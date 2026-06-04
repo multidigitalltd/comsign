@@ -31,7 +31,7 @@ msgstr "+ חתימה"
 msgid "A document is awaiting your signature — %s"
 msgstr "מסמך ממתין לחתימתך — %s"
 
-#: includes/Services/DocumentService.php:262
+#: includes/Services/DocumentService.php:292
 msgid "A signature is required."
 msgstr "נדרשת חתימה."
 
@@ -324,6 +324,10 @@ msgstr "נחתם חלקית"
 msgid "Permanently delete this document and all its data?"
 msgstr "למחוק לצמיתות את המסמך הזה ואת כל הנתונים שלו?"
 
+#: includes/Services/DocumentService.php:216
+msgid "Place at least one signature field before sending."
+msgstr "הניחו לפחות שדה חתימה אחד לפני השליחה."
+
 #: includes/Admin/views/edit.php:80
 msgid "Place signature fields"
 msgstr "הנחת שדות חתימה"
@@ -430,6 +434,10 @@ msgstr "חותמים"
 #: includes/Frontend/SigningController.php:219
 msgid "Signing declined"
 msgstr "החתימה סורבה"
+
+#: includes/Services/DocumentService.php:255
+msgid "Some invitations could not be sent: %s. Please check your site email settings and re-send."
+msgstr "חלק מההזמנות לא נשלחו: %s. אנא בדקו את הגדרות הדוא\"ל של האתר ושלחו מחדש."
 
 #: includes/Admin/DocumentsListTable.php:43
 msgid "Status"

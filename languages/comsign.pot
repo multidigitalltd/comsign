@@ -30,7 +30,7 @@ msgstr ""
 msgid "A document is awaiting your signature — %s"
 msgstr ""
 
-#: includes/Services/DocumentService.php:262
+#: includes/Services/DocumentService.php:292
 msgid "A signature is required."
 msgstr ""
 
@@ -323,6 +323,10 @@ msgstr ""
 msgid "Permanently delete this document and all its data?"
 msgstr ""
 
+#: includes/Services/DocumentService.php:216
+msgid "Place at least one signature field before sending."
+msgstr ""
+
 #: includes/Admin/views/edit.php:80
 msgid "Place signature fields"
 msgstr ""
@@ -428,6 +432,10 @@ msgstr ""
 #: includes/Frontend/SigningController.php:96
 #: includes/Frontend/SigningController.php:219
 msgid "Signing declined"
+msgstr ""
+
+#: includes/Services/DocumentService.php:255
+msgid "Some invitations could not be sent: %s. Please check your site email settings and re-send."
 msgstr ""
 
 #: includes/Admin/DocumentsListTable.php:43

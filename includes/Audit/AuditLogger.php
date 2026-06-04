@@ -26,6 +26,7 @@ final class AuditLogger {
 	public const EVENT_COMPLETED = 'completed';
 	public const EVENT_DECLINED  = 'declined';
 	public const EVENT_DOWNLOADED = 'downloaded';
+	public const EVENT_SEND_FAILED = 'send_failed';
 
 	private AuditRepository $repository;
 

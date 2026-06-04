@@ -85,8 +85,9 @@ final class Storage {
 	 * @param string $path Candidate absolute path.
 	 */
 	public static function is_within_base( string $path ): bool {
-		$base = wp_normalize_path( self::base_dir() );
+		$base = trailingslashit( wp_normalize_path( self::base_dir() ) );
 		$real = wp_normalize_path( $path );
-		return str_starts_with( $real, trailingslashit( $base ) );
+		// strpos (not str_starts_with) for PHP 7.4 compatibility.
+		return 0 === strpos( $real, $base );
 	}
 }

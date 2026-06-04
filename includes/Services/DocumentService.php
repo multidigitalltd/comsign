@@ -209,6 +209,16 @@ final class DocumentService {
 			throw new \RuntimeException( __( 'Add at least one signer before sending.', 'comsign' ) );
 		}
 
+		// A document with no signature fields would finalise to an unsigned PDF;
+		// require at least one placed field, assigned to a signer, before sending.
+		$fields = $this->fields->for_document( $document_id );
+		if ( empty( $fields ) ) {
+			throw new \RuntimeException( __( 'Place at least one signature field before sending.', 'comsign' ) );
+		}
+
+		$failures = array();
+		$sent_any = false;
+
 		foreach ( $signers as $signer ) {
 			// Mint a new raw token; persist only its hash.
 			$raw = Tokens::generate();
@@ -220,13 +230,33 @@ final class DocumentService {
 				)
 			);
 
-			$url = $this->signing_url( $raw );
-			$this->mailer->send_invitation( $document, $signer, $url );
+			$url  = $this->signing_url( $raw );
+			$sent = $this->mailer->send_invitation( $document, $signer, $url );
 
-			$this->audit->record( AuditLogger::EVENT_SENT, $document_id, (int) $signer->id, array( 'email' => $signer->email ) );
+			if ( $sent ) {
+				$sent_any = true;
+				$this->audit->record( AuditLogger::EVENT_SENT, $document_id, (int) $signer->id, array( 'email' => $signer->email ) );
+			} else {
+				$failures[] = $signer->email;
+				$this->audit->record( AuditLogger::EVENT_SEND_FAILED, $document_id, (int) $signer->id, array( 'email' => $signer->email ) );
+			}
 		}
 
-		$this->documents->set_status( $document_id, DocumentRepository::STATUS_SENT );
+		// Only advance the document to "sent" if at least one invitation went out.
+		if ( $sent_any ) {
+			$this->documents->set_status( $document_id, DocumentRepository::STATUS_SENT );
+		}
+
+		// Surface mail failures to the admin instead of silently reporting success.
+		if ( ! empty( $failures ) ) {
+			throw new \RuntimeException(
+				sprintf(
+					/* translators: %s: comma-separated list of email addresses. */
+					__( 'Some invitations could not be sent: %s. Please check your site email settings and re-send.', 'comsign' ),
+					implode( ', ', $failures )
+				)
+			);
+		}
 	}
 
 	/**
