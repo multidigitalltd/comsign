@@ -135,7 +135,32 @@
 		marker.style.borderColor = signerColor( signerId );
 		marker.style.color = signerColor( signerId );
 		marker.title = signerName( signerId );
-		marker.textContent = typeLabel( type );
+
+		var label = document.createElement( 'span' );
+		label.className = 'comsign-field-label';
+		label.textContent = typeLabel( type );
+		marker.appendChild( label );
+
+		// Remove button.
+		var remove = document.createElement( 'button' );
+		remove.type = 'button';
+		remove.className = 'comsign-field-remove';
+		remove.setAttribute( 'aria-label', cfg.i18n.remove || 'Remove' );
+		remove.textContent = '×';
+		remove.addEventListener( 'mousedown', function ( e ) {
+			e.stopPropagation();
+		} );
+		remove.addEventListener( 'click', function ( e ) {
+			e.stopPropagation();
+			marker.parentNode.removeChild( marker );
+		} );
+		marker.appendChild( remove );
+
+		// Resize handle (bottom-inline corner).
+		var handle = document.createElement( 'span' );
+		handle.className = 'comsign-field-resize';
+		marker.appendChild( handle );
+		makeResizable( marker, handle, overlay );
 
 		marker.addEventListener( 'dblclick', function () {
 			marker.parentNode.removeChild( marker );
@@ -143,6 +168,33 @@
 
 		makeDraggable( marker, overlay );
 		overlay.appendChild( marker );
+	}
+
+	function makeResizable( marker, handle, overlay ) {
+		handle.addEventListener( 'mousedown', function ( e ) {
+			e.preventDefault();
+			e.stopPropagation();
+			var rect = overlay.getBoundingClientRect();
+			var startLeft = marker.getBoundingClientRect().left - rect.left;
+			var startTop = marker.getBoundingClientRect().top - rect.top;
+
+			function onMove( ev ) {
+				var w = ( ev.clientX - rect.left - startLeft ) / rect.width;
+				var h = ( ev.clientY - rect.top - startTop ) / rect.height;
+				w = Math.max( 0.04, Math.min( 1 - startLeft / rect.width, w ) );
+				h = Math.max( 0.02, Math.min( 1 - startTop / rect.height, h ) );
+				marker.style.width = ( w * 100 ) + '%';
+				marker.style.height = ( h * 100 ) + '%';
+			}
+
+			function onUp() {
+				document.removeEventListener( 'mousemove', onMove );
+				document.removeEventListener( 'mouseup', onUp );
+			}
+
+			document.addEventListener( 'mousemove', onMove );
+			document.addEventListener( 'mouseup', onUp );
+		} );
 	}
 
 	function makeDraggable( marker, overlay ) {

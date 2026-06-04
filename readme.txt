@@ -4,7 +4,7 @@ Tags: signature, digital signature, pdf, esignature, hebrew
 Requires at least: 6.0
 Tested up to: 6.5
 Requires PHP: 7.4
-Stable tag: 0.2.0
+Stable tag: 0.3.0
 License: GPL-2.0-or-later
 License URI: https://www.gnu.org/licenses/gpl-2.0.html
 
@@ -75,7 +75,23 @@ clear error in that case.
 Yes. The UI is fully translatable (a Hebrew translation ships in `languages/`)
 and renders right-to-left automatically on RTL locales.
 
+= How can someone verify a signed document? =
+
+Add the `[comsign_verify]` shortcode to any page. A verifier enters the document
+ID and its SHA-256 code (shown on the document screen and the signature
+certificate) to confirm the document is authentic and see who signed it.
+
 == Changelog ==
+
+= 0.3.0 =
+* New: link-only signers — email is now optional; reach a signer purely via a
+  shared link / WhatsApp.
+* New: merge variables in composed documents — {{name}} placeholders plus
+  automatic {{date}} and {{site}}.
+* New: re-send the invitation to a single signer.
+* New: resize and remove signature/field boxes directly in the editor.
+* New: public document verification via the [comsign_verify] shortcode
+  (document ID + SHA-256).
 
 = 0.2.0 =
 * New: compose a document from rich text (wp_editor) and generate its PDF —

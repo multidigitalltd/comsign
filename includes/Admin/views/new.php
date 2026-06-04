@@ -51,7 +51,10 @@ defined( 'ABSPATH' ) || exit;
 			</p>
 
 			<p><strong><?php esc_html_e( 'Document content', 'comsign' ); ?></strong></p>
-			<p class="description"><?php esc_html_e( 'Write the fixed text of the document. After creating it you can place fillable and signature fields on the generated PDF.', 'comsign' ); ?></p>
+			<p class="description">
+				<?php esc_html_e( 'Write the fixed text of the document. After creating it you can place fillable and signature fields on the generated PDF.', 'comsign' ); ?>
+				<?php esc_html_e( 'Use placeholders like {{name}} or {{date}} to insert variables.', 'comsign' ); ?>
+			</p>
 			<?php
 			wp_editor(
 				'',
@@ -64,6 +67,14 @@ defined( 'ABSPATH' ) || exit;
 				)
 			);
 			?>
+
+			<p style="margin-top:16px;">
+				<label for="comsign-variables"><strong><?php esc_html_e( 'Variables', 'comsign' ); ?></strong></label><br>
+				<span class="description"><?php esc_html_e( 'One per line, in the form name = value. Each {{name}} in the content is replaced with its value. {{date}} and {{site}} are available automatically.', 'comsign' ); ?></span>
+			</p>
+			<p>
+				<textarea id="comsign-variables" name="variables" rows="4" class="large-text code" placeholder="<?php esc_attr_e( "customer_name = Dana Cohen\ncontract_no = 2026-0042", 'comsign' ); ?>"></textarea>
+			</p>
 
 			<p><button type="submit" class="button button-primary"><?php esc_html_e( 'Create document', 'comsign' ); ?></button></p>
 		</form>

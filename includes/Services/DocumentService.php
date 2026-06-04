@@ -87,17 +87,23 @@ final class DocumentService {
 	/**
 	 * Create a document by composing a PDF from rich-text (HTML) content.
 	 *
-	 * @param string $title Document title.
-	 * @param string $html  Sanitised HTML body (already run through wp_kses_post).
+	 * @param string $title     Document title.
+	 * @param string $html      Sanitised HTML body (already run through wp_kses_post).
+	 * @param array  $variables Map of merge variable name => value. Occurrences
+	 *                          of {{name}} in the title/body are substituted.
 	 *
 	 * @return int New document id.
 	 *
 	 * @throws \RuntimeException If the content is empty or PDF generation fails.
 	 */
-	public function create_from_text( string $title, string $html ): int {
+	public function create_from_text( string $title, string $html, array $variables = array() ): int {
 		if ( '' === trim( wp_strip_all_tags( $html ) ) && '' === trim( $title ) ) {
 			throw new \RuntimeException( __( 'Please add a title or some content for the document.', 'comsign' ) );
 		}
+
+		$variables = $this->merge_variables( $variables );
+		$title     = $this->apply_variables( $title, $variables );
+		$html      = $this->apply_variables( $html, $variables );
 
 		$title = '' !== $title ? $title : __( 'Untitled document', 'comsign' );
 
@@ -121,6 +127,101 @@ final class DocumentService {
 		$this->audit->record( AuditLogger::EVENT_CREATED, $document_id, 0, array( 'title' => $title, 'source' => 'composed' ) );
 
 		return $document_id;
+	}
+
+	/**
+	 * Merge user-supplied variables with built-in automatic ones.
+	 *
+	 * @param array $variables User variables (name => value).
+	 *
+	 * @return array<string,string>
+	 */
+	private function merge_variables( array $variables ): array {
+		$auto = array(
+			'date' => date_i18n( get_option( 'date_format' ) ),
+			'site' => wp_specialchars_decode( get_bloginfo( 'name' ), ENT_QUOTES ),
+		);
+
+		$clean = array();
+		foreach ( $variables as $name => $value ) {
+			$key = preg_replace( '/[^A-Za-z0-9_]/', '', (string) $name );
+			if ( '' !== $key ) {
+				$clean[ $key ] = (string) $value;
+			}
+		}
+
+		// User values win over auto defaults only when explicitly provided.
+		return array_merge( $auto, $clean );
+	}
+
+	/**
+	 * Replace {{name}} placeholders in a string.
+	 *
+	 * @param string $text      Text containing placeholders.
+	 * @param array  $variables name => value map (already normalised).
+	 */
+	private function apply_variables( string $text, array $variables ): string {
+		foreach ( $variables as $name => $value ) {
+			$text = str_replace( '{{' . $name . '}}', $value, $text );
+		}
+		return $text;
+	}
+
+	/**
+	 * Re-send (or first-send) the invitation to a single signer with email.
+	 *
+	 * @param int $document_id Document id (ownership guard).
+	 * @param int $signer_id   Signer id.
+	 *
+	 * @throws \RuntimeException If the signer has no email or is not found.
+	 */
+	public function resend_signer( int $document_id, int $signer_id ): void {
+		$document = $this->documents->find( $document_id );
+		$signer   = $this->signers->find( $signer_id );
+
+		if ( ! $document || ! $signer || (int) $signer->document_id !== $document_id ) {
+			throw new \RuntimeException( __( 'Signer not found.', 'comsign' ) );
+		}
+		if ( '' === trim( (string) $signer->email ) ) {
+			throw new \RuntimeException( __( 'This signer has no email. Share the signing link instead.', 'comsign' ) );
+		}
+
+		$raw = Tokens::generate();
+		$this->signers->update(
+			$signer_id,
+			array(
+				'token_hash' => Tokens::hash( $raw ),
+				'status'     => SignerRepository::STATUS_PENDING,
+			)
+		);
+
+		$sent = $this->mailer->send_invitation( $document, $signer, $this->signing_url( $raw ) );
+		if ( ! $sent ) {
+			$this->audit->record( AuditLogger::EVENT_SEND_FAILED, $document_id, $signer_id, array( 'email' => $signer->email ) );
+			throw new \RuntimeException( __( 'The email could not be sent. Please check your site email settings.', 'comsign' ) );
+		}
+
+		$this->audit->record( AuditLogger::EVENT_SENT, $document_id, $signer_id, array( 'email' => $signer->email, 'channel' => 'resend' ) );
+	}
+
+	/**
+	 * Find a completed document whose signed hash matches (for public verify).
+	 *
+	 * @param int    $document_id Document id.
+	 * @param string $hash        SHA-256 the verifier holds.
+	 *
+	 * @return object|null The document if it is completed and the hash matches.
+	 */
+	public function verify( int $document_id, string $hash ): ?object {
+		$document = $this->documents->find( $document_id );
+		if ( ! $document
+			|| DocumentRepository::STATUS_COMPLETED !== $document->status
+			|| '' === $document->signed_hash
+			|| ! hash_equals( strtolower( $document->signed_hash ), strtolower( trim( $hash ) ) )
+		) {
+			return null;
+		}
+		return $document;
 	}
 
 	/**
@@ -169,16 +270,23 @@ final class DocumentService {
 	 *
 	 * @param int    $document_id Document id.
 	 * @param string $name        Signer name.
-	 * @param string $email       Signer email.
+	 * @param string $email       Signer email (optional for link-only signers).
 	 * @param string $phone       Optional phone (E.164-ish, for WhatsApp).
 	 *
 	 * @return int New signer id.
 	 *
-	 * @throws \RuntimeException On invalid email.
+	 * @throws \RuntimeException On invalid input.
 	 */
 	public function add_signer( int $document_id, string $name, string $email, string $phone = '' ): int {
-		if ( ! is_email( $email ) ) {
+		// Email is optional: a signer can be reached by a shared link / WhatsApp
+		// instead. But if an email is given, it must be valid.
+		if ( '' !== $email && ! is_email( $email ) ) {
 			throw new \RuntimeException( __( 'Please provide a valid email address.', 'comsign' ) );
+		}
+
+		// With no email, a name is required so the signer is identifiable.
+		if ( '' === $email && '' === trim( $name ) ) {
+			throw new \RuntimeException( __( 'Please provide a name or an email for the signer.', 'comsign' ) );
 		}
 
 		$existing = $this->signers->for_document( $document_id );
@@ -384,6 +492,11 @@ final class DocumentService {
 		$sent_any = false;
 
 		foreach ( $signers as $signer ) {
+			// Link-only signers (no email) are shared manually via "Get link".
+			if ( '' === trim( (string) $signer->email ) ) {
+				continue;
+			}
+
 			// Mint a new raw token; persist only its hash.
 			$raw = Tokens::generate();
 			$this->signers->update(

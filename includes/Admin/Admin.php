@@ -51,6 +51,7 @@ final class Admin {
 		add_action( 'admin_post_comsign_add_signer', array( $this, 'handle_add_signer' ) );
 		add_action( 'admin_post_comsign_delete_signer', array( $this, 'handle_delete_signer' ) );
 		add_action( 'admin_post_comsign_signer_link', array( $this, 'handle_signer_link' ) );
+		add_action( 'admin_post_comsign_resend_signer', array( $this, 'handle_resend_signer' ) );
 		add_action( 'admin_post_comsign_save_fields', array( $this, 'handle_save_fields' ) );
 		add_action( 'admin_post_comsign_send', array( $this, 'handle_send' ) );
 		add_action( 'admin_post_comsign_duplicate', array( $this, 'handle_duplicate' ) );
@@ -234,6 +235,7 @@ final class Admin {
 					'add_signer'    => wp_create_nonce( 'comsign_add_signer_' . $document_id ),
 					'delete_signer' => wp_create_nonce( 'comsign_delete_signer_' . $document_id ),
 					'signer_link'   => wp_create_nonce( 'comsign_signer_link_' . $document_id ),
+					'resend_signer' => wp_create_nonce( 'comsign_resend_signer_' . $document_id ),
 					'save_fields'   => wp_create_nonce( 'comsign_save_fields_' . $document_id ),
 					'send'          => wp_create_nonce( 'comsign_send_' . $document_id ),
 					'delete'        => wp_create_nonce( 'comsign_delete_' . $document_id ),
@@ -286,8 +288,12 @@ final class Admin {
 		// wp_kses_post keeps safe formatting markup while stripping anything risky.
 		$html  = isset( $_POST['content'] ) ? wp_kses_post( wp_unslash( $_POST['content'] ) ) : ''; // phpcs:ignore WordPress.Security.ValidatedSanitizedInput.InputNotSanitized
 
+		$variables = $this->parse_variables(
+			isset( $_POST['variables'] ) ? sanitize_textarea_field( wp_unslash( $_POST['variables'] ) ) : ''
+		);
+
 		try {
-			$document_id = $this->service->create_from_text( $title, $html );
+			$document_id = $this->service->create_from_text( $title, $html, $variables );
 		} catch ( \Throwable $e ) {
 			$this->redirect_with_notice( admin_url( 'admin.php?page=comsign-new' ), 'error', $e->getMessage() );
 		}
@@ -326,6 +332,22 @@ final class Admin {
 		$this->service->delete_signer( $document_id, $signer_id );
 
 		$this->redirect_with_notice( $this->edit_url( $document_id ), 'success', __( 'Signer removed.', 'comsign' ) );
+	}
+
+	public function handle_resend_signer(): void {
+		$this->guard();
+		$document_id = $this->posted_document_id();
+		check_admin_referer( 'comsign_resend_signer_' . $document_id );
+
+		$signer_id = isset( $_POST['signer_id'] ) ? absint( wp_unslash( $_POST['signer_id'] ) ) : 0;
+
+		try {
+			$this->service->resend_signer( $document_id, $signer_id );
+		} catch ( \Throwable $e ) {
+			$this->redirect_with_notice( $this->edit_url( $document_id ), 'error', $e->getMessage() );
+		}
+
+		$this->redirect_with_notice( $this->edit_url( $document_id ), 'success', __( 'Invitation re-sent.', 'comsign' ) );
 	}
 
 	/**
@@ -586,6 +608,29 @@ final class Admin {
 			return is_array( $flash ) ? $flash : null;
 		}
 		return null;
+	}
+
+	/**
+	 * Parse a "name = value" per-line variables block into a map.
+	 *
+	 * @param string $raw Raw textarea contents.
+	 *
+	 * @return array<string,string>
+	 */
+	private function parse_variables( string $raw ): array {
+		$out = array();
+		foreach ( preg_split( '/\r\n|\r|\n/', $raw ) as $line ) {
+			$line = trim( (string) $line );
+			if ( '' === $line || false === strpos( $line, '=' ) ) {
+				continue;
+			}
+			list( $key, $value ) = explode( '=', $line, 2 );
+			$key = preg_replace( '/[^A-Za-z0-9_]/', '', trim( $key ) );
+			if ( '' !== $key ) {
+				$out[ $key ] = trim( $value );
+			}
+		}
+		return $out;
 	}
 
 	/**

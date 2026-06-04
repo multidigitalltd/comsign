@@ -44,6 +44,9 @@ final class SigningController {
 	public function register(): void {
 		add_action( 'template_redirect', array( $this, 'maybe_render_signing_page' ) );
 
+		// Public authenticity check: place [comsign_verify] on any page.
+		add_shortcode( 'comsign_verify', array( $this, 'render_verify_shortcode' ) );
+
 		add_action( 'admin_post_nopriv_comsign_sign_submit', array( $this, 'handle_submit' ) );
 		add_action( 'admin_post_comsign_sign_submit', array( $this, 'handle_submit' ) );
 
@@ -159,6 +162,62 @@ final class SigningController {
 		);
 
 		$this->render_template( 'sign', $data );
+	}
+
+	/**
+	 * Render the public document-verification form and result.
+	 *
+	 * Usage: [comsign_verify]. Anyone holding a document's id + SHA-256 can
+	 * confirm it was completed and see who signed and when. The hash is hard to
+	 * guess, so this acts as a capability check without exposing the document.
+	 *
+	 * @return string HTML.
+	 */
+	public function render_verify_shortcode(): string {
+		// Read-only public lookup — no nonce required, inputs are sanitised.
+		$document_id = isset( $_GET['comsign_doc'] ) ? absint( wp_unslash( $_GET['comsign_doc'] ) ) : 0; // phpcs:ignore WordPress.Security.NonceVerification.Recommended
+		$hash        = isset( $_GET['comsign_hash'] ) ? sanitize_text_field( wp_unslash( $_GET['comsign_hash'] ) ) : ''; // phpcs:ignore WordPress.Security.NonceVerification.Recommended
+
+		ob_start();
+
+		echo '<form method="get" class="comsign-verify-form">';
+		echo '<p><label>' . esc_html__( 'Document ID', 'comsign' ) . '<br>';
+		echo '<input type="number" name="comsign_doc" value="' . esc_attr( $document_id ? (string) $document_id : '' ) . '" min="1"></label></p>';
+		echo '<p><label>' . esc_html__( 'Verification code (SHA-256)', 'comsign' ) . '<br>';
+		echo '<input type="text" name="comsign_hash" value="' . esc_attr( $hash ) . '" size="64"></label></p>';
+		echo '<p><button type="submit">' . esc_html__( 'Verify document', 'comsign' ) . '</button></p>';
+		echo '</form>';
+
+		if ( $document_id && '' !== $hash ) {
+			$document = $this->service->verify( $document_id, $hash );
+
+			if ( $document ) {
+				echo '<div class="comsign-verify-result comsign-verify-ok">';
+				echo '<p><strong>' . esc_html__( '✔ This document is authentic.', 'comsign' ) . '</strong></p>';
+				echo '<p>' . esc_html__( 'Title:', 'comsign' ) . ' ' . esc_html( $document->title ) . '</p>';
+				echo '<p>' . esc_html__( 'Completed:', 'comsign' ) . ' ' . esc_html( (string) $document->updated_at ) . '</p>';
+
+				$signers = $this->signers->for_document( (int) $document->id );
+				if ( $signers ) {
+					echo '<p>' . esc_html__( 'Signed by:', 'comsign' ) . '</p><ul>';
+					foreach ( $signers as $signer ) {
+						echo '<li>' . esc_html( $signer->name ?: $signer->email );
+						if ( ! empty( $signer->signed_at ) ) {
+							echo ' — ' . esc_html( (string) $signer->signed_at );
+						}
+						echo '</li>';
+					}
+					echo '</ul>';
+				}
+				echo '</div>';
+			} else {
+				echo '<div class="comsign-verify-result comsign-verify-fail"><p>'
+					. esc_html__( 'No matching signed document was found for that ID and code.', 'comsign' )
+					. '</p></div>';
+			}
+		}
+
+		return (string) ob_get_clean();
 	}
 
 	/* ---------------------------------------------------------------------

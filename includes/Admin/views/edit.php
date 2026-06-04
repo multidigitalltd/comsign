@@ -166,6 +166,15 @@ foreach ( $signers as $signer ) {
 										<input type="hidden" name="_wpnonce" value="<?php echo esc_attr( $nonces['signer_link'] ); ?>">
 										<button type="submit" class="button-link"><?php esc_html_e( 'Get signing link', 'comsign' ); ?></button>
 									</form>
+									<?php if ( ! empty( $signer->email ) ) : ?>
+										<form method="post" action="<?php echo esc_url( $action_url ); ?>" class="comsign-mini-form">
+											<input type="hidden" name="action" value="comsign_resend_signer">
+											<input type="hidden" name="document_id" value="<?php echo esc_attr( $document_id ); ?>">
+											<input type="hidden" name="signer_id" value="<?php echo esc_attr( (int) $signer->id ); ?>">
+											<input type="hidden" name="_wpnonce" value="<?php echo esc_attr( $nonces['resend_signer'] ); ?>">
+											<button type="submit" class="button-link"><?php esc_html_e( 'Email link', 'comsign' ); ?></button>
+										</form>
+									<?php endif; ?>
 									<form method="post" action="<?php echo esc_url( $action_url ); ?>" class="comsign-mini-form" onsubmit="return confirm('<?php echo esc_js( __( 'Remove this signer?', 'comsign' ) ); ?>');">
 										<input type="hidden" name="action" value="comsign_delete_signer">
 										<input type="hidden" name="document_id" value="<?php echo esc_attr( $document_id ); ?>">
@@ -205,8 +214,9 @@ foreach ( $signers as $signer ) {
 					<input type="hidden" name="document_id" value="<?php echo esc_attr( $document_id ); ?>">
 					<input type="hidden" name="_wpnonce" value="<?php echo esc_attr( $nonces['add_signer'] ); ?>">
 					<p><input type="text" name="name" placeholder="<?php esc_attr_e( 'Full name', 'comsign' ); ?>" class="widefat"></p>
-					<p><input type="email" name="email" placeholder="<?php esc_attr_e( 'email@example.com', 'comsign' ); ?>" class="widefat" required></p>
+					<p><input type="email" name="email" placeholder="<?php esc_attr_e( 'email@example.com', 'comsign' ); ?>" class="widefat"></p>
 					<p><input type="tel" name="phone" placeholder="<?php esc_attr_e( 'Phone for WhatsApp (optional)', 'comsign' ); ?>" class="widefat"></p>
+					<p class="description"><?php esc_html_e( 'Email is optional — leave it empty to share a signing link by WhatsApp or any other channel.', 'comsign' ); ?></p>
 					<p><button type="submit" class="button"><?php esc_html_e( 'Add signer', 'comsign' ); ?></button></p>
 				</form>
 			</div>
