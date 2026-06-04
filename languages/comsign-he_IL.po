@@ -1,0 +1,542 @@
+# Hebrew translation for ComSign.
+# Copyright (C) 2026 Multi Digital LTD
+msgid ""
+msgstr ""
+"Project-Id-Version: ComSign 0.1.0\n"
+"Language: he_IL\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+"X-Domain: comsign\n"
+
+#: includes/Admin/DocumentsListTable.php:130
+msgid "%1$d of %2$d signed"
+msgstr "%1$d מתוך %2$d חתמו"
+
+#: includes/Admin/DocumentsListTable.php:78
+#: includes/Admin/views/edit.php:50
+msgid "(untitled)"
+msgstr "(ללא כותרת)"
+
+#: includes/Admin/views/edit.php:94
+msgid "+ Date"
+msgstr "+ תאריך"
+
+#: includes/Admin/views/edit.php:93
+msgid "+ Signature"
+msgstr "+ חתימה"
+
+#: includes/Email/Mailer.php:30
+msgid "A document is awaiting your signature — %s"
+msgstr "מסמך ממתין לחתימתך — %s"
+
+#: includes/Services/DocumentService.php:262
+msgid "A signature is required."
+msgstr "נדרשת חתימה."
+
+#: includes/Admin/views/edit.php:172
+msgid "Actions"
+msgstr "פעולות"
+
+#: includes/Admin/Admin.php:83
+#: includes/Admin/Admin.php:84
+#: includes/Admin/views/list.php:16
+#: includes/Admin/views/new.php:15
+msgid "Add Document"
+msgstr "הוספת מסמך"
+
+#: includes/Services/DocumentService.php:209
+msgid "Add at least one signer before sending."
+msgstr "יש להוסיף לפחות חותם אחד לפני השליחה."
+
+#: includes/Admin/views/edit.php:82
+msgid "Add at least one signer first, then drop signature fields onto the document."
+msgstr "הוסיפו תחילה לפחות חותם אחד, ולאחר מכן הניחו שדות חתימה על המסמך."
+
+#: includes/Admin/views/edit.php:167
+msgid "Add signer"
+msgstr "הוספת חותם"
+
+#: includes/Admin/views/edit.php:65
+msgid "All parties have signed. The signed PDF and verification details are available below."
+msgstr "כל הצדדים חתמו. קובץ ה-PDF החתום ופרטי האימות זמינים למטה."
+
+#: includes/Frontend/SigningController.php:90
+#: includes/Frontend/SigningController.php:168
+msgid "Already signed"
+msgstr "כבר נחתם"
+
+#: includes/Admin/views/edit.php:114
+msgid "Audit trail"
+msgstr "מסלול ביקורת (Audit Trail)"
+
+#: includes/Admin/views/edit.php:54
+msgid "Back to list"
+msgstr "חזרה לרשימה"
+
+#: includes/Admin/views/edit.php:124
+#: includes/Signature/ElectronicSignatureProvider.php:82
+msgid "Browser"
+msgstr "דפדפן"
+
+#: includes/Frontend/views/sign.php:51
+msgid "Clear"
+msgstr "ניקוי"
+
+#: includes/Admin/Admin.php:63
+#: includes/Admin/Admin.php:64
+msgid "ComSign"
+msgstr "ComSign"
+
+#: includes/Admin/views/list.php:15
+msgid "ComSign Documents"
+msgstr "מסמכי ComSign"
+
+#: comsign.php:49
+msgid "ComSign: dependencies are missing. Please run \"composer install\" inside the plugin directory."
+msgstr "ComSign: חסרות תלויות. יש להריץ \"composer install\" בתיקיית התוסף."
+
+#: includes/Admin/DocumentsListTable.php:162
+msgid "Completed"
+msgstr "הושלם"
+
+#: includes/Frontend/views/sign.php:85
+msgid "Confirm decline"
+msgstr "אישור סירוב"
+
+#: includes/Frontend/SigningController.php:173
+msgid "Consent required"
+msgstr "נדרשת הסכמה"
+
+#: includes/Frontend/SigningController.php:188
+msgid "Could not complete signing"
+msgstr "לא ניתן להשלים את החתימה"
+
+#: includes/Admin/Admin.php:143
+msgid "Could not load the document preview."
+msgstr "לא ניתן לטעון את תצוגת המסמך."
+
+#: includes/Services/DocumentService.php:77
+msgid "Could not store the uploaded file."
+msgstr "לא ניתן לשמור את הקובץ שהועלה."
+
+#: includes/Admin/DocumentsListTable.php:45
+msgid "Created"
+msgstr "נוצר"
+
+#: includes/Admin/Admin.php:140
+msgid "Date"
+msgstr "תאריך"
+
+#: includes/Frontend/views/sign.php:75
+msgid "Decline"
+msgstr "סירוב"
+
+#: includes/Admin/DocumentsListTable.php:163
+msgid "Declined"
+msgstr "סורב"
+
+#: includes/Admin/views/edit.php:191
+msgid "Delete document"
+msgstr "מחיקת מסמך"
+
+#: includes/Admin/DocumentsListTable.php:42
+#: includes/Frontend/views/sign.php:25
+#: includes/Signature/ElectronicSignatureProvider.php:66
+msgid "Document"
+msgstr "מסמך"
+
+#: includes/Signature/ElectronicSignatureProvider.php:67
+msgid "Document ID"
+msgstr "מזהה מסמך"
+
+#: includes/Admin/Admin.php:303
+msgid "Document deleted."
+msgstr "המסמך נמחק."
+
+#: includes/Admin/Admin.php:197
+#: includes/Admin/Admin.php:319
+#: includes/Services/DocumentService.php:204
+msgid "Document not found."
+msgstr "המסמך לא נמצא."
+
+#: includes/Frontend/views/sign.php:38
+msgid "Document preview"
+msgstr "תצוגת מסמך"
+
+#: includes/Admin/views/new.php:24
+msgid "Document title"
+msgstr "כותרת המסמך"
+
+#: includes/Frontend/SigningController.php:82
+#: includes/Frontend/SigningController.php:182
+msgid "Document unavailable"
+msgstr "המסמך אינו זמין"
+
+#: includes/Frontend/SigningController.php:239
+msgid "Document unavailable."
+msgstr "המסמך אינו זמין."
+
+#: includes/Admin/Admin.php:247
+msgid "Document uploaded. Now add signers and place signature fields."
+msgstr "המסמך הועלה. כעת הוסיפו חותמים והניחו שדות חתימה."
+
+#: includes/Admin/Admin.php:74
+#: includes/Admin/Admin.php:75
+msgid "Documents"
+msgstr "מסמכים"
+
+#: includes/Admin/views/edit.php:67
+msgid "Download signed PDF"
+msgstr "הורדת PDF חתום"
+
+#: includes/Admin/DocumentsListTable.php:158
+msgid "Draft"
+msgstr "טיוטה"
+
+#: includes/Admin/views/edit.php:95
+msgid "Drag fields to reposition; double-click to remove."
+msgstr "גררו שדות כדי למקם מחדש; לחיצה כפולה כדי להסיר."
+
+#: includes/Frontend/views/sign.php:45
+msgid "Draw"
+msgstr "ציור"
+
+#: includes/Signature/ElectronicSignatureProvider.php:37
+msgid "Electronic signature"
+msgstr "חתימה אלקטרונית"
+
+#: includes/Signature/ElectronicSignatureProvider.php:76
+msgid "Email"
+msgstr "דוא״ל"
+
+#: includes/Admin/views/edit.php:121
+msgid "Event"
+msgstr "אירוע"
+
+#: includes/Admin/views/edit.php:85
+msgid "Field for:"
+msgstr "שדה עבור:"
+
+#: includes/Admin/Admin.php:325
+msgid "File not available."
+msgstr "הקובץ אינו זמין."
+
+#: includes/Admin/views/edit.php:165
+msgid "Full name"
+msgstr "שם מלא"
+
+#: includes/Email/Mailer.php:34
+msgid "Hello %s,"
+msgstr "שלום %s,"
+
+#: includes/Frontend/views/sign.php:31
+msgid "Hello %s, please review the document below and add your signature."
+msgstr "שלום %s, אנא עיינו במסמך שלמטה והוסיפו את חתימתכם."
+
+#: includes/Email/Mailer.php:35
+msgid "Hello,"
+msgstr "שלום,"
+
+#: includes/Frontend/views/sign.php:68
+msgid "I agree to sign this document electronically, and I confirm that my electronic signature is legally binding."
+msgstr "אני מסכים/ה לחתום על מסמך זה באופן אלקטרוני, ומאשר/ת כי חתימתי האלקטרונית מחייבת מבחינה משפטית."
+
+#: includes/Admin/views/edit.php:123
+msgid "IP"
+msgstr "IP"
+
+#: includes/Signature/ElectronicSignatureProvider.php:81
+msgid "IP address"
+msgstr "כתובת IP"
+
+#: includes/Frontend/SigningController.php:162
+#: includes/Frontend/SigningController.php:206
+msgid "Invalid link"
+msgstr "קישור לא תקין"
+
+#: includes/Frontend/SigningController.php:232
+msgid "Invalid link."
+msgstr "קישור לא תקין."
+
+#: includes/Frontend/SigningController.php:74
+msgid "Invalid or expired link"
+msgstr "קישור לא תקין או שפג תוקפו"
+
+#: includes/Services/DocumentService.php:100
+msgid "Invalid upload."
+msgstr "העלאה לא תקינה."
+
+#: includes/Admin/Admin.php:293
+msgid "Invitations sent to all signers."
+msgstr "ההזמנות נשלחו לכל החותמים."
+
+#: includes/Admin/Admin.php:142
+msgid "Loading document…"
+msgstr "טוען מסמך…"
+
+#: includes/Admin/DocumentsListTable.php:82
+msgid "Manage"
+msgstr "ניהול"
+
+#: includes/Signature/ElectronicSignatureProvider.php:75
+msgid "Name"
+msgstr "שם"
+
+#: includes/Admin/DocumentsListTable.php:148
+msgid "No documents yet. Upload your first PDF to get started."
+msgstr "אין עדיין מסמכים. העלו את קובץ ה-PDF הראשון כדי להתחיל."
+
+#: includes/Admin/views/edit.php:116
+msgid "No events recorded yet."
+msgstr "טרם נרשמו אירועים."
+
+#: includes/Services/DocumentService.php:96
+msgid "No file was uploaded, or the upload failed."
+msgstr "לא הועלה קובץ, או שההעלאה נכשלה."
+
+#: includes/Admin/views/edit.php:146
+msgid "No signers yet."
+msgstr "אין עדיין חותמים."
+
+#: includes/Services/DocumentService.php:110
+msgid "Only PDF files are allowed."
+msgstr "ניתן להעלות קבצי PDF בלבד."
+
+#: includes/Admin/views/edit.php:68
+msgid "Original PDF"
+msgstr "PDF מקורי"
+
+#: includes/Admin/views/new.php:29
+msgid "PDF file"
+msgstr "קובץ PDF"
+
+#: includes/Admin/views/new.php:31
+msgid "PDF only, up to 25 MB."
+msgstr "PDF בלבד, עד 25 מ״ב."
+
+#: includes/Admin/DocumentsListTable.php:161
+msgid "Partially signed"
+msgstr "נחתם חלקית"
+
+#: includes/Admin/views/edit.php:187
+msgid "Permanently delete this document and all its data?"
+msgstr "למחוק לצמיתות את המסמך הזה ואת כל הנתונים שלו?"
+
+#: includes/Admin/views/edit.php:80
+msgid "Place signature fields"
+msgstr "הנחת שדות חתימה"
+
+#: includes/Frontend/views/sign.php:71
+msgid "Please add your signature and accept the agreement."
+msgstr "אנא הוסיפו את חתימתכם ואשרו את ההסכמה."
+
+#: includes/Admin/Admin.php:235
+msgid "Please choose a PDF to upload."
+msgstr "אנא בחרו קובץ PDF להעלאה."
+
+#: includes/Email/Mailer.php:43
+msgid "Please open the secure link below to view and sign it:"
+msgstr "אנא פתחו את הקישור המאובטח שלהלן כדי לצפות ולחתום:"
+
+#: includes/Services/DocumentService.php:141
+msgid "Please provide a valid email address."
+msgstr "אנא הזינו כתובת דוא״ל תקינה."
+
+#: includes/Admin/views/edit.php:179
+msgid "Re-send invitations"
+msgstr "שליחת הזמנות מחדש"
+
+#: includes/Frontend/views/sign.php:83
+msgid "Reason for declining (optional)"
+msgstr "סיבת הסירוב (אופציונלי)"
+
+#: includes/Admin/Admin.php:141
+msgid "Remove"
+msgstr "הסרה"
+
+#: includes/Admin/views/edit.php:72
+msgid "SHA-256:"
+msgstr "SHA-256:"
+
+#: includes/Admin/views/edit.php:105
+msgid "Save fields"
+msgstr "שמירת שדות"
+
+#: includes/Frontend/views/partials/footer.php:14
+msgid "Securely processed by %s"
+msgstr "מעובד באופן מאובטח על-ידי %s"
+
+#: includes/Admin/views/edit.php:179
+msgid "Send for signing"
+msgstr "שליחה לחתימה"
+
+#: includes/Admin/DocumentsListTable.php:159
+msgid "Sent"
+msgstr "נשלח"
+
+#: includes/Email/Mailer.php:49
+msgid "Sent by %s"
+msgstr "נשלח על-ידי %s"
+
+#: includes/Frontend/views/partials/header.php:21
+#: includes/Frontend/views/sign.php:74
+msgid "Sign document"
+msgstr "חתימה על המסמך"
+
+#: includes/Frontend/views/sign.php:19
+msgid "Sign: %s"
+msgstr "חתימה: %s"
+
+#: includes/Admin/Admin.php:139
+msgid "Signature"
+msgstr "חתימה"
+
+#: includes/Signature/ElectronicSignatureProvider.php:87
+msgid "Signature Certificate"
+msgstr "תעודת חתימה"
+
+#: includes/Admin/Admin.php:279
+msgid "Signature fields saved."
+msgstr "שדות החתימה נשמרו."
+
+#: includes/Signature/ElectronicSignatureProvider.php:77
+msgid "Signed at"
+msgstr "נחתם בתאריך"
+
+#: includes/Admin/DocumentsListTable.php:89
+msgid "Signed copy"
+msgstr "עותק חתום"
+
+#: includes/Admin/views/edit.php:64
+msgid "Signed document"
+msgstr "מסמך חתום"
+
+#: includes/Signature/ElectronicSignatureProvider.php:73
+msgid "Signer %d"
+msgstr "חותם %d"
+
+#: includes/Admin/Admin.php:265
+msgid "Signer added."
+msgstr "החותם נוסף."
+
+#: includes/Admin/DocumentsListTable.php:44
+#: includes/Admin/views/edit.php:144
+msgid "Signers"
+msgstr "חותמים"
+
+#: includes/Frontend/SigningController.php:96
+#: includes/Frontend/SigningController.php:219
+msgid "Signing declined"
+msgstr "החתימה סורבה"
+
+#: includes/Admin/DocumentsListTable.php:43
+msgid "Status"
+msgstr "סטטוס"
+
+#: includes/Frontend/SigningController.php:316
+msgid "Template missing."
+msgstr "תבנית חסרה."
+
+#: includes/Frontend/SigningController.php:192
+msgid "Thank you!"
+msgstr "תודה!"
+
+#: includes/Frontend/SigningController.php:182
+msgid "The document could not be found."
+msgstr "לא ניתן היה למצוא את המסמך."
+
+#: includes/Services/DocumentService.php:120
+msgid "The file does not look like a valid PDF."
+msgstr "הקובץ אינו נראה כקובץ PDF תקין."
+
+#: includes/Services/DocumentService.php:105
+msgid "The file is too large (max 25 MB)."
+msgstr "הקובץ גדול מדי (מקסימום 25 מ״ב)."
+
+#: includes/Frontend/SigningController.php:83
+msgid "The requested document could not be found."
+msgstr "לא ניתן היה למצוא את המסמך המבוקש."
+
+#: includes/Email/Mailer.php:46
+msgid "This link is personal — please do not forward it."
+msgstr "קישור זה אישי — אנא אל תעבירו אותו לאחרים."
+
+#: includes/Frontend/SigningController.php:162
+#: includes/Frontend/SigningController.php:206
+msgid "This signing link is no longer valid."
+msgstr "קישור החתימה אינו בתוקף עוד."
+
+#: includes/Frontend/SigningController.php:75
+msgid "This signing link is no longer valid. Please ask the sender for a new one."
+msgstr "קישור החתימה אינו בתוקף עוד. אנא בקשו מהשולח קישור חדש."
+
+#: includes/Frontend/views/sign.php:46
+msgid "Type"
+msgstr "הקלדה"
+
+#: includes/Frontend/views/sign.php:55
+msgid "Type your full name"
+msgstr "הקלידו את שמכם המלא"
+
+#: includes/Admin/views/new.php:35
+msgid "Upload & continue"
+msgstr "העלאה והמשך"
+
+#: includes/Admin/views/edit.php:184
+msgid "View original"
+msgstr "צפייה במקור"
+
+#: includes/Admin/DocumentsListTable.php:160
+msgid "Viewed"
+msgstr "נצפה"
+
+#: includes/Admin/views/edit.php:122
+msgid "When"
+msgstr "מתי"
+
+#: includes/Admin/Admin.php:405
+msgid "You are not allowed to access this page."
+msgstr "אינך מורשה לגשת לעמוד זה."
+
+#: includes/Frontend/SigningController.php:168
+msgid "You have already signed this document."
+msgstr "כבר חתמת על מסמך זה."
+
+#: includes/Frontend/SigningController.php:91
+msgid "You have already signed this document. Thank you."
+msgstr "כבר חתמת על מסמך זה. תודה."
+
+#: includes/Email/Mailer.php:41
+msgid "You have been asked to review and sign the document: \"%s\"."
+msgstr "התבקשת לעיין ולחתום על המסמך: \"%s\"."
+
+#: includes/Frontend/SigningController.php:97
+msgid "You have declined to sign this document."
+msgstr "סירבת לחתום על מסמך זה."
+
+#: includes/Frontend/SigningController.php:220
+msgid "You have declined to sign this document. The sender has been notified."
+msgstr "סירבת לחתום על מסמך זה. השולח קיבל הודעה על כך."
+
+#: includes/Frontend/SigningController.php:173
+msgid "You must agree to sign electronically before continuing."
+msgstr "עליך להסכים לחתום באופן אלקטרוני לפני המשך."
+
+#: includes/Frontend/views/sign.php:42
+msgid "Your signature"
+msgstr "החתימה שלך"
+
+#: includes/Frontend/SigningController.php:193
+msgid "Your signature has been recorded. A copy will be available once all parties have signed."
+msgstr "חתימתך נרשמה. עותק יהיה זמין לאחר שכל הצדדים יחתמו."
+
+#: includes/Admin/views/new.php:25
+msgid "e.g. Service agreement"
+msgstr "לדוגמה: הסכם שירות"
+
+#: includes/Admin/views/edit.php:166
+msgid "email@example.com"
+msgstr "email@example.com"
+
