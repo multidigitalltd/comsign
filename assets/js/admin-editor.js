@@ -146,7 +146,7 @@
 		remove.type = 'button';
 		remove.className = 'comsign-field-remove';
 		remove.setAttribute( 'aria-label', cfg.i18n.remove || 'Remove' );
-		remove.textContent = '×';
+		remove.textContent = '\u00D7'; // multiplication sign
 		remove.addEventListener( 'mousedown', function ( e ) {
 			e.stopPropagation();
 		} );

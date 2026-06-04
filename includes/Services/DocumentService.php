@@ -496,13 +496,27 @@ final class DocumentService {
 	 * @param array $fields      List of field definitions.
 	 */
 	public function save_fields( int $document_id, array $fields ): void {
+		// Allowlist of signer ids that actually belong to this document, so a
+		// tampered payload cannot attach a field to a signer of another document.
+		$allowed = array();
+		foreach ( $this->signers->for_document( $document_id ) as $signer ) {
+			$allowed[ (int) $signer->id ] = true;
+		}
+
 		$this->fields->delete_for_document( $document_id );
 
 		foreach ( $fields as $field ) {
+			$signer_id = (int) ( $field['signer_id'] ?? 0 );
+
+			// Skip fields not assigned to a valid signer of this document.
+			if ( ! isset( $allowed[ $signer_id ] ) ) {
+				continue;
+			}
+
 			$this->fields->create(
 				array(
 					'document_id' => $document_id,
-					'signer_id'   => (int) ( $field['signer_id'] ?? 0 ),
+					'signer_id'   => $signer_id,
 					'type'        => (string) ( $field['type'] ?? FieldRepository::TYPE_SIGNATURE ),
 					'page'        => (int) ( $field['page'] ?? 1 ),
 					'pos_x'       => $this->clamp_fraction( $field['pos_x'] ?? 0 ),
@@ -534,9 +548,12 @@ final class DocumentService {
 	 * @param array $options     'sequential' (bool), 'message' (string),
 	 *                           'expiry_days' (int, 0 = no expiry).
 	 *
-	 * @throws \RuntimeException If the document has no signers/fields.
+	 * @return array{emailed:int,link_only:int} Counts describing what happened,
+	 *               so the caller can show an accurate notice.
+	 *
+	 * @throws \RuntimeException On validation or mail failure.
 	 */
-	public function send( int $document_id, array $options = array() ): void {
+	public function send( int $document_id, array $options = array() ): array {
 		$document = $this->documents->find( $document_id );
 		if ( ! $document ) {
 			throw new \RuntimeException( __( 'Document not found.', 'comsign' ) );
@@ -547,12 +564,15 @@ final class DocumentService {
 			throw new \RuntimeException( __( 'Add at least one signer before sending.', 'comsign' ) );
 		}
 
-		// A document with no signature fields would finalise to an unsigned PDF;
-		// require at least one placed field, assigned to a signer, before sending.
 		$fields = $this->fields->for_document( $document_id );
 		if ( empty( $fields ) ) {
 			throw new \RuntimeException( __( 'Place at least one signature field before sending.', 'comsign' ) );
 		}
+
+		// Every field must belong to a signer of this document, and every signer
+		// must have at least one field — otherwise a signer could be invited with
+		// nothing to do, or the document could finalise without a visible mark.
+		$this->assert_fields_cover_signers( $signers, $fields );
 
 		// Persist per-send settings (sequential / message / expiry) on the document.
 		$sequential  = ! empty( $options['sequential'] );
@@ -569,35 +589,30 @@ final class DocumentService {
 		$this->documents->set_expiry( $document_id, $expires_at );
 		$document = $this->documents->find( $document_id );
 
-		// In sequential mode only the next unsigned signer is invited now;
-		// the rest are invited automatically as each one signs.
+		$emailed   = 0;
+		$link_only = 0;
+		$failures  = array();
+
 		if ( $sequential ) {
+			// Only the next unsigned signer is invited now; the rest follow as
+			// each one signs.
 			$next = $this->signers->next_unsigned( $document_id );
 			$this->documents->set_status( $document_id, DocumentRepository::STATUS_SENT );
+
 			if ( $next && '' !== trim( (string) $next->email ) ) {
-				$this->invite_signer( $document, $next );
+				$this->invite_signer( $document, $next ) ? $emailed++ : $failures[] = $next->email;
+			} elseif ( $next ) {
+				$link_only++;
 			}
-			return;
-		}
-
-		$failures = array();
-		$sent_any = false;
-
-		foreach ( $signers as $signer ) {
-			// Link-only signers (no email) are shared manually via "Get link".
-			if ( '' === trim( (string) $signer->email ) ) {
-				continue;
+		} else {
+			foreach ( $signers as $signer ) {
+				if ( '' === trim( (string) $signer->email ) ) {
+					// Reached only via a shared link / WhatsApp.
+					$link_only++;
+					continue;
+				}
+				$this->invite_signer( $document, $signer ) ? $emailed++ : $failures[] = $signer->email;
 			}
-
-			if ( $this->invite_signer( $document, $signer ) ) {
-				$sent_any = true;
-			} else {
-				$failures[] = $signer->email;
-			}
-		}
-
-		// Only advance the document to "sent" if at least one invitation went out.
-		if ( $sent_any || $sequential ) {
 			$this->documents->set_status( $document_id, DocumentRepository::STATUS_SENT );
 		}
 
@@ -610,6 +625,39 @@ final class DocumentService {
 					implode( ', ', $failures )
 				)
 			);
+		}
+
+		return array(
+			'emailed'   => $emailed,
+			'link_only' => $link_only,
+		);
+	}
+
+	/**
+	 * Validate that fields cover the signers, and only valid signers.
+	 *
+	 * @param array $signers Signer rows.
+	 * @param array $fields  Field rows.
+	 *
+	 * @throws \RuntimeException If a signer has no field or a field is orphaned.
+	 */
+	private function assert_fields_cover_signers( array $signers, array $fields ): void {
+		$signer_ids   = array();
+		$with_a_field = array();
+		foreach ( $signers as $signer ) {
+			$signer_ids[ (int) $signer->id ] = true;
+		}
+
+		foreach ( $fields as $field ) {
+			$sid = (int) $field->signer_id;
+			if ( ! isset( $signer_ids[ $sid ] ) ) {
+				throw new \RuntimeException( __( 'A field is assigned to a signer that is not on this document. Please re-save the fields.', 'comsign' ) );
+			}
+			$with_a_field[ $sid ] = true;
+		}
+
+		if ( count( $with_a_field ) < count( $signer_ids ) ) {
+			throw new \RuntimeException( __( 'Every signer must have at least one field. Please assign a field to each signer.', 'comsign' ) );
 		}
 	}
 
@@ -719,7 +767,9 @@ final class DocumentService {
 	 * @throws \RuntimeException If a required field is missing.
 	 */
 	public function record_signature( object $document, object $signer, string $signature_image, array $field_values = array() ): void {
-		$signer_fields = $this->fields->for_signer( (int) $signer->id );
+		// Scope to the document being signed so a mis-assigned field can never
+		// be written through another document's signing flow.
+		$signer_fields = $this->fields->for_signer_in_document( (int) $document->id, (int) $signer->id );
 
 		// A signature is only mandatory when the signer has a signature field.
 		$needs_signature = false;

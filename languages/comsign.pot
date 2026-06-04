@@ -13,7 +13,7 @@ msgstr ""
 msgid "%1$d of %2$d signed"
 msgstr ""
 
-#: includes/Services/DocumentService.php:439
+#: includes/Services/DocumentService.php:443
 msgid "%s (copy)"
 msgstr ""
 
@@ -38,7 +38,11 @@ msgstr ""
 msgid "A document is awaiting your signature — %s"
 msgstr ""
 
-#: includes/Services/DocumentService.php:729
+#: includes/Services/DocumentService.php:654
+msgid "A field is assigned to a signer that is not on this document. Please re-save the fields."
+msgstr ""
+
+#: includes/Services/DocumentService.php:783
 msgid "A signature is required."
 msgstr ""
 
@@ -57,7 +61,7 @@ msgstr ""
 msgid "Add Document"
 msgstr ""
 
-#: includes/Services/DocumentService.php:543
+#: includes/Services/DocumentService.php:564
 msgid "Add at least one signer before sending."
 msgstr ""
 
@@ -82,7 +86,7 @@ msgstr ""
 msgid "Audit report (PDF)"
 msgstr ""
 
-#: includes/Services/DocumentService.php:259
+#: includes/Services/DocumentService.php:263
 msgid "Audit report — %s"
 msgstr ""
 
@@ -215,19 +219,19 @@ msgstr ""
 msgid "Document created. Now add signers and place fields."
 msgstr ""
 
-#: includes/Admin/Admin.php:455
+#: includes/Admin/Admin.php:476
 msgid "Document deleted."
 msgstr ""
 
-#: includes/Admin/Admin.php:445
+#: includes/Admin/Admin.php:466
 msgid "Document duplicated."
 msgstr ""
 
 #: includes/Admin/Admin.php:234
-#: includes/Admin/Admin.php:530
+#: includes/Admin/Admin.php:551
 #: includes/Services/DocumentService.php:228
-#: includes/Services/DocumentService.php:435
-#: includes/Services/DocumentService.php:538
+#: includes/Services/DocumentService.php:439
+#: includes/Services/DocumentService.php:559
 msgid "Document not found."
 msgstr ""
 
@@ -303,11 +307,15 @@ msgstr ""
 msgid "Event"
 msgstr ""
 
+#: includes/Services/DocumentService.php:660
+msgid "Every signer must have at least one field. Please assign a field to each signer."
+msgstr ""
+
 #: includes/Admin/views/edit.php:85
 msgid "Field for:"
 msgstr ""
 
-#: includes/Admin/Admin.php:536
+#: includes/Admin/Admin.php:557
 msgid "File not available."
 msgstr ""
 
@@ -357,16 +365,12 @@ msgstr ""
 msgid "Invalid or expired link"
 msgstr ""
 
-#: includes/Services/DocumentService.php:300
+#: includes/Services/DocumentService.php:304
 msgid "Invalid upload."
 msgstr ""
 
 #: includes/Admin/Admin.php:366
 msgid "Invitation re-sent."
-msgstr ""
-
-#: includes/Admin/Admin.php:430
-msgid "Invitations sent to all signers."
 msgstr ""
 
 #: includes/Frontend/SigningController.php:287
@@ -402,11 +406,15 @@ msgstr ""
 msgid "No documents yet. Upload your first PDF to get started."
 msgstr ""
 
+#: includes/Admin/Admin.php:435
+msgid "No emails were sent because the signer(s) have no email. Use \"Get signing link\" to share their link."
+msgstr ""
+
 #: includes/Admin/views/edit.php:117
 msgid "No events recorded yet."
 msgstr ""
 
-#: includes/Services/DocumentService.php:296
+#: includes/Services/DocumentService.php:300
 msgid "No file was uploaded, or the upload failed."
 msgstr ""
 
@@ -422,7 +430,7 @@ msgstr ""
 msgid "One per line, in the form name = value. Each {{name}} in the content is replaced with its value. {{date}} and {{site}} are available automatically."
 msgstr ""
 
-#: includes/Services/DocumentService.php:310
+#: includes/Services/DocumentService.php:314
 msgid "Only PDF files are allowed."
 msgstr ""
 
@@ -450,7 +458,7 @@ msgstr ""
 msgid "Phone for WhatsApp (optional)"
 msgstr ""
 
-#: includes/Services/DocumentService.php:550
+#: includes/Services/DocumentService.php:569
 msgid "Place at least one signature field before sending."
 msgstr ""
 
@@ -478,11 +486,11 @@ msgstr ""
 msgid "Please open the secure link below to view and sign it:"
 msgstr ""
 
-#: includes/Services/DocumentService.php:349
+#: includes/Services/DocumentService.php:353
 msgid "Please provide a name or an email for the signer."
 msgstr ""
 
-#: includes/Services/DocumentService.php:344
+#: includes/Services/DocumentService.php:348
 msgid "Please provide a valid email address."
 msgstr ""
 
@@ -547,6 +555,14 @@ msgstr ""
 msgid "Sent"
 msgstr ""
 
+#: includes/Admin/Admin.php:439
+msgid "Sent %1$d invitation(s). %2$d signer(s) have no email — share their link manually."
+msgstr ""
+
+#: includes/Admin/Admin.php:446
+msgid "Sent %d invitation(s)."
+msgstr ""
+
 #: includes/Email/Mailer.php:64
 msgid "Sent by %s"
 msgstr ""
@@ -556,7 +572,7 @@ msgstr ""
 msgid "Settings"
 msgstr ""
 
-#: includes/Admin/Admin.php:514
+#: includes/Admin/Admin.php:535
 msgid "Settings saved."
 msgstr ""
 
@@ -610,7 +626,7 @@ msgid "Signer added."
 msgstr ""
 
 #: includes/Services/DocumentService.php:183
-#: includes/Services/DocumentService.php:397
+#: includes/Services/DocumentService.php:401
 msgid "Signer not found."
 msgstr ""
 
@@ -628,7 +644,7 @@ msgstr ""
 msgid "Signing declined"
 msgstr ""
 
-#: includes/Services/DocumentService.php:605
+#: includes/Services/DocumentService.php:624
 msgid "Some invitations could not be sent: %s. Please check your site email settings and re-send."
 msgstr ""
 
@@ -656,11 +672,11 @@ msgstr ""
 msgid "The email could not be sent. Please check your site email settings."
 msgstr ""
 
-#: includes/Services/DocumentService.php:320
+#: includes/Services/DocumentService.php:324
 msgid "The file does not look like a valid PDF."
 msgstr ""
 
-#: includes/Services/DocumentService.php:305
+#: includes/Services/DocumentService.php:309
 msgid "The file is too large (max 25 MB)."
 msgstr ""
 
@@ -763,7 +779,7 @@ msgstr ""
 msgid "Write the fixed text of the document. After creating it you can place fillable and signature fields on the generated PDF."
 msgstr ""
 
-#: includes/Admin/Admin.php:616
+#: includes/Admin/Admin.php:637
 msgid "You are not allowed to access this page."
 msgstr ""
 

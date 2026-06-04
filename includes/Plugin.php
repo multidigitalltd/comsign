@@ -49,8 +49,10 @@ final class Plugin {
 	public function run(): void {
 		add_action( 'init', array( $this, 'load_textdomain' ) );
 
-		// Database upgrades for sites updated without re-activating.
-		add_action( 'plugins_loaded', array( Setup\Installer::class, 'maybe_upgrade' ) );
+		// Database upgrades for sites updated without re-activating. run() is
+		// already executing on plugins_loaded, so call this directly rather than
+		// hooking plugins_loaded again (which would be too late to fire).
+		Setup\Installer::maybe_upgrade();
 
 		// Ensure the reminder cron stays scheduled even after a silent update.
 		add_action( 'init', array( Setup\Cron::class, 'schedule' ) );

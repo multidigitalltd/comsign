@@ -80,6 +80,25 @@ final class FieldRepository {
 	}
 
 	/**
+	 * All fields for a signer, scoped to a specific document.
+	 *
+	 * Safer than {@see for_signer()} during signing: it guarantees the returned
+	 * fields belong to the document being signed, even if a stray field row
+	 * referenced a signer id from elsewhere.
+	 */
+	public function for_signer_in_document( int $document_id, int $signer_id ): array {
+		global $wpdb;
+
+		return $wpdb->get_results( // phpcs:ignore WordPress.DB.DirectDatabaseQuery, WordPress.DB.PreparedSQL.NotPrepared
+			$wpdb->prepare(
+				'SELECT * FROM ' . Installer::fields_table() . ' WHERE document_id = %d AND signer_id = %d ORDER BY page ASC, id ASC',
+				$document_id,
+				$signer_id
+			)
+		);
+	}
+
+	/**
 	 * Store the captured value (e.g. signature image reference) for a field.
 	 *
 	 * @param int    $id    Field id.

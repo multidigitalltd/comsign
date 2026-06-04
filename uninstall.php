@@ -47,12 +47,15 @@ $uploads = wp_upload_dir();
 $dir     = trailingslashit( $uploads['basedir'] ) . 'comsign';
 
 if ( is_dir( $dir ) ) {
-	$items = glob( $dir . '/*' );
-	if ( is_array( $items ) ) {
-		foreach ( $items as $item ) {
-			if ( is_file( $item ) ) {
-				wp_delete_file( $item );
-			}
+	// GLOB_BRACE + a dotfile pattern so .htaccess / index.php are caught too,
+	// otherwise rmdir() would fail and leave the directory behind.
+	$items = array_merge(
+		(array) glob( $dir . '/*' ),
+		(array) glob( $dir . '/.*' )
+	);
+	foreach ( $items as $item ) {
+		if ( is_file( $item ) ) {
+			wp_delete_file( $item );
 		}
 	}
 	// Remove now-empty directory.

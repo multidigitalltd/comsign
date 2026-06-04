@@ -14,7 +14,7 @@ msgstr ""
 msgid "%1$d of %2$d signed"
 msgstr "%1$d מתוך %2$d חתמו"
 
-#: includes/Services/DocumentService.php:439
+#: includes/Services/DocumentService.php:443
 msgid "%s (copy)"
 msgstr "%s (עותק)"
 
@@ -39,7 +39,11 @@ msgstr "+ שדה טקסט"
 msgid "A document is awaiting your signature — %s"
 msgstr "מסמך ממתין לחתימתך — %s"
 
-#: includes/Services/DocumentService.php:729
+#: includes/Services/DocumentService.php:654
+msgid "A field is assigned to a signer that is not on this document. Please re-save the fields."
+msgstr "שדה משויך לחותם שאינו במסמך זה. אנא שמרו מחדש את השדות."
+
+#: includes/Services/DocumentService.php:783
 msgid "A signature is required."
 msgstr "נדרשת חתימה."
 
@@ -58,7 +62,7 @@ msgstr "פעולות"
 msgid "Add Document"
 msgstr "הוספת מסמך"
 
-#: includes/Services/DocumentService.php:543
+#: includes/Services/DocumentService.php:564
 msgid "Add at least one signer before sending."
 msgstr "יש להוסיף לפחות חותם אחד לפני השליחה."
 
@@ -83,7 +87,7 @@ msgstr "כבר נחתם"
 msgid "Audit report (PDF)"
 msgstr "דוח ביקורת (PDF)"
 
-#: includes/Services/DocumentService.php:259
+#: includes/Services/DocumentService.php:263
 msgid "Audit report — %s"
 msgstr "דוח ביקורת — %s"
 
@@ -216,19 +220,19 @@ msgstr "תוכן המסמך"
 msgid "Document created. Now add signers and place fields."
 msgstr "המסמך נוצר. כעת הוסיפו חותמים והניחו שדות."
 
-#: includes/Admin/Admin.php:455
+#: includes/Admin/Admin.php:476
 msgid "Document deleted."
 msgstr "המסמך נמחק."
 
-#: includes/Admin/Admin.php:445
+#: includes/Admin/Admin.php:466
 msgid "Document duplicated."
 msgstr "המסמך שוכפל."
 
 #: includes/Admin/Admin.php:234
-#: includes/Admin/Admin.php:530
+#: includes/Admin/Admin.php:551
 #: includes/Services/DocumentService.php:228
-#: includes/Services/DocumentService.php:435
-#: includes/Services/DocumentService.php:538
+#: includes/Services/DocumentService.php:439
+#: includes/Services/DocumentService.php:559
 msgid "Document not found."
 msgstr "המסמך לא נמצא."
 
@@ -304,11 +308,15 @@ msgstr "שליחת קישור במייל"
 msgid "Event"
 msgstr "אירוע"
 
+#: includes/Services/DocumentService.php:660
+msgid "Every signer must have at least one field. Please assign a field to each signer."
+msgstr "לכל חותם חייב להיות לפחות שדה אחד. אנא שייכו שדה לכל חותם."
+
 #: includes/Admin/views/edit.php:85
 msgid "Field for:"
 msgstr "שדה עבור:"
 
-#: includes/Admin/Admin.php:536
+#: includes/Admin/Admin.php:557
 msgid "File not available."
 msgstr "הקובץ אינו זמין."
 
@@ -358,17 +366,13 @@ msgstr "קישור לא תקין."
 msgid "Invalid or expired link"
 msgstr "קישור לא תקין או שפג תוקפו"
 
-#: includes/Services/DocumentService.php:300
+#: includes/Services/DocumentService.php:304
 msgid "Invalid upload."
 msgstr "העלאה לא תקינה."
 
 #: includes/Admin/Admin.php:366
 msgid "Invitation re-sent."
 msgstr "ההזמנה נשלחה מחדש."
-
-#: includes/Admin/Admin.php:430
-msgid "Invitations sent to all signers."
-msgstr "ההזמנות נשלחו לכל החותמים."
 
 #: includes/Frontend/SigningController.php:287
 msgid "It is not your turn to sign yet."
@@ -403,11 +407,15 @@ msgstr "שם"
 msgid "No documents yet. Upload your first PDF to get started."
 msgstr "אין עדיין מסמכים. העלו את קובץ ה-PDF הראשון כדי להתחיל."
 
+#: includes/Admin/Admin.php:435
+msgid "No emails were sent because the signer(s) have no email. Use \"Get signing link\" to share their link."
+msgstr "לא נשלחו מיילים כי לחותם/ים אין כתובת אימייל. השתמשו ב\"קבלת קישור לחתימה\" לשיתוף הקישור."
+
 #: includes/Admin/views/edit.php:117
 msgid "No events recorded yet."
 msgstr "טרם נרשמו אירועים."
 
-#: includes/Services/DocumentService.php:296
+#: includes/Services/DocumentService.php:300
 msgid "No file was uploaded, or the upload failed."
 msgstr "לא הועלה קובץ, או שההעלאה נכשלה."
 
@@ -423,7 +431,7 @@ msgstr "אין עדיין חותמים."
 msgid "One per line, in the form name = value. Each {{name}} in the content is replaced with its value. {{date}} and {{site}} are available automatically."
 msgstr "שורה אחת לכל משתנה, בפורמט name = value. כל {{name}} בתוכן יוחלף בערכו. {{date}} ו-{{site}} זמינים אוטומטית."
 
-#: includes/Services/DocumentService.php:310
+#: includes/Services/DocumentService.php:314
 msgid "Only PDF files are allowed."
 msgstr "ניתן להעלות קבצי PDF בלבד."
 
@@ -451,7 +459,7 @@ msgstr "למחוק לצמיתות את המסמך הזה ואת כל הנתונ�
 msgid "Phone for WhatsApp (optional)"
 msgstr "טלפון לוואטסאפ (אופציונלי)"
 
-#: includes/Services/DocumentService.php:550
+#: includes/Services/DocumentService.php:569
 msgid "Place at least one signature field before sending."
 msgstr "הניחו לפחות שדה חתימה אחד לפני השליחה."
 
@@ -479,11 +487,11 @@ msgstr "אנא מלאו"
 msgid "Please open the secure link below to view and sign it:"
 msgstr "אנא פתחו את הקישור המאובטח שלהלן כדי לצפות ולחתום:"
 
-#: includes/Services/DocumentService.php:349
+#: includes/Services/DocumentService.php:353
 msgid "Please provide a name or an email for the signer."
 msgstr "אנא הזינו שם או אימייל לחותם."
 
-#: includes/Services/DocumentService.php:344
+#: includes/Services/DocumentService.php:348
 msgid "Please provide a valid email address."
 msgstr "אנא הזינו כתובת דוא״ל תקינה."
 
@@ -548,6 +556,14 @@ msgstr "שליחה לחתימה"
 msgid "Sent"
 msgstr "נשלח"
 
+#: includes/Admin/Admin.php:439
+msgid "Sent %1$d invitation(s). %2$d signer(s) have no email — share their link manually."
+msgstr "נשלחו %1$d הזמנות. ל-%2$d חותם/ים אין אימייל — שתפו את הקישור ידנית."
+
+#: includes/Admin/Admin.php:446
+msgid "Sent %d invitation(s)."
+msgstr "נשלחו %d הזמנות."
+
 #: includes/Email/Mailer.php:64
 msgid "Sent by %s"
 msgstr "נשלח על-ידי %s"
@@ -557,7 +573,7 @@ msgstr "נשלח על-ידי %s"
 msgid "Settings"
 msgstr "הגדרות"
 
-#: includes/Admin/Admin.php:514
+#: includes/Admin/Admin.php:535
 msgid "Settings saved."
 msgstr "ההגדרות נשמרו."
 
@@ -611,7 +627,7 @@ msgid "Signer added."
 msgstr "החותם נוסף."
 
 #: includes/Services/DocumentService.php:183
-#: includes/Services/DocumentService.php:397
+#: includes/Services/DocumentService.php:401
 msgid "Signer not found."
 msgstr "החותם לא נמצא."
 
@@ -629,7 +645,7 @@ msgstr "חותמים"
 msgid "Signing declined"
 msgstr "החתימה סורבה"
 
-#: includes/Services/DocumentService.php:605
+#: includes/Services/DocumentService.php:624
 msgid "Some invitations could not be sent: %s. Please check your site email settings and re-send."
 msgstr "חלק מההזמנות לא נשלחו: %s. אנא בדקו את הגדרות הדוא\"ל של האתר ושלחו מחדש."
 
@@ -657,11 +673,11 @@ msgstr "לא ניתן היה למצוא את המסמך."
 msgid "The email could not be sent. Please check your site email settings."
 msgstr "לא ניתן היה לשלוח את האימייל. אנא בדקו את הגדרות הדוא\"ל של האתר."
 
-#: includes/Services/DocumentService.php:320
+#: includes/Services/DocumentService.php:324
 msgid "The file does not look like a valid PDF."
 msgstr "הקובץ אינו נראה כקובץ PDF תקין."
 
-#: includes/Services/DocumentService.php:305
+#: includes/Services/DocumentService.php:309
 msgid "The file is too large (max 25 MB)."
 msgstr "הקובץ גדול מדי (מקסימום 25 מ״ב)."
 
@@ -764,7 +780,7 @@ msgstr "מתי"
 msgid "Write the fixed text of the document. After creating it you can place fillable and signature fields on the generated PDF."
 msgstr "כתבו את הטקסט הקבוע של המסמך. לאחר היצירה תוכלו להניח שדות למילוי וחתימה על ה-PDF שייווצר."
 
-#: includes/Admin/Admin.php:616
+#: includes/Admin/Admin.php:637
 msgid "You are not allowed to access this page."
 msgstr "אינך מורשה לגשת לעמוד זה."
 

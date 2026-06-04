@@ -422,12 +422,33 @@ final class Admin {
 		);
 
 		try {
-			$this->service->send( $document_id, $options );
+			$result = $this->service->send( $document_id, $options );
 		} catch ( \Throwable $e ) {
 			$this->redirect_with_notice( $this->edit_url( $document_id ), 'error', $e->getMessage() );
 		}
 
-		$this->redirect_with_notice( $this->edit_url( $document_id ), 'success', __( 'Invitations sent to all signers.', 'comsign' ) );
+		$emailed   = (int) ( $result['emailed'] ?? 0 );
+		$link_only = (int) ( $result['link_only'] ?? 0 );
+
+		if ( 0 === $emailed && $link_only > 0 ) {
+			// Nothing was emailed — all remaining signers are link-only.
+			$message = __( 'No emails were sent because the signer(s) have no email. Use "Get signing link" to share their link.', 'comsign' );
+		} elseif ( $link_only > 0 ) {
+			$message = sprintf(
+				/* translators: 1: number emailed, 2: number of link-only signers. */
+				__( 'Sent %1$d invitation(s). %2$d signer(s) have no email — share their link manually.', 'comsign' ),
+				$emailed,
+				$link_only
+			);
+		} else {
+			$message = sprintf(
+				/* translators: %d: number of invitations sent. */
+				__( 'Sent %d invitation(s).', 'comsign' ),
+				$emailed
+			);
+		}
+
+		$this->redirect_with_notice( $this->edit_url( $document_id ), 'success', $message );
 	}
 
 	public function handle_duplicate(): void {
