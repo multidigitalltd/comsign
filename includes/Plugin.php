@@ -1,0 +1,72 @@
+<?php
+/**
+ * Main plugin orchestrator.
+ *
+ * @package ComSign
+ */
+
+namespace ComSign;
+
+defined( 'ABSPATH' ) || exit;
+
+use ComSign\Admin\Admin;
+use ComSign\Frontend\SigningController;
+
+/**
+ * Wires up the plugin's services and hooks.
+ *
+ * Kept deliberately thin: it only loads text domain and delegates to the
+ * admin and frontend controllers.
+ */
+final class Plugin {
+
+	/**
+	 * Singleton instance.
+	 *
+	 * @var Plugin|null
+	 */
+	private static ?Plugin $instance = null;
+
+	/**
+	 * Retrieve the singleton instance.
+	 */
+	public static function instance(): Plugin {
+		if ( null === self::$instance ) {
+			self::$instance = new self();
+		}
+
+		return self::$instance;
+	}
+
+	/**
+	 * Private constructor — use {@see Plugin::instance()}.
+	 */
+	private function __construct() {}
+
+	/**
+	 * Register hooks and boot the controllers.
+	 */
+	public function run(): void {
+		add_action( 'init', array( $this, 'load_textdomain' ) );
+
+		// Database upgrades for sites updated without re-activating.
+		add_action( 'plugins_loaded', array( Setup\Installer::class, 'maybe_upgrade' ) );
+
+		if ( is_admin() ) {
+			( new Admin() )->register();
+		}
+
+		( new SigningController() )->register();
+	}
+
+	/**
+	 * Load the plugin translations.
+	 */
+	public function load_textdomain(): void {
+		load_plugin_textdomain(
+			'comsign',
+			false,
+			dirname( COMSIGN_PLUGIN_BASENAME ) . '/languages'
+		);
+	}
+}
