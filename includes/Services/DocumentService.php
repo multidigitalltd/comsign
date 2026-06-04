@@ -1,0 +1,360 @@
+<?php
+/**
+ * Document workflow orchestration.
+ *
+ * @package ComSign
+ */
+
+namespace ComSign\Services;
+
+defined( 'ABSPATH' ) || exit;
+
+use ComSign\Audit\AuditLogger;
+use ComSign\Database\AuditRepository;
+use ComSign\Database\DocumentRepository;
+use ComSign\Database\FieldRepository;
+use ComSign\Database\SignerRepository;
+use ComSign\Email\Mailer;
+use ComSign\Signature\ElectronicSignatureProvider;
+use ComSign\Signature\SignatureProviderInterface;
+use ComSign\Support\Storage;
+use ComSign\Support\Tokens;
+
+/**
+ * Coordinates the end-to-end document lifecycle: upload, signers, fields,
+ * sending invitations, capturing signatures and finalising the signed PDF.
+ */
+final class DocumentService {
+
+	private DocumentRepository $documents;
+	private SignerRepository $signers;
+	private FieldRepository $fields;
+	private AuditRepository $audit_repo;
+	private AuditLogger $audit;
+	private Mailer $mailer;
+	private SignatureProviderInterface $provider;
+
+	public function __construct() {
+		$this->documents  = new DocumentRepository();
+		$this->signers    = new SignerRepository();
+		$this->fields     = new FieldRepository();
+		$this->audit_repo = new AuditRepository();
+		$this->audit      = new AuditLogger( $this->audit_repo );
+		$this->mailer     = new Mailer();
+		$this->provider   = new ElectronicSignatureProvider();
+	}
+
+	/* ---------------------------------------------------------------------
+	 * Creation
+	 * ------------------------------------------------------------------- */
+
+	/**
+	 * Create a document from an uploaded PDF.
+	 *
+	 * @param array  $file  A single entry from $_FILES.
+	 * @param string $title Document title.
+	 *
+	 * @return int New document id.
+	 *
+	 * @throws \RuntimeException If the upload is invalid.
+	 */
+	public function create_from_upload( array $file, string $title ): int {
+		$this->validate_pdf_upload( $file );
+
+		$title = $title !== '' ? $title : sanitize_file_name( $file['name'] );
+
+		$document_id = $this->documents->create(
+			array(
+				'title'      => $title,
+				'created_by' => get_current_user_id(),
+			)
+		);
+
+		$destination = Storage::document_path( $document_id, 'source' );
+
+		if ( ! move_uploaded_file( $file['tmp_name'], $destination ) ) {
+			$this->documents->delete( $document_id );
+			throw new \RuntimeException( __( 'Could not store the uploaded file.', 'comsign' ) );
+		}
+
+		$this->documents->update( $document_id, array( 'source_path' => $destination ) );
+
+		$this->audit->record( AuditLogger::EVENT_CREATED, $document_id, 0, array( 'title' => $title ) );
+
+		return $document_id;
+	}
+
+	/**
+	 * Validate that an upload is a real, reasonably-sized PDF.
+	 *
+	 * @param array $file $_FILES entry.
+	 *
+	 * @throws \RuntimeException On any validation failure.
+	 */
+	private function validate_pdf_upload( array $file ): void {
+		if ( ! isset( $file['error'] ) || UPLOAD_ERR_OK !== (int) $file['error'] ) {
+			throw new \RuntimeException( __( 'No file was uploaded, or the upload failed.', 'comsign' ) );
+		}
+
+		if ( ! is_uploaded_file( $file['tmp_name'] ) ) {
+			throw new \RuntimeException( __( 'Invalid upload.', 'comsign' ) );
+		}
+
+		// 25 MB ceiling.
+		if ( (int) $file['size'] > 25 * MB_IN_BYTES ) {
+			throw new \RuntimeException( __( 'The file is too large (max 25 MB).', 'comsign' ) );
+		}
+
+		$check = wp_check_filetype_and_ext( $file['tmp_name'], $file['name'] );
+		if ( 'application/pdf' !== ( $check['type'] ?? '' ) ) {
+			throw new \RuntimeException( __( 'Only PDF files are allowed.', 'comsign' ) );
+		}
+
+		// Confirm the magic bytes really are a PDF.
+		$handle = fopen( $file['tmp_name'], 'rb' ); // phpcs:ignore WordPress.WP.AlternativeFunctions.file_system_operations_fopen
+		$magic  = $handle ? fread( $handle, 5 ) : ''; // phpcs:ignore WordPress.WP.AlternativeFunctions.file_system_operations_fread
+		if ( $handle ) {
+			fclose( $handle ); // phpcs:ignore WordPress.WP.AlternativeFunctions.file_system_operations_fclose
+		}
+		if ( 0 !== strncmp( (string) $magic, '%PDF-', 5 ) ) {
+			throw new \RuntimeException( __( 'The file does not look like a valid PDF.', 'comsign' ) );
+		}
+	}
+
+	/* ---------------------------------------------------------------------
+	 * Signers & fields
+	 * ------------------------------------------------------------------- */
+
+	/**
+	 * Add a signer to a draft document.
+	 *
+	 * @param int    $document_id Document id.
+	 * @param string $name        Signer name.
+	 * @param string $email       Signer email.
+	 *
+	 * @return int New signer id.
+	 *
+	 * @throws \RuntimeException On invalid email.
+	 */
+	public function add_signer( int $document_id, string $name, string $email ): int {
+		if ( ! is_email( $email ) ) {
+			throw new \RuntimeException( __( 'Please provide a valid email address.', 'comsign' ) );
+		}
+
+		$existing = $this->signers->for_document( $document_id );
+
+		return $this->signers->create(
+			array(
+				'document_id' => $document_id,
+				'name'        => $name,
+				'email'       => $email,
+				'sign_order'  => count( $existing ),
+			)
+		);
+	}
+
+	/**
+	 * Replace the signature fields for a document.
+	 *
+	 * @param int   $document_id Document id.
+	 * @param array $fields      List of field definitions.
+	 */
+	public function save_fields( int $document_id, array $fields ): void {
+		$this->fields->delete_for_document( $document_id );
+
+		foreach ( $fields as $field ) {
+			$this->fields->create(
+				array(
+					'document_id' => $document_id,
+					'signer_id'   => (int) ( $field['signer_id'] ?? 0 ),
+					'type'        => (string) ( $field['type'] ?? FieldRepository::TYPE_SIGNATURE ),
+					'page'        => (int) ( $field['page'] ?? 1 ),
+					'pos_x'       => $this->clamp_fraction( $field['pos_x'] ?? 0 ),
+					'pos_y'       => $this->clamp_fraction( $field['pos_y'] ?? 0 ),
+					'width'       => $this->clamp_fraction( $field['width'] ?? 0 ),
+					'height'      => $this->clamp_fraction( $field['height'] ?? 0 ),
+				)
+			);
+		}
+	}
+
+	/**
+	 * Clamp a coordinate fraction into the [0, 1] range.
+	 *
+	 * @param mixed $value Raw value.
+	 */
+	private function clamp_fraction( $value ): float {
+		return max( 0.0, min( 1.0, (float) $value ) );
+	}
+
+	/* ---------------------------------------------------------------------
+	 * Sending
+	 * ------------------------------------------------------------------- */
+
+	/**
+	 * Mint fresh tokens and email signing invitations to all signers.
+	 *
+	 * @param int $document_id Document id.
+	 *
+	 * @throws \RuntimeException If the document has no signers/fields.
+	 */
+	public function send( int $document_id ): void {
+		$document = $this->documents->find( $document_id );
+		if ( ! $document ) {
+			throw new \RuntimeException( __( 'Document not found.', 'comsign' ) );
+		}
+
+		$signers = $this->signers->for_document( $document_id );
+		if ( empty( $signers ) ) {
+			throw new \RuntimeException( __( 'Add at least one signer before sending.', 'comsign' ) );
+		}
+
+		foreach ( $signers as $signer ) {
+			// Mint a new raw token; persist only its hash.
+			$raw = Tokens::generate();
+			$this->signers->update(
+				(int) $signer->id,
+				array(
+					'token_hash' => Tokens::hash( $raw ),
+					'status'     => SignerRepository::STATUS_PENDING,
+				)
+			);
+
+			$url = $this->signing_url( $raw );
+			$this->mailer->send_invitation( $document, $signer, $url );
+
+			$this->audit->record( AuditLogger::EVENT_SENT, $document_id, (int) $signer->id, array( 'email' => $signer->email ) );
+		}
+
+		$this->documents->set_status( $document_id, DocumentRepository::STATUS_SENT );
+	}
+
+	/**
+	 * Build the public signing URL for a raw token.
+	 *
+	 * @param string $raw_token Raw token.
+	 */
+	public function signing_url( string $raw_token ): string {
+		return add_query_arg(
+			array(
+				'comsign_sign' => '1',
+				'token'        => rawurlencode( $raw_token ),
+			),
+			home_url( '/' )
+		);
+	}
+
+	/* ---------------------------------------------------------------------
+	 * Signing & finalisation
+	 * ------------------------------------------------------------------- */
+
+	/**
+	 * Record a signer's captured signature and finalise if everyone is done.
+	 *
+	 * @param object $document        Document row.
+	 * @param object $signer          Signer row.
+	 * @param string $signature_image Base64 PNG (no data: prefix) or empty.
+	 *
+	 * @throws \RuntimeException If no signature was provided.
+	 */
+	public function record_signature( object $document, object $signer, string $signature_image ): void {
+		if ( '' === $signature_image ) {
+			throw new \RuntimeException( __( 'A signature is required.', 'comsign' ) );
+		}
+
+		$signer_fields = $this->fields->for_signer( (int) $signer->id );
+		$today         = date_i18n( get_option( 'date_format' ) );
+
+		foreach ( $signer_fields as $field ) {
+			if ( FieldRepository::TYPE_DATE === $field->type ) {
+				$value = wp_json_encode( array( 'kind' => 'text', 'text' => $today ) );
+			} else {
+				$value = wp_json_encode( array( 'kind' => 'image', 'data' => $signature_image ) );
+			}
+			$this->fields->set_value( (int) $field->id, (string) $value );
+		}
+
+		$now = current_time( 'mysql', true );
+		$this->signers->update(
+			(int) $signer->id,
+			array(
+				'status'    => SignerRepository::STATUS_SIGNED,
+				'signed_at' => $now,
+			)
+		);
+
+		// Consent + signature are recorded together for the audit trail.
+		$this->audit->record( AuditLogger::EVENT_CONSENTED, (int) $document->id, (int) $signer->id );
+		$this->audit->record( AuditLogger::EVENT_SIGNED, (int) $document->id, (int) $signer->id );
+
+		if ( $this->signers->all_signed( (int) $document->id ) ) {
+			$this->finalize( (int) $document->id );
+		} else {
+			$this->documents->set_status( (int) $document->id, DocumentRepository::STATUS_SIGNED );
+		}
+	}
+
+	/**
+	 * Generate the final signed PDF and mark the document completed.
+	 *
+	 * @param int $document_id Document id.
+	 */
+	public function finalize( int $document_id ): void {
+		$document = $this->documents->find( $document_id );
+		if ( ! $document ) {
+			return;
+		}
+
+		$fields  = $this->fields->for_document( $document_id );
+		$signers = $this->signers->for_document( $document_id );
+
+		$signed_path = $this->provider->finalize( $document, $fields, $signers );
+		$hash        = is_file( $signed_path ) ? hash_file( 'sha256', $signed_path ) : '';
+
+		$this->documents->update(
+			$document_id,
+			array(
+				'signed_path' => $signed_path,
+				'signed_hash' => $hash,
+				'status'      => DocumentRepository::STATUS_COMPLETED,
+			)
+		);
+
+		$this->audit->record( AuditLogger::EVENT_COMPLETED, $document_id, 0, array( 'sha256' => $hash ) );
+	}
+
+	/**
+	 * Mark a signer (and document) as declined.
+	 *
+	 * @param object $document Document row.
+	 * @param object $signer   Signer row.
+	 * @param string $reason   Optional decline reason.
+	 */
+	public function decline( object $document, object $signer, string $reason = '' ): void {
+		$this->signers->update( (int) $signer->id, array( 'status' => SignerRepository::STATUS_DECLINED ) );
+		$this->documents->set_status( (int) $document->id, DocumentRepository::STATUS_DECLINED );
+		$this->audit->record( AuditLogger::EVENT_DECLINED, (int) $document->id, (int) $signer->id, array( 'reason' => $reason ) );
+	}
+
+	/* ---------------------------------------------------------------------
+	 * Deletion
+	 * ------------------------------------------------------------------- */
+
+	/**
+	 * Permanently delete a document and everything attached to it.
+	 *
+	 * @param int $document_id Document id.
+	 */
+	public function delete( int $document_id ): void {
+		$document = $this->documents->find( $document_id );
+		if ( ! $document ) {
+			return;
+		}
+
+		Storage::delete_document_files( $document );
+		$this->fields->delete_for_document( $document_id );
+		$this->signers->delete_for_document( $document_id );
+		$this->audit_repo->delete_for_document( $document_id );
+		$this->documents->delete( $document_id );
+	}
+}
