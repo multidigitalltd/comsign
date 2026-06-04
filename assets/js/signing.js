@@ -16,15 +16,20 @@
 	var consent = document.getElementById( 'comsign-consent' );
 	var errorBox = document.getElementById( 'comsign-error' );
 
-	if ( ! canvas || ! form || ! window.SignaturePad ) {
+	if ( ! form ) {
 		return;
 	}
 
+	var needsSignature = form.getAttribute( 'data-needs-signature' ) === '1';
+	var hasPad = canvas && window.SignaturePad;
 	var activeTab = 'draw';
-	var pad = new window.SignaturePad( canvas, { penColor: '#0b3d91', backgroundColor: 'rgba(0,0,0,0)' } );
+	var pad = hasPad ? new window.SignaturePad( canvas, { penColor: '#0b3d91', backgroundColor: 'rgba(0,0,0,0)' } ) : null;
 
 	// High-DPI canvas crispness.
 	function resizeCanvas() {
+		if ( ! hasPad ) {
+			return;
+		}
 		var ratio = Math.max( window.devicePixelRatio || 1, 1 );
 		var data = pad.toData();
 		canvas.width = canvas.offsetWidth * ratio;
@@ -77,6 +82,9 @@
 	}
 
 	function currentSignature() {
+		if ( ! hasPad ) {
+			return '';
+		}
 		if ( 'type' === activeTab ) {
 			return typeInput && typeInput.value.trim() ? typeCanvas.toDataURL( 'image/png' ) : '';
 		}
@@ -86,9 +94,10 @@
 	// Submit validation.
 	form.addEventListener( 'submit', function ( e ) {
 		var signature = currentSignature();
-		var ok = signature && consent && consent.checked;
+		var signatureOk = ! needsSignature || signature;
+		var consentOk = consent && consent.checked;
 
-		if ( ! ok ) {
+		if ( ! signatureOk || ! consentOk ) {
 			e.preventDefault();
 			if ( errorBox ) {
 				errorBox.classList.remove( 'is-hidden' );
@@ -96,7 +105,9 @@
 			return;
 		}
 
-		signatureField.value = signature;
+		if ( signatureField ) {
+			signatureField.value = signature;
+		}
 	} );
 
 	// Decline toggle.

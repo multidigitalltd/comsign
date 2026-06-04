@@ -92,6 +92,7 @@ foreach ( $signers as $signer ) {
 						</select>
 						<button type="button" class="button" data-comsign-add="signature"><?php esc_html_e( '+ Signature', 'comsign' ); ?></button>
 						<button type="button" class="button" data-comsign-add="date"><?php esc_html_e( '+ Date', 'comsign' ); ?></button>
+						<button type="button" class="button" data-comsign-add="text"><?php esc_html_e( '+ Text field', 'comsign' ); ?></button>
 						<span class="description"><?php esc_html_e( 'Drag fields to reposition; double-click to remove.', 'comsign' ); ?></span>
 					</div>
 
@@ -147,12 +148,53 @@ foreach ( $signers as $signer ) {
 				<?php else : ?>
 					<ul class="comsign-signers">
 						<?php foreach ( $signers as $signer ) : ?>
-							<li>
-								<span class="comsign-signer-name"><?php echo esc_html( $signer->name ?: '—' ); ?></span>
+							<li id="comsign-signer-<?php echo esc_attr( (int) $signer->id ); ?>">
+								<div class="comsign-signer-head">
+									<span class="comsign-signer-name"><?php echo esc_html( $signer->name ?: '—' ); ?></span>
+									<span class="comsign-badge comsign-badge--<?php echo esc_attr( $signer->status ); ?>"><?php echo esc_html( $signer->status ); ?></span>
+								</div>
 								<span class="comsign-signer-email"><?php echo esc_html( $signer->email ); ?></span>
-								<span class="comsign-badge comsign-badge--<?php echo esc_attr( $signer->status ); ?>">
-									<?php echo esc_html( $signer->status ); ?>
-								</span>
+								<?php if ( ! empty( $signer->phone ) ) : ?>
+									<span class="comsign-signer-email"><?php echo esc_html( $signer->phone ); ?></span>
+								<?php endif; ?>
+
+								<div class="comsign-signer-actions">
+									<form method="post" action="<?php echo esc_url( $action_url ); ?>" class="comsign-mini-form">
+										<input type="hidden" name="action" value="comsign_signer_link">
+										<input type="hidden" name="document_id" value="<?php echo esc_attr( $document_id ); ?>">
+										<input type="hidden" name="signer_id" value="<?php echo esc_attr( (int) $signer->id ); ?>">
+										<input type="hidden" name="_wpnonce" value="<?php echo esc_attr( $nonces['signer_link'] ); ?>">
+										<button type="submit" class="button-link"><?php esc_html_e( 'Get signing link', 'comsign' ); ?></button>
+									</form>
+									<form method="post" action="<?php echo esc_url( $action_url ); ?>" class="comsign-mini-form" onsubmit="return confirm('<?php echo esc_js( __( 'Remove this signer?', 'comsign' ) ); ?>');">
+										<input type="hidden" name="action" value="comsign_delete_signer">
+										<input type="hidden" name="document_id" value="<?php echo esc_attr( $document_id ); ?>">
+										<input type="hidden" name="signer_id" value="<?php echo esc_attr( (int) $signer->id ); ?>">
+										<input type="hidden" name="_wpnonce" value="<?php echo esc_attr( $nonces['delete_signer'] ); ?>">
+										<button type="submit" class="button-link comsign-link-delete"><?php esc_html_e( 'Remove', 'comsign' ); ?></button>
+									</form>
+								</div>
+
+								<?php if ( ! empty( $link_flash ) && (int) $link_flash['signer_id'] === (int) $signer->id ) : ?>
+									<?php
+									$share_link = $link_flash['url'];
+									$wa_text    = sprintf(
+										/* translators: %s: signing link. */
+										__( 'Please sign the document at the following secure link: %s', 'comsign' ),
+										$share_link
+									);
+									$wa_base = ! empty( $signer->phone ) ? 'https://wa.me/' . rawurlencode( ltrim( $signer->phone, '+' ) ) : 'https://wa.me/';
+									$wa_url  = $wa_base . '?text=' . rawurlencode( $wa_text );
+									?>
+									<div class="comsign-link-box">
+										<input type="text" readonly value="<?php echo esc_attr( $share_link ); ?>" class="widefat comsign-link-input" onclick="this.select();">
+										<div class="comsign-link-buttons">
+											<button type="button" class="button comsign-copy" data-clipboard="<?php echo esc_attr( $share_link ); ?>"><?php esc_html_e( 'Copy link', 'comsign' ); ?></button>
+											<a class="button comsign-wa" href="<?php echo esc_url( $wa_url ); ?>" target="_blank" rel="noopener"><?php esc_html_e( 'Share via WhatsApp', 'comsign' ); ?></a>
+										</div>
+										<p class="description"><?php esc_html_e( 'This link is personal and replaces any link previously issued to this signer.', 'comsign' ); ?></p>
+									</div>
+								<?php endif; ?>
 							</li>
 						<?php endforeach; ?>
 					</ul>
@@ -164,6 +206,7 @@ foreach ( $signers as $signer ) {
 					<input type="hidden" name="_wpnonce" value="<?php echo esc_attr( $nonces['add_signer'] ); ?>">
 					<p><input type="text" name="name" placeholder="<?php esc_attr_e( 'Full name', 'comsign' ); ?>" class="widefat"></p>
 					<p><input type="email" name="email" placeholder="<?php esc_attr_e( 'email@example.com', 'comsign' ); ?>" class="widefat" required></p>
+					<p><input type="tel" name="phone" placeholder="<?php esc_attr_e( 'Phone for WhatsApp (optional)', 'comsign' ); ?>" class="widefat"></p>
 					<p><button type="submit" class="button"><?php esc_html_e( 'Add signer', 'comsign' ); ?></button></p>
 				</form>
 			</div>

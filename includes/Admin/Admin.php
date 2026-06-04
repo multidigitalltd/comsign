@@ -47,9 +47,13 @@ final class Admin {
 		add_action( 'admin_enqueue_scripts', array( $this, 'enqueue_assets' ) );
 
 		add_action( 'admin_post_comsign_create_document', array( $this, 'handle_create_document' ) );
+		add_action( 'admin_post_comsign_create_text', array( $this, 'handle_create_text' ) );
 		add_action( 'admin_post_comsign_add_signer', array( $this, 'handle_add_signer' ) );
+		add_action( 'admin_post_comsign_delete_signer', array( $this, 'handle_delete_signer' ) );
+		add_action( 'admin_post_comsign_signer_link', array( $this, 'handle_signer_link' ) );
 		add_action( 'admin_post_comsign_save_fields', array( $this, 'handle_save_fields' ) );
 		add_action( 'admin_post_comsign_send', array( $this, 'handle_send' ) );
+		add_action( 'admin_post_comsign_duplicate', array( $this, 'handle_duplicate' ) );
 		add_action( 'admin_post_comsign_delete', array( $this, 'handle_delete' ) );
 		add_action( 'admin_post_comsign_stream', array( $this, 'handle_stream' ) );
 	}
@@ -105,6 +109,23 @@ final class Admin {
 			COMSIGN_VERSION
 		);
 
+		// Small helper script (copy-to-clipboard etc.) on all ComSign screens.
+		wp_enqueue_script(
+			'comsign-admin',
+			COMSIGN_PLUGIN_URL . 'assets/js/admin.js',
+			array(),
+			COMSIGN_VERSION,
+			true
+		);
+		wp_localize_script(
+			'comsign-admin',
+			'ComSignAdmin',
+			array(
+				'copied' => __( 'Copied!', 'comsign' ),
+				'copy'   => __( 'Copy link', 'comsign' ),
+			)
+		);
+
 		// The editor (pdf.js placement) is only needed on the edit screen.
 		$is_edit = isset( $_GET['action'] ) && 'edit' === sanitize_key( wp_unslash( $_GET['action'] ) ); // phpcs:ignore WordPress.Security.NonceVerification.Recommended
 		if ( ! $is_edit ) {
@@ -138,6 +159,7 @@ final class Admin {
 				'i18n'       => array(
 					'signature' => __( 'Signature', 'comsign' ),
 					'date'      => __( 'Date', 'comsign' ),
+					'text'      => __( 'Text', 'comsign' ),
 					'remove'    => __( 'Remove', 'comsign' ),
 					'loading'   => __( 'Loading document…', 'comsign' ),
 					'loadError' => __( 'Could not load the document preview.', 'comsign' ),
@@ -173,6 +195,7 @@ final class Admin {
 			array(
 				'table'    => $table,
 				'new_url'  => admin_url( 'admin.php?page=comsign-new' ),
+				'counts'   => $this->documents->status_counts(),
 				'notice'   => $this->pull_notice(),
 			)
 		);
@@ -184,9 +207,10 @@ final class Admin {
 		$this->view(
 			'new',
 			array(
-				'action_url' => admin_url( 'admin-post.php' ),
-				'nonce'      => wp_create_nonce( 'comsign_create_document' ),
-				'notice'     => $this->pull_notice(),
+				'action_url'   => admin_url( 'admin-post.php' ),
+				'nonce'        => wp_create_nonce( 'comsign_create_document' ),
+				'compose_nonce' => wp_create_nonce( 'comsign_create_text' ),
+				'notice'       => $this->pull_notice(),
 			)
 		);
 	}
@@ -205,11 +229,14 @@ final class Admin {
 				'fields'     => $this->fields->for_document( $document_id ),
 				'audit'      => $this->audit->for_document( $document_id ),
 				'action_url' => admin_url( 'admin-post.php' ),
+				'link_flash' => $this->pull_link_flash(),
 				'nonces'     => array(
-					'add_signer'  => wp_create_nonce( 'comsign_add_signer_' . $document_id ),
-					'save_fields' => wp_create_nonce( 'comsign_save_fields_' . $document_id ),
-					'send'        => wp_create_nonce( 'comsign_send_' . $document_id ),
-					'delete'      => wp_create_nonce( 'comsign_delete_' . $document_id ),
+					'add_signer'    => wp_create_nonce( 'comsign_add_signer_' . $document_id ),
+					'delete_signer' => wp_create_nonce( 'comsign_delete_signer_' . $document_id ),
+					'signer_link'   => wp_create_nonce( 'comsign_signer_link_' . $document_id ),
+					'save_fields'   => wp_create_nonce( 'comsign_save_fields_' . $document_id ),
+					'send'          => wp_create_nonce( 'comsign_send_' . $document_id ),
+					'delete'        => wp_create_nonce( 'comsign_delete_' . $document_id ),
 				),
 				'download'   => array(
 					'source' => $this->stream_url( $document_id, 'source' ),
@@ -248,6 +275,30 @@ final class Admin {
 		);
 	}
 
+	/**
+	 * Create a document by composing rich-text content into a PDF.
+	 */
+	public function handle_create_text(): void {
+		$this->guard();
+		check_admin_referer( 'comsign_create_text' );
+
+		$title = isset( $_POST['title'] ) ? sanitize_text_field( wp_unslash( $_POST['title'] ) ) : '';
+		// wp_kses_post keeps safe formatting markup while stripping anything risky.
+		$html  = isset( $_POST['content'] ) ? wp_kses_post( wp_unslash( $_POST['content'] ) ) : ''; // phpcs:ignore WordPress.Security.ValidatedSanitizedInput.InputNotSanitized
+
+		try {
+			$document_id = $this->service->create_from_text( $title, $html );
+		} catch ( \Throwable $e ) {
+			$this->redirect_with_notice( admin_url( 'admin.php?page=comsign-new' ), 'error', $e->getMessage() );
+		}
+
+		$this->redirect_with_notice(
+			$this->edit_url( $document_id ),
+			'success',
+			__( 'Document created. Now add signers and place fields.', 'comsign' )
+		);
+	}
+
 	public function handle_add_signer(): void {
 		$this->guard();
 		$document_id = $this->posted_document_id();
@@ -255,14 +306,56 @@ final class Admin {
 
 		$name  = isset( $_POST['name'] ) ? sanitize_text_field( wp_unslash( $_POST['name'] ) ) : '';
 		$email = isset( $_POST['email'] ) ? sanitize_email( wp_unslash( $_POST['email'] ) ) : '';
+		$phone = isset( $_POST['phone'] ) ? $this->sanitize_phone( wp_unslash( $_POST['phone'] ) ) : ''; // phpcs:ignore WordPress.Security.ValidatedSanitizedInput.InputNotSanitized
 
 		try {
-			$this->service->add_signer( $document_id, $name, $email );
+			$this->service->add_signer( $document_id, $name, $email, $phone );
 		} catch ( \Throwable $e ) {
 			$this->redirect_with_notice( $this->edit_url( $document_id ), 'error', $e->getMessage() );
 		}
 
 		$this->redirect_with_notice( $this->edit_url( $document_id ), 'success', __( 'Signer added.', 'comsign' ) );
+	}
+
+	public function handle_delete_signer(): void {
+		$this->guard();
+		$document_id = $this->posted_document_id();
+		check_admin_referer( 'comsign_delete_signer_' . $document_id );
+
+		$signer_id = isset( $_POST['signer_id'] ) ? absint( wp_unslash( $_POST['signer_id'] ) ) : 0;
+		$this->service->delete_signer( $document_id, $signer_id );
+
+		$this->redirect_with_notice( $this->edit_url( $document_id ), 'success', __( 'Signer removed.', 'comsign' ) );
+	}
+
+	/**
+	 * Mint a shareable signing link for a signer (copy / WhatsApp).
+	 */
+	public function handle_signer_link(): void {
+		$this->guard();
+		$document_id = $this->posted_document_id();
+		check_admin_referer( 'comsign_signer_link_' . $document_id );
+
+		$signer_id = isset( $_POST['signer_id'] ) ? absint( wp_unslash( $_POST['signer_id'] ) ) : 0;
+
+		try {
+			$url = $this->service->generate_link( $document_id, $signer_id );
+		} catch ( \Throwable $e ) {
+			$this->redirect_with_notice( $this->edit_url( $document_id ), 'error', $e->getMessage() );
+		}
+
+		// Stash the freshly minted link to render once on the edit screen.
+		set_transient(
+			$this->link_flash_key(),
+			array( 'signer_id' => $signer_id, 'url' => $url ),
+			60
+		);
+
+		$this->redirect_with_notice(
+			$this->edit_url( $document_id ) . '#comsign-signer-' . $signer_id,
+			'success',
+			__( 'A signing link was generated. Copy it or share via WhatsApp below.', 'comsign' )
+		);
 	}
 
 	public function handle_save_fields(): void {
@@ -291,6 +384,21 @@ final class Admin {
 		}
 
 		$this->redirect_with_notice( $this->edit_url( $document_id ), 'success', __( 'Invitations sent to all signers.', 'comsign' ) );
+	}
+
+	public function handle_duplicate(): void {
+		$this->guard();
+		// Triggered from a row-action link (GET) or a form (POST).
+		$document_id = isset( $_REQUEST['document_id'] ) ? absint( wp_unslash( $_REQUEST['document_id'] ) ) : 0; // phpcs:ignore WordPress.Security.NonceVerification.Recommended
+		check_admin_referer( 'comsign_duplicate_' . $document_id );
+
+		try {
+			$new_id = $this->service->duplicate( $document_id );
+		} catch ( \Throwable $e ) {
+			$this->redirect_with_notice( admin_url( 'admin.php?page=comsign' ), 'error', $e->getMessage() );
+		}
+
+		$this->redirect_with_notice( $this->edit_url( $new_id ), 'success', __( 'Document duplicated.', 'comsign' ) );
 	}
 
 	public function handle_delete(): void {
@@ -460,6 +568,36 @@ final class Admin {
 
 	private function notice_key(): string {
 		return 'comsign_notice_' . get_current_user_id();
+	}
+
+	private function link_flash_key(): string {
+		return 'comsign_link_' . get_current_user_id();
+	}
+
+	/**
+	 * Retrieve and clear the one-time signing-link flash.
+	 *
+	 * @return array{signer_id:int,url:string}|null
+	 */
+	private function pull_link_flash(): ?array {
+		$flash = get_transient( $this->link_flash_key() );
+		if ( $flash ) {
+			delete_transient( $this->link_flash_key() );
+			return is_array( $flash ) ? $flash : null;
+		}
+		return null;
+	}
+
+	/**
+	 * Sanitise a phone number: keep digits and a single leading '+'.
+	 *
+	 * @param string $raw Raw input.
+	 */
+	private function sanitize_phone( string $raw ): string {
+		$raw    = trim( $raw );
+		$plus   = ( '' !== $raw && '+' === $raw[0] ) ? '+' : '';
+		$digits = preg_replace( '/\D+/', '', $raw );
+		return substr( $plus . (string) $digits, 0, 40 );
 	}
 
 	/**

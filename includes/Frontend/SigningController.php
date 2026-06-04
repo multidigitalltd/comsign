@@ -135,13 +135,27 @@ final class SigningController {
 		);
 		$post_url  = admin_url( 'admin-post.php' );
 
+		$signer_fields = $this->fields->for_signer( (int) $signer->id );
+
+		$needs_signature = false;
+		$text_fields     = array();
+		foreach ( $signer_fields as $field ) {
+			if ( in_array( $field->type, array( 'signature', 'initials' ), true ) ) {
+				$needs_signature = true;
+			} elseif ( 'text' === $field->type ) {
+				$text_fields[] = $field;
+			}
+		}
+
 		$data = array(
-			'document'  => $document,
-			'signer'    => $signer,
-			'raw_token' => $raw_token,
-			'nonce'     => $nonce,
-			'view_url'  => $view_url,
-			'post_url'  => $post_url,
+			'document'        => $document,
+			'signer'          => $signer,
+			'raw_token'       => $raw_token,
+			'nonce'           => $nonce,
+			'view_url'        => $view_url,
+			'post_url'        => $post_url,
+			'needs_signature' => $needs_signature,
+			'text_fields'     => $text_fields,
 		);
 
 		$this->render_template( 'sign', $data );
@@ -177,13 +191,21 @@ final class SigningController {
 		$raw_signature = isset( $_POST['signature'] ) ? wp_unslash( $_POST['signature'] ) : '';
 		$base64        = $this->extract_png_base64( (string) $raw_signature );
 
+		// Collect signer-filled text fields: field id => value.
+		$field_values = array();
+		if ( isset( $_POST['fields'] ) && is_array( $_POST['fields'] ) ) {
+			foreach ( wp_unslash( $_POST['fields'] ) as $field_id => $value ) { // phpcs:ignore WordPress.Security.ValidatedSanitizedInput.InputNotSanitized
+				$field_values[ (int) $field_id ] = sanitize_text_field( (string) $value );
+			}
+		}
+
 		$document = $this->documents->find( (int) $signer->document_id );
 		if ( ! $document ) {
 			$this->render_message( __( 'Document unavailable', 'comsign' ), __( 'The document could not be found.', 'comsign' ) );
 		}
 
 		try {
-			$this->service->record_signature( $document, $signer, $base64 );
+			$this->service->record_signature( $document, $signer, $base64, $field_values );
 		} catch ( \Throwable $e ) {
 			$this->render_message( __( 'Could not complete signing', 'comsign' ), $e->getMessage() );
 		}

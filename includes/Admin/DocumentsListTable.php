@@ -78,8 +78,14 @@ final class DocumentsListTable extends \WP_List_Table {
 			esc_html( $item->title ?: __( '(untitled)', 'comsign' ) )
 		);
 
+		$duplicate_url = wp_nonce_url(
+			admin_url( 'admin-post.php?action=comsign_duplicate&document_id=' . (int) $item->id ),
+			'comsign_duplicate_' . (int) $item->id
+		);
+
 		$actions = array(
-			'edit' => sprintf( '<a href="%s">%s</a>', esc_url( $edit_url ), esc_html__( 'Manage', 'comsign' ) ),
+			'edit'      => sprintf( '<a href="%s">%s</a>', esc_url( $edit_url ), esc_html__( 'Manage', 'comsign' ) ),
+			'duplicate' => sprintf( '<a href="%s">%s</a>', esc_url( $duplicate_url ), esc_html__( 'Duplicate', 'comsign' ) ),
 		);
 
 		if ( DocumentRepository::STATUS_COMPLETED === $item->status ) {

@@ -98,6 +98,19 @@ final class FieldRepository {
 	}
 
 	/**
+	 * Delete all fields assigned to a signer.
+	 */
+	public function delete_for_signer( int $signer_id ): void {
+		global $wpdb;
+
+		$wpdb->delete( // phpcs:ignore WordPress.DB.DirectDatabaseQuery
+			Installer::fields_table(),
+			array( 'signer_id' => $signer_id ),
+			array( '%d' )
+		);
+	}
+
+	/**
 	 * Delete all fields for a document.
 	 */
 	public function delete_for_document( int $document_id ): void {

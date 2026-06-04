@@ -38,7 +38,10 @@ require __DIR__ . '/partials/header.php';
 			<iframe src="<?php echo esc_url( $view_url ); ?>" title="<?php esc_attr_e( 'Document preview', 'comsign' ); ?>"></iframe>
 		</div>
 
-		<section class="comsign-card comsign-signature-pad">
+		<?php $needs_signature = ! empty( $needs_signature ); ?>
+
+		<?php if ( $needs_signature ) : ?>
+		<section class="comsign-card comsign-signature-pad" data-needs-signature="1">
 			<h2><?php esc_html_e( 'Your signature', 'comsign' ); ?></h2>
 
 			<div class="comsign-tabs" role="tablist">
@@ -56,12 +59,24 @@ require __DIR__ . '/partials/header.php';
 				<canvas id="comsign-type-canvas" class="comsign-canvas" width="600" height="200"></canvas>
 			</div>
 		</section>
+		<?php endif; ?>
 
-		<form id="comsign-sign-form" method="post" action="<?php echo esc_url( $post_url ); ?>" class="comsign-card">
+		<form id="comsign-sign-form" method="post" action="<?php echo esc_url( $post_url ); ?>" class="comsign-card" data-needs-signature="<?php echo $needs_signature ? '1' : '0'; ?>">
 			<input type="hidden" name="action" value="comsign_sign_submit">
 			<input type="hidden" name="token" value="<?php echo esc_attr( $raw_token ); ?>">
 			<input type="hidden" name="_wpnonce" value="<?php echo esc_attr( $nonce ); ?>">
 			<input type="hidden" name="signature" id="comsign-signature-data" value="">
+
+			<?php if ( ! empty( $text_fields ) ) : ?>
+				<div class="comsign-fill-fields">
+					<h2><?php esc_html_e( 'Please fill in', 'comsign' ); ?></h2>
+					<?php foreach ( $text_fields as $field ) : ?>
+						<p>
+							<input type="text" name="fields[<?php echo esc_attr( (int) $field->id ); ?>]" class="comsign-input" placeholder="<?php esc_attr_e( 'Your answer', 'comsign' ); ?>">
+						</p>
+					<?php endforeach; ?>
+				</div>
+			<?php endif; ?>
 
 			<label class="comsign-consent">
 				<input type="checkbox" name="consent" value="1" id="comsign-consent" required>

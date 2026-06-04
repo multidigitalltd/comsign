@@ -4,7 +4,7 @@ Tags: signature, digital signature, pdf, esignature, hebrew
 Requires at least: 6.0
 Tested up to: 6.5
 Requires PHP: 7.4
-Stable tag: 0.1.0
+Stable tag: 0.2.0
 License: GPL-2.0-or-later
 License URI: https://www.gnu.org/licenses/gpl-2.0.html
 
@@ -76,6 +76,15 @@ Yes. The UI is fully translatable (a Hebrew translation ships in `languages/`)
 and renders right-to-left automatically on RTL locales.
 
 == Changelog ==
+
+= 0.2.0 =
+* New: compose a document from rich text (wp_editor) and generate its PDF —
+  in addition to uploading a PDF.
+* New: fillable text fields the signer completes themselves, stamped into the PDF.
+* New: per-signer "Get signing link" with copy-to-clipboard and WhatsApp share
+  (optional phone number per signer).
+* New: signer management (remove signer), document duplication, and a dashboard
+  status summary.
 
 = 0.1.0 =
 * Initial release: upload, field placement, email invitations, online signing

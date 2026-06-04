@@ -35,12 +35,13 @@ final class SignerRepository {
 				'document_id' => (int) $data['document_id'],
 				'name'        => (string) ( $data['name'] ?? '' ),
 				'email'       => (string) ( $data['email'] ?? '' ),
+				'phone'       => (string) ( $data['phone'] ?? '' ),
 				'token_hash'  => (string) ( $data['token_hash'] ?? '' ),
 				'status'      => self::STATUS_PENDING,
 				'sign_order'  => (int) ( $data['sign_order'] ?? 0 ),
 				'created_at'  => current_time( 'mysql', true ),
 			),
-			array( '%d', '%s', '%s', '%s', '%s', '%d', '%s' )
+			array( '%d', '%s', '%s', '%s', '%s', '%s', '%d', '%s' )
 		);
 
 		return (int) $wpdb->insert_id;
@@ -99,6 +100,19 @@ final class SignerRepository {
 			Installer::signers_table(),
 			$data,
 			array( 'id' => $id )
+		);
+	}
+
+	/**
+	 * Delete a single signer.
+	 */
+	public function delete( int $id ): void {
+		global $wpdb;
+
+		$wpdb->delete( // phpcs:ignore WordPress.DB.DirectDatabaseQuery
+			Installer::signers_table(),
+			array( 'id' => $id ),
+			array( '%d' )
 		);
 	}
 

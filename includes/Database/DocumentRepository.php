@@ -91,6 +91,26 @@ final class DocumentRepository {
 	}
 
 	/**
+	 * Document counts grouped by status (for the dashboard summary).
+	 *
+	 * @return array<string,int> status => count.
+	 */
+	public function status_counts(): array {
+		global $wpdb;
+
+		$rows = $wpdb->get_results( // phpcs:ignore WordPress.DB.DirectDatabaseQuery, WordPress.DB.PreparedSQL.NotPrepared
+			'SELECT status, COUNT(*) AS total FROM ' . Installer::documents_table() . ' GROUP BY status'
+		);
+
+		$counts = array();
+		foreach ( (array) $rows as $row ) {
+			$counts[ (string) $row->status ] = (int) $row->total;
+		}
+
+		return $counts;
+	}
+
+	/**
 	 * Update arbitrary columns on a document.
 	 *
 	 * @param int   $id   Document id.

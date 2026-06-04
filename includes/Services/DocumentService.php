@@ -85,6 +85,45 @@ final class DocumentService {
 	}
 
 	/**
+	 * Create a document by composing a PDF from rich-text (HTML) content.
+	 *
+	 * @param string $title Document title.
+	 * @param string $html  Sanitised HTML body (already run through wp_kses_post).
+	 *
+	 * @return int New document id.
+	 *
+	 * @throws \RuntimeException If the content is empty or PDF generation fails.
+	 */
+	public function create_from_text( string $title, string $html ): int {
+		if ( '' === trim( wp_strip_all_tags( $html ) ) && '' === trim( $title ) ) {
+			throw new \RuntimeException( __( 'Please add a title or some content for the document.', 'comsign' ) );
+		}
+
+		$title = '' !== $title ? $title : __( 'Untitled document', 'comsign' );
+
+		$document_id = $this->documents->create(
+			array(
+				'title'      => $title,
+				'created_by' => get_current_user_id(),
+			)
+		);
+
+		$destination = Storage::document_path( $document_id, 'source' );
+
+		try {
+			( new \ComSign\Pdf\PdfComposer() )->render( $title, $html, $destination );
+		} catch ( \Throwable $e ) {
+			$this->documents->delete( $document_id );
+			throw new \RuntimeException( $e->getMessage() );
+		}
+
+		$this->documents->update( $document_id, array( 'source_path' => $destination ) );
+		$this->audit->record( AuditLogger::EVENT_CREATED, $document_id, 0, array( 'title' => $title, 'source' => 'composed' ) );
+
+		return $document_id;
+	}
+
+	/**
 	 * Validate that an upload is a real, reasonably-sized PDF.
 	 *
 	 * @param array $file $_FILES entry.
@@ -131,12 +170,13 @@ final class DocumentService {
 	 * @param int    $document_id Document id.
 	 * @param string $name        Signer name.
 	 * @param string $email       Signer email.
+	 * @param string $phone       Optional phone (E.164-ish, for WhatsApp).
 	 *
 	 * @return int New signer id.
 	 *
 	 * @throws \RuntimeException On invalid email.
 	 */
-	public function add_signer( int $document_id, string $name, string $email ): int {
+	public function add_signer( int $document_id, string $name, string $email, string $phone = '' ): int {
 		if ( ! is_email( $email ) ) {
 			throw new \RuntimeException( __( 'Please provide a valid email address.', 'comsign' ) );
 		}
@@ -148,9 +188,133 @@ final class DocumentService {
 				'document_id' => $document_id,
 				'name'        => $name,
 				'email'       => $email,
+				'phone'       => $phone,
 				'sign_order'  => count( $existing ),
 			)
 		);
+	}
+
+	/**
+	 * Remove a signer (and the fields assigned to them).
+	 *
+	 * @param int $document_id Document id (ownership guard).
+	 * @param int $signer_id   Signer id.
+	 */
+	public function delete_signer( int $document_id, int $signer_id ): void {
+		$signer = $this->signers->find( $signer_id );
+		if ( ! $signer || (int) $signer->document_id !== $document_id ) {
+			return;
+		}
+
+		$this->fields->delete_for_signer( $signer_id );
+		$this->signers->delete( $signer_id );
+	}
+
+	/**
+	 * Mint a fresh token for a signer and return its signing URL.
+	 *
+	 * Used by the "copy link / share to WhatsApp" flow. Minting a new token
+	 * invalidates any previously issued link for that signer.
+	 *
+	 * @param int $document_id Document id (ownership guard).
+	 * @param int $signer_id   Signer id.
+	 *
+	 * @return string The tokenised signing URL.
+	 *
+	 * @throws \RuntimeException If the signer does not belong to the document.
+	 */
+	public function generate_link( int $document_id, int $signer_id ): string {
+		$signer = $this->signers->find( $signer_id );
+		if ( ! $signer || (int) $signer->document_id !== $document_id ) {
+			throw new \RuntimeException( __( 'Signer not found.', 'comsign' ) );
+		}
+
+		$raw = Tokens::generate();
+		$this->signers->update(
+			$signer_id,
+			array(
+				'token_hash' => Tokens::hash( $raw ),
+				'status'     => SignerRepository::STATUS_PENDING,
+			)
+		);
+
+		// Generating a shareable link counts as "sent" for the document state.
+		$document = $this->documents->find( $document_id );
+		if ( $document && DocumentRepository::STATUS_DRAFT === $document->status ) {
+			$this->documents->set_status( $document_id, DocumentRepository::STATUS_SENT );
+		}
+
+		$this->audit->record( AuditLogger::EVENT_SENT, $document_id, $signer_id, array( 'channel' => 'link' ) );
+
+		return $this->signing_url( $raw );
+	}
+
+	/**
+	 * Duplicate a document together with its fields and signers.
+	 *
+	 * Signers are copied without tokens and reset to pending; the new document
+	 * starts as a fresh draft so it can be re-sent.
+	 *
+	 * @param int $document_id Source document id.
+	 *
+	 * @return int New document id.
+	 *
+	 * @throws \RuntimeException If the source is missing.
+	 */
+	public function duplicate( int $document_id ): int {
+		$source = $this->documents->find( $document_id );
+		if ( ! $source ) {
+			throw new \RuntimeException( __( 'Document not found.', 'comsign' ) );
+		}
+
+		/* translators: %s: original document title. */
+		$title   = sprintf( __( '%s (copy)', 'comsign' ), $source->title );
+		$new_id  = $this->documents->create(
+			array(
+				'title'      => $title,
+				'created_by' => get_current_user_id(),
+			)
+		);
+
+		// Copy the source PDF file.
+		if ( $source->source_path && is_file( $source->source_path ) ) {
+			$new_path = Storage::document_path( $new_id, 'source' );
+			copy( $source->source_path, $new_path ); // phpcs:ignore WordPress.WP.AlternativeFunctions.file_system_operations_copy
+			$this->documents->update( $new_id, array( 'source_path' => $new_path ) );
+		}
+
+		// Map old signer ids to new ones so fields stay correctly assigned.
+		$signer_map = array();
+		foreach ( $this->signers->for_document( $document_id ) as $signer ) {
+			$signer_map[ (int) $signer->id ] = $this->signers->create(
+				array(
+					'document_id' => $new_id,
+					'name'        => $signer->name,
+					'email'       => $signer->email,
+					'phone'       => $signer->phone ?? '',
+					'sign_order'  => (int) $signer->sign_order,
+				)
+			);
+		}
+
+		foreach ( $this->fields->for_document( $document_id ) as $field ) {
+			$this->fields->create(
+				array(
+					'document_id' => $new_id,
+					'signer_id'   => $signer_map[ (int) $field->signer_id ] ?? 0,
+					'type'        => $field->type,
+					'page'        => (int) $field->page,
+					'pos_x'       => (float) $field->pos_x,
+					'pos_y'       => (float) $field->pos_y,
+					'width'       => (float) $field->width,
+					'height'      => (float) $field->height,
+				)
+			);
+		}
+
+		$this->audit->record( AuditLogger::EVENT_CREATED, $new_id, 0, array( 'duplicated_from' => $document_id ) );
+
+		return $new_id;
 	}
 
 	/**
@@ -284,22 +448,42 @@ final class DocumentService {
 	 * @param object $document        Document row.
 	 * @param object $signer          Signer row.
 	 * @param string $signature_image Base64 PNG (no data: prefix) or empty.
+	 * @param array  $field_values    Map of field id => text value, for the
+	 *                                text fields the signer fills in themselves.
 	 *
-	 * @throws \RuntimeException If no signature was provided.
+	 * @throws \RuntimeException If a required field is missing.
 	 */
-	public function record_signature( object $document, object $signer, string $signature_image ): void {
-		if ( '' === $signature_image ) {
+	public function record_signature( object $document, object $signer, string $signature_image, array $field_values = array() ): void {
+		$signer_fields = $this->fields->for_signer( (int) $signer->id );
+
+		// A signature is only mandatory when the signer has a signature field.
+		$needs_signature = false;
+		foreach ( $signer_fields as $field ) {
+			if ( in_array( $field->type, array( FieldRepository::TYPE_SIGNATURE, FieldRepository::TYPE_INITIALS ), true ) ) {
+				$needs_signature = true;
+				break;
+			}
+		}
+		if ( $needs_signature && '' === $signature_image ) {
 			throw new \RuntimeException( __( 'A signature is required.', 'comsign' ) );
 		}
 
-		$signer_fields = $this->fields->for_signer( (int) $signer->id );
-		$today         = date_i18n( get_option( 'date_format' ) );
+		$today = date_i18n( get_option( 'date_format' ) );
 
 		foreach ( $signer_fields as $field ) {
-			if ( FieldRepository::TYPE_DATE === $field->type ) {
-				$value = wp_json_encode( array( 'kind' => 'text', 'text' => $today ) );
-			} else {
-				$value = wp_json_encode( array( 'kind' => 'image', 'data' => $signature_image ) );
+			switch ( $field->type ) {
+				case FieldRepository::TYPE_DATE:
+					$value = wp_json_encode( array( 'kind' => 'text', 'text' => $today ) );
+					break;
+
+				case FieldRepository::TYPE_TEXT:
+					$text  = isset( $field_values[ (int) $field->id ] ) ? (string) $field_values[ (int) $field->id ] : '';
+					$value = wp_json_encode( array( 'kind' => 'text', 'text' => $text ) );
+					break;
+
+				default: // signature / initials.
+					$value = wp_json_encode( array( 'kind' => 'image', 'data' => $signature_image ) );
+					break;
 			}
 			$this->fields->set_value( (int) $field->id, (string) $value );
 		}

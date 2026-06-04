@@ -87,6 +87,7 @@ final class Installer {
 			document_id BIGINT UNSIGNED NOT NULL,
 			name VARCHAR(255) NOT NULL DEFAULT '',
 			email VARCHAR(190) NOT NULL DEFAULT '',
+			phone VARCHAR(40) NOT NULL DEFAULT '',
 			token_hash CHAR(64) NOT NULL DEFAULT '',
 			status VARCHAR(20) NOT NULL DEFAULT 'pending',
 			sign_order SMALLINT UNSIGNED NOT NULL DEFAULT 0,

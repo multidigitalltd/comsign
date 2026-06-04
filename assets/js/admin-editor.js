@@ -64,7 +64,13 @@
 	}
 
 	function typeLabel( type ) {
-		return 'date' === type ? ( cfg.i18n.date || 'Date' ) : ( cfg.i18n.signature || 'Signature' );
+		if ( 'date' === type ) {
+			return cfg.i18n.date || 'Date';
+		}
+		if ( 'text' === type ) {
+			return cfg.i18n.text || 'Text';
+		}
+		return cfg.i18n.signature || 'Signature';
 	}
 
 	container.textContent = cfg.i18n.loading || 'Loading…';
@@ -170,8 +176,8 @@
 		btn.addEventListener( 'click', function () {
 			var type = btn.getAttribute( 'data-comsign-add' );
 			var signerId = signerSelect ? parseInt( signerSelect.value, 10 ) : 0;
-			var w = 'date' === type ? 0.18 : 0.22;
-			var h = 'date' === type ? 0.03 : 0.06;
+			var w = 'signature' === type ? 0.22 : 0.18;
+			var h = 'signature' === type ? 0.06 : 0.03;
 			addMarker( 1, signerId, type, 0.1, 0.1, w, h );
 		} );
 	} );

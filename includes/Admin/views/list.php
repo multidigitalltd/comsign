@@ -18,6 +18,19 @@ defined( 'ABSPATH' ) || exit;
 
 	<?php require __DIR__ . '/partials/notice.php'; ?>
 
+	<?php if ( ! empty( $counts ) ) : ?>
+		<div class="comsign-summary">
+			<?php foreach ( $counts as $status => $total ) : ?>
+				<span class="comsign-summary-item">
+					<span class="comsign-badge comsign-badge--<?php echo esc_attr( $status ); ?>">
+						<?php echo esc_html( \ComSign\Admin\DocumentsListTable::status_label( $status ) ); ?>
+					</span>
+					<strong><?php echo esc_html( (string) $total ); ?></strong>
+				</span>
+			<?php endforeach; ?>
+		</div>
+	<?php endif; ?>
+
 	<form method="get">
 		<input type="hidden" name="page" value="comsign">
 		<?php $table->display(); ?>
