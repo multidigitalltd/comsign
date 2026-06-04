@@ -205,6 +205,66 @@ final class DocumentService {
 	}
 
 	/**
+	 * Whether a document's signing window has expired.
+	 *
+	 * @param object $document Document row.
+	 */
+	public function is_expired( object $document ): bool {
+		return ! empty( $document->expires_at ) && strtotime( $document->expires_at . ' UTC' ) < time();
+	}
+
+	/**
+	 * Build a standalone audit-trail report PDF and return its path.
+	 *
+	 * @param int $document_id Document id.
+	 *
+	 * @return string Absolute path to a temporary PDF (caller should delete it).
+	 *
+	 * @throws \RuntimeException If the document is missing.
+	 */
+	public function generate_audit_pdf( int $document_id ): string {
+		$document = $this->documents->find( $document_id );
+		if ( ! $document ) {
+			throw new \RuntimeException( __( 'Document not found.', 'comsign' ) );
+		}
+
+		$entries = $this->audit_repo->for_document( $document_id );
+
+		$html  = '<h2>' . esc_html__( 'Audit trail', 'comsign' ) . '</h2>';
+		$html .= '<p>' . esc_html__( 'Document', 'comsign' ) . ': ' . esc_html( $document->title ) . ' (#' . (int) $document->id . ')</p>';
+		if ( ! empty( $document->signed_hash ) ) {
+			$html .= '<p>SHA-256: ' . esc_html( $document->signed_hash ) . '</p>';
+		}
+
+		$html .= '<table border="0.5" cellpadding="5"><thead><tr>'
+			. '<th><b>' . esc_html__( 'Event', 'comsign' ) . '</b></th>'
+			. '<th><b>' . esc_html__( 'When', 'comsign' ) . '</b></th>'
+			. '<th><b>' . esc_html__( 'IP', 'comsign' ) . '</b></th>'
+			. '<th><b>' . esc_html__( 'Browser', 'comsign' ) . '</b></th>'
+			. '</tr></thead><tbody>';
+
+		foreach ( $entries as $entry ) {
+			$html .= '<tr>'
+				. '<td>' . esc_html( $entry->event ) . '</td>'
+				. '<td>' . esc_html( $entry->created_at ) . '</td>'
+				. '<td>' . esc_html( $entry->ip ) . '</td>'
+				. '<td>' . esc_html( $entry->user_agent ) . '</td>'
+				. '</tr>';
+		}
+		$html .= '</tbody></table>';
+
+		$path = wp_tempnam( 'comsign-audit-' . $document_id . '.pdf' );
+		( new \ComSign\Pdf\PdfComposer() )->render(
+			/* translators: %s: document title. */
+			sprintf( __( 'Audit report — %s', 'comsign' ), $document->title ),
+			$html,
+			$path
+		);
+
+		return $path;
+	}
+
+	/**
 	 * Find a completed document whose signed hash matches (for public verify).
 	 *
 	 * @param int    $document_id Document id.
@@ -464,13 +524,15 @@ final class DocumentService {
 	 * ------------------------------------------------------------------- */
 
 	/**
-	 * Mint fresh tokens and email signing invitations to all signers.
+	 * Mint fresh tokens and email signing invitations.
 	 *
-	 * @param int $document_id Document id.
+	 * @param int   $document_id Document id.
+	 * @param array $options     'sequential' (bool), 'message' (string),
+	 *                           'expiry_days' (int, 0 = no expiry).
 	 *
 	 * @throws \RuntimeException If the document has no signers/fields.
 	 */
-	public function send( int $document_id ): void {
+	public function send( int $document_id, array $options = array() ): void {
 		$document = $this->documents->find( $document_id );
 		if ( ! $document ) {
 			throw new \RuntimeException( __( 'Document not found.', 'comsign' ) );
@@ -488,6 +550,32 @@ final class DocumentService {
 			throw new \RuntimeException( __( 'Place at least one signature field before sending.', 'comsign' ) );
 		}
 
+		// Persist per-send settings (sequential / message / expiry) on the document.
+		$sequential  = ! empty( $options['sequential'] );
+		$expiry_days = max( 0, (int) ( $options['expiry_days'] ?? 0 ) );
+		$expires_at  = $expiry_days > 0 ? gmdate( 'Y-m-d H:i:s', time() + $expiry_days * DAY_IN_SECONDS ) : null;
+
+		$this->documents->update(
+			$document_id,
+			array(
+				'sequential' => $sequential ? 1 : 0,
+				'message'    => isset( $options['message'] ) ? (string) $options['message'] : '',
+			)
+		);
+		$this->documents->set_expiry( $document_id, $expires_at );
+		$document = $this->documents->find( $document_id );
+
+		// In sequential mode only the next unsigned signer is invited now;
+		// the rest are invited automatically as each one signs.
+		if ( $sequential ) {
+			$next = $this->signers->next_unsigned( $document_id );
+			$this->documents->set_status( $document_id, DocumentRepository::STATUS_SENT );
+			if ( $next && '' !== trim( (string) $next->email ) ) {
+				$this->invite_signer( $document, $next );
+			}
+			return;
+		}
+
 		$failures = array();
 		$sent_any = false;
 
@@ -497,30 +585,15 @@ final class DocumentService {
 				continue;
 			}
 
-			// Mint a new raw token; persist only its hash.
-			$raw = Tokens::generate();
-			$this->signers->update(
-				(int) $signer->id,
-				array(
-					'token_hash' => Tokens::hash( $raw ),
-					'status'     => SignerRepository::STATUS_PENDING,
-				)
-			);
-
-			$url  = $this->signing_url( $raw );
-			$sent = $this->mailer->send_invitation( $document, $signer, $url );
-
-			if ( $sent ) {
+			if ( $this->invite_signer( $document, $signer ) ) {
 				$sent_any = true;
-				$this->audit->record( AuditLogger::EVENT_SENT, $document_id, (int) $signer->id, array( 'email' => $signer->email ) );
 			} else {
 				$failures[] = $signer->email;
-				$this->audit->record( AuditLogger::EVENT_SEND_FAILED, $document_id, (int) $signer->id, array( 'email' => $signer->email ) );
 			}
 		}
 
 		// Only advance the document to "sent" if at least one invitation went out.
-		if ( $sent_any ) {
+		if ( $sent_any || $sequential ) {
 			$this->documents->set_status( $document_id, DocumentRepository::STATUS_SENT );
 		}
 
@@ -534,6 +607,81 @@ final class DocumentService {
 				)
 			);
 		}
+	}
+
+	/**
+	 * Mint a token for a signer and email them the invitation.
+	 *
+	 * @param object $document    Document row.
+	 * @param object $signer      Signer row (must have an email).
+	 * @param bool   $is_reminder Whether to phrase it as a reminder.
+	 *
+	 * @return bool Whether the email was accepted for delivery.
+	 */
+	private function invite_signer( object $document, object $signer, bool $is_reminder = false ): bool {
+		$raw    = Tokens::generate();
+		$update = array(
+			'token_hash' => Tokens::hash( $raw ),
+			'status'     => SignerRepository::STATUS_PENDING,
+		);
+		if ( $is_reminder ) {
+			$update['reminded_at'] = current_time( 'mysql', true );
+		}
+		$this->signers->update( (int) $signer->id, $update );
+
+		$sent = $this->mailer->send_invitation( $document, $signer, $this->signing_url( $raw ), $is_reminder );
+
+		if ( $sent ) {
+			$event = $is_reminder ? AuditLogger::EVENT_REMINDED : AuditLogger::EVENT_SENT;
+			$this->audit->record( $event, (int) $document->id, (int) $signer->id, array( 'email' => $signer->email ) );
+		} else {
+			$this->audit->record( AuditLogger::EVENT_SEND_FAILED, (int) $document->id, (int) $signer->id, array( 'email' => $signer->email ) );
+		}
+
+		return $sent;
+	}
+
+	/**
+	 * Send reminder emails to in-progress signers (called from daily cron).
+	 *
+	 * Honours sequential order (only the active signer is reminded) and a
+	 * minimum gap between reminders.
+	 *
+	 * @param int $min_gap_days Minimum days between reminders for a signer.
+	 *
+	 * @return int Number of reminders sent.
+	 */
+	public function run_reminders( int $min_gap_days = 3 ): int {
+		$count   = 0;
+		$cutoff  = time() - max( 1, $min_gap_days ) * DAY_IN_SECONDS;
+
+		foreach ( $this->signers->reminder_candidates() as $signer ) {
+			// Respect the reminder gap.
+			if ( ! empty( $signer->reminded_at ) && strtotime( $signer->reminded_at . ' UTC' ) > $cutoff ) {
+				continue;
+			}
+
+			$document = $this->documents->find( (int) $signer->document_id );
+			if ( ! $document ) {
+				continue;
+			}
+
+			// Skip expired documents.
+			if ( ! empty( $document->expires_at ) && strtotime( $document->expires_at . ' UTC' ) < time() ) {
+				continue;
+			}
+
+			// In sequential mode, only remind the active signer.
+			if ( ! empty( $document->sequential ) && $this->signers->has_earlier_unsigned( $signer ) ) {
+				continue;
+			}
+
+			if ( $this->invite_signer( $document, $signer, true ) ) {
+				++$count;
+			}
+		}
+
+		return $count;
 	}
 
 	/**
@@ -618,6 +766,14 @@ final class DocumentService {
 			$this->finalize( (int) $document->id );
 		} else {
 			$this->documents->set_status( (int) $document->id, DocumentRepository::STATUS_SIGNED );
+
+			// Sequential signing: invite the next signer in line automatically.
+			if ( ! empty( $document->sequential ) ) {
+				$next = $this->signers->next_unsigned( (int) $document->id );
+				if ( $next && '' !== trim( (string) $next->email ) ) {
+					$this->invite_signer( $document, $next );
+				}
+			}
 		}
 	}
 

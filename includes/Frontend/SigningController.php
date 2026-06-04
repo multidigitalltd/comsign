@@ -101,6 +101,22 @@ final class SigningController {
 			);
 		}
 
+		// Expired signing window.
+		if ( $this->service->is_expired( $document ) ) {
+			$this->render_message(
+				__( 'Link expired', 'comsign' ),
+				__( 'This signing link has expired. Please ask the sender for a new one.', 'comsign' )
+			);
+		}
+
+		// Sequential signing: not this signer's turn yet.
+		if ( ! empty( $document->sequential ) && $this->signers->has_earlier_unsigned( $signer ) ) {
+			$this->render_message(
+				__( 'Waiting for an earlier signer', 'comsign' ),
+				__( 'This document is signed in order. You will be notified when it is your turn.', 'comsign' )
+			);
+		}
+
 		// First view → mark viewed + audit.
 		if ( SignerRepository::STATUS_VIEWED !== $signer->status ) {
 			$this->signers->update(
@@ -261,6 +277,14 @@ final class SigningController {
 		$document = $this->documents->find( (int) $signer->document_id );
 		if ( ! $document ) {
 			$this->render_message( __( 'Document unavailable', 'comsign' ), __( 'The document could not be found.', 'comsign' ) );
+		}
+
+		if ( $this->service->is_expired( $document ) ) {
+			$this->render_message( __( 'Link expired', 'comsign' ), __( 'This signing link has expired.', 'comsign' ) );
+		}
+
+		if ( ! empty( $document->sequential ) && $this->signers->has_earlier_unsigned( $signer ) ) {
+			$this->render_message( __( 'Waiting for an earlier signer', 'comsign' ), __( 'It is not your turn to sign yet.', 'comsign' ) );
 		}
 
 		try {

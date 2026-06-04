@@ -228,6 +228,23 @@ foreach ( $signers as $signer ) {
 					<input type="hidden" name="action" value="comsign_send">
 					<input type="hidden" name="document_id" value="<?php echo esc_attr( $document_id ); ?>">
 					<input type="hidden" name="_wpnonce" value="<?php echo esc_attr( $nonces['send'] ); ?>">
+
+					<p>
+						<label>
+							<input type="checkbox" name="sequential" value="1" <?php checked( ! empty( $document->sequential ) ); ?>>
+							<?php esc_html_e( 'Require signing in order', 'comsign' ); ?>
+						</label>
+					</p>
+					<p>
+						<label for="comsign-expiry"><?php esc_html_e( 'Link expires after', 'comsign' ); ?></label>
+						<input type="number" id="comsign-expiry" name="expiry_days" min="0" max="365" value="0" style="width:70px;">
+						<?php esc_html_e( 'days (0 = never)', 'comsign' ); ?>
+					</p>
+					<p>
+						<label for="comsign-message"><?php esc_html_e( 'Message to signers (optional)', 'comsign' ); ?></label>
+						<textarea id="comsign-message" name="message" rows="3" class="widefat"><?php echo esc_textarea( $document->message ?? '' ); ?></textarea>
+					</p>
+
 					<button type="submit" class="button button-primary" <?php disabled( empty( $signers ) ); ?>>
 						<?php echo $is_draft ? esc_html__( 'Send for signing', 'comsign' ) : esc_html__( 'Re-send invitations', 'comsign' ); ?>
 					</button>
@@ -235,6 +252,7 @@ foreach ( $signers as $signer ) {
 
 				<p>
 					<a class="button" href="<?php echo esc_url( $download['source'] ); ?>"><?php esc_html_e( 'View original', 'comsign' ); ?></a>
+					<a class="button" href="<?php echo esc_url( $download['audit_pdf'] ); ?>"><?php esc_html_e( 'Audit report (PDF)', 'comsign' ); ?></a>
 				</p>
 
 				<form method="post" action="<?php echo esc_url( $action_url ); ?>" onsubmit="return confirm('<?php echo esc_js( __( 'Permanently delete this document and all its data?', 'comsign' ) ); ?>');">

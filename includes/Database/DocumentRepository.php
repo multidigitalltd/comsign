@@ -136,6 +136,30 @@ final class DocumentRepository {
 	}
 
 	/**
+	 * Set (or clear) the expiry datetime.
+	 *
+	 * $wpdb->update() cannot reliably write SQL NULL, so this uses a prepared
+	 * statement that sets NULL when no expiry is given.
+	 *
+	 * @param int         $id      Document id.
+	 * @param string|null $expires UTC 'Y-m-d H:i:s', or null to clear.
+	 */
+	public function set_expiry( int $id, ?string $expires ): void {
+		global $wpdb;
+
+		$table = Installer::documents_table();
+
+		if ( null === $expires ) {
+			// phpcs:ignore WordPress.DB.DirectDatabaseQuery, WordPress.DB.PreparedSQL.NotPrepared
+			$wpdb->query( $wpdb->prepare( "UPDATE {$table} SET expires_at = NULL WHERE id = %d", $id ) );
+			return;
+		}
+
+		// phpcs:ignore WordPress.DB.DirectDatabaseQuery, WordPress.DB.PreparedSQL.NotPrepared
+		$wpdb->query( $wpdb->prepare( "UPDATE {$table} SET expires_at = %s WHERE id = %d", $expires, $id ) );
+	}
+
+	/**
 	 * Delete a document row.
 	 */
 	public function delete( int $id ): void {

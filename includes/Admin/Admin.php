@@ -16,6 +16,7 @@ use ComSign\Database\FieldRepository;
 use ComSign\Database\SignerRepository;
 use ComSign\Services\DocumentService;
 use ComSign\Support\Capabilities;
+use ComSign\Support\Settings;
 use ComSign\Support\Storage;
 
 /**
@@ -57,6 +58,8 @@ final class Admin {
 		add_action( 'admin_post_comsign_duplicate', array( $this, 'handle_duplicate' ) );
 		add_action( 'admin_post_comsign_delete', array( $this, 'handle_delete' ) );
 		add_action( 'admin_post_comsign_stream', array( $this, 'handle_stream' ) );
+		add_action( 'admin_post_comsign_audit_pdf', array( $this, 'handle_audit_pdf' ) );
+		add_action( 'admin_post_comsign_save_settings', array( $this, 'handle_save_settings' ) );
 	}
 
 	/* ---------------------------------------------------------------------
@@ -90,6 +93,15 @@ final class Admin {
 			Capabilities::MANAGE,
 			'comsign-new',
 			array( $this, 'render_new_page' )
+		);
+
+		add_submenu_page(
+			self::MENU_SLUG,
+			__( 'Settings', 'comsign' ),
+			__( 'Settings', 'comsign' ),
+			Capabilities::MANAGE,
+			'comsign-settings',
+			array( $this, 'render_settings_page' )
 		);
 	}
 
@@ -241,8 +253,12 @@ final class Admin {
 					'delete'        => wp_create_nonce( 'comsign_delete_' . $document_id ),
 				),
 				'download'   => array(
-					'source' => $this->stream_url( $document_id, 'source' ),
-					'signed' => $this->stream_url( $document_id, 'signed' ),
+					'source'    => $this->stream_url( $document_id, 'source' ),
+					'signed'    => $this->stream_url( $document_id, 'signed' ),
+					'audit_pdf' => wp_nonce_url(
+						admin_url( 'admin-post.php?action=comsign_audit_pdf&document_id=' . $document_id ),
+						'comsign_audit_pdf_' . $document_id
+					),
 				),
 				'notice'     => $this->pull_notice(),
 			)
@@ -399,8 +415,14 @@ final class Admin {
 		$document_id = $this->posted_document_id();
 		check_admin_referer( 'comsign_send_' . $document_id );
 
+		$options = array(
+			'sequential'  => ! empty( $_POST['sequential'] ),
+			'message'     => isset( $_POST['message'] ) ? sanitize_textarea_field( wp_unslash( $_POST['message'] ) ) : '',
+			'expiry_days' => isset( $_POST['expiry_days'] ) ? absint( wp_unslash( $_POST['expiry_days'] ) ) : 0,
+		);
+
 		try {
-			$this->service->send( $document_id );
+			$this->service->send( $document_id, $options );
 		} catch ( \Throwable $e ) {
 			$this->redirect_with_notice( $this->edit_url( $document_id ), 'error', $e->getMessage() );
 		}
@@ -431,6 +453,65 @@ final class Admin {
 		$this->service->delete( $document_id );
 
 		$this->redirect_with_notice( admin_url( 'admin.php?page=comsign' ), 'success', __( 'Document deleted.', 'comsign' ) );
+	}
+
+	/**
+	 * Generate and stream a standalone audit-trail PDF.
+	 */
+	public function handle_audit_pdf(): void {
+		$this->guard();
+
+		$document_id = isset( $_REQUEST['document_id'] ) ? absint( wp_unslash( $_REQUEST['document_id'] ) ) : 0; // phpcs:ignore WordPress.Security.NonceVerification.Recommended
+		check_admin_referer( 'comsign_audit_pdf_' . $document_id );
+
+		try {
+			$path = $this->service->generate_audit_pdf( $document_id );
+		} catch ( \Throwable $e ) {
+			wp_die( esc_html( $e->getMessage() ) );
+		}
+
+		nocache_headers();
+		header( 'Content-Type: application/pdf' );
+		header( 'Content-Disposition: attachment; filename="comsign-audit-' . $document_id . '.pdf"' );
+		header( 'Content-Length: ' . (string) filesize( $path ) );
+		header( 'X-Content-Type-Options: nosniff' );
+		readfile( $path ); // phpcs:ignore WordPress.WP.AlternativeFunctions.file_system_operations_readfile
+		wp_delete_file( $path );
+		exit;
+	}
+
+	/**
+	 * Render the settings page.
+	 */
+	public function render_settings_page(): void {
+		$this->guard();
+
+		$this->view(
+			'settings',
+			array(
+				'action_url' => admin_url( 'admin-post.php' ),
+				'nonce'      => wp_create_nonce( 'comsign_save_settings' ),
+				'settings'   => Settings::all(),
+				'notice'     => $this->pull_notice(),
+			)
+		);
+	}
+
+	/**
+	 * Persist plugin settings.
+	 */
+	public function handle_save_settings(): void {
+		$this->guard();
+		check_admin_referer( 'comsign_save_settings' );
+
+		Settings::update(
+			array(
+				'reminders_enabled' => ! empty( $_POST['reminders_enabled'] ),
+				'reminder_days'     => isset( $_POST['reminder_days'] ) ? absint( wp_unslash( $_POST['reminder_days'] ) ) : 3,
+			)
+		);
+
+		$this->redirect_with_notice( admin_url( 'admin.php?page=comsign-settings' ), 'success', __( 'Settings saved.', 'comsign' ) );
 	}
 
 	/**

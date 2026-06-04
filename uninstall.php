@@ -27,6 +27,10 @@ foreach ( $tables as $table ) {
 
 // Remove options.
 delete_option( 'comsign_db_version' );
+delete_option( 'comsign_settings' );
+
+// Clear the scheduled reminder event.
+wp_clear_scheduled_hook( 'comsign_daily_reminders' );
 
 // Remove the custom capability from all roles.
 if ( function_exists( 'wp_roles' ) ) {

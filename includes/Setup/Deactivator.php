@@ -21,6 +21,7 @@ final class Deactivator {
 	 * Clean up transient, non-destructive state.
 	 */
 	public static function deactivate(): void {
+		Cron::unschedule();
 		flush_rewrite_rules();
 	}
 }

@@ -24,6 +24,7 @@ final class Activator {
 		Installer::install();
 		Capabilities::add();
 		Storage::ensure_protected_dir();
+		Cron::schedule();
 
 		flush_rewrite_rules();
 	}

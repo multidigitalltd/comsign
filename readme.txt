@@ -83,6 +83,15 @@ certificate) to confirm the document is authentic and see who signed it.
 
 == Changelog ==
 
+= 0.4.0 =
+* New: sequential signing — require signers to sign in order; the next signer
+  is invited automatically once the previous one signs.
+* New: automatic reminders (daily WP-Cron) for signers who have not signed,
+  configurable on the new Settings screen.
+* New: link expiry — set how many days a signing link stays valid.
+* New: custom message to signers, included in the invitation email.
+* New: downloadable audit-trail report (PDF) per document.
+
 = 0.3.0 =
 * New: link-only signers — email is now optional; reach a signer purely via a
   shared link / WhatsApp.

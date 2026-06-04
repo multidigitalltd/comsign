@@ -23,8 +23,8 @@ defined( 'ABSPATH' ) || exit;
  * Constants
  * --------------------------------------------------------------------------
  */
-define( 'COMSIGN_VERSION', '0.3.0' );
-define( 'COMSIGN_DB_VERSION', '2' );
+define( 'COMSIGN_VERSION', '0.4.0' );
+define( 'COMSIGN_DB_VERSION', '3' );
 define( 'COMSIGN_PLUGIN_FILE', __FILE__ );
 define( 'COMSIGN_PLUGIN_DIR', plugin_dir_path( __FILE__ ) );
 define( 'COMSIGN_PLUGIN_URL', plugin_dir_url( __FILE__ ) );

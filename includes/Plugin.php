@@ -52,6 +52,10 @@ final class Plugin {
 		// Database upgrades for sites updated without re-activating.
 		add_action( 'plugins_loaded', array( Setup\Installer::class, 'maybe_upgrade' ) );
 
+		// Ensure the reminder cron stays scheduled even after a silent update.
+		add_action( 'init', array( Setup\Cron::class, 'schedule' ) );
+		( new Setup\Cron() )->register();
+
 		if ( is_admin() ) {
 			( new Admin() )->register();
 		}

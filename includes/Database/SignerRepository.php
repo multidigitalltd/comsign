@@ -130,6 +130,84 @@ final class SignerRepository {
 	}
 
 	/**
+	 * The next signer (lowest order) who has not yet signed or declined.
+	 *
+	 * Used for sequential signing: only this signer should be active.
+	 *
+	 * @param int $document_id Document id.
+	 */
+	public function next_unsigned( int $document_id ): ?object {
+		global $wpdb;
+
+		$row = $wpdb->get_row( // phpcs:ignore WordPress.DB.DirectDatabaseQuery, WordPress.DB.PreparedSQL.NotPrepared
+			$wpdb->prepare(
+				'SELECT * FROM ' . Installer::signers_table()
+					. ' WHERE document_id = %d AND status NOT IN ( %s, %s ) ORDER BY sign_order ASC, id ASC LIMIT 1',
+				$document_id,
+				self::STATUS_SIGNED,
+				self::STATUS_DECLINED
+			)
+		);
+
+		return $row ?: null;
+	}
+
+	/**
+	 * Whether any earlier-order signer for the same document is still unsigned.
+	 *
+	 * @param object $signer Signer row.
+	 */
+	public function has_earlier_unsigned( object $signer ): bool {
+		global $wpdb;
+
+		$count = (int) $wpdb->get_var( // phpcs:ignore WordPress.DB.DirectDatabaseQuery, WordPress.DB.PreparedSQL.NotPrepared
+			$wpdb->prepare(
+				'SELECT COUNT(*) FROM ' . Installer::signers_table()
+					. ' WHERE document_id = %d AND sign_order < %d AND status NOT IN ( %s, %s )',
+				(int) $signer->document_id,
+				(int) $signer->sign_order,
+				self::STATUS_SIGNED,
+				self::STATUS_DECLINED
+			)
+		);
+
+		return $count > 0;
+	}
+
+	/**
+	 * Signers that are candidates for an automatic reminder.
+	 *
+	 * Pending/viewed signers who have an email and an active token, on
+	 * documents that are still in progress.
+	 *
+	 * @return object[]
+	 */
+	public function reminder_candidates(): array {
+		global $wpdb;
+
+		$signers   = Installer::signers_table();
+		$documents = Installer::documents_table();
+
+		// phpcs:disable WordPress.DB.PreparedSQL.NotPrepared, WordPress.DB.DirectDatabaseQuery
+		return $wpdb->get_results(
+			$wpdb->prepare(
+				"SELECT s.* FROM {$signers} s
+				 INNER JOIN {$documents} d ON d.id = s.document_id
+				 WHERE s.status IN ( %s, %s )
+				   AND s.email <> ''
+				   AND s.token_hash <> ''
+				   AND d.status IN ( %s, %s, %s )",
+				self::STATUS_PENDING,
+				self::STATUS_VIEWED,
+				'sent',
+				'viewed',
+				'signed'
+			)
+		);
+		// phpcs:enable
+	}
+
+	/**
 	 * Whether every signer for a document has signed.
 	 */
 	public function all_signed( int $document_id ): bool {
