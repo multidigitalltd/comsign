@@ -99,7 +99,7 @@ final class Installer {
 			signed_at DATETIME DEFAULT NULL,
 			created_at DATETIME NOT NULL DEFAULT '0000-00-00 00:00:00',
 			PRIMARY KEY  (id),
-			UNIQUE KEY token_hash (token_hash),
+			KEY token_hash (token_hash),
 			KEY document_id (document_id),
 			KEY email (email)
 		) {$charset_collate};";
@@ -138,11 +138,35 @@ final class Installer {
 			KEY event (event)
 		) {$charset_collate};";
 
+		// Drop the legacy UNIQUE index on token_hash before dbDelta re-adds it as
+		// a plain index. The unique index made two not-yet-sent signers (both with
+		// an empty token_hash) collide. Safe/no-op on fresh installs and SQLite.
+		self::drop_legacy_token_unique_index();
+
 		foreach ( $schema as $statement ) {
 			dbDelta( $statement );
 		}
 
 		update_option( self::OPTION_DB_VERSION, COMSIGN_DB_VERSION );
+	}
+
+	/**
+	 * Best-effort removal of the old UNIQUE(token_hash) index.
+	 */
+	private static function drop_legacy_token_unique_index(): void {
+		global $wpdb;
+
+		$signers  = self::signers_table();
+		$suppress = $wpdb->suppress_errors( true );
+
+		// phpcs:disable WordPress.DB.DirectDatabaseQuery, WordPress.DB.PreparedSQL.NotPrepared
+		$index = $wpdb->get_results( "SHOW INDEX FROM {$signers} WHERE Key_name = 'token_hash' AND Non_unique = 0" );
+		if ( ! empty( $index ) ) {
+			$wpdb->query( "ALTER TABLE {$signers} DROP INDEX token_hash" );
+		}
+		// phpcs:enable
+
+		$wpdb->suppress_errors( $suppress );
 	}
 
 	/**

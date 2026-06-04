@@ -253,7 +253,11 @@ final class DocumentService {
 		}
 		$html .= '</tbody></table>';
 
-		$path = wp_tempnam( 'comsign-audit-' . $document_id . '.pdf' );
+		// Write into the plugin's protected dir (wp_tempnam lives in an admin
+		// include that isn't always loaded). The caller deletes it after sending.
+		$path = trailingslashit( Storage::ensure_protected_dir() )
+			. 'audit-' . $document_id . '-' . wp_generate_password( 12, false ) . '.pdf';
+
 		( new \ComSign\Pdf\PdfComposer() )->render(
 			/* translators: %s: document title. */
 			sprintf( __( 'Audit report — %s', 'comsign' ), $document->title ),
