@@ -29,6 +29,7 @@ foreach ( $tables as $table ) {
 // Remove options.
 delete_option( 'comsign_db_version' );
 delete_option( 'comsign_settings' );
+delete_option( 'comsign_pki' );
 
 // Clear the scheduled reminder event.
 wp_clear_scheduled_hook( 'comsign_daily_reminders' );

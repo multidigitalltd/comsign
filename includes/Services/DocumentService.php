@@ -1091,7 +1091,13 @@ final class DocumentService {
 		$fields  = $this->fields->for_document( $document_id );
 		$signers = $this->signers->for_document( $document_id );
 
-		$signed_path = $this->provider->finalize( $document, $fields, $signers );
+		// Use the cryptographic provider when a certificate is configured,
+		// otherwise the baseline electronic provider.
+		$provider = \ComSign\Signature\Certificate::is_configured()
+			? new \ComSign\Signature\PadesSignatureProvider()
+			: $this->provider;
+
+		$signed_path = $provider->finalize( $document, $fields, $signers );
 		$hash        = is_file( $signed_path ) ? hash_file( 'sha256', $signed_path ) : '';
 
 		$this->documents->update(
@@ -1103,7 +1109,7 @@ final class DocumentService {
 			)
 		);
 
-		$this->audit->record( AuditLogger::EVENT_COMPLETED, $document_id, 0, array( 'sha256' => $hash ) );
+		$this->audit->record( AuditLogger::EVENT_COMPLETED, $document_id, 0, array( 'sha256' => $hash, 'provider' => $provider->id() ) );
 	}
 
 	/**

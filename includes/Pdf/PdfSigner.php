@@ -31,10 +31,13 @@ final class PdfSigner {
 	 * @param array  $certificate Optional certificate data: 'title', 'lines'
 	 *                            (array of label => value strings) appended as
 	 *                            a final page. Empty to skip.
+	 * @param array  $crypto      Optional PAdES signing data: 'cert', 'pkey',
+	 *                            'pass', 'info'. When present, a cryptographic
+	 *                            signature is embedded in the output.
 	 *
 	 * @throws \RuntimeException On import/render failure.
 	 */
-	public function render( string $source_path, string $output_path, array $fields, array $certificate = array() ): void {
+	public function render( string $source_path, string $output_path, array $fields, array $certificate = array(), array $crypto = array() ): void {
 		if ( ! is_readable( $source_path ) ) {
 			throw new \RuntimeException( 'Source PDF is not readable.' );
 		}
@@ -50,6 +53,18 @@ final class PdfSigner {
 		$pdf->setPrintFooter( false );
 		$pdf->setAutoPageBreak( false );
 		$pdf->SetMargins( 0, 0, 0 );
+
+		// Apply a cryptographic (PAdES) signature when a certificate is provided.
+		if ( ! empty( $crypto['cert'] ) && ! empty( $crypto['pkey'] ) && method_exists( $pdf, 'setSignature' ) ) {
+			$pdf->setSignature(
+				$crypto['cert'],
+				$crypto['pkey'],
+				(string) ( $crypto['pass'] ?? '' ),
+				'',
+				2,
+				(array) ( $crypto['info'] ?? array() )
+			);
+		}
 
 		try {
 			$page_count = $pdf->setSourceFile( $source_path );

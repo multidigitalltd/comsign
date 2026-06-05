@@ -4,7 +4,7 @@ Tags: signature, digital signature, pdf, esignature, hebrew
 Requires at least: 6.0
 Tested up to: 6.5
 Requires PHP: 7.4
-Stable tag: 0.6.0
+Stable tag: 0.7.0
 License: GPL-2.0-or-later
 License URI: https://www.gnu.org/licenses/gpl-2.0.html
 
@@ -82,6 +82,12 @@ ID and its SHA-256 code (shown on the document screen and the signature
 certificate) to confirm the document is authentic and see who signed it.
 
 == Changelog ==
+
+= 0.7.0 =
+* New: real PKI / PAdES signing. Upload a PKCS#12 (.p12/.pfx) certificate in
+  Settings and completed documents are signed with a cryptographic
+  PKCS#7/PAdES signature (eIDAS / ComSign compatible). Without a certificate,
+  documents continue to use electronic signatures.
 
 = 0.6.1 =
 * New: outgoing webhooks - every event is POSTed as signed JSON (HMAC-SHA256)

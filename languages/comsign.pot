@@ -35,7 +35,7 @@ msgstr ""
 msgid "A signature is required."
 msgstr ""
 
-#: includes/Admin/Admin.php:418
+#: includes/Admin/Admin.php:420
 msgid "A signing link was generated. Copy it or share via WhatsApp below."
 msgstr ""
 
@@ -44,8 +44,12 @@ msgstr ""
 msgid "Actions"
 msgstr ""
 
-#: includes/Admin/Admin.php:97
-#: includes/Admin/Admin.php:98
+#: includes/Admin/views/settings.php:80
+msgid "Active certificate:"
+msgstr ""
+
+#: includes/Admin/Admin.php:99
+#: includes/Admin/Admin.php:100
 #: includes/Admin/views/list.php:16
 #: includes/Admin/views/new.php:16
 msgid "Add Document"
@@ -103,7 +107,7 @@ msgstr ""
 
 #: includes/Admin/views/edit.php:135
 #: includes/Services/DocumentService.php:245
-#: includes/Signature/ElectronicSignatureProvider.php:82
+#: includes/Signature/CertificatePage.php:46
 msgid "Browser"
 msgstr ""
 
@@ -111,7 +115,7 @@ msgstr ""
 msgid "Bulk send"
 msgstr ""
 
-#: includes/Admin/Admin.php:661
+#: includes/Admin/Admin.php:701
 msgid "Bulk send complete: %d document(s) created and sent."
 msgstr ""
 
@@ -123,12 +127,24 @@ msgstr ""
 msgid "Bulk send: %s"
 msgstr ""
 
-#: includes/Admin/Admin.php:195
+#: includes/Admin/views/settings.php:95
+msgid "Certificate password"
+msgstr ""
+
+#: includes/Admin/Admin.php:581
+msgid "Certificate removed. Documents will use electronic signatures."
+msgstr ""
+
+#: includes/Admin/Admin.php:569
+msgid "Certificate stored. New documents will be signed with PKI/PAdES."
+msgstr ""
+
+#: includes/Admin/Admin.php:197
 #: includes/Admin/views/edit.php:102
 msgid "Checkbox"
 msgstr ""
 
-#: includes/Admin/Admin.php:196
+#: includes/Admin/Admin.php:198
 msgid "Choice"
 msgstr ""
 
@@ -144,8 +160,8 @@ msgstr ""
 msgid "Clear"
 msgstr ""
 
-#: includes/Admin/Admin.php:77
-#: includes/Admin/Admin.php:78
+#: includes/Admin/Admin.php:79
+#: includes/Admin/Admin.php:80
 msgid "ComSign"
 msgstr ""
 
@@ -165,6 +181,10 @@ msgstr ""
 msgid "Completed"
 msgstr ""
 
+#: includes/Admin/views/settings.php:83
+msgid "Completed documents are signed with a cryptographic PKCS#7/PAdES signature."
+msgstr ""
+
 #: includes/Frontend/SigningController.php:215
 msgid "Completed:"
 msgstr ""
@@ -181,11 +201,11 @@ msgstr ""
 msgid "Consent required"
 msgstr ""
 
-#: includes/Admin/Admin.php:152
+#: includes/Admin/Admin.php:154
 msgid "Copied!"
 msgstr ""
 
-#: includes/Admin/Admin.php:153
+#: includes/Admin/Admin.php:155
 #: includes/Admin/views/edit.php:211
 msgid "Copy link"
 msgstr ""
@@ -198,7 +218,7 @@ msgstr ""
 msgid "Could not generate the document PDF."
 msgstr ""
 
-#: includes/Admin/Admin.php:200
+#: includes/Admin/Admin.php:202
 msgid "Could not load the document preview."
 msgstr ""
 
@@ -224,7 +244,7 @@ msgstr ""
 msgid "Dana Cohen, dana@example.com, +972500000000\nAvi Levi, avi@example.com"
 msgstr ""
 
-#: includes/Admin/Admin.php:190
+#: includes/Admin/Admin.php:192
 msgid "Date"
 msgstr ""
 
@@ -252,15 +272,23 @@ msgstr ""
 msgid "Delete this template?"
 msgstr ""
 
+#: includes/Admin/views/settings.php:74
+msgid "Digital signature (PKI / PAdES)"
+msgstr ""
+
+#: includes/Signature/PadesSignatureProvider.php:34
+msgid "Digital signature (PKI/PAdES)"
+msgstr ""
+
 #: includes/Admin/DocumentsListTable.php:42
 #: includes/Frontend/views/sign.php:25
 #: includes/Services/DocumentService.php:236
-#: includes/Signature/ElectronicSignatureProvider.php:66
+#: includes/Signature/CertificatePage.php:31
 msgid "Document"
 msgstr ""
 
 #: includes/Frontend/SigningController.php:201
-#: includes/Signature/ElectronicSignatureProvider.php:67
+#: includes/Signature/CertificatePage.php:32
 msgid "Document ID"
 msgstr ""
 
@@ -268,24 +296,24 @@ msgstr ""
 msgid "Document content"
 msgstr ""
 
-#: includes/Admin/Admin.php:634
+#: includes/Admin/Admin.php:674
 msgid "Document created from template. Review and send."
 msgstr ""
 
-#: includes/Admin/Admin.php:343
+#: includes/Admin/Admin.php:345
 msgid "Document created. Now add signers and place fields."
 msgstr ""
 
-#: includes/Admin/Admin.php:499
+#: includes/Admin/Admin.php:501
 msgid "Document deleted."
 msgstr ""
 
-#: includes/Admin/Admin.php:489
+#: includes/Admin/Admin.php:491
 msgid "Document duplicated."
 msgstr ""
 
-#: includes/Admin/Admin.php:256
-#: includes/Admin/Admin.php:735
+#: includes/Admin/Admin.php:258
+#: includes/Admin/Admin.php:775
 #: includes/Services/DocumentService.php:230
 #: includes/Services/DocumentService.php:441
 #: includes/Services/DocumentService.php:511
@@ -295,6 +323,10 @@ msgstr ""
 
 #: includes/Frontend/views/sign.php:38
 msgid "Document preview"
+msgstr ""
+
+#: includes/Signature/PadesSignatureProvider.php:57
+msgid "Document signed via ComSign"
 msgstr ""
 
 #: includes/Admin/views/new.php:31
@@ -311,12 +343,12 @@ msgstr ""
 msgid "Document unavailable."
 msgstr ""
 
-#: includes/Admin/Admin.php:315
+#: includes/Admin/Admin.php:317
 msgid "Document uploaded. Now add signers and place signature fields."
 msgstr ""
 
-#: includes/Admin/Admin.php:88
-#: includes/Admin/Admin.php:89
+#: includes/Admin/Admin.php:90
+#: includes/Admin/Admin.php:91
 msgid "Documents"
 msgstr ""
 
@@ -344,12 +376,12 @@ msgstr ""
 msgid "Each line creates and sends a separate document. Format: name, email, phone (phone optional)."
 msgstr ""
 
-#: includes/Signature/ElectronicSignatureProvider.php:37
+#: includes/Signature/ElectronicSignatureProvider.php:34
 msgid "Electronic signature"
 msgstr ""
 
-#: includes/Admin/Admin.php:192
-#: includes/Signature/ElectronicSignatureProvider.php:76
+#: includes/Admin/Admin.php:194
+#: includes/Signature/CertificatePage.php:40
 msgid "Email"
 msgstr ""
 
@@ -373,7 +405,7 @@ msgstr ""
 msgid "Enter a number"
 msgstr ""
 
-#: includes/Admin/Admin.php:198
+#: includes/Admin/Admin.php:200
 msgid "Enter options separated by commas:"
 msgstr ""
 
@@ -394,7 +426,7 @@ msgstr ""
 msgid "Field for:"
 msgstr ""
 
-#: includes/Admin/Admin.php:741
+#: includes/Admin/Admin.php:781
 msgid "File not available."
 msgstr ""
 
@@ -432,11 +464,11 @@ msgstr ""
 msgid "IP"
 msgstr ""
 
-#: includes/Signature/ElectronicSignatureProvider.php:81
+#: includes/Signature/CertificatePage.php:45
 msgid "IP address"
 msgstr ""
 
-#: includes/Admin/Admin.php:189
+#: includes/Admin/Admin.php:191
 #: includes/Admin/views/edit.php:96
 msgid "Initials"
 msgstr ""
@@ -462,7 +494,7 @@ msgstr ""
 msgid "Invalid upload."
 msgstr ""
 
-#: includes/Admin/Admin.php:389
+#: includes/Admin/Admin.php:391
 msgid "Invitation re-sent."
 msgstr ""
 
@@ -480,7 +512,7 @@ msgstr ""
 msgid "Link expires after"
 msgstr ""
 
-#: includes/Admin/Admin.php:199
+#: includes/Admin/Admin.php:201
 msgid "Loading document…"
 msgstr ""
 
@@ -493,8 +525,8 @@ msgstr ""
 msgid "Message to signers (optional)"
 msgstr ""
 
-#: includes/Admin/Admin.php:191
-#: includes/Signature/ElectronicSignatureProvider.php:75
+#: includes/Admin/Admin.php:193
+#: includes/Signature/CertificatePage.php:39
 msgid "Name"
 msgstr ""
 
@@ -506,7 +538,7 @@ msgstr ""
 msgid "No documents yet. Upload your first PDF to get started."
 msgstr ""
 
-#: includes/Admin/Admin.php:458
+#: includes/Admin/Admin.php:460
 msgid "No emails were sent because the signer(s) have no email. Use \"Get signing link\" to share their link."
 msgstr ""
 
@@ -530,7 +562,7 @@ msgstr ""
 msgid "No templates yet."
 msgstr ""
 
-#: includes/Admin/Admin.php:194
+#: includes/Admin/Admin.php:196
 #: includes/Admin/views/edit.php:101
 msgid "Number"
 msgstr ""
@@ -541,6 +573,14 @@ msgstr ""
 
 #: includes/Services/DocumentService.php:316
 msgid "Only PDF files are allowed."
+msgstr ""
+
+#: includes/Signature/Certificate.php:55
+msgid "OpenSSL is not available on this server, so PKI signing cannot be enabled."
+msgstr ""
+
+#: includes/Admin/views/settings.php:77
+msgid "OpenSSL is not available on this server, so cryptographic signing cannot be enabled."
 msgstr ""
 
 #: includes/Admin/views/edit.php:69
@@ -584,7 +624,11 @@ msgstr ""
 msgid "Please add your signature and accept the agreement."
 msgstr ""
 
-#: includes/Admin/Admin.php:303
+#: includes/Admin/Admin.php:561
+msgid "Please choose a .p12/.pfx certificate file."
+msgstr ""
+
+#: includes/Admin/Admin.php:305
 msgid "Please choose a PDF to upload."
 msgstr ""
 
@@ -640,9 +684,17 @@ msgstr ""
 msgid "Reminders run once a day via WP-Cron. Each reminder issues a fresh signing link."
 msgstr ""
 
-#: includes/Admin/Admin.php:197
+#: includes/Admin/Admin.php:199
 #: includes/Admin/views/edit.php:193
 msgid "Remove"
+msgstr ""
+
+#: includes/Admin/views/settings.php:87
+msgid "Remove certificate"
+msgstr ""
+
+#: includes/Admin/views/settings.php:84
+msgid "Remove the certificate and revert to electronic signatures?"
 msgstr ""
 
 #: includes/Admin/views/edit.php:188
@@ -693,11 +745,11 @@ msgstr ""
 msgid "Sent"
 msgstr ""
 
-#: includes/Admin/Admin.php:462
+#: includes/Admin/Admin.php:464
 msgid "Sent %1$d invitation(s). %2$d signer(s) have no email — share their link manually."
 msgstr ""
 
-#: includes/Admin/Admin.php:469
+#: includes/Admin/Admin.php:471
 msgid "Sent %d invitation(s)."
 msgstr ""
 
@@ -705,12 +757,12 @@ msgstr ""
 msgid "Sent by %s"
 msgstr ""
 
-#: includes/Admin/Admin.php:115
-#: includes/Admin/Admin.php:116
+#: includes/Admin/Admin.php:117
+#: includes/Admin/Admin.php:118
 msgid "Settings"
 msgstr ""
 
-#: includes/Admin/Admin.php:560
+#: includes/Admin/Admin.php:600
 msgid "Settings saved."
 msgstr ""
 
@@ -727,20 +779,20 @@ msgstr ""
 msgid "Sign: %s"
 msgstr ""
 
-#: includes/Admin/Admin.php:188
+#: includes/Admin/Admin.php:190
 #: includes/Admin/views/edit.php:95
 msgid "Signature"
 msgstr ""
 
-#: includes/Signature/ElectronicSignatureProvider.php:87
+#: includes/Signature/CertificatePage.php:51
 msgid "Signature Certificate"
 msgstr ""
 
-#: includes/Admin/Admin.php:433
+#: includes/Admin/Admin.php:435
 msgid "Signature fields saved."
 msgstr ""
 
-#: includes/Signature/ElectronicSignatureProvider.php:77
+#: includes/Signature/CertificatePage.php:41
 msgid "Signed at"
 msgstr ""
 
@@ -756,11 +808,11 @@ msgstr ""
 msgid "Signed document"
 msgstr ""
 
-#: includes/Signature/ElectronicSignatureProvider.php:73
+#: includes/Signature/CertificatePage.php:37
 msgid "Signer %d"
 msgstr ""
 
-#: includes/Admin/Admin.php:362
+#: includes/Admin/Admin.php:364
 msgid "Signer added."
 msgstr ""
 
@@ -769,7 +821,7 @@ msgstr ""
 msgid "Signer not found."
 msgstr ""
 
-#: includes/Admin/Admin.php:373
+#: includes/Admin/Admin.php:375
 msgid "Signer removed."
 msgstr ""
 
@@ -795,7 +847,7 @@ msgstr ""
 msgid "Template"
 msgstr ""
 
-#: includes/Admin/Admin.php:674
+#: includes/Admin/Admin.php:714
 msgid "Template deleted."
 msgstr ""
 
@@ -807,29 +859,33 @@ msgstr ""
 msgid "Template name"
 msgstr ""
 
-#: includes/Admin/Admin.php:579
+#: includes/Admin/Admin.php:619
 #: includes/Services/DocumentService.php:580
 #: includes/Services/DocumentService.php:666
 msgid "Template not found."
 msgstr ""
 
-#: includes/Admin/Admin.php:618
+#: includes/Admin/Admin.php:658
 msgid "Template saved."
 msgstr ""
 
-#: includes/Admin/Admin.php:106
-#: includes/Admin/Admin.php:107
+#: includes/Admin/Admin.php:108
+#: includes/Admin/Admin.php:109
 #: includes/Admin/views/templates.php:18
 msgid "Templates"
 msgstr ""
 
-#: includes/Admin/Admin.php:193
+#: includes/Admin/Admin.php:195
 #: includes/Admin/views/edit.php:100
 msgid "Text"
 msgstr ""
 
 #: includes/Frontend/SigningController.php:298
 msgid "Thank you!"
+msgstr ""
+
+#: includes/Signature/Certificate.php:61
+msgid "The certificate could not be read. Check the file and password."
 msgstr ""
 
 #: includes/Frontend/SigningController.php:280
@@ -909,6 +965,14 @@ msgstr ""
 msgid "Upload a PDF"
 msgstr ""
 
+#: includes/Admin/views/settings.php:90
+msgid "Upload a PKCS#12 certificate (.p12/.pfx) to sign completed documents cryptographically (eIDAS / ComSign compatible). Without it, documents use electronic signatures."
+msgstr ""
+
+#: includes/Admin/views/settings.php:96
+msgid "Upload certificate"
+msgstr ""
+
 #: includes/Admin/views/templates.php:51
 msgid "Use"
 msgstr ""
@@ -967,7 +1031,7 @@ msgstr ""
 msgid "X-ComSign-Key"
 msgstr ""
 
-#: includes/Admin/Admin.php:840
+#: includes/Admin/Admin.php:880
 msgid "You are not allowed to access this page."
 msgstr ""
 

@@ -62,6 +62,8 @@ final class Admin {
 		add_action( 'admin_post_comsign_stream', array( $this, 'handle_stream' ) );
 		add_action( 'admin_post_comsign_audit_pdf', array( $this, 'handle_audit_pdf' ) );
 		add_action( 'admin_post_comsign_save_settings', array( $this, 'handle_save_settings' ) );
+		add_action( 'admin_post_comsign_upload_certificate', array( $this, 'handle_upload_certificate' ) );
+		add_action( 'admin_post_comsign_remove_certificate', array( $this, 'handle_remove_certificate' ) );
 		add_action( 'admin_post_comsign_save_template', array( $this, 'handle_save_template' ) );
 		add_action( 'admin_post_comsign_use_template', array( $this, 'handle_use_template' ) );
 		add_action( 'admin_post_comsign_bulk_template', array( $this, 'handle_bulk_template' ) );
@@ -533,12 +535,50 @@ final class Admin {
 		$this->view(
 			'settings',
 			array(
-				'action_url' => admin_url( 'admin-post.php' ),
-				'nonce'      => wp_create_nonce( 'comsign_save_settings' ),
-				'settings'   => Settings::all(),
-				'notice'     => $this->pull_notice(),
+				'action_url'    => admin_url( 'admin-post.php' ),
+				'nonce'         => wp_create_nonce( 'comsign_save_settings' ),
+				'cert_nonce'    => wp_create_nonce( 'comsign_upload_certificate' ),
+				'remove_nonce'  => wp_create_nonce( 'comsign_remove_certificate' ),
+				'settings'      => Settings::all(),
+				'pki_available' => \ComSign\Signature\Certificate::openssl_available(),
+				'pki_subject'   => \ComSign\Signature\Certificate::is_configured() ? \ComSign\Signature\Certificate::subject() : '',
+				'notice'        => $this->pull_notice(),
 			)
 		);
+	}
+
+	/**
+	 * Store an uploaded PKCS#12 certificate for PAdES signing.
+	 */
+	public function handle_upload_certificate(): void {
+		$this->guard();
+		check_admin_referer( 'comsign_upload_certificate' );
+
+		$password = isset( $_POST['cert_password'] ) ? (string) wp_unslash( $_POST['cert_password'] ) : ''; // phpcs:ignore WordPress.Security.ValidatedSanitizedInput
+
+		try {
+			if ( empty( $_FILES['certificate']['tmp_name'] ) || ! is_uploaded_file( $_FILES['certificate']['tmp_name'] ) ) {
+				throw new \RuntimeException( __( 'Please choose a .p12/.pfx certificate file.', 'comsign' ) );
+			}
+			$tmp = sanitize_text_field( $_FILES['certificate']['tmp_name'] ); // phpcs:ignore WordPress.Security.ValidatedSanitizedInput
+			\ComSign\Signature\Certificate::store( $tmp, $password );
+		} catch ( \Throwable $e ) {
+			$this->redirect_with_notice( admin_url( 'admin.php?page=comsign-settings' ), 'error', $e->getMessage() );
+		}
+
+		$this->redirect_with_notice( admin_url( 'admin.php?page=comsign-settings' ), 'success', __( 'Certificate stored. New documents will be signed with PKI/PAdES.', 'comsign' ) );
+	}
+
+	/**
+	 * Remove the stored certificate (revert to electronic signatures).
+	 */
+	public function handle_remove_certificate(): void {
+		$this->guard();
+		check_admin_referer( 'comsign_remove_certificate' );
+
+		\ComSign\Signature\Certificate::remove();
+
+		$this->redirect_with_notice( admin_url( 'admin.php?page=comsign-settings' ), 'success', __( 'Certificate removed. Documents will use electronic signatures.', 'comsign' ) );
 	}
 
 	/**
