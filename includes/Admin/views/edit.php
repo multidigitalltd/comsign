@@ -178,6 +178,15 @@ foreach ( $signers as $signer ) {
 										<input type="hidden" name="_wpnonce" value="<?php echo esc_attr( $nonces['signer_link'] ); ?>">
 										<button type="submit" class="button-link"><?php esc_html_e( 'Get signing link', 'comsign' ); ?></button>
 									</form>
+									<?php if ( SignerRepository::STATUS_SIGNED !== $signer->status ) : ?>
+										<form method="post" action="<?php echo esc_url( $action_url ); ?>" class="comsign-mini-form">
+											<input type="hidden" name="action" value="comsign_sign_in_person">
+											<input type="hidden" name="document_id" value="<?php echo esc_attr( $document_id ); ?>">
+											<input type="hidden" name="signer_id" value="<?php echo esc_attr( (int) $signer->id ); ?>">
+											<input type="hidden" name="_wpnonce" value="<?php echo esc_attr( $nonces['sign_in_person'] ); ?>">
+											<button type="submit" class="button-link"><?php esc_html_e( 'Sign in person', 'comsign' ); ?></button>
+										</form>
+									<?php endif; ?>
 									<?php if ( ! empty( $signer->email ) ) : ?>
 										<form method="post" action="<?php echo esc_url( $action_url ); ?>" class="comsign-mini-form">
 											<input type="hidden" name="action" value="comsign_resend_signer">

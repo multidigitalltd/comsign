@@ -4,7 +4,7 @@ Tags: signature, digital signature, pdf, esignature, hebrew
 Requires at least: 6.0
 Tested up to: 6.5
 Requires PHP: 7.4
-Stable tag: 0.12.0
+Stable tag: 0.13.0
 License: GPL-2.0-or-later
 License URI: https://www.gnu.org/licenses/gpl-2.0.html
 
@@ -105,6 +105,11 @@ ID and its SHA-256 code (shown on the document screen and the signature
 certificate) to confirm the document is authentic and see who signed it.
 
 == Changelog ==
+
+= 0.13.0 =
+* New: in-person signing. From a document, hand your device to a present signer
+  and open the signing page directly - the session is pre-verified (the admin
+  authorises it) and the action is recorded in the audit trail as in-person.
 
 = 0.12.0 =
 * New: Analytics dashboard - totals by status, completion rate, average

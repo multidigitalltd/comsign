@@ -56,6 +56,7 @@ final class Admin {
 		add_action( 'admin_post_comsign_save_cc', array( $this, 'handle_save_cc' ) );
 		add_action( 'admin_post_comsign_delete_signer', array( $this, 'handle_delete_signer' ) );
 		add_action( 'admin_post_comsign_signer_link', array( $this, 'handle_signer_link' ) );
+		add_action( 'admin_post_comsign_sign_in_person', array( $this, 'handle_sign_in_person' ) );
 		add_action( 'admin_post_comsign_resend_signer', array( $this, 'handle_resend_signer' ) );
 		add_action( 'admin_post_comsign_save_fields', array( $this, 'handle_save_fields' ) );
 		add_action( 'admin_post_comsign_send', array( $this, 'handle_send' ) );
@@ -285,6 +286,7 @@ final class Admin {
 					'save_cc'       => wp_create_nonce( 'comsign_save_cc_' . $document_id ),
 					'delete_signer' => wp_create_nonce( 'comsign_delete_signer_' . $document_id ),
 					'signer_link'   => wp_create_nonce( 'comsign_signer_link_' . $document_id ),
+					'sign_in_person' => wp_create_nonce( 'comsign_sign_in_person_' . $document_id ),
 					'resend_signer' => wp_create_nonce( 'comsign_resend_signer_' . $document_id ),
 					'save_fields'   => wp_create_nonce( 'comsign_save_fields_' . $document_id ),
 					'send'          => wp_create_nonce( 'comsign_send_' . $document_id ),
@@ -438,6 +440,41 @@ final class Admin {
 	/**
 	 * Mint a shareable signing link for a signer (copy / WhatsApp).
 	 */
+	/**
+	 * In-person signing: refresh the signer's link, pre-verify the session (the
+	 * present admin authorises it) and open the signing page directly.
+	 */
+	public function handle_sign_in_person(): void {
+		$this->guard();
+		$document_id = $this->posted_document_id();
+		check_admin_referer( 'comsign_sign_in_person_' . $document_id );
+
+		$signer_id = isset( $_POST['signer_id'] ) ? absint( wp_unslash( $_POST['signer_id'] ) ) : 0;
+
+		try {
+			$url = $this->service->generate_link( $document_id, $signer_id );
+		} catch ( \Throwable $e ) {
+			$this->redirect_with_notice( $this->edit_url( $document_id ), 'error', $e->getMessage() );
+			return;
+		}
+
+		// Skip the identity challenge: the signer is physically present and the
+		// authorised admin is initiating the session. Record it for the trail.
+		$signer = $this->signers->find( $signer_id );
+		if ( $signer ) {
+			\ComSign\Frontend\SignerAuth::mark_verified( $signer );
+			( new AuditLogger( $this->audit ) )->record(
+				AuditLogger::EVENT_SENT,
+				$document_id,
+				$signer_id,
+				array( 'channel' => 'in_person' )
+			);
+		}
+
+		wp_safe_redirect( $url );
+		exit;
+	}
+
 	public function handle_signer_link(): void {
 		$this->guard();
 		$document_id = $this->posted_document_id();
