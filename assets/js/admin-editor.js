@@ -63,14 +63,31 @@
 		return '';
 	}
 
+	var LABELS = {
+		signature: cfg.i18n.signature || 'Signature',
+		initials: cfg.i18n.initials || 'Initials',
+		date: cfg.i18n.date || 'Date',
+		name: cfg.i18n.name || 'Name',
+		email: cfg.i18n.email || 'Email',
+		text: cfg.i18n.text || 'Text',
+		number: cfg.i18n.number || 'Number',
+		checkbox: cfg.i18n.checkbox || 'Checkbox',
+		choice: cfg.i18n.choice || 'Choice'
+	};
+
 	function typeLabel( type ) {
-		if ( 'date' === type ) {
-			return cfg.i18n.date || 'Date';
+		return LABELS[ type ] || LABELS.signature;
+	}
+
+	// Default box size (fractions) per field type.
+	function defaultSize( type ) {
+		if ( 'signature' === type || 'initials' === type ) {
+			return { w: 0.22, h: 0.06 };
 		}
-		if ( 'text' === type ) {
-			return cfg.i18n.text || 'Text';
+		if ( 'checkbox' === type ) {
+			return { w: 0.04, h: 0.025 };
 		}
-		return cfg.i18n.signature || 'Signature';
+		return { w: 0.18, h: 0.03 };
 	}
 
 	container.textContent = cfg.i18n.loading || 'Loading…';
@@ -85,7 +102,7 @@
 	} ).then( function () {
 		// Place existing fields once all pages exist.
 		fields.forEach( function ( f ) {
-			addMarker( f.page, f.signer_id, f.type, f.pos_x, f.pos_y, f.width, f.height );
+			addMarker( f.page, f.signer_id, f.type, f.pos_x, f.pos_y, f.width, f.height, f.options || [] );
 		} );
 	} ).catch( function () {
 		container.textContent = cfg.i18n.loadError || 'Could not load preview.';
@@ -118,7 +135,7 @@
 		} );
 	}
 
-	function addMarker( page, signerId, type, x, y, w, h ) {
+	function addMarker( page, signerId, type, x, y, w, h, options ) {
 		var overlay = pageEls[ page ];
 		if ( ! overlay ) {
 			return;
@@ -128,6 +145,7 @@
 		marker.className = 'comsign-field';
 		marker.dataset.signer = signerId;
 		marker.dataset.type = type;
+		marker.dataset.options = JSON.stringify( options || [] );
 		marker.style.left = ( x * 100 ) + '%';
 		marker.style.top = ( y * 100 ) + '%';
 		marker.style.width = ( w * 100 ) + '%';
@@ -224,15 +242,26 @@
 	}
 
 	// Toolbar: add a new field on the first page for the active signer.
-	document.querySelectorAll( '[data-comsign-add]' ).forEach( function ( btn ) {
-		btn.addEventListener( 'click', function () {
-			var type = btn.getAttribute( 'data-comsign-add' );
+	var typeSelect = document.getElementById( 'comsign-field-type' );
+	var addBtn = document.getElementById( 'comsign-add-field' );
+	if ( addBtn ) {
+		addBtn.addEventListener( 'click', function () {
+			var type = typeSelect ? typeSelect.value : 'signature';
 			var signerId = signerSelect ? parseInt( signerSelect.value, 10 ) : 0;
-			var w = 'signature' === type ? 0.22 : 0.18;
-			var h = 'signature' === type ? 0.06 : 0.03;
-			addMarker( 1, signerId, type, 0.1, 0.1, w, h );
+			var size = defaultSize( type );
+			var options = [];
+
+			if ( 'choice' === type ) {
+				var raw = window.prompt( cfg.i18n.choicePrompt || 'Enter options separated by commas:', '' );
+				if ( null === raw ) {
+					return; // cancelled
+				}
+				options = raw.split( ',' ).map( function ( s ) { return s.trim(); } ).filter( Boolean );
+			}
+
+			addMarker( 1, signerId, type, 0.1, 0.1, size.w, size.h, options );
 		} );
-	} );
+	}
 
 	// Serialize on submit.
 	if ( form ) {
@@ -241,6 +270,8 @@
 			Object.keys( pageEls ).forEach( function ( page ) {
 				var overlay = pageEls[ page ];
 				overlay.querySelectorAll( '.comsign-field' ).forEach( function ( m ) {
+					var options = [];
+					try { options = JSON.parse( m.dataset.options || '[]' ); } catch ( e ) { options = []; }
 					out.push( {
 						signer_id: parseInt( m.dataset.signer, 10 ) || 0,
 						type: m.dataset.type,
@@ -248,7 +279,8 @@
 						pos_x: pct( m.style.left ),
 						pos_y: pct( m.style.top ),
 						width: pct( m.style.width ),
-						height: pct( m.style.height )
+						height: pct( m.style.height ),
+						options: options
 					} );
 				} );
 			} );

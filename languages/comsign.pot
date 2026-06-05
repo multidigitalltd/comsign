@@ -18,39 +18,27 @@ msgid "%s (copy)"
 msgstr ""
 
 #: includes/Admin/DocumentsListTable.php:78
-#: includes/Admin/views/edit.php:50
+#: includes/Admin/views/edit.php:51
 msgid "(untitled)"
-msgstr ""
-
-#: includes/Admin/views/edit.php:94
-msgid "+ Date"
-msgstr ""
-
-#: includes/Admin/views/edit.php:93
-msgid "+ Signature"
-msgstr ""
-
-#: includes/Admin/views/edit.php:95
-msgid "+ Text field"
 msgstr ""
 
 #: includes/Email/Mailer.php:34
 msgid "A document is awaiting your signature — %s"
 msgstr ""
 
-#: includes/Services/DocumentService.php:654
+#: includes/Services/DocumentService.php:664
 msgid "A field is assigned to a signer that is not on this document. Please re-save the fields."
 msgstr ""
 
-#: includes/Services/DocumentService.php:783
+#: includes/Services/DocumentService.php:793
 msgid "A signature is required."
 msgstr ""
 
-#: includes/Admin/Admin.php:395
+#: includes/Admin/Admin.php:402
 msgid "A signing link was generated. Copy it or share via WhatsApp below."
 msgstr ""
 
-#: includes/Admin/views/edit.php:225
+#: includes/Admin/views/edit.php:235
 msgid "Actions"
 msgstr ""
 
@@ -61,28 +49,32 @@ msgstr ""
 msgid "Add Document"
 msgstr ""
 
-#: includes/Services/DocumentService.php:564
+#: includes/Services/DocumentService.php:574
 msgid "Add at least one signer before sending."
 msgstr ""
 
-#: includes/Admin/views/edit.php:82
+#: includes/Admin/views/edit.php:83
 msgid "Add at least one signer first, then drop signature fields onto the document."
 msgstr ""
 
-#: includes/Admin/views/edit.php:220
+#: includes/Admin/views/edit.php:105
+msgid "Add field"
+msgstr ""
+
+#: includes/Admin/views/edit.php:230
 msgid "Add signer"
 msgstr ""
 
-#: includes/Admin/views/edit.php:65
+#: includes/Admin/views/edit.php:66
 msgid "All parties have signed. The signed PDF and verification details are available below."
 msgstr ""
 
 #: includes/Frontend/SigningController.php:93
-#: includes/Frontend/SigningController.php:257
+#: includes/Frontend/SigningController.php:258
 msgid "Already signed"
 msgstr ""
 
-#: includes/Admin/views/edit.php:255
+#: includes/Admin/views/edit.php:265
 msgid "Audit report (PDF)"
 msgstr ""
 
@@ -90,7 +82,7 @@ msgstr ""
 msgid "Audit report — %s"
 msgstr ""
 
-#: includes/Admin/views/edit.php:115
+#: includes/Admin/views/edit.php:125
 #: includes/Services/DocumentService.php:233
 msgid "Audit trail"
 msgstr ""
@@ -99,14 +91,31 @@ msgstr ""
 msgid "Automatic reminders"
 msgstr ""
 
-#: includes/Admin/views/edit.php:54
+#: includes/Admin/views/edit.php:55
 msgid "Back to list"
 msgstr ""
 
-#: includes/Admin/views/edit.php:125
+#: includes/Admin/views/edit.php:135
 #: includes/Services/DocumentService.php:243
 #: includes/Signature/ElectronicSignatureProvider.php:82
 msgid "Browser"
+msgstr ""
+
+#: includes/Admin/Admin.php:180
+#: includes/Admin/views/edit.php:102
+msgid "Checkbox"
+msgstr ""
+
+#: includes/Admin/Admin.php:181
+msgid "Choice"
+msgstr ""
+
+#: includes/Admin/views/edit.php:103
+msgid "Choice (dropdown)"
+msgstr ""
+
+#: includes/Frontend/views/sign.php:85
+msgid "Choose…"
 msgstr ""
 
 #: includes/Frontend/views/sign.php:54
@@ -134,7 +143,7 @@ msgstr ""
 msgid "Completed"
 msgstr ""
 
-#: includes/Frontend/SigningController.php:214
+#: includes/Frontend/SigningController.php:215
 msgid "Completed:"
 msgstr ""
 
@@ -142,11 +151,11 @@ msgstr ""
 msgid "Compose from text"
 msgstr ""
 
-#: includes/Frontend/views/sign.php:100
+#: includes/Frontend/views/sign.php:119
 msgid "Confirm decline"
 msgstr ""
 
-#: includes/Frontend/SigningController.php:262
+#: includes/Frontend/SigningController.php:263
 msgid "Consent required"
 msgstr ""
 
@@ -155,11 +164,11 @@ msgid "Copied!"
 msgstr ""
 
 #: includes/Admin/Admin.php:138
-#: includes/Admin/views/edit.php:201
+#: includes/Admin/views/edit.php:211
 msgid "Copy link"
 msgstr ""
 
-#: includes/Frontend/SigningController.php:293
+#: includes/Frontend/SigningController.php:294
 msgid "Could not complete signing"
 msgstr ""
 
@@ -167,7 +176,7 @@ msgstr ""
 msgid "Could not generate the document PDF."
 msgstr ""
 
-#: includes/Admin/Admin.php:178
+#: includes/Admin/Admin.php:185
 msgid "Could not load the document preview."
 msgstr ""
 
@@ -183,11 +192,15 @@ msgstr ""
 msgid "Created"
 msgstr ""
 
-#: includes/Admin/Admin.php:174
+#: includes/Admin/Admin.php:175
 msgid "Date"
 msgstr ""
 
-#: includes/Frontend/views/sign.php:90
+#: includes/Admin/views/edit.php:97
+msgid "Date (auto)"
+msgstr ""
+
+#: includes/Frontend/views/sign.php:109
 msgid "Decline"
 msgstr ""
 
@@ -195,7 +208,7 @@ msgstr ""
 msgid "Declined"
 msgstr ""
 
-#: includes/Admin/views/edit.php:262
+#: includes/Admin/views/edit.php:272
 msgid "Delete document"
 msgstr ""
 
@@ -206,7 +219,7 @@ msgstr ""
 msgid "Document"
 msgstr ""
 
-#: includes/Frontend/SigningController.php:200
+#: includes/Frontend/SigningController.php:201
 #: includes/Signature/ElectronicSignatureProvider.php:67
 msgid "Document ID"
 msgstr ""
@@ -215,23 +228,23 @@ msgstr ""
 msgid "Document content"
 msgstr ""
 
-#: includes/Admin/Admin.php:320
+#: includes/Admin/Admin.php:327
 msgid "Document created. Now add signers and place fields."
 msgstr ""
 
-#: includes/Admin/Admin.php:476
+#: includes/Admin/Admin.php:483
 msgid "Document deleted."
 msgstr ""
 
-#: includes/Admin/Admin.php:466
+#: includes/Admin/Admin.php:473
 msgid "Document duplicated."
 msgstr ""
 
-#: includes/Admin/Admin.php:234
-#: includes/Admin/Admin.php:551
+#: includes/Admin/Admin.php:241
+#: includes/Admin/Admin.php:558
 #: includes/Services/DocumentService.php:228
 #: includes/Services/DocumentService.php:439
-#: includes/Services/DocumentService.php:559
+#: includes/Services/DocumentService.php:569
 msgid "Document not found."
 msgstr ""
 
@@ -245,15 +258,15 @@ msgid "Document title"
 msgstr ""
 
 #: includes/Frontend/SigningController.php:85
-#: includes/Frontend/SigningController.php:279
+#: includes/Frontend/SigningController.php:280
 msgid "Document unavailable"
 msgstr ""
 
-#: includes/Frontend/SigningController.php:344
+#: includes/Frontend/SigningController.php:345
 msgid "Document unavailable."
 msgstr ""
 
-#: includes/Admin/Admin.php:292
+#: includes/Admin/Admin.php:299
 msgid "Document uploaded. Now add signers and place signature fields."
 msgstr ""
 
@@ -262,7 +275,7 @@ msgstr ""
 msgid "Documents"
 msgstr ""
 
-#: includes/Admin/views/edit.php:67
+#: includes/Admin/views/edit.php:68
 msgid "Download signed PDF"
 msgstr ""
 
@@ -270,7 +283,7 @@ msgstr ""
 msgid "Draft"
 msgstr ""
 
-#: includes/Admin/views/edit.php:96
+#: includes/Admin/views/edit.php:106
 msgid "Drag fields to reposition; double-click to remove."
 msgstr ""
 
@@ -286,44 +299,57 @@ msgstr ""
 msgid "Electronic signature"
 msgstr ""
 
+#: includes/Admin/Admin.php:177
 #: includes/Signature/ElectronicSignatureProvider.php:76
 msgid "Email"
+msgstr ""
+
+#: includes/Admin/views/edit.php:99
+msgid "Email (auto)"
 msgstr ""
 
 #: includes/Admin/views/settings.php:29
 msgid "Email a reminder to signers who have not signed yet."
 msgstr ""
 
-#: includes/Admin/views/edit.php:219
+#: includes/Admin/views/edit.php:229
 msgid "Email is optional — leave it empty to share a signing link by WhatsApp or any other channel."
 msgstr ""
 
-#: includes/Admin/views/edit.php:175
+#: includes/Admin/views/edit.php:185
 msgid "Email link"
 msgstr ""
 
-#: includes/Admin/views/edit.php:122
+#: includes/Frontend/views/sign.php:91
+msgid "Enter a number"
+msgstr ""
+
+#: includes/Admin/Admin.php:183
+msgid "Enter options separated by commas:"
+msgstr ""
+
+#: includes/Admin/views/edit.php:132
 #: includes/Services/DocumentService.php:240
 msgid "Event"
 msgstr ""
 
-#: includes/Services/DocumentService.php:660
+#: includes/Services/DocumentService.php:670
 msgid "Every signer must have at least one field. Please assign a field to each signer."
 msgstr ""
 
-#: includes/Admin/views/edit.php:85
+#: includes/Admin/views/edit.php:86
 msgid "Field for:"
 msgstr ""
 
-#: includes/Admin/Admin.php:557
+#: includes/Admin/Admin.php:564
 msgid "File not available."
 msgstr ""
 
-#: includes/Admin/views/edit.php:216
+#: includes/Admin/views/edit.php:226
 msgid "Full name"
 msgstr ""
 
-#: includes/Admin/views/edit.php:167
+#: includes/Admin/views/edit.php:177
 msgid "Get signing link"
 msgstr ""
 
@@ -339,11 +365,15 @@ msgstr ""
 msgid "Hello,"
 msgstr ""
 
-#: includes/Frontend/views/sign.php:83
+#: includes/Frontend/views/sign.php:102
 msgid "I agree to sign this document electronically, and I confirm that my electronic signature is legally binding."
 msgstr ""
 
-#: includes/Admin/views/edit.php:124
+#: includes/Frontend/views/sign.php:81
+msgid "I confirm"
+msgstr ""
+
+#: includes/Admin/views/edit.php:134
 #: includes/Services/DocumentService.php:242
 msgid "IP"
 msgstr ""
@@ -352,12 +382,17 @@ msgstr ""
 msgid "IP address"
 msgstr ""
 
-#: includes/Frontend/SigningController.php:251
-#: includes/Frontend/SigningController.php:311
+#: includes/Admin/Admin.php:174
+#: includes/Admin/views/edit.php:96
+msgid "Initials"
+msgstr ""
+
+#: includes/Frontend/SigningController.php:252
+#: includes/Frontend/SigningController.php:312
 msgid "Invalid link"
 msgstr ""
 
-#: includes/Frontend/SigningController.php:337
+#: includes/Frontend/SigningController.php:338
 msgid "Invalid link."
 msgstr ""
 
@@ -369,24 +404,24 @@ msgstr ""
 msgid "Invalid upload."
 msgstr ""
 
-#: includes/Admin/Admin.php:366
+#: includes/Admin/Admin.php:373
 msgid "Invitation re-sent."
 msgstr ""
 
-#: includes/Frontend/SigningController.php:287
+#: includes/Frontend/SigningController.php:288
 msgid "It is not your turn to sign yet."
 msgstr ""
 
 #: includes/Frontend/SigningController.php:107
-#: includes/Frontend/SigningController.php:283
+#: includes/Frontend/SigningController.php:284
 msgid "Link expired"
 msgstr ""
 
-#: includes/Admin/views/edit.php:239
+#: includes/Admin/views/edit.php:249
 msgid "Link expires after"
 msgstr ""
 
-#: includes/Admin/Admin.php:177
+#: includes/Admin/Admin.php:184
 msgid "Loading document…"
 msgstr ""
 
@@ -394,23 +429,28 @@ msgstr ""
 msgid "Manage"
 msgstr ""
 
-#: includes/Admin/views/edit.php:244
+#: includes/Admin/views/edit.php:254
 msgid "Message to signers (optional)"
 msgstr ""
 
+#: includes/Admin/Admin.php:176
 #: includes/Signature/ElectronicSignatureProvider.php:75
 msgid "Name"
+msgstr ""
+
+#: includes/Admin/views/edit.php:98
+msgid "Name (auto)"
 msgstr ""
 
 #: includes/Admin/DocumentsListTable.php:154
 msgid "No documents yet. Upload your first PDF to get started."
 msgstr ""
 
-#: includes/Admin/Admin.php:435
+#: includes/Admin/Admin.php:442
 msgid "No emails were sent because the signer(s) have no email. Use \"Get signing link\" to share their link."
 msgstr ""
 
-#: includes/Admin/views/edit.php:117
+#: includes/Admin/views/edit.php:127
 msgid "No events recorded yet."
 msgstr ""
 
@@ -418,12 +458,17 @@ msgstr ""
 msgid "No file was uploaded, or the upload failed."
 msgstr ""
 
-#: includes/Frontend/SigningController.php:231
+#: includes/Frontend/SigningController.php:232
 msgid "No matching signed document was found for that ID and code."
 msgstr ""
 
-#: includes/Admin/views/edit.php:147
+#: includes/Admin/views/edit.php:157
 msgid "No signers yet."
+msgstr ""
+
+#: includes/Admin/Admin.php:179
+#: includes/Admin/views/edit.php:101
+msgid "Number"
 msgstr ""
 
 #: includes/Admin/views/new.php:73
@@ -434,7 +479,7 @@ msgstr ""
 msgid "Only PDF files are allowed."
 msgstr ""
 
-#: includes/Admin/views/edit.php:68
+#: includes/Admin/views/edit.php:69
 msgid "Original PDF"
 msgstr ""
 
@@ -450,19 +495,19 @@ msgstr ""
 msgid "Partially signed"
 msgstr ""
 
-#: includes/Admin/views/edit.php:258
+#: includes/Admin/views/edit.php:268
 msgid "Permanently delete this document and all its data?"
 msgstr ""
 
-#: includes/Admin/views/edit.php:218
+#: includes/Admin/views/edit.php:228
 msgid "Phone for WhatsApp (optional)"
 msgstr ""
 
-#: includes/Services/DocumentService.php:569
+#: includes/Services/DocumentService.php:579
 msgid "Place at least one signature field before sending."
 msgstr ""
 
-#: includes/Admin/views/edit.php:80
+#: includes/Admin/views/edit.php:81
 msgid "Place signature fields"
 msgstr ""
 
@@ -470,11 +515,11 @@ msgstr ""
 msgid "Please add a title or some content for the document."
 msgstr ""
 
-#: includes/Frontend/views/sign.php:86
+#: includes/Frontend/views/sign.php:105
 msgid "Please add your signature and accept the agreement."
 msgstr ""
 
-#: includes/Admin/Admin.php:280
+#: includes/Admin/Admin.php:287
 msgid "Please choose a PDF to upload."
 msgstr ""
 
@@ -494,15 +539,15 @@ msgstr ""
 msgid "Please provide a valid email address."
 msgstr ""
 
-#: includes/Admin/views/edit.php:192
+#: includes/Admin/views/edit.php:202
 msgid "Please sign the document at the following secure link: %s"
 msgstr ""
 
-#: includes/Admin/views/edit.php:249
+#: includes/Admin/views/edit.php:259
 msgid "Re-send invitations"
 msgstr ""
 
-#: includes/Frontend/views/sign.php:98
+#: includes/Frontend/views/sign.php:117
 msgid "Reason for declining (optional)"
 msgstr ""
 
@@ -518,24 +563,24 @@ msgstr ""
 msgid "Reminders run once a day via WP-Cron. Each reminder issues a fresh signing link."
 msgstr ""
 
-#: includes/Admin/Admin.php:176
-#: includes/Admin/views/edit.php:183
+#: includes/Admin/Admin.php:182
+#: includes/Admin/views/edit.php:193
 msgid "Remove"
 msgstr ""
 
-#: includes/Admin/views/edit.php:178
+#: includes/Admin/views/edit.php:188
 msgid "Remove this signer?"
 msgstr ""
 
-#: includes/Admin/views/edit.php:235
+#: includes/Admin/views/edit.php:245
 msgid "Require signing in order"
 msgstr ""
 
-#: includes/Admin/views/edit.php:72
+#: includes/Admin/views/edit.php:73
 msgid "SHA-256:"
 msgstr ""
 
-#: includes/Admin/views/edit.php:106
+#: includes/Admin/views/edit.php:116
 msgid "Save fields"
 msgstr ""
 
@@ -547,7 +592,7 @@ msgstr ""
 msgid "Securely processed by %s"
 msgstr ""
 
-#: includes/Admin/views/edit.php:249
+#: includes/Admin/views/edit.php:259
 msgid "Send for signing"
 msgstr ""
 
@@ -555,11 +600,11 @@ msgstr ""
 msgid "Sent"
 msgstr ""
 
-#: includes/Admin/Admin.php:439
+#: includes/Admin/Admin.php:446
 msgid "Sent %1$d invitation(s). %2$d signer(s) have no email — share their link manually."
 msgstr ""
 
-#: includes/Admin/Admin.php:446
+#: includes/Admin/Admin.php:453
 msgid "Sent %d invitation(s)."
 msgstr ""
 
@@ -572,16 +617,16 @@ msgstr ""
 msgid "Settings"
 msgstr ""
 
-#: includes/Admin/Admin.php:535
+#: includes/Admin/Admin.php:542
 msgid "Settings saved."
 msgstr ""
 
-#: includes/Admin/views/edit.php:202
+#: includes/Admin/views/edit.php:212
 msgid "Share via WhatsApp"
 msgstr ""
 
 #: includes/Frontend/views/partials/header.php:21
-#: includes/Frontend/views/sign.php:89
+#: includes/Frontend/views/sign.php:108
 msgid "Sign document"
 msgstr ""
 
@@ -590,6 +635,7 @@ msgid "Sign: %s"
 msgstr ""
 
 #: includes/Admin/Admin.php:173
+#: includes/Admin/views/edit.php:95
 msgid "Signature"
 msgstr ""
 
@@ -597,7 +643,7 @@ msgstr ""
 msgid "Signature Certificate"
 msgstr ""
 
-#: includes/Admin/Admin.php:410
+#: includes/Admin/Admin.php:417
 msgid "Signature fields saved."
 msgstr ""
 
@@ -605,7 +651,7 @@ msgstr ""
 msgid "Signed at"
 msgstr ""
 
-#: includes/Frontend/SigningController.php:218
+#: includes/Frontend/SigningController.php:219
 msgid "Signed by:"
 msgstr ""
 
@@ -613,7 +659,7 @@ msgstr ""
 msgid "Signed copy"
 msgstr ""
 
-#: includes/Admin/views/edit.php:64
+#: includes/Admin/views/edit.php:65
 msgid "Signed document"
 msgstr ""
 
@@ -621,7 +667,7 @@ msgstr ""
 msgid "Signer %d"
 msgstr ""
 
-#: includes/Admin/Admin.php:339
+#: includes/Admin/Admin.php:346
 msgid "Signer added."
 msgstr ""
 
@@ -630,21 +676,21 @@ msgstr ""
 msgid "Signer not found."
 msgstr ""
 
-#: includes/Admin/Admin.php:350
+#: includes/Admin/Admin.php:357
 msgid "Signer removed."
 msgstr ""
 
 #: includes/Admin/DocumentsListTable.php:44
-#: includes/Admin/views/edit.php:145
+#: includes/Admin/views/edit.php:155
 msgid "Signers"
 msgstr ""
 
 #: includes/Frontend/SigningController.php:99
-#: includes/Frontend/SigningController.php:324
+#: includes/Frontend/SigningController.php:325
 msgid "Signing declined"
 msgstr ""
 
-#: includes/Services/DocumentService.php:624
+#: includes/Services/DocumentService.php:634
 msgid "Some invitations could not be sent: %s. Please check your site email settings and re-send."
 msgstr ""
 
@@ -652,19 +698,20 @@ msgstr ""
 msgid "Status"
 msgstr ""
 
-#: includes/Frontend/SigningController.php:421
+#: includes/Frontend/SigningController.php:422
 msgid "Template missing."
 msgstr ""
 
-#: includes/Admin/Admin.php:175
+#: includes/Admin/Admin.php:178
+#: includes/Admin/views/edit.php:100
 msgid "Text"
 msgstr ""
 
-#: includes/Frontend/SigningController.php:297
+#: includes/Frontend/SigningController.php:298
 msgid "Thank you!"
 msgstr ""
 
-#: includes/Frontend/SigningController.php:279
+#: includes/Frontend/SigningController.php:280
 msgid "The document could not be found."
 msgstr ""
 
@@ -688,7 +735,7 @@ msgstr ""
 msgid "This document is signed in order. You will be notified when it is your turn."
 msgstr ""
 
-#: includes/Admin/views/edit.php:204
+#: includes/Admin/views/edit.php:214
 msgid "This link is personal and replaces any link previously issued to this signer."
 msgstr ""
 
@@ -700,7 +747,7 @@ msgstr ""
 msgid "This signer has no email. Share the signing link instead."
 msgstr ""
 
-#: includes/Frontend/SigningController.php:283
+#: includes/Frontend/SigningController.php:284
 msgid "This signing link has expired."
 msgstr ""
 
@@ -708,8 +755,8 @@ msgstr ""
 msgid "This signing link has expired. Please ask the sender for a new one."
 msgstr ""
 
-#: includes/Frontend/SigningController.php:251
-#: includes/Frontend/SigningController.php:311
+#: includes/Frontend/SigningController.php:252
+#: includes/Frontend/SigningController.php:312
 msgid "This signing link is no longer valid."
 msgstr ""
 
@@ -717,7 +764,7 @@ msgstr ""
 msgid "This signing link is no longer valid. Please ask the sender for a new one."
 msgstr ""
 
-#: includes/Frontend/SigningController.php:213
+#: includes/Frontend/SigningController.php:214
 msgid "Title:"
 msgstr ""
 
@@ -749,15 +796,15 @@ msgstr ""
 msgid "Variables"
 msgstr ""
 
-#: includes/Frontend/SigningController.php:202
+#: includes/Frontend/SigningController.php:203
 msgid "Verification code (SHA-256)"
 msgstr ""
 
-#: includes/Frontend/SigningController.php:204
+#: includes/Frontend/SigningController.php:205
 msgid "Verify document"
 msgstr ""
 
-#: includes/Admin/views/edit.php:254
+#: includes/Admin/views/edit.php:264
 msgid "View original"
 msgstr ""
 
@@ -766,11 +813,11 @@ msgid "Viewed"
 msgstr ""
 
 #: includes/Frontend/SigningController.php:115
-#: includes/Frontend/SigningController.php:287
+#: includes/Frontend/SigningController.php:288
 msgid "Waiting for an earlier signer"
 msgstr ""
 
-#: includes/Admin/views/edit.php:123
+#: includes/Admin/views/edit.php:133
 #: includes/Services/DocumentService.php:241
 msgid "When"
 msgstr ""
@@ -779,11 +826,11 @@ msgstr ""
 msgid "Write the fixed text of the document. After creating it you can place fillable and signature fields on the generated PDF."
 msgstr ""
 
-#: includes/Admin/Admin.php:637
+#: includes/Admin/Admin.php:663
 msgid "You are not allowed to access this page."
 msgstr ""
 
-#: includes/Frontend/SigningController.php:257
+#: includes/Frontend/SigningController.php:258
 msgid "You have already signed this document."
 msgstr ""
 
@@ -799,15 +846,15 @@ msgstr ""
 msgid "You have declined to sign this document."
 msgstr ""
 
-#: includes/Frontend/SigningController.php:325
+#: includes/Frontend/SigningController.php:326
 msgid "You have declined to sign this document. The sender has been notified."
 msgstr ""
 
-#: includes/Frontend/SigningController.php:262
+#: includes/Frontend/SigningController.php:263
 msgid "You must agree to sign electronically before continuing."
 msgstr ""
 
-#: includes/Frontend/views/sign.php:75
+#: includes/Frontend/views/sign.php:93
 msgid "Your answer"
 msgstr ""
 
@@ -815,7 +862,7 @@ msgstr ""
 msgid "Your signature"
 msgstr ""
 
-#: includes/Frontend/SigningController.php:298
+#: includes/Frontend/SigningController.php:299
 msgid "Your signature has been recorded. A copy will be available once all parties have signed."
 msgstr ""
 
@@ -827,7 +874,7 @@ msgstr ""
 msgid "days"
 msgstr ""
 
-#: includes/Admin/views/edit.php:241
+#: includes/Admin/views/edit.php:251
 msgid "days (0 = never)"
 msgstr ""
 
@@ -836,11 +883,11 @@ msgstr ""
 msgid "e.g. Service agreement"
 msgstr ""
 
-#: includes/Admin/views/edit.php:217
+#: includes/Admin/views/edit.php:227
 msgid "email@example.com"
 msgstr ""
 
-#: includes/Frontend/SigningController.php:212
+#: includes/Frontend/SigningController.php:213
 msgid "✔ This document is authentic."
 msgstr ""
 

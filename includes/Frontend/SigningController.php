@@ -157,12 +157,13 @@ final class SigningController {
 		$signer_fields = $this->fields->for_signer( (int) $signer->id );
 
 		$needs_signature = false;
-		$text_fields     = array();
+		$input_fields    = array();
 		foreach ( $signer_fields as $field ) {
-			if ( in_array( $field->type, array( 'signature', 'initials' ), true ) ) {
+			if ( in_array( $field->type, array( FieldRepository::TYPE_SIGNATURE, FieldRepository::TYPE_INITIALS ), true ) ) {
 				$needs_signature = true;
-			} elseif ( 'text' === $field->type ) {
-				$text_fields[] = $field;
+			} elseif ( in_array( $field->type, FieldRepository::INPUT_TYPES, true ) ) {
+				// Fields the signer fills in themselves (auto fields are excluded).
+				$input_fields[] = $field;
 			}
 		}
 
@@ -174,7 +175,7 @@ final class SigningController {
 			'view_url'        => $view_url,
 			'post_url'        => $post_url,
 			'needs_signature' => $needs_signature,
-			'text_fields'     => $text_fields,
+			'input_fields'    => $input_fields,
 		);
 
 		$this->render_template( 'sign', $data );

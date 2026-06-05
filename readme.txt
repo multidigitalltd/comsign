@@ -83,6 +83,14 @@ certificate) to confirm the document is authentic and see who signed it.
 
 == Changelog ==
 
+= 0.5.0 =
+* New field types: number, checkbox, and choice (dropdown with admin-defined
+  options) that the signer fills in.
+* New auto fields (per-signer variables): Name and Email auto-fill from the
+  signer's details when they sign (joining the existing auto Date field).
+* Editor: a field-type dropdown replaces the per-type buttons; choice fields
+  prompt for their options.
+
 = 0.4.0 =
 * New: sequential signing — require signers to sign in order; the next signer
   is invited automatically once the previous one signs.

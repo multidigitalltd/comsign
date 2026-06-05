@@ -523,6 +523,7 @@ final class DocumentService {
 					'pos_y'       => $this->clamp_fraction( $field['pos_y'] ?? 0 ),
 					'width'       => $this->clamp_fraction( $field['width'] ?? 0 ),
 					'height'      => $this->clamp_fraction( $field['height'] ?? 0 ),
+					'options'     => isset( $field['options'] ) && is_array( $field['options'] ) ? $field['options'] : null,
 				)
 			);
 		}
@@ -535,6 +536,15 @@ final class DocumentService {
 	 */
 	private function clamp_fraction( $value ): float {
 		return max( 0.0, min( 1.0, (float) $value ) );
+	}
+
+	/**
+	 * Encode a plain-text field value for PDF stamping.
+	 *
+	 * @param string $text Text value.
+	 */
+	private function text_value( string $text ): string {
+		return (string) wp_json_encode( array( 'kind' => 'text', 'text' => $text ) );
 	}
 
 	/* ---------------------------------------------------------------------
@@ -786,14 +796,35 @@ final class DocumentService {
 		$today = date_i18n( get_option( 'date_format' ) );
 
 		foreach ( $signer_fields as $field ) {
+			$posted = isset( $field_values[ (int) $field->id ] ) ? (string) $field_values[ (int) $field->id ] : '';
+
 			switch ( $field->type ) {
+				// Auto-filled from signer/document data (per-signer variables).
 				case FieldRepository::TYPE_DATE:
-					$value = wp_json_encode( array( 'kind' => 'text', 'text' => $today ) );
+					$value = $this->text_value( $today );
+					break;
+				case FieldRepository::TYPE_NAME:
+					$value = $this->text_value( (string) $signer->name );
+					break;
+				case FieldRepository::TYPE_EMAIL:
+					$value = $this->text_value( (string) $signer->email );
 					break;
 
+				// Signer-entered.
 				case FieldRepository::TYPE_TEXT:
-					$text  = isset( $field_values[ (int) $field->id ] ) ? (string) $field_values[ (int) $field->id ] : '';
-					$value = wp_json_encode( array( 'kind' => 'text', 'text' => $text ) );
+					$value = $this->text_value( $posted );
+					break;
+				case FieldRepository::TYPE_NUMBER:
+					// Keep digits, separators and a leading sign only.
+					$value = $this->text_value( preg_replace( '/[^0-9.,\-+ ]/', '', $posted ) );
+					break;
+				case FieldRepository::TYPE_CHECKBOX:
+					$value = $this->text_value( '' !== $posted ? 'X' : '' );
+					break;
+				case FieldRepository::TYPE_CHOICE:
+					// Only accept a value that is one of the defined options.
+					$options = FieldRepository::decode_options( $field );
+					$value   = $this->text_value( in_array( $posted, $options, true ) ? $posted : '' );
 					break;
 
 				default: // signature / initials.

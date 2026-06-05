@@ -170,12 +170,19 @@ final class Admin {
 				'workerSrc'  => COMSIGN_PLUGIN_URL . 'assets/vendor/pdfjs/pdf.worker.min.js',
 				'pdfUrl'     => $this->stream_url( $document_id, 'source' ),
 				'i18n'       => array(
-					'signature' => __( 'Signature', 'comsign' ),
-					'date'      => __( 'Date', 'comsign' ),
-					'text'      => __( 'Text', 'comsign' ),
-					'remove'    => __( 'Remove', 'comsign' ),
-					'loading'   => __( 'Loading document…', 'comsign' ),
-					'loadError' => __( 'Could not load the document preview.', 'comsign' ),
+					'signature'    => __( 'Signature', 'comsign' ),
+					'initials'     => __( 'Initials', 'comsign' ),
+					'date'         => __( 'Date', 'comsign' ),
+					'name'         => __( 'Name', 'comsign' ),
+					'email'        => __( 'Email', 'comsign' ),
+					'text'         => __( 'Text', 'comsign' ),
+					'number'       => __( 'Number', 'comsign' ),
+					'checkbox'     => __( 'Checkbox', 'comsign' ),
+					'choice'       => __( 'Choice', 'comsign' ),
+					'remove'       => __( 'Remove', 'comsign' ),
+					'choicePrompt' => __( 'Enter options separated by commas:', 'comsign' ),
+					'loading'      => __( 'Loading document…', 'comsign' ),
+					'loadError'    => __( 'Could not load the document preview.', 'comsign' ),
 				),
 			)
 		);
@@ -607,6 +614,11 @@ final class Admin {
 			FieldRepository::TYPE_INITIALS,
 			FieldRepository::TYPE_DATE,
 			FieldRepository::TYPE_TEXT,
+			FieldRepository::TYPE_NUMBER,
+			FieldRepository::TYPE_CHECKBOX,
+			FieldRepository::TYPE_CHOICE,
+			FieldRepository::TYPE_NAME,
+			FieldRepository::TYPE_EMAIL,
 		);
 
 		$clean = array();
@@ -615,6 +627,19 @@ final class Admin {
 				continue;
 			}
 			$type = isset( $field['type'] ) ? sanitize_key( $field['type'] ) : FieldRepository::TYPE_SIGNATURE;
+
+			// Choice fields carry a list of options the signer can pick from.
+			$options = null;
+			if ( FieldRepository::TYPE_CHOICE === $type && isset( $field['options'] ) && is_array( $field['options'] ) ) {
+				$options = array();
+				foreach ( $field['options'] as $opt ) {
+					$opt = sanitize_text_field( (string) $opt );
+					if ( '' !== $opt ) {
+						$options[] = $opt;
+					}
+				}
+			}
+
 			$clean[] = array(
 				'signer_id' => isset( $field['signer_id'] ) ? absint( $field['signer_id'] ) : 0,
 				'type'      => in_array( $type, $allowed_types, true ) ? $type : FieldRepository::TYPE_SIGNATURE,
@@ -623,6 +648,7 @@ final class Admin {
 				'pos_y'     => isset( $field['pos_y'] ) ? (float) $field['pos_y'] : 0.0,
 				'width'     => isset( $field['width'] ) ? (float) $field['width'] : 0.0,
 				'height'    => isset( $field['height'] ) ? (float) $field['height'] : 0.0,
+				'options'   => $options,
 			);
 		}
 

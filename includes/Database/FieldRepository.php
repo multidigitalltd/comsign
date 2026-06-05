@@ -23,14 +23,44 @@ final class FieldRepository {
 	public const TYPE_INITIALS  = 'initials';
 	public const TYPE_DATE      = 'date';
 	public const TYPE_TEXT      = 'text';
+	public const TYPE_NUMBER    = 'number';
+	public const TYPE_CHECKBOX  = 'checkbox';
+	public const TYPE_CHOICE    = 'choice';
+	public const TYPE_NAME      = 'name';  // auto: signer name.
+	public const TYPE_EMAIL     = 'email'; // auto: signer email.
+
+	/**
+	 * Field types the signer interacts with on the signing page.
+	 */
+	public const INPUT_TYPES = array(
+		self::TYPE_TEXT,
+		self::TYPE_NUMBER,
+		self::TYPE_CHECKBOX,
+		self::TYPE_CHOICE,
+	);
+
+	/**
+	 * Field types auto-filled from signer/document data (no input needed).
+	 */
+	public const AUTO_TYPES = array(
+		self::TYPE_DATE,
+		self::TYPE_NAME,
+		self::TYPE_EMAIL,
+	);
 
 	/**
 	 * Insert a field.
 	 *
-	 * @param array $data document_id, signer_id, type, page, pos_x, pos_y, width, height.
+	 * @param array $data document_id, signer_id, type, page, pos_x, pos_y,
+	 *                    width, height, options (array for choice fields).
 	 */
 	public function create( array $data ): int {
 		global $wpdb;
+
+		$options = $data['options'] ?? null;
+		if ( null !== $options && ! is_string( $options ) ) {
+			$options = wp_json_encode( array_values( (array) $options ) );
+		}
 
 		$wpdb->insert( // phpcs:ignore WordPress.DB.DirectDatabaseQuery
 			Installer::fields_table(),
@@ -43,12 +73,28 @@ final class FieldRepository {
 				'pos_y'       => (float) ( $data['pos_y'] ?? 0 ),
 				'width'       => (float) ( $data['width'] ?? 0 ),
 				'height'      => (float) ( $data['height'] ?? 0 ),
+				'options'     => $options,
 				'created_at'  => current_time( 'mysql', true ),
 			),
-			array( '%d', '%d', '%s', '%d', '%f', '%f', '%f', '%f', '%s' )
+			array( '%d', '%d', '%s', '%d', '%f', '%f', '%f', '%f', '%s', '%s' )
 		);
 
 		return (int) $wpdb->insert_id;
+	}
+
+	/**
+	 * Decode a field's choice options into a flat array of strings.
+	 *
+	 * @param object $field Field row.
+	 *
+	 * @return string[]
+	 */
+	public static function decode_options( object $field ): array {
+		if ( empty( $field->options ) ) {
+			return array();
+		}
+		$decoded = json_decode( (string) $field->options, true );
+		return is_array( $decoded ) ? array_values( array_map( 'strval', $decoded ) ) : array();
 	}
 
 	/**

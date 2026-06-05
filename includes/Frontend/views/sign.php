@@ -67,12 +67,31 @@ require __DIR__ . '/partials/header.php';
 			<input type="hidden" name="_wpnonce" value="<?php echo esc_attr( $nonce ); ?>">
 			<input type="hidden" name="signature" id="comsign-signature-data" value="">
 
-			<?php if ( ! empty( $text_fields ) ) : ?>
+			<?php if ( ! empty( $input_fields ) ) : ?>
 				<div class="comsign-fill-fields">
 					<h2><?php esc_html_e( 'Please fill in', 'comsign' ); ?></h2>
-					<?php foreach ( $text_fields as $field ) : ?>
+					<?php
+					foreach ( $input_fields as $field ) :
+						$name = 'fields[' . (int) $field->id . ']';
+						?>
 						<p>
-							<input type="text" name="fields[<?php echo esc_attr( (int) $field->id ); ?>]" class="comsign-input" placeholder="<?php esc_attr_e( 'Your answer', 'comsign' ); ?>">
+						<?php if ( \ComSign\Database\FieldRepository::TYPE_CHECKBOX === $field->type ) : ?>
+							<label class="comsign-check">
+								<input type="checkbox" name="<?php echo esc_attr( $name ); ?>" value="1">
+								<span><?php esc_html_e( 'I confirm', 'comsign' ); ?></span>
+							</label>
+						<?php elseif ( \ComSign\Database\FieldRepository::TYPE_CHOICE === $field->type ) : ?>
+							<select name="<?php echo esc_attr( $name ); ?>" class="comsign-input">
+								<option value=""><?php esc_html_e( 'Choose…', 'comsign' ); ?></option>
+								<?php foreach ( \ComSign\Database\FieldRepository::decode_options( $field ) as $opt ) : ?>
+									<option value="<?php echo esc_attr( $opt ); ?>"><?php echo esc_html( $opt ); ?></option>
+								<?php endforeach; ?>
+							</select>
+						<?php elseif ( \ComSign\Database\FieldRepository::TYPE_NUMBER === $field->type ) : ?>
+							<input type="number" step="any" name="<?php echo esc_attr( $name ); ?>" class="comsign-input" placeholder="<?php esc_attr_e( 'Enter a number', 'comsign' ); ?>">
+						<?php else : ?>
+							<input type="text" name="<?php echo esc_attr( $name ); ?>" class="comsign-input" placeholder="<?php esc_attr_e( 'Your answer', 'comsign' ); ?>">
+						<?php endif; ?>
 						</p>
 					<?php endforeach; ?>
 				</div>

@@ -35,6 +35,7 @@ foreach ( $fields as $field ) {
 		'pos_y'     => (float) $field->pos_y,
 		'width'     => (float) $field->width,
 		'height'    => (float) $field->height,
+		'options'   => \ComSign\Database\FieldRepository::decode_options( $field ),
 	);
 }
 
@@ -90,9 +91,18 @@ foreach ( $signers as $signer ) {
 								</option>
 							<?php endforeach; ?>
 						</select>
-						<button type="button" class="button" data-comsign-add="signature"><?php esc_html_e( '+ Signature', 'comsign' ); ?></button>
-						<button type="button" class="button" data-comsign-add="date"><?php esc_html_e( '+ Date', 'comsign' ); ?></button>
-						<button type="button" class="button" data-comsign-add="text"><?php esc_html_e( '+ Text field', 'comsign' ); ?></button>
+						<select id="comsign-field-type">
+							<option value="signature"><?php esc_html_e( 'Signature', 'comsign' ); ?></option>
+							<option value="initials"><?php esc_html_e( 'Initials', 'comsign' ); ?></option>
+							<option value="date"><?php esc_html_e( 'Date (auto)', 'comsign' ); ?></option>
+							<option value="name"><?php esc_html_e( 'Name (auto)', 'comsign' ); ?></option>
+							<option value="email"><?php esc_html_e( 'Email (auto)', 'comsign' ); ?></option>
+							<option value="text"><?php esc_html_e( 'Text', 'comsign' ); ?></option>
+							<option value="number"><?php esc_html_e( 'Number', 'comsign' ); ?></option>
+							<option value="checkbox"><?php esc_html_e( 'Checkbox', 'comsign' ); ?></option>
+							<option value="choice"><?php esc_html_e( 'Choice (dropdown)', 'comsign' ); ?></option>
+						</select>
+						<button type="button" class="button" id="comsign-add-field"><?php esc_html_e( 'Add field', 'comsign' ); ?></button>
 						<span class="description"><?php esc_html_e( 'Drag fields to reposition; double-click to remove.', 'comsign' ); ?></span>
 					</div>
 
