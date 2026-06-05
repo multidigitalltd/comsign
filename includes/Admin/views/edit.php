@@ -265,6 +265,14 @@ foreach ( $signers as $signer ) {
 					<a class="button" href="<?php echo esc_url( $download['audit_pdf'] ); ?>"><?php esc_html_e( 'Audit report (PDF)', 'comsign' ); ?></a>
 				</p>
 
+				<form method="post" action="<?php echo esc_url( $action_url ); ?>" class="comsign-inline-form">
+					<input type="hidden" name="action" value="comsign_save_template">
+					<input type="hidden" name="document_id" value="<?php echo esc_attr( $document_id ); ?>">
+					<input type="hidden" name="_wpnonce" value="<?php echo esc_attr( $nonces['save_template'] ); ?>">
+					<p><input type="text" name="template_name" class="widefat" placeholder="<?php esc_attr_e( 'Template name', 'comsign' ); ?>"></p>
+					<p><button type="submit" class="button"><?php esc_html_e( 'Save as template', 'comsign' ); ?></button></p>
+				</form>
+
 				<form method="post" action="<?php echo esc_url( $action_url ); ?>" onsubmit="return confirm('<?php echo esc_js( __( 'Permanently delete this document and all its data?', 'comsign' ) ); ?>');">
 					<input type="hidden" name="action" value="comsign_delete">
 					<input type="hidden" name="document_id" value="<?php echo esc_attr( $document_id ); ?>">

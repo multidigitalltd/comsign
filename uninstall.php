@@ -18,6 +18,7 @@ $tables = array(
 	$wpdb->prefix . 'comsign_signers',
 	$wpdb->prefix . 'comsign_fields',
 	$wpdb->prefix . 'comsign_audit',
+	$wpdb->prefix . 'comsign_templates',
 );
 
 foreach ( $tables as $table ) {

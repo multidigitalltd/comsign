@@ -49,6 +49,14 @@ final class Installer {
 	}
 
 	/**
+	 * Fully qualified table name for reusable templates.
+	 */
+	public static function templates_table(): string {
+		global $wpdb;
+		return $wpdb->prefix . 'comsign_templates';
+	}
+
+	/**
 	 * Run dbDelta to create/update the schema, then store the version.
 	 */
 	public static function install(): void {
@@ -62,6 +70,7 @@ final class Installer {
 		$signers   = self::signers_table();
 		$fields    = self::fields_table();
 		$audit     = self::audit_table();
+		$templates = self::templates_table();
 
 		$schema = array();
 
@@ -137,6 +146,19 @@ final class Installer {
 			KEY document_id (document_id),
 			KEY signer_id (signer_id),
 			KEY event (event)
+		) {$charset_collate};";
+
+		// Templates: reusable document + field definitions (fields keyed by role).
+		$schema[] = "CREATE TABLE {$templates} (
+			id BIGINT UNSIGNED NOT NULL AUTO_INCREMENT,
+			name VARCHAR(255) NOT NULL DEFAULT '',
+			source_path VARCHAR(255) NOT NULL DEFAULT '',
+			roles LONGTEXT NULL,
+			fields LONGTEXT NULL,
+			created_by BIGINT UNSIGNED NOT NULL DEFAULT 0,
+			created_at DATETIME NOT NULL DEFAULT '0000-00-00 00:00:00',
+			PRIMARY KEY  (id),
+			KEY created_by (created_by)
 		) {$charset_collate};";
 
 		// Drop the legacy UNIQUE index on token_hash before dbDelta re-adds it as

@@ -67,6 +67,17 @@ final class Storage {
 	}
 
 	/**
+	 * Build an absolute path inside the storage dir for a template source PDF.
+	 *
+	 * @param int $template_id Template id.
+	 */
+	public static function template_path( int $template_id ): string {
+		$dir   = self::ensure_protected_dir();
+		$nonce = substr( hash( 'sha256', 'tpl' . $template_id . wp_salt( 'auth' ) ), 0, 16 );
+		return sprintf( '%s/tpl-%d-%s.pdf', $dir, $template_id, $nonce );
+	}
+
+	/**
 	 * Delete every stored file belonging to a document.
 	 *
 	 * @param object $document Document row with source_path/signed_path.

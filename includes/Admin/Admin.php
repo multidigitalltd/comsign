@@ -30,6 +30,7 @@ final class Admin {
 	private SignerRepository $signers;
 	private FieldRepository $fields;
 	private AuditRepository $audit;
+	private \ComSign\Database\TemplateRepository $templates;
 	private DocumentService $service;
 
 	public function __construct() {
@@ -37,6 +38,7 @@ final class Admin {
 		$this->signers   = new SignerRepository();
 		$this->fields    = new FieldRepository();
 		$this->audit     = new AuditRepository();
+		$this->templates = new \ComSign\Database\TemplateRepository();
 		$this->service   = new DocumentService();
 	}
 
@@ -60,6 +62,10 @@ final class Admin {
 		add_action( 'admin_post_comsign_stream', array( $this, 'handle_stream' ) );
 		add_action( 'admin_post_comsign_audit_pdf', array( $this, 'handle_audit_pdf' ) );
 		add_action( 'admin_post_comsign_save_settings', array( $this, 'handle_save_settings' ) );
+		add_action( 'admin_post_comsign_save_template', array( $this, 'handle_save_template' ) );
+		add_action( 'admin_post_comsign_use_template', array( $this, 'handle_use_template' ) );
+		add_action( 'admin_post_comsign_bulk_template', array( $this, 'handle_bulk_template' ) );
+		add_action( 'admin_post_comsign_delete_template', array( $this, 'handle_delete_template' ) );
 	}
 
 	/* ---------------------------------------------------------------------
@@ -93,6 +99,15 @@ final class Admin {
 			Capabilities::MANAGE,
 			'comsign-new',
 			array( $this, 'render_new_page' )
+		);
+
+		add_submenu_page(
+			self::MENU_SLUG,
+			__( 'Templates', 'comsign' ),
+			__( 'Templates', 'comsign' ),
+			Capabilities::MANAGE,
+			'comsign-templates',
+			array( $this, 'render_templates_page' )
 		);
 
 		add_submenu_page(
@@ -257,6 +272,7 @@ final class Admin {
 					'resend_signer' => wp_create_nonce( 'comsign_resend_signer_' . $document_id ),
 					'save_fields'   => wp_create_nonce( 'comsign_save_fields_' . $document_id ),
 					'send'          => wp_create_nonce( 'comsign_send_' . $document_id ),
+					'save_template' => wp_create_nonce( 'comsign_save_template_' . $document_id ),
 					'delete'        => wp_create_nonce( 'comsign_delete_' . $document_id ),
 				),
 				'download'   => array(
@@ -540,6 +556,165 @@ final class Admin {
 		);
 
 		$this->redirect_with_notice( admin_url( 'admin.php?page=comsign-settings' ), 'success', __( 'Settings saved.', 'comsign' ) );
+	}
+
+	/* ---------------------------------------------------------------------
+	 * Templates
+	 * ------------------------------------------------------------------- */
+
+	/**
+	 * Templates screen: list, or the "use"/"bulk" sub-forms.
+	 */
+	public function render_templates_page(): void {
+		$this->guard();
+
+		$action      = isset( $_GET['action'] ) ? sanitize_key( wp_unslash( $_GET['action'] ) ) : ''; // phpcs:ignore WordPress.Security.NonceVerification.Recommended
+		$template_id = isset( $_GET['template'] ) ? absint( wp_unslash( $_GET['template'] ) ) : 0; // phpcs:ignore WordPress.Security.NonceVerification.Recommended
+
+		if ( ( 'use' === $action || 'bulk' === $action ) && $template_id ) {
+			$template = $this->templates->find( $template_id );
+			if ( ! $template ) {
+				wp_die( esc_html__( 'Template not found.', 'comsign' ) );
+			}
+			$this->view(
+				'use' === $action ? 'template-use' : 'template-bulk',
+				array(
+					'template'   => $template,
+					'roles'      => \ComSign\Database\TemplateRepository::roles( $template ),
+					'action_url' => admin_url( 'admin-post.php' ),
+					'nonce'      => wp_create_nonce( ( 'use' === $action ? 'comsign_use_template_' : 'comsign_bulk_template_' ) . $template_id ),
+					'notice'     => $this->pull_notice(),
+				)
+			);
+			return;
+		}
+
+		$this->view(
+			'templates',
+			array(
+				'templates' => $this->templates->all(),
+				'base_url'  => admin_url( 'admin.php?page=comsign-templates' ),
+				'action_url' => admin_url( 'admin-post.php' ),
+				'notice'    => $this->pull_notice(),
+			)
+		);
+	}
+
+	public function handle_save_template(): void {
+		$this->guard();
+		$document_id = $this->posted_document_id();
+		check_admin_referer( 'comsign_save_template_' . $document_id );
+
+		$name = isset( $_POST['template_name'] ) ? sanitize_text_field( wp_unslash( $_POST['template_name'] ) ) : '';
+
+		try {
+			$this->service->save_as_template( $document_id, $name );
+		} catch ( \Throwable $e ) {
+			$this->redirect_with_notice( $this->edit_url( $document_id ), 'error', $e->getMessage() );
+		}
+
+		$this->redirect_with_notice( admin_url( 'admin.php?page=comsign-templates' ), 'success', __( 'Template saved.', 'comsign' ) );
+	}
+
+	public function handle_use_template(): void {
+		$this->guard();
+		$template_id = isset( $_POST['template_id'] ) ? absint( wp_unslash( $_POST['template_id'] ) ) : 0;
+		check_admin_referer( 'comsign_use_template_' . $template_id );
+
+		$recipients = $this->sanitize_recipients( $_POST['recipients'] ?? array() ); // phpcs:ignore WordPress.Security.ValidatedSanitizedInput
+
+		try {
+			$document_id = $this->service->create_from_template( $template_id, $recipients );
+		} catch ( \Throwable $e ) {
+			$this->redirect_with_notice( admin_url( 'admin.php?page=comsign-templates' ), 'error', $e->getMessage() );
+		}
+
+		$this->redirect_with_notice( $this->edit_url( $document_id ), 'success', __( 'Document created from template. Review and send.', 'comsign' ) );
+	}
+
+	public function handle_bulk_template(): void {
+		$this->guard();
+		$template_id = isset( $_POST['template_id'] ) ? absint( wp_unslash( $_POST['template_id'] ) ) : 0;
+		check_admin_referer( 'comsign_bulk_template_' . $template_id );
+
+		$rows    = isset( $_POST['recipients_text'] ) ? sanitize_textarea_field( wp_unslash( $_POST['recipients_text'] ) ) : '';
+		$options = array(
+			'message'     => isset( $_POST['message'] ) ? sanitize_textarea_field( wp_unslash( $_POST['message'] ) ) : '',
+			'expiry_days' => isset( $_POST['expiry_days'] ) ? absint( wp_unslash( $_POST['expiry_days'] ) ) : 0,
+		);
+
+		$recipients = $this->parse_bulk_recipients( $rows );
+
+		try {
+			$count = $this->service->bulk_from_template( $template_id, $recipients, $options );
+		} catch ( \Throwable $e ) {
+			$this->redirect_with_notice( admin_url( 'admin.php?page=comsign-templates' ), 'error', $e->getMessage() );
+		}
+
+		$this->redirect_with_notice(
+			admin_url( 'admin.php?page=comsign' ),
+			'success',
+			sprintf(
+				/* translators: %d: number of documents sent. */
+				__( 'Bulk send complete: %d document(s) created and sent.', 'comsign' ),
+				$count
+			)
+		);
+	}
+
+	public function handle_delete_template(): void {
+		$this->guard();
+		$template_id = isset( $_REQUEST['template_id'] ) ? absint( wp_unslash( $_REQUEST['template_id'] ) ) : 0; // phpcs:ignore WordPress.Security.NonceVerification.Recommended
+		check_admin_referer( 'comsign_delete_template_' . $template_id );
+
+		$this->service->delete_template( $template_id );
+
+		$this->redirect_with_notice( admin_url( 'admin.php?page=comsign-templates' ), 'success', __( 'Template deleted.', 'comsign' ) );
+	}
+
+	/**
+	 * Sanitise the per-role recipients array from the "use template" form.
+	 *
+	 * @param mixed $raw Raw recipients input.
+	 */
+	private function sanitize_recipients( $raw ): array {
+		if ( ! is_array( $raw ) ) {
+			return array();
+		}
+		$out = array();
+		foreach ( $raw as $index => $r ) {
+			if ( ! is_array( $r ) ) {
+				continue;
+			}
+			$out[ (int) $index ] = array(
+				'name'  => isset( $r['name'] ) ? sanitize_text_field( wp_unslash( $r['name'] ) ) : '',
+				'email' => isset( $r['email'] ) ? sanitize_email( wp_unslash( $r['email'] ) ) : '',
+				'phone' => isset( $r['phone'] ) ? $this->sanitize_phone( wp_unslash( $r['phone'] ) ) : '', // phpcs:ignore WordPress.Security.ValidatedSanitizedInput
+			);
+		}
+		return $out;
+	}
+
+	/**
+	 * Parse a "name, email, phone" per-line bulk recipients block.
+	 *
+	 * @param string $raw Raw textarea contents.
+	 */
+	private function parse_bulk_recipients( string $raw ): array {
+		$out = array();
+		foreach ( preg_split( '/\r\n|\r|\n/', $raw ) as $line ) {
+			$line = trim( (string) $line );
+			if ( '' === $line ) {
+				continue;
+			}
+			$parts = array_map( 'trim', explode( ',', $line ) );
+			$out[] = array(
+				'name'  => isset( $parts[0] ) ? sanitize_text_field( $parts[0] ) : '',
+				'email' => isset( $parts[1] ) ? sanitize_email( $parts[1] ) : '',
+				'phone' => isset( $parts[2] ) ? $this->sanitize_phone( $parts[2] ) : '',
+			);
+		}
+		return $out;
 	}
 
 	/**

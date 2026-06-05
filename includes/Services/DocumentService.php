@@ -30,6 +30,7 @@ final class DocumentService {
 	private SignerRepository $signers;
 	private FieldRepository $fields;
 	private AuditRepository $audit_repo;
+	private \ComSign\Database\TemplateRepository $templates;
 	private AuditLogger $audit;
 	private Mailer $mailer;
 	private SignatureProviderInterface $provider;
@@ -39,6 +40,7 @@ final class DocumentService {
 		$this->signers    = new SignerRepository();
 		$this->fields     = new FieldRepository();
 		$this->audit_repo = new AuditRepository();
+		$this->templates  = new \ComSign\Database\TemplateRepository();
 		$this->audit      = new AuditLogger( $this->audit_repo );
 		$this->mailer     = new Mailer();
 		$this->provider   = new ElectronicSignatureProvider();
@@ -487,6 +489,219 @@ final class DocumentService {
 		$this->audit->record( AuditLogger::EVENT_CREATED, $new_id, 0, array( 'duplicated_from' => $document_id ) );
 
 		return $new_id;
+	}
+
+	/* ---------------------------------------------------------------------
+	 * Templates & bulk send
+	 * ------------------------------------------------------------------- */
+
+	/**
+	 * Save a document's layout (source + fields, keyed by role) as a template.
+	 *
+	 * @param int    $document_id Source document id.
+	 * @param string $name        Template name.
+	 *
+	 * @return int New template id.
+	 *
+	 * @throws \RuntimeException If the document is missing.
+	 */
+	public function save_as_template( int $document_id, string $name ): int {
+		$document = $this->documents->find( $document_id );
+		if ( ! $document ) {
+			throw new \RuntimeException( __( 'Document not found.', 'comsign' ) );
+		}
+
+		// Map each signer id to a role index (ordered as they sign).
+		$signers   = $this->signers->for_document( $document_id );
+		$role_of   = array();
+		$roles     = array();
+		foreach ( $signers as $index => $signer ) {
+			$role_of[ (int) $signer->id ] = $index;
+			/* translators: %d: role number. */
+			$roles[] = $signer->name ? $signer->name : sprintf( __( 'Role %d', 'comsign' ), $index + 1 );
+		}
+
+		// Serialise fields with role_index instead of a concrete signer id.
+		$fields = array();
+		foreach ( $this->fields->for_document( $document_id ) as $field ) {
+			if ( ! isset( $role_of[ (int) $field->signer_id ] ) ) {
+				continue;
+			}
+			$fields[] = array(
+				'role_index' => $role_of[ (int) $field->signer_id ],
+				'type'       => (string) $field->type,
+				'page'       => (int) $field->page,
+				'pos_x'      => (float) $field->pos_x,
+				'pos_y'      => (float) $field->pos_y,
+				'width'      => (float) $field->width,
+				'height'     => (float) $field->height,
+				'options'    => FieldRepository::decode_options( $field ),
+			);
+		}
+
+		$name = '' !== trim( $name ) ? $name : (string) $document->title;
+
+		$template_id = $this->templates->create(
+			array(
+				'name'   => $name,
+				'roles'  => $roles,
+				'fields' => $fields,
+			)
+		);
+
+		// Copy the source PDF into a stable template path.
+		if ( $document->source_path && is_file( $document->source_path ) ) {
+			$dest = Storage::template_path( $template_id );
+			copy( $document->source_path, $dest ); // phpcs:ignore WordPress.WP.AlternativeFunctions.file_system_operations_copy
+			global $wpdb;
+			$wpdb->update( // phpcs:ignore WordPress.DB.DirectDatabaseQuery
+				\ComSign\Setup\Installer::templates_table(),
+				array( 'source_path' => $dest ),
+				array( 'id' => $template_id )
+			);
+		}
+
+		return $template_id;
+	}
+
+	/**
+	 * Create a draft document from a template, assigning recipients to roles.
+	 *
+	 * @param int   $template_id  Template id.
+	 * @param array $recipients   role_index => array{name,email,phone}.
+	 *
+	 * @return int New document id.
+	 *
+	 * @throws \RuntimeException If the template is missing or has no recipients.
+	 */
+	public function create_from_template( int $template_id, array $recipients ): int {
+		$template = $this->templates->find( $template_id );
+		if ( ! $template ) {
+			throw new \RuntimeException( __( 'Template not found.', 'comsign' ) );
+		}
+
+		$roles = \ComSign\Database\TemplateRepository::roles( $template );
+
+		$document_id = $this->documents->create(
+			array(
+				'title'      => (string) $template->name,
+				'created_by' => get_current_user_id(),
+			)
+		);
+
+		// Copy the template source PDF for this document.
+		if ( $template->source_path && is_file( $template->source_path ) ) {
+			$dest = Storage::document_path( $document_id, 'source' );
+			copy( $template->source_path, $dest ); // phpcs:ignore WordPress.WP.AlternativeFunctions.file_system_operations_copy
+			$this->documents->update( $document_id, array( 'source_path' => $dest ) );
+		}
+
+		// Create a signer per role and remember the mapping.
+		$signer_of_role = array();
+		foreach ( $roles as $index => $label ) {
+			$r     = $recipients[ $index ] ?? array();
+			$email = isset( $r['email'] ) ? sanitize_email( (string) $r['email'] ) : '';
+			$name  = isset( $r['name'] ) ? (string) $r['name'] : '';
+			$phone = isset( $r['phone'] ) ? (string) $r['phone'] : '';
+
+			if ( '' !== $email && ! is_email( $email ) ) {
+				$email = '';
+			}
+			if ( '' === $name && '' === $email ) {
+				// Skip empty role assignments entirely.
+				continue;
+			}
+
+			$signer_of_role[ $index ] = $this->signers->create(
+				array(
+					'document_id' => $document_id,
+					'name'        => $name,
+					'email'       => $email,
+					'phone'       => $phone,
+					'sign_order'  => $index,
+				)
+			);
+		}
+
+		// Recreate the fields, mapping role_index -> new signer id.
+		foreach ( \ComSign\Database\TemplateRepository::fields( $template ) as $field ) {
+			$role = (int) ( $field['role_index'] ?? 0 );
+			if ( ! isset( $signer_of_role[ $role ] ) ) {
+				continue;
+			}
+			$this->fields->create(
+				array(
+					'document_id' => $document_id,
+					'signer_id'   => $signer_of_role[ $role ],
+					'type'        => (string) ( $field['type'] ?? FieldRepository::TYPE_SIGNATURE ),
+					'page'        => (int) ( $field['page'] ?? 1 ),
+					'pos_x'       => (float) ( $field['pos_x'] ?? 0 ),
+					'pos_y'       => (float) ( $field['pos_y'] ?? 0 ),
+					'width'       => (float) ( $field['width'] ?? 0 ),
+					'height'      => (float) ( $field['height'] ?? 0 ),
+					'options'     => isset( $field['options'] ) && is_array( $field['options'] ) ? $field['options'] : null,
+				)
+			);
+		}
+
+		$this->audit->record( AuditLogger::EVENT_CREATED, $document_id, 0, array( 'from_template' => $template_id ) );
+
+		return $document_id;
+	}
+
+	/**
+	 * Bulk: create and send one document per recipient from a 1-role template.
+	 *
+	 * @param int   $template_id Template id (must have exactly one role).
+	 * @param array $recipients  List of array{name,email,phone}.
+	 * @param array $options     Send options (message, expiry_days).
+	 *
+	 * @return int Number of documents created and sent.
+	 *
+	 * @throws \RuntimeException If the template is unsuitable for bulk send.
+	 */
+	public function bulk_from_template( int $template_id, array $recipients, array $options = array() ): int {
+		$template = $this->templates->find( $template_id );
+		if ( ! $template ) {
+			throw new \RuntimeException( __( 'Template not found.', 'comsign' ) );
+		}
+
+		if ( count( \ComSign\Database\TemplateRepository::roles( $template ) ) !== 1 ) {
+			throw new \RuntimeException( __( 'Bulk send requires a template with exactly one role.', 'comsign' ) );
+		}
+
+		$count = 0;
+		foreach ( $recipients as $recipient ) {
+			if ( empty( $recipient['email'] ) || ! is_email( $recipient['email'] ) ) {
+				continue;
+			}
+			$document_id = $this->create_from_template( $template_id, array( 0 => $recipient ) );
+			try {
+				$this->send( $document_id, $options );
+				++$count;
+			} catch ( \Throwable $e ) {
+				// One bad recipient must not abort the whole batch.
+				continue;
+			}
+		}
+
+		return $count;
+	}
+
+	/**
+	 * Delete a template and its source file.
+	 *
+	 * @param int $template_id Template id.
+	 */
+	public function delete_template( int $template_id ): void {
+		$template = $this->templates->find( $template_id );
+		if ( ! $template ) {
+			return;
+		}
+		if ( $template->source_path && is_file( $template->source_path ) && Storage::is_within_base( $template->source_path ) ) {
+			wp_delete_file( $template->source_path );
+		}
+		$this->templates->delete( $template_id );
 	}
 
 	/**

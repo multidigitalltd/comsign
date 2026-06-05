@@ -83,6 +83,12 @@ certificate) to confirm the document is authentic and see who signed it.
 
 == Changelog ==
 
+= 0.6.0 =
+* New: reusable Templates - save a document (source + fields, keyed by role) as
+  a template, then create new documents from it by assigning recipients to roles.
+* New: Bulk send - from a single-role template, paste a recipient list to create
+  and send an individual document to each.
+
 = 0.5.0 =
 * New field types: number, checkbox, and choice (dropdown with admin-defined
   options) that the signer fills in.
