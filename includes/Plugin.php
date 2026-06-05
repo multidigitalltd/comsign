@@ -63,6 +63,10 @@ final class Plugin {
 		}
 
 		( new SigningController() )->register();
+
+		// Integrations: outgoing webhooks + REST API.
+		( new \ComSign\Integrations\Webhooks() )->register();
+		( new \ComSign\Integrations\RestApi() )->register();
 	}
 
 	/**

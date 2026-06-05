@@ -552,6 +552,8 @@ final class Admin {
 			array(
 				'reminders_enabled' => ! empty( $_POST['reminders_enabled'] ),
 				'reminder_days'     => isset( $_POST['reminder_days'] ) ? absint( wp_unslash( $_POST['reminder_days'] ) ) : 3,
+				'webhook_url'       => isset( $_POST['webhook_url'] ) ? esc_url_raw( wp_unslash( $_POST['webhook_url'] ) ) : '',
+				'regenerate_keys'   => ! empty( $_POST['regenerate_keys'] ),
 			)
 		);
 

@@ -55,6 +55,18 @@ final class AuditLogger {
 				'meta'        => $meta ? $meta : null,
 			)
 		);
+
+		/**
+		 * Fires for every recorded audit event. Webhook delivery and other
+		 * integrations subscribe to this — the webhook stream mirrors the audit
+		 * trail exactly.
+		 *
+		 * @param string $event       Event slug.
+		 * @param int    $document_id Document id.
+		 * @param int    $signer_id   Signer id (0 if none).
+		 * @param array  $meta        Extra structured context.
+		 */
+		do_action( 'comsign_event', $event, $document_id, $signer_id, $meta );
 	}
 
 	/**

@@ -112,7 +112,7 @@ msgstr "דפדפן"
 msgid "Bulk send"
 msgstr "שליחה בכמות"
 
-#: includes/Admin/Admin.php:659
+#: includes/Admin/Admin.php:661
 msgid "Bulk send complete: %d document(s) created and sent."
 msgstr "השליחה בכמות הושלמה: %d מסמכים נוצרו ונשלחו."
 
@@ -269,7 +269,7 @@ msgstr "מזהה מסמך"
 msgid "Document content"
 msgstr "תוכן המסמך"
 
-#: includes/Admin/Admin.php:632
+#: includes/Admin/Admin.php:634
 msgid "Document created from template. Review and send."
 msgstr "מסמך נוצר מתבנית. בדקו ושלחו."
 
@@ -286,7 +286,7 @@ msgid "Document duplicated."
 msgstr "המסמך שוכפל."
 
 #: includes/Admin/Admin.php:256
-#: includes/Admin/Admin.php:733
+#: includes/Admin/Admin.php:735
 #: includes/Services/DocumentService.php:230
 #: includes/Services/DocumentService.php:441
 #: includes/Services/DocumentService.php:511
@@ -383,6 +383,10 @@ msgstr "הזינו אפשרויות מופרדות בפסיקים:"
 msgid "Event"
 msgstr "אירוע"
 
+#: includes/Admin/views/settings.php:47
+msgid "Every event is POSTed here as JSON, signed with X-ComSign-Signature (HMAC-SHA256 of the body using the secret below)."
+msgstr "כל אירוע נשלח לכאן כ-JSON, חתום ב-X-ComSign-Signature (HMAC-SHA256 של גוף הבקשה עם הסוד שלמטה)."
+
 #: includes/Services/DocumentService.php:885
 msgid "Every signer must have at least one field. Please assign a field to each signer."
 msgstr "לכל חותם חייב להיות לפחות שדה אחד. אנא שייכו שדה לכל חותם."
@@ -391,7 +395,7 @@ msgstr "לכל חותם חייב להיות לפחות שדה אחד. אנא ש�
 msgid "Field for:"
 msgstr "שדה עבור:"
 
-#: includes/Admin/Admin.php:739
+#: includes/Admin/Admin.php:741
 msgid "File not available."
 msgstr "הקובץ אינו זמין."
 
@@ -437,6 +441,10 @@ msgstr "כתובת IP"
 #: includes/Admin/views/edit.php:96
 msgid "Initials"
 msgstr "ראשי תיבות"
+
+#: includes/Admin/views/settings.php:42
+msgid "Integrations"
+msgstr "אינטגרציות"
 
 #: includes/Frontend/SigningController.php:252
 #: includes/Frontend/SigningController.php:312
@@ -601,6 +609,14 @@ msgstr "אנא הזינו כתובת דוא״ל תקינה."
 msgid "Please sign the document at the following secure link: %s"
 msgstr "אנא חתמו על המסמך בקישור המאובטח הבא: %s"
 
+#: includes/Admin/views/settings.php:52
+msgid "REST API key"
+msgstr "מפתח REST API"
+
+#: includes/Admin/views/settings.php:68
+msgid "REST base: /wp-json/comsign/v1/documents"
+msgstr "בסיס REST: /wp-json/comsign/v1/documents"
+
 #: includes/Admin/views/edit.php:259
 msgid "Re-send invitations"
 msgstr "שליחת הזמנות מחדש"
@@ -608,6 +624,10 @@ msgstr "שליחת הזמנות מחדש"
 #: includes/Frontend/views/sign.php:117
 msgid "Reason for declining (optional)"
 msgstr "סיבת הסירוב (אופציונלי)"
+
+#: includes/Admin/views/settings.php:65
+msgid "Regenerate API key & webhook secret on save"
+msgstr "יצירה מחדש של מפתח ה-API וסוד ה-webhook בשמירה"
 
 #: includes/Admin/views/settings.php:34
 msgid "Remind every"
@@ -658,7 +678,7 @@ msgstr "שמירה כתבנית"
 msgid "Save fields"
 msgstr "שמירת שדות"
 
-#: includes/Admin/views/settings.php:41
+#: includes/Admin/views/settings.php:70
 msgid "Save settings"
 msgstr "שמירת הגדרות"
 
@@ -691,7 +711,7 @@ msgstr "נשלח על-ידי %s"
 msgid "Settings"
 msgstr "הגדרות"
 
-#: includes/Admin/Admin.php:558
+#: includes/Admin/Admin.php:560
 msgid "Settings saved."
 msgstr "ההגדרות נשמרו."
 
@@ -776,7 +796,7 @@ msgstr "סטטוס"
 msgid "Template"
 msgstr "תבנית"
 
-#: includes/Admin/Admin.php:672
+#: includes/Admin/Admin.php:674
 msgid "Template deleted."
 msgstr "התבנית נמחקה."
 
@@ -788,13 +808,13 @@ msgstr "תבנית חסרה."
 msgid "Template name"
 msgstr "שם התבנית"
 
-#: includes/Admin/Admin.php:577
+#: includes/Admin/Admin.php:579
 #: includes/Services/DocumentService.php:580
 #: includes/Services/DocumentService.php:666
 msgid "Template not found."
 msgstr "התבנית לא נמצאה."
 
-#: includes/Admin/Admin.php:616
+#: includes/Admin/Admin.php:618
 msgid "Template saved."
 msgstr "התבנית נשמרה."
 
@@ -927,6 +947,14 @@ msgstr "נצפה"
 msgid "Waiting for an earlier signer"
 msgstr "ממתינים לחותם קודם"
 
+#: includes/Admin/views/settings.php:45
+msgid "Webhook URL"
+msgstr "כתובת Webhook"
+
+#: includes/Admin/views/settings.php:57
+msgid "Webhook secret"
+msgstr "סוד Webhook"
+
 #: includes/Admin/views/edit.php:133
 #: includes/Services/DocumentService.php:243
 msgid "When"
@@ -936,7 +964,11 @@ msgstr "מתי"
 msgid "Write the fixed text of the document. After creating it you can place fillable and signature fields on the generated PDF."
 msgstr "כתבו את הטקסט הקבוע של המסמך. לאחר היצירה תוכלו להניח שדות למילוי וחתימה על ה-PDF שייווצר."
 
-#: includes/Admin/Admin.php:838
+#: includes/Admin/views/settings.php:53
+msgid "X-ComSign-Key"
+msgstr "X-ComSign-Key"
+
+#: includes/Admin/Admin.php:840
 msgid "You are not allowed to access this page."
 msgstr "אינך מורשה לגשת לעמוד זה."
 

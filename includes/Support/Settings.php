@@ -25,6 +25,9 @@ final class Settings {
 		return array(
 			'reminders_enabled' => false,
 			'reminder_days'     => 3,
+			'webhook_url'       => '',
+			'webhook_secret'    => '',
+			'api_key'           => '',
 		);
 	}
 
@@ -52,11 +55,26 @@ final class Settings {
 	 * @param array $data Raw settings.
 	 */
 	public static function update( array $data ): void {
+		$current = self::all();
+
+		// Keep existing secret/key unless explicitly (re)generated.
+		$secret  = (string) $current['webhook_secret'];
+		$api_key = (string) $current['api_key'];
+		if ( ! empty( $data['regenerate_keys'] ) || '' === $secret ) {
+			$secret = wp_generate_password( 40, false );
+		}
+		if ( ! empty( $data['regenerate_keys'] ) || '' === $api_key ) {
+			$api_key = wp_generate_password( 40, false );
+		}
+
 		update_option(
 			self::OPTION,
 			array(
 				'reminders_enabled' => ! empty( $data['reminders_enabled'] ),
 				'reminder_days'     => max( 1, min( 60, (int) ( $data['reminder_days'] ?? 3 ) ) ),
+				'webhook_url'       => isset( $data['webhook_url'] ) ? esc_url_raw( trim( (string) $data['webhook_url'] ) ) : '',
+				'webhook_secret'    => $secret,
+				'api_key'           => $api_key,
 			)
 		);
 	}

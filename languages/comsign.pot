@@ -111,7 +111,7 @@ msgstr ""
 msgid "Bulk send"
 msgstr ""
 
-#: includes/Admin/Admin.php:659
+#: includes/Admin/Admin.php:661
 msgid "Bulk send complete: %d document(s) created and sent."
 msgstr ""
 
@@ -268,7 +268,7 @@ msgstr ""
 msgid "Document content"
 msgstr ""
 
-#: includes/Admin/Admin.php:632
+#: includes/Admin/Admin.php:634
 msgid "Document created from template. Review and send."
 msgstr ""
 
@@ -285,7 +285,7 @@ msgid "Document duplicated."
 msgstr ""
 
 #: includes/Admin/Admin.php:256
-#: includes/Admin/Admin.php:733
+#: includes/Admin/Admin.php:735
 #: includes/Services/DocumentService.php:230
 #: includes/Services/DocumentService.php:441
 #: includes/Services/DocumentService.php:511
@@ -382,6 +382,10 @@ msgstr ""
 msgid "Event"
 msgstr ""
 
+#: includes/Admin/views/settings.php:47
+msgid "Every event is POSTed here as JSON, signed with X-ComSign-Signature (HMAC-SHA256 of the body using the secret below)."
+msgstr ""
+
 #: includes/Services/DocumentService.php:885
 msgid "Every signer must have at least one field. Please assign a field to each signer."
 msgstr ""
@@ -390,7 +394,7 @@ msgstr ""
 msgid "Field for:"
 msgstr ""
 
-#: includes/Admin/Admin.php:739
+#: includes/Admin/Admin.php:741
 msgid "File not available."
 msgstr ""
 
@@ -435,6 +439,10 @@ msgstr ""
 #: includes/Admin/Admin.php:189
 #: includes/Admin/views/edit.php:96
 msgid "Initials"
+msgstr ""
+
+#: includes/Admin/views/settings.php:42
+msgid "Integrations"
 msgstr ""
 
 #: includes/Frontend/SigningController.php:252
@@ -600,12 +608,24 @@ msgstr ""
 msgid "Please sign the document at the following secure link: %s"
 msgstr ""
 
+#: includes/Admin/views/settings.php:52
+msgid "REST API key"
+msgstr ""
+
+#: includes/Admin/views/settings.php:68
+msgid "REST base: /wp-json/comsign/v1/documents"
+msgstr ""
+
 #: includes/Admin/views/edit.php:259
 msgid "Re-send invitations"
 msgstr ""
 
 #: includes/Frontend/views/sign.php:117
 msgid "Reason for declining (optional)"
+msgstr ""
+
+#: includes/Admin/views/settings.php:65
+msgid "Regenerate API key & webhook secret on save"
 msgstr ""
 
 #: includes/Admin/views/settings.php:34
@@ -657,7 +677,7 @@ msgstr ""
 msgid "Save fields"
 msgstr ""
 
-#: includes/Admin/views/settings.php:41
+#: includes/Admin/views/settings.php:70
 msgid "Save settings"
 msgstr ""
 
@@ -690,7 +710,7 @@ msgstr ""
 msgid "Settings"
 msgstr ""
 
-#: includes/Admin/Admin.php:558
+#: includes/Admin/Admin.php:560
 msgid "Settings saved."
 msgstr ""
 
@@ -775,7 +795,7 @@ msgstr ""
 msgid "Template"
 msgstr ""
 
-#: includes/Admin/Admin.php:672
+#: includes/Admin/Admin.php:674
 msgid "Template deleted."
 msgstr ""
 
@@ -787,13 +807,13 @@ msgstr ""
 msgid "Template name"
 msgstr ""
 
-#: includes/Admin/Admin.php:577
+#: includes/Admin/Admin.php:579
 #: includes/Services/DocumentService.php:580
 #: includes/Services/DocumentService.php:666
 msgid "Template not found."
 msgstr ""
 
-#: includes/Admin/Admin.php:616
+#: includes/Admin/Admin.php:618
 msgid "Template saved."
 msgstr ""
 
@@ -926,6 +946,14 @@ msgstr ""
 msgid "Waiting for an earlier signer"
 msgstr ""
 
+#: includes/Admin/views/settings.php:45
+msgid "Webhook URL"
+msgstr ""
+
+#: includes/Admin/views/settings.php:57
+msgid "Webhook secret"
+msgstr ""
+
 #: includes/Admin/views/edit.php:133
 #: includes/Services/DocumentService.php:243
 msgid "When"
@@ -935,7 +963,11 @@ msgstr ""
 msgid "Write the fixed text of the document. After creating it you can place fillable and signature fields on the generated PDF."
 msgstr ""
 
-#: includes/Admin/Admin.php:838
+#: includes/Admin/views/settings.php:53
+msgid "X-ComSign-Key"
+msgstr ""
+
+#: includes/Admin/Admin.php:840
 msgid "You are not allowed to access this page."
 msgstr ""
 

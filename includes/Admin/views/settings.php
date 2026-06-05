@@ -38,6 +38,35 @@ defined( 'ABSPATH' ) || exit;
 
 		<p class="description"><?php esc_html_e( 'Reminders run once a day via WP-Cron. Each reminder issues a fresh signing link.', 'comsign' ); ?></p>
 
+		<hr>
+		<h2><?php esc_html_e( 'Integrations', 'comsign' ); ?></h2>
+
+		<p>
+			<label for="comsign-webhook-url"><strong><?php esc_html_e( 'Webhook URL', 'comsign' ); ?></strong></label><br>
+			<input type="url" id="comsign-webhook-url" name="webhook_url" class="regular-text" value="<?php echo esc_attr( (string) ( $settings['webhook_url'] ?? '' ) ); ?>" placeholder="https://example.com/hook">
+			<br><span class="description"><?php esc_html_e( 'Every event is POSTed here as JSON, signed with X-ComSign-Signature (HMAC-SHA256 of the body using the secret below).', 'comsign' ); ?></span>
+		</p>
+
+		<?php if ( ! empty( $settings['api_key'] ) ) : ?>
+			<p>
+				<strong><?php esc_html_e( 'REST API key', 'comsign' ); ?></strong>
+				(<code><?php esc_html_e( 'X-ComSign-Key', 'comsign' ); ?></code>):<br>
+				<input type="text" readonly class="regular-text" value="<?php echo esc_attr( (string) $settings['api_key'] ); ?>" onclick="this.select();">
+			</p>
+			<p>
+				<strong><?php esc_html_e( 'Webhook secret', 'comsign' ); ?>:</strong><br>
+				<input type="text" readonly class="regular-text" value="<?php echo esc_attr( (string) $settings['webhook_secret'] ); ?>" onclick="this.select();">
+			</p>
+		<?php endif; ?>
+
+		<p>
+			<label>
+				<input type="checkbox" name="regenerate_keys" value="1">
+				<?php esc_html_e( 'Regenerate API key & webhook secret on save', 'comsign' ); ?>
+			</label>
+		</p>
+		<p class="description"><?php esc_html_e( 'REST base: /wp-json/comsign/v1/documents', 'comsign' ); ?></p>
+
 		<p><button type="submit" class="button button-primary"><?php esc_html_e( 'Save settings', 'comsign' ); ?></button></p>
 	</form>
 </div>

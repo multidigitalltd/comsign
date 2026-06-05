@@ -4,7 +4,7 @@ Tags: signature, digital signature, pdf, esignature, hebrew
 Requires at least: 6.0
 Tested up to: 6.5
 Requires PHP: 7.4
-Stable tag: 0.3.0
+Stable tag: 0.6.0
 License: GPL-2.0-or-later
 License URI: https://www.gnu.org/licenses/gpl-2.0.html
 
@@ -82,6 +82,12 @@ ID and its SHA-256 code (shown on the document screen and the signature
 certificate) to confirm the document is authentic and see who signed it.
 
 == Changelog ==
+
+= 0.6.1 =
+* New: outgoing webhooks - every event is POSTed as signed JSON (HMAC-SHA256)
+  to a configurable URL.
+* New: REST API (comsign/v1) to list/read documents, read the audit trail, and
+  create + send documents, authenticated by an API key or a logged-in manager.
 
 = 0.6.0 =
 * New: reusable Templates - save a document (source + fields, keyed by role) as
