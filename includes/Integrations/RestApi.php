@@ -206,6 +206,7 @@ final class RestApi {
 			$fields[] = array(
 				'signer_id' => $signer_ids[ $idx ],
 				'type'      => sanitize_key( (string) ( $f['type'] ?? 'signature' ) ),
+				'required'  => ! empty( $f['required'] ),
 				'page'      => (int) ( $f['page'] ?? 1 ),
 				'pos_x'     => (float) ( $f['pos_x'] ?? 0 ),
 				'pos_y'     => (float) ( $f['pos_y'] ?? 0 ),

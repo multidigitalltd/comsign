@@ -191,3 +191,10 @@ body.comsign-public {
 	text-decoration: underline;
 	font: inherit;
 }
+
+/* Required signer fields */
+.comsign-required .comsign-input,
+.comsign-required .comsign-check {
+	box-shadow: 0 0 0 2px #f0b429;
+	border-radius: 4px;
+}

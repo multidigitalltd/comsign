@@ -121,6 +121,7 @@ final class Installer {
 			document_id BIGINT UNSIGNED NOT NULL,
 			signer_id BIGINT UNSIGNED NOT NULL,
 			type VARCHAR(20) NOT NULL DEFAULT 'signature',
+			required TINYINT(1) NOT NULL DEFAULT 0,
 			page SMALLINT UNSIGNED NOT NULL DEFAULT 1,
 			pos_x DECIMAL(8,4) NOT NULL DEFAULT 0,
 			pos_y DECIMAL(8,4) NOT NULL DEFAULT 0,

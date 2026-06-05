@@ -199,6 +199,7 @@ final class Admin {
 					'choice'       => __( 'Choice', 'comsign' ),
 					'remove'       => __( 'Remove', 'comsign' ),
 					'choicePrompt' => __( 'Enter options separated by commas:', 'comsign' ),
+					'toggleRequired' => __( 'Click to toggle required', 'comsign' ),
 					'loading'      => __( 'Loading document…', 'comsign' ),
 					'loadError'    => __( 'Could not load the document preview.', 'comsign' ),
 				),

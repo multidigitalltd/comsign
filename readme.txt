@@ -4,7 +4,7 @@ Tags: signature, digital signature, pdf, esignature, hebrew
 Requires at least: 6.0
 Tested up to: 6.5
 Requires PHP: 7.4
-Stable tag: 0.8.0
+Stable tag: 0.9.0
 License: GPL-2.0-or-later
 License URI: https://www.gnu.org/licenses/gpl-2.0.html
 
@@ -82,6 +82,12 @@ ID and its SHA-256 code (shown on the document screen and the signature
 certificate) to confirm the document is authentic and see who signed it.
 
 == Changelog ==
+
+= 0.9.0 =
+* New: required (smart) fields. Mark signer-filled fields as required in the
+  editor (toolbar toggle or click a field's label); the signer cannot complete
+  the document until every required field is filled, enforced both in the
+  browser and on the server. Required flags are preserved in templates.
 
 = 0.8.0 =
 * New: signer identity verification. Per signer, require an access code (shared

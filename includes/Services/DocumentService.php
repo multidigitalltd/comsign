@@ -587,6 +587,7 @@ final class DocumentService {
 			$fields[] = array(
 				'role_index' => $role_of[ (int) $field->signer_id ],
 				'type'       => (string) $field->type,
+				'required'   => ! empty( $field->required ),
 				'page'       => (int) $field->page,
 				'pos_x'      => (float) $field->pos_x,
 				'pos_y'      => (float) $field->pos_y,
@@ -691,6 +692,7 @@ final class DocumentService {
 					'document_id' => $document_id,
 					'signer_id'   => $signer_of_role[ $role ],
 					'type'        => (string) ( $field['type'] ?? FieldRepository::TYPE_SIGNATURE ),
+					'required'    => ! empty( $field['required'] ),
 					'page'        => (int) ( $field['page'] ?? 1 ),
 					'pos_x'       => (float) ( $field['pos_x'] ?? 0 ),
 					'pos_y'       => (float) ( $field['pos_y'] ?? 0 ),
@@ -790,6 +792,7 @@ final class DocumentService {
 					'document_id' => $document_id,
 					'signer_id'   => $signer_id,
 					'type'        => (string) ( $field['type'] ?? FieldRepository::TYPE_SIGNATURE ),
+					'required'    => ! empty( $field['required'] ),
 					'page'        => (int) ( $field['page'] ?? 1 ),
 					'pos_x'       => $this->clamp_fraction( $field['pos_x'] ?? 0 ),
 					'pos_y'       => $this->clamp_fraction( $field['pos_y'] ?? 0 ),
@@ -1069,6 +1072,16 @@ final class DocumentService {
 
 		foreach ( $signer_fields as $field ) {
 			$posted = isset( $field_values[ (int) $field->id ] ) ? (string) $field_values[ (int) $field->id ] : '';
+
+			// Enforce required signer-entered fields server-side.
+			if ( ! empty( $field->required ) && in_array( $field->type, FieldRepository::INPUT_TYPES, true ) ) {
+				$filled = ( FieldRepository::TYPE_CHOICE === $field->type )
+					? in_array( $posted, FieldRepository::decode_options( $field ), true )
+					: ( '' !== trim( $posted ) );
+				if ( ! $filled ) {
+					throw new \RuntimeException( __( 'Please complete all required fields before signing.', 'comsign' ) );
+				}
+			}
 
 			switch ( $field->type ) {
 				// Auto-filled from signer/document data (per-signer variables).

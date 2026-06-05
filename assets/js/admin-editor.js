@@ -102,7 +102,7 @@
 	} ).then( function () {
 		// Place existing fields once all pages exist.
 		fields.forEach( function ( f ) {
-			addMarker( f.page, f.signer_id, f.type, f.pos_x, f.pos_y, f.width, f.height, f.options || [] );
+			addMarker( f.page, f.signer_id, f.type, f.pos_x, f.pos_y, f.width, f.height, f.options || [], f.required );
 		} );
 	} ).catch( function () {
 		container.textContent = cfg.i18n.loadError || 'Could not load preview.';
@@ -135,16 +135,26 @@
 		} );
 	}
 
-	function addMarker( page, signerId, type, x, y, w, h, options ) {
+	// Field types the signer fills in themselves — only these can be "required".
+	var REQUIRABLE = [ 'signature', 'initials', 'text', 'number', 'checkbox', 'choice' ];
+
+	function canRequire( type ) {
+		return REQUIRABLE.indexOf( type ) !== -1;
+	}
+
+	function addMarker( page, signerId, type, x, y, w, h, options, required ) {
 		var overlay = pageEls[ page ];
 		if ( ! overlay ) {
 			return;
 		}
 
+		var isRequired = !! required && canRequire( type );
+
 		var marker = document.createElement( 'div' );
-		marker.className = 'comsign-field';
+		marker.className = 'comsign-field' + ( isRequired ? ' comsign-field--required' : '' );
 		marker.dataset.signer = signerId;
 		marker.dataset.type = type;
+		marker.dataset.required = isRequired ? '1' : '';
 		marker.dataset.options = JSON.stringify( options || [] );
 		marker.style.left = ( x * 100 ) + '%';
 		marker.style.top = ( y * 100 ) + '%';
@@ -156,8 +166,21 @@
 
 		var label = document.createElement( 'span' );
 		label.className = 'comsign-field-label';
-		label.textContent = typeLabel( type );
+		label.textContent = typeLabel( type ) + ( isRequired ? ' *' : '' );
 		marker.appendChild( label );
+
+		// Click the label to toggle "required" on requirable fields.
+		if ( canRequire( type ) ) {
+			label.title = cfg.i18n.toggleRequired || 'Click to toggle required';
+			label.style.cursor = 'pointer';
+			label.addEventListener( 'click', function ( e ) {
+				e.stopPropagation();
+				var now = marker.dataset.required !== '1';
+				marker.dataset.required = now ? '1' : '';
+				marker.classList.toggle( 'comsign-field--required', now );
+				label.textContent = typeLabel( type ) + ( now ? ' *' : '' );
+			} );
+		}
 
 		// Remove button.
 		var remove = document.createElement( 'button' );
@@ -250,6 +273,8 @@
 			var signerId = signerSelect ? parseInt( signerSelect.value, 10 ) : 0;
 			var size = defaultSize( type );
 			var options = [];
+			var requiredEl = document.getElementById( 'comsign-field-required' );
+			var required = requiredEl ? requiredEl.checked : false;
 
 			if ( 'choice' === type ) {
 				var raw = window.prompt( cfg.i18n.choicePrompt || 'Enter options separated by commas:', '' );
@@ -259,7 +284,7 @@
 				options = raw.split( ',' ).map( function ( s ) { return s.trim(); } ).filter( Boolean );
 			}
 
-			addMarker( 1, signerId, type, 0.1, 0.1, size.w, size.h, options );
+			addMarker( 1, signerId, type, 0.1, 0.1, size.w, size.h, options, required );
 		} );
 	}
 
@@ -275,6 +300,7 @@
 					out.push( {
 						signer_id: parseInt( m.dataset.signer, 10 ) || 0,
 						type: m.dataset.type,
+						required: m.dataset.required === '1',
 						page: parseInt( page, 10 ),
 						pos_x: pct( m.style.left ),
 						pos_y: pct( m.style.top ),

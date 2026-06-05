@@ -73,24 +73,25 @@ require __DIR__ . '/partials/header.php';
 					<?php
 					foreach ( $input_fields as $field ) :
 						$name = 'fields[' . (int) $field->id . ']';
+						$req  = ! empty( $field->required );
 						?>
-						<p>
+						<p<?php echo $req ? ' class="comsign-required"' : ''; ?>>
 						<?php if ( \ComSign\Database\FieldRepository::TYPE_CHECKBOX === $field->type ) : ?>
 							<label class="comsign-check">
-								<input type="checkbox" name="<?php echo esc_attr( $name ); ?>" value="1">
-								<span><?php esc_html_e( 'I confirm', 'comsign' ); ?></span>
+								<input type="checkbox" name="<?php echo esc_attr( $name ); ?>" value="1"<?php echo $req ? ' required' : ''; ?>>
+								<span><?php esc_html_e( 'I confirm', 'comsign' ); ?><?php echo $req ? ' *' : ''; ?></span>
 							</label>
 						<?php elseif ( \ComSign\Database\FieldRepository::TYPE_CHOICE === $field->type ) : ?>
-							<select name="<?php echo esc_attr( $name ); ?>" class="comsign-input">
+							<select name="<?php echo esc_attr( $name ); ?>" class="comsign-input"<?php echo $req ? ' required' : ''; ?>>
 								<option value=""><?php esc_html_e( 'Choose…', 'comsign' ); ?></option>
 								<?php foreach ( \ComSign\Database\FieldRepository::decode_options( $field ) as $opt ) : ?>
 									<option value="<?php echo esc_attr( $opt ); ?>"><?php echo esc_html( $opt ); ?></option>
 								<?php endforeach; ?>
 							</select>
 						<?php elseif ( \ComSign\Database\FieldRepository::TYPE_NUMBER === $field->type ) : ?>
-							<input type="number" step="any" name="<?php echo esc_attr( $name ); ?>" class="comsign-input" placeholder="<?php esc_attr_e( 'Enter a number', 'comsign' ); ?>">
+							<input type="number" step="any" name="<?php echo esc_attr( $name ); ?>" class="comsign-input" placeholder="<?php echo $req ? esc_attr__( 'Enter a number (required)', 'comsign' ) : esc_attr__( 'Enter a number', 'comsign' ); ?>"<?php echo $req ? ' required' : ''; ?>>
 						<?php else : ?>
-							<input type="text" name="<?php echo esc_attr( $name ); ?>" class="comsign-input" placeholder="<?php esc_attr_e( 'Your answer', 'comsign' ); ?>">
+							<input type="text" name="<?php echo esc_attr( $name ); ?>" class="comsign-input" placeholder="<?php echo $req ? esc_attr__( 'Your answer (required)', 'comsign' ) : esc_attr__( 'Your answer', 'comsign' ); ?>"<?php echo $req ? ' required' : ''; ?>>
 						<?php endif; ?>
 						</p>
 					<?php endforeach; ?>

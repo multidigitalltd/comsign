@@ -30,6 +30,7 @@ foreach ( $fields as $field ) {
 	$fields_for_js[] = array(
 		'signer_id' => (int) $field->signer_id,
 		'type'      => (string) $field->type,
+		'required'  => ! empty( $field->required ),
 		'page'      => (int) $field->page,
 		'pos_x'     => (float) $field->pos_x,
 		'pos_y'     => (float) $field->pos_y,
@@ -102,8 +103,9 @@ foreach ( $signers as $signer ) {
 							<option value="checkbox"><?php esc_html_e( 'Checkbox', 'comsign' ); ?></option>
 							<option value="choice"><?php esc_html_e( 'Choice (dropdown)', 'comsign' ); ?></option>
 						</select>
+						<label class="comsign-required-toggle"><input type="checkbox" id="comsign-field-required"> <?php esc_html_e( 'Required', 'comsign' ); ?></label>
 						<button type="button" class="button" id="comsign-add-field"><?php esc_html_e( 'Add field', 'comsign' ); ?></button>
-						<span class="description"><?php esc_html_e( 'Drag fields to reposition; double-click to remove.', 'comsign' ); ?></span>
+						<span class="description"><?php esc_html_e( 'Drag to reposition; double-click to remove; click a field label to toggle “required”.', 'comsign' ); ?></span>
 					</div>
 
 					<div id="comsign-pdf" class="comsign-pdf" aria-live="polite"></div>

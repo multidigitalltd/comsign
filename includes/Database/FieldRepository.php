@@ -68,6 +68,7 @@ final class FieldRepository {
 				'document_id' => (int) $data['document_id'],
 				'signer_id'   => (int) $data['signer_id'],
 				'type'        => (string) ( $data['type'] ?? self::TYPE_SIGNATURE ),
+				'required'    => ! empty( $data['required'] ) ? 1 : 0,
 				'page'        => max( 1, (int) ( $data['page'] ?? 1 ) ),
 				'pos_x'       => (float) ( $data['pos_x'] ?? 0 ),
 				'pos_y'       => (float) ( $data['pos_y'] ?? 0 ),
@@ -76,7 +77,7 @@ final class FieldRepository {
 				'options'     => $options,
 				'created_at'  => current_time( 'mysql', true ),
 			),
-			array( '%d', '%d', '%s', '%d', '%f', '%f', '%f', '%f', '%s', '%s' )
+			array( '%d', '%d', '%s', '%d', '%d', '%f', '%f', '%f', '%f', '%s', '%s' )
 		);
 
 		return (int) $wpdb->insert_id;
