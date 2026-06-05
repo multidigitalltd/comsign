@@ -1,10 +1,18 @@
 /* ComSign public signing page. Self-contained, RTL-aware via [dir]. */
 
 :root {
-	--comsign-primary: #0b3d91;
+	/* --comsign-accent is injected per-site (Branding); falls back to default. */
+	--comsign-primary: var(--comsign-accent, #0b3d91);
 	--comsign-border: #d6d9de;
 	--comsign-bg: #f4f6f9;
 	--comsign-text: #1d2327;
+}
+
+.comsign-brand-logo {
+	max-height: 44px;
+	max-width: 240px;
+	width: auto;
+	display: block;
 }
 
 * { box-sizing: border-box; }

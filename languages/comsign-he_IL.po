@@ -44,6 +44,10 @@ msgstr "נדרשת חתימה."
 msgid "A signing link was generated. Copy it or share via WhatsApp below."
 msgstr "נוצר קישור לחתימה. העתיקו אותו או שתפו בוואטסאפ למטה."
 
+#: includes/Admin/views/settings.php:60
+msgid "Accent colour"
+msgstr "צבע מותג"
+
 #: includes/Admin/views/edit.php:210
 msgid "Access code"
 msgstr "קוד גישה"
@@ -61,7 +65,7 @@ msgstr "קוד גישה (שאתם משתפים)"
 msgid "Actions"
 msgstr "פעולות"
 
-#: includes/Admin/views/settings.php:80
+#: includes/Admin/views/settings.php:119
 msgid "Active certificate:"
 msgstr "תעודה פעילה:"
 
@@ -122,6 +126,14 @@ msgstr "תזכורות אוטומטיות"
 msgid "Back to list"
 msgstr "חזרה לרשימה"
 
+#: includes/Admin/views/settings.php:46
+msgid "Brand name"
+msgstr "שם המותג"
+
+#: includes/Admin/views/settings.php:42
+msgid "Branding"
+msgstr "מיתוג"
+
 #: includes/Admin/views/edit.php:137
 #: includes/Services/DocumentService.php:245
 #: includes/Signature/CertificatePage.php:46
@@ -132,7 +144,7 @@ msgstr "דפדפן"
 msgid "Bulk send"
 msgstr "שליחה בכמות"
 
-#: includes/Admin/Admin.php:734
+#: includes/Admin/Admin.php:740
 msgid "Bulk send complete: %d document(s) created and sent."
 msgstr "השליחה בכמות הושלמה: %d מסמכים נוצרו ונשלחו."
 
@@ -144,15 +156,15 @@ msgstr "שליחה בכמות דורשת תבנית עם תפקיד אחד בד�
 msgid "Bulk send: %s"
 msgstr "שליחה בכמות: %s"
 
-#: includes/Admin/views/settings.php:95
+#: includes/Admin/views/settings.php:134
 msgid "Certificate password"
 msgstr "סיסמת התעודה"
 
-#: includes/Admin/Admin.php:614
+#: includes/Admin/Admin.php:617
 msgid "Certificate removed. Documents will use electronic signatures."
 msgstr "התעודה הוסרה. מסמכים ייחתמו בחתימה אלקטרונית."
 
-#: includes/Admin/Admin.php:602
+#: includes/Admin/Admin.php:605
 msgid "Certificate stored. New documents will be signed with PKI/PAdES."
 msgstr "התעודה נשמרה. מסמכים חדשים ייחתמו ב-PKI/PAdES."
 
@@ -206,7 +218,7 @@ msgstr "ComSign: חסרות תלויות. יש להריץ \"composer install\" �
 msgid "Completed"
 msgstr "הושלם"
 
-#: includes/Admin/views/settings.php:83
+#: includes/Admin/views/settings.php:122
 msgid "Completed documents are signed with a cryptographic PKCS#7/PAdES signature."
 msgstr "מסמכים שהושלמו נחתמים בחתימה קריפטוגרפית PKCS#7/PAdES."
 
@@ -301,7 +313,7 @@ msgstr "מחיקת מסמך"
 msgid "Delete this template?"
 msgstr "למחוק את התבנית הזו?"
 
-#: includes/Admin/views/settings.php:74
+#: includes/Admin/views/settings.php:113
 msgid "Digital signature (PKI / PAdES)"
 msgstr "חתימה דיגיטלית (PKI / PAdES)"
 
@@ -325,7 +337,7 @@ msgstr "מזהה מסמך"
 msgid "Document content"
 msgstr "תוכן המסמך"
 
-#: includes/Admin/Admin.php:707
+#: includes/Admin/Admin.php:713
 msgid "Document created from template. Review and send."
 msgstr "מסמך נוצר מתבנית. בדקו ושלחו."
 
@@ -342,7 +354,7 @@ msgid "Document duplicated."
 msgstr "המסמך שוכפל."
 
 #: includes/Admin/Admin.php:260
-#: includes/Admin/Admin.php:808
+#: includes/Admin/Admin.php:814
 #: includes/Services/DocumentService.php:230
 #: includes/Services/DocumentService.php:498
 #: includes/Services/DocumentService.php:570
@@ -451,7 +463,7 @@ msgstr "הזינו אפשרויות מופרדות בפסיקים:"
 msgid "Event"
 msgstr "אירוע"
 
-#: includes/Admin/views/settings.php:47
+#: includes/Admin/views/settings.php:86
 msgid "Every event is POSTed here as JSON, signed with X-ComSign-Signature (HMAC-SHA256 of the body using the secret below)."
 msgstr "כל אירוע נשלח לכאן כ-JSON, חתום ב-X-ComSign-Signature (HMAC-SHA256 של גוף הבקשה עם הסוד שלמטה)."
 
@@ -463,7 +475,7 @@ msgstr "לכל חותם חייב להיות לפחות שדה אחד. אנא ש�
 msgid "Field for:"
 msgstr "שדה עבור:"
 
-#: includes/Admin/Admin.php:814
+#: includes/Admin/Admin.php:820
 msgid "File not available."
 msgstr "הקובץ אינו זמין."
 
@@ -510,7 +522,7 @@ msgstr "כתובת IP"
 msgid "Initials"
 msgstr "ראשי תיבות"
 
-#: includes/Admin/views/settings.php:42
+#: includes/Admin/views/settings.php:81
 msgid "Integrations"
 msgstr "אינטגרציות"
 
@@ -553,6 +565,10 @@ msgstr "הקישור פג תוקף לאחר"
 #: includes/Admin/Admin.php:203
 msgid "Loading document…"
 msgstr "טוען מסמך…"
+
+#: includes/Admin/views/settings.php:51
+msgid "Logo URL"
+msgstr "כתובת לוגו"
 
 #: includes/Admin/DocumentsListTable.php:87
 msgid "Manage"
@@ -621,7 +637,7 @@ msgstr "ניתן להעלות קבצי PDF בלבד."
 msgid "OpenSSL is not available on this server, so PKI signing cannot be enabled."
 msgstr "OpenSSL אינו זמין בשרת זה, ולכן לא ניתן להפעיל חתימת PKI."
 
-#: includes/Admin/views/settings.php:77
+#: includes/Admin/views/settings.php:116
 msgid "OpenSSL is not available on this server, so cryptographic signing cannot be enabled."
 msgstr "OpenSSL אינו זמין בשרת זה, ולכן לא ניתן להפעיל חתימה קריפטוגרפית."
 
@@ -666,7 +682,7 @@ msgstr "אנא הוסיפו כותרת או תוכן כלשהו למסמך."
 msgid "Please add your signature and accept the agreement."
 msgstr "אנא הוסיפו את חתימתכם ואשרו את ההסכמה."
 
-#: includes/Admin/Admin.php:583
+#: includes/Admin/Admin.php:586
 msgid "Please choose a .p12/.pfx certificate file."
 msgstr "אנא בחרו קובץ תעודה .p12/.pfx."
 
@@ -714,11 +730,11 @@ msgstr "אנא חתמו על המסמך בקישור המאובטח הבא: %s"
 msgid "Please verify your identity before signing."
 msgstr "אנא אמתו את זהותכם לפני החתימה."
 
-#: includes/Admin/views/settings.php:52
+#: includes/Admin/views/settings.php:91
 msgid "REST API key"
 msgstr "מפתח REST API"
 
-#: includes/Admin/views/settings.php:68
+#: includes/Admin/views/settings.php:107
 msgid "REST base: /wp-json/comsign/v1/documents"
 msgstr "בסיס REST: /wp-json/comsign/v1/documents"
 
@@ -730,7 +746,7 @@ msgstr "שליחת הזמנות מחדש"
 msgid "Reason for declining (optional)"
 msgstr "סיבת הסירוב (אופציונלי)"
 
-#: includes/Admin/views/settings.php:65
+#: includes/Admin/views/settings.php:104
 msgid "Regenerate API key & webhook secret on save"
 msgstr "יצירה מחדש של מפתח ה-API וסוד ה-webhook בשמירה"
 
@@ -751,11 +767,11 @@ msgstr "התזכורות רצות פעם ביום דרך WP-Cron. כל תזכו�
 msgid "Remove"
 msgstr "הסרה"
 
-#: includes/Admin/views/settings.php:87
+#: includes/Admin/views/settings.php:126
 msgid "Remove certificate"
 msgstr "הסרת תעודה"
 
-#: includes/Admin/views/settings.php:84
+#: includes/Admin/views/settings.php:123
 msgid "Remove the certificate and revert to electronic signatures?"
 msgstr "להסיר את התעודה ולחזור לחתימה אלקטרונית?"
 
@@ -803,13 +819,17 @@ msgstr "שמירה כתבנית"
 msgid "Save fields"
 msgstr "שמירת שדות"
 
-#: includes/Admin/views/settings.php:70
+#: includes/Admin/views/settings.php:109
 msgid "Save settings"
 msgstr "שמירת הגדרות"
 
 #: includes/Frontend/views/partials/footer.php:14
 msgid "Securely processed by %s"
 msgstr "מעובד באופן מאובטח על-ידי %s"
+
+#: includes/Admin/views/settings.php:53
+msgid "Select image"
+msgstr "בחירת תמונה"
 
 #: includes/Admin/views/edit.php:284
 msgid "Send for signing"
@@ -836,7 +856,7 @@ msgstr "נשלח על-ידי %s"
 msgid "Settings"
 msgstr "הגדרות"
 
-#: includes/Admin/Admin.php:633
+#: includes/Admin/Admin.php:639
 msgid "Settings saved."
 msgstr "ההגדרות נשמרו."
 
@@ -844,7 +864,11 @@ msgstr "ההגדרות נשמרו."
 msgid "Share via WhatsApp"
 msgstr "שיתוף בוואטסאפ"
 
-#: includes/Frontend/views/partials/header.php:21
+#: includes/Admin/views/settings.php:43
+msgid "Shown to signers on the signing page and in emails."
+msgstr "מוצג לחותמים בעמוד החתימה ובמיילים."
+
+#: includes/Frontend/views/partials/header.php:25
 #: includes/Frontend/views/sign.php:109
 msgid "Sign document"
 msgstr "חתימה על המסמך"
@@ -925,7 +949,7 @@ msgstr "סטטוס"
 msgid "Template"
 msgstr "תבנית"
 
-#: includes/Admin/Admin.php:747
+#: includes/Admin/Admin.php:753
 msgid "Template deleted."
 msgstr "התבנית נמחקה."
 
@@ -937,13 +961,13 @@ msgstr "תבנית חסרה."
 msgid "Template name"
 msgstr "שם התבנית"
 
-#: includes/Admin/Admin.php:652
+#: includes/Admin/Admin.php:658
 #: includes/Services/DocumentService.php:640
 #: includes/Services/DocumentService.php:752
 msgid "Template not found."
 msgstr "התבנית לא נמצאה."
 
-#: includes/Admin/Admin.php:691
+#: includes/Admin/Admin.php:697
 msgid "Template saved."
 msgstr "התבנית נשמרה."
 
@@ -974,11 +998,11 @@ msgstr "לא ניתן היה לקרוא את התעודה. בדקו את הקו�
 msgid "The certificate file is missing or too large (max 512 KB)."
 msgstr "קובץ התעודה חסר או גדול מדי (מקסימום 512 ק\"ב)."
 
-#: includes/Admin/Admin.php:593
+#: includes/Admin/Admin.php:596
 msgid "The certificate file is too large (max 512 KB)."
 msgstr "קובץ התעודה גדול מדי (מקסימום 512 ק\"ב)."
 
-#: includes/Admin/Admin.php:589
+#: includes/Admin/Admin.php:592
 msgid "The certificate must be a .p12 or .pfx file."
 msgstr "התעודה חייבת להיות קובץ ‎.p12‎ או ‎.pfx‎."
 
@@ -1064,11 +1088,11 @@ msgstr "העלאה והמשך"
 msgid "Upload a PDF"
 msgstr "העלאת PDF"
 
-#: includes/Admin/views/settings.php:90
+#: includes/Admin/views/settings.php:129
 msgid "Upload a PKCS#12 certificate (.p12/.pfx) to sign completed documents cryptographically (eIDAS / ComSign compatible). Without it, documents use electronic signatures."
 msgstr "העלו תעודת PKCS#12 ‏(.p12/.pfx) כדי לחתום מסמכים שהושלמו בחתימה קריפטוגרפית (תואם eIDAS / ComSign). ללא תעודה, המסמכים נחתמים בחתימה אלקטרונית."
 
-#: includes/Admin/views/settings.php:96
+#: includes/Admin/views/settings.php:135
 msgid "Upload certificate"
 msgstr "העלאת תעודה"
 
@@ -1130,11 +1154,11 @@ msgstr "ממתינים לחותם קודם"
 msgid "We sent a one-time code to %s. Enter it below to continue."
 msgstr "שלחנו קוד חד-פעמי אל %s. הזינו אותו כאן כדי להמשיך."
 
-#: includes/Admin/views/settings.php:45
+#: includes/Admin/views/settings.php:84
 msgid "Webhook URL"
 msgstr "כתובת Webhook"
 
-#: includes/Admin/views/settings.php:57
+#: includes/Admin/views/settings.php:96
 msgid "Webhook secret"
 msgstr "סוד Webhook"
 
@@ -1147,11 +1171,11 @@ msgstr "מתי"
 msgid "Write the fixed text of the document. After creating it you can place fillable and signature fields on the generated PDF."
 msgstr "כתבו את הטקסט הקבוע של המסמך. לאחר היצירה תוכלו להניח שדות למילוי וחתימה על ה-PDF שייווצר."
 
-#: includes/Admin/views/settings.php:53
+#: includes/Admin/views/settings.php:92
 msgid "X-ComSign-Key"
 msgstr "X-ComSign-Key"
 
-#: includes/Admin/Admin.php:913
+#: includes/Admin/Admin.php:919
 msgid "You are not allowed to access this page."
 msgstr "אינך מורשה לגשת לעמוד זה."
 

@@ -25,7 +25,7 @@ final class Mailer {
 	 * @return bool Whether the mail was accepted for delivery.
 	 */
 	public function send_invitation( object $document, object $signer, string $sign_url, bool $is_reminder = false ): bool {
-		$site = wp_specialchars_decode( get_bloginfo( 'name' ), ENT_QUOTES );
+		$site = \ComSign\Support\Settings::brand_name();
 
 		$subject = $is_reminder
 			/* translators: %s: site name. */

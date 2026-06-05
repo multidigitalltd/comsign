@@ -39,6 +39,45 @@ defined( 'ABSPATH' ) || exit;
 		<p class="description"><?php esc_html_e( 'Reminders run once a day via WP-Cron. Each reminder issues a fresh signing link.', 'comsign' ); ?></p>
 
 		<hr>
+		<h2><?php esc_html_e( 'Branding', 'comsign' ); ?></h2>
+		<p class="description"><?php esc_html_e( 'Shown to signers on the signing page and in emails.', 'comsign' ); ?></p>
+
+		<p>
+			<label for="comsign-brand-name"><strong><?php esc_html_e( 'Brand name', 'comsign' ); ?></strong></label><br>
+			<input type="text" id="comsign-brand-name" name="brand_name" class="regular-text" value="<?php echo esc_attr( (string) ( $settings['brand_name'] ?? '' ) ); ?>" placeholder="<?php echo esc_attr( get_bloginfo( 'name' ) ); ?>">
+		</p>
+
+		<p>
+			<label for="comsign-brand-logo"><strong><?php esc_html_e( 'Logo URL', 'comsign' ); ?></strong></label><br>
+			<input type="url" id="comsign-brand-logo" name="brand_logo_url" class="regular-text" value="<?php echo esc_attr( (string) ( $settings['brand_logo_url'] ?? '' ) ); ?>" placeholder="https://example.com/logo.png">
+			<button type="button" class="button" id="comsign-pick-logo"><?php esc_html_e( 'Select image', 'comsign' ); ?></button>
+		</p>
+		<?php if ( ! empty( $settings['brand_logo_url'] ) ) : ?>
+			<p><img src="<?php echo esc_url( (string) $settings['brand_logo_url'] ); ?>" alt="" style="max-height:48px;max-width:240px;"></p>
+		<?php endif; ?>
+
+		<p>
+			<label for="comsign-brand-color"><strong><?php esc_html_e( 'Accent colour', 'comsign' ); ?></strong></label><br>
+			<input type="color" id="comsign-brand-color" name="brand_color" value="<?php echo esc_attr( (string) ( $settings['brand_color'] ?? '' ) ?: '#0b3d91' ); ?>">
+		</p>
+
+		<script>
+		( function () {
+			var btn = document.getElementById( 'comsign-pick-logo' );
+			if ( ! btn || ! window.wp || ! window.wp.media ) { return; }
+			btn.addEventListener( 'click', function ( e ) {
+				e.preventDefault();
+				var frame = window.wp.media( { multiple: false, library: { type: 'image' } } );
+				frame.on( 'select', function () {
+					var att = frame.state().get( 'selection' ).first().toJSON();
+					document.getElementById( 'comsign-brand-logo' ).value = att.url;
+				} );
+				frame.open();
+			} );
+		} )();
+		</script>
+
+		<hr>
 		<h2><?php esc_html_e( 'Integrations', 'comsign' ); ?></h2>
 
 		<p>

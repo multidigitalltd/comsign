@@ -551,6 +551,9 @@ final class Admin {
 	public function render_settings_page(): void {
 		$this->guard();
 
+		// Enables the media picker for the brand logo.
+		wp_enqueue_media();
+
 		$this->view(
 			'settings',
 			array(
@@ -627,6 +630,9 @@ final class Admin {
 				'reminder_days'     => isset( $_POST['reminder_days'] ) ? absint( wp_unslash( $_POST['reminder_days'] ) ) : 3,
 				'webhook_url'       => isset( $_POST['webhook_url'] ) ? esc_url_raw( wp_unslash( $_POST['webhook_url'] ) ) : '',
 				'regenerate_keys'   => ! empty( $_POST['regenerate_keys'] ),
+				'brand_name'        => isset( $_POST['brand_name'] ) ? sanitize_text_field( wp_unslash( $_POST['brand_name'] ) ) : '',
+				'brand_logo_url'    => isset( $_POST['brand_logo_url'] ) ? esc_url_raw( wp_unslash( $_POST['brand_logo_url'] ) ) : '',
+				'brand_color'       => isset( $_POST['brand_color'] ) ? sanitize_text_field( wp_unslash( $_POST['brand_color'] ) ) : '',
 			)
 		);
 

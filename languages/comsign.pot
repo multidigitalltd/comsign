@@ -43,6 +43,10 @@ msgstr ""
 msgid "A signing link was generated. Copy it or share via WhatsApp below."
 msgstr ""
 
+#: includes/Admin/views/settings.php:60
+msgid "Accent colour"
+msgstr ""
+
 #: includes/Admin/views/edit.php:210
 msgid "Access code"
 msgstr ""
@@ -60,7 +64,7 @@ msgstr ""
 msgid "Actions"
 msgstr ""
 
-#: includes/Admin/views/settings.php:80
+#: includes/Admin/views/settings.php:119
 msgid "Active certificate:"
 msgstr ""
 
@@ -121,6 +125,14 @@ msgstr ""
 msgid "Back to list"
 msgstr ""
 
+#: includes/Admin/views/settings.php:46
+msgid "Brand name"
+msgstr ""
+
+#: includes/Admin/views/settings.php:42
+msgid "Branding"
+msgstr ""
+
 #: includes/Admin/views/edit.php:137
 #: includes/Services/DocumentService.php:245
 #: includes/Signature/CertificatePage.php:46
@@ -131,7 +143,7 @@ msgstr ""
 msgid "Bulk send"
 msgstr ""
 
-#: includes/Admin/Admin.php:734
+#: includes/Admin/Admin.php:740
 msgid "Bulk send complete: %d document(s) created and sent."
 msgstr ""
 
@@ -143,15 +155,15 @@ msgstr ""
 msgid "Bulk send: %s"
 msgstr ""
 
-#: includes/Admin/views/settings.php:95
+#: includes/Admin/views/settings.php:134
 msgid "Certificate password"
 msgstr ""
 
-#: includes/Admin/Admin.php:614
+#: includes/Admin/Admin.php:617
 msgid "Certificate removed. Documents will use electronic signatures."
 msgstr ""
 
-#: includes/Admin/Admin.php:602
+#: includes/Admin/Admin.php:605
 msgid "Certificate stored. New documents will be signed with PKI/PAdES."
 msgstr ""
 
@@ -205,7 +217,7 @@ msgstr ""
 msgid "Completed"
 msgstr ""
 
-#: includes/Admin/views/settings.php:83
+#: includes/Admin/views/settings.php:122
 msgid "Completed documents are signed with a cryptographic PKCS#7/PAdES signature."
 msgstr ""
 
@@ -300,7 +312,7 @@ msgstr ""
 msgid "Delete this template?"
 msgstr ""
 
-#: includes/Admin/views/settings.php:74
+#: includes/Admin/views/settings.php:113
 msgid "Digital signature (PKI / PAdES)"
 msgstr ""
 
@@ -324,7 +336,7 @@ msgstr ""
 msgid "Document content"
 msgstr ""
 
-#: includes/Admin/Admin.php:707
+#: includes/Admin/Admin.php:713
 msgid "Document created from template. Review and send."
 msgstr ""
 
@@ -341,7 +353,7 @@ msgid "Document duplicated."
 msgstr ""
 
 #: includes/Admin/Admin.php:260
-#: includes/Admin/Admin.php:808
+#: includes/Admin/Admin.php:814
 #: includes/Services/DocumentService.php:230
 #: includes/Services/DocumentService.php:498
 #: includes/Services/DocumentService.php:570
@@ -450,7 +462,7 @@ msgstr ""
 msgid "Event"
 msgstr ""
 
-#: includes/Admin/views/settings.php:47
+#: includes/Admin/views/settings.php:86
 msgid "Every event is POSTed here as JSON, signed with X-ComSign-Signature (HMAC-SHA256 of the body using the secret below)."
 msgstr ""
 
@@ -462,7 +474,7 @@ msgstr ""
 msgid "Field for:"
 msgstr ""
 
-#: includes/Admin/Admin.php:814
+#: includes/Admin/Admin.php:820
 msgid "File not available."
 msgstr ""
 
@@ -509,7 +521,7 @@ msgstr ""
 msgid "Initials"
 msgstr ""
 
-#: includes/Admin/views/settings.php:42
+#: includes/Admin/views/settings.php:81
 msgid "Integrations"
 msgstr ""
 
@@ -551,6 +563,10 @@ msgstr ""
 
 #: includes/Admin/Admin.php:203
 msgid "Loading document…"
+msgstr ""
+
+#: includes/Admin/views/settings.php:51
+msgid "Logo URL"
 msgstr ""
 
 #: includes/Admin/DocumentsListTable.php:87
@@ -620,7 +636,7 @@ msgstr ""
 msgid "OpenSSL is not available on this server, so PKI signing cannot be enabled."
 msgstr ""
 
-#: includes/Admin/views/settings.php:77
+#: includes/Admin/views/settings.php:116
 msgid "OpenSSL is not available on this server, so cryptographic signing cannot be enabled."
 msgstr ""
 
@@ -665,7 +681,7 @@ msgstr ""
 msgid "Please add your signature and accept the agreement."
 msgstr ""
 
-#: includes/Admin/Admin.php:583
+#: includes/Admin/Admin.php:586
 msgid "Please choose a .p12/.pfx certificate file."
 msgstr ""
 
@@ -713,11 +729,11 @@ msgstr ""
 msgid "Please verify your identity before signing."
 msgstr ""
 
-#: includes/Admin/views/settings.php:52
+#: includes/Admin/views/settings.php:91
 msgid "REST API key"
 msgstr ""
 
-#: includes/Admin/views/settings.php:68
+#: includes/Admin/views/settings.php:107
 msgid "REST base: /wp-json/comsign/v1/documents"
 msgstr ""
 
@@ -729,7 +745,7 @@ msgstr ""
 msgid "Reason for declining (optional)"
 msgstr ""
 
-#: includes/Admin/views/settings.php:65
+#: includes/Admin/views/settings.php:104
 msgid "Regenerate API key & webhook secret on save"
 msgstr ""
 
@@ -750,11 +766,11 @@ msgstr ""
 msgid "Remove"
 msgstr ""
 
-#: includes/Admin/views/settings.php:87
+#: includes/Admin/views/settings.php:126
 msgid "Remove certificate"
 msgstr ""
 
-#: includes/Admin/views/settings.php:84
+#: includes/Admin/views/settings.php:123
 msgid "Remove the certificate and revert to electronic signatures?"
 msgstr ""
 
@@ -802,12 +818,16 @@ msgstr ""
 msgid "Save fields"
 msgstr ""
 
-#: includes/Admin/views/settings.php:70
+#: includes/Admin/views/settings.php:109
 msgid "Save settings"
 msgstr ""
 
 #: includes/Frontend/views/partials/footer.php:14
 msgid "Securely processed by %s"
+msgstr ""
+
+#: includes/Admin/views/settings.php:53
+msgid "Select image"
 msgstr ""
 
 #: includes/Admin/views/edit.php:284
@@ -835,7 +855,7 @@ msgstr ""
 msgid "Settings"
 msgstr ""
 
-#: includes/Admin/Admin.php:633
+#: includes/Admin/Admin.php:639
 msgid "Settings saved."
 msgstr ""
 
@@ -843,7 +863,11 @@ msgstr ""
 msgid "Share via WhatsApp"
 msgstr ""
 
-#: includes/Frontend/views/partials/header.php:21
+#: includes/Admin/views/settings.php:43
+msgid "Shown to signers on the signing page and in emails."
+msgstr ""
+
+#: includes/Frontend/views/partials/header.php:25
 #: includes/Frontend/views/sign.php:109
 msgid "Sign document"
 msgstr ""
@@ -924,7 +948,7 @@ msgstr ""
 msgid "Template"
 msgstr ""
 
-#: includes/Admin/Admin.php:747
+#: includes/Admin/Admin.php:753
 msgid "Template deleted."
 msgstr ""
 
@@ -936,13 +960,13 @@ msgstr ""
 msgid "Template name"
 msgstr ""
 
-#: includes/Admin/Admin.php:652
+#: includes/Admin/Admin.php:658
 #: includes/Services/DocumentService.php:640
 #: includes/Services/DocumentService.php:752
 msgid "Template not found."
 msgstr ""
 
-#: includes/Admin/Admin.php:691
+#: includes/Admin/Admin.php:697
 msgid "Template saved."
 msgstr ""
 
@@ -973,11 +997,11 @@ msgstr ""
 msgid "The certificate file is missing or too large (max 512 KB)."
 msgstr ""
 
-#: includes/Admin/Admin.php:593
+#: includes/Admin/Admin.php:596
 msgid "The certificate file is too large (max 512 KB)."
 msgstr ""
 
-#: includes/Admin/Admin.php:589
+#: includes/Admin/Admin.php:592
 msgid "The certificate must be a .p12 or .pfx file."
 msgstr ""
 
@@ -1063,11 +1087,11 @@ msgstr ""
 msgid "Upload a PDF"
 msgstr ""
 
-#: includes/Admin/views/settings.php:90
+#: includes/Admin/views/settings.php:129
 msgid "Upload a PKCS#12 certificate (.p12/.pfx) to sign completed documents cryptographically (eIDAS / ComSign compatible). Without it, documents use electronic signatures."
 msgstr ""
 
-#: includes/Admin/views/settings.php:96
+#: includes/Admin/views/settings.php:135
 msgid "Upload certificate"
 msgstr ""
 
@@ -1129,11 +1153,11 @@ msgstr ""
 msgid "We sent a one-time code to %s. Enter it below to continue."
 msgstr ""
 
-#: includes/Admin/views/settings.php:45
+#: includes/Admin/views/settings.php:84
 msgid "Webhook URL"
 msgstr ""
 
-#: includes/Admin/views/settings.php:57
+#: includes/Admin/views/settings.php:96
 msgid "Webhook secret"
 msgstr ""
 
@@ -1146,11 +1170,11 @@ msgstr ""
 msgid "Write the fixed text of the document. After creating it you can place fillable and signature fields on the generated PDF."
 msgstr ""
 
-#: includes/Admin/views/settings.php:53
+#: includes/Admin/views/settings.php:92
 msgid "X-ComSign-Key"
 msgstr ""
 
-#: includes/Admin/Admin.php:913
+#: includes/Admin/Admin.php:919
 msgid "You are not allowed to access this page."
 msgstr ""
 

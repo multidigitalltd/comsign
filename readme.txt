@@ -4,7 +4,7 @@ Tags: signature, digital signature, pdf, esignature, hebrew
 Requires at least: 6.0
 Tested up to: 6.5
 Requires PHP: 7.4
-Stable tag: 0.9.1
+Stable tag: 0.10.0
 License: GPL-2.0-or-later
 License URI: https://www.gnu.org/licenses/gpl-2.0.html
 
@@ -105,6 +105,11 @@ ID and its SHA-256 code (shown on the document screen and the signature
 certificate) to confirm the document is authentic and see who signed it.
 
 == Changelog ==
+
+= 0.10.0 =
+* New: Branding. Set a brand name, logo and accent colour (Settings) shown to
+  signers on the signing/verification pages; the brand name is also used in
+  invitation emails.
 
 = 0.9.1 =
 * Security: PKI certificate password is now AES-256 encrypted (key from the

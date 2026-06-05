@@ -28,6 +28,9 @@ final class Settings {
 			'webhook_url'       => '',
 			'webhook_secret'    => '',
 			'api_key'           => '',
+			'brand_name'        => '',
+			'brand_logo_url'    => '',
+			'brand_color'       => '',
 		);
 	}
 
@@ -67,6 +70,9 @@ final class Settings {
 			$api_key = wp_generate_password( 40, false );
 		}
 
+		// Accept a #rgb or #rrggbb colour only.
+		$color = isset( $data['brand_color'] ) ? sanitize_hex_color( (string) $data['brand_color'] ) : '';
+
 		update_option(
 			self::OPTION,
 			array(
@@ -75,7 +81,18 @@ final class Settings {
 				'webhook_url'       => isset( $data['webhook_url'] ) ? esc_url_raw( trim( (string) $data['webhook_url'] ) ) : '',
 				'webhook_secret'    => $secret,
 				'api_key'           => $api_key,
+				'brand_name'        => isset( $data['brand_name'] ) ? sanitize_text_field( (string) $data['brand_name'] ) : '',
+				'brand_logo_url'    => isset( $data['brand_logo_url'] ) ? esc_url_raw( trim( (string) $data['brand_logo_url'] ) ) : '',
+				'brand_color'       => (string) $color,
 			)
 		);
+	}
+
+	/**
+	 * Brand name for signer-facing pages and emails (falls back to site name).
+	 */
+	public static function brand_name(): string {
+		$name = (string) self::get( 'brand_name' );
+		return '' !== $name ? $name : wp_specialchars_decode( get_bloginfo( 'name' ), ENT_QUOTES );
 	}
 }
