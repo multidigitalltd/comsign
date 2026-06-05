@@ -194,6 +194,21 @@ foreach ( $signers as $signer ) {
 									</form>
 								</div>
 
+								<form method="post" action="<?php echo esc_url( $action_url ); ?>" class="comsign-inline-form comsign-signer-auth">
+									<input type="hidden" name="action" value="comsign_set_signer_auth">
+									<input type="hidden" name="document_id" value="<?php echo esc_attr( $document_id ); ?>">
+									<input type="hidden" name="signer_id" value="<?php echo esc_attr( (int) $signer->id ); ?>">
+									<input type="hidden" name="_wpnonce" value="<?php echo esc_attr( $nonces['signer_auth'] ); ?>">
+									<label class="comsign-auth-label"><?php esc_html_e( 'Verify identity:', 'comsign' ); ?></label>
+									<select name="auth_method">
+										<?php foreach ( \ComSign\Frontend\SignerAuth::methods() as $value => $label ) : ?>
+											<option value="<?php echo esc_attr( $value ); ?>" <?php selected( (string) $signer->auth_method, $value ); ?>><?php echo esc_html( $label ); ?></option>
+										<?php endforeach; ?>
+									</select>
+									<input type="text" name="auth_code" placeholder="<?php esc_attr_e( 'Access code', 'comsign' ); ?>" autocomplete="off">
+									<button type="submit" class="button button-small"><?php esc_html_e( 'Save', 'comsign' ); ?></button>
+								</form>
+
 								<?php if ( ! empty( $link_flash ) && (int) $link_flash['signer_id'] === (int) $signer->id ) : ?>
 									<?php
 									$share_link = $link_flash['url'];
@@ -226,6 +241,14 @@ foreach ( $signers as $signer ) {
 					<p><input type="text" name="name" placeholder="<?php esc_attr_e( 'Full name', 'comsign' ); ?>" class="widefat"></p>
 					<p><input type="email" name="email" placeholder="<?php esc_attr_e( 'email@example.com', 'comsign' ); ?>" class="widefat"></p>
 					<p><input type="tel" name="phone" placeholder="<?php esc_attr_e( 'Phone for WhatsApp (optional)', 'comsign' ); ?>" class="widefat"></p>
+					<p>
+						<select name="auth_method" class="widefat">
+							<?php foreach ( \ComSign\Frontend\SignerAuth::methods() as $value => $label ) : ?>
+								<option value="<?php echo esc_attr( $value ); ?>"><?php echo esc_html( $label ); ?></option>
+							<?php endforeach; ?>
+						</select>
+					</p>
+					<p><input type="text" name="auth_code" placeholder="<?php esc_attr_e( 'Access code (for the access-code method)', 'comsign' ); ?>" class="widefat" autocomplete="off"></p>
 					<p class="description"><?php esc_html_e( 'Email is optional — leave it empty to share a signing link by WhatsApp or any other channel.', 'comsign' ); ?></p>
 					<p><button type="submit" class="button"><?php esc_html_e( 'Add signer', 'comsign' ); ?></button></p>
 				</form>

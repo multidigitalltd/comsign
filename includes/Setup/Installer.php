@@ -103,6 +103,8 @@ final class Installer {
 			token_hash CHAR(64) NOT NULL DEFAULT '',
 			status VARCHAR(20) NOT NULL DEFAULT 'pending',
 			sign_order SMALLINT UNSIGNED NOT NULL DEFAULT 0,
+			auth_method VARCHAR(20) NOT NULL DEFAULT 'none',
+			auth_code_hash VARCHAR(255) NOT NULL DEFAULT '',
 			reminded_at DATETIME DEFAULT NULL,
 			viewed_at DATETIME DEFAULT NULL,
 			signed_at DATETIME DEFAULT NULL,

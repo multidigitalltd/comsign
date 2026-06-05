@@ -343,7 +343,7 @@ final class DocumentService {
 	 *
 	 * @throws \RuntimeException On invalid input.
 	 */
-	public function add_signer( int $document_id, string $name, string $email, string $phone = '' ): int {
+	public function add_signer( int $document_id, string $name, string $email, string $phone = '', string $auth_method = 'none', string $auth_code = '' ): int {
 		// Email is optional: a signer can be reached by a shared link / WhatsApp
 		// instead. But if an email is given, it must be valid.
 		if ( '' !== $email && ! is_email( $email ) ) {
@@ -357,14 +357,71 @@ final class DocumentService {
 
 		$existing = $this->signers->for_document( $document_id );
 
+		$auth = $this->normalize_auth( $auth_method, $auth_code, $email );
+
 		return $this->signers->create(
 			array(
-				'document_id' => $document_id,
-				'name'        => $name,
-				'email'       => $email,
-				'phone'       => $phone,
-				'sign_order'  => count( $existing ),
+				'document_id'    => $document_id,
+				'name'           => $name,
+				'email'          => $email,
+				'phone'          => $phone,
+				'sign_order'     => count( $existing ),
+				'auth_method'    => $auth['method'],
+				'auth_code_hash' => $auth['hash'],
 			)
+		);
+	}
+
+	/**
+	 * Update a signer's identity-verification method.
+	 *
+	 * @param int    $document_id Owning document (guard).
+	 * @param int    $signer_id   Signer id.
+	 * @param string $method      none|code|email_otp.
+	 * @param string $code        Access code (only for the 'code' method).
+	 */
+	public function set_signer_auth( int $document_id, int $signer_id, string $method, string $code = '' ): void {
+		$signer = $this->signers->find( $signer_id );
+		if ( ! $signer || (int) $signer->document_id !== $document_id ) {
+			return;
+		}
+
+		$auth = $this->normalize_auth( $method, $code, (string) $signer->email );
+
+		$data = array( 'auth_method' => $auth['method'] );
+		// Only overwrite the stored code when a new one is supplied (or cleared).
+		if ( 'code' !== $auth['method'] || '' !== $code ) {
+			$data['auth_code_hash'] = $auth['hash'];
+		}
+
+		$this->signers->update( $signer_id, $data );
+	}
+
+	/**
+	 * Validate an auth method against the signer and prepare the stored hash.
+	 *
+	 * @param string $method Requested method.
+	 * @param string $code   Plain access code (for 'code').
+	 * @param string $email  Signer email (required for 'email_otp').
+	 *
+	 * @return array{method:string,hash:string}
+	 */
+	private function normalize_auth( string $method, string $code, string $email ): array {
+		$method = in_array( $method, array( 'code', 'email_otp' ), true ) ? $method : 'none';
+
+		// Email OTP needs an email; fall back to none otherwise.
+		if ( 'email_otp' === $method && '' === $email ) {
+			$method = 'none';
+		}
+
+		$hash = '';
+		if ( 'code' === $method && '' !== $code ) {
+			$hash = \ComSign\Frontend\SignerAuth::hash_code( $code );
+		}
+
+		return array(
+			'method' => $method,
+			'hash'   => $hash,
 		);
 	}
 

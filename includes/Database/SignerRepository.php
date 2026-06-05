@@ -39,9 +39,11 @@ final class SignerRepository {
 				'token_hash'  => (string) ( $data['token_hash'] ?? '' ),
 				'status'      => self::STATUS_PENDING,
 				'sign_order'  => (int) ( $data['sign_order'] ?? 0 ),
+				'auth_method' => (string) ( $data['auth_method'] ?? 'none' ),
+				'auth_code_hash' => (string) ( $data['auth_code_hash'] ?? '' ),
 				'created_at'  => current_time( 'mysql', true ),
 			),
-			array( '%d', '%s', '%s', '%s', '%s', '%s', '%d', '%s' )
+			array( '%d', '%s', '%s', '%s', '%s', '%s', '%d', '%s', '%s', '%s' )
 		);
 
 		return (int) $wpdb->insert_id;

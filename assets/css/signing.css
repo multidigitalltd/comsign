@@ -161,3 +161,33 @@ body.comsign-public {
 @media ( max-width: 600px ) {
 	.comsign-doc-viewer iframe { height: 50vh; }
 }
+
+/* Identity challenge (access code / email OTP) */
+.comsign-auth__error {
+	background: #fde8e8;
+	color: #8a1f1f;
+	border: 1px solid #f3b1b1;
+	border-radius: 6px;
+	padding: 10px 12px;
+	margin: 12px 0;
+}
+.comsign-auth__form input[type="text"] {
+	font-size: 1.4em;
+	letter-spacing: 0.3em;
+	padding: 10px 12px;
+	width: 100%;
+	max-width: 240px;
+	box-sizing: border-box;
+}
+.comsign-auth__resend {
+	margin-top: 8px;
+}
+.comsign-link-button {
+	background: none;
+	border: none;
+	color: #2271b1;
+	cursor: pointer;
+	padding: 0;
+	text-decoration: underline;
+	font: inherit;
+}

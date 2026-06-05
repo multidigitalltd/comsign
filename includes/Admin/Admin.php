@@ -52,6 +52,7 @@ final class Admin {
 		add_action( 'admin_post_comsign_create_document', array( $this, 'handle_create_document' ) );
 		add_action( 'admin_post_comsign_create_text', array( $this, 'handle_create_text' ) );
 		add_action( 'admin_post_comsign_add_signer', array( $this, 'handle_add_signer' ) );
+		add_action( 'admin_post_comsign_set_signer_auth', array( $this, 'handle_set_signer_auth' ) );
 		add_action( 'admin_post_comsign_delete_signer', array( $this, 'handle_delete_signer' ) );
 		add_action( 'admin_post_comsign_signer_link', array( $this, 'handle_signer_link' ) );
 		add_action( 'admin_post_comsign_resend_signer', array( $this, 'handle_resend_signer' ) );
@@ -269,6 +270,7 @@ final class Admin {
 				'link_flash' => $this->pull_link_flash(),
 				'nonces'     => array(
 					'add_signer'    => wp_create_nonce( 'comsign_add_signer_' . $document_id ),
+					'signer_auth'   => wp_create_nonce( 'comsign_set_signer_auth_' . $document_id ),
 					'delete_signer' => wp_create_nonce( 'comsign_delete_signer_' . $document_id ),
 					'signer_link'   => wp_create_nonce( 'comsign_signer_link_' . $document_id ),
 					'resend_signer' => wp_create_nonce( 'comsign_resend_signer_' . $document_id ),
@@ -351,17 +353,33 @@ final class Admin {
 		$document_id = $this->posted_document_id();
 		check_admin_referer( 'comsign_add_signer_' . $document_id );
 
-		$name  = isset( $_POST['name'] ) ? sanitize_text_field( wp_unslash( $_POST['name'] ) ) : '';
-		$email = isset( $_POST['email'] ) ? sanitize_email( wp_unslash( $_POST['email'] ) ) : '';
-		$phone = isset( $_POST['phone'] ) ? $this->sanitize_phone( wp_unslash( $_POST['phone'] ) ) : ''; // phpcs:ignore WordPress.Security.ValidatedSanitizedInput.InputNotSanitized
+		$name        = isset( $_POST['name'] ) ? sanitize_text_field( wp_unslash( $_POST['name'] ) ) : '';
+		$email       = isset( $_POST['email'] ) ? sanitize_email( wp_unslash( $_POST['email'] ) ) : '';
+		$phone       = isset( $_POST['phone'] ) ? $this->sanitize_phone( wp_unslash( $_POST['phone'] ) ) : ''; // phpcs:ignore WordPress.Security.ValidatedSanitizedInput.InputNotSanitized
+		$auth_method = isset( $_POST['auth_method'] ) ? sanitize_key( wp_unslash( $_POST['auth_method'] ) ) : 'none';
+		$auth_code   = isset( $_POST['auth_code'] ) ? sanitize_text_field( wp_unslash( $_POST['auth_code'] ) ) : '';
 
 		try {
-			$this->service->add_signer( $document_id, $name, $email, $phone );
+			$this->service->add_signer( $document_id, $name, $email, $phone, $auth_method, $auth_code );
 		} catch ( \Throwable $e ) {
 			$this->redirect_with_notice( $this->edit_url( $document_id ), 'error', $e->getMessage() );
 		}
 
 		$this->redirect_with_notice( $this->edit_url( $document_id ), 'success', __( 'Signer added.', 'comsign' ) );
+	}
+
+	public function handle_set_signer_auth(): void {
+		$this->guard();
+		$document_id = $this->posted_document_id();
+		check_admin_referer( 'comsign_set_signer_auth_' . $document_id );
+
+		$signer_id   = isset( $_POST['signer_id'] ) ? absint( wp_unslash( $_POST['signer_id'] ) ) : 0;
+		$auth_method = isset( $_POST['auth_method'] ) ? sanitize_key( wp_unslash( $_POST['auth_method'] ) ) : 'none';
+		$auth_code   = isset( $_POST['auth_code'] ) ? sanitize_text_field( wp_unslash( $_POST['auth_code'] ) ) : '';
+
+		$this->service->set_signer_auth( $document_id, $signer_id, $auth_method, $auth_code );
+
+		$this->redirect_with_notice( $this->edit_url( $document_id ), 'success', __( 'Signer verification updated.', 'comsign' ) );
 	}
 
 	public function handle_delete_signer(): void {

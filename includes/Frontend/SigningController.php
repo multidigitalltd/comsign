@@ -55,6 +55,9 @@ final class SigningController {
 
 		add_action( 'admin_post_nopriv_comsign_sign_view', array( $this, 'handle_view_document' ) );
 		add_action( 'admin_post_comsign_sign_view', array( $this, 'handle_view_document' ) );
+
+		add_action( 'admin_post_nopriv_comsign_sign_auth', array( $this, 'handle_auth' ) );
+		add_action( 'admin_post_comsign_sign_auth', array( $this, 'handle_auth' ) );
 	}
 
 	/* ---------------------------------------------------------------------
@@ -115,6 +118,11 @@ final class SigningController {
 				__( 'Waiting for an earlier signer', 'comsign' ),
 				__( 'This document is signed in order. You will be notified when it is your turn.', 'comsign' )
 			);
+		}
+
+		// Identity challenge (access code / email OTP) before viewing.
+		if ( SignerAuth::requires( $signer ) && ! SignerAuth::verified( $signer ) ) {
+			$this->render_auth_challenge( $signer, $raw_token );
 		}
 
 		// First view → mark viewed + audit.
@@ -237,6 +245,73 @@ final class SigningController {
 		return (string) ob_get_clean();
 	}
 
+	/**
+	 * Render the identity-challenge page and exit. For email OTP, a code is sent
+	 * automatically the first time (no code is sent on a simple page refresh).
+	 *
+	 * @param object $signer    Signer row.
+	 * @param string $raw_token Raw token.
+	 * @param string $error     Optional error message to show.
+	 */
+	private function render_auth_challenge( object $signer, string $raw_token, string $error = '' ): void {
+		$method = (string) $signer->auth_method;
+
+		if ( SignerAuth::METHOD_OTP === $method && ! get_transient( 'comsign_otp_' . (int) $signer->id ) ) {
+			SignerAuth::send_otp( $signer );
+		}
+
+		$this->render_template(
+			'auth',
+			array(
+				'signer'    => $signer,
+				'method'    => $method,
+				'raw_token' => $raw_token,
+				'post_url'  => admin_url( 'admin-post.php' ),
+				'nonce'     => wp_create_nonce( 'comsign_auth_' . $signer->id ),
+				'error'     => $error,
+				'email'     => SignerAuth::METHOD_OTP === $method ? $this->mask_email( (string) $signer->email ) : '',
+			)
+		);
+	}
+
+	/**
+	 * Verify a submitted access code / OTP and, on success, mark the session
+	 * verified and return the signer to the signing page.
+	 */
+	public function handle_auth(): void {
+		$raw_token = isset( $_POST['token'] ) ? sanitize_text_field( wp_unslash( $_POST['token'] ) ) : ''; // phpcs:ignore WordPress.Security.NonceVerification.Missing
+		$signer    = $this->resolve_signer( $raw_token );
+
+		if ( ! $signer ) {
+			$this->render_message( __( 'Invalid link', 'comsign' ), __( 'This signing link is no longer valid.', 'comsign' ) );
+		}
+
+		check_admin_referer( 'comsign_auth_' . $signer->id );
+
+		// Resend OTP on request.
+		if ( ! empty( $_POST['resend'] ) && SignerAuth::METHOD_OTP === (string) $signer->auth_method ) {
+			delete_transient( 'comsign_otp_' . (int) $signer->id );
+			$this->render_auth_challenge( $signer, $raw_token, __( 'A new code has been sent.', 'comsign' ) );
+		}
+
+		$code = isset( $_POST['code'] ) ? sanitize_text_field( wp_unslash( $_POST['code'] ) ) : '';
+
+		$ok = SignerAuth::METHOD_OTP === (string) $signer->auth_method
+			? SignerAuth::verify_otp( $signer, $code )
+			: SignerAuth::verify_code( $signer, $code );
+
+		if ( ! $ok ) {
+			$this->audit->record( AuditLogger::EVENT_VIEWED, (int) $signer->document_id, (int) $signer->id, array( 'auth' => 'failed' ) );
+			$this->render_auth_challenge( $signer, $raw_token, __( 'That code was not correct. Please try again.', 'comsign' ) );
+		}
+
+		SignerAuth::mark_verified( $signer );
+		$this->audit->record( AuditLogger::EVENT_VIEWED, (int) $signer->document_id, (int) $signer->id, array( 'auth' => 'passed' ) );
+
+		wp_safe_redirect( $this->service->signing_url( $raw_token ) );
+		exit;
+	}
+
 	/* ---------------------------------------------------------------------
 	 * Submission handlers
 	 * ------------------------------------------------------------------- */
@@ -256,6 +331,10 @@ final class SigningController {
 
 		if ( SignerRepository::STATUS_SIGNED === $signer->status ) {
 			$this->render_message( __( 'Already signed', 'comsign' ), __( 'You have already signed this document.', 'comsign' ) );
+		}
+
+		if ( SignerAuth::requires( $signer ) && ! SignerAuth::verified( $signer ) ) {
+			$this->render_message( __( 'Verification required', 'comsign' ), __( 'Please verify your identity before signing.', 'comsign' ) );
 		}
 
 		$consent = ! empty( $_POST['consent'] );
@@ -340,6 +419,10 @@ final class SigningController {
 
 		check_admin_referer( 'comsign_view_' . $signer->id, '_n' );
 
+		if ( SignerAuth::requires( $signer ) && ! SignerAuth::verified( $signer ) ) {
+			wp_die( esc_html__( 'Verification required.', 'comsign' ), '', array( 'response' => 403 ) );
+		}
+
 		$document = $this->documents->find( (int) $signer->document_id );
 		if ( ! $document || ! $document->source_path || ! Storage::is_within_base( $document->source_path ) || ! is_file( $document->source_path ) ) {
 			wp_die( esc_html__( 'Document unavailable.', 'comsign' ), '', array( 'response' => 404 ) );
@@ -375,6 +458,21 @@ final class SigningController {
 
 		// Constant-time re-check (defence in depth against timing on lookup).
 		return Tokens::verify( $raw_token, $signer->token_hash ) ? $signer : null;
+	}
+
+	/**
+	 * Partially mask an email for display on the OTP challenge.
+	 *
+	 * @param string $email Email address.
+	 */
+	private function mask_email( string $email ): string {
+		$parts = explode( '@', $email );
+		if ( count( $parts ) !== 2 ) {
+			return '';
+		}
+		$name   = $parts[0];
+		$masked = mb_substr( $name, 0, 1 ) . str_repeat( '*', max( 1, mb_strlen( $name ) - 1 ) );
+		return $masked . '@' . $parts[1];
 	}
 
 	/**

@@ -14,7 +14,7 @@ msgstr ""
 msgid "%1$d of %2$d signed"
 msgstr "%1$d מתוך %2$d חתמו"
 
-#: includes/Services/DocumentService.php:445
+#: includes/Services/DocumentService.php:502
 msgid "%s (copy)"
 msgstr "%s (עותק)"
 
@@ -28,19 +28,35 @@ msgstr "(ללא כותרת)"
 msgid "A document is awaiting your signature — %s"
 msgstr "מסמך ממתין לחתימתך — %s"
 
-#: includes/Services/DocumentService.php:879
+#: includes/Services/DocumentService.php:936
 msgid "A field is assigned to a signer that is not on this document. Please re-save the fields."
 msgstr "שדה משויך לחותם שאינו במסמך זה. אנא שמרו מחדש את השדות."
 
-#: includes/Services/DocumentService.php:1008
+#: includes/Frontend/SigningController.php:294
+msgid "A new code has been sent."
+msgstr "קוד חדש נשלח."
+
+#: includes/Services/DocumentService.php:1065
 msgid "A signature is required."
 msgstr "נדרשת חתימה."
 
-#: includes/Admin/Admin.php:420
+#: includes/Admin/Admin.php:438
 msgid "A signing link was generated. Copy it or share via WhatsApp below."
 msgstr "נוצר קישור לחתימה. העתיקו אותו או שתפו בוואטסאפ למטה."
 
-#: includes/Admin/views/edit.php:235
+#: includes/Admin/views/edit.php:208
+msgid "Access code"
+msgstr "קוד גישה"
+
+#: includes/Admin/views/edit.php:251
+msgid "Access code (for the access-code method)"
+msgstr "קוד גישה (לשיטת קוד הגישה)"
+
+#: includes/Frontend/SignerAuth.php:38
+msgid "Access code (shared by you)"
+msgstr "קוד גישה (שאתם משתפים)"
+
+#: includes/Admin/views/edit.php:258
 #: includes/Admin/views/templates.php:32
 msgid "Actions"
 msgstr "פעולות"
@@ -49,14 +65,14 @@ msgstr "פעולות"
 msgid "Active certificate:"
 msgstr "תעודה פעילה:"
 
-#: includes/Admin/Admin.php:99
 #: includes/Admin/Admin.php:100
+#: includes/Admin/Admin.php:101
 #: includes/Admin/views/list.php:16
 #: includes/Admin/views/new.php:16
 msgid "Add Document"
 msgstr "הוספת מסמך"
 
-#: includes/Services/DocumentService.php:789
+#: includes/Services/DocumentService.php:846
 msgid "Add at least one signer before sending."
 msgstr "יש להוסיף לפחות חותם אחד לפני השליחה."
 
@@ -68,7 +84,7 @@ msgstr "הוסיפו תחילה לפחות חותם אחד, ולאחר מכן ה
 msgid "Add field"
 msgstr "הוספת שדה"
 
-#: includes/Admin/views/edit.php:230
+#: includes/Admin/views/edit.php:253
 msgid "Add signer"
 msgstr "הוספת חותם"
 
@@ -76,8 +92,8 @@ msgstr "הוספת חותם"
 msgid "All parties have signed. The signed PDF and verification details are available below."
 msgstr "כל הצדדים חתמו. קובץ ה-PDF החתום ופרטי האימות זמינים למטה."
 
-#: includes/Frontend/SigningController.php:93
-#: includes/Frontend/SigningController.php:258
+#: includes/Frontend/SigningController.php:96
+#: includes/Frontend/SigningController.php:333
 msgid "Already signed"
 msgstr "כבר נחתם"
 
@@ -85,7 +101,7 @@ msgstr "כבר נחתם"
 msgid "Assign a recipient to each role. The document is created as a draft so you can review it before sending."
 msgstr "שייכו נמען לכל תפקיד. המסמך נוצר כטיוטה כדי שתוכלו לבדוק לפני השליחה."
 
-#: includes/Admin/views/edit.php:265
+#: includes/Admin/views/edit.php:288
 msgid "Audit report (PDF)"
 msgstr "דוח ביקורת (PDF)"
 
@@ -116,11 +132,11 @@ msgstr "דפדפן"
 msgid "Bulk send"
 msgstr "שליחה בכמות"
 
-#: includes/Admin/Admin.php:701
+#: includes/Admin/Admin.php:719
 msgid "Bulk send complete: %d document(s) created and sent."
 msgstr "השליחה בכמות הושלמה: %d מסמכים נוצרו ונשלחו."
 
-#: includes/Services/DocumentService.php:670
+#: includes/Services/DocumentService.php:727
 msgid "Bulk send requires a template with exactly one role."
 msgstr "שליחה בכמות דורשת תבנית עם תפקיד אחד בדיוק."
 
@@ -132,20 +148,20 @@ msgstr "שליחה בכמות: %s"
 msgid "Certificate password"
 msgstr "סיסמת התעודה"
 
-#: includes/Admin/Admin.php:581
+#: includes/Admin/Admin.php:599
 msgid "Certificate removed. Documents will use electronic signatures."
 msgstr "התעודה הוסרה. מסמכים ייחתמו בחתימה אלקטרונית."
 
-#: includes/Admin/Admin.php:569
+#: includes/Admin/Admin.php:587
 msgid "Certificate stored. New documents will be signed with PKI/PAdES."
 msgstr "התעודה נשמרה. מסמכים חדשים ייחתמו ב-PKI/PAdES."
 
-#: includes/Admin/Admin.php:197
+#: includes/Admin/Admin.php:198
 #: includes/Admin/views/edit.php:102
 msgid "Checkbox"
 msgstr "תיבת סימון"
 
-#: includes/Admin/Admin.php:198
+#: includes/Admin/Admin.php:199
 msgid "Choice"
 msgstr "בחירה"
 
@@ -161,8 +177,12 @@ msgstr "בחרו…"
 msgid "Clear"
 msgstr "ניקוי"
 
-#: includes/Admin/Admin.php:79
+#: includes/Frontend/views/auth.php:50
+msgid "Code"
+msgstr "קוד"
+
 #: includes/Admin/Admin.php:80
+#: includes/Admin/Admin.php:81
 msgid "ComSign"
 msgstr "ComSign"
 
@@ -186,7 +206,7 @@ msgstr "הושלם"
 msgid "Completed documents are signed with a cryptographic PKCS#7/PAdES signature."
 msgstr "מסמכים שהושלמו נחתמים בחתימה קריפטוגרפית PKCS#7/PAdES."
 
-#: includes/Frontend/SigningController.php:215
+#: includes/Frontend/SigningController.php:223
 msgid "Completed:"
 msgstr "הושלם:"
 
@@ -198,20 +218,24 @@ msgstr "יצירה מטקסט"
 msgid "Confirm decline"
 msgstr "אישור סירוב"
 
-#: includes/Frontend/SigningController.php:263
+#: includes/Frontend/SigningController.php:342
 msgid "Consent required"
 msgstr "נדרשת הסכמה"
 
-#: includes/Admin/Admin.php:154
+#: includes/Frontend/views/auth.php:53
+msgid "Continue"
+msgstr "המשך"
+
+#: includes/Admin/Admin.php:155
 msgid "Copied!"
 msgstr "הועתק!"
 
-#: includes/Admin/Admin.php:155
-#: includes/Admin/views/edit.php:211
+#: includes/Admin/Admin.php:156
+#: includes/Admin/views/edit.php:226
 msgid "Copy link"
 msgstr "העתקת קישור"
 
-#: includes/Frontend/SigningController.php:294
+#: includes/Frontend/SigningController.php:373
 msgid "Could not complete signing"
 msgstr "לא ניתן להשלים את החתימה"
 
@@ -219,7 +243,7 @@ msgstr "לא ניתן להשלים את החתימה"
 msgid "Could not generate the document PDF."
 msgstr "לא ניתן היה להפיק את קובץ ה-PDF של המסמך."
 
-#: includes/Admin/Admin.php:202
+#: includes/Admin/Admin.php:203
 msgid "Could not load the document preview."
 msgstr "לא ניתן לטעון את תצוגת המסמך."
 
@@ -245,7 +269,7 @@ msgstr "נוצר"
 msgid "Dana Cohen, dana@example.com, +972500000000\nAvi Levi, avi@example.com"
 msgstr "דנה כהן, dana@example.com, +972500000000\nאבי לוי, avi@example.com"
 
-#: includes/Admin/Admin.php:192
+#: includes/Admin/Admin.php:193
 msgid "Date"
 msgstr "תאריך"
 
@@ -265,7 +289,7 @@ msgstr "סורב"
 msgid "Delete"
 msgstr "מחיקה"
 
-#: includes/Admin/views/edit.php:280
+#: includes/Admin/views/edit.php:303
 msgid "Delete document"
 msgstr "מחיקת מסמך"
 
@@ -288,7 +312,7 @@ msgstr "חתימה דיגיטלית (PKI/PAdES)"
 msgid "Document"
 msgstr "מסמך"
 
-#: includes/Frontend/SigningController.php:201
+#: includes/Frontend/SigningController.php:209
 #: includes/Signature/CertificatePage.php:32
 msgid "Document ID"
 msgstr "מזהה מסמך"
@@ -297,28 +321,28 @@ msgstr "מזהה מסמך"
 msgid "Document content"
 msgstr "תוכן המסמך"
 
-#: includes/Admin/Admin.php:674
+#: includes/Admin/Admin.php:692
 msgid "Document created from template. Review and send."
 msgstr "מסמך נוצר מתבנית. בדקו ושלחו."
 
-#: includes/Admin/Admin.php:345
+#: includes/Admin/Admin.php:347
 msgid "Document created. Now add signers and place fields."
 msgstr "המסמך נוצר. כעת הוסיפו חותמים והניחו שדות."
 
-#: includes/Admin/Admin.php:501
+#: includes/Admin/Admin.php:519
 msgid "Document deleted."
 msgstr "המסמך נמחק."
 
-#: includes/Admin/Admin.php:491
+#: includes/Admin/Admin.php:509
 msgid "Document duplicated."
 msgstr "המסמך שוכפל."
 
-#: includes/Admin/Admin.php:258
-#: includes/Admin/Admin.php:775
+#: includes/Admin/Admin.php:259
+#: includes/Admin/Admin.php:793
 #: includes/Services/DocumentService.php:230
-#: includes/Services/DocumentService.php:441
-#: includes/Services/DocumentService.php:511
-#: includes/Services/DocumentService.php:784
+#: includes/Services/DocumentService.php:498
+#: includes/Services/DocumentService.php:568
+#: includes/Services/DocumentService.php:841
 msgid "Document not found."
 msgstr "המסמך לא נמצא."
 
@@ -335,21 +359,21 @@ msgstr "המסמך נחתם באמצעות ComSign"
 msgid "Document title"
 msgstr "כותרת המסמך"
 
-#: includes/Frontend/SigningController.php:85
-#: includes/Frontend/SigningController.php:280
+#: includes/Frontend/SigningController.php:88
+#: includes/Frontend/SigningController.php:359
 msgid "Document unavailable"
 msgstr "המסמך אינו זמין"
 
-#: includes/Frontend/SigningController.php:345
+#: includes/Frontend/SigningController.php:428
 msgid "Document unavailable."
 msgstr "המסמך אינו זמין."
 
-#: includes/Admin/Admin.php:317
+#: includes/Admin/Admin.php:319
 msgid "Document uploaded. Now add signers and place signature fields."
 msgstr "המסמך הועלה. כעת הוסיפו חותמים והניחו שדות חתימה."
 
-#: includes/Admin/Admin.php:90
 #: includes/Admin/Admin.php:91
+#: includes/Admin/Admin.php:92
 msgid "Documents"
 msgstr "מסמכים"
 
@@ -381,7 +405,7 @@ msgstr "כל שורה יוצרת ושולחת מסמך נפרד. פורמט: ש�
 msgid "Electronic signature"
 msgstr "חתימה אלקטרונית"
 
-#: includes/Admin/Admin.php:194
+#: includes/Admin/Admin.php:195
 #: includes/Signature/CertificatePage.php:40
 msgid "Email"
 msgstr "דוא״ל"
@@ -394,7 +418,7 @@ msgstr "אימייל (אוטומטי)"
 msgid "Email a reminder to signers who have not signed yet."
 msgstr "שליחת תזכורת במייל לחותמים שטרם חתמו."
 
-#: includes/Admin/views/edit.php:229
+#: includes/Admin/views/edit.php:252
 msgid "Email is optional — leave it empty to share a signing link by WhatsApp or any other channel."
 msgstr "האימייל אופציונלי — השאירו ריק כדי לשתף קישור לחתימה בוואטסאפ או בכל ערוץ אחר."
 
@@ -402,11 +426,15 @@ msgstr "האימייל אופציונלי — השאירו ריק כדי לשת�
 msgid "Email link"
 msgstr "שליחת קישור במייל"
 
+#: includes/Frontend/SignerAuth.php:39
+msgid "Email one-time code"
+msgstr "קוד חד-פעמי באימייל"
+
 #: includes/Frontend/views/sign.php:91
 msgid "Enter a number"
 msgstr "הזינו מספר"
 
-#: includes/Admin/Admin.php:200
+#: includes/Admin/Admin.php:201
 msgid "Enter options separated by commas:"
 msgstr "הזינו אפשרויות מופרדות בפסיקים:"
 
@@ -419,7 +447,7 @@ msgstr "אירוע"
 msgid "Every event is POSTed here as JSON, signed with X-ComSign-Signature (HMAC-SHA256 of the body using the secret below)."
 msgstr "כל אירוע נשלח לכאן כ-JSON, חתום ב-X-ComSign-Signature (HMAC-SHA256 של גוף הבקשה עם הסוד שלמטה)."
 
-#: includes/Services/DocumentService.php:885
+#: includes/Services/DocumentService.php:942
 msgid "Every signer must have at least one field. Please assign a field to each signer."
 msgstr "לכל חותם חייב להיות לפחות שדה אחד. אנא שייכו שדה לכל חותם."
 
@@ -427,11 +455,11 @@ msgstr "לכל חותם חייב להיות לפחות שדה אחד. אנא ש�
 msgid "Field for:"
 msgstr "שדה עבור:"
 
-#: includes/Admin/Admin.php:781
+#: includes/Admin/Admin.php:799
 msgid "File not available."
 msgstr "הקובץ אינו זמין."
 
-#: includes/Admin/views/edit.php:226
+#: includes/Admin/views/edit.php:241
 #: includes/Admin/views/template-use.php:31
 msgid "Full name"
 msgstr "שם מלא"
@@ -469,7 +497,7 @@ msgstr "IP"
 msgid "IP address"
 msgstr "כתובת IP"
 
-#: includes/Admin/Admin.php:191
+#: includes/Admin/Admin.php:192
 #: includes/Admin/views/edit.php:96
 msgid "Initials"
 msgstr "ראשי תיבות"
@@ -478,16 +506,17 @@ msgstr "ראשי תיבות"
 msgid "Integrations"
 msgstr "אינטגרציות"
 
-#: includes/Frontend/SigningController.php:252
-#: includes/Frontend/SigningController.php:312
+#: includes/Frontend/SigningController.php:286
+#: includes/Frontend/SigningController.php:327
+#: includes/Frontend/SigningController.php:391
 msgid "Invalid link"
 msgstr "קישור לא תקין"
 
-#: includes/Frontend/SigningController.php:338
+#: includes/Frontend/SigningController.php:417
 msgid "Invalid link."
 msgstr "קישור לא תקין."
 
-#: includes/Frontend/SigningController.php:77
+#: includes/Frontend/SigningController.php:80
 msgid "Invalid or expired link"
 msgstr "קישור לא תקין או שפג תוקפו"
 
@@ -495,25 +524,25 @@ msgstr "קישור לא תקין או שפג תוקפו"
 msgid "Invalid upload."
 msgstr "העלאה לא תקינה."
 
-#: includes/Admin/Admin.php:391
+#: includes/Admin/Admin.php:409
 msgid "Invitation re-sent."
 msgstr "ההזמנה נשלחה מחדש."
 
-#: includes/Frontend/SigningController.php:288
+#: includes/Frontend/SigningController.php:367
 msgid "It is not your turn to sign yet."
 msgstr "עדיין לא הגיע תורך לחתום."
 
-#: includes/Frontend/SigningController.php:107
-#: includes/Frontend/SigningController.php:284
+#: includes/Frontend/SigningController.php:110
+#: includes/Frontend/SigningController.php:363
 msgid "Link expired"
 msgstr "הקישור פג תוקף"
 
-#: includes/Admin/views/edit.php:249
+#: includes/Admin/views/edit.php:272
 #: includes/Admin/views/template-bulk.php:36
 msgid "Link expires after"
 msgstr "הקישור פג תוקף לאחר"
 
-#: includes/Admin/Admin.php:201
+#: includes/Admin/Admin.php:202
 msgid "Loading document…"
 msgstr "טוען מסמך…"
 
@@ -521,12 +550,12 @@ msgstr "טוען מסמך…"
 msgid "Manage"
 msgstr "ניהול"
 
-#: includes/Admin/views/edit.php:254
+#: includes/Admin/views/edit.php:277
 #: includes/Admin/views/template-bulk.php:32
 msgid "Message to signers (optional)"
 msgstr "הודעה לחותמים (אופציונלי)"
 
-#: includes/Admin/Admin.php:193
+#: includes/Admin/Admin.php:194
 #: includes/Signature/CertificatePage.php:39
 msgid "Name"
 msgstr "שם"
@@ -539,7 +568,7 @@ msgstr "שם (אוטומטי)"
 msgid "No documents yet. Upload your first PDF to get started."
 msgstr "אין עדיין מסמכים. העלו את קובץ ה-PDF הראשון כדי להתחיל."
 
-#: includes/Admin/Admin.php:460
+#: includes/Admin/Admin.php:478
 msgid "No emails were sent because the signer(s) have no email. Use \"Get signing link\" to share their link."
 msgstr "לא נשלחו מיילים כי לחותם/ים אין כתובת אימייל. השתמשו ב\"קבלת קישור לחתימה\" לשיתוף הקישור."
 
@@ -547,11 +576,15 @@ msgstr "לא נשלחו מיילים כי לחותם/ים אין כתובת אי
 msgid "No events recorded yet."
 msgstr "טרם נרשמו אירועים."
 
+#: includes/Frontend/SignerAuth.php:37
+msgid "No extra verification"
+msgstr "ללא אימות נוסף"
+
 #: includes/Services/DocumentService.php:302
 msgid "No file was uploaded, or the upload failed."
 msgstr "לא הועלה קובץ, או שההעלאה נכשלה."
 
-#: includes/Frontend/SigningController.php:232
+#: includes/Frontend/SigningController.php:240
 msgid "No matching signed document was found for that ID and code."
 msgstr "לא נמצא מסמך חתום תואם למזהה ולקוד שהוזנו."
 
@@ -563,7 +596,7 @@ msgstr "אין עדיין חותמים."
 msgid "No templates yet."
 msgstr "אין עדיין תבניות."
 
-#: includes/Admin/Admin.php:196
+#: includes/Admin/Admin.php:197
 #: includes/Admin/views/edit.php:101
 msgid "Number"
 msgstr "מספר"
@@ -600,16 +633,16 @@ msgstr "PDF בלבד, עד 25 מ״ב."
 msgid "Partially signed"
 msgstr "נחתם חלקית"
 
-#: includes/Admin/views/edit.php:276
+#: includes/Admin/views/edit.php:299
 msgid "Permanently delete this document and all its data?"
 msgstr "למחוק לצמיתות את המסמך הזה ואת כל הנתונים שלו?"
 
-#: includes/Admin/views/edit.php:228
+#: includes/Admin/views/edit.php:243
 #: includes/Admin/views/template-use.php:33
 msgid "Phone for WhatsApp (optional)"
 msgstr "טלפון לוואטסאפ (אופציונלי)"
 
-#: includes/Services/DocumentService.php:794
+#: includes/Services/DocumentService.php:851
 msgid "Place at least one signature field before sending."
 msgstr "הניחו לפחות שדה חתימה אחד לפני השליחה."
 
@@ -625,13 +658,17 @@ msgstr "אנא הוסיפו כותרת או תוכן כלשהו למסמך."
 msgid "Please add your signature and accept the agreement."
 msgstr "אנא הוסיפו את חתימתכם ואשרו את ההסכמה."
 
-#: includes/Admin/Admin.php:561
+#: includes/Admin/Admin.php:579
 msgid "Please choose a .p12/.pfx certificate file."
 msgstr "אנא בחרו קובץ תעודה .p12/.pfx."
 
-#: includes/Admin/Admin.php:305
+#: includes/Admin/Admin.php:307
 msgid "Please choose a PDF to upload."
 msgstr "אנא בחרו קובץ PDF להעלאה."
+
+#: includes/Frontend/views/auth.php:37
+msgid "Please enter the access code provided by the sender to continue."
+msgstr "הזינו את קוד הגישה שקיבלתם מהשולח כדי להמשיך."
 
 #: includes/Frontend/views/sign.php:72
 msgid "Please fill in"
@@ -649,9 +686,13 @@ msgstr "אנא הזינו שם או אימייל לחותם."
 msgid "Please provide a valid email address."
 msgstr "אנא הזינו כתובת דוא״ל תקינה."
 
-#: includes/Admin/views/edit.php:202
+#: includes/Admin/views/edit.php:217
 msgid "Please sign the document at the following secure link: %s"
 msgstr "אנא חתמו על המסמך בקישור המאובטח הבא: %s"
+
+#: includes/Frontend/SigningController.php:337
+msgid "Please verify your identity before signing."
+msgstr "אנא אמתו את זהותכם לפני החתימה."
 
 #: includes/Admin/views/settings.php:52
 msgid "REST API key"
@@ -661,7 +702,7 @@ msgstr "מפתח REST API"
 msgid "REST base: /wp-json/comsign/v1/documents"
 msgstr "בסיס REST: /wp-json/comsign/v1/documents"
 
-#: includes/Admin/views/edit.php:259
+#: includes/Admin/views/edit.php:282
 msgid "Re-send invitations"
 msgstr "שליחת הזמנות מחדש"
 
@@ -685,7 +726,7 @@ msgstr "תזכורת: מסמך ממתין לחתימתך — %s"
 msgid "Reminders run once a day via WP-Cron. Each reminder issues a fresh signing link."
 msgstr "התזכורות רצות פעם ביום דרך WP-Cron. כל תזכורת מנפיקה קישור חתימה חדש."
 
-#: includes/Admin/Admin.php:199
+#: includes/Admin/Admin.php:200
 #: includes/Admin/views/edit.php:193
 msgid "Remove"
 msgstr "הסרה"
@@ -702,11 +743,15 @@ msgstr "להסיר את התעודה ולחזור לחתימה אלקטרוני�
 msgid "Remove this signer?"
 msgstr "להסיר את החותם הזה?"
 
-#: includes/Admin/views/edit.php:245
+#: includes/Admin/views/edit.php:268
 msgid "Require signing in order"
 msgstr "דרישת חתימה לפי סדר"
 
-#: includes/Services/DocumentService.php:521
+#: includes/Frontend/views/auth.php:62
+msgid "Resend code"
+msgstr "שליחת קוד מחדש"
+
+#: includes/Services/DocumentService.php:578
 msgid "Role %d"
 msgstr "תפקיד %d"
 
@@ -718,11 +763,15 @@ msgstr "תפקידים"
 msgid "SHA-256:"
 msgstr "SHA-256:"
 
+#: includes/Admin/views/edit.php:209
+msgid "Save"
+msgstr "שמירה"
+
 #: includes/Admin/views/templates.php:19
 msgid "Save a document as a template from its management screen, then reuse it here for new documents or bulk sending."
 msgstr "שמרו מסמך כתבנית ממסך הניהול שלו, ואז השתמשו בה כאן ליצירת מסמכים חדשים או לשליחה בכמות."
 
-#: includes/Admin/views/edit.php:273
+#: includes/Admin/views/edit.php:296
 msgid "Save as template"
 msgstr "שמירה כתבנית"
 
@@ -738,7 +787,7 @@ msgstr "שמירת הגדרות"
 msgid "Securely processed by %s"
 msgstr "מעובד באופן מאובטח על-ידי %s"
 
-#: includes/Admin/views/edit.php:259
+#: includes/Admin/views/edit.php:282
 msgid "Send for signing"
 msgstr "שליחה לחתימה"
 
@@ -746,11 +795,11 @@ msgstr "שליחה לחתימה"
 msgid "Sent"
 msgstr "נשלח"
 
-#: includes/Admin/Admin.php:464
+#: includes/Admin/Admin.php:482
 msgid "Sent %1$d invitation(s). %2$d signer(s) have no email — share their link manually."
 msgstr "נשלחו %1$d הזמנות. ל-%2$d חותם/ים אין אימייל — שתפו את הקישור ידנית."
 
-#: includes/Admin/Admin.php:471
+#: includes/Admin/Admin.php:489
 msgid "Sent %d invitation(s)."
 msgstr "נשלחו %d הזמנות."
 
@@ -758,16 +807,16 @@ msgstr "נשלחו %d הזמנות."
 msgid "Sent by %s"
 msgstr "נשלח על-ידי %s"
 
-#: includes/Admin/Admin.php:117
 #: includes/Admin/Admin.php:118
+#: includes/Admin/Admin.php:119
 msgid "Settings"
 msgstr "הגדרות"
 
-#: includes/Admin/Admin.php:600
+#: includes/Admin/Admin.php:618
 msgid "Settings saved."
 msgstr "ההגדרות נשמרו."
 
-#: includes/Admin/views/edit.php:212
+#: includes/Admin/views/edit.php:227
 msgid "Share via WhatsApp"
 msgstr "שיתוף בוואטסאפ"
 
@@ -780,7 +829,7 @@ msgstr "חתימה על המסמך"
 msgid "Sign: %s"
 msgstr "חתימה: %s"
 
-#: includes/Admin/Admin.php:190
+#: includes/Admin/Admin.php:191
 #: includes/Admin/views/edit.php:95
 msgid "Signature"
 msgstr "חתימה"
@@ -789,7 +838,7 @@ msgstr "חתימה"
 msgid "Signature Certificate"
 msgstr "תעודת חתימה"
 
-#: includes/Admin/Admin.php:435
+#: includes/Admin/Admin.php:453
 msgid "Signature fields saved."
 msgstr "שדות החתימה נשמרו."
 
@@ -797,7 +846,7 @@ msgstr "שדות החתימה נשמרו."
 msgid "Signed at"
 msgstr "נחתם בתאריך"
 
-#: includes/Frontend/SigningController.php:219
+#: includes/Frontend/SigningController.php:227
 msgid "Signed by:"
 msgstr "נחתם על-ידי:"
 
@@ -813,30 +862,34 @@ msgstr "מסמך חתום"
 msgid "Signer %d"
 msgstr "חותם %d"
 
-#: includes/Admin/Admin.php:364
+#: includes/Admin/Admin.php:368
 msgid "Signer added."
 msgstr "החותם נוסף."
 
 #: includes/Services/DocumentService.php:185
-#: includes/Services/DocumentService.php:403
+#: includes/Services/DocumentService.php:460
 msgid "Signer not found."
 msgstr "החותם לא נמצא."
 
-#: includes/Admin/Admin.php:375
+#: includes/Admin/Admin.php:393
 msgid "Signer removed."
 msgstr "החותם הוסר."
+
+#: includes/Admin/Admin.php:382
+msgid "Signer verification updated."
+msgstr "אימות החותם עודכן."
 
 #: includes/Admin/DocumentsListTable.php:44
 #: includes/Admin/views/edit.php:155
 msgid "Signers"
 msgstr "חותמים"
 
-#: includes/Frontend/SigningController.php:99
-#: includes/Frontend/SigningController.php:325
+#: includes/Frontend/SigningController.php:102
+#: includes/Frontend/SigningController.php:404
 msgid "Signing declined"
 msgstr "החתימה סורבה"
 
-#: includes/Services/DocumentService.php:849
+#: includes/Services/DocumentService.php:906
 msgid "Some invitations could not be sent: %s. Please check your site email settings and re-send."
 msgstr "חלק מההזמנות לא נשלחו: %s. אנא בדקו את הגדרות הדוא\"ל של האתר ושלחו מחדש."
 
@@ -848,48 +901,52 @@ msgstr "סטטוס"
 msgid "Template"
 msgstr "תבנית"
 
-#: includes/Admin/Admin.php:714
+#: includes/Admin/Admin.php:732
 msgid "Template deleted."
 msgstr "התבנית נמחקה."
 
-#: includes/Frontend/SigningController.php:422
+#: includes/Frontend/SigningController.php:520
 msgid "Template missing."
 msgstr "תבנית חסרה."
 
-#: includes/Admin/views/edit.php:272
+#: includes/Admin/views/edit.php:295
 msgid "Template name"
 msgstr "שם התבנית"
 
-#: includes/Admin/Admin.php:619
-#: includes/Services/DocumentService.php:580
-#: includes/Services/DocumentService.php:666
+#: includes/Admin/Admin.php:637
+#: includes/Services/DocumentService.php:637
+#: includes/Services/DocumentService.php:723
 msgid "Template not found."
 msgstr "התבנית לא נמצאה."
 
-#: includes/Admin/Admin.php:658
+#: includes/Admin/Admin.php:676
 msgid "Template saved."
 msgstr "התבנית נשמרה."
 
-#: includes/Admin/Admin.php:108
 #: includes/Admin/Admin.php:109
+#: includes/Admin/Admin.php:110
 #: includes/Admin/views/templates.php:18
 msgid "Templates"
 msgstr "תבניות"
 
-#: includes/Admin/Admin.php:195
+#: includes/Admin/Admin.php:196
 #: includes/Admin/views/edit.php:100
 msgid "Text"
 msgstr "טקסט"
 
-#: includes/Frontend/SigningController.php:298
+#: includes/Frontend/SigningController.php:377
 msgid "Thank you!"
 msgstr "תודה!"
+
+#: includes/Frontend/SigningController.php:305
+msgid "That code was not correct. Please try again."
+msgstr "הקוד שגוי. נסו שוב."
 
 #: includes/Signature/Certificate.php:61
 msgid "The certificate could not be read. Check the file and password."
 msgstr "לא ניתן היה לקרוא את התעודה. בדקו את הקובץ והסיסמה."
 
-#: includes/Frontend/SigningController.php:280
+#: includes/Frontend/SigningController.php:359
 msgid "The document could not be found."
 msgstr "לא ניתן היה למצוא את המסמך."
 
@@ -905,15 +962,15 @@ msgstr "הקובץ אינו נראה כקובץ PDF תקין."
 msgid "The file is too large (max 25 MB)."
 msgstr "הקובץ גדול מדי (מקסימום 25 מ״ב)."
 
-#: includes/Frontend/SigningController.php:86
+#: includes/Frontend/SigningController.php:89
 msgid "The requested document could not be found."
 msgstr "לא ניתן היה למצוא את המסמך המבוקש."
 
-#: includes/Frontend/SigningController.php:116
+#: includes/Frontend/SigningController.php:119
 msgid "This document is signed in order. You will be notified when it is your turn."
 msgstr "מסמך זה נחתם לפי סדר. תקבלו הודעה כשיגיע תורכם."
 
-#: includes/Admin/views/edit.php:214
+#: includes/Admin/views/edit.php:229
 msgid "This link is personal and replaces any link previously issued to this signer."
 msgstr "הקישור אישי ומחליף כל קישור קודם שהונפק לחותם זה."
 
@@ -925,24 +982,25 @@ msgstr "קישור זה אישי — אנא אל תעבירו אותו לאחר�
 msgid "This signer has no email. Share the signing link instead."
 msgstr "לחותם זה אין אימייל. שתפו את קישור החתימה במקום."
 
-#: includes/Frontend/SigningController.php:284
+#: includes/Frontend/SigningController.php:363
 msgid "This signing link has expired."
 msgstr "קישור החתימה פג תוקף."
 
-#: includes/Frontend/SigningController.php:108
+#: includes/Frontend/SigningController.php:111
 msgid "This signing link has expired. Please ask the sender for a new one."
 msgstr "קישור החתימה פג תוקף. אנא בקשו מהשולח קישור חדש."
 
-#: includes/Frontend/SigningController.php:252
-#: includes/Frontend/SigningController.php:312
+#: includes/Frontend/SigningController.php:286
+#: includes/Frontend/SigningController.php:327
+#: includes/Frontend/SigningController.php:391
 msgid "This signing link is no longer valid."
 msgstr "קישור החתימה אינו בתוקף עוד."
 
-#: includes/Frontend/SigningController.php:78
+#: includes/Frontend/SigningController.php:81
 msgid "This signing link is no longer valid. Please ask the sender for a new one."
 msgstr "קישור החתימה אינו בתוקף עוד. אנא בקשו מהשולח קישור חדש."
 
-#: includes/Frontend/SigningController.php:214
+#: includes/Frontend/SigningController.php:222
 msgid "Title:"
 msgstr "כותרת:"
 
@@ -990,15 +1048,32 @@ msgstr "שימוש בתבנית: %s"
 msgid "Variables"
 msgstr "משתנים"
 
-#: includes/Frontend/SigningController.php:203
+#: includes/Frontend/SigningController.php:211
 msgid "Verification code (SHA-256)"
 msgstr "קוד אימות (SHA-256)"
 
-#: includes/Frontend/SigningController.php:205
+#: includes/Frontend/SigningController.php:337
+msgid "Verification required"
+msgstr "נדרש אימות"
+
+#: includes/Frontend/SigningController.php:423
+msgid "Verification required."
+msgstr "נדרש אימות."
+
+#: includes/Frontend/SigningController.php:213
 msgid "Verify document"
 msgstr "אימות מסמך"
 
-#: includes/Admin/views/edit.php:264
+#: includes/Admin/views/edit.php:202
+msgid "Verify identity:"
+msgstr "אימות זהות:"
+
+#: includes/Frontend/views/auth.php:20
+#: includes/Frontend/views/auth.php:24
+msgid "Verify your identity"
+msgstr "אימות הזהות שלכם"
+
+#: includes/Admin/views/edit.php:287
 msgid "View original"
 msgstr "צפייה במקור"
 
@@ -1006,10 +1081,14 @@ msgstr "צפייה במקור"
 msgid "Viewed"
 msgstr "נצפה"
 
-#: includes/Frontend/SigningController.php:115
-#: includes/Frontend/SigningController.php:288
+#: includes/Frontend/SigningController.php:118
+#: includes/Frontend/SigningController.php:367
 msgid "Waiting for an earlier signer"
 msgstr "ממתינים לחותם קודם"
+
+#: includes/Frontend/views/auth.php:31
+msgid "We sent a one-time code to %s. Enter it below to continue."
+msgstr "שלחנו קוד חד-פעמי אל %s. הזינו אותו כאן כדי להמשיך."
 
 #: includes/Admin/views/settings.php:45
 msgid "Webhook URL"
@@ -1032,15 +1111,15 @@ msgstr "כתבו את הטקסט הקבוע של המסמך. לאחר היציר
 msgid "X-ComSign-Key"
 msgstr "X-ComSign-Key"
 
-#: includes/Admin/Admin.php:880
+#: includes/Admin/Admin.php:898
 msgid "You are not allowed to access this page."
 msgstr "אינך מורשה לגשת לעמוד זה."
 
-#: includes/Frontend/SigningController.php:258
+#: includes/Frontend/SigningController.php:333
 msgid "You have already signed this document."
 msgstr "כבר חתמת על מסמך זה."
 
-#: includes/Frontend/SigningController.php:94
+#: includes/Frontend/SigningController.php:97
 msgid "You have already signed this document. Thank you."
 msgstr "כבר חתמת על מסמך זה. תודה."
 
@@ -1048,17 +1127,21 @@ msgstr "כבר חתמת על מסמך זה. תודה."
 msgid "You have been asked to review and sign the document: \"%s\"."
 msgstr "התבקשת לעיין ולחתום על המסמך: \"%s\"."
 
-#: includes/Frontend/SigningController.php:100
+#: includes/Frontend/SigningController.php:103
 msgid "You have declined to sign this document."
 msgstr "סירבת לחתום על מסמך זה."
 
-#: includes/Frontend/SigningController.php:326
+#: includes/Frontend/SigningController.php:405
 msgid "You have declined to sign this document. The sender has been notified."
 msgstr "סירבת לחתום על מסמך זה. השולח קיבל הודעה על כך."
 
-#: includes/Frontend/SigningController.php:263
+#: includes/Frontend/SigningController.php:342
 msgid "You must agree to sign electronically before continuing."
 msgstr "עליך להסכים לחתום באופן אלקטרוני לפני המשך."
+
+#: includes/Frontend/SignerAuth.php:128
+msgid "Your ComSign verification code"
+msgstr "קוד האימות שלכם ב-ComSign"
 
 #: includes/Frontend/views/sign.php:93
 msgid "Your answer"
@@ -1068,9 +1151,13 @@ msgstr "התשובה שלך"
 msgid "Your signature"
 msgstr "החתימה שלך"
 
-#: includes/Frontend/SigningController.php:299
+#: includes/Frontend/SigningController.php:378
 msgid "Your signature has been recorded. A copy will be available once all parties have signed."
 msgstr "חתימתך נרשמה. עותק יהיה זמין לאחר שכל הצדדים יחתמו."
+
+#: includes/Frontend/SignerAuth.php:131
+msgid "Your verification code is: %1$s\n\nIt expires in %2$d minutes."
+msgstr "קוד האימות שלכם הוא: %1$s\n\nהוא יפוג בעוד %2$d דקות."
 
 #: includes/Admin/views/new.php:76
 msgid "customer_name = Dana Cohen\ncontract_no = 2026-0042"
@@ -1080,7 +1167,7 @@ msgstr "customer_name = דנה כהן\ncontract_no = 2026-0042"
 msgid "days"
 msgstr "ימים"
 
-#: includes/Admin/views/edit.php:251
+#: includes/Admin/views/edit.php:274
 #: includes/Admin/views/template-bulk.php:38
 msgid "days (0 = never)"
 msgstr "ימים (0 = ללא הגבלה)"
@@ -1090,12 +1177,12 @@ msgstr "ימים (0 = ללא הגבלה)"
 msgid "e.g. Service agreement"
 msgstr "לדוגמה: הסכם שירות"
 
-#: includes/Admin/views/edit.php:227
+#: includes/Admin/views/edit.php:242
 #: includes/Admin/views/template-use.php:32
 msgid "email@example.com"
 msgstr "email@example.com"
 
-#: includes/Frontend/SigningController.php:213
+#: includes/Frontend/SigningController.php:221
 msgid "✔ This document is authentic."
 msgstr "✔ המסמך מאומת ואותנטי."
 
