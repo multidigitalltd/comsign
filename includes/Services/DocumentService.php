@@ -1207,6 +1207,76 @@ final class DocumentService {
 		);
 
 		$this->audit->record( AuditLogger::EVENT_COMPLETED, $document_id, 0, array( 'sha256' => $hash, 'provider' => $provider->id() ) );
+
+		// Email the completed PDF to any CC recipients.
+		$this->notify_cc( $this->documents->find( $document_id ), $signed_path );
+	}
+
+	/**
+	 * Store the CC recipients for a document (validated, comma-joined).
+	 *
+	 * @param int   $document_id Document id.
+	 * @param array $emails      Raw email strings.
+	 */
+	public function set_cc( int $document_id, array $emails ): void {
+		$valid = array();
+		foreach ( $emails as $email ) {
+			$email = sanitize_email( (string) $email );
+			$key   = strtolower( $email );
+			if ( '' !== $email && is_email( $email ) && ! isset( $valid[ $key ] ) ) {
+				$valid[ $key ] = $email;
+			}
+		}
+		$this->documents->update( $document_id, array( 'cc_emails' => implode( ',', array_values( $valid ) ) ) );
+	}
+
+	/**
+	 * Parse a document's stored CC list into an array of emails.
+	 *
+	 * @param object|null $document Document row.
+	 *
+	 * @return string[]
+	 */
+	public static function cc_list( ?object $document ): array {
+		if ( ! $document || empty( $document->cc_emails ) ) {
+			return array();
+		}
+		return array_values( array_filter( array_map( 'trim', explode( ',', (string) $document->cc_emails ) ) ) );
+	}
+
+	/**
+	 * Email the completed signed PDF to the document's CC recipients.
+	 *
+	 * @param object|null $document    Document row.
+	 * @param string      $signed_path Path to the signed PDF.
+	 */
+	private function notify_cc( ?object $document, string $signed_path ): void {
+		$recipients = self::cc_list( $document );
+		if ( empty( $recipients ) || ! is_file( $signed_path ) ) {
+			return;
+		}
+
+		$brand   = \ComSign\Support\Settings::brand_name();
+		/* translators: %s: document title. */
+		$subject = sprintf( __( 'Completed & signed: "%s"', 'comsign' ), $document->title );
+		$body    = implode(
+			"\r\n",
+			array(
+				/* translators: %s: document title. */
+				sprintf( __( 'The document "%s" has been signed by all parties.', 'comsign' ), $document->title ),
+				'',
+				__( 'The fully signed copy is attached.', 'comsign' ),
+				'',
+				/* translators: %s: brand/site name. */
+				sprintf( __( 'Sent by %s', 'comsign' ), $brand ),
+			)
+		);
+
+		$headers = array( 'Content-Type: text/plain; charset=UTF-8' );
+
+		foreach ( $recipients as $email ) {
+			wp_mail( $email, $subject, $body, $headers, array( $signed_path ) );
+		}
 	}
 
 	/**

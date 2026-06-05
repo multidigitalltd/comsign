@@ -81,6 +81,7 @@ final class Installer {
 			status VARCHAR(20) NOT NULL DEFAULT 'draft',
 			sequential TINYINT(1) NOT NULL DEFAULT 0,
 			message TEXT NULL,
+			cc_emails TEXT NULL,
 			expires_at DATETIME DEFAULT NULL,
 			source_path VARCHAR(255) NOT NULL DEFAULT '',
 			signed_path VARCHAR(255) NOT NULL DEFAULT '',

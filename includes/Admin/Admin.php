@@ -53,6 +53,7 @@ final class Admin {
 		add_action( 'admin_post_comsign_create_text', array( $this, 'handle_create_text' ) );
 		add_action( 'admin_post_comsign_add_signer', array( $this, 'handle_add_signer' ) );
 		add_action( 'admin_post_comsign_set_signer_auth', array( $this, 'handle_set_signer_auth' ) );
+		add_action( 'admin_post_comsign_save_cc', array( $this, 'handle_save_cc' ) );
 		add_action( 'admin_post_comsign_delete_signer', array( $this, 'handle_delete_signer' ) );
 		add_action( 'admin_post_comsign_signer_link', array( $this, 'handle_signer_link' ) );
 		add_action( 'admin_post_comsign_resend_signer', array( $this, 'handle_resend_signer' ) );
@@ -272,6 +273,7 @@ final class Admin {
 				'nonces'     => array(
 					'add_signer'    => wp_create_nonce( 'comsign_add_signer_' . $document_id ),
 					'signer_auth'   => wp_create_nonce( 'comsign_set_signer_auth_' . $document_id ),
+					'save_cc'       => wp_create_nonce( 'comsign_save_cc_' . $document_id ),
 					'delete_signer' => wp_create_nonce( 'comsign_delete_signer_' . $document_id ),
 					'signer_link'   => wp_create_nonce( 'comsign_signer_link_' . $document_id ),
 					'resend_signer' => wp_create_nonce( 'comsign_resend_signer_' . $document_id ),
@@ -367,6 +369,20 @@ final class Admin {
 		}
 
 		$this->redirect_with_notice( $this->edit_url( $document_id ), 'success', __( 'Signer added.', 'comsign' ) );
+	}
+
+	public function handle_save_cc(): void {
+		$this->guard();
+		$document_id = $this->posted_document_id();
+		check_admin_referer( 'comsign_save_cc_' . $document_id );
+
+		$raw = isset( $_POST['cc_emails'] ) ? sanitize_textarea_field( wp_unslash( $_POST['cc_emails'] ) ) : '';
+		// Split on commas, semicolons, whitespace or newlines.
+		$emails = preg_split( '/[\s,;]+/', $raw, -1, PREG_SPLIT_NO_EMPTY );
+
+		$this->service->set_cc( $document_id, is_array( $emails ) ? $emails : array() );
+
+		$this->redirect_with_notice( $this->edit_url( $document_id ), 'success', __( 'CC recipients saved.', 'comsign' ) );
 	}
 
 	public function handle_set_signer_auth(): void {

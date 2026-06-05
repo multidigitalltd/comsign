@@ -254,6 +254,17 @@ foreach ( $signers as $signer ) {
 					<p class="description"><?php esc_html_e( 'Email is optional — leave it empty to share a signing link by WhatsApp or any other channel.', 'comsign' ); ?></p>
 					<p><button type="submit" class="button"><?php esc_html_e( 'Add signer', 'comsign' ); ?></button></p>
 				</form>
+
+				<hr>
+				<h3><?php esc_html_e( 'CC recipients', 'comsign' ); ?></h3>
+				<form method="post" action="<?php echo esc_url( $action_url ); ?>" class="comsign-inline-form">
+					<input type="hidden" name="action" value="comsign_save_cc">
+					<input type="hidden" name="document_id" value="<?php echo esc_attr( $document_id ); ?>">
+					<input type="hidden" name="_wpnonce" value="<?php echo esc_attr( $nonces['save_cc'] ); ?>">
+					<p><textarea name="cc_emails" rows="2" class="widefat" placeholder="cc1@example.com, cc2@example.com"><?php echo esc_textarea( (string) ( $document->cc_emails ?? '' ) ); ?></textarea></p>
+					<p class="description"><?php esc_html_e( 'These people receive the fully signed PDF by email when signing completes. They do not sign.', 'comsign' ); ?></p>
+					<p><button type="submit" class="button"><?php esc_html_e( 'Save CC recipients', 'comsign' ); ?></button></p>
+				</form>
 			</div>
 
 			<div class="comsign-card">
