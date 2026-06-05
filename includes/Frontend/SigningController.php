@@ -367,8 +367,10 @@ final class SigningController {
 			$this->render_message( __( 'Waiting for an earlier signer', 'comsign' ), __( 'It is not your turn to sign yet.', 'comsign' ) );
 		}
 
+		$uploads = $this->collect_uploads( $document, $signer );
+
 		try {
-			$this->service->record_signature( $document, $signer, $base64, $field_values );
+			$this->service->record_signature( $document, $signer, $base64, $field_values, $uploads );
 		} catch ( \Throwable $e ) {
 			$this->render_message( __( 'Could not complete signing', 'comsign' ), $e->getMessage() );
 		}
@@ -458,6 +460,52 @@ final class SigningController {
 
 		// Constant-time re-check (defence in depth against timing on lookup).
 		return Tokens::verify( $raw_token, $signer->token_hash ) ? $signer : null;
+	}
+
+	/**
+	 * Validate and store any uploaded attachment files for this signer.
+	 *
+	 * Only fields that are this signer's attachment fields are accepted, so a
+	 * tampered field id cannot write a file against someone else's field.
+	 *
+	 * @param object $document Document row.
+	 * @param object $signer   Signer row.
+	 *
+	 * @return array<int,array{path:string,name:string}>
+	 */
+	private function collect_uploads( object $document, object $signer ): array {
+		if ( empty( $_FILES['attachments']['name'] ) || ! is_array( $_FILES['attachments']['name'] ) ) {
+			return array();
+		}
+
+		// Build the allowlist of this signer's attachment field ids.
+		$allowed = array();
+		foreach ( $this->fields->for_signer_in_document( (int) $document->id, (int) $signer->id ) as $field ) {
+			if ( FieldRepository::TYPE_ATTACHMENT === $field->type ) {
+				$allowed[ (int) $field->id ] = true;
+			}
+		}
+
+		$uploads = array();
+		// phpcs:ignore WordPress.Security.ValidatedSanitizedInput.InputNotSanitized
+		foreach ( array_keys( $_FILES['attachments']['name'] ) as $field_id ) {
+			$field_id = (int) $field_id;
+			if ( ! isset( $allowed[ $field_id ] ) ) {
+				continue;
+			}
+			$entry = array(
+				'name'     => $_FILES['attachments']['name'][ $field_id ], // phpcs:ignore WordPress.Security.ValidatedSanitizedInput
+				'tmp_name' => $_FILES['attachments']['tmp_name'][ $field_id ], // phpcs:ignore WordPress.Security.ValidatedSanitizedInput
+				'error'    => $_FILES['attachments']['error'][ $field_id ], // phpcs:ignore WordPress.Security.ValidatedSanitizedInput
+				'size'     => $_FILES['attachments']['size'][ $field_id ], // phpcs:ignore WordPress.Security.ValidatedSanitizedInput
+			);
+			$stored = Storage::store_attachment( $entry, (int) $document->id, $field_id );
+			if ( $stored ) {
+				$uploads[ $field_id ] = $stored;
+			}
+		}
+
+		return $uploads;
 	}
 
 	/**

@@ -61,7 +61,16 @@ require __DIR__ . '/partials/header.php';
 		</section>
 		<?php endif; ?>
 
-		<form id="comsign-sign-form" method="post" action="<?php echo esc_url( $post_url ); ?>" class="comsign-card" data-needs-signature="<?php echo $needs_signature ? '1' : '0'; ?>">
+		<?php
+		$has_uploads = false;
+		foreach ( $input_fields as $f ) {
+			if ( \ComSign\Database\FieldRepository::TYPE_ATTACHMENT === $f->type ) {
+				$has_uploads = true;
+				break;
+			}
+		}
+		?>
+		<form id="comsign-sign-form" method="post" action="<?php echo esc_url( $post_url ); ?>" class="comsign-card" data-needs-signature="<?php echo $needs_signature ? '1' : '0'; ?>"<?php echo $has_uploads ? ' enctype="multipart/form-data"' : ''; ?>>
 			<input type="hidden" name="action" value="comsign_sign_submit">
 			<input type="hidden" name="token" value="<?php echo esc_attr( $raw_token ); ?>">
 			<input type="hidden" name="_wpnonce" value="<?php echo esc_attr( $nonce ); ?>">
@@ -88,6 +97,11 @@ require __DIR__ . '/partials/header.php';
 									<option value="<?php echo esc_attr( $opt ); ?>"><?php echo esc_html( $opt ); ?></option>
 								<?php endforeach; ?>
 							</select>
+						<?php elseif ( \ComSign\Database\FieldRepository::TYPE_ATTACHMENT === $field->type ) : ?>
+							<label class="comsign-file-label">
+								<?php esc_html_e( 'Upload a file', 'comsign' ); ?><?php echo $req ? ' *' : ''; ?>
+								<input type="file" name="attachments[<?php echo (int) $field->id; ?>]" class="comsign-file" accept=".pdf,.png,.jpg,.jpeg,.gif,.webp,.heic,.doc,.docx,.txt"<?php echo $req ? ' required' : ''; ?>>
+							</label>
 						<?php elseif ( \ComSign\Database\FieldRepository::TYPE_NUMBER === $field->type ) : ?>
 							<input type="number" step="any" name="<?php echo esc_attr( $name ); ?>" class="comsign-input" placeholder="<?php echo $req ? esc_attr__( 'Enter a number (required)', 'comsign' ) : esc_attr__( 'Enter a number', 'comsign' ); ?>"<?php echo $req ? ' required' : ''; ?>>
 						<?php else : ?>

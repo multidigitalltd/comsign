@@ -47,10 +47,47 @@ final class CertificatePage {
 			}
 		}
 
+		// List signer-uploaded attachments, if any.
+		$n = 0;
+		foreach ( self::attachments( (int) $document->id ) as $att ) {
+			++$n;
+			/* translators: %d: attachment number. */
+			$lines[ sprintf( __( 'Attachment %d', 'comsign' ), $n ) ] = (string) $att;
+		}
+
 		return array(
 			'title' => __( 'Signature Certificate', 'comsign' ),
 			'lines' => $lines,
 		);
+	}
+
+	/**
+	 * Filenames of attachments uploaded for a document.
+	 *
+	 * @param int $document_id Document id.
+	 *
+	 * @return string[]
+	 */
+	private static function attachments( int $document_id ): array {
+		global $wpdb;
+		$table = \ComSign\Setup\Installer::fields_table();
+
+		$rows = $wpdb->get_results( // phpcs:ignore WordPress.DB.DirectDatabaseQuery, WordPress.DB.PreparedSQL.NotPrepared
+			$wpdb->prepare(
+				'SELECT value FROM ' . $table . ' WHERE document_id = %d AND type = %s',
+				$document_id,
+				\ComSign\Database\FieldRepository::TYPE_ATTACHMENT
+			)
+		);
+
+		$names = array();
+		foreach ( (array) $rows as $row ) {
+			$decoded = json_decode( (string) $row->value, true );
+			if ( is_array( $decoded ) && 'file' === ( $decoded['kind'] ?? '' ) && ! empty( $decoded['name'] ) ) {
+				$names[] = (string) $decoded['name'];
+			}
+		}
+		return $names;
 	}
 
 	/**

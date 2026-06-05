@@ -208,6 +208,7 @@ final class Admin {
 					'number'       => __( 'Number', 'comsign' ),
 					'checkbox'     => __( 'Checkbox', 'comsign' ),
 					'choice'       => __( 'Choice', 'comsign' ),
+					'attachment'   => __( 'File', 'comsign' ),
 					'remove'       => __( 'Remove', 'comsign' ),
 					'choicePrompt' => __( 'Enter options separated by commas:', 'comsign' ),
 					'toggleRequired' => __( 'Click to toggle required', 'comsign' ),

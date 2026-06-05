@@ -90,6 +90,56 @@ final class Storage {
 	}
 
 	/**
+	 * Store a signer-uploaded attachment in the protected dir.
+	 *
+	 * Validates the upload (size + extension allowlist) and writes it under an
+	 * unguessable name. Returns array{path,name} or null on rejection.
+	 *
+	 * @param array $file        One entry from $_FILES.
+	 * @param int   $document_id Document id (namespacing).
+	 * @param int   $field_id    Field id.
+	 *
+	 * @return array{path:string,name:string}|null
+	 */
+	public static function store_attachment( array $file, int $document_id, int $field_id ): ?array {
+		if ( empty( $file['tmp_name'] ) || ! isset( $file['error'] ) || UPLOAD_ERR_OK !== (int) $file['error'] || ! is_uploaded_file( $file['tmp_name'] ) ) {
+			return null;
+		}
+
+		// 8 MB cap.
+		if ( (int) ( $file['size'] ?? 0 ) > 8 * MB_IN_BYTES ) {
+			return null;
+		}
+
+		$orig = sanitize_file_name( (string) ( $file['name'] ?? 'upload' ) );
+		$ext  = strtolower( pathinfo( $orig, PATHINFO_EXTENSION ) );
+
+		$allowed = array( 'pdf', 'png', 'jpg', 'jpeg', 'gif', 'webp', 'heic', 'doc', 'docx', 'txt' );
+		if ( ! in_array( $ext, $allowed, true ) ) {
+			return null;
+		}
+
+		// Cross-check the real mime against WordPress' allowed types.
+		$check = wp_check_filetype( $orig );
+		if ( false === $check['ext'] ) {
+			return null;
+		}
+
+		$dir  = self::ensure_protected_dir();
+		$dest = sprintf( '%s/att-%d-%d-%s.%s', $dir, $document_id, $field_id, wp_generate_password( 12, false ), $ext );
+
+		if ( ! @move_uploaded_file( $file['tmp_name'], $dest ) ) { // phpcs:ignore WordPress.PHP.NoSilencedErrors.Discouraged
+			return null;
+		}
+		@chmod( $dest, 0600 ); // phpcs:ignore WordPress.PHP.NoSilencedErrors.Discouraged
+
+		return array(
+			'path' => $dest,
+			'name' => $orig,
+		);
+	}
+
+	/**
 	 * Delete every stored file belonging to a document.
 	 *
 	 * @param object $document Document row with source_path/signed_path.
@@ -98,6 +148,14 @@ final class Storage {
 		foreach ( array( $document->source_path, $document->signed_path ) as $path ) {
 			if ( $path && is_file( $path ) && self::is_within_base( $path ) ) {
 				wp_delete_file( $path );
+			}
+		}
+
+		// Remove any signer-uploaded attachments for this document.
+		$pattern = trailingslashit( self::base_dir() ) . 'att-' . (int) $document->id . '-*';
+		foreach ( (array) glob( $pattern ) as $att ) {
+			if ( is_file( $att ) && self::is_within_base( $att ) ) {
+				wp_delete_file( $att );
 			}
 		}
 	}

@@ -58,7 +58,7 @@ msgstr ""
 msgid "A signature is required."
 msgstr ""
 
-#: includes/Admin/Admin.php:501
+#: includes/Admin/Admin.php:502
 msgid "A signing link was generated. Copy it or share via WhatsApp below."
 msgstr ""
 
@@ -66,11 +66,11 @@ msgstr ""
 msgid "Accent colour"
 msgstr ""
 
-#: includes/Admin/views/edit.php:219
+#: includes/Admin/views/edit.php:220
 msgid "Access code"
 msgstr ""
 
-#: includes/Admin/views/edit.php:262
+#: includes/Admin/views/edit.php:263
 msgid "Access code (for the access-code method)"
 msgstr ""
 
@@ -78,7 +78,7 @@ msgstr ""
 msgid "Access code (shared by you)"
 msgstr ""
 
-#: includes/Admin/views/edit.php:280
+#: includes/Admin/views/edit.php:281
 #: includes/Admin/views/templates.php:32
 msgid "Actions"
 msgstr ""
@@ -102,11 +102,11 @@ msgstr ""
 msgid "Add at least one signer first, then drop signature fields onto the document."
 msgstr ""
 
-#: includes/Admin/views/edit.php:107
+#: includes/Admin/views/edit.php:108
 msgid "Add field"
 msgstr ""
 
-#: includes/Admin/views/edit.php:264
+#: includes/Admin/views/edit.php:265
 msgid "Add signer"
 msgstr ""
 
@@ -129,7 +129,11 @@ msgstr ""
 msgid "Assign a recipient to each role. The document is created as a draft so you can review it before sending."
 msgstr ""
 
-#: includes/Admin/views/edit.php:310
+#: includes/Signature/CertificatePage.php:55
+msgid "Attachment %d"
+msgstr ""
+
+#: includes/Admin/views/edit.php:311
 msgid "Audit report (PDF)"
 msgstr ""
 
@@ -137,7 +141,7 @@ msgstr ""
 msgid "Audit report — %s"
 msgstr ""
 
-#: includes/Admin/views/edit.php:127
+#: includes/Admin/views/edit.php:128
 #: includes/Services/DocumentService.php:235
 msgid "Audit trail"
 msgstr ""
@@ -162,7 +166,7 @@ msgstr ""
 msgid "Branding"
 msgstr ""
 
-#: includes/Admin/views/edit.php:137
+#: includes/Admin/views/edit.php:138
 #: includes/Services/DocumentService.php:245
 #: includes/Signature/CertificatePage.php:46
 msgid "Browser"
@@ -172,7 +176,7 @@ msgstr ""
 msgid "Bulk send"
 msgstr ""
 
-#: includes/Admin/Admin.php:825
+#: includes/Admin/Admin.php:826
 msgid "Bulk send complete: %d document(s) created and sent."
 msgstr ""
 
@@ -184,11 +188,11 @@ msgstr ""
 msgid "Bulk send: %s"
 msgstr ""
 
-#: includes/Admin/views/edit.php:268
+#: includes/Admin/views/edit.php:269
 msgid "CC recipients"
 msgstr ""
 
-#: includes/Admin/Admin.php:396
+#: includes/Admin/Admin.php:397
 msgid "CC recipients saved."
 msgstr ""
 
@@ -196,11 +200,11 @@ msgstr ""
 msgid "Certificate password"
 msgstr ""
 
-#: includes/Admin/Admin.php:679
+#: includes/Admin/Admin.php:680
 msgid "Certificate removed. Documents will use electronic signatures."
 msgstr ""
 
-#: includes/Admin/Admin.php:667
+#: includes/Admin/Admin.php:668
 msgid "Certificate stored. New documents will be signed with PKI/PAdES."
 msgstr ""
 
@@ -217,7 +221,7 @@ msgstr ""
 msgid "Choice (dropdown)"
 msgstr ""
 
-#: includes/Frontend/views/sign.php:86
+#: includes/Frontend/views/sign.php:95
 msgid "Choose…"
 msgstr ""
 
@@ -225,7 +229,7 @@ msgstr ""
 msgid "Clear"
 msgstr ""
 
-#: includes/Admin/Admin.php:213
+#: includes/Admin/Admin.php:214
 msgid "Click to toggle required"
 msgstr ""
 
@@ -255,7 +259,7 @@ msgstr ""
 msgid "Completed"
 msgstr ""
 
-#: includes/Services/DocumentService.php:1261
+#: includes/Services/DocumentService.php:1281
 msgid "Completed & signed: \"%s\""
 msgstr ""
 
@@ -283,7 +287,7 @@ msgstr ""
 msgid "Compose from text"
 msgstr ""
 
-#: includes/Frontend/views/sign.php:120
+#: includes/Frontend/views/sign.php:134
 msgid "Confirm decline"
 msgstr ""
 
@@ -300,11 +304,11 @@ msgid "Copied!"
 msgstr ""
 
 #: includes/Admin/Admin.php:167
-#: includes/Admin/views/edit.php:237
+#: includes/Admin/views/edit.php:238
 msgid "Copy link"
 msgstr ""
 
-#: includes/Frontend/SigningController.php:373
+#: includes/Frontend/SigningController.php:375
 msgid "Could not complete signing"
 msgstr ""
 
@@ -312,7 +316,7 @@ msgstr ""
 msgid "Could not generate the document PDF."
 msgstr ""
 
-#: includes/Admin/Admin.php:215
+#: includes/Admin/Admin.php:216
 msgid "Could not load the document preview."
 msgstr ""
 
@@ -346,7 +350,7 @@ msgstr ""
 msgid "Date (auto)"
 msgstr ""
 
-#: includes/Frontend/views/sign.php:110
+#: includes/Frontend/views/sign.php:124
 msgid "Decline"
 msgstr ""
 
@@ -359,7 +363,7 @@ msgstr ""
 msgid "Delete"
 msgstr ""
 
-#: includes/Admin/views/edit.php:325
+#: includes/Admin/views/edit.php:326
 msgid "Delete document"
 msgstr ""
 
@@ -392,24 +396,24 @@ msgstr ""
 msgid "Document content"
 msgstr ""
 
-#: includes/Admin/Admin.php:798
+#: includes/Admin/Admin.php:799
 msgid "Document created from template. Review and send."
 msgstr ""
 
-#: includes/Admin/Admin.php:361
+#: includes/Admin/Admin.php:362
 msgid "Document created. Now add signers and place fields."
 msgstr ""
 
-#: includes/Admin/Admin.php:582
+#: includes/Admin/Admin.php:583
 msgid "Document deleted."
 msgstr ""
 
-#: includes/Admin/Admin.php:572
+#: includes/Admin/Admin.php:573
 msgid "Document duplicated."
 msgstr ""
 
-#: includes/Admin/Admin.php:271
-#: includes/Admin/Admin.php:899
+#: includes/Admin/Admin.php:272
+#: includes/Admin/Admin.php:900
 #: includes/Services/DocumentService.php:230
 #: includes/Services/DocumentService.php:498
 #: includes/Services/DocumentService.php:570
@@ -435,11 +439,11 @@ msgstr ""
 msgid "Document unavailable"
 msgstr ""
 
-#: includes/Frontend/SigningController.php:428
+#: includes/Frontend/SigningController.php:430
 msgid "Document unavailable."
 msgstr ""
 
-#: includes/Admin/Admin.php:333
+#: includes/Admin/Admin.php:334
 msgid "Document uploaded. Now add signers and place signature fields."
 msgstr ""
 
@@ -461,7 +465,7 @@ msgstr ""
 msgid "Draft"
 msgstr ""
 
-#: includes/Admin/views/edit.php:108
+#: includes/Admin/views/edit.php:109
 msgid "Drag to reposition; double-click to remove; click a field label to toggle “required”."
 msgstr ""
 
@@ -494,11 +498,11 @@ msgstr ""
 msgid "Email a reminder to signers who have not signed yet."
 msgstr ""
 
-#: includes/Admin/views/edit.php:263
+#: includes/Admin/views/edit.php:264
 msgid "Email is optional — leave it empty to share a signing link by WhatsApp or any other channel."
 msgstr ""
 
-#: includes/Admin/views/edit.php:196
+#: includes/Admin/views/edit.php:197
 msgid "Email link"
 msgstr ""
 
@@ -506,19 +510,19 @@ msgstr ""
 msgid "Email one-time code"
 msgstr ""
 
-#: includes/Frontend/views/sign.php:92
+#: includes/Frontend/views/sign.php:106
 msgid "Enter a number"
 msgstr ""
 
-#: includes/Frontend/views/sign.php:92
+#: includes/Frontend/views/sign.php:106
 msgid "Enter a number (required)"
 msgstr ""
 
-#: includes/Admin/Admin.php:212
+#: includes/Admin/Admin.php:213
 msgid "Enter options separated by commas:"
 msgstr ""
 
-#: includes/Admin/views/edit.php:134
+#: includes/Admin/views/edit.php:135
 #: includes/Services/DocumentService.php:242
 msgid "Event"
 msgstr ""
@@ -535,16 +539,24 @@ msgstr ""
 msgid "Field for:"
 msgstr ""
 
-#: includes/Admin/Admin.php:905
+#: includes/Admin/Admin.php:211
+msgid "File"
+msgstr ""
+
+#: includes/Admin/Admin.php:906
 msgid "File not available."
 msgstr ""
 
-#: includes/Admin/views/edit.php:252
+#: includes/Admin/views/edit.php:105
+msgid "File upload"
+msgstr ""
+
+#: includes/Admin/views/edit.php:253
 #: includes/Admin/views/template-use.php:31
 msgid "Full name"
 msgstr ""
 
-#: includes/Admin/views/edit.php:179
+#: includes/Admin/views/edit.php:180
 msgid "Get signing link"
 msgstr ""
 
@@ -560,15 +572,15 @@ msgstr ""
 msgid "Hello,"
 msgstr ""
 
-#: includes/Frontend/views/sign.php:103
+#: includes/Frontend/views/sign.php:117
 msgid "I agree to sign this document electronically, and I confirm that my electronic signature is legally binding."
 msgstr ""
 
-#: includes/Frontend/views/sign.php:82
+#: includes/Frontend/views/sign.php:91
 msgid "I confirm"
 msgstr ""
 
-#: includes/Admin/views/edit.php:136
+#: includes/Admin/views/edit.php:137
 #: includes/Services/DocumentService.php:244
 msgid "IP"
 msgstr ""
@@ -588,11 +600,11 @@ msgstr ""
 
 #: includes/Frontend/SigningController.php:286
 #: includes/Frontend/SigningController.php:327
-#: includes/Frontend/SigningController.php:391
+#: includes/Frontend/SigningController.php:393
 msgid "Invalid link"
 msgstr ""
 
-#: includes/Frontend/SigningController.php:417
+#: includes/Frontend/SigningController.php:419
 msgid "Invalid link."
 msgstr ""
 
@@ -604,7 +616,7 @@ msgstr ""
 msgid "Invalid upload."
 msgstr ""
 
-#: includes/Admin/Admin.php:437
+#: includes/Admin/Admin.php:438
 msgid "Invitation re-sent."
 msgstr ""
 
@@ -621,12 +633,12 @@ msgstr ""
 msgid "Link expired"
 msgstr ""
 
-#: includes/Admin/views/edit.php:294
+#: includes/Admin/views/edit.php:295
 #: includes/Admin/views/template-bulk.php:36
 msgid "Link expires after"
 msgstr ""
 
-#: includes/Admin/Admin.php:214
+#: includes/Admin/Admin.php:215
 msgid "Loading document…"
 msgstr ""
 
@@ -638,7 +650,7 @@ msgstr ""
 msgid "Manage"
 msgstr ""
 
-#: includes/Admin/views/edit.php:299
+#: includes/Admin/views/edit.php:300
 #: includes/Admin/views/template-bulk.php:32
 msgid "Message to signers (optional)"
 msgstr ""
@@ -660,11 +672,11 @@ msgstr ""
 msgid "No documents yet. Upload your first PDF to get started."
 msgstr ""
 
-#: includes/Admin/Admin.php:541
+#: includes/Admin/Admin.php:542
 msgid "No emails were sent because the signer(s) have no email. Use \"Get signing link\" to share their link."
 msgstr ""
 
-#: includes/Admin/views/edit.php:129
+#: includes/Admin/views/edit.php:130
 msgid "No events recorded yet."
 msgstr ""
 
@@ -680,7 +692,7 @@ msgstr ""
 msgid "No matching signed document was found for that ID and code."
 msgstr ""
 
-#: includes/Admin/views/edit.php:159
+#: includes/Admin/views/edit.php:160
 msgid "No signers yet."
 msgstr ""
 
@@ -730,11 +742,11 @@ msgstr ""
 msgid "Partially signed"
 msgstr ""
 
-#: includes/Admin/views/edit.php:321
+#: includes/Admin/views/edit.php:322
 msgid "Permanently delete this document and all its data?"
 msgstr ""
 
-#: includes/Admin/views/edit.php:254
+#: includes/Admin/views/edit.php:255
 #: includes/Admin/views/template-use.php:33
 msgid "Phone for WhatsApp (optional)"
 msgstr ""
@@ -751,19 +763,19 @@ msgstr ""
 msgid "Please add a title or some content for the document."
 msgstr ""
 
-#: includes/Frontend/views/sign.php:106
+#: includes/Frontend/views/sign.php:120
 msgid "Please add your signature and accept the agreement."
 msgstr ""
 
-#: includes/Admin/Admin.php:648
+#: includes/Admin/Admin.php:649
 msgid "Please choose a .p12/.pfx certificate file."
 msgstr ""
 
-#: includes/Admin/Admin.php:321
+#: includes/Admin/Admin.php:322
 msgid "Please choose a PDF to upload."
 msgstr ""
 
-#: includes/Services/DocumentService.php:1109
+#: includes/Services/DocumentService.php:1115
 msgid "Please complete all required fields before signing."
 msgstr ""
 
@@ -771,7 +783,7 @@ msgstr ""
 msgid "Please enter the access code provided by the sender to continue."
 msgstr ""
 
-#: includes/Frontend/views/sign.php:72
+#: includes/Frontend/views/sign.php:81
 msgid "Please fill in"
 msgstr ""
 
@@ -795,7 +807,7 @@ msgstr ""
 msgid "Please provide at least one recipient."
 msgstr ""
 
-#: includes/Admin/views/edit.php:228
+#: includes/Admin/views/edit.php:229
 msgid "Please sign the document at the following secure link: %s"
 msgstr ""
 
@@ -811,11 +823,11 @@ msgstr ""
 msgid "REST base: /wp-json/comsign/v1/documents"
 msgstr ""
 
-#: includes/Admin/views/edit.php:304
+#: includes/Admin/views/edit.php:305
 msgid "Re-send invitations"
 msgstr ""
 
-#: includes/Frontend/views/sign.php:118
+#: includes/Frontend/views/sign.php:132
 msgid "Reason for declining (optional)"
 msgstr ""
 
@@ -835,8 +847,8 @@ msgstr ""
 msgid "Reminders run once a day via WP-Cron. Each reminder issues a fresh signing link."
 msgstr ""
 
-#: includes/Admin/Admin.php:211
-#: includes/Admin/views/edit.php:204
+#: includes/Admin/Admin.php:212
+#: includes/Admin/views/edit.php:205
 msgid "Remove"
 msgstr ""
 
@@ -848,15 +860,15 @@ msgstr ""
 msgid "Remove the certificate and revert to electronic signatures?"
 msgstr ""
 
-#: includes/Admin/views/edit.php:199
+#: includes/Admin/views/edit.php:200
 msgid "Remove this signer?"
 msgstr ""
 
-#: includes/Admin/views/edit.php:290
+#: includes/Admin/views/edit.php:291
 msgid "Require signing in order"
 msgstr ""
 
-#: includes/Admin/views/edit.php:106
+#: includes/Admin/views/edit.php:107
 msgid "Required"
 msgstr ""
 
@@ -876,11 +888,11 @@ msgstr ""
 msgid "SHA-256:"
 msgstr ""
 
-#: includes/Admin/views/edit.php:220
+#: includes/Admin/views/edit.php:221
 msgid "Save"
 msgstr ""
 
-#: includes/Admin/views/edit.php:275
+#: includes/Admin/views/edit.php:276
 msgid "Save CC recipients"
 msgstr ""
 
@@ -888,11 +900,11 @@ msgstr ""
 msgid "Save a document as a template from its management screen, then reuse it here for new documents or bulk sending."
 msgstr ""
 
-#: includes/Admin/views/edit.php:318
+#: includes/Admin/views/edit.php:319
 msgid "Save as template"
 msgstr ""
 
-#: includes/Admin/views/edit.php:118
+#: includes/Admin/views/edit.php:119
 msgid "Save fields"
 msgstr ""
 
@@ -908,7 +920,7 @@ msgstr ""
 msgid "Select image"
 msgstr ""
 
-#: includes/Admin/views/edit.php:304
+#: includes/Admin/views/edit.php:305
 msgid "Send for signing"
 msgstr ""
 
@@ -917,16 +929,16 @@ msgstr ""
 msgid "Sent"
 msgstr ""
 
-#: includes/Admin/Admin.php:545
+#: includes/Admin/Admin.php:546
 msgid "Sent %1$d invitation(s). %2$d signer(s) have no email — share their link manually."
 msgstr ""
 
-#: includes/Admin/Admin.php:552
+#: includes/Admin/Admin.php:553
 msgid "Sent %d invitation(s)."
 msgstr ""
 
 #: includes/Email/Mailer.php:64
-#: includes/Services/DocumentService.php:1271
+#: includes/Services/DocumentService.php:1291
 msgid "Sent by %s"
 msgstr ""
 
@@ -935,11 +947,11 @@ msgstr ""
 msgid "Settings"
 msgstr ""
 
-#: includes/Admin/Admin.php:701
+#: includes/Admin/Admin.php:702
 msgid "Settings saved."
 msgstr ""
 
-#: includes/Admin/views/edit.php:238
+#: includes/Admin/views/edit.php:239
 msgid "Share via WhatsApp"
 msgstr ""
 
@@ -948,11 +960,11 @@ msgid "Shown to signers on the signing page and in emails."
 msgstr ""
 
 #: includes/Frontend/views/partials/header.php:25
-#: includes/Frontend/views/sign.php:109
+#: includes/Frontend/views/sign.php:123
 msgid "Sign document"
 msgstr ""
 
-#: includes/Admin/views/edit.php:187
+#: includes/Admin/views/edit.php:188
 msgid "Sign in person"
 msgstr ""
 
@@ -965,11 +977,11 @@ msgstr ""
 msgid "Signature"
 msgstr ""
 
-#: includes/Signature/CertificatePage.php:51
+#: includes/Signature/CertificatePage.php:59
 msgid "Signature Certificate"
 msgstr ""
 
-#: includes/Admin/Admin.php:516
+#: includes/Admin/Admin.php:517
 msgid "Signature fields saved."
 msgstr ""
 
@@ -997,7 +1009,7 @@ msgstr ""
 msgid "Signer %d"
 msgstr ""
 
-#: includes/Admin/Admin.php:382
+#: includes/Admin/Admin.php:383
 msgid "Signer added."
 msgstr ""
 
@@ -1006,21 +1018,21 @@ msgstr ""
 msgid "Signer not found."
 msgstr ""
 
-#: includes/Admin/Admin.php:421
+#: includes/Admin/Admin.php:422
 msgid "Signer removed."
 msgstr ""
 
-#: includes/Admin/Admin.php:410
+#: includes/Admin/Admin.php:411
 msgid "Signer verification updated."
 msgstr ""
 
 #: includes/Admin/DocumentsListTable.php:44
-#: includes/Admin/views/edit.php:157
+#: includes/Admin/views/edit.php:158
 msgid "Signers"
 msgstr ""
 
 #: includes/Frontend/SigningController.php:102
-#: includes/Frontend/SigningController.php:404
+#: includes/Frontend/SigningController.php:406
 msgid "Signing declined"
 msgstr ""
 
@@ -1037,25 +1049,25 @@ msgstr ""
 msgid "Template"
 msgstr ""
 
-#: includes/Admin/Admin.php:838
+#: includes/Admin/Admin.php:839
 msgid "Template deleted."
 msgstr ""
 
-#: includes/Frontend/SigningController.php:520
+#: includes/Frontend/SigningController.php:568
 msgid "Template missing."
 msgstr ""
 
-#: includes/Admin/views/edit.php:317
+#: includes/Admin/views/edit.php:318
 msgid "Template name"
 msgstr ""
 
-#: includes/Admin/Admin.php:743
+#: includes/Admin/Admin.php:744
 #: includes/Services/DocumentService.php:640
 #: includes/Services/DocumentService.php:752
 msgid "Template not found."
 msgstr ""
 
-#: includes/Admin/Admin.php:782
+#: includes/Admin/Admin.php:783
 msgid "Template saved."
 msgstr ""
 
@@ -1070,7 +1082,7 @@ msgstr ""
 msgid "Text"
 msgstr ""
 
-#: includes/Frontend/SigningController.php:377
+#: includes/Frontend/SigningController.php:379
 msgid "Thank you!"
 msgstr ""
 
@@ -1086,15 +1098,15 @@ msgstr ""
 msgid "The certificate file is missing or too large (max 512 KB)."
 msgstr ""
 
-#: includes/Admin/Admin.php:658
+#: includes/Admin/Admin.php:659
 msgid "The certificate file is too large (max 512 KB)."
 msgstr ""
 
-#: includes/Admin/Admin.php:654
+#: includes/Admin/Admin.php:655
 msgid "The certificate must be a .p12 or .pfx file."
 msgstr ""
 
-#: includes/Services/DocumentService.php:1266
+#: includes/Services/DocumentService.php:1286
 msgid "The document \"%s\" has been signed by all parties."
 msgstr ""
 
@@ -1114,7 +1126,7 @@ msgstr ""
 msgid "The file is too large (max 25 MB)."
 msgstr ""
 
-#: includes/Services/DocumentService.php:1268
+#: includes/Services/DocumentService.php:1288
 msgid "The fully signed copy is attached."
 msgstr ""
 
@@ -1122,7 +1134,7 @@ msgstr ""
 msgid "The requested document could not be found."
 msgstr ""
 
-#: includes/Admin/views/edit.php:274
+#: includes/Admin/views/edit.php:275
 msgid "These people receive the fully signed PDF by email when signing completes. They do not sign."
 msgstr ""
 
@@ -1134,7 +1146,7 @@ msgstr ""
 msgid "This document is signed in order. You will be notified when it is your turn."
 msgstr ""
 
-#: includes/Admin/views/edit.php:240
+#: includes/Admin/views/edit.php:241
 msgid "This link is personal and replaces any link previously issued to this signer."
 msgstr ""
 
@@ -1156,7 +1168,7 @@ msgstr ""
 
 #: includes/Frontend/SigningController.php:286
 #: includes/Frontend/SigningController.php:327
-#: includes/Frontend/SigningController.php:391
+#: includes/Frontend/SigningController.php:393
 msgid "This signing link is no longer valid."
 msgstr ""
 
@@ -1196,6 +1208,10 @@ msgstr ""
 msgid "Upload a PKCS#12 certificate (.p12/.pfx) to sign completed documents cryptographically (eIDAS / ComSign compatible). Without it, documents use electronic signatures."
 msgstr ""
 
+#: includes/Frontend/views/sign.php:102
+msgid "Upload a file"
+msgstr ""
+
 #: includes/Admin/views/settings.php:135
 msgid "Upload certificate"
 msgstr ""
@@ -1224,7 +1240,7 @@ msgstr ""
 msgid "Verification required"
 msgstr ""
 
-#: includes/Frontend/SigningController.php:423
+#: includes/Frontend/SigningController.php:425
 msgid "Verification required."
 msgstr ""
 
@@ -1232,7 +1248,7 @@ msgstr ""
 msgid "Verify document"
 msgstr ""
 
-#: includes/Admin/views/edit.php:213
+#: includes/Admin/views/edit.php:214
 msgid "Verify identity:"
 msgstr ""
 
@@ -1241,7 +1257,7 @@ msgstr ""
 msgid "Verify your identity"
 msgstr ""
 
-#: includes/Admin/views/edit.php:309
+#: includes/Admin/views/edit.php:310
 msgid "View original"
 msgstr ""
 
@@ -1267,7 +1283,7 @@ msgstr ""
 msgid "Webhook secret"
 msgstr ""
 
-#: includes/Admin/views/edit.php:135
+#: includes/Admin/views/edit.php:136
 #: includes/Services/DocumentService.php:243
 msgid "When"
 msgstr ""
@@ -1280,7 +1296,7 @@ msgstr ""
 msgid "X-ComSign-Key"
 msgstr ""
 
-#: includes/Admin/Admin.php:1004
+#: includes/Admin/Admin.php:1005
 msgid "You are not allowed to access this page."
 msgstr ""
 
@@ -1300,7 +1316,7 @@ msgstr ""
 msgid "You have declined to sign this document."
 msgstr ""
 
-#: includes/Frontend/SigningController.php:405
+#: includes/Frontend/SigningController.php:407
 msgid "You have declined to sign this document. The sender has been notified."
 msgstr ""
 
@@ -1312,11 +1328,11 @@ msgstr ""
 msgid "Your ComSign verification code"
 msgstr ""
 
-#: includes/Frontend/views/sign.php:94
+#: includes/Frontend/views/sign.php:108
 msgid "Your answer"
 msgstr ""
 
-#: includes/Frontend/views/sign.php:94
+#: includes/Frontend/views/sign.php:108
 msgid "Your answer (required)"
 msgstr ""
 
@@ -1324,7 +1340,7 @@ msgstr ""
 msgid "Your signature"
 msgstr ""
 
-#: includes/Frontend/SigningController.php:378
+#: includes/Frontend/SigningController.php:380
 msgid "Your signature has been recorded. A copy will be available once all parties have signed."
 msgstr ""
 
@@ -1340,7 +1356,7 @@ msgstr ""
 msgid "days"
 msgstr ""
 
-#: includes/Admin/views/edit.php:296
+#: includes/Admin/views/edit.php:297
 #: includes/Admin/views/template-bulk.php:38
 msgid "days (0 = never)"
 msgstr ""
@@ -1350,7 +1366,7 @@ msgstr ""
 msgid "e.g. Service agreement"
 msgstr ""
 
-#: includes/Admin/views/edit.php:253
+#: includes/Admin/views/edit.php:254
 #: includes/Admin/views/template-use.php:32
 msgid "email@example.com"
 msgstr ""

@@ -1078,7 +1078,7 @@ final class DocumentService {
 	 *
 	 * @throws \RuntimeException If a required field is missing.
 	 */
-	public function record_signature( object $document, object $signer, string $signature_image, array $field_values = array() ): void {
+	public function record_signature( object $document, object $signer, string $signature_image, array $field_values = array(), array $uploads = array() ): void {
 		// Scope to the document being signed so a mis-assigned field can never
 		// be written through another document's signing flow.
 		$signer_fields = $this->fields->for_signer_in_document( (int) $document->id, (int) $signer->id );
@@ -1100,11 +1100,17 @@ final class DocumentService {
 		foreach ( $signer_fields as $field ) {
 			$posted = isset( $field_values[ (int) $field->id ] ) ? (string) $field_values[ (int) $field->id ] : '';
 
+			$upload = $uploads[ (int) $field->id ] ?? null;
+
 			// Enforce required signer-entered fields server-side.
 			if ( ! empty( $field->required ) && in_array( $field->type, FieldRepository::INPUT_TYPES, true ) ) {
-				$filled = ( FieldRepository::TYPE_CHOICE === $field->type )
-					? in_array( $posted, FieldRepository::decode_options( $field ), true )
-					: ( '' !== trim( $posted ) );
+				if ( FieldRepository::TYPE_ATTACHMENT === $field->type ) {
+					$filled = is_array( $upload ) && ! empty( $upload['path'] );
+				} elseif ( FieldRepository::TYPE_CHOICE === $field->type ) {
+					$filled = in_array( $posted, FieldRepository::decode_options( $field ), true );
+				} else {
+					$filled = ( '' !== trim( $posted ) );
+				}
 				if ( ! $filled ) {
 					throw new \RuntimeException( __( 'Please complete all required fields before signing.', 'comsign' ) );
 				}
@@ -1137,6 +1143,20 @@ final class DocumentService {
 					// Only accept a value that is one of the defined options.
 					$options = FieldRepository::decode_options( $field );
 					$value   = $this->text_value( in_array( $posted, $options, true ) ? $posted : '' );
+					break;
+				case FieldRepository::TYPE_ATTACHMENT:
+					// Store a reference to the uploaded file (not stamped onto the PDF).
+					if ( is_array( $upload ) && ! empty( $upload['path'] ) ) {
+						$value = (string) wp_json_encode(
+							array(
+								'kind' => 'file',
+								'name' => (string) ( $upload['name'] ?? 'file' ),
+								'path' => (string) $upload['path'],
+							)
+						);
+					} else {
+						$value = $this->text_value( '' );
+					}
 					break;
 
 				default: // signature / initials.
@@ -1274,9 +1294,40 @@ final class DocumentService {
 
 		$headers = array( 'Content-Type: text/plain; charset=UTF-8' );
 
-		foreach ( $recipients as $email ) {
-			wp_mail( $email, $subject, $body, $headers, array( $signed_path ) );
+		// Include the signed PDF plus any signer-uploaded attachments.
+		$attachments = array( $signed_path );
+		foreach ( $this->collect_attachments( (int) $document->id ) as $att ) {
+			$attachments[] = $att['path'];
 		}
+
+		foreach ( $recipients as $email ) {
+			wp_mail( $email, $subject, $body, $headers, $attachments );
+		}
+	}
+
+	/**
+	 * Collect signer-uploaded attachments for a document.
+	 *
+	 * @param int $document_id Document id.
+	 *
+	 * @return array<int,array{path:string,name:string,signer_id:int}>
+	 */
+	public function collect_attachments( int $document_id ): array {
+		$out = array();
+		foreach ( $this->fields->for_document( $document_id ) as $field ) {
+			if ( FieldRepository::TYPE_ATTACHMENT !== $field->type || empty( $field->value ) ) {
+				continue;
+			}
+			$decoded = json_decode( (string) $field->value, true );
+			if ( is_array( $decoded ) && 'file' === ( $decoded['kind'] ?? '' ) && ! empty( $decoded['path'] ) && is_file( $decoded['path'] ) ) {
+				$out[] = array(
+					'path'      => (string) $decoded['path'],
+					'name'      => (string) ( $decoded['name'] ?? basename( $decoded['path'] ) ),
+					'signer_id' => (int) $field->signer_id,
+				);
+			}
+		}
+		return $out;
 	}
 
 	/**

@@ -26,6 +26,7 @@ final class FieldRepository {
 	public const TYPE_NUMBER    = 'number';
 	public const TYPE_CHECKBOX  = 'checkbox';
 	public const TYPE_CHOICE    = 'choice';
+	public const TYPE_ATTACHMENT = 'attachment'; // signer uploads a file.
 	public const TYPE_NAME      = 'name';  // auto: signer name.
 	public const TYPE_EMAIL     = 'email'; // auto: signer email.
 
@@ -37,6 +38,7 @@ final class FieldRepository {
 		self::TYPE_NUMBER,
 		self::TYPE_CHECKBOX,
 		self::TYPE_CHOICE,
+		self::TYPE_ATTACHMENT,
 	);
 
 	/**

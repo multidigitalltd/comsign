@@ -72,7 +72,8 @@
 		text: cfg.i18n.text || 'Text',
 		number: cfg.i18n.number || 'Number',
 		checkbox: cfg.i18n.checkbox || 'Checkbox',
-		choice: cfg.i18n.choice || 'Choice'
+		choice: cfg.i18n.choice || 'Choice',
+		attachment: cfg.i18n.attachment || 'File'
 	};
 
 	function typeLabel( type ) {
@@ -136,7 +137,7 @@
 	}
 
 	// Field types the signer fills in themselves — only these can be "required".
-	var REQUIRABLE = [ 'signature', 'initials', 'text', 'number', 'checkbox', 'choice' ];
+	var REQUIRABLE = [ 'signature', 'initials', 'text', 'number', 'checkbox', 'choice', 'attachment' ];
 
 	function canRequire( type ) {
 		return REQUIRABLE.indexOf( type ) !== -1;

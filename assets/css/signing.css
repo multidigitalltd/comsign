@@ -206,3 +206,15 @@ body.comsign-public {
 	box-shadow: 0 0 0 2px #f0b429;
 	border-radius: 4px;
 }
+
+/* Signer file-upload field */
+.comsign-file-label {
+	display: block;
+	font-weight: 600;
+	margin-bottom: 4px;
+}
+.comsign-file {
+	display: block;
+	margin-top: 6px;
+	font-weight: 400;
+}

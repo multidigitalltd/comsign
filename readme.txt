@@ -4,7 +4,7 @@ Tags: signature, digital signature, pdf, esignature, hebrew
 Requires at least: 6.0
 Tested up to: 6.5
 Requires PHP: 7.4
-Stable tag: 0.13.0
+Stable tag: 0.14.0
 License: GPL-2.0-or-later
 License URI: https://www.gnu.org/licenses/gpl-2.0.html
 
@@ -105,6 +105,12 @@ ID and its SHA-256 code (shown on the document screen and the signature
 certificate) to confirm the document is authentic and see who signed it.
 
 == Changelog ==
+
+= 0.14.0 =
+* New: signer file upload. Add a "File upload" field so a signer attaches a
+  file (e.g. an ID copy) while signing. Uploads are validated (type + 8 MB cap),
+  stored privately, listed on the certificate page, and emailed with the signed
+  PDF to CC recipients. Removed with the document.
 
 = 0.13.0 =
 * New: in-person signing. From a document, hand your device to a present signer

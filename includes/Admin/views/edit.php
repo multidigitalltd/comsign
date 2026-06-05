@@ -102,6 +102,7 @@ foreach ( $signers as $signer ) {
 							<option value="number"><?php esc_html_e( 'Number', 'comsign' ); ?></option>
 							<option value="checkbox"><?php esc_html_e( 'Checkbox', 'comsign' ); ?></option>
 							<option value="choice"><?php esc_html_e( 'Choice (dropdown)', 'comsign' ); ?></option>
+							<option value="attachment"><?php esc_html_e( 'File upload', 'comsign' ); ?></option>
 						</select>
 						<label class="comsign-required-toggle"><input type="checkbox" id="comsign-field-required"> <?php esc_html_e( 'Required', 'comsign' ); ?></label>
 						<button type="button" class="button" id="comsign-add-field"><?php esc_html_e( 'Add field', 'comsign' ); ?></button>
