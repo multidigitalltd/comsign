@@ -107,6 +107,15 @@ final class Admin {
 
 		add_submenu_page(
 			self::MENU_SLUG,
+			__( 'Analytics', 'comsign' ),
+			__( 'Analytics', 'comsign' ),
+			Capabilities::MANAGE,
+			'comsign-analytics',
+			array( $this, 'render_analytics_page' )
+		);
+
+		add_submenu_page(
+			self::MENU_SLUG,
 			__( 'Templates', 'comsign' ),
 			__( 'Templates', 'comsign' ),
 			Capabilities::MANAGE,
@@ -653,6 +662,29 @@ final class Admin {
 		);
 
 		$this->redirect_with_notice( admin_url( 'admin.php?page=comsign-settings' ), 'success', __( 'Settings saved.', 'comsign' ) );
+	}
+
+	/**
+	 * Analytics dashboard.
+	 */
+	public function render_analytics_page(): void {
+		$this->guard();
+
+		$analytics = new \ComSign\Services\Analytics();
+
+		$this->view(
+			'analytics',
+			array(
+				'counts'       => $analytics->status_counts(),
+				'total'        => $analytics->total(),
+				'rate'         => $analytics->completion_rate(),
+				'avg_seconds'  => $analytics->avg_completion_seconds(),
+				'signers'      => $analytics->signer_stats(),
+				'stuck'        => $analytics->stuck( 7 ),
+				'series'       => $analytics->completions_by_day( 14 ),
+				'edit_base'    => admin_url( 'admin.php?page=comsign&action=edit&document=' ),
+			)
+		);
 	}
 
 	/* ---------------------------------------------------------------------
