@@ -31,17 +31,24 @@ Workflow:
 
 = Signature level =
 
-The current release implements **electronic signatures** (DocuSign-style:
-draw / type / stamp, embedded into the PDF). The architecture exposes a clean
-`SignatureProviderInterface` extension point so a future **PKI / PAdES**
-provider (certificates, cryptographic signatures, ComSign / eIDAS) can be
-added without touching the workflow code.
+ComSign supports **electronic signatures** (DocuSign-style: draw / type / stamp,
+embedded into the PDF) and, when you upload a PKCS#12 certificate, real
+**PKI / PAdES** cryptographic signatures (PKCS#7, eIDAS / ComSign compatible).
+Both run behind a clean `SignatureProviderInterface`; the cryptographic provider
+is selected automatically once a certificate is configured.
 
 = Signer authentication =
 
-This phase relies on an **audit trail** (IP, User-Agent, timestamp, recorded
-consent). OTP (SMS/email) and ID verification are intentionally out of scope
-for now, but the data model leaves room for them.
+Every signature is backed by an **audit trail** (IP, User-Agent, timestamp,
+recorded consent). On top of that you can require, per signer, an **access code**
+(shared out of band) or an **emailed one-time code (OTP)** before the document
+can be viewed or signed.
+
+= Automation =
+
+A REST API (`comsign/v1`) lists/reads documents, reads the audit trail and
+creates + sends documents (API key or logged-in manager). Outgoing **webhooks**
+POST a signed JSON payload (HMAC-SHA256) for every event.
 
 = Security =
 
