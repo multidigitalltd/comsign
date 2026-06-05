@@ -576,11 +576,25 @@ final class Admin {
 		$password = isset( $_POST['cert_password'] ) ? (string) wp_unslash( $_POST['cert_password'] ) : ''; // phpcs:ignore WordPress.Security.ValidatedSanitizedInput
 
 		try {
-			if ( empty( $_FILES['certificate']['tmp_name'] ) || ! is_uploaded_file( $_FILES['certificate']['tmp_name'] ) ) {
+			$file = isset( $_FILES['certificate'] ) ? $_FILES['certificate'] : array(); // phpcs:ignore WordPress.Security.ValidatedSanitizedInput
+
+			// Validate the upload using name/size/error — never the tmp path.
+			if ( empty( $file['tmp_name'] ) || ! isset( $file['error'] ) || UPLOAD_ERR_OK !== (int) $file['error'] || ! is_uploaded_file( $file['tmp_name'] ) ) {
 				throw new \RuntimeException( __( 'Please choose a .p12/.pfx certificate file.', 'comsign' ) );
 			}
-			$tmp = sanitize_text_field( $_FILES['certificate']['tmp_name'] ); // phpcs:ignore WordPress.Security.ValidatedSanitizedInput
-			\ComSign\Signature\Certificate::store( $tmp, $password );
+
+			$name = isset( $file['name'] ) ? sanitize_file_name( wp_unslash( $file['name'] ) ) : '';
+			$ext  = strtolower( pathinfo( $name, PATHINFO_EXTENSION ) );
+			if ( ! in_array( $ext, array( 'p12', 'pfx' ), true ) ) {
+				throw new \RuntimeException( __( 'The certificate must be a .p12 or .pfx file.', 'comsign' ) );
+			}
+
+			if ( (int) ( $file['size'] ?? 0 ) > 512 * KB_IN_BYTES ) {
+				throw new \RuntimeException( __( 'The certificate file is too large (max 512 KB).', 'comsign' ) );
+			}
+
+			// Pass the tmp path through untouched (it is a system path, not input).
+			\ComSign\Signature\Certificate::store( $file['tmp_name'], $password ); // phpcs:ignore WordPress.Security.ValidatedSanitizedInput
 		} catch ( \Throwable $e ) {
 			$this->redirect_with_notice( admin_url( 'admin.php?page=comsign-settings' ), 'error', $e->getMessage() );
 		}

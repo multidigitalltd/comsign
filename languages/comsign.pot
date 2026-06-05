@@ -27,7 +27,7 @@ msgstr ""
 msgid "A document is awaiting your signature — %s"
 msgstr ""
 
-#: includes/Services/DocumentService.php:939
+#: includes/Services/DocumentService.php:966
 msgid "A field is assigned to a signer that is not on this document. Please re-save the fields."
 msgstr ""
 
@@ -35,7 +35,7 @@ msgstr ""
 msgid "A new code has been sent."
 msgstr ""
 
-#: includes/Services/DocumentService.php:1068
+#: includes/Services/DocumentService.php:1095
 msgid "A signature is required."
 msgstr ""
 
@@ -71,7 +71,7 @@ msgstr ""
 msgid "Add Document"
 msgstr ""
 
-#: includes/Services/DocumentService.php:849
+#: includes/Services/DocumentService.php:876
 msgid "Add at least one signer before sending."
 msgstr ""
 
@@ -131,11 +131,11 @@ msgstr ""
 msgid "Bulk send"
 msgstr ""
 
-#: includes/Admin/Admin.php:720
+#: includes/Admin/Admin.php:734
 msgid "Bulk send complete: %d document(s) created and sent."
 msgstr ""
 
-#: includes/Services/DocumentService.php:729
+#: includes/Services/DocumentService.php:756
 msgid "Bulk send requires a template with exactly one role."
 msgstr ""
 
@@ -147,11 +147,11 @@ msgstr ""
 msgid "Certificate password"
 msgstr ""
 
-#: includes/Admin/Admin.php:600
+#: includes/Admin/Admin.php:614
 msgid "Certificate removed. Documents will use electronic signatures."
 msgstr ""
 
-#: includes/Admin/Admin.php:588
+#: includes/Admin/Admin.php:602
 msgid "Certificate stored. New documents will be signed with PKI/PAdES."
 msgstr ""
 
@@ -324,7 +324,7 @@ msgstr ""
 msgid "Document content"
 msgstr ""
 
-#: includes/Admin/Admin.php:693
+#: includes/Admin/Admin.php:707
 msgid "Document created from template. Review and send."
 msgstr ""
 
@@ -341,11 +341,11 @@ msgid "Document duplicated."
 msgstr ""
 
 #: includes/Admin/Admin.php:260
-#: includes/Admin/Admin.php:794
+#: includes/Admin/Admin.php:808
 #: includes/Services/DocumentService.php:230
 #: includes/Services/DocumentService.php:498
-#: includes/Services/DocumentService.php:568
-#: includes/Services/DocumentService.php:844
+#: includes/Services/DocumentService.php:570
+#: includes/Services/DocumentService.php:871
 msgid "Document not found."
 msgstr ""
 
@@ -454,7 +454,7 @@ msgstr ""
 msgid "Every event is POSTed here as JSON, signed with X-ComSign-Signature (HMAC-SHA256 of the body using the secret below)."
 msgstr ""
 
-#: includes/Services/DocumentService.php:945
+#: includes/Services/DocumentService.php:972
 msgid "Every signer must have at least one field. Please assign a field to each signer."
 msgstr ""
 
@@ -462,7 +462,7 @@ msgstr ""
 msgid "Field for:"
 msgstr ""
 
-#: includes/Admin/Admin.php:800
+#: includes/Admin/Admin.php:814
 msgid "File not available."
 msgstr ""
 
@@ -616,7 +616,7 @@ msgstr ""
 msgid "Only PDF files are allowed."
 msgstr ""
 
-#: includes/Signature/Certificate.php:55
+#: includes/Signature/Certificate.php:67
 msgid "OpenSSL is not available on this server, so PKI signing cannot be enabled."
 msgstr ""
 
@@ -649,7 +649,7 @@ msgstr ""
 msgid "Phone for WhatsApp (optional)"
 msgstr ""
 
-#: includes/Services/DocumentService.php:854
+#: includes/Services/DocumentService.php:881
 msgid "Place at least one signature field before sending."
 msgstr ""
 
@@ -665,7 +665,7 @@ msgstr ""
 msgid "Please add your signature and accept the agreement."
 msgstr ""
 
-#: includes/Admin/Admin.php:580
+#: includes/Admin/Admin.php:583
 msgid "Please choose a .p12/.pfx certificate file."
 msgstr ""
 
@@ -673,7 +673,7 @@ msgstr ""
 msgid "Please choose a PDF to upload."
 msgstr ""
 
-#: includes/Services/DocumentService.php:1082
+#: includes/Services/DocumentService.php:1109
 msgid "Please complete all required fields before signing."
 msgstr ""
 
@@ -693,8 +693,16 @@ msgstr ""
 msgid "Please provide a name or an email for the signer."
 msgstr ""
 
+#: includes/Services/DocumentService.php:679
+msgid "Please provide a recipient for every role that has fields."
+msgstr ""
+
 #: includes/Services/DocumentService.php:350
 msgid "Please provide a valid email address."
+msgstr ""
+
+#: includes/Services/DocumentService.php:668
+msgid "Please provide at least one recipient."
 msgstr ""
 
 #: includes/Admin/views/edit.php:219
@@ -766,7 +774,7 @@ msgstr ""
 msgid "Resend code"
 msgstr ""
 
-#: includes/Services/DocumentService.php:578
+#: includes/Services/DocumentService.php:580
 msgid "Role %d"
 msgstr ""
 
@@ -827,7 +835,7 @@ msgstr ""
 msgid "Settings"
 msgstr ""
 
-#: includes/Admin/Admin.php:619
+#: includes/Admin/Admin.php:633
 msgid "Settings saved."
 msgstr ""
 
@@ -904,7 +912,7 @@ msgstr ""
 msgid "Signing declined"
 msgstr ""
 
-#: includes/Services/DocumentService.php:909
+#: includes/Services/DocumentService.php:936
 msgid "Some invitations could not be sent: %s. Please check your site email settings and re-send."
 msgstr ""
 
@@ -916,7 +924,7 @@ msgstr ""
 msgid "Template"
 msgstr ""
 
-#: includes/Admin/Admin.php:733
+#: includes/Admin/Admin.php:747
 msgid "Template deleted."
 msgstr ""
 
@@ -928,13 +936,13 @@ msgstr ""
 msgid "Template name"
 msgstr ""
 
-#: includes/Admin/Admin.php:638
-#: includes/Services/DocumentService.php:638
-#: includes/Services/DocumentService.php:725
+#: includes/Admin/Admin.php:652
+#: includes/Services/DocumentService.php:640
+#: includes/Services/DocumentService.php:752
 msgid "Template not found."
 msgstr ""
 
-#: includes/Admin/Admin.php:677
+#: includes/Admin/Admin.php:691
 msgid "Template saved."
 msgstr ""
 
@@ -957,8 +965,20 @@ msgstr ""
 msgid "That code was not correct. Please try again."
 msgstr ""
 
-#: includes/Signature/Certificate.php:61
+#: includes/Signature/Certificate.php:78
 msgid "The certificate could not be read. Check the file and password."
+msgstr ""
+
+#: includes/Signature/Certificate.php:72
+msgid "The certificate file is missing or too large (max 512 KB)."
+msgstr ""
+
+#: includes/Admin/Admin.php:593
+msgid "The certificate file is too large (max 512 KB)."
+msgstr ""
+
+#: includes/Admin/Admin.php:589
+msgid "The certificate must be a .p12 or .pfx file."
 msgstr ""
 
 #: includes/Frontend/SigningController.php:359
@@ -979,6 +999,10 @@ msgstr ""
 
 #: includes/Frontend/SigningController.php:89
 msgid "The requested document could not be found."
+msgstr ""
+
+#: includes/Frontend/SigningController.php:221
+msgid "This document is authentic."
 msgstr ""
 
 #: includes/Frontend/SigningController.php:119
@@ -1126,7 +1150,7 @@ msgstr ""
 msgid "X-ComSign-Key"
 msgstr ""
 
-#: includes/Admin/Admin.php:899
+#: includes/Admin/Admin.php:913
 msgid "You are not allowed to access this page."
 msgstr ""
 
@@ -1199,9 +1223,5 @@ msgstr ""
 #: includes/Admin/views/edit.php:244
 #: includes/Admin/views/template-use.php:32
 msgid "email@example.com"
-msgstr ""
-
-#: includes/Frontend/SigningController.php:221
-msgid "✔ This document is authentic."
 msgstr ""
 

@@ -28,7 +28,7 @@ msgstr "(ללא כותרת)"
 msgid "A document is awaiting your signature — %s"
 msgstr "מסמך ממתין לחתימתך — %s"
 
-#: includes/Services/DocumentService.php:939
+#: includes/Services/DocumentService.php:966
 msgid "A field is assigned to a signer that is not on this document. Please re-save the fields."
 msgstr "שדה משויך לחותם שאינו במסמך זה. אנא שמרו מחדש את השדות."
 
@@ -36,7 +36,7 @@ msgstr "שדה משויך לחותם שאינו במסמך זה. אנא שמרו
 msgid "A new code has been sent."
 msgstr "קוד חדש נשלח."
 
-#: includes/Services/DocumentService.php:1068
+#: includes/Services/DocumentService.php:1095
 msgid "A signature is required."
 msgstr "נדרשת חתימה."
 
@@ -72,7 +72,7 @@ msgstr "תעודה פעילה:"
 msgid "Add Document"
 msgstr "הוספת מסמך"
 
-#: includes/Services/DocumentService.php:849
+#: includes/Services/DocumentService.php:876
 msgid "Add at least one signer before sending."
 msgstr "יש להוסיף לפחות חותם אחד לפני השליחה."
 
@@ -132,11 +132,11 @@ msgstr "דפדפן"
 msgid "Bulk send"
 msgstr "שליחה בכמות"
 
-#: includes/Admin/Admin.php:720
+#: includes/Admin/Admin.php:734
 msgid "Bulk send complete: %d document(s) created and sent."
 msgstr "השליחה בכמות הושלמה: %d מסמכים נוצרו ונשלחו."
 
-#: includes/Services/DocumentService.php:729
+#: includes/Services/DocumentService.php:756
 msgid "Bulk send requires a template with exactly one role."
 msgstr "שליחה בכמות דורשת תבנית עם תפקיד אחד בדיוק."
 
@@ -148,11 +148,11 @@ msgstr "שליחה בכמות: %s"
 msgid "Certificate password"
 msgstr "סיסמת התעודה"
 
-#: includes/Admin/Admin.php:600
+#: includes/Admin/Admin.php:614
 msgid "Certificate removed. Documents will use electronic signatures."
 msgstr "התעודה הוסרה. מסמכים ייחתמו בחתימה אלקטרונית."
 
-#: includes/Admin/Admin.php:588
+#: includes/Admin/Admin.php:602
 msgid "Certificate stored. New documents will be signed with PKI/PAdES."
 msgstr "התעודה נשמרה. מסמכים חדשים ייחתמו ב-PKI/PAdES."
 
@@ -325,7 +325,7 @@ msgstr "מזהה מסמך"
 msgid "Document content"
 msgstr "תוכן המסמך"
 
-#: includes/Admin/Admin.php:693
+#: includes/Admin/Admin.php:707
 msgid "Document created from template. Review and send."
 msgstr "מסמך נוצר מתבנית. בדקו ושלחו."
 
@@ -342,11 +342,11 @@ msgid "Document duplicated."
 msgstr "המסמך שוכפל."
 
 #: includes/Admin/Admin.php:260
-#: includes/Admin/Admin.php:794
+#: includes/Admin/Admin.php:808
 #: includes/Services/DocumentService.php:230
 #: includes/Services/DocumentService.php:498
-#: includes/Services/DocumentService.php:568
-#: includes/Services/DocumentService.php:844
+#: includes/Services/DocumentService.php:570
+#: includes/Services/DocumentService.php:871
 msgid "Document not found."
 msgstr "המסמך לא נמצא."
 
@@ -455,7 +455,7 @@ msgstr "אירוע"
 msgid "Every event is POSTed here as JSON, signed with X-ComSign-Signature (HMAC-SHA256 of the body using the secret below)."
 msgstr "כל אירוע נשלח לכאן כ-JSON, חתום ב-X-ComSign-Signature (HMAC-SHA256 של גוף הבקשה עם הסוד שלמטה)."
 
-#: includes/Services/DocumentService.php:945
+#: includes/Services/DocumentService.php:972
 msgid "Every signer must have at least one field. Please assign a field to each signer."
 msgstr "לכל חותם חייב להיות לפחות שדה אחד. אנא שייכו שדה לכל חותם."
 
@@ -463,7 +463,7 @@ msgstr "לכל חותם חייב להיות לפחות שדה אחד. אנא ש�
 msgid "Field for:"
 msgstr "שדה עבור:"
 
-#: includes/Admin/Admin.php:800
+#: includes/Admin/Admin.php:814
 msgid "File not available."
 msgstr "הקובץ אינו זמין."
 
@@ -617,7 +617,7 @@ msgstr "שורה אחת לכל משתנה, בפורמט name = value. כל {{nam
 msgid "Only PDF files are allowed."
 msgstr "ניתן להעלות קבצי PDF בלבד."
 
-#: includes/Signature/Certificate.php:55
+#: includes/Signature/Certificate.php:67
 msgid "OpenSSL is not available on this server, so PKI signing cannot be enabled."
 msgstr "OpenSSL אינו זמין בשרת זה, ולכן לא ניתן להפעיל חתימת PKI."
 
@@ -650,7 +650,7 @@ msgstr "למחוק לצמיתות את המסמך הזה ואת כל הנתונ�
 msgid "Phone for WhatsApp (optional)"
 msgstr "טלפון לוואטסאפ (אופציונלי)"
 
-#: includes/Services/DocumentService.php:854
+#: includes/Services/DocumentService.php:881
 msgid "Place at least one signature field before sending."
 msgstr "הניחו לפחות שדה חתימה אחד לפני השליחה."
 
@@ -666,7 +666,7 @@ msgstr "אנא הוסיפו כותרת או תוכן כלשהו למסמך."
 msgid "Please add your signature and accept the agreement."
 msgstr "אנא הוסיפו את חתימתכם ואשרו את ההסכמה."
 
-#: includes/Admin/Admin.php:580
+#: includes/Admin/Admin.php:583
 msgid "Please choose a .p12/.pfx certificate file."
 msgstr "אנא בחרו קובץ תעודה .p12/.pfx."
 
@@ -674,7 +674,7 @@ msgstr "אנא בחרו קובץ תעודה .p12/.pfx."
 msgid "Please choose a PDF to upload."
 msgstr "אנא בחרו קובץ PDF להעלאה."
 
-#: includes/Services/DocumentService.php:1082
+#: includes/Services/DocumentService.php:1109
 msgid "Please complete all required fields before signing."
 msgstr "אנא מלאו את כל שדות החובה לפני החתימה."
 
@@ -694,9 +694,17 @@ msgstr "אנא פתחו את הקישור המאובטח שלהלן כדי לצ�
 msgid "Please provide a name or an email for the signer."
 msgstr "אנא הזינו שם או אימייל לחותם."
 
+#: includes/Services/DocumentService.php:679
+msgid "Please provide a recipient for every role that has fields."
+msgstr "אנא ספקו נמען לכל תפקיד שיש לו שדות."
+
 #: includes/Services/DocumentService.php:350
 msgid "Please provide a valid email address."
 msgstr "אנא הזינו כתובת דוא״ל תקינה."
+
+#: includes/Services/DocumentService.php:668
+msgid "Please provide at least one recipient."
+msgstr "אנא ספקו לפחות נמען אחד."
 
 #: includes/Admin/views/edit.php:219
 msgid "Please sign the document at the following secure link: %s"
@@ -767,7 +775,7 @@ msgstr "חובה"
 msgid "Resend code"
 msgstr "שליחת קוד מחדש"
 
-#: includes/Services/DocumentService.php:578
+#: includes/Services/DocumentService.php:580
 msgid "Role %d"
 msgstr "תפקיד %d"
 
@@ -828,7 +836,7 @@ msgstr "נשלח על-ידי %s"
 msgid "Settings"
 msgstr "הגדרות"
 
-#: includes/Admin/Admin.php:619
+#: includes/Admin/Admin.php:633
 msgid "Settings saved."
 msgstr "ההגדרות נשמרו."
 
@@ -905,7 +913,7 @@ msgstr "חותמים"
 msgid "Signing declined"
 msgstr "החתימה סורבה"
 
-#: includes/Services/DocumentService.php:909
+#: includes/Services/DocumentService.php:936
 msgid "Some invitations could not be sent: %s. Please check your site email settings and re-send."
 msgstr "חלק מההזמנות לא נשלחו: %s. אנא בדקו את הגדרות הדוא\"ל של האתר ושלחו מחדש."
 
@@ -917,7 +925,7 @@ msgstr "סטטוס"
 msgid "Template"
 msgstr "תבנית"
 
-#: includes/Admin/Admin.php:733
+#: includes/Admin/Admin.php:747
 msgid "Template deleted."
 msgstr "התבנית נמחקה."
 
@@ -929,13 +937,13 @@ msgstr "תבנית חסרה."
 msgid "Template name"
 msgstr "שם התבנית"
 
-#: includes/Admin/Admin.php:638
-#: includes/Services/DocumentService.php:638
-#: includes/Services/DocumentService.php:725
+#: includes/Admin/Admin.php:652
+#: includes/Services/DocumentService.php:640
+#: includes/Services/DocumentService.php:752
 msgid "Template not found."
 msgstr "התבנית לא נמצאה."
 
-#: includes/Admin/Admin.php:677
+#: includes/Admin/Admin.php:691
 msgid "Template saved."
 msgstr "התבנית נשמרה."
 
@@ -958,9 +966,21 @@ msgstr "תודה!"
 msgid "That code was not correct. Please try again."
 msgstr "הקוד שגוי. נסו שוב."
 
-#: includes/Signature/Certificate.php:61
+#: includes/Signature/Certificate.php:78
 msgid "The certificate could not be read. Check the file and password."
 msgstr "לא ניתן היה לקרוא את התעודה. בדקו את הקובץ והסיסמה."
+
+#: includes/Signature/Certificate.php:72
+msgid "The certificate file is missing or too large (max 512 KB)."
+msgstr "קובץ התעודה חסר או גדול מדי (מקסימום 512 ק\"ב)."
+
+#: includes/Admin/Admin.php:593
+msgid "The certificate file is too large (max 512 KB)."
+msgstr "קובץ התעודה גדול מדי (מקסימום 512 ק\"ב)."
+
+#: includes/Admin/Admin.php:589
+msgid "The certificate must be a .p12 or .pfx file."
+msgstr "התעודה חייבת להיות קובץ ‎.p12‎ או ‎.pfx‎."
 
 #: includes/Frontend/SigningController.php:359
 msgid "The document could not be found."
@@ -981,6 +1001,10 @@ msgstr "הקובץ גדול מדי (מקסימום 25 מ״ב)."
 #: includes/Frontend/SigningController.php:89
 msgid "The requested document could not be found."
 msgstr "לא ניתן היה למצוא את המסמך המבוקש."
+
+#: includes/Frontend/SigningController.php:221
+msgid "This document is authentic."
+msgstr "מסמך זה אותנטי."
 
 #: includes/Frontend/SigningController.php:119
 msgid "This document is signed in order. You will be notified when it is your turn."
@@ -1127,7 +1151,7 @@ msgstr "כתבו את הטקסט הקבוע של המסמך. לאחר היציר
 msgid "X-ComSign-Key"
 msgstr "X-ComSign-Key"
 
-#: includes/Admin/Admin.php:899
+#: includes/Admin/Admin.php:913
 msgid "You are not allowed to access this page."
 msgstr "אינך מורשה לגשת לעמוד זה."
 
@@ -1201,8 +1225,4 @@ msgstr "לדוגמה: הסכם שירות"
 #: includes/Admin/views/template-use.php:32
 msgid "email@example.com"
 msgstr "email@example.com"
-
-#: includes/Frontend/SigningController.php:221
-msgid "✔ This document is authentic."
-msgstr "✔ המסמך מאומת ואותנטי."
 

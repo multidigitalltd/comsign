@@ -41,7 +41,19 @@ final class Storage {
 		// Block directory listing / direct access on Apache.
 		$htaccess = $dir . '/.htaccess';
 		if ( ! file_exists( $htaccess ) ) {
-			file_put_contents( $htaccess, "Order allow,deny\nDeny from all\n" ); // phpcs:ignore WordPress.WP.AlternativeFunctions.file_system_operations_file_put_contents
+			// Deny on Apache 2.2 and 2.4, and disable PHP execution as defence
+			// in depth against an uploaded file ever being run.
+			$rules = "Order allow,deny\nDeny from all\n"
+				. "<IfModule mod_authz_core.c>\n\tRequire all denied\n</IfModule>\n"
+				. "<IfModule mod_php.c>\n\tphp_flag engine off\n</IfModule>\n";
+			file_put_contents( $htaccess, $rules ); // phpcs:ignore WordPress.WP.AlternativeFunctions.file_system_operations_file_put_contents
+		}
+
+		// Block direct access on IIS.
+		$webconfig = $dir . '/web.config';
+		if ( ! file_exists( $webconfig ) ) {
+			$xml = "<?xml version=\"1.0\" encoding=\"UTF-8\"?>\n<configuration>\n\t<system.webServer>\n\t\t<authorization>\n\t\t\t<deny users=\"*\" />\n\t\t</authorization>\n\t</system.webServer>\n</configuration>\n";
+			file_put_contents( $webconfig, $xml ); // phpcs:ignore WordPress.WP.AlternativeFunctions.file_system_operations_file_put_contents
 		}
 
 		// Prevent index listing on misconfigured servers.

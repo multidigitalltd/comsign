@@ -38,6 +38,27 @@ final class Webhooks {
 			return;
 		}
 
+		// SSRF guard: only http(s).
+		$scheme = strtolower( (string) wp_parse_url( $url, PHP_URL_SCHEME ) );
+		if ( ! in_array( $scheme, array( 'http', 'https' ), true ) ) {
+			return;
+		}
+
+		// Reject private / loopback / link-local / reserved targets explicitly.
+		// (wp_http_validate_url() exempts the site's own host, which would let a
+		// site hosted on a private IP reach internal services — so we check the
+		// resolved IP ourselves as well.)
+		$host = (string) wp_parse_url( $url, PHP_URL_HOST );
+		$ip   = filter_var( $host, FILTER_VALIDATE_IP ) ? $host : gethostbyname( $host );
+		if ( filter_var( $ip, FILTER_VALIDATE_IP )
+			&& ! filter_var( $ip, FILTER_VALIDATE_IP, FILTER_FLAG_NO_PRIV_RANGE | FILTER_FLAG_NO_RES_RANGE ) ) {
+			return;
+		}
+
+		if ( ! wp_http_validate_url( $url ) ) {
+			return;
+		}
+
 		$payload = wp_json_encode(
 			array(
 				'event'       => $event,

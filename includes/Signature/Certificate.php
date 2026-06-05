@@ -23,7 +23,19 @@ final class Certificate {
 	/**
 	 * Absolute path to the stored PKCS#12 file.
 	 */
+	/** Maximum accepted PKCS#12 size, in bytes. */
+	private const MAX_BYTES = 512 * 1024;
+
+	/**
+	 * Absolute path to the stored PKCS#12 file (randomised, not guessable).
+	 *
+	 * Falls back to the legacy fixed name so existing installs keep working.
+	 */
 	public static function path(): string {
+		$opt = get_option( self::OPTION );
+		if ( is_array( $opt ) && ! empty( $opt['path'] ) ) {
+			return (string) $opt['path'];
+		}
 		return trailingslashit( Storage::base_dir() ) . 'pki-cert.p12';
 	}
 
@@ -31,7 +43,7 @@ final class Certificate {
 	 * Whether OpenSSL is available (required for PAdES).
 	 */
 	public static function openssl_available(): bool {
-		return function_exists( 'openssl_pkcs12_read' );
+		return function_exists( 'openssl_pkcs12_read' ) && function_exists( 'openssl_encrypt' );
 	}
 
 	/**
@@ -55,24 +67,40 @@ final class Certificate {
 			throw new \RuntimeException( __( 'OpenSSL is not available on this server, so PKI signing cannot be enabled.', 'comsign' ) );
 		}
 
-		$data = is_readable( $tmp_file ) ? file_get_contents( $tmp_file ) : ''; // phpcs:ignore WordPress.WP.AlternativeFunctions.file_get_contents_file_get_contents
+		// Guard the size before reading the whole file into memory.
+		if ( ! is_readable( $tmp_file ) || filesize( $tmp_file ) > self::MAX_BYTES ) {
+			throw new \RuntimeException( __( 'The certificate file is missing or too large (max 512 KB).', 'comsign' ) );
+		}
+
+		$data  = file_get_contents( $tmp_file ); // phpcs:ignore WordPress.WP.AlternativeFunctions.file_get_contents_file_get_contents
 		$certs = array();
-		if ( '' === $data || ! openssl_pkcs12_read( $data, $certs, $password ) ) {
+		if ( ! is_string( $data ) || '' === $data || ! openssl_pkcs12_read( $data, $certs, $password ) ) {
 			throw new \RuntimeException( __( 'The certificate could not be read. Check the file and password.', 'comsign' ) );
 		}
 
-		Storage::ensure_protected_dir();
-		if ( ! move_uploaded_file( $tmp_file, self::path() ) ) {
-			// Fallback for non-HTTP-upload contexts (e.g. tests).
-			file_put_contents( self::path(), $data ); // phpcs:ignore WordPress.WP.AlternativeFunctions.file_system_operations_file_put_contents
-		}
+		// Remove any previously stored certificate file first.
+		self::remove();
 
+		Storage::ensure_protected_dir();
+		$dest = trailingslashit( Storage::base_dir() ) . 'pki-' . wp_generate_password( 24, false ) . '.p12';
+		if ( ! @move_uploaded_file( $tmp_file, $dest ) ) { // phpcs:ignore WordPress.PHP.NoSilencedErrors.Discouraged
+			// Fallback for non-HTTP-upload contexts (e.g. tests).
+			file_put_contents( $dest, $data ); // phpcs:ignore WordPress.WP.AlternativeFunctions.file_system_operations_file_put_contents
+		}
+		@chmod( $dest, 0600 ); // phpcs:ignore WordPress.PHP.NoSilencedErrors.Discouraged
+
+		// Store the password encrypted (never plaintext) and keep the option out
+		// of the autoloaded set so it is not loaded on every request. remove()
+		// above deleted any prior option, so this creates it fresh with
+		// autoload = 'no'.
 		update_option(
 			self::OPTION,
 			array(
-				'password' => (string) $password,
+				'path'     => $dest,
+				'password' => self::encrypt( $password ),
 				'subject'  => self::subject_from( $certs ),
-			)
+			),
+			false
 		);
 	}
 
@@ -86,10 +114,12 @@ final class Certificate {
 			return null;
 		}
 
-		$opt  = get_option( self::OPTION );
-		$data = is_readable( self::path() ) ? file_get_contents( self::path() ) : ''; // phpcs:ignore WordPress.WP.AlternativeFunctions.file_get_contents_file_get_contents
-		$certs = array();
-		if ( '' === $data || ! openssl_pkcs12_read( $data, $certs, (string) $opt['password'] ) ) {
+		$opt      = get_option( self::OPTION );
+		$password = self::decrypt( (string) $opt['password'] );
+		$path     = self::path();
+		$data     = is_readable( $path ) ? file_get_contents( $path ) : ''; // phpcs:ignore WordPress.WP.AlternativeFunctions.file_get_contents_file_get_contents
+		$certs    = array();
+		if ( ! is_string( $data ) || '' === $data || ! openssl_pkcs12_read( $data, $certs, $password ) ) {
 			return null;
 		}
 
@@ -111,10 +141,44 @@ final class Certificate {
 	 * Remove the stored certificate and its option.
 	 */
 	public static function remove(): void {
-		if ( is_file( self::path() ) ) {
-			wp_delete_file( self::path() );
+		$file = self::path();
+		if ( is_file( $file ) && Storage::is_within_base( $file ) ) {
+			wp_delete_file( $file );
 		}
 		delete_option( self::OPTION );
+	}
+
+	/**
+	 * Encrypt a secret with a key derived from the site's auth salt (which lives
+	 * in wp-config.php, not the database), so a DB dump alone cannot reveal it.
+	 *
+	 * @param string $plaintext Secret.
+	 */
+	private static function encrypt( string $plaintext ): string {
+		$key = hash( 'sha256', wp_salt( 'auth' ), true );
+		$iv  = random_bytes( 16 );
+		$ct  = openssl_encrypt( $plaintext, 'aes-256-cbc', $key, OPENSSL_RAW_DATA, $iv );
+		if ( false === $ct ) {
+			return '';
+		}
+		return base64_encode( $iv . $ct ); // phpcs:ignore WordPress.PHP.DiscouragedPHPFunctions.obfuscation_base64_encode
+	}
+
+	/**
+	 * Reverse {@see encrypt()}.
+	 *
+	 * @param string $stored Stored value.
+	 */
+	private static function decrypt( string $stored ): string {
+		$raw = base64_decode( $stored, true ); // phpcs:ignore WordPress.PHP.DiscouragedPHPFunctions.obfuscation_base64_decode
+		if ( false === $raw || strlen( $raw ) <= 16 ) {
+			return '';
+		}
+		$key = hash( 'sha256', wp_salt( 'auth' ), true );
+		$iv  = substr( $raw, 0, 16 );
+		$ct  = substr( $raw, 16 );
+		$pt  = openssl_decrypt( $ct, 'aes-256-cbc', $key, OPENSSL_RAW_DATA, $iv );
+		return false === $pt ? '' : $pt;
 	}
 
 	/**

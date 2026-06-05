@@ -4,7 +4,7 @@ Tags: signature, digital signature, pdf, esignature, hebrew
 Requires at least: 6.0
 Tested up to: 6.5
 Requires PHP: 7.4
-Stable tag: 0.9.0
+Stable tag: 0.9.1
 License: GPL-2.0-or-later
 License URI: https://www.gnu.org/licenses/gpl-2.0.html
 
@@ -50,6 +50,22 @@ for now, but the data model leaves room for them.
   ever streamed through authenticated/tokenised endpoints.
 * All admin actions are guarded by capabilities + nonces.
 * All output is escaped; all database access uses prepared statements.
+* A PKI certificate's password is stored AES-256 encrypted with a key derived
+  from your wp-config.php auth salt (not the database), in a non-autoloaded
+  option; the certificate file itself has an unguessable name.
+* Outgoing webhooks are restricted to http(s) and refuse private/loopback/
+  link-local/reserved targets (SSRF protection).
+
+= Server hardening (important on nginx) =
+
+The protected uploads directory ships with `.htaccess` (Apache) and `web.config`
+(IIS) deny rules. On **nginx** these are ignored, so add a location block to
+your server config to block direct access to the storage directory, e.g.:
+
+`location ~* /wp-content/uploads/comsign/ { deny all; return 403; }`
+
+This keeps source/signed PDFs and the PKI certificate reachable only through
+ComSign's authenticated endpoints.
 
 == Third-party libraries ==
 
@@ -82,6 +98,22 @@ ID and its SHA-256 code (shown on the document screen and the signature
 certificate) to confirm the document is authentic and see who signed it.
 
 == Changelog ==
+
+= 0.9.1 =
+* Security: PKI certificate password is now AES-256 encrypted (key from the
+  wp-config.php auth salt, not the DB) and kept in a non-autoloaded option;
+  the certificate file uses an unguessable name.
+* Security: webhook delivery is restricted to http(s) and blocks private/
+  loopback/link-local/reserved targets (SSRF protection).
+* Security: certificate upload validates name/size/extension before reading;
+  storage dir now also ships web.config (IIS) + nginx guidance.
+* Fix: document duplication now copies field options and the required flag.
+* Fix: creating a document from a template requires recipients (no more empty
+  drafts) and a recipient for every role that has fields.
+* Fix: REST create-with-send returns 502 + a structured error on send failure
+  instead of a misleading 201.
+* Fix: signing page now scopes fields to the document (consistent with signing).
+* Fix: removed a stray non-ASCII glyph from the public verification result.
 
 = 0.9.0 =
 * New: required (smart) fields. Mark signer-filled fields as required in the

@@ -233,7 +233,15 @@ final class RestApi {
 				);
 				$result['status'] = 'sent';
 			} catch ( \Throwable $e ) {
-				$result['warning'] = $e->getMessage();
+				// The document was created but could not be sent. Signal this
+				// distinctly with a 502 + structured error so automation does
+				// not mistake a partial result for a successful send.
+				$result['status'] = 'created_but_not_sent';
+				$result['error']  = array(
+					'code'    => 'send_failed',
+					'message' => $e->getMessage(),
+				);
+				return new WP_REST_Response( $result, 502 );
 			}
 		}
 

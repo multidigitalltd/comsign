@@ -162,7 +162,7 @@ final class SigningController {
 		);
 		$post_url  = admin_url( 'admin-post.php' );
 
-		$signer_fields = $this->fields->for_signer( (int) $signer->id );
+		$signer_fields = $this->fields->for_signer_in_document( (int) $document->id, (int) $signer->id );
 
 		$needs_signature = false;
 		$input_fields    = array();
@@ -218,7 +218,7 @@ final class SigningController {
 
 			if ( $document ) {
 				echo '<div class="comsign-verify-result comsign-verify-ok">';
-				echo '<p><strong>' . esc_html__( '✔ This document is authentic.', 'comsign' ) . '</strong></p>';
+				echo '<p><strong>' . esc_html__( 'This document is authentic.', 'comsign' ) . '</strong></p>';
 				echo '<p>' . esc_html__( 'Title:', 'comsign' ) . ' ' . esc_html( $document->title ) . '</p>';
 				echo '<p>' . esc_html__( 'Completed:', 'comsign' ) . ' ' . esc_html( (string) $document->updated_at ) . '</p>';
 

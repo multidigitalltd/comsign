@@ -534,11 +534,13 @@ final class DocumentService {
 					'document_id' => $new_id,
 					'signer_id'   => $signer_map[ (int) $field->signer_id ] ?? 0,
 					'type'        => $field->type,
+					'required'    => ! empty( $field->required ),
 					'page'        => (int) $field->page,
 					'pos_x'       => (float) $field->pos_x,
 					'pos_y'       => (float) $field->pos_y,
 					'width'       => (float) $field->width,
 					'height'      => (float) $field->height,
+					'options'     => FieldRepository::decode_options( $field ),
 				)
 			);
 		}
@@ -640,6 +642,44 @@ final class DocumentService {
 
 		$roles = \ComSign\Database\TemplateRepository::roles( $template );
 
+		// Validate recipients up front so we never leave an empty/orphan draft.
+		$valid = array();
+		foreach ( $roles as $index => $label ) {
+			$r     = $recipients[ $index ] ?? array();
+			$email = isset( $r['email'] ) ? sanitize_email( (string) $r['email'] ) : '';
+			$name  = isset( $r['name'] ) ? (string) $r['name'] : '';
+			$phone = isset( $r['phone'] ) ? (string) $r['phone'] : '';
+
+			if ( '' !== $email && ! is_email( $email ) ) {
+				$email = '';
+			}
+			if ( '' === $name && '' === $email ) {
+				continue; // No usable recipient for this role.
+			}
+
+			$valid[ $index ] = array(
+				'name'  => $name,
+				'email' => $email,
+				'phone' => $phone,
+			);
+		}
+
+		if ( empty( $valid ) ) {
+			throw new \RuntimeException( __( 'Please provide at least one recipient.', 'comsign' ) );
+		}
+
+		// Every role that carries fields must have a recipient, otherwise those
+		// fields would be silently dropped.
+		$roles_with_fields = array();
+		foreach ( \ComSign\Database\TemplateRepository::fields( $template ) as $field ) {
+			$roles_with_fields[ (int) ( $field['role_index'] ?? 0 ) ] = true;
+		}
+		foreach ( array_keys( $roles_with_fields ) as $role_index ) {
+			if ( ! isset( $valid[ $role_index ] ) ) {
+				throw new \RuntimeException( __( 'Please provide a recipient for every role that has fields.', 'comsign' ) );
+			}
+		}
+
 		$document_id = $this->documents->create(
 			array(
 				'title'      => (string) $template->name,
@@ -654,28 +694,15 @@ final class DocumentService {
 			$this->documents->update( $document_id, array( 'source_path' => $dest ) );
 		}
 
-		// Create a signer per role and remember the mapping.
+		// Create a signer per valid role and remember the mapping.
 		$signer_of_role = array();
-		foreach ( $roles as $index => $label ) {
-			$r     = $recipients[ $index ] ?? array();
-			$email = isset( $r['email'] ) ? sanitize_email( (string) $r['email'] ) : '';
-			$name  = isset( $r['name'] ) ? (string) $r['name'] : '';
-			$phone = isset( $r['phone'] ) ? (string) $r['phone'] : '';
-
-			if ( '' !== $email && ! is_email( $email ) ) {
-				$email = '';
-			}
-			if ( '' === $name && '' === $email ) {
-				// Skip empty role assignments entirely.
-				continue;
-			}
-
+		foreach ( $valid as $index => $r ) {
 			$signer_of_role[ $index ] = $this->signers->create(
 				array(
 					'document_id' => $document_id,
-					'name'        => $name,
-					'email'       => $email,
-					'phone'       => $phone,
+					'name'        => $r['name'],
+					'email'       => $r['email'],
+					'phone'       => $r['phone'],
 					'sign_order'  => $index,
 				)
 			);
