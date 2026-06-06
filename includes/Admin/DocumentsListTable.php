@@ -24,7 +24,17 @@ final class DocumentsListTable extends \WP_List_Table {
 	private DocumentRepository $documents;
 	private SignerRepository $signers;
 
-	public function __construct( DocumentRepository $documents, SignerRepository $signers ) {
+	/**
+	 * Account ids the current user may see (tenant scope).
+	 *
+	 * @var int[]
+	 */
+	private array $account_ids;
+
+	/**
+	 * @param int[] $account_ids Visible account ids for the current user.
+	 */
+	public function __construct( DocumentRepository $documents, SignerRepository $signers, array $account_ids = array() ) {
 		parent::__construct(
 			array(
 				'singular' => 'comsign_document',
@@ -33,8 +43,9 @@ final class DocumentsListTable extends \WP_List_Table {
 			)
 		);
 
-		$this->documents = $documents;
-		$this->signers   = $signers;
+		$this->documents   = $documents;
+		$this->signers     = $signers;
+		$this->account_ids = array_map( 'intval', $account_ids );
 	}
 
 	public function get_columns(): array {
@@ -49,9 +60,9 @@ final class DocumentsListTable extends \WP_List_Table {
 	public function prepare_items(): void {
 		$per_page     = 20;
 		$current_page = $this->get_pagenum();
-		$total        = $this->documents->count();
+		$total        = $this->documents->count_for_accounts( $this->account_ids );
 
-		$this->items = $this->documents->paginate( $per_page, ( $current_page - 1 ) * $per_page );
+		$this->items = $this->documents->paginate_for_accounts( $this->account_ids, $per_page, ( $current_page - 1 ) * $per_page );
 
 		$this->set_pagination_args(
 			array(

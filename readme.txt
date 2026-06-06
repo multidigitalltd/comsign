@@ -4,7 +4,7 @@ Tags: signature, digital signature, pdf, esignature, hebrew
 Requires at least: 6.0
 Tested up to: 6.5
 Requires PHP: 7.4
-Stable tag: 0.18.0
+Stable tag: 0.19.0
 License: GPL-2.0-or-later
 License URI: https://www.gnu.org/licenses/gpl-2.0.html
 
@@ -105,6 +105,18 @@ ID and its SHA-256 code (shown on the document screen and the signature
 certificate) to confirm the document is authentic and see who signed it.
 
 == Changelog ==
+
+= 0.19.0 =
+* New (foundation): multi-tenant accounts/workspaces. Documents and templates
+  now belong to an account; the admin document list, edit screen and file
+  downloads are scoped so a user only ever sees their own account's documents.
+* New: hierarchical sub-accounts - a manager (owner/admin) of a parent account
+  automatically sees all descendant accounts' documents (e.g. a company manager
+  seeing every agent's documents), while a plain member sees only their own.
+* New: account membership with owner/admin/member roles and a workspace switcher
+  for users who belong to more than one account.
+* Migration is non-breaking: existing documents/templates move to a default
+  workspace and current administrators become its owners.
 
 = 0.18.0 =
 * New: document timeline on the edit screen - a clear chronological view of

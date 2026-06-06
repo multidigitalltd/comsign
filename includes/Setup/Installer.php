@@ -57,6 +57,27 @@ final class Installer {
 	}
 
 	/**
+	 * Fully qualified table name for accounts (tenants/workspaces).
+	 */
+	public static function accounts_table(): string {
+		global $wpdb;
+		return $wpdb->prefix . 'comsign_accounts';
+	}
+
+	/**
+	 * Fully qualified table name for account memberships.
+	 */
+	public static function account_users_table(): string {
+		global $wpdb;
+		return $wpdb->prefix . 'comsign_account_users';
+	}
+
+	/**
+	 * Option holding the id of the default (migration) account.
+	 */
+	public const OPTION_DEFAULT_ACCOUNT = 'comsign_default_account';
+
+	/**
 	 * Run dbDelta to create/update the schema, then store the version.
 	 */
 	public static function install(): void {
@@ -71,6 +92,8 @@ final class Installer {
 		$fields    = self::fields_table();
 		$audit     = self::audit_table();
 		$templates = self::templates_table();
+		$accounts      = self::accounts_table();
+		$account_users = self::account_users_table();
 
 		$schema = array();
 
@@ -86,11 +109,13 @@ final class Installer {
 			source_path VARCHAR(255) NOT NULL DEFAULT '',
 			signed_path VARCHAR(255) NOT NULL DEFAULT '',
 			signed_hash CHAR(64) NOT NULL DEFAULT '',
+			account_id BIGINT UNSIGNED NOT NULL DEFAULT 0,
 			created_by BIGINT UNSIGNED NOT NULL DEFAULT 0,
 			created_at DATETIME NOT NULL DEFAULT '0000-00-00 00:00:00',
 			updated_at DATETIME NOT NULL DEFAULT '0000-00-00 00:00:00',
 			PRIMARY KEY  (id),
 			KEY status (status),
+			KEY account_id (account_id),
 			KEY created_by (created_by)
 		) {$charset_collate};";
 
@@ -161,10 +186,37 @@ final class Installer {
 			source_path VARCHAR(255) NOT NULL DEFAULT '',
 			roles LONGTEXT NULL,
 			fields LONGTEXT NULL,
+			account_id BIGINT UNSIGNED NOT NULL DEFAULT 0,
 			created_by BIGINT UNSIGNED NOT NULL DEFAULT 0,
 			created_at DATETIME NOT NULL DEFAULT '0000-00-00 00:00:00',
 			PRIMARY KEY  (id),
+			KEY account_id (account_id),
 			KEY created_by (created_by)
+		) {$charset_collate};";
+
+		// Accounts: tenants / workspaces. parent_id links a sub-account to its
+		// parent so a manager account can see all descendants' documents.
+		$schema[] = "CREATE TABLE {$accounts} (
+			id BIGINT UNSIGNED NOT NULL AUTO_INCREMENT,
+			name VARCHAR(190) NOT NULL DEFAULT '',
+			parent_id BIGINT UNSIGNED NOT NULL DEFAULT 0,
+			tier VARCHAR(40) NOT NULL DEFAULT 'free',
+			created_at DATETIME NOT NULL DEFAULT '0000-00-00 00:00:00',
+			PRIMARY KEY  (id),
+			KEY parent_id (parent_id)
+		) {$charset_collate};";
+
+		// Account memberships: which WP user belongs to which account, and as
+		// what role (owner / admin / member).
+		$schema[] = "CREATE TABLE {$account_users} (
+			id BIGINT UNSIGNED NOT NULL AUTO_INCREMENT,
+			account_id BIGINT UNSIGNED NOT NULL,
+			user_id BIGINT UNSIGNED NOT NULL,
+			role VARCHAR(20) NOT NULL DEFAULT 'member',
+			created_at DATETIME NOT NULL DEFAULT '0000-00-00 00:00:00',
+			PRIMARY KEY  (id),
+			UNIQUE KEY account_user (account_id, user_id),
+			KEY user_id (user_id)
 		) {$charset_collate};";
 
 		// Drop the legacy UNIQUE index on token_hash before dbDelta re-adds it as
@@ -176,7 +228,79 @@ final class Installer {
 			dbDelta( $statement );
 		}
 
+		self::migrate_accounts();
+
 		update_option( self::OPTION_DB_VERSION, COMSIGN_DB_VERSION );
+	}
+
+	/**
+	 * Ensure a default account exists, every existing document/template belongs
+	 * to it, and every current manager is an owner of it. Idempotent, so it is
+	 * safe to run on every upgrade.
+	 */
+	private static function migrate_accounts(): void {
+		global $wpdb;
+
+		$accounts = self::accounts_table();
+		$now      = current_time( 'mysql', true );
+
+		// 1) Ensure the default account exists.
+		$default_id = (int) get_option( self::OPTION_DEFAULT_ACCOUNT, 0 );
+		$exists     = $default_id
+			? (int) $wpdb->get_var( $wpdb->prepare( "SELECT id FROM {$accounts} WHERE id = %d", $default_id ) ) // phpcs:ignore WordPress.DB
+			: 0;
+		if ( ! $exists ) {
+			$wpdb->insert( // phpcs:ignore WordPress.DB.DirectDatabaseQuery
+				$accounts,
+				array(
+					'name'       => __( 'Default workspace', 'comsign' ),
+					'parent_id'  => 0,
+					'tier'       => 'free',
+					'created_at' => $now,
+				),
+				array( '%s', '%d', '%s', '%s' )
+			);
+			$default_id = (int) $wpdb->insert_id;
+			update_option( self::OPTION_DEFAULT_ACCOUNT, $default_id );
+		}
+
+		// 2) Backfill account_id on pre-existing rows (account_id = 0).
+		$docs = self::documents_table();
+		$tpl  = self::templates_table();
+		$wpdb->query( $wpdb->prepare( "UPDATE {$docs} SET account_id = %d WHERE account_id = 0", $default_id ) ); // phpcs:ignore WordPress.DB
+		$wpdb->query( $wpdb->prepare( "UPDATE {$tpl} SET account_id = %d WHERE account_id = 0", $default_id ) );  // phpcs:ignore WordPress.DB
+
+		// 3) Make every current manager (and every past document creator) an
+		//    owner of the default account, so existing access is preserved.
+		$au       = self::account_users_table();
+		$user_ids = array();
+		foreach ( get_users( array( 'fields' => array( 'ID' ) ) ) as $u ) {
+			$uid = (int) $u->ID;
+			// Core administrators (manage_options) always qualify, so the
+			// activating admin becomes an owner even before the custom cap is
+			// granted; plus anyone already holding the ComSign manage cap.
+			if ( user_can( $uid, 'manage_options' ) || user_can( $uid, \ComSign\Support\Capabilities::MANAGE ) ) {
+				$user_ids[] = $uid;
+			}
+		}
+		$creators = $wpdb->get_col( "SELECT DISTINCT created_by FROM {$docs} WHERE created_by > 0" ); // phpcs:ignore WordPress.DB
+		$user_ids = array_unique( array_merge( $user_ids, array_map( 'intval', (array) $creators ) ) );
+
+		foreach ( $user_ids as $uid ) {
+			$has = (int) $wpdb->get_var( $wpdb->prepare( "SELECT id FROM {$au} WHERE account_id = %d AND user_id = %d", $default_id, $uid ) ); // phpcs:ignore WordPress.DB
+			if ( ! $has ) {
+				$wpdb->insert( // phpcs:ignore WordPress.DB.DirectDatabaseQuery
+					$au,
+					array(
+						'account_id' => $default_id,
+						'user_id'    => $uid,
+						'role'       => 'owner',
+						'created_at' => $now,
+					),
+					array( '%d', '%d', '%s', '%s' )
+				);
+			}
+		}
 	}
 
 	/**

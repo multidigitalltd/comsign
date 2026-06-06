@@ -39,11 +39,12 @@ final class DocumentRepository {
 				'title'       => (string) ( $data['title'] ?? '' ),
 				'status'      => self::STATUS_DRAFT,
 				'source_path' => (string) ( $data['source_path'] ?? '' ),
+				'account_id'  => (int) ( $data['account_id'] ?? 0 ),
 				'created_by'  => (int) ( $data['created_by'] ?? get_current_user_id() ),
 				'created_at'  => $now,
 				'updated_at'  => $now,
 			),
-			array( '%s', '%s', '%s', '%d', '%s', '%s' )
+			array( '%s', '%s', '%s', '%d', '%d', '%s', '%s' )
 		);
 
 		return (int) $wpdb->insert_id;
@@ -81,6 +82,55 @@ final class DocumentRepository {
 	}
 
 	/**
+	 * A page of documents restricted to a set of account ids, newest first.
+	 *
+	 * @param int[] $account_ids Visible account ids.
+	 * @param int   $per_page    Items per page.
+	 * @param int   $offset      Offset.
+	 */
+	public function paginate_for_accounts( array $account_ids, int $per_page, int $offset ): array {
+		global $wpdb;
+
+		$account_ids = array_values( array_unique( array_map( 'intval', $account_ids ) ) );
+		if ( ! $account_ids ) {
+			return array();
+		}
+
+		$placeholders = implode( ',', array_fill( 0, count( $account_ids ), '%d' ) );
+		$args         = array_merge( $account_ids, array( $per_page, $offset ) );
+
+		return $wpdb->get_results( // phpcs:ignore WordPress.DB.DirectDatabaseQuery, WordPress.DB.PreparedSQL.NotPrepared
+			$wpdb->prepare(
+				'SELECT * FROM ' . Installer::documents_table() . " WHERE account_id IN ($placeholders) ORDER BY id DESC LIMIT %d OFFSET %d",
+				...$args
+			)
+		);
+	}
+
+	/**
+	 * Document count restricted to a set of account ids.
+	 *
+	 * @param int[] $account_ids Visible account ids.
+	 */
+	public function count_for_accounts( array $account_ids ): int {
+		global $wpdb;
+
+		$account_ids = array_values( array_unique( array_map( 'intval', $account_ids ) ) );
+		if ( ! $account_ids ) {
+			return 0;
+		}
+
+		$placeholders = implode( ',', array_fill( 0, count( $account_ids ), '%d' ) );
+
+		return (int) $wpdb->get_var( // phpcs:ignore WordPress.DB.DirectDatabaseQuery, WordPress.DB.PreparedSQL.NotPrepared
+			$wpdb->prepare(
+				'SELECT COUNT(*) FROM ' . Installer::documents_table() . " WHERE account_id IN ($placeholders)",
+				...$account_ids
+			)
+		);
+	}
+
+	/**
 	 * Total document count (for pagination).
 	 */
 	public function count(): int {
@@ -107,6 +157,36 @@ final class DocumentRepository {
 			$counts[ (string) $row->status ] = (int) $row->total;
 		}
 
+		return $counts;
+	}
+
+	/**
+	 * Document counts grouped by status, restricted to a set of account ids.
+	 *
+	 * @param int[] $account_ids Visible account ids.
+	 *
+	 * @return array<string,int>
+	 */
+	public function status_counts_for_accounts( array $account_ids ): array {
+		global $wpdb;
+
+		$account_ids = array_values( array_unique( array_map( 'intval', $account_ids ) ) );
+		if ( ! $account_ids ) {
+			return array();
+		}
+
+		$placeholders = implode( ',', array_fill( 0, count( $account_ids ), '%d' ) );
+		$rows         = $wpdb->get_results( // phpcs:ignore WordPress.DB.DirectDatabaseQuery, WordPress.DB.PreparedSQL.NotPrepared
+			$wpdb->prepare(
+				'SELECT status, COUNT(*) AS total FROM ' . Installer::documents_table() . " WHERE account_id IN ($placeholders) GROUP BY status",
+				...$account_ids
+			)
+		);
+
+		$counts = array();
+		foreach ( (array) $rows as $row ) {
+			$counts[ (string) $row->status ] = (int) $row->total;
+		}
 		return $counts;
 	}
 

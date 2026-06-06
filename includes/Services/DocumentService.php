@@ -34,6 +34,7 @@ final class DocumentService {
 	private AuditLogger $audit;
 	private Mailer $mailer;
 	private SignatureProviderInterface $provider;
+	private AccountService $account;
 
 	public function __construct() {
 		$this->documents  = new DocumentRepository();
@@ -44,6 +45,16 @@ final class DocumentService {
 		$this->audit      = new AuditLogger( $this->audit_repo );
 		$this->mailer     = new Mailer();
 		$this->provider   = new ElectronicSignatureProvider();
+		$this->account    = new AccountService();
+	}
+
+	/**
+	 * The account new documents/templates should be created under: the current
+	 * user's working account, falling back to the default account.
+	 */
+	private function creation_account_id(): int {
+		$id = $this->account->current_account_id( get_current_user_id() );
+		return $id > 0 ? $id : $this->account->default_account_id();
 	}
 
 	/* ---------------------------------------------------------------------
@@ -68,6 +79,7 @@ final class DocumentService {
 		$document_id = $this->documents->create(
 			array(
 				'title'      => $title,
+				'account_id' => $this->creation_account_id(),
 				'created_by' => get_current_user_id(),
 			)
 		);
@@ -112,6 +124,7 @@ final class DocumentService {
 		$document_id = $this->documents->create(
 			array(
 				'title'      => $title,
+				'account_id' => $this->creation_account_id(),
 				'created_by' => get_current_user_id(),
 			)
 		);
@@ -530,6 +543,8 @@ final class DocumentService {
 		$new_id  = $this->documents->create(
 			array(
 				'title'      => $title,
+				// A copy stays in the same account as its source.
+				'account_id' => (int) ( $source->account_id ?? $this->creation_account_id() ),
 				'created_by' => get_current_user_id(),
 			)
 		);
@@ -714,6 +729,7 @@ final class DocumentService {
 		$document_id = $this->documents->create(
 			array(
 				'title'      => (string) $template->name,
+				'account_id' => $this->creation_account_id(),
 				'created_by' => get_current_user_id(),
 			)
 		);

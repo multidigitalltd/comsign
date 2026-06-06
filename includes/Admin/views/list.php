@@ -7,6 +7,10 @@
  * @var \ComSign\Admin\DocumentsListTable $table
  * @var string                            $new_url
  * @var array|null                        $notice
+ * @var array                             $accounts    Accounts the user belongs to.
+ * @var int                               $current_account
+ * @var string                            $switch_url
+ * @var string                            $switch_nonce
  */
 
 defined( 'ABSPATH' ) || exit;
@@ -17,6 +21,22 @@ defined( 'ABSPATH' ) || exit;
 	<hr class="wp-header-end">
 
 	<?php require __DIR__ . '/partials/notice.php'; ?>
+
+	<?php if ( count( $accounts ) > 1 ) : ?>
+		<form method="post" action="<?php echo esc_url( $switch_url ); ?>" class="comsign-account-switcher" style="margin:8px 0;">
+			<input type="hidden" name="action" value="comsign_switch_account">
+			<input type="hidden" name="_wpnonce" value="<?php echo esc_attr( $switch_nonce ); ?>">
+			<label for="comsign-account"><?php esc_html_e( 'Workspace:', 'comsign' ); ?></label>
+			<select name="account_id" id="comsign-account" onchange="this.form.submit()">
+				<?php foreach ( $accounts as $acct ) : ?>
+					<option value="<?php echo (int) $acct->id; ?>"<?php selected( (int) $acct->id, $current_account ); ?>>
+						<?php echo esc_html( $acct->name ); ?>
+					</option>
+				<?php endforeach; ?>
+			</select>
+			<noscript><button type="submit" class="button"><?php esc_html_e( 'Switch', 'comsign' ); ?></button></noscript>
+		</form>
+	<?php endif; ?>
 
 	<?php if ( ! empty( $counts ) ) : ?>
 		<div class="comsign-summary">

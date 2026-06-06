@@ -32,6 +32,7 @@ final class Admin {
 	private AuditRepository $audit;
 	private \ComSign\Database\TemplateRepository $templates;
 	private DocumentService $service;
+	private \ComSign\Services\AccountService $accounts;
 
 	public function __construct() {
 		$this->documents = new DocumentRepository();
@@ -40,6 +41,28 @@ final class Admin {
 		$this->audit     = new AuditRepository();
 		$this->templates = new \ComSign\Database\TemplateRepository();
 		$this->service   = new DocumentService();
+		$this->accounts  = new \ComSign\Services\AccountService();
+	}
+
+	/**
+	 * Account ids the current user may see.
+	 *
+	 * @return int[]
+	 */
+	private function visible_account_ids(): array {
+		return $this->accounts->visible_account_ids( get_current_user_id() );
+	}
+
+	/**
+	 * Load a document and ensure the current user's account scope allows access.
+	 * Dies with 403 otherwise. Centralises tenant authorization for the admin.
+	 */
+	private function assert_document_access( int $document_id ): object {
+		$document = $this->documents->find( $document_id );
+		if ( ! $document || ! $this->accounts->can_access_document( $document, get_current_user_id() ) ) {
+			wp_die( esc_html__( 'You do not have access to this document.', 'comsign' ), '', array( 'response' => 403 ) );
+		}
+		return $document;
 	}
 
 	/**
@@ -61,6 +84,7 @@ final class Admin {
 		add_action( 'admin_post_comsign_test_webhook', array( $this, 'handle_test_webhook' ) );
 		add_action( 'admin_post_comsign_resend_signer', array( $this, 'handle_resend_signer' ) );
 		add_action( 'admin_post_comsign_extend_expiry', array( $this, 'handle_extend_expiry' ) );
+		add_action( 'admin_post_comsign_switch_account', array( $this, 'handle_switch_account' ) );
 		add_action( 'admin_post_comsign_save_fields', array( $this, 'handle_save_fields' ) );
 		add_action( 'admin_post_comsign_send', array( $this, 'handle_send' ) );
 		add_action( 'admin_post_comsign_duplicate', array( $this, 'handle_duplicate' ) );
@@ -252,16 +276,22 @@ final class Admin {
 	}
 
 	private function render_list_page(): void {
-		$table = new DocumentsListTable( $this->documents, $this->signers );
+		$account_ids = $this->visible_account_ids();
+		$table       = new DocumentsListTable( $this->documents, $this->signers, $account_ids );
 		$table->prepare_items();
 
+		$user_id = get_current_user_id();
 		$this->view(
 			'list',
 			array(
-				'table'    => $table,
-				'new_url'  => admin_url( 'admin.php?page=comsign-new' ),
-				'counts'   => $this->documents->status_counts(),
-				'notice'   => $this->pull_notice(),
+				'table'           => $table,
+				'new_url'         => admin_url( 'admin.php?page=comsign-new' ),
+				'counts'          => $this->documents->status_counts_for_accounts( $account_ids ),
+				'accounts'        => $this->accounts->accounts_for_user( $user_id ),
+				'current_account' => $this->accounts->current_account_id( $user_id ),
+				'switch_url'      => admin_url( 'admin-post.php' ),
+				'switch_nonce'    => wp_create_nonce( 'comsign_switch_account' ),
+				'notice'          => $this->pull_notice(),
 			)
 		);
 	}
@@ -281,10 +311,7 @@ final class Admin {
 	}
 
 	private function render_edit_page( int $document_id ): void {
-		$document = $this->documents->find( $document_id );
-		if ( ! $document ) {
-			wp_die( esc_html__( 'Document not found.', 'comsign' ) );
-		}
+		$document = $this->assert_document_access( $document_id );
 
 		$this->view(
 			'edit',
@@ -451,6 +478,19 @@ final class Admin {
 		}
 
 		$this->redirect_with_notice( $this->edit_url( $document_id ), 'success', __( 'Invitation re-sent.', 'comsign' ) );
+	}
+
+	/**
+	 * Switch the current user's working account (tenant context).
+	 */
+	public function handle_switch_account(): void {
+		$this->guard();
+		check_admin_referer( 'comsign_switch_account' );
+
+		$account_id = isset( $_POST['account_id'] ) ? absint( wp_unslash( $_POST['account_id'] ) ) : 0;
+		$this->accounts->set_current_account( get_current_user_id(), $account_id );
+
+		$this->redirect_with_notice( admin_url( 'admin.php?page=comsign' ), 'success', __( 'Workspace switched.', 'comsign' ) );
 	}
 
 	/**
@@ -625,6 +665,7 @@ final class Admin {
 
 		$document_id = isset( $_REQUEST['document_id'] ) ? absint( wp_unslash( $_REQUEST['document_id'] ) ) : 0; // phpcs:ignore WordPress.Security.NonceVerification.Recommended
 		check_admin_referer( 'comsign_audit_pdf_' . $document_id );
+		$this->assert_document_access( $document_id );
 
 		try {
 			$path = $this->service->generate_audit_pdf( $document_id );
@@ -981,10 +1022,7 @@ final class Admin {
 
 		check_admin_referer( 'comsign_stream_' . $document_id . '_' . $which );
 
-		$document = $this->documents->find( $document_id );
-		if ( ! $document ) {
-			wp_die( esc_html__( 'Document not found.', 'comsign' ), '', array( 'response' => 404 ) );
-		}
+		$document = $this->assert_document_access( $document_id );
 
 		$path = 'signed' === $which ? $document->signed_path : $document->source_path;
 
@@ -1100,7 +1138,12 @@ final class Admin {
 	 * Read and validate the posted document id.
 	 */
 	private function posted_document_id(): int {
-		return isset( $_POST['document_id'] ) ? absint( wp_unslash( $_POST['document_id'] ) ) : 0; // phpcs:ignore WordPress.Security.NonceVerification.Missing
+		$id = isset( $_POST['document_id'] ) ? absint( wp_unslash( $_POST['document_id'] ) ) : 0; // phpcs:ignore WordPress.Security.NonceVerification.Missing
+		if ( $id > 0 ) {
+			// Tenant authorization for every document POST handler.
+			$this->assert_document_access( $id );
+		}
+		return $id;
 	}
 
 	/**
