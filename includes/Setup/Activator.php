@@ -9,6 +9,7 @@ namespace ComSign\Setup;
 
 defined( 'ABSPATH' ) || exit;
 
+use ComSign\Frontend\PortalController;
 use ComSign\Frontend\SigningController;
 use ComSign\Support\Capabilities;
 use ComSign\Support\Storage;
@@ -27,8 +28,9 @@ final class Activator {
 		Storage::ensure_protected_dir();
 		Cron::schedule();
 
-		// Register the /comsign/verify rule before flushing so it resolves.
+		// Register our rewrite rules before flushing so they resolve.
 		SigningController::register_verify_route();
+		PortalController::register_route();
 		flush_rewrite_rules();
 	}
 }

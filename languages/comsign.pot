@@ -39,6 +39,8 @@ msgstr ""
 #: includes/Admin/views/analytics.php:93
 #: includes/Admin/views/edit.php:52
 #: includes/Admin/views/templates.php:47
+#: includes/Frontend/views/partials/portal-doc-table.php:31
+#: includes/Frontend/views/portal-document.php:22
 msgid "(untitled)"
 msgstr ""
 
@@ -176,6 +178,10 @@ msgstr ""
 
 #: includes/Admin/views/analytics.php:46
 msgid "Avg. time to complete"
+msgstr ""
+
+#: includes/Frontend/views/portal-document.php:20
+msgid "Back to documents"
 msgstr ""
 
 #: includes/Admin/views/edit.php:56
@@ -377,11 +383,16 @@ msgstr ""
 #: includes/Admin/DocumentsListTable.php:56
 #: includes/Admin/views/templates.php:31
 #: includes/Audit/AuditLogger.php:43
+#: includes/Frontend/views/partials/portal-doc-table.php:23
 msgid "Created"
 msgstr ""
 
 #: includes/Admin/views/template-bulk.php:28
 msgid "Dana Cohen, dana@example.com, +972500000000\nAvi Levi, avi@example.com"
+msgstr ""
+
+#: includes/Frontend/PortalController.php:246
+msgid "Dashboard"
 msgstr ""
 
 #: includes/Admin/Admin.php:240
@@ -436,6 +447,8 @@ msgstr ""
 
 #: includes/Admin/DocumentsListTable.php:53
 #: includes/Admin/views/analytics.php:85
+#: includes/Frontend/PortalController.php:208
+#: includes/Frontend/views/partials/portal-doc-table.php:20
 #: includes/Frontend/views/sign.php:25
 #: includes/Services/DocumentService.php:276
 #: includes/Signature/CertificatePage.php:31
@@ -465,6 +478,10 @@ msgstr ""
 
 #: includes/Admin/Admin.php:647
 msgid "Document duplicated."
+msgstr ""
+
+#: includes/Frontend/PortalController.php:198
+msgid "Document not available"
 msgstr ""
 
 #: includes/Services/DocumentService.php:245
@@ -503,6 +520,9 @@ msgstr ""
 
 #: includes/Admin/Admin.php:120
 #: includes/Admin/Admin.php:121
+#: includes/Frontend/PortalController.php:173
+#: includes/Frontend/PortalController.php:251
+#: includes/Frontend/views/portal-documents.php:21
 msgid "Documents"
 msgstr ""
 
@@ -548,6 +568,7 @@ msgid "Electronic signature"
 msgstr ""
 
 #: includes/Admin/Admin.php:242
+#: includes/Frontend/views/portal-document.php:40
 #: includes/Signature/CertificatePage.php:40
 msgid "Email"
 msgstr ""
@@ -606,6 +627,7 @@ msgid "Expired"
 msgstr ""
 
 #: includes/Admin/views/edit.php:145
+#: includes/Frontend/views/portal-document.php:27
 msgid "Expires:"
 msgstr ""
 
@@ -774,6 +796,7 @@ msgid "My electronic signature is legally binding and has the same effect as a h
 msgstr ""
 
 #: includes/Admin/Admin.php:241
+#: includes/Frontend/views/portal-document.php:39
 #: includes/Signature/CertificatePage.php:39
 msgid "Name"
 msgstr ""
@@ -786,8 +809,20 @@ msgstr ""
 msgid "Needs attention (out > 7 days)"
 msgstr ""
 
+#: includes/Frontend/views/portal-documents.php:37
+msgid "Next"
+msgstr ""
+
 #: includes/Support/HealthCheck.php:129
 msgid "No REST API key is set. Save Settings to generate one if you use the API."
+msgstr ""
+
+#: includes/Frontend/views/partials/portal-doc-table.php:13
+msgid "No documents to show. Start by uploading a PDF in the admin."
+msgstr ""
+
+#: includes/Frontend/views/portal-dashboard.php:30
+msgid "No documents yet."
 msgstr ""
 
 #: includes/Admin/DocumentsListTable.php:165
@@ -815,6 +850,10 @@ msgstr ""
 msgid "No matching signed document was found for that ID and code."
 msgstr ""
 
+#: includes/Frontend/views/portal-document.php:34
+msgid "No signers added yet."
+msgstr ""
+
 #: includes/Admin/views/edit.php:216
 msgid "No signers yet."
 msgstr ""
@@ -829,6 +868,18 @@ msgstr ""
 
 #: includes/Integrations/Webhooks.php:103
 msgid "No webhook URL is configured."
+msgstr ""
+
+#: includes/Frontend/PortalController.php:118
+msgid "No workspace"
+msgstr ""
+
+#: includes/Frontend/PortalController.php:119
+msgid "No workspace yet"
+msgstr ""
+
+#: includes/Frontend/PortalController.php:197
+msgid "Not found"
 msgstr ""
 
 #: includes/Admin/views/analytics.php:80
@@ -893,6 +944,10 @@ msgstr ""
 
 #: includes/Support/HealthCheck.php:57
 msgid "PHP version"
+msgstr ""
+
+#: includes/Frontend/views/portal-documents.php:33
+msgid "Page %1$d of %2$d"
 msgstr ""
 
 #: includes/Admin/DocumentsListTable.php:178
@@ -961,12 +1016,24 @@ msgstr ""
 msgid "Please provide at least one recipient."
 msgstr ""
 
+#: includes/Frontend/PortalController.php:104
+msgid "Please sign in"
+msgstr ""
+
 #: includes/Admin/views/edit.php:285
 msgid "Please sign the document at the following secure link: %s"
 msgstr ""
 
 #: includes/Frontend/SigningController.php:400
 msgid "Please verify your identity before signing."
+msgstr ""
+
+#: includes/Frontend/PortalController.php:286
+msgid "Portal template missing."
+msgstr ""
+
+#: includes/Frontend/views/portal-documents.php:28
+msgid "Previous"
 msgstr ""
 
 #: includes/Admin/views/health.php:19
@@ -994,6 +1061,10 @@ msgstr ""
 
 #: includes/Frontend/views/sign.php:147
 msgid "Reason for declining (optional)"
+msgstr ""
+
+#: includes/Frontend/views/portal-dashboard.php:34
+msgid "Recent documents"
 msgstr ""
 
 #: includes/Admin/views/settings.php:104
@@ -1174,6 +1245,11 @@ msgstr ""
 msgid "Sign document"
 msgstr ""
 
+#: includes/Frontend/PortalController.php:103
+#: includes/Frontend/views/portal-message.php:21
+msgid "Sign in"
+msgstr ""
+
 #: includes/Admin/views/edit.php:244
 msgid "Sign in person"
 msgstr ""
@@ -1200,9 +1276,11 @@ msgid "Signatures pending"
 msgstr ""
 
 #: includes/Audit/AuditLogger.php:47
+#: includes/Frontend/views/partials/portal-doc-table.php:22
 msgid "Signed"
 msgstr ""
 
+#: includes/Frontend/views/portal-document.php:42
 #: includes/Signature/CertificatePage.php:41
 msgid "Signed at"
 msgstr ""
@@ -1247,6 +1325,7 @@ msgstr ""
 
 #: includes/Admin/DocumentsListTable.php:55
 #: includes/Admin/views/edit.php:214
+#: includes/Frontend/views/portal-document.php:32
 msgid "Signers"
 msgstr ""
 
@@ -1266,10 +1345,13 @@ msgstr ""
 #: includes/Admin/DocumentsListTable.php:54
 #: includes/Admin/views/analytics.php:86
 #: includes/Admin/views/health.php:37
+#: includes/Frontend/views/partials/portal-doc-table.php:21
+#: includes/Frontend/views/portal-document.php:41
 msgid "Status"
 msgstr ""
 
 #: includes/Admin/views/edit.php:142
+#: includes/Frontend/views/portal-document.php:24
 msgid "Status:"
 msgstr ""
 
@@ -1278,6 +1360,7 @@ msgid "Storage is writable but the .htaccess guard is missing. On nginx, add a d
 msgstr ""
 
 #: includes/Admin/views/list.php:37
+#: includes/Frontend/views/partials/portal-nav.php:36
 msgid "Switch"
 msgstr ""
 
@@ -1414,6 +1497,10 @@ msgstr ""
 
 #: includes/Admin/views/edit.php:331
 msgid "These people receive the fully signed PDF by email when signing completes. They do not sign."
+msgstr ""
+
+#: includes/Frontend/PortalController.php:199
+msgid "This document does not exist in your workspace."
 msgstr ""
 
 #: includes/Frontend/SigningController.php:284
@@ -1592,11 +1679,16 @@ msgstr ""
 msgid "When"
 msgstr ""
 
+#: includes/Frontend/PortalController.php:149
+msgid "Workspace"
+msgstr ""
+
 #: includes/Admin/Admin.php:493
 msgid "Workspace switched."
 msgstr ""
 
 #: includes/Admin/views/list.php:29
+#: includes/Frontend/views/partials/portal-nav.php:28
 msgid "Workspace:"
 msgstr ""
 
@@ -1640,8 +1732,16 @@ msgstr ""
 msgid "You must agree to sign electronically before continuing."
 msgstr ""
 
+#: includes/Frontend/PortalController.php:105
+msgid "You need to sign in to access your workspace."
+msgstr ""
+
 #: includes/Frontend/SignerAuth.php:128
 msgid "Your ComSign verification code"
+msgstr ""
+
+#: includes/Frontend/PortalController.php:120
+msgid "Your account is not part of any workspace. Please contact your administrator."
 msgstr ""
 
 #: includes/Database/FieldRepository.php:114
@@ -1654,6 +1754,10 @@ msgstr ""
 
 #: includes/Frontend/SignerAuth.php:131
 msgid "Your verification code is: %1$s\n\nIt expires in %2$d minutes."
+msgstr ""
+
+#: includes/Frontend/views/portal-dashboard.php:20
+msgid "Your workspace"
 msgstr ""
 
 #: includes/Admin/views/new.php:76

@@ -34,6 +34,8 @@ msgstr "%s (עותק)"
 #: includes/Admin/views/analytics.php:93
 #: includes/Admin/views/edit.php:52
 #: includes/Admin/views/templates.php:47
+#: includes/Frontend/views/partials/portal-doc-table.php:31
+#: includes/Frontend/views/portal-document.php:22
 msgid "(untitled)"
 msgstr "(ללא כותרת)"
 
@@ -172,6 +174,10 @@ msgstr "תזכורות אוטומטיות"
 #: includes/Admin/views/analytics.php:46
 msgid "Avg. time to complete"
 msgstr "זמן ממוצע להשלמה"
+
+#: includes/Frontend/views/portal-document.php:20
+msgid "Back to documents"
+msgstr "חזרה למסמכים"
 
 #: includes/Admin/views/edit.php:56
 msgid "Back to list"
@@ -372,12 +378,17 @@ msgstr "יצירת מסמך"
 #: includes/Admin/DocumentsListTable.php:56
 #: includes/Admin/views/templates.php:31
 #: includes/Audit/AuditLogger.php:43
+#: includes/Frontend/views/partials/portal-doc-table.php:23
 msgid "Created"
 msgstr "נוצר"
 
 #: includes/Admin/views/template-bulk.php:28
 msgid "Dana Cohen, dana@example.com, +972500000000\nAvi Levi, avi@example.com"
 msgstr "דנה כהן, dana@example.com, +972500000000\nאבי לוי, avi@example.com"
+
+#: includes/Frontend/PortalController.php:246
+msgid "Dashboard"
+msgstr "לוח בקרה"
 
 #: includes/Admin/Admin.php:240
 msgid "Date"
@@ -431,6 +442,8 @@ msgstr "חתימה דיגיטלית (PKI/PAdES)"
 
 #: includes/Admin/DocumentsListTable.php:53
 #: includes/Admin/views/analytics.php:85
+#: includes/Frontend/PortalController.php:208
+#: includes/Frontend/views/partials/portal-doc-table.php:20
 #: includes/Frontend/views/sign.php:25
 #: includes/Services/DocumentService.php:276
 #: includes/Signature/CertificatePage.php:31
@@ -461,6 +474,10 @@ msgstr "המסמך נמחק."
 #: includes/Admin/Admin.php:647
 msgid "Document duplicated."
 msgstr "המסמך שוכפל."
+
+#: includes/Frontend/PortalController.php:198
+msgid "Document not available"
+msgstr "המסמך אינו זמין"
 
 #: includes/Services/DocumentService.php:245
 #: includes/Services/DocumentService.php:270
@@ -498,6 +515,9 @@ msgstr "המסמך הועלה. כעת הוסיפו חותמים והניחו ש�
 
 #: includes/Admin/Admin.php:120
 #: includes/Admin/Admin.php:121
+#: includes/Frontend/PortalController.php:173
+#: includes/Frontend/PortalController.php:251
+#: includes/Frontend/views/portal-documents.php:21
 msgid "Documents"
 msgstr "מסמכים"
 
@@ -543,6 +563,7 @@ msgid "Electronic signature"
 msgstr "חתימה אלקטרונית"
 
 #: includes/Admin/Admin.php:242
+#: includes/Frontend/views/portal-document.php:40
 #: includes/Signature/CertificatePage.php:40
 msgid "Email"
 msgstr "דוא״ל"
@@ -601,6 +622,7 @@ msgid "Expired"
 msgstr "פג תוקף"
 
 #: includes/Admin/views/edit.php:145
+#: includes/Frontend/views/portal-document.php:27
 msgid "Expires:"
 msgstr "פג תוקף:"
 
@@ -769,6 +791,7 @@ msgid "My electronic signature is legally binding and has the same effect as a h
 msgstr "החתימה המקוונת שלי מחייבת מבחינה משפטית ובעלת תוקף זהה לחתימה ידנית. מועד החתימה, כתובת ה-IP והדפדפן שלי נרשמים כהוכחה לחתימה."
 
 #: includes/Admin/Admin.php:241
+#: includes/Frontend/views/portal-document.php:39
 #: includes/Signature/CertificatePage.php:39
 msgid "Name"
 msgstr "שם"
@@ -781,9 +804,21 @@ msgstr "שם (אוטומטי)"
 msgid "Needs attention (out > 7 days)"
 msgstr "דורש תשומת לב (נשלח לפני יותר מ-7 ימים)"
 
+#: includes/Frontend/views/portal-documents.php:37
+msgid "Next"
+msgstr "הבא"
+
 #: includes/Support/HealthCheck.php:129
 msgid "No REST API key is set. Save Settings to generate one if you use the API."
 msgstr "לא הוגדר מפתח REST API. שמרו את ההגדרות כדי לייצר מפתח אם אתם משתמשים ב-API."
+
+#: includes/Frontend/views/partials/portal-doc-table.php:13
+msgid "No documents to show. Start by uploading a PDF in the admin."
+msgstr "אין מסמכים להצגה. התחילו בהעלאת PDF בממשק הניהול."
+
+#: includes/Frontend/views/portal-dashboard.php:30
+msgid "No documents yet."
+msgstr "אין עדיין מסמכים."
 
 #: includes/Admin/DocumentsListTable.php:165
 msgid "No documents yet. Upload your first PDF to get started."
@@ -810,6 +845,10 @@ msgstr "לא הועלה קובץ, או שההעלאה נכשלה."
 msgid "No matching signed document was found for that ID and code."
 msgstr "לא נמצא מסמך חתום תואם למזהה ולקוד שהוזנו."
 
+#: includes/Frontend/views/portal-document.php:34
+msgid "No signers added yet."
+msgstr "לא נוספו עדיין חותמים."
+
 #: includes/Admin/views/edit.php:216
 msgid "No signers yet."
 msgstr "אין עדיין חותמים."
@@ -825,6 +864,18 @@ msgstr "לא הוגדרה כתובת webhook (אופציונלי)."
 #: includes/Integrations/Webhooks.php:103
 msgid "No webhook URL is configured."
 msgstr "לא הוגדרה כתובת webhook."
+
+#: includes/Frontend/PortalController.php:118
+msgid "No workspace"
+msgstr "אין סביבת עבודה"
+
+#: includes/Frontend/PortalController.php:119
+msgid "No workspace yet"
+msgstr "אין עדיין סביבת עבודה"
+
+#: includes/Frontend/PortalController.php:197
+msgid "Not found"
+msgstr "לא נמצא"
 
 #: includes/Admin/views/analytics.php:80
 msgid "Nothing stuck — every document is moving."
@@ -889,6 +940,10 @@ msgstr "PDF בלבד, עד 25 מ״ב."
 #: includes/Support/HealthCheck.php:57
 msgid "PHP version"
 msgstr "גרסת PHP"
+
+#: includes/Frontend/views/portal-documents.php:33
+msgid "Page %1$d of %2$d"
+msgstr "עמוד %1$d מתוך %2$d"
 
 #: includes/Admin/DocumentsListTable.php:178
 #: includes/Admin/views/analytics.php:25
@@ -956,6 +1011,10 @@ msgstr "אנא הזינו כתובת דוא״ל תקינה."
 msgid "Please provide at least one recipient."
 msgstr "אנא ספקו לפחות נמען אחד."
 
+#: includes/Frontend/PortalController.php:104
+msgid "Please sign in"
+msgstr "נא להתחבר"
+
 #: includes/Admin/views/edit.php:285
 msgid "Please sign the document at the following secure link: %s"
 msgstr "אנא חתמו על המסמך בקישור המאובטח הבא: %s"
@@ -963,6 +1022,14 @@ msgstr "אנא חתמו על המסמך בקישור המאובטח הבא: %s"
 #: includes/Frontend/SigningController.php:400
 msgid "Please verify your identity before signing."
 msgstr "אנא אמתו את זהותכם לפני החתימה."
+
+#: includes/Frontend/PortalController.php:286
+msgid "Portal template missing."
+msgstr "תבנית הפורטל חסרה."
+
+#: includes/Frontend/views/portal-documents.php:28
+msgid "Previous"
+msgstr "הקודם"
 
 #: includes/Admin/views/health.php:19
 msgid "Problem"
@@ -990,6 +1057,10 @@ msgstr "שליחת הזמנות מחדש"
 #: includes/Frontend/views/sign.php:147
 msgid "Reason for declining (optional)"
 msgstr "סיבת הסירוב (אופציונלי)"
+
+#: includes/Frontend/views/portal-dashboard.php:34
+msgid "Recent documents"
+msgstr "מסמכים אחרונים"
 
 #: includes/Admin/views/settings.php:104
 msgid "Regenerate API key & webhook secret on save"
@@ -1169,6 +1240,11 @@ msgstr "חתימה וסיום"
 msgid "Sign document"
 msgstr "חתימה על המסמך"
 
+#: includes/Frontend/PortalController.php:103
+#: includes/Frontend/views/portal-message.php:21
+msgid "Sign in"
+msgstr "התחברות"
+
 #: includes/Admin/views/edit.php:244
 msgid "Sign in person"
 msgstr "חתימה במקום"
@@ -1195,9 +1271,11 @@ msgid "Signatures pending"
 msgstr "חתימות ממתינות"
 
 #: includes/Audit/AuditLogger.php:47
+#: includes/Frontend/views/partials/portal-doc-table.php:22
 msgid "Signed"
 msgstr "נחתם"
 
+#: includes/Frontend/views/portal-document.php:42
 #: includes/Signature/CertificatePage.php:41
 msgid "Signed at"
 msgstr "נחתם בתאריך"
@@ -1242,6 +1320,7 @@ msgstr "אימות החותם עודכן."
 
 #: includes/Admin/DocumentsListTable.php:55
 #: includes/Admin/views/edit.php:214
+#: includes/Frontend/views/portal-document.php:32
 msgid "Signers"
 msgstr "חותמים"
 
@@ -1261,10 +1340,13 @@ msgstr "חלק מההזמנות לא נשלחו: %s. אנא בדקו את הגד
 #: includes/Admin/DocumentsListTable.php:54
 #: includes/Admin/views/analytics.php:86
 #: includes/Admin/views/health.php:37
+#: includes/Frontend/views/partials/portal-doc-table.php:21
+#: includes/Frontend/views/portal-document.php:41
 msgid "Status"
 msgstr "סטטוס"
 
 #: includes/Admin/views/edit.php:142
+#: includes/Frontend/views/portal-document.php:24
 msgid "Status:"
 msgstr "סטטוס:"
 
@@ -1273,6 +1355,7 @@ msgid "Storage is writable but the .htaccess guard is missing. On nginx, add a d
 msgstr "האחסון ניתן לכתיבה אך חסר קובץ .htaccess להגנה. ב-nginx, הוסיפו כלל deny לתיקיית ההעלאות של comsign."
 
 #: includes/Admin/views/list.php:37
+#: includes/Frontend/views/partials/portal-nav.php:36
 msgid "Switch"
 msgstr "החלפה"
 
@@ -1410,6 +1493,10 @@ msgstr "בדיקות אלו עוזרות לוודא ש-ComSign מוגדר נכו
 #: includes/Admin/views/edit.php:331
 msgid "These people receive the fully signed PDF by email when signing completes. They do not sign."
 msgstr "אנשים אלה יקבלו את ה-PDF החתום במייל עם השלמת החתימות. הם אינם חותמים."
+
+#: includes/Frontend/PortalController.php:199
+msgid "This document does not exist in your workspace."
+msgstr "מסמך זה אינו קיים בסביבת העבודה שלך."
 
 #: includes/Frontend/SigningController.php:284
 msgid "This document is authentic."
@@ -1587,11 +1674,16 @@ msgstr "סוד Webhook"
 msgid "When"
 msgstr "מתי"
 
+#: includes/Frontend/PortalController.php:149
+msgid "Workspace"
+msgstr "סביבת עבודה"
+
 #: includes/Admin/Admin.php:493
 msgid "Workspace switched."
 msgstr "סביבת העבודה הוחלפה."
 
 #: includes/Admin/views/list.php:29
+#: includes/Frontend/views/partials/portal-nav.php:28
 msgid "Workspace:"
 msgstr "סביבת עבודה:"
 
@@ -1635,9 +1727,17 @@ msgstr "סירבת לחתום על מסמך זה. השולח קיבל הודעה
 msgid "You must agree to sign electronically before continuing."
 msgstr "עליך להסכים לחתום באופן אלקטרוני לפני המשך."
 
+#: includes/Frontend/PortalController.php:105
+msgid "You need to sign in to access your workspace."
+msgstr "עליך להתחבר כדי לגשת לסביבת העבודה שלך."
+
 #: includes/Frontend/SignerAuth.php:128
 msgid "Your ComSign verification code"
 msgstr "קוד האימות שלכם ב-ComSign"
+
+#: includes/Frontend/PortalController.php:120
+msgid "Your account is not part of any workspace. Please contact your administrator."
+msgstr "החשבון שלך אינו משויך לאף סביבת עבודה. פנה למנהל המערכת."
 
 #: includes/Database/FieldRepository.php:114
 msgid "Your answer"
@@ -1650,6 +1750,10 @@ msgstr "החתימה שלך"
 #: includes/Frontend/SignerAuth.php:131
 msgid "Your verification code is: %1$s\n\nIt expires in %2$d minutes."
 msgstr "קוד האימות שלכם הוא: %1$s\n\nהוא יפוג בעוד %2$d דקות."
+
+#: includes/Frontend/views/portal-dashboard.php:20
+msgid "Your workspace"
+msgstr "סביבת העבודה שלך"
 
 #: includes/Admin/views/new.php:76
 msgid "customer_name = Dana Cohen\ncontract_no = 2026-0042"

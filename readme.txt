@@ -4,7 +4,7 @@ Tags: signature, digital signature, pdf, esignature, hebrew
 Requires at least: 6.0
 Tested up to: 6.5
 Requires PHP: 7.4
-Stable tag: 0.19.0
+Stable tag: 0.20.0
 License: GPL-2.0-or-later
 License URI: https://www.gnu.org/licenses/gpl-2.0.html
 
@@ -105,6 +105,14 @@ ID and its SHA-256 code (shown on the document screen and the signature
 certificate) to confirm the document is authentic and see who signed it.
 
 == Changelog ==
+
+= 0.20.0 =
+* New: client portal at /comsign/app (also ?comsign_app=1) - a clean front-end
+  workspace for logged-in account users, separate from WP Admin. Includes a
+  dashboard (status summary + recent documents), an account-scoped documents
+  list, and a read-only document detail with signer progress.
+* The portal is fully tenant-scoped and mobile-friendly, with a workspace
+  switcher for users who belong to more than one account.
 
 = 0.19.0 =
 * New (foundation): multi-tenant accounts/workspaces. Documents and templates
