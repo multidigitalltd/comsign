@@ -89,4 +89,72 @@ final class Webhooks {
 			)
 		);
 	}
+
+	/**
+	 * Send a blocking test delivery and report the outcome (for the health page).
+	 *
+	 * @return array{ok:bool,message:string}
+	 */
+	public function send_test(): array {
+		$url = (string) Settings::get( 'webhook_url' );
+		if ( '' === $url ) {
+			return array(
+				'ok'      => false,
+				'message' => __( 'No webhook URL is configured.', 'comsign' ),
+			);
+		}
+
+		$scheme = strtolower( (string) wp_parse_url( $url, PHP_URL_SCHEME ) );
+		$host   = (string) wp_parse_url( $url, PHP_URL_HOST );
+		$ip     = filter_var( $host, FILTER_VALIDATE_IP ) ? $host : gethostbyname( $host );
+		$blocked = filter_var( $ip, FILTER_VALIDATE_IP )
+			&& ! filter_var( $ip, FILTER_VALIDATE_IP, FILTER_FLAG_NO_PRIV_RANGE | FILTER_FLAG_NO_RES_RANGE );
+
+		if ( ! in_array( $scheme, array( 'http', 'https' ), true ) || $blocked || ! wp_http_validate_url( $url ) ) {
+			return array(
+				'ok'      => false,
+				'message' => __( 'The webhook URL is invalid or points to a blocked (private/loopback) target.', 'comsign' ),
+			);
+		}
+
+		$payload   = (string) wp_json_encode(
+			array(
+				'event'     => 'test',
+				'site'      => home_url(),
+				'timestamp' => time(),
+			)
+		);
+		$secret    = (string) Settings::get( 'webhook_secret' );
+		$signature = $secret ? hash_hmac( 'sha256', $payload, $secret ) : '';
+
+		$response = wp_remote_post(
+			$url,
+			array(
+				'timeout'   => 10,
+				'blocking'  => true,
+				'headers'   => array(
+					'Content-Type'        => 'application/json',
+					'X-ComSign-Event'     => 'test',
+					'X-ComSign-Signature' => $signature,
+				),
+				'body'      => $payload,
+				'sslverify' => true,
+			)
+		);
+
+		if ( is_wp_error( $response ) ) {
+			return array(
+				'ok'      => false,
+				// translators: %s: error message.
+				'message' => sprintf( __( 'Delivery failed: %s', 'comsign' ), $response->get_error_message() ),
+			);
+		}
+
+		$code = (int) wp_remote_retrieve_response_code( $response );
+		return array(
+			'ok'      => $code >= 200 && $code < 400,
+			// translators: %d: HTTP status code.
+			'message' => sprintf( __( 'Endpoint responded with HTTP %d.', 'comsign' ), $code ),
+		);
+	}
 }

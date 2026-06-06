@@ -46,6 +46,10 @@ msgstr ""
 msgid "* Required"
 msgstr ""
 
+#: includes/Support/HealthCheck.php:128
+msgid "A REST API key is configured."
+msgstr ""
+
 #: includes/Email/Mailer.php:34
 msgid "A document is awaiting your signature — %s"
 msgstr ""
@@ -62,8 +66,12 @@ msgstr ""
 msgid "A signature is required."
 msgstr ""
 
-#: includes/Admin/Admin.php:504
+#: includes/Admin/Admin.php:515
 msgid "A signing link was generated. Copy it or share via WhatsApp below."
+msgstr ""
+
+#: includes/Support/HealthCheck.php:142
+msgid "A webhook URL is configured. Use “Send test webhook” below to confirm it is reachable."
 msgstr ""
 
 #: includes/Admin/views/settings.php:60
@@ -91,8 +99,8 @@ msgstr ""
 msgid "Active certificate:"
 msgstr ""
 
-#: includes/Admin/Admin.php:102
-#: includes/Admin/Admin.php:103
+#: includes/Admin/Admin.php:104
+#: includes/Admin/Admin.php:105
 #: includes/Admin/views/list.php:16
 #: includes/Admin/views/new.php:16
 msgid "Add Document"
@@ -123,8 +131,8 @@ msgstr ""
 msgid "Already signed"
 msgstr ""
 
-#: includes/Admin/Admin.php:111
-#: includes/Admin/Admin.php:112
+#: includes/Admin/Admin.php:113
+#: includes/Admin/Admin.php:114
 #: includes/Admin/views/analytics.php:33
 msgid "Analytics"
 msgstr ""
@@ -180,7 +188,7 @@ msgstr ""
 msgid "Bulk send"
 msgstr ""
 
-#: includes/Admin/Admin.php:828
+#: includes/Admin/Admin.php:891
 msgid "Bulk send complete: %d document(s) created and sent."
 msgstr ""
 
@@ -196,7 +204,7 @@ msgstr ""
 msgid "CC recipients"
 msgstr ""
 
-#: includes/Admin/Admin.php:399
+#: includes/Admin/Admin.php:410
 msgid "CC recipients saved."
 msgstr ""
 
@@ -204,20 +212,24 @@ msgstr ""
 msgid "Certificate password"
 msgstr ""
 
-#: includes/Admin/Admin.php:682
+#: includes/Admin/Admin.php:693
 msgid "Certificate removed. Documents will use electronic signatures."
 msgstr ""
 
-#: includes/Admin/Admin.php:670
+#: includes/Admin/Admin.php:681
 msgid "Certificate stored. New documents will be signed with PKI/PAdES."
 msgstr ""
 
-#: includes/Admin/Admin.php:209
+#: includes/Admin/views/health.php:38
+msgid "Check"
+msgstr ""
+
+#: includes/Admin/Admin.php:220
 #: includes/Admin/views/edit.php:103
 msgid "Checkbox"
 msgstr ""
 
-#: includes/Admin/Admin.php:210
+#: includes/Admin/Admin.php:221
 msgid "Choice"
 msgstr ""
 
@@ -233,7 +245,7 @@ msgstr ""
 msgid "Clear"
 msgstr ""
 
-#: includes/Admin/Admin.php:216
+#: includes/Admin/Admin.php:227
 msgid "Click to toggle required"
 msgstr ""
 
@@ -241,8 +253,8 @@ msgstr ""
 msgid "Code"
 msgstr ""
 
-#: includes/Admin/Admin.php:82
-#: includes/Admin/Admin.php:83
+#: includes/Admin/Admin.php:84
+#: includes/Admin/Admin.php:85
 msgid "ComSign"
 msgstr ""
 
@@ -252,6 +264,10 @@ msgstr ""
 
 #: includes/Admin/views/settings.php:16
 msgid "ComSign Settings"
+msgstr ""
+
+#: includes/Admin/Admin.php:746
+msgid "ComSign test email"
 msgstr ""
 
 #: comsign.php:49
@@ -295,6 +311,10 @@ msgstr ""
 msgid "Confirm decline"
 msgstr ""
 
+#: includes/Admin/views/health.php:58
+msgid "Connectivity tests"
+msgstr ""
+
 #: includes/Frontend/SigningController.php:405
 msgid "Consent required"
 msgstr ""
@@ -303,11 +323,11 @@ msgstr ""
 msgid "Continue"
 msgstr ""
 
-#: includes/Admin/Admin.php:166
+#: includes/Admin/Admin.php:177
 msgid "Copied!"
 msgstr ""
 
-#: includes/Admin/Admin.php:167
+#: includes/Admin/Admin.php:178
 #: includes/Admin/views/edit.php:238
 msgid "Copy link"
 msgstr ""
@@ -320,7 +340,7 @@ msgstr ""
 msgid "Could not generate the document PDF."
 msgstr ""
 
-#: includes/Admin/Admin.php:218
+#: includes/Admin/Admin.php:229
 msgid "Could not load the document preview."
 msgstr ""
 
@@ -346,7 +366,7 @@ msgstr ""
 msgid "Dana Cohen, dana@example.com, +972500000000\nAvi Levi, avi@example.com"
 msgstr ""
 
-#: includes/Admin/Admin.php:204
+#: includes/Admin/Admin.php:215
 msgid "Date"
 msgstr ""
 
@@ -375,6 +395,14 @@ msgstr ""
 msgid "Delete this template?"
 msgstr ""
 
+#: includes/Integrations/Webhooks.php:149
+msgid "Delivery failed: %s"
+msgstr ""
+
+#: includes/Admin/views/health.php:39
+msgid "Details"
+msgstr ""
+
 #: includes/Admin/views/settings.php:113
 msgid "Digital signature (PKI / PAdES)"
 msgstr ""
@@ -400,24 +428,24 @@ msgstr ""
 msgid "Document content"
 msgstr ""
 
-#: includes/Admin/Admin.php:801
+#: includes/Admin/Admin.php:864
 msgid "Document created from template. Review and send."
 msgstr ""
 
-#: includes/Admin/Admin.php:364
+#: includes/Admin/Admin.php:375
 msgid "Document created. Now add signers and place fields."
 msgstr ""
 
-#: includes/Admin/Admin.php:585
+#: includes/Admin/Admin.php:596
 msgid "Document deleted."
 msgstr ""
 
-#: includes/Admin/Admin.php:575
+#: includes/Admin/Admin.php:586
 msgid "Document duplicated."
 msgstr ""
 
-#: includes/Admin/Admin.php:274
-#: includes/Admin/Admin.php:902
+#: includes/Admin/Admin.php:285
+#: includes/Admin/Admin.php:965
 #: includes/Services/DocumentService.php:230
 #: includes/Services/DocumentService.php:498
 #: includes/Services/DocumentService.php:572
@@ -447,12 +475,12 @@ msgstr ""
 msgid "Document unavailable."
 msgstr ""
 
-#: includes/Admin/Admin.php:336
+#: includes/Admin/Admin.php:347
 msgid "Document uploaded. Now add signers and place signature fields."
 msgstr ""
 
-#: includes/Admin/Admin.php:93
-#: includes/Admin/Admin.php:94
+#: includes/Admin/Admin.php:95
+#: includes/Admin/Admin.php:96
 msgid "Documents"
 msgstr ""
 
@@ -489,7 +517,7 @@ msgstr ""
 msgid "Electronic signature"
 msgstr ""
 
-#: includes/Admin/Admin.php:206
+#: includes/Admin/Admin.php:217
 #: includes/Signature/CertificatePage.php:40
 msgid "Email"
 msgstr ""
@@ -500,6 +528,10 @@ msgstr ""
 
 #: includes/Admin/views/settings.php:29
 msgid "Email a reminder to signers who have not signed yet."
+msgstr ""
+
+#: includes/Support/HealthCheck.php:116
+msgid "Email delivery"
 msgstr ""
 
 #: includes/Admin/views/edit.php:264
@@ -514,7 +546,11 @@ msgstr ""
 msgid "Email one-time code"
 msgstr ""
 
-#: includes/Admin/Admin.php:213
+#: includes/Integrations/Webhooks.php:157
+msgid "Endpoint responded with HTTP %d."
+msgstr ""
+
+#: includes/Admin/Admin.php:224
 msgid "Enter options separated by commas:"
 msgstr ""
 
@@ -539,15 +575,15 @@ msgstr ""
 msgid "Field for:"
 msgstr ""
 
-#: includes/Admin/Admin.php:214
+#: includes/Admin/Admin.php:225
 msgid "Field label shown to the signer (optional):"
 msgstr ""
 
-#: includes/Admin/Admin.php:211
+#: includes/Admin/Admin.php:222
 msgid "File"
 msgstr ""
 
-#: includes/Admin/Admin.php:908
+#: includes/Admin/Admin.php:971
 msgid "File not available."
 msgstr ""
 
@@ -562,6 +598,14 @@ msgstr ""
 #: includes/Admin/views/edit.php:253
 #: includes/Admin/views/template-use.php:31
 msgid "Full name"
+msgstr ""
+
+#: includes/Support/HealthCheck.php:70
+msgid "GD is available for stamping signature images."
+msgstr ""
+
+#: includes/Support/HealthCheck.php:71
+msgid "GD is missing; drawn/typed signature images cannot be processed."
 msgstr ""
 
 #: includes/Admin/views/edit.php:180
@@ -597,7 +641,11 @@ msgstr ""
 msgid "IP address"
 msgstr ""
 
-#: includes/Admin/Admin.php:203
+#: includes/Support/HealthCheck.php:67
+msgid "Image support (GD)"
+msgstr ""
+
+#: includes/Admin/Admin.php:214
 #: includes/Admin/views/edit.php:97
 msgid "Initials"
 msgstr ""
@@ -624,8 +672,12 @@ msgstr ""
 msgid "Invalid upload."
 msgstr ""
 
-#: includes/Admin/Admin.php:440
+#: includes/Admin/Admin.php:451
 msgid "Invitation re-sent."
+msgstr ""
+
+#: includes/Support/HealthCheck.php:118
+msgid "Invitations are sent with wp_mail(). Use “Send test email” below to confirm delivery on this server."
 msgstr ""
 
 #: includes/Frontend/SigningController.php:430
@@ -646,7 +698,7 @@ msgstr ""
 msgid "Link expires after"
 msgstr ""
 
-#: includes/Admin/Admin.php:217
+#: includes/Admin/Admin.php:228
 msgid "Loading document…"
 msgstr ""
 
@@ -671,7 +723,7 @@ msgstr ""
 msgid "My electronic signature is legally binding and has the same effect as a handwritten signature. The time, my IP address and browser are recorded as proof of signing."
 msgstr ""
 
-#: includes/Admin/Admin.php:205
+#: includes/Admin/Admin.php:216
 #: includes/Signature/CertificatePage.php:39
 msgid "Name"
 msgstr ""
@@ -684,11 +736,15 @@ msgstr ""
 msgid "Needs attention (out > 7 days)"
 msgstr ""
 
+#: includes/Support/HealthCheck.php:129
+msgid "No REST API key is set. Save Settings to generate one if you use the API."
+msgstr ""
+
 #: includes/Admin/DocumentsListTable.php:154
 msgid "No documents yet. Upload your first PDF to get started."
 msgstr ""
 
-#: includes/Admin/Admin.php:544
+#: includes/Admin/Admin.php:555
 msgid "No emails were sent because the signer(s) have no email. Use \"Get signing link\" to share their link."
 msgstr ""
 
@@ -716,14 +772,26 @@ msgstr ""
 msgid "No templates yet."
 msgstr ""
 
+#: includes/Support/HealthCheck.php:136
+msgid "No webhook URL configured (optional)."
+msgstr ""
+
+#: includes/Integrations/Webhooks.php:103
+msgid "No webhook URL is configured."
+msgstr ""
+
 #: includes/Admin/views/analytics.php:80
 msgid "Nothing stuck — every document is moving."
 msgstr ""
 
-#: includes/Admin/Admin.php:208
+#: includes/Admin/Admin.php:219
 #: includes/Admin/views/edit.php:102
 #: includes/Database/FieldRepository.php:106
 msgid "Number"
+msgstr ""
+
+#: includes/Admin/views/health.php:17
+msgid "OK"
 msgstr ""
 
 #: includes/Admin/views/new.php:73
@@ -734,6 +802,14 @@ msgstr ""
 msgid "Only PDF files are allowed."
 msgstr ""
 
+#: includes/Support/HealthCheck.php:78
+msgid "OpenSSL (PKI signing)"
+msgstr ""
+
+#: includes/Support/HealthCheck.php:81
+msgid "OpenSSL is available for cryptographic (PAdES) signing."
+msgstr ""
+
 #: includes/Signature/Certificate.php:67
 msgid "OpenSSL is not available on this server, so PKI signing cannot be enabled."
 msgstr ""
@@ -742,8 +818,18 @@ msgstr ""
 msgid "OpenSSL is not available on this server, so cryptographic signing cannot be enabled."
 msgstr ""
 
+#: includes/Support/HealthCheck.php:82
+msgid "OpenSSL is unavailable; documents use electronic signatures only."
+msgstr ""
+
 #: includes/Admin/views/edit.php:70
 msgid "Original PDF"
+msgstr ""
+
+#: includes/Support/HealthCheck.php:136
+#: includes/Support/HealthCheck.php:140
+#: includes/Support/HealthCheck.php:142
+msgid "Outgoing webhook"
 msgstr ""
 
 #: includes/Admin/views/new.php:35
@@ -752,6 +838,10 @@ msgstr ""
 
 #: includes/Admin/views/new.php:37
 msgid "PDF only, up to 25 MB."
+msgstr ""
+
+#: includes/Support/HealthCheck.php:57
+msgid "PHP version"
 msgstr ""
 
 #: includes/Admin/DocumentsListTable.php:167
@@ -780,11 +870,11 @@ msgstr ""
 msgid "Please add a title or some content for the document."
 msgstr ""
 
-#: includes/Admin/Admin.php:651
+#: includes/Admin/Admin.php:662
 msgid "Please choose a .p12/.pfx certificate file."
 msgstr ""
 
-#: includes/Admin/Admin.php:324
+#: includes/Admin/Admin.php:335
 msgid "Please choose a PDF to upload."
 msgstr ""
 
@@ -828,7 +918,18 @@ msgstr ""
 msgid "Please verify your identity before signing."
 msgstr ""
 
+#: includes/Admin/views/health.php:19
+msgid "Problem"
+msgstr ""
+
+#: includes/Support/HealthCheck.php:103
+#: includes/Support/HealthCheck.php:108
+#: includes/Support/HealthCheck.php:111
+msgid "Protected file storage"
+msgstr ""
+
 #: includes/Admin/views/settings.php:91
+#: includes/Support/HealthCheck.php:125
 msgid "REST API key"
 msgstr ""
 
@@ -860,7 +961,7 @@ msgstr ""
 msgid "Reminders run once a day via WP-Cron. Each reminder issues a fresh signing link."
 msgstr ""
 
-#: includes/Admin/Admin.php:212
+#: includes/Admin/Admin.php:223
 #: includes/Admin/views/edit.php:205
 msgid "Remove"
 msgstr ""
@@ -897,6 +998,10 @@ msgstr ""
 msgid "Roles"
 msgstr ""
 
+#: includes/Support/HealthCheck.php:60
+msgid "Running PHP %s (7.4+ required)."
+msgstr ""
+
 #: includes/Admin/views/edit.php:74
 msgid "SHA-256:"
 msgstr ""
@@ -929,6 +1034,12 @@ msgstr ""
 msgid "Scan to verify this document online."
 msgstr ""
 
+#: includes/Support/HealthCheck.php:91
+#: includes/Support/HealthCheck.php:94
+#: includes/Support/HealthCheck.php:96
+msgid "Scheduled tasks (WP-Cron)"
+msgstr ""
+
 #: includes/Frontend/views/partials/footer.php:14
 msgid "Securely processed by %s"
 msgstr ""
@@ -945,16 +1056,24 @@ msgstr ""
 msgid "Send for signing"
 msgstr ""
 
+#: includes/Admin/views/health.php:66
+msgid "Send test email to %s"
+msgstr ""
+
+#: includes/Admin/views/health.php:73
+msgid "Send test webhook"
+msgstr ""
+
 #: includes/Admin/DocumentsListTable.php:165
 #: includes/Admin/views/analytics.php:23
 msgid "Sent"
 msgstr ""
 
-#: includes/Admin/Admin.php:548
+#: includes/Admin/Admin.php:559
 msgid "Sent %1$d invitation(s). %2$d signer(s) have no email — share their link manually."
 msgstr ""
 
-#: includes/Admin/Admin.php:555
+#: includes/Admin/Admin.php:566
 msgid "Sent %d invitation(s)."
 msgstr ""
 
@@ -963,12 +1082,12 @@ msgstr ""
 msgid "Sent by %s"
 msgstr ""
 
-#: includes/Admin/Admin.php:129
-#: includes/Admin/Admin.php:130
+#: includes/Admin/Admin.php:131
+#: includes/Admin/Admin.php:132
 msgid "Settings"
 msgstr ""
 
-#: includes/Admin/Admin.php:704
+#: includes/Admin/Admin.php:715
 msgid "Settings saved."
 msgstr ""
 
@@ -976,7 +1095,7 @@ msgstr ""
 msgid "Share via WhatsApp"
 msgstr ""
 
-#: includes/Admin/Admin.php:215
+#: includes/Admin/Admin.php:226
 msgid "Short help text under the field (optional):"
 msgstr ""
 
@@ -1000,7 +1119,7 @@ msgstr ""
 msgid "Sign: %s"
 msgstr ""
 
-#: includes/Admin/Admin.php:202
+#: includes/Admin/Admin.php:213
 #: includes/Admin/views/edit.php:96
 msgid "Signature"
 msgstr ""
@@ -1009,7 +1128,7 @@ msgstr ""
 msgid "Signature Certificate"
 msgstr ""
 
-#: includes/Admin/Admin.php:519
+#: includes/Admin/Admin.php:530
 msgid "Signature fields saved."
 msgstr ""
 
@@ -1042,7 +1161,7 @@ msgstr ""
 msgid "Signer %d"
 msgstr ""
 
-#: includes/Admin/Admin.php:385
+#: includes/Admin/Admin.php:396
 msgid "Signer added."
 msgstr ""
 
@@ -1051,11 +1170,11 @@ msgstr ""
 msgid "Signer not found."
 msgstr ""
 
-#: includes/Admin/Admin.php:424
+#: includes/Admin/Admin.php:435
 msgid "Signer removed."
 msgstr ""
 
-#: includes/Admin/Admin.php:413
+#: includes/Admin/Admin.php:424
 msgid "Signer verification updated."
 msgstr ""
 
@@ -1075,14 +1194,25 @@ msgstr ""
 
 #: includes/Admin/DocumentsListTable.php:43
 #: includes/Admin/views/analytics.php:86
+#: includes/Admin/views/health.php:37
 msgid "Status"
+msgstr ""
+
+#: includes/Support/HealthCheck.php:108
+msgid "Storage is writable but the .htaccess guard is missing. On nginx, add a deny rule for the comsign uploads directory."
+msgstr ""
+
+#: includes/Admin/Admin.php:140
+#: includes/Admin/Admin.php:141
+#: includes/Admin/views/health.php:28
+msgid "System Status"
 msgstr ""
 
 #: includes/Admin/views/templates.php:29
 msgid "Template"
 msgstr ""
 
-#: includes/Admin/Admin.php:841
+#: includes/Admin/Admin.php:904
 msgid "Template deleted."
 msgstr ""
 
@@ -1094,23 +1224,27 @@ msgstr ""
 msgid "Template name"
 msgstr ""
 
-#: includes/Admin/Admin.php:746
+#: includes/Admin/Admin.php:809
 #: includes/Services/DocumentService.php:644
 #: includes/Services/DocumentService.php:758
 msgid "Template not found."
 msgstr ""
 
-#: includes/Admin/Admin.php:785
+#: includes/Admin/Admin.php:848
 msgid "Template saved."
 msgstr ""
 
-#: includes/Admin/Admin.php:120
-#: includes/Admin/Admin.php:121
+#: includes/Admin/Admin.php:122
+#: includes/Admin/Admin.php:123
 #: includes/Admin/views/templates.php:18
 msgid "Templates"
 msgstr ""
 
-#: includes/Admin/Admin.php:207
+#: includes/Admin/Admin.php:753
+msgid "Test email sent to %s."
+msgstr ""
+
+#: includes/Admin/Admin.php:218
 #: includes/Admin/views/edit.php:101
 msgid "Text"
 msgstr ""
@@ -1131,12 +1265,16 @@ msgstr ""
 msgid "The certificate file is missing or too large (max 512 KB)."
 msgstr ""
 
-#: includes/Admin/Admin.php:661
+#: includes/Admin/Admin.php:672
 msgid "The certificate file is too large (max 512 KB)."
 msgstr ""
 
-#: includes/Admin/Admin.php:657
+#: includes/Admin/Admin.php:668
 msgid "The certificate must be a .p12 or .pfx file."
+msgstr ""
+
+#: includes/Support/HealthCheck.php:96
+msgid "The daily reminder task is scheduled."
 msgstr ""
 
 #: includes/Services/DocumentService.php:1294
@@ -1167,8 +1305,32 @@ msgstr ""
 msgid "The fully signed copy is attached."
 msgstr ""
 
+#: includes/Support/HealthCheck.php:103
+msgid "The protected uploads directory is missing or not writable."
+msgstr ""
+
+#: includes/Support/HealthCheck.php:91
+msgid "The reminder task is not scheduled. Reactivate the plugin."
+msgstr ""
+
 #: includes/Frontend/SigningController.php:95
 msgid "The requested document could not be found."
+msgstr ""
+
+#: includes/Support/HealthCheck.php:111
+msgid "The storage directory exists, is writable and carries deny rules (verify nginx separately)."
+msgstr ""
+
+#: includes/Integrations/Webhooks.php:116
+msgid "The webhook URL is invalid or points to a blocked (private/loopback) target."
+msgstr ""
+
+#: includes/Support/HealthCheck.php:140
+msgid "The webhook URL is set but looks invalid or points to a blocked (private/loopback) target."
+msgstr ""
+
+#: includes/Admin/views/health.php:32
+msgid "These checks help you confirm ComSign is correctly configured on this server."
 msgstr ""
 
 #: includes/Admin/views/edit.php:275
@@ -1185,6 +1347,10 @@ msgstr ""
 
 #: includes/Frontend/views/sign.php:120
 msgid "This field is required."
+msgstr ""
+
+#: includes/Admin/Admin.php:747
+msgid "This is a test email from ComSign. If you received it, outgoing mail works on this server."
 msgstr ""
 
 #: includes/Admin/views/edit.php:241
@@ -1312,9 +1478,17 @@ msgstr ""
 msgid "Viewed"
 msgstr ""
 
+#: includes/Support/HealthCheck.php:94
+msgid "WP-Cron is disabled; make sure a real system cron triggers wp-cron.php, or reminders will not be sent."
+msgstr ""
+
 #: includes/Frontend/SigningController.php:124
 #: includes/Frontend/SigningController.php:430
 msgid "Waiting for an earlier signer"
+msgstr ""
+
+#: includes/Admin/views/health.php:18
+msgid "Warning"
 msgstr ""
 
 #: includes/Frontend/views/auth.php:31
@@ -1342,7 +1516,7 @@ msgstr ""
 msgid "X-ComSign-Key"
 msgstr ""
 
-#: includes/Admin/Admin.php:1011
+#: includes/Admin/Admin.php:1074
 msgid "You are not allowed to access this page."
 msgstr ""
 
@@ -1407,5 +1581,9 @@ msgstr ""
 #: includes/Admin/views/edit.php:254
 #: includes/Admin/views/template-use.php:32
 msgid "email@example.com"
+msgstr ""
+
+#: includes/Admin/Admin.php:755
+msgid "wp_mail() reported a failure. Check your mail configuration (e.g. an SMTP plugin)."
 msgstr ""
 

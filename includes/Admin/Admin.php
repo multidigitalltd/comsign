@@ -57,6 +57,8 @@ final class Admin {
 		add_action( 'admin_post_comsign_delete_signer', array( $this, 'handle_delete_signer' ) );
 		add_action( 'admin_post_comsign_signer_link', array( $this, 'handle_signer_link' ) );
 		add_action( 'admin_post_comsign_sign_in_person', array( $this, 'handle_sign_in_person' ) );
+		add_action( 'admin_post_comsign_test_email', array( $this, 'handle_test_email' ) );
+		add_action( 'admin_post_comsign_test_webhook', array( $this, 'handle_test_webhook' ) );
 		add_action( 'admin_post_comsign_resend_signer', array( $this, 'handle_resend_signer' ) );
 		add_action( 'admin_post_comsign_save_fields', array( $this, 'handle_save_fields' ) );
 		add_action( 'admin_post_comsign_send', array( $this, 'handle_send' ) );
@@ -131,6 +133,15 @@ final class Admin {
 			Capabilities::MANAGE,
 			'comsign-settings',
 			array( $this, 'render_settings_page' )
+		);
+
+		add_submenu_page(
+			self::MENU_SLUG,
+			__( 'System Status', 'comsign' ),
+			__( 'System Status', 'comsign' ),
+			Capabilities::MANAGE,
+			'comsign-health',
+			array( $this, 'render_health_page' )
 		);
 	}
 
@@ -702,6 +713,58 @@ final class Admin {
 		);
 
 		$this->redirect_with_notice( admin_url( 'admin.php?page=comsign-settings' ), 'success', __( 'Settings saved.', 'comsign' ) );
+	}
+
+	/**
+	 * System status / health-check page.
+	 */
+	public function render_health_page(): void {
+		$this->guard();
+
+		$this->view(
+			'health',
+			array(
+				'checks'     => \ComSign\Support\HealthCheck::run(),
+				'action_url' => admin_url( 'admin-post.php' ),
+				'nonce'      => wp_create_nonce( 'comsign_health_actions' ),
+				'admin_mail' => wp_get_current_user()->user_email,
+				'notice'     => $this->pull_notice(),
+			)
+		);
+	}
+
+	/**
+	 * Send a test email to the current administrator.
+	 */
+	public function handle_test_email(): void {
+		$this->guard();
+		check_admin_referer( 'comsign_health_actions' );
+
+		$to   = wp_get_current_user()->user_email;
+		$sent = wp_mail(
+			$to,
+			__( 'ComSign test email', 'comsign' ),
+			__( 'This is a test email from ComSign. If you received it, outgoing mail works on this server.', 'comsign' )
+		);
+
+		$url = admin_url( 'admin.php?page=comsign-health' );
+		if ( $sent ) {
+			/* translators: %s: email address. */
+			$this->redirect_with_notice( $url, 'success', sprintf( __( 'Test email sent to %s.', 'comsign' ), $to ) );
+		}
+		$this->redirect_with_notice( $url, 'error', __( 'wp_mail() reported a failure. Check your mail configuration (e.g. an SMTP plugin).', 'comsign' ) );
+	}
+
+	/**
+	 * Send a blocking test webhook and report the result.
+	 */
+	public function handle_test_webhook(): void {
+		$this->guard();
+		check_admin_referer( 'comsign_health_actions' );
+
+		$result = ( new \ComSign\Integrations\Webhooks() )->send_test();
+		$url     = admin_url( 'admin.php?page=comsign-health' );
+		$this->redirect_with_notice( $url, $result['ok'] ? 'success' : 'error', $result['message'] );
 	}
 
 	/**

@@ -4,7 +4,7 @@ Tags: signature, digital signature, pdf, esignature, hebrew
 Requires at least: 6.0
 Tested up to: 6.5
 Requires PHP: 7.4
-Stable tag: 0.16.0
+Stable tag: 0.17.0
 License: GPL-2.0-or-later
 License URI: https://www.gnu.org/licenses/gpl-2.0.html
 
@@ -105,6 +105,12 @@ ID and its SHA-256 code (shown on the document screen and the signature
 certificate) to confirm the document is authentic and see who signed it.
 
 == Changelog ==
+
+= 0.17.0 =
+* New: System Status screen (ComSign → System Status) with at-a-glance checks
+  for PHP, GD, OpenSSL, WP-Cron, protected storage, REST key and webhook, plus
+  one-click "Send test email" and "Send test webhook" buttons to confirm
+  connectivity on the live server.
 
 = 0.16.0 =
 * New: dedicated public verification page at /comsign/verify (also reachable via
