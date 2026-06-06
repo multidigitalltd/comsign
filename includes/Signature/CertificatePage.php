@@ -56,8 +56,9 @@ final class CertificatePage {
 		}
 
 		return array(
-			'title' => __( 'Signature Certificate', 'comsign' ),
-			'lines' => $lines,
+			'title'      => __( 'Signature Certificate', 'comsign' ),
+			'verify_url' => \ComSign\Frontend\SigningController::verify_url( (int) $document->id ),
+			'lines'      => $lines,
 		);
 	}
 

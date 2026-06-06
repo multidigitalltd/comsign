@@ -314,3 +314,24 @@ body.comsign-public {
 		min-height: 50vh;
 	}
 }
+
+/* ---- Public verification page ---- */
+.comsign-verify-form input[type="text"],
+.comsign-verify-form input[type="number"] {
+	max-width: 100%;
+	min-height: 44px;
+	padding: 8px;
+}
+.comsign-verify-result {
+	margin-top: 16px;
+	padding: 16px;
+	border-radius: 6px;
+}
+.comsign-verify-ok {
+	background: #ecfdf5;
+	border: 1px solid #10b981;
+}
+.comsign-verify-fail {
+	background: #fef2f2;
+	border: 1px solid #ef4444;
+}

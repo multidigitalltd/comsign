@@ -54,7 +54,7 @@ msgstr ""
 msgid "A field is assigned to a signer that is not on this document. Please re-save the fields."
 msgstr ""
 
-#: includes/Frontend/SigningController.php:294
+#: includes/Frontend/SigningController.php:357
 msgid "A new code has been sent."
 msgstr ""
 
@@ -118,8 +118,8 @@ msgstr ""
 msgid "All parties have signed. The signed PDF and verification details are available below."
 msgstr ""
 
-#: includes/Frontend/SigningController.php:96
-#: includes/Frontend/SigningController.php:333
+#: includes/Frontend/SigningController.php:102
+#: includes/Frontend/SigningController.php:396
 msgid "Already signed"
 msgstr ""
 
@@ -271,7 +271,7 @@ msgstr ""
 msgid "Completed documents are signed with a cryptographic PKCS#7/PAdES signature."
 msgstr ""
 
-#: includes/Frontend/SigningController.php:223
+#: includes/Frontend/SigningController.php:286
 msgid "Completed:"
 msgstr ""
 
@@ -295,7 +295,7 @@ msgstr ""
 msgid "Confirm decline"
 msgstr ""
 
-#: includes/Frontend/SigningController.php:342
+#: includes/Frontend/SigningController.php:405
 msgid "Consent required"
 msgstr ""
 
@@ -312,7 +312,7 @@ msgstr ""
 msgid "Copy link"
 msgstr ""
 
-#: includes/Frontend/SigningController.php:375
+#: includes/Frontend/SigningController.php:438
 msgid "Could not complete signing"
 msgstr ""
 
@@ -391,7 +391,7 @@ msgstr ""
 msgid "Document"
 msgstr ""
 
-#: includes/Frontend/SigningController.php:209
+#: includes/Frontend/SigningController.php:272
 #: includes/Signature/CertificatePage.php:32
 msgid "Document ID"
 msgstr ""
@@ -438,12 +438,12 @@ msgstr ""
 msgid "Document title"
 msgstr ""
 
-#: includes/Frontend/SigningController.php:88
-#: includes/Frontend/SigningController.php:359
+#: includes/Frontend/SigningController.php:94
+#: includes/Frontend/SigningController.php:422
 msgid "Document unavailable"
 msgstr ""
 
-#: includes/Frontend/SigningController.php:440
+#: includes/Frontend/SigningController.php:503
 msgid "Document unavailable."
 msgstr ""
 
@@ -516,6 +516,10 @@ msgstr ""
 
 #: includes/Admin/Admin.php:213
 msgid "Enter options separated by commas:"
+msgstr ""
+
+#: includes/Frontend/views/verify.php:17
+msgid "Enter the document ID and its verification code to confirm it is authentic and see who signed it."
 msgstr ""
 
 #: includes/Admin/views/edit.php:135
@@ -602,17 +606,17 @@ msgstr ""
 msgid "Integrations"
 msgstr ""
 
-#: includes/Frontend/SigningController.php:286
-#: includes/Frontend/SigningController.php:327
-#: includes/Frontend/SigningController.php:403
+#: includes/Frontend/SigningController.php:349
+#: includes/Frontend/SigningController.php:390
+#: includes/Frontend/SigningController.php:466
 msgid "Invalid link"
 msgstr ""
 
-#: includes/Frontend/SigningController.php:429
+#: includes/Frontend/SigningController.php:492
 msgid "Invalid link."
 msgstr ""
 
-#: includes/Frontend/SigningController.php:80
+#: includes/Frontend/SigningController.php:86
 msgid "Invalid or expired link"
 msgstr ""
 
@@ -624,7 +628,7 @@ msgstr ""
 msgid "Invitation re-sent."
 msgstr ""
 
-#: includes/Frontend/SigningController.php:367
+#: includes/Frontend/SigningController.php:430
 msgid "It is not your turn to sign yet."
 msgstr ""
 
@@ -632,8 +636,8 @@ msgstr ""
 msgid "Last activity"
 msgstr ""
 
-#: includes/Frontend/SigningController.php:110
-#: includes/Frontend/SigningController.php:363
+#: includes/Frontend/SigningController.php:116
+#: includes/Frontend/SigningController.php:426
 msgid "Link expired"
 msgstr ""
 
@@ -700,7 +704,7 @@ msgstr ""
 msgid "No file was uploaded, or the upload failed."
 msgstr ""
 
-#: includes/Frontend/SigningController.php:240
+#: includes/Frontend/SigningController.php:303
 msgid "No matching signed document was found for that ID and code."
 msgstr ""
 
@@ -820,7 +824,7 @@ msgstr ""
 msgid "Please sign the document at the following secure link: %s"
 msgstr ""
 
-#: includes/Frontend/SigningController.php:337
+#: includes/Frontend/SigningController.php:400
 msgid "Please verify your identity before signing."
 msgstr ""
 
@@ -921,6 +925,10 @@ msgstr ""
 msgid "Save settings"
 msgstr ""
 
+#: includes/Pdf/PdfSigner.php:152
+msgid "Scan to verify this document online."
+msgstr ""
+
 #: includes/Frontend/views/partials/footer.php:14
 msgid "Securely processed by %s"
 msgstr ""
@@ -1013,7 +1021,7 @@ msgstr ""
 msgid "Signed at"
 msgstr ""
 
-#: includes/Frontend/SigningController.php:227
+#: includes/Frontend/SigningController.php:290
 msgid "Signed by:"
 msgstr ""
 
@@ -1025,8 +1033,8 @@ msgstr ""
 msgid "Signed document"
 msgstr ""
 
-#: includes/Frontend/SigningController.php:382
-#: includes/Frontend/SigningController.php:389
+#: includes/Frontend/SigningController.php:445
+#: includes/Frontend/SigningController.php:452
 msgid "Signed successfully"
 msgstr ""
 
@@ -1056,8 +1064,8 @@ msgstr ""
 msgid "Signers"
 msgstr ""
 
-#: includes/Frontend/SigningController.php:102
-#: includes/Frontend/SigningController.php:416
+#: includes/Frontend/SigningController.php:108
+#: includes/Frontend/SigningController.php:479
 msgid "Signing declined"
 msgstr ""
 
@@ -1078,7 +1086,7 @@ msgstr ""
 msgid "Template deleted."
 msgstr ""
 
-#: includes/Frontend/SigningController.php:578
+#: includes/Frontend/SigningController.php:641
 msgid "Template missing."
 msgstr ""
 
@@ -1107,11 +1115,11 @@ msgstr ""
 msgid "Text"
 msgstr ""
 
-#: includes/Frontend/SigningController.php:390
+#: includes/Frontend/SigningController.php:453
 msgid "Thank you — your signature has been recorded. The document will be completed once the remaining participants have signed."
 msgstr ""
 
-#: includes/Frontend/SigningController.php:305
+#: includes/Frontend/SigningController.php:368
 msgid "That code was not correct. Please try again."
 msgstr ""
 
@@ -1135,11 +1143,11 @@ msgstr ""
 msgid "The document \"%s\" has been signed by all parties."
 msgstr ""
 
-#: includes/Frontend/SigningController.php:359
+#: includes/Frontend/SigningController.php:422
 msgid "The document could not be found."
 msgstr ""
 
-#: includes/Frontend/SigningController.php:383
+#: includes/Frontend/SigningController.php:446
 msgid "The document is now fully signed by all parties. A signed copy will be sent to the relevant recipients."
 msgstr ""
 
@@ -1159,7 +1167,7 @@ msgstr ""
 msgid "The fully signed copy is attached."
 msgstr ""
 
-#: includes/Frontend/SigningController.php:89
+#: includes/Frontend/SigningController.php:95
 msgid "The requested document could not be found."
 msgstr ""
 
@@ -1167,11 +1175,11 @@ msgstr ""
 msgid "These people receive the fully signed PDF by email when signing completes. They do not sign."
 msgstr ""
 
-#: includes/Frontend/SigningController.php:221
+#: includes/Frontend/SigningController.php:284
 msgid "This document is authentic."
 msgstr ""
 
-#: includes/Frontend/SigningController.php:119
+#: includes/Frontend/SigningController.php:125
 msgid "This document is signed in order. You will be notified when it is your turn."
 msgstr ""
 
@@ -1191,25 +1199,25 @@ msgstr ""
 msgid "This signer has no email. Share the signing link instead."
 msgstr ""
 
-#: includes/Frontend/SigningController.php:363
+#: includes/Frontend/SigningController.php:426
 msgid "This signing link has expired."
 msgstr ""
 
-#: includes/Frontend/SigningController.php:111
+#: includes/Frontend/SigningController.php:117
 msgid "This signing link has expired. Please ask the sender for a new one."
 msgstr ""
 
-#: includes/Frontend/SigningController.php:286
-#: includes/Frontend/SigningController.php:327
-#: includes/Frontend/SigningController.php:403
+#: includes/Frontend/SigningController.php:349
+#: includes/Frontend/SigningController.php:390
+#: includes/Frontend/SigningController.php:466
 msgid "This signing link is no longer valid."
 msgstr ""
 
-#: includes/Frontend/SigningController.php:81
+#: includes/Frontend/SigningController.php:87
 msgid "This signing link is no longer valid. Please ask the sender for a new one."
 msgstr ""
 
-#: includes/Frontend/SigningController.php:222
+#: includes/Frontend/SigningController.php:285
 msgid "Title:"
 msgstr ""
 
@@ -1265,19 +1273,24 @@ msgstr ""
 msgid "Variables"
 msgstr ""
 
-#: includes/Frontend/SigningController.php:211
+#: includes/Frontend/SigningController.php:274
 msgid "Verification code (SHA-256)"
 msgstr ""
 
-#: includes/Frontend/SigningController.php:337
+#: includes/Frontend/SigningController.php:400
 msgid "Verification required"
 msgstr ""
 
-#: includes/Frontend/SigningController.php:435
+#: includes/Frontend/SigningController.php:498
 msgid "Verification required."
 msgstr ""
 
-#: includes/Frontend/SigningController.php:213
+#: includes/Frontend/views/verify.php:12
+#: includes/Frontend/views/verify.php:16
+msgid "Verify a document"
+msgstr ""
+
+#: includes/Frontend/SigningController.php:276
 msgid "Verify document"
 msgstr ""
 
@@ -1299,8 +1312,8 @@ msgstr ""
 msgid "Viewed"
 msgstr ""
 
-#: includes/Frontend/SigningController.php:118
-#: includes/Frontend/SigningController.php:367
+#: includes/Frontend/SigningController.php:124
+#: includes/Frontend/SigningController.php:430
 msgid "Waiting for an earlier signer"
 msgstr ""
 
@@ -1333,11 +1346,11 @@ msgstr ""
 msgid "You are not allowed to access this page."
 msgstr ""
 
-#: includes/Frontend/SigningController.php:333
+#: includes/Frontend/SigningController.php:396
 msgid "You have already signed this document."
 msgstr ""
 
-#: includes/Frontend/SigningController.php:97
+#: includes/Frontend/SigningController.php:103
 msgid "You have already signed this document. Thank you."
 msgstr ""
 
@@ -1345,15 +1358,15 @@ msgstr ""
 msgid "You have been asked to review and sign the document: \"%s\"."
 msgstr ""
 
-#: includes/Frontend/SigningController.php:103
+#: includes/Frontend/SigningController.php:109
 msgid "You have declined to sign this document."
 msgstr ""
 
-#: includes/Frontend/SigningController.php:417
+#: includes/Frontend/SigningController.php:480
 msgid "You have declined to sign this document. The sender has been notified."
 msgstr ""
 
-#: includes/Frontend/SigningController.php:342
+#: includes/Frontend/SigningController.php:405
 msgid "You must agree to sign electronically before continuing."
 msgstr ""
 

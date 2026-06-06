@@ -4,7 +4,7 @@ Tags: signature, digital signature, pdf, esignature, hebrew
 Requires at least: 6.0
 Tested up to: 6.5
 Requires PHP: 7.4
-Stable tag: 0.15.0
+Stable tag: 0.16.0
 License: GPL-2.0-or-later
 License URI: https://www.gnu.org/licenses/gpl-2.0.html
 
@@ -105,6 +105,13 @@ ID and its SHA-256 code (shown on the document screen and the signature
 certificate) to confirm the document is authentic and see who signed it.
 
 == Changelog ==
+
+= 0.16.0 =
+* New: dedicated public verification page at /comsign/verify (also reachable via
+  ?comsign_verify=1) with a styled authentic / not-found result - no shortcode
+  page required. The [comsign_verify] shortcode still works.
+* New: every signature certificate now carries a QR code that opens the
+  verification page for that document.
 
 = 0.15.0 =
 * New: signer-friendly UX. Fields now carry a human label and optional help

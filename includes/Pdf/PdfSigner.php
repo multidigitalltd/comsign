@@ -136,6 +136,21 @@ final class PdfSigner {
 		$pdf->SetFont( 'dejavusans', '', 10 );
 		$pdf->writeHTML( $html, true, false, true, false, '' );
 		$pdf->setRTL( false );
+
+		// QR code linking to the public verification page.
+		if ( ! empty( $certificate['verify_url'] ) ) {
+			$y     = $pdf->GetY() + 16;
+			$style = array(
+				'border'  => 0,
+				'padding' => 2,
+				'fgcolor' => array( 0, 0, 0 ),
+				'bgcolor' => false,
+			);
+			$pdf->write2DBarcode( (string) $certificate['verify_url'], 'QRCODE,M', 40, $y, 90, 90, $style, 'N' );
+			$pdf->SetXY( 140, $y + 36 );
+			$pdf->SetFont( 'dejavusans', '', 9 );
+			$pdf->Cell( 0, 10, __( 'Scan to verify this document online.', 'comsign' ), 0, 0, 'L' );
+		}
 	}
 
 	/**

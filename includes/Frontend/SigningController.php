@@ -44,6 +44,12 @@ final class SigningController {
 	public function register(): void {
 		add_action( 'template_redirect', array( $this, 'maybe_render_signing_page' ) );
 
+		// Dedicated public verification page at /comsign/verify (also reachable
+		// via ?comsign_verify=1, which works without a rewrite flush).
+		add_action( 'init', array( __CLASS__, 'register_verify_route' ) );
+		add_filter( 'query_vars', array( $this, 'register_verify_query_var' ) );
+		add_action( 'template_redirect', array( $this, 'maybe_render_verify_page' ) );
+
 		// Public authenticity check: place [comsign_verify] on any page.
 		add_shortcode( 'comsign_verify', array( $this, 'render_verify_shortcode' ) );
 
@@ -199,6 +205,62 @@ final class SigningController {
 	 * @return string HTML.
 	 */
 	public function render_verify_shortcode(): string {
+		return $this->verify_markup();
+	}
+
+	/**
+	 * Register the pretty /comsign/verify rewrite rule. Static so the activator
+	 * can call it before flushing rewrite rules.
+	 */
+	public static function register_verify_route(): void {
+		add_rewrite_rule( '^comsign/verify/?$', 'index.php?comsign_verify=1', 'top' );
+	}
+
+	/**
+	 * Allow the comsign_verify query var.
+	 *
+	 * @param string[] $vars Registered query vars.
+	 *
+	 * @return string[]
+	 */
+	public function register_verify_query_var( array $vars ): array {
+		$vars[] = 'comsign_verify';
+		return $vars;
+	}
+
+	/**
+	 * Build a verification URL for a document (used by links and the QR code).
+	 *
+	 * Uses the query-var form so it resolves even if rewrite rules were never
+	 * flushed. The verifier still supplies the secret code separately.
+	 *
+	 * @param int $document_id Document id.
+	 */
+	public static function verify_url( int $document_id ): string {
+		return add_query_arg(
+			array(
+				'comsign_verify' => '1',
+				'comsign_doc'    => $document_id,
+			),
+			home_url( '/' )
+		);
+	}
+
+	/**
+	 * Render the standalone verification page when /comsign/verify is requested.
+	 */
+	public function maybe_render_verify_page(): void {
+		if ( empty( $_GET['comsign_verify'] ) && ! get_query_var( 'comsign_verify' ) ) { // phpcs:ignore WordPress.Security.NonceVerification.Recommended
+			return;
+		}
+		$this->render_template( 'verify', array( 'content' => $this->verify_markup() ) );
+	}
+
+	/**
+	 * The verification form + result markup, shared by the shortcode and the
+	 * dedicated /comsign/verify page.
+	 */
+	private function verify_markup(): string {
 		// Read-only public lookup — no nonce required, inputs are sanitised.
 		$document_id = isset( $_GET['comsign_doc'] ) ? absint( wp_unslash( $_GET['comsign_doc'] ) ) : 0; // phpcs:ignore WordPress.Security.NonceVerification.Recommended
 		$hash        = isset( $_GET['comsign_hash'] ) ? sanitize_text_field( wp_unslash( $_GET['comsign_hash'] ) ) : ''; // phpcs:ignore WordPress.Security.NonceVerification.Recommended
@@ -206,6 +268,7 @@ final class SigningController {
 		ob_start();
 
 		echo '<form method="get" class="comsign-verify-form">';
+		echo '<input type="hidden" name="comsign_verify" value="1">';
 		echo '<p><label>' . esc_html__( 'Document ID', 'comsign' ) . '<br>';
 		echo '<input type="number" name="comsign_doc" value="' . esc_attr( $document_id ? (string) $document_id : '' ) . '" min="1"></label></p>';
 		echo '<p><label>' . esc_html__( 'Verification code (SHA-256)', 'comsign' ) . '<br>';

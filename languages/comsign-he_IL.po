@@ -49,7 +49,7 @@ msgstr "מסמך ממתין לחתימתך — %s"
 msgid "A field is assigned to a signer that is not on this document. Please re-save the fields."
 msgstr "שדה משויך לחותם שאינו במסמך זה. אנא שמרו מחדש את השדות."
 
-#: includes/Frontend/SigningController.php:294
+#: includes/Frontend/SigningController.php:357
 msgid "A new code has been sent."
 msgstr "קוד חדש נשלח."
 
@@ -113,8 +113,8 @@ msgstr "הוספת חותם"
 msgid "All parties have signed. The signed PDF and verification details are available below."
 msgstr "כל הצדדים חתמו. קובץ ה-PDF החתום ופרטי האימות זמינים למטה."
 
-#: includes/Frontend/SigningController.php:96
-#: includes/Frontend/SigningController.php:333
+#: includes/Frontend/SigningController.php:102
+#: includes/Frontend/SigningController.php:396
 msgid "Already signed"
 msgstr "כבר נחתם"
 
@@ -266,7 +266,7 @@ msgstr "הושלם ונחתם: \"%s\""
 msgid "Completed documents are signed with a cryptographic PKCS#7/PAdES signature."
 msgstr "מסמכים שהושלמו נחתמים בחתימה קריפטוגרפית PKCS#7/PAdES."
 
-#: includes/Frontend/SigningController.php:223
+#: includes/Frontend/SigningController.php:286
 msgid "Completed:"
 msgstr "הושלם:"
 
@@ -290,7 +290,7 @@ msgstr "יצירה מטקסט"
 msgid "Confirm decline"
 msgstr "אישור סירוב"
 
-#: includes/Frontend/SigningController.php:342
+#: includes/Frontend/SigningController.php:405
 msgid "Consent required"
 msgstr "נדרשת הסכמה"
 
@@ -307,7 +307,7 @@ msgstr "הועתק!"
 msgid "Copy link"
 msgstr "העתקת קישור"
 
-#: includes/Frontend/SigningController.php:375
+#: includes/Frontend/SigningController.php:438
 msgid "Could not complete signing"
 msgstr "לא ניתן להשלים את החתימה"
 
@@ -386,7 +386,7 @@ msgstr "חתימה דיגיטלית (PKI/PAdES)"
 msgid "Document"
 msgstr "מסמך"
 
-#: includes/Frontend/SigningController.php:209
+#: includes/Frontend/SigningController.php:272
 #: includes/Signature/CertificatePage.php:32
 msgid "Document ID"
 msgstr "מזהה מסמך"
@@ -433,12 +433,12 @@ msgstr "המסמך נחתם באמצעות ComSign"
 msgid "Document title"
 msgstr "כותרת המסמך"
 
-#: includes/Frontend/SigningController.php:88
-#: includes/Frontend/SigningController.php:359
+#: includes/Frontend/SigningController.php:94
+#: includes/Frontend/SigningController.php:422
 msgid "Document unavailable"
 msgstr "המסמך אינו זמין"
 
-#: includes/Frontend/SigningController.php:440
+#: includes/Frontend/SigningController.php:503
 msgid "Document unavailable."
 msgstr "המסמך אינו זמין."
 
@@ -512,6 +512,10 @@ msgstr "קוד חד-פעמי באימייל"
 #: includes/Admin/Admin.php:213
 msgid "Enter options separated by commas:"
 msgstr "הזינו אפשרויות מופרדות בפסיקים:"
+
+#: includes/Frontend/views/verify.php:17
+msgid "Enter the document ID and its verification code to confirm it is authentic and see who signed it."
+msgstr "הזינו את מזהה המסמך ואת קוד האימות כדי לוודא שהוא אותנטי ולראות מי חתם עליו."
 
 #: includes/Admin/views/edit.php:135
 #: includes/Services/DocumentService.php:242
@@ -597,17 +601,17 @@ msgstr "ראשי תיבות"
 msgid "Integrations"
 msgstr "אינטגרציות"
 
-#: includes/Frontend/SigningController.php:286
-#: includes/Frontend/SigningController.php:327
-#: includes/Frontend/SigningController.php:403
+#: includes/Frontend/SigningController.php:349
+#: includes/Frontend/SigningController.php:390
+#: includes/Frontend/SigningController.php:466
 msgid "Invalid link"
 msgstr "קישור לא תקין"
 
-#: includes/Frontend/SigningController.php:429
+#: includes/Frontend/SigningController.php:492
 msgid "Invalid link."
 msgstr "קישור לא תקין."
 
-#: includes/Frontend/SigningController.php:80
+#: includes/Frontend/SigningController.php:86
 msgid "Invalid or expired link"
 msgstr "קישור לא תקין או שפג תוקפו"
 
@@ -619,7 +623,7 @@ msgstr "העלאה לא תקינה."
 msgid "Invitation re-sent."
 msgstr "ההזמנה נשלחה מחדש."
 
-#: includes/Frontend/SigningController.php:367
+#: includes/Frontend/SigningController.php:430
 msgid "It is not your turn to sign yet."
 msgstr "עדיין לא הגיע תורך לחתום."
 
@@ -627,8 +631,8 @@ msgstr "עדיין לא הגיע תורך לחתום."
 msgid "Last activity"
 msgstr "פעילות אחרונה"
 
-#: includes/Frontend/SigningController.php:110
-#: includes/Frontend/SigningController.php:363
+#: includes/Frontend/SigningController.php:116
+#: includes/Frontend/SigningController.php:426
 msgid "Link expired"
 msgstr "הקישור פג תוקף"
 
@@ -695,7 +699,7 @@ msgstr "ללא אימות נוסף"
 msgid "No file was uploaded, or the upload failed."
 msgstr "לא הועלה קובץ, או שההעלאה נכשלה."
 
-#: includes/Frontend/SigningController.php:240
+#: includes/Frontend/SigningController.php:303
 msgid "No matching signed document was found for that ID and code."
 msgstr "לא נמצא מסמך חתום תואם למזהה ולקוד שהוזנו."
 
@@ -815,7 +819,7 @@ msgstr "אנא ספקו לפחות נמען אחד."
 msgid "Please sign the document at the following secure link: %s"
 msgstr "אנא חתמו על המסמך בקישור המאובטח הבא: %s"
 
-#: includes/Frontend/SigningController.php:337
+#: includes/Frontend/SigningController.php:400
 msgid "Please verify your identity before signing."
 msgstr "אנא אמתו את זהותכם לפני החתימה."
 
@@ -916,6 +920,10 @@ msgstr "שמירת שדות"
 msgid "Save settings"
 msgstr "שמירת הגדרות"
 
+#: includes/Pdf/PdfSigner.php:152
+msgid "Scan to verify this document online."
+msgstr "סרקו כדי לאמת את המסמך באופן מקוון."
+
 #: includes/Frontend/views/partials/footer.php:14
 msgid "Securely processed by %s"
 msgstr "מעובד באופן מאובטח על-ידי %s"
@@ -1008,7 +1016,7 @@ msgstr "חתימות ממתינות"
 msgid "Signed at"
 msgstr "נחתם בתאריך"
 
-#: includes/Frontend/SigningController.php:227
+#: includes/Frontend/SigningController.php:290
 msgid "Signed by:"
 msgstr "נחתם על-ידי:"
 
@@ -1020,8 +1028,8 @@ msgstr "עותק חתום"
 msgid "Signed document"
 msgstr "מסמך חתום"
 
-#: includes/Frontend/SigningController.php:382
-#: includes/Frontend/SigningController.php:389
+#: includes/Frontend/SigningController.php:445
+#: includes/Frontend/SigningController.php:452
 msgid "Signed successfully"
 msgstr "נחתם בהצלחה"
 
@@ -1051,8 +1059,8 @@ msgstr "אימות החותם עודכן."
 msgid "Signers"
 msgstr "חותמים"
 
-#: includes/Frontend/SigningController.php:102
-#: includes/Frontend/SigningController.php:416
+#: includes/Frontend/SigningController.php:108
+#: includes/Frontend/SigningController.php:479
 msgid "Signing declined"
 msgstr "החתימה סורבה"
 
@@ -1073,7 +1081,7 @@ msgstr "תבנית"
 msgid "Template deleted."
 msgstr "התבנית נמחקה."
 
-#: includes/Frontend/SigningController.php:578
+#: includes/Frontend/SigningController.php:641
 msgid "Template missing."
 msgstr "תבנית חסרה."
 
@@ -1102,11 +1110,11 @@ msgstr "תבניות"
 msgid "Text"
 msgstr "טקסט"
 
-#: includes/Frontend/SigningController.php:390
+#: includes/Frontend/SigningController.php:453
 msgid "Thank you — your signature has been recorded. The document will be completed once the remaining participants have signed."
 msgstr "תודה — חתימתך נקלטה. המסמך יושלם לאחר ששאר המשתתפים יחתמו."
 
-#: includes/Frontend/SigningController.php:305
+#: includes/Frontend/SigningController.php:368
 msgid "That code was not correct. Please try again."
 msgstr "הקוד שגוי. נסו שוב."
 
@@ -1130,11 +1138,11 @@ msgstr "התעודה חייבת להיות קובץ ‎.p12‎ או ‎.pfx‎."
 msgid "The document \"%s\" has been signed by all parties."
 msgstr "המסמך \"%s\" נחתם על ידי כל הצדדים."
 
-#: includes/Frontend/SigningController.php:359
+#: includes/Frontend/SigningController.php:422
 msgid "The document could not be found."
 msgstr "לא ניתן היה למצוא את המסמך."
 
-#: includes/Frontend/SigningController.php:383
+#: includes/Frontend/SigningController.php:446
 msgid "The document is now fully signed by all parties. A signed copy will be sent to the relevant recipients."
 msgstr "המסמך נחתם כעת על ידי כל הצדדים. עותק חתום יישלח לנמענים הרלוונטיים."
 
@@ -1154,7 +1162,7 @@ msgstr "הקובץ גדול מדי (מקסימום 25 מ״ב)."
 msgid "The fully signed copy is attached."
 msgstr "העותק החתום המלא מצורף."
 
-#: includes/Frontend/SigningController.php:89
+#: includes/Frontend/SigningController.php:95
 msgid "The requested document could not be found."
 msgstr "לא ניתן היה למצוא את המסמך המבוקש."
 
@@ -1162,11 +1170,11 @@ msgstr "לא ניתן היה למצוא את המסמך המבוקש."
 msgid "These people receive the fully signed PDF by email when signing completes. They do not sign."
 msgstr "אנשים אלה יקבלו את ה-PDF החתום במייל עם השלמת החתימות. הם אינם חותמים."
 
-#: includes/Frontend/SigningController.php:221
+#: includes/Frontend/SigningController.php:284
 msgid "This document is authentic."
 msgstr "מסמך זה אותנטי."
 
-#: includes/Frontend/SigningController.php:119
+#: includes/Frontend/SigningController.php:125
 msgid "This document is signed in order. You will be notified when it is your turn."
 msgstr "מסמך זה נחתם לפי סדר. תקבלו הודעה כשיגיע תורכם."
 
@@ -1186,25 +1194,25 @@ msgstr "קישור זה אישי — אנא אל תעבירו אותו לאחר�
 msgid "This signer has no email. Share the signing link instead."
 msgstr "לחותם זה אין אימייל. שתפו את קישור החתימה במקום."
 
-#: includes/Frontend/SigningController.php:363
+#: includes/Frontend/SigningController.php:426
 msgid "This signing link has expired."
 msgstr "קישור החתימה פג תוקף."
 
-#: includes/Frontend/SigningController.php:111
+#: includes/Frontend/SigningController.php:117
 msgid "This signing link has expired. Please ask the sender for a new one."
 msgstr "קישור החתימה פג תוקף. אנא בקשו מהשולח קישור חדש."
 
-#: includes/Frontend/SigningController.php:286
-#: includes/Frontend/SigningController.php:327
-#: includes/Frontend/SigningController.php:403
+#: includes/Frontend/SigningController.php:349
+#: includes/Frontend/SigningController.php:390
+#: includes/Frontend/SigningController.php:466
 msgid "This signing link is no longer valid."
 msgstr "קישור החתימה אינו בתוקף עוד."
 
-#: includes/Frontend/SigningController.php:81
+#: includes/Frontend/SigningController.php:87
 msgid "This signing link is no longer valid. Please ask the sender for a new one."
 msgstr "קישור החתימה אינו בתוקף עוד. אנא בקשו מהשולח קישור חדש."
 
-#: includes/Frontend/SigningController.php:222
+#: includes/Frontend/SigningController.php:285
 msgid "Title:"
 msgstr "כותרת:"
 
@@ -1260,19 +1268,24 @@ msgstr "שימוש בתבנית: %s"
 msgid "Variables"
 msgstr "משתנים"
 
-#: includes/Frontend/SigningController.php:211
+#: includes/Frontend/SigningController.php:274
 msgid "Verification code (SHA-256)"
 msgstr "קוד אימות (SHA-256)"
 
-#: includes/Frontend/SigningController.php:337
+#: includes/Frontend/SigningController.php:400
 msgid "Verification required"
 msgstr "נדרש אימות"
 
-#: includes/Frontend/SigningController.php:435
+#: includes/Frontend/SigningController.php:498
 msgid "Verification required."
 msgstr "נדרש אימות."
 
-#: includes/Frontend/SigningController.php:213
+#: includes/Frontend/views/verify.php:12
+#: includes/Frontend/views/verify.php:16
+msgid "Verify a document"
+msgstr "אימות מסמך"
+
+#: includes/Frontend/SigningController.php:276
 msgid "Verify document"
 msgstr "אימות מסמך"
 
@@ -1294,8 +1307,8 @@ msgstr "צפייה במקור"
 msgid "Viewed"
 msgstr "נצפה"
 
-#: includes/Frontend/SigningController.php:118
-#: includes/Frontend/SigningController.php:367
+#: includes/Frontend/SigningController.php:124
+#: includes/Frontend/SigningController.php:430
 msgid "Waiting for an earlier signer"
 msgstr "ממתינים לחותם קודם"
 
@@ -1328,11 +1341,11 @@ msgstr "X-ComSign-Key"
 msgid "You are not allowed to access this page."
 msgstr "אינך מורשה לגשת לעמוד זה."
 
-#: includes/Frontend/SigningController.php:333
+#: includes/Frontend/SigningController.php:396
 msgid "You have already signed this document."
 msgstr "כבר חתמת על מסמך זה."
 
-#: includes/Frontend/SigningController.php:97
+#: includes/Frontend/SigningController.php:103
 msgid "You have already signed this document. Thank you."
 msgstr "כבר חתמת על מסמך זה. תודה."
 
@@ -1340,15 +1353,15 @@ msgstr "כבר חתמת על מסמך זה. תודה."
 msgid "You have been asked to review and sign the document: \"%s\"."
 msgstr "התבקשת לעיין ולחתום על המסמך: \"%s\"."
 
-#: includes/Frontend/SigningController.php:103
+#: includes/Frontend/SigningController.php:109
 msgid "You have declined to sign this document."
 msgstr "סירבת לחתום על מסמך זה."
 
-#: includes/Frontend/SigningController.php:417
+#: includes/Frontend/SigningController.php:480
 msgid "You have declined to sign this document. The sender has been notified."
 msgstr "סירבת לחתום על מסמך זה. השולח קיבל הודעה על כך."
 
-#: includes/Frontend/SigningController.php:342
+#: includes/Frontend/SigningController.php:405
 msgid "You must agree to sign electronically before continuing."
 msgstr "עליך להסכים לחתום באופן אלקטרוני לפני המשך."
 
