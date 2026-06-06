@@ -103,7 +103,7 @@
 	} ).then( function () {
 		// Place existing fields once all pages exist.
 		fields.forEach( function ( f ) {
-			addMarker( f.page, f.signer_id, f.type, f.pos_x, f.pos_y, f.width, f.height, f.options || [], f.required );
+			addMarker( f.page, f.signer_id, f.type, f.pos_x, f.pos_y, f.width, f.height, f.options || [], f.required, f.label || '', f.help_text || '' );
 		} );
 	} ).catch( function () {
 		container.textContent = cfg.i18n.loadError || 'Could not load preview.';
@@ -143,7 +143,18 @@
 		return REQUIRABLE.indexOf( type ) !== -1;
 	}
 
-	function addMarker( page, signerId, type, x, y, w, h, options, required ) {
+	// Field types that can carry a signer-facing label / help text.
+	var LABELLABLE = [ 'text', 'number', 'checkbox', 'choice', 'attachment' ];
+
+	function canLabel( type ) {
+		return LABELLABLE.indexOf( type ) !== -1;
+	}
+
+	function fieldCaption( type, customLabel ) {
+		return customLabel ? customLabel : typeLabel( type );
+	}
+
+	function addMarker( page, signerId, type, x, y, w, h, options, required, customLabel, helpText ) {
 		var overlay = pageEls[ page ];
 		if ( ! overlay ) {
 			return;
@@ -156,6 +167,8 @@
 		marker.dataset.signer = signerId;
 		marker.dataset.type = type;
 		marker.dataset.required = isRequired ? '1' : '';
+		marker.dataset.label = customLabel || '';
+		marker.dataset.help = helpText || '';
 		marker.dataset.options = JSON.stringify( options || [] );
 		marker.style.left = ( x * 100 ) + '%';
 		marker.style.top = ( y * 100 ) + '%';
@@ -167,7 +180,10 @@
 
 		var label = document.createElement( 'span' );
 		label.className = 'comsign-field-label';
-		label.textContent = typeLabel( type ) + ( isRequired ? ' *' : '' );
+		label.textContent = fieldCaption( type, customLabel ) + ( isRequired ? ' *' : '' );
+		if ( helpText ) {
+			label.title = helpText;
+		}
 		marker.appendChild( label );
 
 		// Click the label to toggle "required" on requirable fields.
@@ -179,7 +195,7 @@
 				var now = marker.dataset.required !== '1';
 				marker.dataset.required = now ? '1' : '';
 				marker.classList.toggle( 'comsign-field--required', now );
-				label.textContent = typeLabel( type ) + ( now ? ' *' : '' );
+				label.textContent = fieldCaption( type, marker.dataset.label ) + ( now ? ' *' : '' );
 			} );
 		}
 
@@ -285,7 +301,21 @@
 				options = raw.split( ',' ).map( function ( s ) { return s.trim(); } ).filter( Boolean );
 			}
 
-			addMarker( 1, signerId, type, 0.1, 0.1, size.w, size.h, options, required );
+			// Ask for a signer-facing label (and optional help text) for fields
+			// the signer fills in, so they never see a bare "Your answer".
+			var customLabel = '';
+			var helpText = '';
+			if ( canLabel( type ) ) {
+				var l = window.prompt( cfg.i18n.labelPrompt || 'Field label shown to the signer (optional):', '' );
+				if ( null === l ) {
+					return; // cancelled
+				}
+				customLabel = l.trim();
+				var hp = window.prompt( cfg.i18n.helpPrompt || 'Short help text under the field (optional):', '' );
+				helpText = ( null === hp ) ? '' : hp.trim();
+			}
+
+			addMarker( 1, signerId, type, 0.1, 0.1, size.w, size.h, options, required, customLabel, helpText );
 		} );
 	}
 
@@ -307,6 +337,8 @@
 						pos_y: pct( m.style.top ),
 						width: pct( m.style.width ),
 						height: pct( m.style.height ),
+						label: m.dataset.label || '',
+						help_text: m.dataset.help || '',
 						options: options
 					} );
 				} );

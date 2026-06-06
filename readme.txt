@@ -4,7 +4,7 @@ Tags: signature, digital signature, pdf, esignature, hebrew
 Requires at least: 6.0
 Tested up to: 6.5
 Requires PHP: 7.4
-Stable tag: 0.14.0
+Stable tag: 0.15.0
 License: GPL-2.0-or-later
 License URI: https://www.gnu.org/licenses/gpl-2.0.html
 
@@ -105,6 +105,19 @@ ID and its SHA-256 code (shown on the document screen and the signature
 certificate) to confirm the document is authentic and see who signed it.
 
 == Changelog ==
+
+= 0.15.0 =
+* New: signer-friendly UX. Fields now carry a human label and optional help
+  text (set in the editor) so signers no longer see a bare "Your answer".
+* New: clearer signing flow - plain-language consent with the legal wording in
+  a collapsible "More information" section, a prominent "Sign & finish" button
+  with a secondary "Decline", and distinct completion messages for "fully
+  signed" vs "waiting for other signers".
+* New: mobile-first signing page - touch-friendly controls, the page no longer
+  scrolls while drawing a signature, inline per-field validation that scrolls to
+  and highlights the first problem.
+* Fix: the admin field editor now preserves the "required" flag and the file
+  upload field type on save (both were previously dropped).
 
 = 0.14.0 =
 * New: signer file upload. Add a "File upload" field so a signer attaches a

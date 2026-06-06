@@ -540,6 +540,8 @@ final class DocumentService {
 					'pos_y'       => (float) $field->pos_y,
 					'width'       => (float) $field->width,
 					'height'      => (float) $field->height,
+					'label'       => (string) ( $field->label ?? '' ),
+					'help_text'   => (string) ( $field->help_text ?? '' ),
 					'options'     => FieldRepository::decode_options( $field ),
 				)
 			);
@@ -595,6 +597,8 @@ final class DocumentService {
 				'pos_y'      => (float) $field->pos_y,
 				'width'      => (float) $field->width,
 				'height'     => (float) $field->height,
+				'label'      => (string) ( $field->label ?? '' ),
+				'help_text'  => (string) ( $field->help_text ?? '' ),
 				'options'    => FieldRepository::decode_options( $field ),
 			);
 		}
@@ -725,6 +729,8 @@ final class DocumentService {
 					'pos_y'       => (float) ( $field['pos_y'] ?? 0 ),
 					'width'       => (float) ( $field['width'] ?? 0 ),
 					'height'      => (float) ( $field['height'] ?? 0 ),
+					'label'       => (string) ( $field['label'] ?? '' ),
+					'help_text'   => (string) ( $field['help_text'] ?? '' ),
 					'options'     => isset( $field['options'] ) && is_array( $field['options'] ) ? $field['options'] : null,
 				)
 			);
@@ -825,6 +831,8 @@ final class DocumentService {
 					'pos_y'       => $this->clamp_fraction( $field['pos_y'] ?? 0 ),
 					'width'       => $this->clamp_fraction( $field['width'] ?? 0 ),
 					'height'      => $this->clamp_fraction( $field['height'] ?? 0 ),
+					'label'       => (string) ( $field['label'] ?? '' ),
+					'help_text'   => (string) ( $field['help_text'] ?? '' ),
 					'options'     => isset( $field['options'] ) && is_array( $field['options'] ) ? $field['options'] : null,
 				)
 			);

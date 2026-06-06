@@ -76,13 +76,43 @@ final class FieldRepository {
 				'pos_y'       => (float) ( $data['pos_y'] ?? 0 ),
 				'width'       => (float) ( $data['width'] ?? 0 ),
 				'height'      => (float) ( $data['height'] ?? 0 ),
+				'label'       => mb_substr( (string) ( $data['label'] ?? '' ), 0, 150 ),
+				'help_text'   => mb_substr( (string) ( $data['help_text'] ?? '' ), 0, 255 ),
 				'options'     => $options,
 				'created_at'  => current_time( 'mysql', true ),
 			),
-			array( '%d', '%d', '%s', '%d', '%d', '%f', '%f', '%f', '%f', '%s', '%s' )
+			array( '%d', '%d', '%s', '%d', '%d', '%f', '%f', '%f', '%f', '%s', '%s', '%s', '%s' )
 		);
 
 		return (int) $wpdb->insert_id;
+	}
+
+	/**
+	 * Human-facing label for a field on the signing page.
+	 *
+	 * Uses the admin-supplied label when present, otherwise a sensible default
+	 * per field type so the signer never sees a bare "Your answer".
+	 *
+	 * @param object $field Field row.
+	 */
+	public static function display_label( object $field ): string {
+		$label = isset( $field->label ) ? trim( (string) $field->label ) : '';
+		if ( '' !== $label ) {
+			return $label;
+		}
+
+		switch ( $field->type ) {
+			case self::TYPE_NUMBER:
+				return __( 'Number', 'comsign' );
+			case self::TYPE_CHECKBOX:
+				return __( 'I confirm', 'comsign' );
+			case self::TYPE_CHOICE:
+				return __( 'Select an option', 'comsign' );
+			case self::TYPE_ATTACHMENT:
+				return __( 'Upload a file', 'comsign' );
+			default:
+				return __( 'Your answer', 'comsign' );
+		}
 	}
 
 	/**

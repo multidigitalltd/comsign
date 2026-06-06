@@ -78,50 +78,65 @@ require __DIR__ . '/partials/header.php';
 
 			<?php if ( ! empty( $input_fields ) ) : ?>
 				<div class="comsign-fill-fields">
-					<h2><?php esc_html_e( 'Please fill in', 'comsign' ); ?></h2>
+					<h2><?php esc_html_e( 'Fill in the details below', 'comsign' ); ?></h2>
+					<p class="comsign-required-legend"><?php esc_html_e( '* Required', 'comsign' ); ?></p>
 					<?php
+					$fr = '\ComSign\Database\FieldRepository';
 					foreach ( $input_fields as $field ) :
-						$name = 'fields[' . (int) $field->id . ']';
-						$req  = ! empty( $field->required );
+						$fid     = 'comsign-field-' . (int) $field->id;
+						$name    = 'fields[' . (int) $field->id . ']';
+						$req     = ! empty( $field->required );
+						$caption = $fr::display_label( $field );
+						$help    = isset( $field->help_text ) ? trim( (string) $field->help_text ) : '';
+						$help_id = '' !== $help ? $fid . '-help' : '';
+						$describe = '' !== $help_id ? ' aria-describedby="' . esc_attr( $help_id ) . '"' : '';
 						?>
-						<p<?php echo $req ? ' class="comsign-required"' : ''; ?>>
-						<?php if ( \ComSign\Database\FieldRepository::TYPE_CHECKBOX === $field->type ) : ?>
-							<label class="comsign-check">
-								<input type="checkbox" name="<?php echo esc_attr( $name ); ?>" value="1"<?php echo $req ? ' required' : ''; ?>>
-								<span><?php esc_html_e( 'I confirm', 'comsign' ); ?><?php echo $req ? ' *' : ''; ?></span>
+						<div class="comsign-field-row<?php echo $req ? ' comsign-required' : ''; ?>" data-required="<?php echo $req ? '1' : '0'; ?>">
+						<?php if ( $fr::TYPE_CHECKBOX === $field->type ) : ?>
+							<label class="comsign-check" for="<?php echo esc_attr( $fid ); ?>">
+								<input type="checkbox" id="<?php echo esc_attr( $fid ); ?>" name="<?php echo esc_attr( $name ); ?>" value="1"<?php echo $describe; ?><?php echo $req ? ' required' : ''; ?>>
+								<span><?php echo esc_html( $caption ); ?><?php echo $req ? ' <span class="comsign-req">*</span>' : ''; // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped ?></span>
 							</label>
-						<?php elseif ( \ComSign\Database\FieldRepository::TYPE_CHOICE === $field->type ) : ?>
-							<select name="<?php echo esc_attr( $name ); ?>" class="comsign-input"<?php echo $req ? ' required' : ''; ?>>
-								<option value=""><?php esc_html_e( 'Choose…', 'comsign' ); ?></option>
-								<?php foreach ( \ComSign\Database\FieldRepository::decode_options( $field ) as $opt ) : ?>
-									<option value="<?php echo esc_attr( $opt ); ?>"><?php echo esc_html( $opt ); ?></option>
-								<?php endforeach; ?>
-							</select>
-						<?php elseif ( \ComSign\Database\FieldRepository::TYPE_ATTACHMENT === $field->type ) : ?>
-							<label class="comsign-file-label">
-								<?php esc_html_e( 'Upload a file', 'comsign' ); ?><?php echo $req ? ' *' : ''; ?>
-								<input type="file" name="attachments[<?php echo (int) $field->id; ?>]" class="comsign-file" accept=".pdf,.png,.jpg,.jpeg,.gif,.webp,.heic,.doc,.docx,.txt"<?php echo $req ? ' required' : ''; ?>>
-							</label>
-						<?php elseif ( \ComSign\Database\FieldRepository::TYPE_NUMBER === $field->type ) : ?>
-							<input type="number" step="any" name="<?php echo esc_attr( $name ); ?>" class="comsign-input" placeholder="<?php echo $req ? esc_attr__( 'Enter a number (required)', 'comsign' ) : esc_attr__( 'Enter a number', 'comsign' ); ?>"<?php echo $req ? ' required' : ''; ?>>
 						<?php else : ?>
-							<input type="text" name="<?php echo esc_attr( $name ); ?>" class="comsign-input" placeholder="<?php echo $req ? esc_attr__( 'Your answer (required)', 'comsign' ) : esc_attr__( 'Your answer', 'comsign' ); ?>"<?php echo $req ? ' required' : ''; ?>>
+							<label class="comsign-field-caption" for="<?php echo esc_attr( $fid ); ?>"><?php echo esc_html( $caption ); ?><?php echo $req ? ' <span class="comsign-req">*</span>' : ''; // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped ?></label>
+							<?php if ( $fr::TYPE_CHOICE === $field->type ) : ?>
+								<select id="<?php echo esc_attr( $fid ); ?>" name="<?php echo esc_attr( $name ); ?>" class="comsign-input"<?php echo $describe; ?><?php echo $req ? ' required' : ''; ?>>
+									<option value=""><?php esc_html_e( 'Choose…', 'comsign' ); ?></option>
+									<?php foreach ( $fr::decode_options( $field ) as $opt ) : ?>
+										<option value="<?php echo esc_attr( $opt ); ?>"><?php echo esc_html( $opt ); ?></option>
+									<?php endforeach; ?>
+								</select>
+							<?php elseif ( $fr::TYPE_ATTACHMENT === $field->type ) : ?>
+								<input type="file" id="<?php echo esc_attr( $fid ); ?>" name="attachments[<?php echo (int) $field->id; ?>]" class="comsign-file" accept=".pdf,.png,.jpg,.jpeg,.gif,.webp,.heic,.doc,.docx,.txt"<?php echo $describe; ?><?php echo $req ? ' required' : ''; ?>>
+							<?php elseif ( $fr::TYPE_NUMBER === $field->type ) : ?>
+								<input type="number" inputmode="decimal" step="any" id="<?php echo esc_attr( $fid ); ?>" name="<?php echo esc_attr( $name ); ?>" class="comsign-input"<?php echo $describe; ?><?php echo $req ? ' required' : ''; ?>>
+							<?php else : ?>
+								<input type="text" id="<?php echo esc_attr( $fid ); ?>" name="<?php echo esc_attr( $name ); ?>" class="comsign-input"<?php echo $describe; ?><?php echo $req ? ' required' : ''; ?>>
+							<?php endif; ?>
 						<?php endif; ?>
-						</p>
+						<?php if ( '' !== $help ) : ?>
+							<p class="comsign-field-help" id="<?php echo esc_attr( $help_id ); ?>"><?php echo esc_html( $help ); ?></p>
+						<?php endif; ?>
+						<p class="comsign-field-error is-hidden"><?php esc_html_e( 'This field is required.', 'comsign' ); ?></p>
+						</div>
 					<?php endforeach; ?>
 				</div>
 			<?php endif; ?>
 
-			<label class="comsign-consent">
+			<label class="comsign-consent" for="comsign-consent">
 				<input type="checkbox" name="consent" value="1" id="comsign-consent" required>
-				<span><?php esc_html_e( 'I agree to sign this document electronically, and I confirm that my electronic signature is legally binding.', 'comsign' ); ?></span>
+				<span><?php esc_html_e( 'I have read the document and I agree to sign it electronically.', 'comsign' ); ?></span>
 			</label>
+			<details class="comsign-legal">
+				<summary><?php esc_html_e( 'More information', 'comsign' ); ?></summary>
+				<p><?php esc_html_e( 'My electronic signature is legally binding and has the same effect as a handwritten signature. The time, my IP address and browser are recorded as proof of signing.', 'comsign' ); ?></p>
+			</details>
 
-			<p class="comsign-error is-hidden" id="comsign-error"><?php esc_html_e( 'Please add your signature and accept the agreement.', 'comsign' ); ?></p>
+			<p class="comsign-error is-hidden" id="comsign-error"><?php esc_html_e( 'Please complete the highlighted items: add your signature, fill the required fields and accept the agreement.', 'comsign' ); ?></p>
 
 			<div class="comsign-actions">
-				<button type="submit" class="comsign-btn comsign-btn--primary" id="comsign-submit"><?php esc_html_e( 'Sign document', 'comsign' ); ?></button>
-				<button type="button" class="comsign-btn comsign-btn--ghost" id="comsign-decline-toggle"><?php esc_html_e( 'Decline', 'comsign' ); ?></button>
+				<button type="submit" class="comsign-btn comsign-btn--primary" id="comsign-submit"><?php esc_html_e( 'Sign & finish', 'comsign' ); ?></button>
+				<button type="button" class="comsign-btn comsign-btn--ghost" id="comsign-decline-toggle"><?php esc_html_e( 'Decline to sign', 'comsign' ); ?></button>
 			</div>
 		</form>
 

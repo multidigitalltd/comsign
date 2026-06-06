@@ -218,3 +218,99 @@ body.comsign-public {
 	margin-top: 6px;
 	font-weight: 400;
 }
+
+/* ---- 0.15.0 signer UX: labels, help, inline errors, mobile ---- */
+.comsign-required-legend {
+	color: #6b7280;
+	font-size: 0.85em;
+	margin: 0 0 12px;
+}
+.comsign-field-row {
+	margin: 0 0 16px;
+}
+.comsign-field-caption {
+	display: block;
+	font-weight: 600;
+	margin-bottom: 4px;
+}
+.comsign-req {
+	color: #b91c1c;
+}
+.comsign-field-help {
+	color: #6b7280;
+	font-size: 0.85em;
+	margin: 4px 0 0;
+}
+.comsign-field-error {
+	color: #b91c1c;
+	font-size: 0.85em;
+	margin: 4px 0 0;
+}
+.comsign-row-invalid .comsign-input,
+.comsign-row-invalid .comsign-file,
+.comsign-row-invalid .comsign-check {
+	box-shadow: 0 0 0 2px #b91c1c;
+	border-radius: 4px;
+}
+
+/* Collapsible legal text under the plain-language consent */
+.comsign-legal {
+	margin: 4px 0 16px;
+	font-size: 0.9em;
+}
+.comsign-legal summary {
+	cursor: pointer;
+	color: #2563eb;
+}
+.comsign-legal p {
+	color: #4b5563;
+	margin: 8px 0 0;
+}
+
+/* Touch-friendly controls (>=44px tap targets) */
+.comsign-btn {
+	min-height: 48px;
+}
+.comsign-input,
+.comsign-file {
+	min-height: 44px;
+}
+.comsign-check input,
+.comsign-consent input {
+	width: 22px;
+	height: 22px;
+}
+
+/* Keep the page from scrolling while drawing a signature on touch screens */
+.comsign-canvas {
+	touch-action: none;
+	max-width: 100%;
+}
+
+/* Prominent primary action; decline clearly secondary */
+.comsign-actions {
+	display: flex;
+	flex-wrap: wrap;
+	gap: 12px;
+	align-items: center;
+}
+.comsign-btn--primary {
+	font-weight: 700;
+}
+.comsign-btn--ghost {
+	opacity: 0.85;
+}
+
+/* Mobile-first: vertical layout, full-width actions on small screens */
+@media ( max-width: 600px ) {
+	.comsign-actions {
+		flex-direction: column-reverse;
+		align-items: stretch;
+	}
+	.comsign-actions .comsign-btn {
+		width: 100%;
+	}
+	.comsign-doc-viewer iframe {
+		min-height: 50vh;
+	}
+}

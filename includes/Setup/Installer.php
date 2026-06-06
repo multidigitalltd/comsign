@@ -128,6 +128,8 @@ final class Installer {
 			pos_y DECIMAL(8,4) NOT NULL DEFAULT 0,
 			width DECIMAL(8,4) NOT NULL DEFAULT 0,
 			height DECIMAL(8,4) NOT NULL DEFAULT 0,
+			label VARCHAR(150) NOT NULL DEFAULT '',
+			help_text VARCHAR(255) NOT NULL DEFAULT '',
 			options LONGTEXT NULL,
 			value LONGTEXT NULL,
 			created_at DATETIME NOT NULL DEFAULT '0000-00-00 00:00:00',

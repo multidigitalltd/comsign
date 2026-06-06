@@ -375,9 +375,19 @@ final class SigningController {
 			$this->render_message( __( 'Could not complete signing', 'comsign' ), $e->getMessage() );
 		}
 
+		// Tailor the confirmation to whether the whole document is now complete.
+		$fresh = $this->documents->find( (int) $document->id );
+		if ( $fresh && DocumentRepository::STATUS_COMPLETED === $fresh->status ) {
+			$this->render_message(
+				__( 'Signed successfully', 'comsign' ),
+				__( 'The document is now fully signed by all parties. A signed copy will be sent to the relevant recipients.', 'comsign' ),
+				'success'
+			);
+		}
+
 		$this->render_message(
-			__( 'Thank you!', 'comsign' ),
-			__( 'Your signature has been recorded. A copy will be available once all parties have signed.', 'comsign' ),
+			__( 'Signed successfully', 'comsign' ),
+			__( 'Thank you — your signature has been recorded. The document will be completed once the remaining participants have signed.', 'comsign' ),
 			'success'
 		);
 	}

@@ -211,6 +211,8 @@ final class Admin {
 					'attachment'   => __( 'File', 'comsign' ),
 					'remove'       => __( 'Remove', 'comsign' ),
 					'choicePrompt' => __( 'Enter options separated by commas:', 'comsign' ),
+					'labelPrompt'  => __( 'Field label shown to the signer (optional):', 'comsign' ),
+					'helpPrompt'   => __( 'Short help text under the field (optional):', 'comsign' ),
 					'toggleRequired' => __( 'Click to toggle required', 'comsign' ),
 					'loading'      => __( 'Loading document…', 'comsign' ),
 					'loadError'    => __( 'Could not load the document preview.', 'comsign' ),
@@ -959,6 +961,7 @@ final class Admin {
 			FieldRepository::TYPE_NUMBER,
 			FieldRepository::TYPE_CHECKBOX,
 			FieldRepository::TYPE_CHOICE,
+			FieldRepository::TYPE_ATTACHMENT,
 			FieldRepository::TYPE_NAME,
 			FieldRepository::TYPE_EMAIL,
 		);
@@ -985,11 +988,14 @@ final class Admin {
 			$clean[] = array(
 				'signer_id' => isset( $field['signer_id'] ) ? absint( $field['signer_id'] ) : 0,
 				'type'      => in_array( $type, $allowed_types, true ) ? $type : FieldRepository::TYPE_SIGNATURE,
+				'required'  => ! empty( $field['required'] ),
 				'page'      => isset( $field['page'] ) ? max( 1, absint( $field['page'] ) ) : 1,
 				'pos_x'     => isset( $field['pos_x'] ) ? (float) $field['pos_x'] : 0.0,
 				'pos_y'     => isset( $field['pos_y'] ) ? (float) $field['pos_y'] : 0.0,
 				'width'     => isset( $field['width'] ) ? (float) $field['width'] : 0.0,
 				'height'    => isset( $field['height'] ) ? (float) $field['height'] : 0.0,
+				'label'     => isset( $field['label'] ) ? sanitize_text_field( (string) $field['label'] ) : '',
+				'help_text' => isset( $field['help_text'] ) ? sanitize_text_field( (string) $field['help_text'] ) : '',
 				'options'   => $options,
 			);
 		}

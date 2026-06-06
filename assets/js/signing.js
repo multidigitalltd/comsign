@@ -91,20 +91,92 @@
 		return pad.isEmpty() ? '' : pad.toDataURL( 'image/png' );
 	}
 
+	// Check a single required field row; returns true when filled.
+	function rowFilled( row ) {
+		var el = row.querySelector( 'input, select, textarea' );
+		if ( ! el ) {
+			return true;
+		}
+		if ( 'checkbox' === el.type ) {
+			return el.checked;
+		}
+		if ( 'file' === el.type ) {
+			return el.files && el.files.length > 0;
+		}
+		return '' !== ( el.value || '' ).trim();
+	}
+
+	function showRowError( row, show ) {
+		var msg = row.querySelector( '.comsign-field-error' );
+		row.classList.toggle( 'comsign-row-invalid', show );
+		if ( msg ) {
+			msg.classList.toggle( 'is-hidden', ! show );
+		}
+	}
+
+	// Clear a row's error as soon as the signer starts fixing it.
+	document.querySelectorAll( '.comsign-field-row[data-required="1"]' ).forEach( function ( row ) {
+		row.addEventListener( 'input', function () {
+			if ( rowFilled( row ) ) {
+				showRowError( row, false );
+			}
+		} );
+		row.addEventListener( 'change', function () {
+			if ( rowFilled( row ) ) {
+				showRowError( row, false );
+			}
+		} );
+	} );
+
+	function scrollToFirst( el ) {
+		if ( ! el ) {
+			return;
+		}
+		if ( el.scrollIntoView ) {
+			el.scrollIntoView( { behavior: 'smooth', block: 'center' } );
+		}
+		var focusable = el.querySelector ? el.querySelector( 'input, select, textarea' ) : null;
+		if ( focusable && 'file' !== focusable.type ) {
+			try { focusable.focus( { preventScroll: true } ); } catch ( err ) { focusable.focus(); }
+		}
+	}
+
 	// Submit validation.
 	form.addEventListener( 'submit', function ( e ) {
-		var signature = currentSignature();
-		var signatureOk = ! needsSignature || signature;
-		var consentOk = consent && consent.checked;
+		var firstInvalid = null;
 
-		if ( ! signatureOk || ! consentOk ) {
+		// 1) Required fill-in fields.
+		document.querySelectorAll( '.comsign-field-row[data-required="1"]' ).forEach( function ( row ) {
+			var ok = rowFilled( row );
+			showRowError( row, ! ok );
+			if ( ! ok && ! firstInvalid ) {
+				firstInvalid = row;
+			}
+		} );
+
+		// 2) Signature.
+		var signature = currentSignature();
+		if ( needsSignature && ! signature && ! firstInvalid ) {
+			firstInvalid = document.querySelector( '.comsign-signature-pad' );
+		}
+
+		// 3) Consent.
+		if ( consent && ! consent.checked && ! firstInvalid ) {
+			firstInvalid = consent.closest ? consent.closest( '.comsign-consent' ) : consent;
+		}
+
+		if ( firstInvalid ) {
 			e.preventDefault();
 			if ( errorBox ) {
 				errorBox.classList.remove( 'is-hidden' );
 			}
+			scrollToFirst( firstInvalid );
 			return;
 		}
 
+		if ( errorBox ) {
+			errorBox.classList.add( 'is-hidden' );
+		}
 		if ( signatureField ) {
 			signatureField.value = signature;
 		}
