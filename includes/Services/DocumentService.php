@@ -216,6 +216,33 @@ final class DocumentService {
 	}
 
 	/**
+	 * Push a document's signing deadline out by a number of days.
+	 *
+	 * Extends from the later of "now" or the current expiry, so extending an
+	 * already-expired document gives a fresh window from today. Returns the new
+	 * expiry (UTC 'Y-m-d H:i:s').
+	 *
+	 * @param int $document_id Document id.
+	 * @param int $days        Days to add (1..365).
+	 */
+	public function extend_expiry( int $document_id, int $days ): string {
+		$days     = max( 1, min( 365, $days ) );
+		$document = $this->documents->find( $document_id );
+		if ( ! $document ) {
+			throw new \RuntimeException( __( 'Document not found.', 'comsign' ) );
+		}
+
+		$current = ! empty( $document->expires_at ) ? strtotime( $document->expires_at . ' UTC' ) : 0;
+		$base    = ( $current && $current > time() ) ? $current : time();
+		$new     = gmdate( 'Y-m-d H:i:s', $base + $days * DAY_IN_SECONDS );
+
+		$this->documents->set_expiry( $document_id, $new );
+		$this->audit->record( AuditLogger::EVENT_EXPIRY_EXTENDED, $document_id, 0, array( 'expires_at' => $new ) );
+
+		return $new;
+	}
+
+	/**
 	 * Build a standalone audit-trail report PDF and return its path.
 	 *
 	 * @param int $document_id Document id.

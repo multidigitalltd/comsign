@@ -29,8 +29,32 @@ final class AuditLogger {
 	public const EVENT_SEND_FAILED = 'send_failed';
 	public const EVENT_REMINDED    = 'reminded';
 	public const EVENT_EXPIRED     = 'expired';
+	public const EVENT_EXPIRY_EXTENDED = 'expiry_extended';
 
 	private AuditRepository $repository;
+
+	/**
+	 * Human-readable label for an event, for the document timeline.
+	 *
+	 * @param string $event Event key.
+	 */
+	public static function label( string $event ): string {
+		$labels = array(
+			self::EVENT_CREATED         => __( 'Created', 'comsign' ),
+			self::EVENT_SENT            => __( 'Sent for signing', 'comsign' ),
+			self::EVENT_VIEWED          => __( 'Viewed', 'comsign' ),
+			self::EVENT_CONSENTED       => __( 'Consented', 'comsign' ),
+			self::EVENT_SIGNED          => __( 'Signed', 'comsign' ),
+			self::EVENT_COMPLETED       => __( 'Completed', 'comsign' ),
+			self::EVENT_DECLINED        => __( 'Declined', 'comsign' ),
+			self::EVENT_DOWNLOADED      => __( 'Downloaded', 'comsign' ),
+			self::EVENT_SEND_FAILED     => __( 'Send failed', 'comsign' ),
+			self::EVENT_REMINDED        => __( 'Reminder sent', 'comsign' ),
+			self::EVENT_EXPIRED         => __( 'Expired', 'comsign' ),
+			self::EVENT_EXPIRY_EXTENDED => __( 'Expiry extended', 'comsign' ),
+		);
+		return $labels[ $event ] ?? ucfirst( str_replace( '_', ' ', $event ) );
+	}
 
 	public function __construct( ?AuditRepository $repository = null ) {
 		$this->repository = $repository ?? new AuditRepository();

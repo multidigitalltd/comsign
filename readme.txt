@@ -4,7 +4,7 @@ Tags: signature, digital signature, pdf, esignature, hebrew
 Requires at least: 6.0
 Tested up to: 6.5
 Requires PHP: 7.4
-Stable tag: 0.17.0
+Stable tag: 0.18.0
 License: GPL-2.0-or-later
 License URI: https://www.gnu.org/licenses/gpl-2.0.html
 
@@ -105,6 +105,15 @@ ID and its SHA-256 code (shown on the document screen and the signature
 certificate) to confirm the document is authentic and see who signed it.
 
 == Changelog ==
+
+= 0.18.0 =
+* New: document timeline on the edit screen - a clear chronological view of
+  every event (created, sent, viewed, signed, declined, completed, reminded,
+  expired...) with the signer's name and a readable timestamp, plus the current
+  status and expiry at a glance.
+* New: extend the signing deadline in one click (7 / 14 / 30 days) and download
+  the audit trail straight from the timeline. Audit events now show readable
+  labels instead of raw keys.
 
 = 0.17.0 =
 * New: System Status screen (ComSign → System Status) with at-a-glance checks

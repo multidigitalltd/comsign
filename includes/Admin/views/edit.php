@@ -124,6 +124,62 @@ foreach ( $signers as $signer ) {
 				<?php endif; ?>
 			</div>
 
+			<?php
+			// Map signer ids to names for the timeline.
+			$signer_names = array();
+			foreach ( $signers as $sg ) {
+				$signer_names[ (int) $sg->id ] = $sg->name ? $sg->name : $sg->email;
+			}
+			$expires_label = '';
+			if ( ! empty( $document->expires_at ) ) {
+				$expires_label = mysql2date( get_option( 'date_format' ) . ' ' . get_option( 'time_format' ), get_date_from_gmt( $document->expires_at ) );
+			}
+			?>
+			<div class="comsign-card">
+				<h2><?php esc_html_e( 'Timeline', 'comsign' ); ?></h2>
+
+				<p>
+					<strong><?php esc_html_e( 'Status:', 'comsign' ); ?></strong>
+					<?php echo esc_html( ucfirst( (string) $document->status ) ); ?>
+					<?php if ( '' !== $expires_label ) : ?>
+						&nbsp;·&nbsp;<strong><?php esc_html_e( 'Expires:', 'comsign' ); ?></strong> <?php echo esc_html( $expires_label ); ?>
+					<?php endif; ?>
+				</p>
+
+				<?php if ( empty( $audit ) ) : ?>
+					<p class="description"><?php esc_html_e( 'No events recorded yet.', 'comsign' ); ?></p>
+				<?php else : ?>
+					<ol class="comsign-timeline">
+						<?php foreach ( array_reverse( $audit ) as $entry ) : ?>
+							<?php $who = ! empty( $entry->signer_id ) && isset( $signer_names[ (int) $entry->signer_id ] ) ? $signer_names[ (int) $entry->signer_id ] : ''; ?>
+							<li class="comsign-timeline-item comsign-tl--<?php echo esc_attr( $entry->event ); ?>">
+								<span class="comsign-tl-event"><?php echo esc_html( \ComSign\Audit\AuditLogger::label( (string) $entry->event ) ); ?></span>
+								<?php if ( '' !== $who ) : ?>
+									<span class="comsign-tl-who"><?php echo esc_html( $who ); ?></span>
+								<?php endif; ?>
+								<span class="comsign-tl-when"><?php echo esc_html( mysql2date( get_option( 'date_format' ) . ' ' . get_option( 'time_format' ), get_date_from_gmt( (string) $entry->created_at ) ) ); ?></span>
+							</li>
+						<?php endforeach; ?>
+					</ol>
+				<?php endif; ?>
+
+				<div class="comsign-timeline-actions">
+					<form method="post" action="<?php echo esc_url( $action_url ); ?>" class="comsign-extend-form">
+						<input type="hidden" name="action" value="comsign_extend_expiry">
+						<input type="hidden" name="document_id" value="<?php echo (int) $document->id; ?>">
+						<input type="hidden" name="_wpnonce" value="<?php echo esc_attr( $nonces['extend_expiry'] ); ?>">
+						<label for="comsign-extend-days"><?php esc_html_e( 'Extend deadline by', 'comsign' ); ?></label>
+						<select name="days" id="comsign-extend-days">
+							<option value="7"><?php esc_html_e( '7 days', 'comsign' ); ?></option>
+							<option value="14"><?php esc_html_e( '14 days', 'comsign' ); ?></option>
+							<option value="30"><?php esc_html_e( '30 days', 'comsign' ); ?></option>
+						</select>
+						<button type="submit" class="button"><?php esc_html_e( 'Extend', 'comsign' ); ?></button>
+					</form>
+					<a class="button" href="<?php echo esc_url( $download['audit_pdf'] ); ?>"><?php esc_html_e( 'Download audit trail (PDF)', 'comsign' ); ?></a>
+				</div>
+			</div>
+
 			<div class="comsign-card">
 				<h2><?php esc_html_e( 'Audit trail', 'comsign' ); ?></h2>
 				<?php if ( empty( $audit ) ) : ?>
@@ -141,7 +197,7 @@ foreach ( $signers as $signer ) {
 						<tbody>
 							<?php foreach ( $audit as $entry ) : ?>
 								<tr>
-									<td><code><?php echo esc_html( $entry->event ); ?></code></td>
+									<td><?php echo esc_html( \ComSign\Audit\AuditLogger::label( (string) $entry->event ) ); ?></td>
 									<td><?php echo esc_html( $entry->created_at ); ?></td>
 									<td><?php echo esc_html( $entry->ip ); ?></td>
 									<td class="comsign-ua"><?php echo esc_html( $entry->user_agent ); ?></td>

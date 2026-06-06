@@ -60,6 +60,7 @@ final class Admin {
 		add_action( 'admin_post_comsign_test_email', array( $this, 'handle_test_email' ) );
 		add_action( 'admin_post_comsign_test_webhook', array( $this, 'handle_test_webhook' ) );
 		add_action( 'admin_post_comsign_resend_signer', array( $this, 'handle_resend_signer' ) );
+		add_action( 'admin_post_comsign_extend_expiry', array( $this, 'handle_extend_expiry' ) );
 		add_action( 'admin_post_comsign_save_fields', array( $this, 'handle_save_fields' ) );
 		add_action( 'admin_post_comsign_send', array( $this, 'handle_send' ) );
 		add_action( 'admin_post_comsign_duplicate', array( $this, 'handle_duplicate' ) );
@@ -302,6 +303,7 @@ final class Admin {
 					'signer_link'   => wp_create_nonce( 'comsign_signer_link_' . $document_id ),
 					'sign_in_person' => wp_create_nonce( 'comsign_sign_in_person_' . $document_id ),
 					'resend_signer' => wp_create_nonce( 'comsign_resend_signer_' . $document_id ),
+					'extend_expiry' => wp_create_nonce( 'comsign_extend_expiry_' . $document_id ),
 					'save_fields'   => wp_create_nonce( 'comsign_save_fields_' . $document_id ),
 					'send'          => wp_create_nonce( 'comsign_send_' . $document_id ),
 					'save_template' => wp_create_nonce( 'comsign_save_template_' . $document_id ),
@@ -449,6 +451,25 @@ final class Admin {
 		}
 
 		$this->redirect_with_notice( $this->edit_url( $document_id ), 'success', __( 'Invitation re-sent.', 'comsign' ) );
+	}
+
+	/**
+	 * Extend a document's signing deadline.
+	 */
+	public function handle_extend_expiry(): void {
+		$this->guard();
+		$document_id = $this->posted_document_id();
+		check_admin_referer( 'comsign_extend_expiry_' . $document_id );
+
+		$days = isset( $_POST['days'] ) ? absint( wp_unslash( $_POST['days'] ) ) : 0;
+
+		try {
+			$this->service->extend_expiry( $document_id, $days );
+		} catch ( \Throwable $e ) {
+			$this->redirect_with_notice( $this->edit_url( $document_id ), 'error', $e->getMessage() );
+		}
+
+		$this->redirect_with_notice( $this->edit_url( $document_id ), 'success', __( 'Signing deadline extended.', 'comsign' ) );
 	}
 
 	/**
