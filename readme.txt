@@ -4,7 +4,7 @@ Tags: signature, digital signature, pdf, esignature, hebrew
 Requires at least: 6.0
 Tested up to: 6.5
 Requires PHP: 7.4
-Stable tag: 0.34.0
+Stable tag: 0.35.0
 License: GPL-2.0-or-later
 License URI: https://www.gnu.org/licenses/gpl-2.0.html
 
@@ -105,6 +105,14 @@ ID and its SHA-256 code (shown on the document screen and the signature
 certificate) to confirm the document is authentic and see who signed it.
 
 == Changelog ==
+
+= 0.35.0 =
+* New: signing delegation ("assign to someone else"). When the sender enables it
+  for a document, a signer who shouldn't sign can hand their slot to another
+  person from the signing page. The handover issues a fresh signing link
+  (invalidating the original), resets the identity challenge so a shared access
+  code can't transfer, emails the new signer, adds them to the address book, and
+  records a "Delegated" event in the audit trail.
 
 = 0.34.0 =
 * New: address book. Signers are remembered per workspace as you add them, and

@@ -59,6 +59,9 @@ final class SigningController {
 		add_action( 'admin_post_nopriv_comsign_sign_decline', array( $this, 'handle_decline' ) );
 		add_action( 'admin_post_comsign_sign_decline', array( $this, 'handle_decline' ) );
 
+		add_action( 'admin_post_nopriv_comsign_sign_delegate', array( $this, 'handle_delegate' ) );
+		add_action( 'admin_post_comsign_sign_delegate', array( $this, 'handle_delegate' ) );
+
 		add_action( 'admin_post_nopriv_comsign_sign_view', array( $this, 'handle_view_document' ) );
 		add_action( 'admin_post_comsign_sign_view', array( $this, 'handle_view_document' ) );
 
@@ -186,6 +189,8 @@ final class SigningController {
 			'signer'          => $signer,
 			'raw_token'       => $raw_token,
 			'nonce'           => $nonce,
+			'delegate_nonce'  => wp_create_nonce( 'comsign_delegate_' . $signer->id ),
+			'can_delegate'    => ! empty( $document->allow_delegation ),
 			'view_url'        => $view_url,
 			'post_url'        => $post_url,
 			'needs_signature' => $needs_signature,
@@ -489,6 +494,41 @@ final class SigningController {
 		$this->render_message(
 			__( 'Signing declined', 'comsign' ),
 			__( 'You have declined to sign this document. The sender has been notified.', 'comsign' )
+		);
+	}
+
+	/**
+	 * Reassign this signing slot to someone else (delegation).
+	 */
+	public function handle_delegate(): void {
+		$raw_token = isset( $_POST['token'] ) ? sanitize_text_field( wp_unslash( $_POST['token'] ) ) : ''; // phpcs:ignore WordPress.Security.NonceVerification.Missing
+		$signer    = $this->resolve_signer( $raw_token );
+
+		if ( ! $signer ) {
+			$this->render_message( __( 'Invalid link', 'comsign' ), __( 'This signing link is no longer valid.', 'comsign' ) );
+		}
+
+		check_admin_referer( 'comsign_delegate_' . $signer->id );
+
+		$document = $this->documents->find( (int) $signer->document_id );
+		if ( ! $document ) {
+			$this->render_message( __( 'Document unavailable', 'comsign' ), __( 'The document could not be found.', 'comsign' ) );
+		}
+
+		$name  = isset( $_POST['delegate_name'] ) ? sanitize_text_field( wp_unslash( $_POST['delegate_name'] ) ) : '';
+		$email = isset( $_POST['delegate_email'] ) ? sanitize_email( wp_unslash( $_POST['delegate_email'] ) ) : '';
+		$phone = isset( $_POST['delegate_phone'] ) ? sanitize_text_field( wp_unslash( $_POST['delegate_phone'] ) ) : '';
+
+		try {
+			$this->service->delegate_signer( $document, $signer, $name, $email, $phone );
+		} catch ( \Throwable $e ) {
+			$this->render_message( __( 'Could not reassign', 'comsign' ), $e->getMessage() );
+		}
+
+		$this->render_message(
+			__( 'Assigned to someone else', 'comsign' ),
+			__( 'Thank you. We have emailed the document to the person you chose, and your access to this link has ended.', 'comsign' ),
+			'success'
 		);
 	}
 

@@ -149,6 +149,31 @@ require __DIR__ . '/partials/header.php';
 			<p><textarea name="reason" id="comsign-reason" class="comsign-input" rows="3"></textarea></p>
 			<button type="submit" class="comsign-btn comsign-btn--danger"><?php esc_html_e( 'Confirm decline', 'comsign' ); ?></button>
 		</form>
+
+		<?php if ( ! empty( $can_delegate ) ) : ?>
+			<details class="comsign-card comsign-delegate">
+				<summary><?php esc_html_e( 'Someone else should sign this', 'comsign' ); ?></summary>
+				<form method="post" action="<?php echo esc_url( $post_url ); ?>">
+					<input type="hidden" name="action" value="comsign_sign_delegate">
+					<input type="hidden" name="token" value="<?php echo esc_attr( $raw_token ); ?>">
+					<input type="hidden" name="_wpnonce" value="<?php echo esc_attr( $delegate_nonce ); ?>">
+					<p class="comsign-intro"><?php esc_html_e( 'We will email the document to the person you choose, and your access to this link will end.', 'comsign' ); ?></p>
+					<p>
+						<label for="comsign-delegate-name"><?php esc_html_e( 'Full name', 'comsign' ); ?></label>
+						<input type="text" id="comsign-delegate-name" name="delegate_name" class="comsign-input" required>
+					</p>
+					<p>
+						<label for="comsign-delegate-email"><?php esc_html_e( 'Email', 'comsign' ); ?></label>
+						<input type="email" id="comsign-delegate-email" name="delegate_email" class="comsign-input" required>
+					</p>
+					<p>
+						<label for="comsign-delegate-phone"><?php esc_html_e( 'Phone (optional)', 'comsign' ); ?></label>
+						<input type="text" id="comsign-delegate-phone" name="delegate_phone" class="comsign-input">
+					</p>
+					<button type="submit" class="comsign-btn comsign-btn--ghost"><?php esc_html_e( 'Assign to this person', 'comsign' ); ?></button>
+				</form>
+			</details>
+		<?php endif; ?>
 	</main>
 
 	<script src="<?php echo esc_url( COMSIGN_PLUGIN_URL . 'assets/vendor/signature_pad/signature_pad.umd.min.js?ver=4.1.7' ); ?>"></script>

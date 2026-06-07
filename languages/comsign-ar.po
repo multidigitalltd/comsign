@@ -116,6 +116,9 @@ msgstr "وقّع جميع الأطراف. ملف PDF الموقّع وتفاصي
 msgid "All statuses"
 msgstr "كل الحالات"
 
+msgid "Allow signers to assign someone else"
+msgstr "السماح للموقّعين بإحالة التوقيع إلى شخص آخر"
+
 msgid "Already signed"
 msgstr "موقّع بالفعل"
 
@@ -124,6 +127,12 @@ msgstr "التحليلات"
 
 msgid "Assign a recipient to each role. The document is created as a draft so you can review it before sending."
 msgstr "عيّن مستلمًا لكل دور. يُنشأ المستند كمسودة لتتمكن من مراجعته قبل الإرسال."
+
+msgid "Assign to this person"
+msgstr "إحالة إلى هذا الشخص"
+
+msgid "Assigned to someone else"
+msgstr "تمت الإحالة إلى شخص آخر"
 
 msgid "At least one signer added"
 msgstr "تمت إضافة موقّع واحد على الأقل"
@@ -293,6 +302,9 @@ msgstr "تعذّر إنشاء ملف PDF للمستند."
 msgid "Could not load the document preview."
 msgstr "تعذّر تحميل معاينة المستند."
 
+msgid "Could not reassign"
+msgstr "تعذّرت الإحالة"
+
 msgid "Could not store the uploaded file."
 msgstr "تعذّر حفظ الملف المرفوع."
 
@@ -334,6 +346,9 @@ msgstr "مرفوض"
 
 msgid "Default workspace"
 msgstr "مساحة العمل الافتراضية"
+
+msgid "Delegated"
+msgstr "تمت الإحالة"
 
 msgid "Delete"
 msgstr "حذف"
@@ -869,6 +884,9 @@ msgstr "يرجى تقديم مستلم لكل دور يحتوي على حقول.
 msgid "Please provide a sub-workspace name."
 msgstr "يرجى تقديم اسم لمساحة العمل الفرعية."
 
+msgid "Please provide a valid email address for the new signer."
+msgstr "يرجى تقديم عنوان بريد إلكتروني صالح للموقّع الجديد."
+
 msgid "Please provide a valid email address."
 msgstr "يرجى تقديم عنوان بريد إلكتروني صالح."
 
@@ -877,6 +895,9 @@ msgstr "يرجى تقديم بريد إلكتروني ودور صالحين."
 
 msgid "Please provide at least one recipient."
 msgstr "يرجى تقديم مستلم واحد على الأقل."
+
+msgid "Please provide the new signer’s name."
+msgstr "يرجى تقديم اسم الموقّع الجديد."
 
 msgid "Please sign in"
 msgstr "يرجى تسجيل الدخول"
@@ -1160,6 +1181,9 @@ msgstr "انتقل إلى المحتوى"
 msgid "Some invitations could not be sent: %s. Please check your site email settings and re-send."
 msgstr "تعذّر إرسال بعض الدعوات: %s. يرجى التحقق من إعدادات بريد موقعك وإعادة الإرسال."
 
+msgid "Someone else should sign this"
+msgstr "يجب أن يوقّع هذا شخص آخر"
+
 msgid "Status"
 msgstr "الحالة"
 
@@ -1210,6 +1234,9 @@ msgstr "نص"
 
 msgid "Thank you — your signature has been recorded. The document will be completed once the remaining participants have signed."
 msgstr "شكرًا لك — تم تسجيل توقيعك. سيكتمل المستند بمجرد توقيع باقي المشاركين."
+
+msgid "Thank you. We have emailed the document to the person you chose, and your access to this link has ended."
+msgstr "شكرًا لك. أرسلنا المستند بالبريد إلى الشخص الذي اخترته، وانتهى وصولك إلى هذا الرابط."
 
 msgid "That code was not correct. Please try again."
 msgstr "الرمز غير صحيح. يرجى المحاولة مرة أخرى."
@@ -1280,6 +1307,9 @@ msgstr "يتلقى هؤلاء الأشخاص ملف PDF الموقّع بالك�
 msgid "These signers have no fields yet: %s. Open \\\"Place signature fields\\\"."
 msgstr "هؤلاء الموقّعون ليس لديهم حقول بعد: %s. افتح \\\"وضع حقول التوقيع\\\"."
 
+msgid "This document does not allow assigning to someone else."
+msgstr "لا يسمح هذا المستند بالإحالة إلى شخص آخر."
+
 msgid "This document does not exist in your workspace."
 msgstr "هذا المستند غير موجود في مساحة عملك."
 
@@ -1306,6 +1336,9 @@ msgstr "هذا الرابط شخصي ويحل محل أي رابط سبق إصد
 
 msgid "This link is personal — please do not forward it."
 msgstr "هذا الرابط شخصي — يرجى عدم إعادة توجيهه."
+
+msgid "This signer can no longer be reassigned."
+msgstr "لم يعد بالإمكان إعادة تعيين هذا الموقّع."
 
 msgid "This signer has no email. Share the signing link instead."
 msgstr "ليس لدى هذا الموقّع بريد إلكتروني. شارك رابط التوقيع بدلًا من ذلك."
@@ -1438,6 +1471,9 @@ msgstr "تحذير"
 
 msgid "We sent a one-time code to %s. Enter it below to continue."
 msgstr "أرسلنا رمزًا لمرة واحدة إلى %s. أدخله أدناه للمتابعة."
+
+msgid "We will email the document to the person you choose, and your access to this link will end."
+msgstr "سنرسل المستند بالبريد إلى الشخص الذي تختاره، وسينتهي وصولك إلى هذا الرابط."
 
 msgid "Webhook URL"
 msgstr "عنوان webhook"

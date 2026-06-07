@@ -30,6 +30,7 @@ final class AuditLogger {
 	public const EVENT_REMINDED    = 'reminded';
 	public const EVENT_EXPIRED     = 'expired';
 	public const EVENT_EXPIRY_EXTENDED = 'expiry_extended';
+	public const EVENT_DELEGATED   = 'delegated';
 
 	private AuditRepository $repository;
 
@@ -52,6 +53,7 @@ final class AuditLogger {
 			self::EVENT_REMINDED        => __( 'Reminder sent', 'comsign' ),
 			self::EVENT_EXPIRED         => __( 'Expired', 'comsign' ),
 			self::EVENT_EXPIRY_EXTENDED => __( 'Expiry extended', 'comsign' ),
+			self::EVENT_DELEGATED       => __( 'Delegated', 'comsign' ),
 		);
 		return $labels[ $event ] ?? ucfirst( str_replace( '_', ' ', $event ) );
 	}

@@ -222,6 +222,84 @@ final class DocumentService {
 	}
 
 	/**
+	 * Reassign a signer's slot to someone else ("assign to another person").
+	 *
+	 * Authorised by the caller holding the current signing token. Issues a fresh
+	 * token (invalidating the previous holder's link), resets the identity
+	 * challenge (a shared access code cannot transfer to a new person), captures
+	 * the new contact, emails the new signer, and records a 'delegated' event.
+	 *
+	 * @param object $document Document row (must allow delegation).
+	 * @param object $signer   Signer being reassigned.
+	 * @param string $name     New signer name.
+	 * @param string $email    New signer email (required — that's how they're invited).
+	 * @param string $phone    Optional phone.
+	 *
+	 * @throws \RuntimeException On invalid input or a non-delegable signer.
+	 */
+	public function delegate_signer( object $document, object $signer, string $name, string $email, string $phone = '' ): void {
+		if ( empty( $document->allow_delegation ) ) {
+			throw new \RuntimeException( __( 'This document does not allow assigning to someone else.', 'comsign' ) );
+		}
+		if ( in_array( $signer->status, array( SignerRepository::STATUS_SIGNED, SignerRepository::STATUS_DECLINED ), true ) ) {
+			throw new \RuntimeException( __( 'This signer can no longer be reassigned.', 'comsign' ) );
+		}
+
+		$name  = trim( $name );
+		$email = sanitize_email( $email );
+		if ( '' === $email || ! is_email( $email ) ) {
+			throw new \RuntimeException( __( 'Please provide a valid email address for the new signer.', 'comsign' ) );
+		}
+		if ( '' === $name ) {
+			throw new \RuntimeException( __( 'Please provide the new signer’s name.', 'comsign' ) );
+		}
+
+		$old_email = (string) $signer->email;
+
+		// Preserve an email-OTP requirement (it works for any address); a shared
+		// access code can't be known by the delegate, so it falls back to none.
+		$new_auth = ( \ComSign\Frontend\SignerAuth::METHOD_OTP === (string) ( $signer->auth_method ?? '' ) )
+			? \ComSign\Frontend\SignerAuth::METHOD_OTP
+			: \ComSign\Frontend\SignerAuth::METHOD_NONE;
+
+		$raw = Tokens::generate();
+		$this->signers->update(
+			(int) $signer->id,
+			array(
+				'name'           => $name,
+				'email'          => $email,
+				'phone'          => $phone,
+				'token_hash'     => Tokens::hash( $raw ),
+				'status'         => SignerRepository::STATUS_PENDING,
+				'auth_method'    => $new_auth,
+				'auth_code_hash' => '',
+			)
+		);
+
+		// Drop any verified session / OTP / lockout left by the previous holder.
+		delete_transient( 'comsign_otp_' . (int) $signer->id );
+		delete_transient( 'comsign_authfail_' . (int) $signer->id );
+
+		// Remember the new signer in the account address book.
+		$this->contacts->upsert( (int) ( $document->account_id ?? 0 ), $name, $email, $phone );
+
+		$this->audit->record(
+			AuditLogger::EVENT_DELEGATED,
+			(int) $document->id,
+			(int) $signer->id,
+			array( 'from' => $old_email, 'to' => $email )
+		);
+
+		$fresh = $this->signers->find( (int) $signer->id );
+		if ( $fresh ) {
+			$sent = $this->mailer->send_invitation( $document, $fresh, $this->signing_url( $raw ) );
+			if ( ! $sent ) {
+				$this->audit->record( AuditLogger::EVENT_SEND_FAILED, (int) $document->id, (int) $signer->id, array( 'email' => $email, 'channel' => 'delegate' ) );
+			}
+		}
+	}
+
+	/**
 	 * Whether a document's signing window has expired.
 	 *
 	 * @param object $document Document row.
@@ -964,8 +1042,9 @@ final class DocumentService {
 		$this->documents->update(
 			$document_id,
 			array(
-				'sequential' => $sequential ? 1 : 0,
-				'message'    => isset( $options['message'] ) ? (string) $options['message'] : '',
+				'sequential'       => $sequential ? 1 : 0,
+				'allow_delegation' => ! empty( $options['allow_delegation'] ) ? 1 : 0,
+				'message'          => isset( $options['message'] ) ? (string) $options['message'] : '',
 			)
 		);
 		$this->documents->set_expiry( $document_id, $expires_at );

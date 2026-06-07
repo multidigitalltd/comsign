@@ -116,6 +116,9 @@ msgstr "Все стороны подписали. Подписанный PDF и 
 msgid "All statuses"
 msgstr "Все статусы"
 
+msgid "Allow signers to assign someone else"
+msgstr "Разрешить подписантам передавать подписание другому"
+
 msgid "Already signed"
 msgstr "Уже подписано"
 
@@ -124,6 +127,12 @@ msgstr "Аналитика"
 
 msgid "Assign a recipient to each role. The document is created as a draft so you can review it before sending."
 msgstr "Назначьте получателя на каждую роль. Документ создаётся как черновик, чтобы вы могли проверить его перед отправкой."
+
+msgid "Assign to this person"
+msgstr "Передать этому человеку"
+
+msgid "Assigned to someone else"
+msgstr "Передано другому человеку"
 
 msgid "At least one signer added"
 msgstr "Добавлен хотя бы один подписант"
@@ -293,6 +302,9 @@ msgstr "Не удалось создать PDF документа."
 msgid "Could not load the document preview."
 msgstr "Не удалось загрузить предпросмотр документа."
 
+msgid "Could not reassign"
+msgstr "Не удалось передать"
+
 msgid "Could not store the uploaded file."
 msgstr "Не удалось сохранить загруженный файл."
 
@@ -334,6 +346,9 @@ msgstr "Отклонено"
 
 msgid "Default workspace"
 msgstr "Рабочее пространство по умолчанию"
+
+msgid "Delegated"
+msgstr "Передано"
 
 msgid "Delete"
 msgstr "Удалить"
@@ -869,6 +884,9 @@ msgstr "Пожалуйста, укажите получателя для каж�
 msgid "Please provide a sub-workspace name."
 msgstr "Пожалуйста, укажите название под-пространства."
 
+msgid "Please provide a valid email address for the new signer."
+msgstr "Укажите корректный email нового подписанта."
+
 msgid "Please provide a valid email address."
 msgstr "Пожалуйста, укажите корректный email."
 
@@ -877,6 +895,9 @@ msgstr "Пожалуйста, укажите корректные email и ро�
 
 msgid "Please provide at least one recipient."
 msgstr "Пожалуйста, укажите хотя бы одного получателя."
+
+msgid "Please provide the new signer’s name."
+msgstr "Укажите имя нового подписанта."
 
 msgid "Please sign in"
 msgstr "Пожалуйста, войдите"
@@ -1160,6 +1181,9 @@ msgstr "Перейти к содержимому"
 msgid "Some invitations could not be sent: %s. Please check your site email settings and re-send."
 msgstr "Некоторые приглашения не удалось отправить: %s. Проверьте настройки почты сайта и отправьте повторно."
 
+msgid "Someone else should sign this"
+msgstr "Это должен подписать кто-то другой"
+
 msgid "Status"
 msgstr "Статус"
 
@@ -1210,6 +1234,9 @@ msgstr "Текст"
 
 msgid "Thank you — your signature has been recorded. The document will be completed once the remaining participants have signed."
 msgstr "Спасибо — ваша подпись зафиксирована. Документ будет завершён, как только подпишут остальные участники."
+
+msgid "Thank you. We have emailed the document to the person you chose, and your access to this link has ended."
+msgstr "Спасибо. Мы отправили документ выбранному вами человеку по email, и ваш доступ к этой ссылке завершён."
 
 msgid "That code was not correct. Please try again."
 msgstr "Код неверен. Пожалуйста, попробуйте снова."
@@ -1280,6 +1307,9 @@ msgstr "Эти люди получают полностью подписанны
 msgid "These signers have no fields yet: %s. Open \\\"Place signature fields\\\"."
 msgstr "У этих подписантов пока нет полей: %s. Откройте \\\"Разместить поля подписи\\\"."
 
+msgid "This document does not allow assigning to someone else."
+msgstr "Этот документ не разрешает передачу другому человеку."
+
 msgid "This document does not exist in your workspace."
 msgstr "Этого документа нет в вашем рабочем пространстве."
 
@@ -1306,6 +1336,9 @@ msgstr "Эта ссылка персональная и заменяет люб�
 
 msgid "This link is personal — please do not forward it."
 msgstr "Эта ссылка персональная — пожалуйста, не пересылайте её."
+
+msgid "This signer can no longer be reassigned."
+msgstr "Этого подписанта больше нельзя переназначить."
 
 msgid "This signer has no email. Share the signing link instead."
 msgstr "У этого подписанта нет email. Вместо этого поделитесь ссылкой для подписания."
@@ -1438,6 +1471,9 @@ msgstr "Предупреждение"
 
 msgid "We sent a one-time code to %s. Enter it below to continue."
 msgstr "Мы отправили одноразовый код на %s. Введите его ниже, чтобы продолжить."
+
+msgid "We will email the document to the person you choose, and your access to this link will end."
+msgstr "Мы отправим документ выбранному вами человеку по email, и ваш доступ к этой ссылке завершится."
 
 msgid "Webhook URL"
 msgstr "URL webhook"

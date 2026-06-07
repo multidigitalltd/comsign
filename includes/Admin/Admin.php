@@ -807,9 +807,10 @@ final class Admin {
 		}
 
 		$options = array(
-			'sequential'  => ! empty( $_POST['sequential'] ),
-			'message'     => isset( $_POST['message'] ) ? sanitize_textarea_field( wp_unslash( $_POST['message'] ) ) : '',
-			'expiry_days' => isset( $_POST['expiry_days'] ) ? absint( wp_unslash( $_POST['expiry_days'] ) ) : 0,
+			'sequential'       => ! empty( $_POST['sequential'] ),
+			'allow_delegation' => ! empty( $_POST['allow_delegation'] ),
+			'message'          => isset( $_POST['message'] ) ? sanitize_textarea_field( wp_unslash( $_POST['message'] ) ) : '',
+			'expiry_days'      => isset( $_POST['expiry_days'] ) ? absint( wp_unslash( $_POST['expiry_days'] ) ) : 0,
 		);
 
 		try {

@@ -120,6 +120,7 @@ final class Installer {
 			title VARCHAR(255) NOT NULL DEFAULT '',
 			status VARCHAR(20) NOT NULL DEFAULT 'draft',
 			sequential TINYINT(1) NOT NULL DEFAULT 0,
+			allow_delegation TINYINT(1) NOT NULL DEFAULT 0,
 			message TEXT NULL,
 			cc_emails TEXT NULL,
 			expires_at DATETIME DEFAULT NULL,

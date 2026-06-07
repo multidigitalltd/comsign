@@ -368,6 +368,12 @@ foreach ( $signers as $signer ) {
 						</label>
 					</p>
 					<p>
+						<label>
+							<input type="checkbox" name="allow_delegation" value="1" <?php checked( ! empty( $document->allow_delegation ) ); ?>>
+							<?php esc_html_e( 'Allow signers to assign someone else', 'comsign' ); ?>
+						</label>
+					</p>
+					<p>
 						<label for="comsign-expiry"><?php esc_html_e( 'Link expires after', 'comsign' ); ?></label>
 						<input type="number" id="comsign-expiry" name="expiry_days" min="0" max="365" value="0" style="width:70px;">
 						<?php esc_html_e( 'days (0 = never)', 'comsign' ); ?>

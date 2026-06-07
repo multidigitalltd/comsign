@@ -532,3 +532,15 @@ body.comsign-public {
 	border-radius: var( --comsign-radius-sm, 6px );
 }
 .comsign-portal-filter select { min-height: 40px; }
+
+/* ---- Delegation (assign to someone else) (0.35.0) ---- */
+.comsign-delegate > summary {
+	cursor: pointer;
+	font-weight: 600;
+	list-style: revert;
+}
+.comsign-delegate > summary:focus-visible {
+	outline: 2px solid var( --comsign-focus, #2563eb );
+	outline-offset: 2px;
+	border-radius: var( --comsign-radius-sm, 6px );
+}
