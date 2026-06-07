@@ -4,7 +4,7 @@ Tags: signature, digital signature, pdf, esignature, hebrew
 Requires at least: 6.0
 Tested up to: 6.5
 Requires PHP: 7.4
-Stable tag: 0.27.0
+Stable tag: 0.27.1
 License: GPL-2.0-or-later
 License URI: https://www.gnu.org/licenses/gpl-2.0.html
 
@@ -105,6 +105,14 @@ ID and its SHA-256 code (shown on the document screen and the signature
 certificate) to confirm the document is authentic and see who signed it.
 
 == Changelog ==
+
+= 0.27.1 =
+* Packaging: trimmed the bundled TCPDF font set to the DejaVu Sans family
+  (regular/bold/italic, which carry the Hebrew glyphs) plus the standard core
+  fonts, dropping ~21 MB of unused font families. The plugin ZIP is now small
+  enough to upload on hosts with a low upload_max_filesize, which was causing
+  "corrupted/incompatible archive" errors during install. Hebrew, bold and
+  italic rendering verified in both the composed-PDF and signed-PDF pipelines.
 
 = 0.27.0 =
 * Dev: added a committed integration-test suite that boots a real WordPress
