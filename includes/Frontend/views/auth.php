@@ -20,7 +20,7 @@ use ComSign\Frontend\SignerAuth;
 $page_title = __( 'Verify your identity', 'comsign' );
 require __DIR__ . '/partials/header.php';
 ?>
-	<main class="comsign-card comsign-auth">
+	<main id="comsign-main" tabindex="-1" class="comsign-card comsign-auth">
 		<h1><?php esc_html_e( 'Verify your identity', 'comsign' ); ?></h1>
 
 		<?php if ( SignerAuth::METHOD_OTP === $method ) : ?>

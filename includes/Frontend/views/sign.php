@@ -21,7 +21,7 @@ $page_title = sprintf(
 );
 require __DIR__ . '/partials/header.php';
 ?>
-	<main class="comsign-sign">
+	<main id="comsign-main" tabindex="-1" class="comsign-sign">
 		<h1><?php echo esc_html( $document->title ?: __( 'Document', 'comsign' ) ); ?></h1>
 		<p class="comsign-intro">
 			<?php

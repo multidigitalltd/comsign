@@ -345,6 +345,7 @@ foreach ( $signers as $signer ) {
 							<?php foreach ( $readiness['items'] as $item ) : ?>
 								<li class="<?php echo $item['ok'] ? 'ok' : 'todo'; ?>">
 									<span class="comsign-readiness-mark" aria-hidden="true"><?php echo $item['ok'] ? '✓' : '○'; ?></span>
+									<span class="comsign-sr-only"><?php echo $item['ok'] ? esc_html__( 'Done:', 'comsign' ) : esc_html__( 'To do:', 'comsign' ); ?></span>
 									<?php echo esc_html( $item['label'] ); ?>
 									<?php if ( ! $item['ok'] ) : ?>
 										<span class="comsign-readiness-hint"><?php echo esc_html( $item['hint'] ); ?></span>

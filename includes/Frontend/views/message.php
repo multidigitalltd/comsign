@@ -14,7 +14,7 @@ defined( 'ABSPATH' ) || exit;
 $page_title = $title;
 require __DIR__ . '/partials/header.php';
 ?>
-	<main class="comsign-card comsign-message comsign-message--<?php echo esc_attr( $type ); ?>">
+	<main id="comsign-main" tabindex="-1" class="comsign-card comsign-message comsign-message--<?php echo esc_attr( $type ); ?>">
 		<h1><?php echo esc_html( $title ); ?></h1>
 		<p><?php echo esc_html( $message ); ?></p>
 	</main>

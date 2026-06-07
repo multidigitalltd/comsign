@@ -205,9 +205,15 @@ final class Admin {
 		}
 
 		wp_enqueue_style(
+			'comsign-tokens',
+			COMSIGN_PLUGIN_URL . 'assets/css/tokens.css',
+			array(),
+			COMSIGN_VERSION
+		);
+		wp_enqueue_style(
 			'comsign-admin',
 			COMSIGN_PLUGIN_URL . 'assets/css/admin.css',
-			array(),
+			array( 'comsign-tokens' ),
 			COMSIGN_VERSION
 		);
 

@@ -24,7 +24,7 @@ defined( 'ABSPATH' ) || exit;
 require __DIR__ . '/partials/header.php';
 require __DIR__ . '/partials/portal-nav.php';
 ?>
-	<main class="comsign-portal">
+	<main id="comsign-main" tabindex="-1" class="comsign-portal">
 		<p><a href="<?php echo esc_url( \ComSign\Frontend\PortalController::url( array( 'view' => 'documents' ) ) ); ?>">&larr; <?php esc_html_e( 'Back to documents', 'comsign' ); ?></a></p>
 
 		<h1><?php echo esc_html( $document->title ? $document->title : __( '(untitled)', 'comsign' ) ); ?></h1>
@@ -53,6 +53,7 @@ require __DIR__ . '/partials/portal-nav.php';
 					<?php foreach ( $readiness['items'] as $item ) : ?>
 						<li class="<?php echo $item['ok'] ? 'ok' : 'todo'; ?>">
 							<span class="comsign-readiness-mark" aria-hidden="true"><?php echo $item['ok'] ? '✓' : '○'; ?></span>
+							<span class="comsign-sr-only"><?php echo $item['ok'] ? esc_html__( 'Done:', 'comsign' ) : esc_html__( 'To do:', 'comsign' ); ?></span>
 							<?php echo esc_html( $item['label'] ); ?>
 							<?php if ( ! $item['ok'] ) : ?>
 								<span class="comsign-readiness-hint"><?php echo esc_html( $item['hint'] ); ?></span>

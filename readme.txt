@@ -4,7 +4,7 @@ Tags: signature, digital signature, pdf, esignature, hebrew
 Requires at least: 6.0
 Tested up to: 6.5
 Requires PHP: 7.4
-Stable tag: 0.24.0
+Stable tag: 0.25.0
 License: GPL-2.0-or-later
 License URI: https://www.gnu.org/licenses/gpl-2.0.html
 
@@ -105,6 +105,19 @@ ID and its SHA-256 code (shown on the document screen and the signature
 certificate) to confirm the document is authentic and see who signed it.
 
 == Changelog ==
+
+= 0.25.0 =
+* New: a shared design-tokens stylesheet (tokens.css) loaded on every ComSign
+  surface - admin screens and the public/portal pages - giving one palette,
+  spacing scale, radius, shadow and focus treatment. Recent components now
+  consume the tokens so the look stays consistent.
+* Accessibility: visible keyboard focus rings (focus-visible), a
+  "Skip to content" link on public pages, screen-reader status text on the
+  readiness checklist, reduced-motion support, and a screen-reader-only
+  utility class.
+* Accessibility: the Add Document tabs are now a proper ARIA tablist with
+  aria-selected/aria-controls, tabpanels, roving tabindex and arrow-key
+  navigation; portal nav marks the current page with aria-current.
 
 = 0.24.0 =
 * New: senders can now create and send documents from the client portal, not

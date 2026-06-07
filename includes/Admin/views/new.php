@@ -24,12 +24,12 @@ defined( 'ABSPATH' ) || exit;
 		<li><span class="comsign-step-n">4</span><?php esc_html_e( 'Review &amp; send', 'comsign' ); ?></li>
 	</ol>
 
-	<div class="comsign-tabs comsign-admin-tabs" role="tablist">
-		<button type="button" class="comsign-tab is-active" data-tab="upload" role="tab"><?php esc_html_e( 'Upload a PDF', 'comsign' ); ?></button>
-		<button type="button" class="comsign-tab" data-tab="compose" role="tab"><?php esc_html_e( 'Compose from text', 'comsign' ); ?></button>
+	<div class="comsign-tabs comsign-admin-tabs" role="tablist" aria-label="<?php esc_attr_e( 'How to add a document', 'comsign' ); ?>">
+		<button type="button" id="comsign-tab-upload" class="comsign-tab is-active" data-tab="upload" role="tab" aria-selected="true" aria-controls="comsign-panel-upload"><?php esc_html_e( 'Upload a PDF', 'comsign' ); ?></button>
+		<button type="button" id="comsign-tab-compose" class="comsign-tab" data-tab="compose" role="tab" aria-selected="false" aria-controls="comsign-panel-compose" tabindex="-1"><?php esc_html_e( 'Compose from text', 'comsign' ); ?></button>
 	</div>
 
-	<div class="comsign-tab-panel" data-panel="upload">
+	<div class="comsign-tab-panel" data-panel="upload" id="comsign-panel-upload" role="tabpanel" aria-labelledby="comsign-tab-upload" tabindex="0">
 		<form method="post" action="<?php echo esc_url( $action_url ); ?>" enctype="multipart/form-data" class="comsign-card">
 			<input type="hidden" name="action" value="comsign_create_document">
 			<input type="hidden" name="_wpnonce" value="<?php echo esc_attr( $nonce ); ?>">
@@ -47,7 +47,7 @@ defined( 'ABSPATH' ) || exit;
 		</form>
 	</div>
 
-	<div class="comsign-tab-panel is-hidden" data-panel="compose">
+	<div class="comsign-tab-panel is-hidden" data-panel="compose" id="comsign-panel-compose" role="tabpanel" aria-labelledby="comsign-tab-compose" tabindex="0">
 		<form method="post" action="<?php echo esc_url( $action_url ); ?>" class="comsign-card">
 			<input type="hidden" name="action" value="comsign_create_text">
 			<input type="hidden" name="_wpnonce" value="<?php echo esc_attr( $compose_nonce ); ?>">

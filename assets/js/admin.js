@@ -38,17 +38,48 @@
 		} );
 	} );
 
-	// Tab switching (Add Document screen).
-	var tabs = document.querySelectorAll( '.comsign-admin-tabs .comsign-tab' );
-	tabs.forEach( function ( tab ) {
+	// Tab switching (Add Document screen) with ARIA state + keyboard support.
+	var tabs = Array.prototype.slice.call(
+		document.querySelectorAll( '.comsign-admin-tabs .comsign-tab' )
+	);
+
+	function activateTab( tab, setFocus ) {
+		var target = tab.getAttribute( 'data-tab' );
+		tabs.forEach( function ( t ) {
+			var active = t === tab;
+			t.classList.toggle( 'is-active', active );
+			t.setAttribute( 'aria-selected', active ? 'true' : 'false' );
+			t.setAttribute( 'tabindex', active ? '0' : '-1' );
+		} );
+		document.querySelectorAll( '.comsign-tab-panel' ).forEach( function ( panel ) {
+			panel.classList.toggle( 'is-hidden', panel.getAttribute( 'data-panel' ) !== target );
+		} );
+		if ( setFocus ) {
+			tab.focus();
+		}
+	}
+
+	tabs.forEach( function ( tab, index ) {
 		tab.addEventListener( 'click', function () {
-			var target = tab.getAttribute( 'data-tab' );
-			tabs.forEach( function ( t ) {
-				t.classList.toggle( 'is-active', t === tab );
-			} );
-			document.querySelectorAll( '.comsign-tab-panel' ).forEach( function ( panel ) {
-				panel.classList.toggle( 'is-hidden', panel.getAttribute( 'data-panel' ) !== target );
-			} );
+			activateTab( tab, false );
+		} );
+
+		// Left/Right arrows move between tabs; Home/End jump to the ends.
+		tab.addEventListener( 'keydown', function ( e ) {
+			var next = null;
+			if ( 'ArrowRight' === e.key || 'ArrowDown' === e.key ) {
+				next = tabs[ ( index + 1 ) % tabs.length ];
+			} else if ( 'ArrowLeft' === e.key || 'ArrowUp' === e.key ) {
+				next = tabs[ ( index - 1 + tabs.length ) % tabs.length ];
+			} else if ( 'Home' === e.key ) {
+				next = tabs[ 0 ];
+			} else if ( 'End' === e.key ) {
+				next = tabs[ tabs.length - 1 ];
+			}
+			if ( next ) {
+				e.preventDefault();
+				activateTab( next, true );
+			}
 		} );
 	} );
 } )();

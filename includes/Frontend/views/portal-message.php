@@ -14,7 +14,7 @@ defined( 'ABSPATH' ) || exit;
 
 require __DIR__ . '/partials/header.php';
 ?>
-	<main class="comsign-card comsign-message">
+	<main id="comsign-main" tabindex="-1" class="comsign-card comsign-message">
 		<h1><?php echo esc_html( $heading ); ?></h1>
 		<p><?php echo esc_html( $message ); ?></p>
 		<?php if ( ! empty( $login_url ) ) : ?>

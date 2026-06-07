@@ -10,11 +10,11 @@
 
 defined( 'ABSPATH' ) || exit;
 ?>
-<nav class="comsign-portal-nav">
+<nav class="comsign-portal-nav" aria-label="<?php esc_attr_e( 'Workspace', 'comsign' ); ?>">
 	<ul class="comsign-portal-links">
 		<?php foreach ( $nav as $link ) : ?>
 			<li>
-				<a href="<?php echo esc_url( $link['url'] ); ?>" class="<?php echo $link['active'] ? 'is-active' : ''; ?>">
+				<a href="<?php echo esc_url( $link['url'] ); ?>" class="<?php echo $link['active'] ? 'is-active' : ''; ?>"<?php echo $link['active'] ? ' aria-current="page"' : ''; ?>>
 					<?php echo esc_html( $link['label'] ); ?>
 				</a>
 			</li>

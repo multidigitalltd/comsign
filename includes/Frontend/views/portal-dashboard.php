@@ -16,7 +16,7 @@ defined( 'ABSPATH' ) || exit;
 require __DIR__ . '/partials/header.php';
 require __DIR__ . '/partials/portal-nav.php';
 ?>
-	<main class="comsign-portal">
+	<main id="comsign-main" tabindex="-1" class="comsign-portal">
 		<h1><?php esc_html_e( 'Your workspace', 'comsign' ); ?></h1>
 
 		<div class="comsign-portal-cards">
