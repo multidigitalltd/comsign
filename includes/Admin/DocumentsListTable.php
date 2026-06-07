@@ -60,9 +60,19 @@ final class DocumentsListTable extends \WP_List_Table {
 	public function prepare_items(): void {
 		$per_page     = 20;
 		$current_page = $this->get_pagenum();
-		$total        = $this->documents->count_for_accounts( $this->account_ids );
 
-		$this->items = $this->documents->paginate_for_accounts( $this->account_ids, $per_page, ( $current_page - 1 ) * $per_page );
+		// Search + status filter (the list page verifies the page nonce/cap).
+		// phpcs:disable WordPress.Security.NonceVerification.Recommended
+		$search = isset( $_REQUEST['s'] ) ? sanitize_text_field( wp_unslash( $_REQUEST['s'] ) ) : '';
+		$status = isset( $_REQUEST['status'] ) ? sanitize_key( wp_unslash( $_REQUEST['status'] ) ) : '';
+		// phpcs:enable WordPress.Security.NonceVerification.Recommended
+		if ( ! in_array( $status, $this->filterable_statuses(), true ) ) {
+			$status = '';
+		}
+
+		$total = $this->documents->count_for_accounts( $this->account_ids, $search, $status );
+
+		$this->items = $this->documents->paginate_for_accounts( $this->account_ids, $per_page, ( $current_page - 1 ) * $per_page, $search, $status );
 
 		$this->set_pagination_args(
 			array(
@@ -73,6 +83,49 @@ final class DocumentsListTable extends \WP_List_Table {
 		);
 
 		$this->_column_headers = array( $this->get_columns(), array(), array() );
+	}
+
+	/**
+	 * Statuses offered in the filter dropdown.
+	 *
+	 * @return string[]
+	 */
+	private function filterable_statuses(): array {
+		return array(
+			DocumentRepository::STATUS_DRAFT,
+			DocumentRepository::STATUS_SENT,
+			DocumentRepository::STATUS_SIGNED,
+			DocumentRepository::STATUS_COMPLETED,
+			DocumentRepository::STATUS_DECLINED,
+		);
+	}
+
+	/**
+	 * Status filter dropdown above the table (left of the pagination).
+	 *
+	 * @param string $which 'top' or 'bottom'.
+	 */
+	protected function extra_tablenav( $which ): void {
+		if ( 'top' !== $which ) {
+			return;
+		}
+		// phpcs:ignore WordPress.Security.NonceVerification.Recommended
+		$current = isset( $_REQUEST['status'] ) ? sanitize_key( wp_unslash( $_REQUEST['status'] ) ) : '';
+		echo '<div class="alignleft actions">';
+		echo '<label class="screen-reader-text" for="comsign-filter-status">' . esc_html__( 'Filter by status', 'comsign' ) . '</label>';
+		echo '<select name="status" id="comsign-filter-status">';
+		echo '<option value="">' . esc_html__( 'All statuses', 'comsign' ) . '</option>';
+		foreach ( $this->filterable_statuses() as $st ) {
+			printf(
+				'<option value="%s" %s>%s</option>',
+				esc_attr( $st ),
+				selected( $current, $st, false ),
+				esc_html( self::status_label( $st ) )
+			);
+		}
+		echo '</select>';
+		submit_button( __( 'Filter', 'comsign' ), '', 'filter_action', false );
+		echo '</div>';
 	}
 
 	/**

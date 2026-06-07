@@ -10,7 +10,7 @@ msgstr ""
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
 "X-Domain: comsign\n"
 
-#: includes/Admin/DocumentsListTable.php:147
+#: includes/Admin/DocumentsListTable.php:200
 msgid "%1$d of %2$d signed"
 msgstr "%1$d מתוך %2$d חתמו"
 
@@ -34,7 +34,7 @@ msgstr "%s (עותק)"
 msgid "%s's workspace"
 msgstr "סביבת העבודה של %s"
 
-#: includes/Admin/DocumentsListTable.php:89
+#: includes/Admin/DocumentsListTable.php:142
 #: includes/Admin/views/analytics.php:93
 #: includes/Admin/views/edit.php:52
 #: includes/Admin/views/templates.php:47
@@ -185,6 +185,7 @@ msgstr "מנהל"
 msgid "All parties have signed. The signed PDF and verification details are available below."
 msgstr "כל הצדדים חתמו. קובץ ה-PDF החתום ופרטי האימות זמינים למטה."
 
+#: includes/Admin/DocumentsListTable.php:117
 #: includes/Frontend/views/portal-documents.php:43
 msgid "All statuses"
 msgstr "כל הסטטוסים"
@@ -371,7 +372,7 @@ msgstr "דוא“ל בדיקה מ-ComSign"
 msgid "ComSign: dependencies are missing. Please run \"composer install\" inside the plugin directory."
 msgstr "ComSign: חסרות תלויות. יש להריץ \"composer install\" בתיקיית התוסף."
 
-#: includes/Admin/DocumentsListTable.php:179
+#: includes/Admin/DocumentsListTable.php:232
 #: includes/Admin/views/analytics.php:26
 #: includes/Audit/AuditLogger.php:48
 msgid "Completed"
@@ -501,7 +502,7 @@ msgstr "תאריך (אוטומטי)"
 msgid "Decline to sign"
 msgstr "סירוב לחתום"
 
-#: includes/Admin/DocumentsListTable.php:180
+#: includes/Admin/DocumentsListTable.php:233
 #: includes/Admin/views/analytics.php:27
 #: includes/Audit/AuditLogger.php:49
 msgid "Declined"
@@ -664,7 +665,7 @@ msgstr "הורדת PDF חתום"
 msgid "Downloaded"
 msgstr "הורד"
 
-#: includes/Admin/DocumentsListTable.php:175
+#: includes/Admin/DocumentsListTable.php:228
 #: includes/Admin/views/analytics.php:22
 msgid "Draft"
 msgstr "טיוטה"
@@ -686,7 +687,7 @@ msgstr "ציור"
 msgid "Drawing area for your signature"
 msgstr "אזור ציור לחתימה שלך"
 
-#: includes/Admin/DocumentsListTable.php:99
+#: includes/Admin/DocumentsListTable.php:152
 msgid "Duplicate"
 msgstr "שכפול"
 
@@ -836,10 +837,12 @@ msgstr "העלאת קובץ"
 msgid "Fill in the details below"
 msgstr "מלאו את הפרטים הבאים"
 
+#: includes/Admin/DocumentsListTable.php:127
 #: includes/Frontend/views/portal-documents.php:48
 msgid "Filter"
 msgstr "סינון"
 
+#: includes/Admin/DocumentsListTable.php:115
 #: includes/Frontend/views/portal-documents.php:41
 msgid "Filter by status"
 msgstr "סינון לפי סטטוס"
@@ -991,7 +994,7 @@ msgstr "טוען מסמך…"
 msgid "Logo URL"
 msgstr "כתובת לוגו"
 
-#: includes/Admin/DocumentsListTable.php:98
+#: includes/Admin/DocumentsListTable.php:151
 msgid "Manage"
 msgstr "ניהול"
 
@@ -1063,7 +1066,7 @@ msgstr "אין מסמכים להצגה. התחילו בהעלאת PDF בממשק
 msgid "No documents yet."
 msgstr "אין עדיין מסמכים."
 
-#: includes/Admin/DocumentsListTable.php:165
+#: includes/Admin/DocumentsListTable.php:218
 msgid "No documents yet. Upload your first PDF to get started."
 msgstr "אין עדיין מסמכים. העלו את קובץ ה-PDF הראשון כדי להתחיל."
 
@@ -1215,7 +1218,7 @@ msgstr "גרסת PHP"
 msgid "Page %1$d of %2$d"
 msgstr "עמוד %1$d מתוך %2$d"
 
-#: includes/Admin/DocumentsListTable.php:178
+#: includes/Admin/DocumentsListTable.php:231
 #: includes/Admin/views/analytics.php:25
 msgid "Partially signed"
 msgstr "נחתם חלקית"
@@ -1515,6 +1518,7 @@ msgstr "משימות מתוזמנות (WP-Cron)"
 msgid "Search by title…"
 msgstr "חיפוש לפי כותרת…"
 
+#: includes/Admin/views/list.php:56
 #: includes/Frontend/views/portal-documents.php:39
 msgid "Search documents"
 msgstr "חיפוש מסמכים"
@@ -1562,7 +1566,7 @@ msgstr "שליחת webhook לבדיקה"
 msgid "Sender"
 msgstr "שולח"
 
-#: includes/Admin/DocumentsListTable.php:176
+#: includes/Admin/DocumentsListTable.php:229
 #: includes/Admin/views/analytics.php:23
 msgid "Sent"
 msgstr "נשלח"
@@ -1664,7 +1668,7 @@ msgstr "נחתם בתאריך"
 msgid "Signed by:"
 msgstr "נחתם על-ידי:"
 
-#: includes/Admin/DocumentsListTable.php:106
+#: includes/Admin/DocumentsListTable.php:159
 msgid "Signed copy"
 msgstr "עותק חתום"
 
@@ -2101,7 +2105,7 @@ msgstr "אימות הזהות שלכם"
 msgid "View original"
 msgstr "צפייה במקור"
 
-#: includes/Admin/DocumentsListTable.php:177
+#: includes/Admin/DocumentsListTable.php:230
 #: includes/Admin/views/analytics.php:24
 #: includes/Audit/AuditLogger.php:45
 msgid "Viewed"

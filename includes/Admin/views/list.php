@@ -53,6 +53,7 @@ defined( 'ABSPATH' ) || exit;
 
 	<form method="get">
 		<input type="hidden" name="page" value="comsign">
+		<?php $table->search_box( esc_html__( 'Search documents', 'comsign' ), 'comsign-doc-search' ); ?>
 		<?php $table->display(); ?>
 	</form>
 </div>

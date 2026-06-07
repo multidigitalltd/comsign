@@ -4,7 +4,7 @@ Tags: signature, digital signature, pdf, esignature, hebrew
 Requires at least: 6.0
 Tested up to: 6.5
 Requires PHP: 7.4
-Stable tag: 0.32.0
+Stable tag: 0.33.0
 License: GPL-2.0-or-later
 License URI: https://www.gnu.org/licenses/gpl-2.0.html
 
@@ -105,6 +105,11 @@ ID and its SHA-256 code (shown on the document screen and the signature
 certificate) to confirm the document is authentic and see who signed it.
 
 == Changelog ==
+
+= 0.33.0 =
+* New: search and status filtering on the admin Documents list too (parity with
+  the portal) - a search box and a status dropdown, scoped to your current
+  workspace. Reuses the same account-scoped, escaped query layer.
 
 = 0.32.0 =
 * Security: the signer identity challenge (access code / email one-time code) is

@@ -9,7 +9,7 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "X-Domain: comsign\n"
 
-#: includes/Admin/DocumentsListTable.php:147
+#: includes/Admin/DocumentsListTable.php:200
 msgid "%1$d of %2$d signed"
 msgstr ""
 
@@ -39,7 +39,7 @@ msgstr ""
 msgid "%s's workspace"
 msgstr ""
 
-#: includes/Admin/DocumentsListTable.php:89
+#: includes/Admin/DocumentsListTable.php:142
 #: includes/Admin/views/analytics.php:93
 #: includes/Admin/views/edit.php:52
 #: includes/Admin/views/templates.php:47
@@ -190,6 +190,7 @@ msgstr ""
 msgid "All parties have signed. The signed PDF and verification details are available below."
 msgstr ""
 
+#: includes/Admin/DocumentsListTable.php:117
 #: includes/Frontend/views/portal-documents.php:43
 msgid "All statuses"
 msgstr ""
@@ -376,7 +377,7 @@ msgstr ""
 msgid "ComSign: dependencies are missing. Please run \"composer install\" inside the plugin directory."
 msgstr ""
 
-#: includes/Admin/DocumentsListTable.php:179
+#: includes/Admin/DocumentsListTable.php:232
 #: includes/Admin/views/analytics.php:26
 #: includes/Audit/AuditLogger.php:48
 msgid "Completed"
@@ -506,7 +507,7 @@ msgstr ""
 msgid "Decline to sign"
 msgstr ""
 
-#: includes/Admin/DocumentsListTable.php:180
+#: includes/Admin/DocumentsListTable.php:233
 #: includes/Admin/views/analytics.php:27
 #: includes/Audit/AuditLogger.php:49
 msgid "Declined"
@@ -669,7 +670,7 @@ msgstr ""
 msgid "Downloaded"
 msgstr ""
 
-#: includes/Admin/DocumentsListTable.php:175
+#: includes/Admin/DocumentsListTable.php:228
 #: includes/Admin/views/analytics.php:22
 msgid "Draft"
 msgstr ""
@@ -691,7 +692,7 @@ msgstr ""
 msgid "Drawing area for your signature"
 msgstr ""
 
-#: includes/Admin/DocumentsListTable.php:99
+#: includes/Admin/DocumentsListTable.php:152
 msgid "Duplicate"
 msgstr ""
 
@@ -841,10 +842,12 @@ msgstr ""
 msgid "Fill in the details below"
 msgstr ""
 
+#: includes/Admin/DocumentsListTable.php:127
 #: includes/Frontend/views/portal-documents.php:48
 msgid "Filter"
 msgstr ""
 
+#: includes/Admin/DocumentsListTable.php:115
 #: includes/Frontend/views/portal-documents.php:41
 msgid "Filter by status"
 msgstr ""
@@ -996,7 +999,7 @@ msgstr ""
 msgid "Logo URL"
 msgstr ""
 
-#: includes/Admin/DocumentsListTable.php:98
+#: includes/Admin/DocumentsListTable.php:151
 msgid "Manage"
 msgstr ""
 
@@ -1068,7 +1071,7 @@ msgstr ""
 msgid "No documents yet."
 msgstr ""
 
-#: includes/Admin/DocumentsListTable.php:165
+#: includes/Admin/DocumentsListTable.php:218
 msgid "No documents yet. Upload your first PDF to get started."
 msgstr ""
 
@@ -1220,7 +1223,7 @@ msgstr ""
 msgid "Page %1$d of %2$d"
 msgstr ""
 
-#: includes/Admin/DocumentsListTable.php:178
+#: includes/Admin/DocumentsListTable.php:231
 #: includes/Admin/views/analytics.php:25
 msgid "Partially signed"
 msgstr ""
@@ -1520,6 +1523,7 @@ msgstr ""
 msgid "Search by title…"
 msgstr ""
 
+#: includes/Admin/views/list.php:56
 #: includes/Frontend/views/portal-documents.php:39
 msgid "Search documents"
 msgstr ""
@@ -1567,7 +1571,7 @@ msgstr ""
 msgid "Sender"
 msgstr ""
 
-#: includes/Admin/DocumentsListTable.php:176
+#: includes/Admin/DocumentsListTable.php:229
 #: includes/Admin/views/analytics.php:23
 msgid "Sent"
 msgstr ""
@@ -1669,7 +1673,7 @@ msgstr ""
 msgid "Signed by:"
 msgstr ""
 
-#: includes/Admin/DocumentsListTable.php:106
+#: includes/Admin/DocumentsListTable.php:159
 msgid "Signed copy"
 msgstr ""
 
@@ -2106,7 +2110,7 @@ msgstr ""
 msgid "View original"
 msgstr ""
 
-#: includes/Admin/DocumentsListTable.php:177
+#: includes/Admin/DocumentsListTable.php:230
 #: includes/Admin/views/analytics.php:24
 #: includes/Audit/AuditLogger.php:45
 msgid "Viewed"
