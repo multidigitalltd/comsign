@@ -446,6 +446,9 @@ msgstr "اسحب لإعادة التموضع؛ انقر مرتين للإزال�
 msgid "Draw"
 msgstr "ارسم"
 
+msgid "Drawing area for your signature"
+msgstr "منطقة رسم توقيعك"
+
 msgid "Duplicate"
 msgstr "تكرار"
 
@@ -887,6 +890,9 @@ msgstr "يرجى التحقق من هويتك قبل التوقيع."
 msgid "Portal template missing."
 msgstr "قالب البوابة مفقود."
 
+msgid "Preview of your typed signature"
+msgstr "معاينة توقيعك المكتوب"
+
 msgid "Previous"
 msgstr "السابق"
 
@@ -1096,6 +1102,9 @@ msgstr "شهادة التوقيع"
 
 msgid "Signature fields saved."
 msgstr "تم حفظ حقول التوقيع."
+
+msgid "Signature method"
+msgstr "طريقة التوقيع"
 
 msgid "Signatures pending"
 msgstr "توقيعات معلّقة"

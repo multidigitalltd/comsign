@@ -44,19 +44,20 @@ require __DIR__ . '/partials/header.php';
 		<section class="comsign-card comsign-signature-pad" data-needs-signature="1">
 			<h2><?php esc_html_e( 'Your signature', 'comsign' ); ?></h2>
 
-			<div class="comsign-tabs" role="tablist">
-				<button type="button" class="comsign-tab is-active" data-tab="draw" role="tab"><?php esc_html_e( 'Draw', 'comsign' ); ?></button>
-				<button type="button" class="comsign-tab" data-tab="type" role="tab"><?php esc_html_e( 'Type', 'comsign' ); ?></button>
+			<div class="comsign-tabs" role="tablist" aria-label="<?php esc_attr_e( 'Signature method', 'comsign' ); ?>">
+				<button type="button" id="comsign-tab-draw" class="comsign-tab is-active" data-tab="draw" role="tab" aria-selected="true" aria-controls="comsign-panel-draw"><?php esc_html_e( 'Draw', 'comsign' ); ?></button>
+				<button type="button" id="comsign-tab-type" class="comsign-tab" data-tab="type" role="tab" aria-selected="false" aria-controls="comsign-panel-type" tabindex="-1"><?php esc_html_e( 'Type', 'comsign' ); ?></button>
 			</div>
 
-			<div class="comsign-tab-panel" data-panel="draw">
-				<canvas id="comsign-canvas" class="comsign-canvas" width="600" height="200"></canvas>
+			<div class="comsign-tab-panel" data-panel="draw" id="comsign-panel-draw" role="tabpanel" aria-labelledby="comsign-tab-draw" tabindex="0">
+				<canvas id="comsign-canvas" class="comsign-canvas" width="600" height="200" role="img" aria-label="<?php esc_attr_e( 'Drawing area for your signature', 'comsign' ); ?>"></canvas>
 				<p><button type="button" class="comsign-link" id="comsign-clear"><?php esc_html_e( 'Clear', 'comsign' ); ?></button></p>
 			</div>
 
-			<div class="comsign-tab-panel is-hidden" data-panel="type">
+			<div class="comsign-tab-panel is-hidden" data-panel="type" id="comsign-panel-type" role="tabpanel" aria-labelledby="comsign-tab-type" tabindex="0">
+				<label class="comsign-sr-only" for="comsign-type-input"><?php esc_html_e( 'Type your full name', 'comsign' ); ?></label>
 				<input type="text" id="comsign-type-input" class="comsign-input" placeholder="<?php esc_attr_e( 'Type your full name', 'comsign' ); ?>" autocomplete="off">
-				<canvas id="comsign-type-canvas" class="comsign-canvas" width="600" height="200"></canvas>
+				<canvas id="comsign-type-canvas" class="comsign-canvas" width="600" height="200" role="img" aria-label="<?php esc_attr_e( 'Preview of your typed signature', 'comsign' ); ?>"></canvas>
 			</div>
 		</section>
 		<?php endif; ?>

@@ -4,7 +4,7 @@ Tags: signature, digital signature, pdf, esignature, hebrew
 Requires at least: 6.0
 Tested up to: 6.5
 Requires PHP: 7.4
-Stable tag: 0.30.0
+Stable tag: 0.31.0
 License: GPL-2.0-or-later
 License URI: https://www.gnu.org/licenses/gpl-2.0.html
 
@@ -105,6 +105,18 @@ ID and its SHA-256 code (shown on the document screen and the signature
 certificate) to confirm the document is authentic and see who signed it.
 
 == Changelog ==
+
+= 0.31.0 =
+* Accessibility: the signing page's Draw/Type signature switch is now a proper
+  ARIA tab set (aria-selected/aria-controls, tab panels, roving tabindex and
+  arrow-key navigation); the signature canvases and the typed-name field gained
+  accessible labels.
+* Accessibility: workspace switchers (admin and portal) no longer auto-submit on
+  selection — they use an explicit "Switch" button, so keyboard and
+  screen-reader users aren't navigated away unexpectedly.
+* Security: added a security regression test suite (token randomness/hashing/
+  constant-time verification, signer-token isolation, cross-tenant access/IDOR,
+  and webhook SSRF blocking of loopback/private/link-local targets).
 
 = 0.30.0 =
 * New: search and status filtering on the client-portal document list. Filter by

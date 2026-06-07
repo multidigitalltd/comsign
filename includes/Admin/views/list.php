@@ -27,14 +27,14 @@ defined( 'ABSPATH' ) || exit;
 			<input type="hidden" name="action" value="comsign_switch_account">
 			<input type="hidden" name="_wpnonce" value="<?php echo esc_attr( $switch_nonce ); ?>">
 			<label for="comsign-account"><?php esc_html_e( 'Workspace:', 'comsign' ); ?></label>
-			<select name="account_id" id="comsign-account" onchange="this.form.submit()">
+			<select name="account_id" id="comsign-account">
 				<?php foreach ( $accounts as $acct ) : ?>
 					<option value="<?php echo (int) $acct->id; ?>"<?php selected( (int) $acct->id, $current_account ); ?>>
 						<?php echo esc_html( $acct->name ); ?>
 					</option>
 				<?php endforeach; ?>
 			</select>
-			<noscript><button type="submit" class="button"><?php esc_html_e( 'Switch', 'comsign' ); ?></button></noscript>
+			<button type="submit" class="button"><?php esc_html_e( 'Switch', 'comsign' ); ?></button>
 		</form>
 	<?php endif; ?>
 

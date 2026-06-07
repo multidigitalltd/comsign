@@ -51,16 +51,44 @@
 		} );
 	}
 
-	// Tab switching.
-	document.querySelectorAll( '.comsign-tab' ).forEach( function ( tab ) {
+	// Tab switching with ARIA state + keyboard support (WAI-ARIA tabs pattern).
+	var tabEls = Array.prototype.slice.call( document.querySelectorAll( '.comsign-tabs .comsign-tab' ) );
+
+	function selectTab( tab, focus ) {
+		activeTab = tab.getAttribute( 'data-tab' );
+		tabEls.forEach( function ( t ) {
+			var on = t === tab;
+			t.classList.toggle( 'is-active', on );
+			t.setAttribute( 'aria-selected', on ? 'true' : 'false' );
+			t.setAttribute( 'tabindex', on ? '0' : '-1' );
+		} );
+		document.querySelectorAll( '.comsign-tab-panel' ).forEach( function ( panel ) {
+			panel.classList.toggle( 'is-hidden', panel.getAttribute( 'data-panel' ) !== activeTab );
+		} );
+		if ( focus ) {
+			tab.focus();
+		}
+	}
+
+	tabEls.forEach( function ( tab, i ) {
 		tab.addEventListener( 'click', function () {
-			activeTab = tab.getAttribute( 'data-tab' );
-			document.querySelectorAll( '.comsign-tab' ).forEach( function ( t ) {
-				t.classList.toggle( 'is-active', t === tab );
-			} );
-			document.querySelectorAll( '.comsign-tab-panel' ).forEach( function ( panel ) {
-				panel.classList.toggle( 'is-hidden', panel.getAttribute( 'data-panel' ) !== activeTab );
-			} );
+			selectTab( tab, false );
+		} );
+		tab.addEventListener( 'keydown', function ( e ) {
+			var next = null;
+			if ( 'ArrowRight' === e.key || 'ArrowDown' === e.key ) {
+				next = tabEls[ ( i + 1 ) % tabEls.length ];
+			} else if ( 'ArrowLeft' === e.key || 'ArrowUp' === e.key ) {
+				next = tabEls[ ( i - 1 + tabEls.length ) % tabEls.length ];
+			} else if ( 'Home' === e.key ) {
+				next = tabEls[ 0 ];
+			} else if ( 'End' === e.key ) {
+				next = tabEls[ tabEls.length - 1 ];
+			}
+			if ( next ) {
+				e.preventDefault();
+				selectTab( next, true );
+			}
 		} );
 	} );
 

@@ -3,7 +3,7 @@
  * Plugin Name:       ComSign
  * Plugin URI:        https://github.com/multidigitalltd/comsign
  * Description:       Secure digital document signing for WordPress - upload a PDF, place signature fields, send by email, sign online (draw / type / stamp), embed the signature in the PDF and keep a full audit trail. Full Hebrew/RTL support.
- * Version:           0.30.0
+ * Version:           0.31.0
  * Requires at least: 6.0
  * Requires PHP:      7.4
  * Author:            Multi Digital LTD
@@ -23,7 +23,7 @@ defined( 'ABSPATH' ) || exit;
  * Constants
  * --------------------------------------------------------------------------
  */
-define( 'COMSIGN_VERSION', '0.30.0' );
+define( 'COMSIGN_VERSION', '0.31.0' );
 define( 'COMSIGN_DB_VERSION', '12' );
 define( 'COMSIGN_PLUGIN_FILE', __FILE__ );
 define( 'COMSIGN_PLUGIN_DIR', plugin_dir_path( __FILE__ ) );

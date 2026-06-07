@@ -49,7 +49,7 @@ msgstr ""
 msgid "(untitled)"
 msgstr ""
 
-#: includes/Frontend/views/sign.php:82
+#: includes/Frontend/views/sign.php:83
 msgid "* Required"
 msgstr ""
 
@@ -337,7 +337,7 @@ msgstr ""
 msgid "Choose a template"
 msgstr ""
 
-#: includes/Frontend/views/sign.php:104
+#: includes/Frontend/views/sign.php:105
 msgid "Choose…"
 msgstr ""
 
@@ -410,7 +410,7 @@ msgstr ""
 msgid "Compose from text"
 msgstr ""
 
-#: includes/Frontend/views/sign.php:149
+#: includes/Frontend/views/sign.php:150
 msgid "Confirm decline"
 msgstr ""
 
@@ -502,7 +502,7 @@ msgstr ""
 msgid "Date (auto)"
 msgstr ""
 
-#: includes/Frontend/views/sign.php:139
+#: includes/Frontend/views/sign.php:140
 msgid "Decline to sign"
 msgstr ""
 
@@ -687,6 +687,10 @@ msgstr ""
 msgid "Draw"
 msgstr ""
 
+#: includes/Frontend/views/sign.php:53
+msgid "Drawing area for your signature"
+msgstr ""
+
 #: includes/Admin/DocumentsListTable.php:99
 msgid "Duplicate"
 msgstr ""
@@ -833,7 +837,7 @@ msgstr ""
 msgid "File upload"
 msgstr ""
 
-#: includes/Frontend/views/sign.php:81
+#: includes/Frontend/views/sign.php:82
 msgid "Fill in the details below"
 msgstr ""
 
@@ -898,7 +902,7 @@ msgstr ""
 msgid "I confirm"
 msgstr ""
 
-#: includes/Frontend/views/sign.php:128
+#: includes/Frontend/views/sign.php:129
 msgid "I have read the document and I agree to sign it electronically."
 msgstr ""
 
@@ -1018,11 +1022,11 @@ msgstr ""
 msgid "Message to signers (optional)"
 msgstr ""
 
-#: includes/Frontend/views/sign.php:131
+#: includes/Frontend/views/sign.php:132
 msgid "More information"
 msgstr ""
 
-#: includes/Frontend/views/sign.php:132
+#: includes/Frontend/views/sign.php:133
 msgid "My electronic signature is legally binding and has the same effect as a handwritten signature. The time, my IP address and browser are recorded as proof of signing."
 msgstr ""
 
@@ -1278,7 +1282,7 @@ msgstr ""
 msgid "Please complete all required fields before signing."
 msgstr ""
 
-#: includes/Frontend/views/sign.php:135
+#: includes/Frontend/views/sign.php:136
 msgid "Please complete the highlighted items: add your signature, fill the required fields and accept the agreement."
 msgstr ""
 
@@ -1330,6 +1334,10 @@ msgstr ""
 msgid "Portal template missing."
 msgstr ""
 
+#: includes/Frontend/views/sign.php:60
+msgid "Preview of your typed signature"
+msgstr ""
+
 #: includes/Frontend/views/portal-documents.php:59
 msgid "Previous"
 msgstr ""
@@ -1363,7 +1371,7 @@ msgstr ""
 msgid "Ready to send"
 msgstr ""
 
-#: includes/Frontend/views/sign.php:147
+#: includes/Frontend/views/sign.php:148
 msgid "Reason for declining (optional)"
 msgstr ""
 
@@ -1603,7 +1611,7 @@ msgstr ""
 msgid "Shown to signers on the signing page and in emails."
 msgstr ""
 
-#: includes/Frontend/views/sign.php:138
+#: includes/Frontend/views/sign.php:139
 msgid "Sign & finish"
 msgstr ""
 
@@ -1637,6 +1645,10 @@ msgstr ""
 
 #: includes/Admin/Admin.php:787
 msgid "Signature fields saved."
+msgstr ""
+
+#: includes/Frontend/views/sign.php:47
+msgid "Signature method"
 msgstr ""
 
 #: includes/Admin/views/analytics.php:50
@@ -1918,7 +1930,7 @@ msgstr ""
 msgid "This document is signed in order. You will be notified when it is your turn."
 msgstr ""
 
-#: includes/Frontend/views/sign.php:120
+#: includes/Frontend/views/sign.php:121
 msgid "This field is required."
 msgstr ""
 
@@ -1991,6 +2003,7 @@ msgid "Type"
 msgstr ""
 
 #: includes/Frontend/views/sign.php:58
+#: includes/Frontend/views/sign.php:59
 msgid "Type your full name"
 msgstr ""
 
