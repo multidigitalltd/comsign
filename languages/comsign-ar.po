@@ -1,0 +1,1534 @@
+msgid ""
+msgstr ""
+"Project-Id-Version: ComSign\nLanguage: ar\nMIME-Version: 1.0\nContent-Type: text/plain; charset=UTF-8\nContent-Transfer-Encoding: 8bit\nPlural-Forms: nplurals=6; plural=(n==0 ? 0 : n==1 ? 1 : n==2 ? 2 : n%100>=3 && n%100<=10 ? 3 : n%100>=11 ? 4 : 5);\n"
+
+msgid "%1$d of %2$d signed"
+msgstr "تم توقيع %1$d من %2$d"
+
+msgid "%s (copy)"
+msgstr "%s (نسخة)"
+
+msgid "%s's workspace"
+msgstr "مساحة عمل %s"
+
+msgid "(untitled)"
+msgstr "(بدون عنوان)"
+
+msgid "* Required"
+msgstr "* مطلوب"
+
+msgid "14 days"
+msgstr "14 يومًا"
+
+msgid "30 days"
+msgstr "30 يومًا"
+
+msgid "7 days"
+msgstr "7 أيام"
+
+msgid "A REST API key is configured."
+msgstr "تم إعداد مفتاح REST API."
+
+msgid "A document is awaiting your signature — %s"
+msgstr "هناك مستند بانتظار توقيعك — %s"
+
+msgid "A field is assigned to a signer that is not on this document. Please re-save the fields."
+msgstr "تم تعيين حقل لموقّع غير موجود في هذا المستند. يرجى حفظ الحقول من جديد."
+
+msgid "A new code has been sent."
+msgstr "تم إرسال رمز جديد."
+
+msgid "A signature is required."
+msgstr "التوقيع مطلوب."
+
+msgid "A signing link was generated. Copy it or share via WhatsApp below."
+msgstr "تم إنشاء رابط توقيع. انسخه أو شاركه عبر واتساب أدناه."
+
+msgid "A sub-workspace belongs under this one; managers here can see its documents too."
+msgstr "تنتمي مساحة العمل الفرعية إلى هذه المساحة؛ يمكن للمديرين هنا رؤية مستنداتها أيضًا."
+
+msgid "A webhook URL is configured. Use “Send test webhook” below to confirm it is reachable."
+msgstr "تم إعداد عنوان webhook. استخدم «إرسال webhook تجريبي» أدناه للتأكد من إمكانية الوصول إليه."
+
+msgid "Accent colour"
+msgstr "لون التمييز"
+
+msgid "Access code"
+msgstr "رمز الوصول"
+
+msgid "Access code (for the access-code method)"
+msgstr "رمز الوصول (لطريقة رمز الوصول)"
+
+msgid "Access code (shared by you)"
+msgstr "رمز الوصول (تشاركه أنت)"
+
+msgid "Action"
+msgstr "إجراء"
+
+msgid "Actions"
+msgstr "إجراءات"
+
+msgid "Active certificate:"
+msgstr "الشهادة الفعّالة:"
+
+msgid "Add Document"
+msgstr "إضافة مستند"
+
+msgid "Add a signature (or initials) field for: %s."
+msgstr "أضف حقل توقيع (أو أحرف أولى) لـ: %s."
+
+msgid "Add a signer first, then drag fields onto the document."
+msgstr "أضف موقّعًا أولًا، ثم اسحب الحقول إلى المستند."
+
+msgid "Add at least one signer before sending."
+msgstr "أضف موقّعًا واحدًا على الأقل قبل الإرسال."
+
+msgid "Add at least one signer first, then drop signature fields onto the document."
+msgstr "أضف موقّعًا واحدًا على الأقل أولًا، ثم ضع حقول التوقيع على المستند."
+
+msgid "Add at least one signer to start placing fields."
+msgstr "أضف موقّعًا واحدًا على الأقل لبدء وضع الحقول."
+
+msgid "Add field"
+msgstr "إضافة حقل"
+
+msgid "Add recipients"
+msgstr "إضافة مستلمين"
+
+msgid "Add signer"
+msgstr "إضافة موقّع"
+
+msgid "Add signers"
+msgstr "إضافة موقّعين"
+
+msgid "Add the document"
+msgstr "إضافة المستند"
+
+msgid "Add the people who need to sign."
+msgstr "أضف الأشخاص الذين يجب أن يوقّعوا."
+
+msgid "Admin"
+msgstr "مدير"
+
+msgid "All parties have signed. The signed PDF and verification details are available below."
+msgstr "وقّع جميع الأطراف. ملف PDF الموقّع وتفاصيل التحقق متاحة أدناه."
+
+msgid "Already signed"
+msgstr "موقّع بالفعل"
+
+msgid "Analytics"
+msgstr "التحليلات"
+
+msgid "Assign a recipient to each role. The document is created as a draft so you can review it before sending."
+msgstr "عيّن مستلمًا لكل دور. يُنشأ المستند كمسودة لتتمكن من مراجعته قبل الإرسال."
+
+msgid "At least one signer added"
+msgstr "تمت إضافة موقّع واحد على الأقل"
+
+msgid "Attachment %d"
+msgstr "مرفق %d"
+
+msgid "Audit report (PDF)"
+msgstr "تقرير التدقيق (PDF)"
+
+msgid "Audit report — %s"
+msgstr "تقرير التدقيق — %s"
+
+msgid "Audit trail"
+msgstr "سجل التدقيق"
+
+msgid "Automatic reminders"
+msgstr "التذكيرات التلقائية"
+
+msgid "Avg. time to complete"
+msgstr "متوسط وقت الإكمال"
+
+msgid "Back to documents"
+msgstr "العودة إلى المستندات"
+
+msgid "Back to list"
+msgstr "العودة إلى القائمة"
+
+msgid "Before you can send:"
+msgstr "قبل أن تتمكن من الإرسال:"
+
+msgid "Brand name"
+msgstr "اسم العلامة التجارية"
+
+msgid "Branding"
+msgstr "الهوية البصرية"
+
+msgid "Browser"
+msgstr "المتصفح"
+
+msgid "Bulk send"
+msgstr "إرسال جماعي"
+
+msgid "Bulk send complete: %d document(s) created and sent."
+msgstr "اكتمل الإرسال الجماعي: تم إنشاء وإرسال %d مستند."
+
+msgid "Bulk send requires a template with exactly one role."
+msgstr "يتطلب الإرسال الجماعي قالبًا يحتوي على دور واحد بالضبط."
+
+msgid "Bulk send: %s"
+msgstr "إرسال جماعي: %s"
+
+msgid "CC recipients"
+msgstr "مستلمو نسخة (CC)"
+
+msgid "CC recipients saved."
+msgstr "تم حفظ مستلمي النسخة."
+
+msgid "Cancel"
+msgstr "إلغاء"
+
+msgid "Certificate password"
+msgstr "كلمة مرور الشهادة"
+
+msgid "Certificate removed. Documents will use electronic signatures."
+msgstr "تمت إزالة الشهادة. ستستخدم المستندات التوقيعات الإلكترونية."
+
+msgid "Certificate stored. New documents will be signed with PKI/PAdES."
+msgstr "تم حفظ الشهادة. ستُوقّع المستندات الجديدة باستخدام PKI/PAdES."
+
+msgid "Check"
+msgstr "تحقق"
+
+msgid "Checkbox"
+msgstr "مربع اختيار"
+
+msgid "Choice"
+msgstr "اختيار"
+
+msgid "Choice (dropdown)"
+msgstr "اختيار (قائمة منسدلة)"
+
+msgid "Choose a different template"
+msgstr "اختر قالبًا آخر"
+
+msgid "Choose a template"
+msgstr "اختر قالبًا"
+
+msgid "Choose…"
+msgstr "اختر…"
+
+msgid "Clear"
+msgstr "مسح"
+
+msgid "Click to toggle required"
+msgstr "انقر لتبديل خيار «مطلوب»"
+
+msgid "Code"
+msgstr "الرمز"
+
+msgid "ComSign"
+msgstr "ComSign"
+
+msgid "ComSign Documents"
+msgstr "مستندات ComSign"
+
+msgid "ComSign Settings"
+msgstr "إعدادات ComSign"
+
+msgid "ComSign test email"
+msgstr "بريد تجريبي من ComSign"
+
+msgid "ComSign: dependencies are missing. Please run \\\"composer install\\\" inside the plugin directory."
+msgstr "ComSign: التبعيات مفقودة. يرجى تشغيل \\\"composer install\\\" داخل مجلد الإضافة."
+
+msgid "Completed"
+msgstr "مكتمل"
+
+msgid "Completed & signed: \\\"%s\\\""
+msgstr "اكتمل وتم التوقيع: \\\"%s\\\""
+
+msgid "Completed documents are signed with a cryptographic PKCS#7/PAdES signature."
+msgstr "تُوقّع المستندات المكتملة بتوقيع تشفيري من نوع PKCS#7/PAdES."
+
+msgid "Completed:"
+msgstr "اكتمل في:"
+
+msgid "Completion rate"
+msgstr "معدل الإكمال"
+
+msgid "Completions (last 14 days)"
+msgstr "الإكمالات (آخر 14 يومًا)"
+
+msgid "Completions per day"
+msgstr "الإكمالات في اليوم"
+
+msgid "Compose from text"
+msgstr "إنشاء من نص"
+
+msgid "Confirm decline"
+msgstr "تأكيد الرفض"
+
+msgid "Connectivity tests"
+msgstr "اختبارات الاتصال"
+
+msgid "Consent required"
+msgstr "الموافقة مطلوبة"
+
+msgid "Consented"
+msgstr "تمت الموافقة"
+
+msgid "Continue"
+msgstr "متابعة"
+
+msgid "Copied!"
+msgstr "تم النسخ!"
+
+msgid "Copy link"
+msgstr "نسخ الرابط"
+
+msgid "Could not complete signing"
+msgstr "تعذّر إكمال التوقيع"
+
+msgid "Could not generate the document PDF."
+msgstr "تعذّر إنشاء ملف PDF للمستند."
+
+msgid "Could not load the document preview."
+msgstr "تعذّر تحميل معاينة المستند."
+
+msgid "Could not store the uploaded file."
+msgstr "تعذّر حفظ الملف المرفوع."
+
+msgid "Create"
+msgstr "إنشاء"
+
+msgid "Create & send all"
+msgstr "إنشاء وإرسال الكل"
+
+msgid "Create &amp; send"
+msgstr "إنشاء وإرسال"
+
+msgid "Create a sub-workspace"
+msgstr "إنشاء مساحة عمل فرعية"
+
+msgid "Create document"
+msgstr "إنشاء مستند"
+
+msgid "Created"
+msgstr "تم الإنشاء"
+
+msgid "Dana Cohen, dana@example.com, +972500000000\\nAvi Levi, avi@example.com"
+msgstr "دانا كوهين, dana@example.com, ‎+972500000000\\nأبي ليفي, avi@example.com"
+
+msgid "Dashboard"
+msgstr "لوحة التحكم"
+
+msgid "Date"
+msgstr "التاريخ"
+
+msgid "Date (auto)"
+msgstr "التاريخ (تلقائي)"
+
+msgid "Decline to sign"
+msgstr "رفض التوقيع"
+
+msgid "Declined"
+msgstr "مرفوض"
+
+msgid "Default workspace"
+msgstr "مساحة العمل الافتراضية"
+
+msgid "Delete"
+msgstr "حذف"
+
+msgid "Delete document"
+msgstr "حذف المستند"
+
+msgid "Delete this template?"
+msgstr "حذف هذا القالب؟"
+
+msgid "Delivery failed: %s"
+msgstr "فشل التسليم: %s"
+
+msgid "Details"
+msgstr "التفاصيل"
+
+msgid "Digital signature (PKI / PAdES)"
+msgstr "التوقيع الرقمي (PKI / PAdES)"
+
+msgid "Digital signature (PKI/PAdES)"
+msgstr "التوقيع الرقمي (PKI/PAdES)"
+
+msgid "Document"
+msgstr "مستند"
+
+msgid "Document ID"
+msgstr "معرّف المستند"
+
+msgid "Document content"
+msgstr "محتوى المستند"
+
+msgid "Document created and sent for signing."
+msgstr "تم إنشاء المستند وإرساله للتوقيع."
+
+msgid "Document created from template. Review and send."
+msgstr "تم إنشاء المستند من قالب. راجِعه وأرسِله."
+
+msgid "Document created. Now add signers and place fields."
+msgstr "تم إنشاء المستند. الآن أضف الموقّعين وضع الحقول."
+
+msgid "Document deleted."
+msgstr "تم حذف المستند."
+
+msgid "Document duplicated."
+msgstr "تم تكرار المستند."
+
+msgid "Document file is uploaded"
+msgstr "تم رفع ملف المستند"
+
+msgid "Document not available"
+msgstr "المستند غير متاح"
+
+msgid "Document not found."
+msgstr "لم يتم العثور على المستند."
+
+msgid "Document preview"
+msgstr "معاينة المستند"
+
+msgid "Document sent for signing."
+msgstr "تم إرسال المستند للتوقيع."
+
+msgid "Document signed via ComSign"
+msgstr "تم توقيع المستند عبر ComSign"
+
+msgid "Document title"
+msgstr "عنوان المستند"
+
+msgid "Document title (optional)"
+msgstr "عنوان المستند (اختياري)"
+
+msgid "Document unavailable"
+msgstr "المستند غير متاح"
+
+msgid "Document unavailable."
+msgstr "المستند غير متاح."
+
+msgid "Document uploaded. Now add signers and place signature fields."
+msgstr "تم رفع المستند. الآن أضف الموقّعين وضع حقول التوقيع."
+
+msgid "Documents"
+msgstr "المستندات"
+
+msgid "Documents by status"
+msgstr "المستندات حسب الحالة"
+
+msgid "Done:"
+msgstr "تم:"
+
+msgid "Download audit trail (PDF)"
+msgstr "تنزيل سجل التدقيق (PDF)"
+
+msgid "Download original"
+msgstr "تنزيل الأصل"
+
+msgid "Download signed PDF"
+msgstr "تنزيل PDF الموقّع"
+
+msgid "Downloaded"
+msgstr "تم التنزيل"
+
+msgid "Draft"
+msgstr "مسودة"
+
+msgid "Draft created."
+msgstr "تم إنشاء المسودة."
+
+msgid "Drag to reposition; double-click to remove; click a field label to toggle “required”."
+msgstr "اسحب لإعادة التموضع؛ انقر مرتين للإزالة؛ انقر على تسمية الحقل لتبديل «مطلوب»."
+
+msgid "Draw"
+msgstr "ارسم"
+
+msgid "Duplicate"
+msgstr "تكرار"
+
+msgid "Each line creates and sends a separate document. Format: name, email, phone (phone optional)."
+msgstr "كل سطر يُنشئ ويُرسل مستندًا منفصلًا. التنسيق: الاسم، البريد الإلكتروني، الهاتف (الهاتف اختياري)."
+
+msgid "Each signer should have somewhere to sign."
+msgstr "يجب أن يكون لكل موقّع مكان للتوقيع."
+
+msgid "Edit document"
+msgstr "تحرير المستند"
+
+msgid "Electronic signature"
+msgstr "توقيع إلكتروني"
+
+msgid "Email"
+msgstr "البريد الإلكتروني"
+
+msgid "Email (auto)"
+msgstr "البريد الإلكتروني (تلقائي)"
+
+msgid "Email a reminder to signers who have not signed yet."
+msgstr "أرسل تذكيرًا بالبريد إلى الموقّعين الذين لم يوقّعوا بعد."
+
+msgid "Email delivery"
+msgstr "تسليم البريد الإلكتروني"
+
+msgid "Email is optional — leave it empty to share a signing link by WhatsApp or any other channel."
+msgstr "البريد الإلكتروني اختياري — اتركه فارغًا لمشاركة رابط التوقيع عبر واتساب أو أي قناة أخرى."
+
+msgid "Email link"
+msgstr "رابط بالبريد"
+
+msgid "Email one-time code"
+msgstr "رمز لمرة واحدة بالبريد"
+
+msgid "Endpoint responded with HTTP %d."
+msgstr "استجابت نقطة النهاية برمز HTTP %d."
+
+msgid "Enter options separated by commas:"
+msgstr "أدخل الخيارات مفصولة بفواصل:"
+
+msgid "Enter the document ID and its verification code to confirm it is authentic and see who signed it."
+msgstr "أدخل معرّف المستند ورمز التحقق الخاص به للتأكد من أصالته ومعرفة من وقّعه."
+
+msgid "Event"
+msgstr "الحدث"
+
+msgid "Every event is POSTed here as JSON, signed with X-ComSign-Signature (HMAC-SHA256 of the body using the secret below)."
+msgstr "يُرسَل كل حدث هنا عبر POST بصيغة JSON، موقّعًا بـ X-ComSign-Signature (HMAC-SHA256 للمحتوى باستخدام السر أدناه)."
+
+msgid "Every signer has a field to fill"
+msgstr "لكل موقّع حقل لتعبئته"
+
+msgid "Every signer has a signature field"
+msgstr "لكل موقّع حقل توقيع"
+
+msgid "Every signer must have at least one field. Please assign a field to each signer."
+msgstr "يجب أن يكون لكل موقّع حقل واحد على الأقل. يرجى تعيين حقل لكل موقّع."
+
+msgid "Expired"
+msgstr "منتهٍ"
+
+msgid "Expires:"
+msgstr "ينتهي في:"
+
+msgid "Expiry extended"
+msgstr "تم تمديد الصلاحية"
+
+msgid "Extend"
+msgstr "تمديد"
+
+msgid "Extend deadline by"
+msgstr "تمديد الموعد النهائي بمقدار"
+
+msgid "Field for:"
+msgstr "حقل لـ:"
+
+msgid "Field label shown to the signer (optional):"
+msgstr "تسمية الحقل الظاهرة للموقّع (اختياري):"
+
+msgid "Field:"
+msgstr "حقل:"
+
+msgid "Fields saved."
+msgstr "تم حفظ الحقول."
+
+msgid "File"
+msgstr "ملف"
+
+msgid "File not available."
+msgstr "الملف غير متاح."
+
+msgid "File upload"
+msgstr "رفع ملف"
+
+msgid "Fill in the details below"
+msgstr "املأ التفاصيل أدناه"
+
+msgid "For signer:"
+msgstr "للموقّع:"
+
+msgid "Full name"
+msgstr "الاسم الكامل"
+
+msgid "GD is available for stamping signature images."
+msgstr "مكتبة GD متاحة لختم صور التوقيع."
+
+msgid "GD is missing; drawn/typed signature images cannot be processed."
+msgstr "مكتبة GD مفقودة؛ لا يمكن معالجة صور التوقيع المرسومة/المكتوبة."
+
+msgid "Get signing link"
+msgstr "الحصول على رابط التوقيع"
+
+msgid "Hello %s,"
+msgstr "مرحبًا %s،"
+
+msgid "Hello %s, please review the document below and add your signature."
+msgstr "مرحبًا %s، يرجى مراجعة المستند أدناه وإضافة توقيعك."
+
+msgid "Hello,"
+msgstr "مرحبًا،"
+
+msgid "How it works"
+msgstr "كيف يعمل"
+
+msgid "How signing works"
+msgstr "كيف يعمل التوقيع"
+
+msgid "How to add a document"
+msgstr "كيفية إضافة مستند"
+
+msgid "I confirm"
+msgstr "أؤكّد"
+
+msgid "I have read the document and I agree to sign it electronically."
+msgstr "لقد قرأت المستند وأوافق على توقيعه إلكترونيًا."
+
+msgid "IP"
+msgstr "IP"
+
+msgid "IP address"
+msgstr "عنوان IP"
+
+msgid "Image support (GD)"
+msgstr "دعم الصور (GD)"
+
+msgid "Initials"
+msgstr "الأحرف الأولى"
+
+msgid "Integrations"
+msgstr "التكاملات"
+
+msgid "Invalid link"
+msgstr "رابط غير صالح"
+
+msgid "Invalid link."
+msgstr "رابط غير صالح."
+
+msgid "Invalid or expired link"
+msgstr "رابط غير صالح أو منتهٍ"
+
+msgid "Invalid upload."
+msgstr "رفع غير صالح."
+
+msgid "Invitation cancelled."
+msgstr "تم إلغاء الدعوة."
+
+msgid "Invitation re-sent."
+msgstr "تمت إعادة إرسال الدعوة."
+
+msgid "Invitation saved. The user will join when they sign in with this email."
+msgstr "تم حفظ الدعوة. سينضم المستخدم عند تسجيل الدخول بهذا البريد الإلكتروني."
+
+msgid "Invitations are sent with wp_mail(). Use “Send test email” below to confirm delivery on this server."
+msgstr "تُرسل الدعوات باستخدام wp_mail(). استخدم «إرسال بريد تجريبي» أدناه للتأكد من التسليم على هذا الخادم."
+
+msgid "Invite a member"
+msgstr "دعوة عضو"
+
+msgid "It is not your turn to sign yet."
+msgstr "لم يحن دورك للتوقيع بعد."
+
+msgid "Last activity"
+msgstr "آخر نشاط"
+
+msgid "Link expired"
+msgstr "انتهت صلاحية الرابط"
+
+msgid "Link expires after"
+msgstr "تنتهي صلاحية الرابط بعد"
+
+msgid "Loading document…"
+msgstr "جارٍ تحميل المستند…"
+
+msgid "Logo URL"
+msgstr "عنوان الشعار"
+
+msgid "Manage"
+msgstr "إدارة"
+
+msgid "Member"
+msgstr "عضو"
+
+msgid "Member added."
+msgstr "تمت إضافة العضو."
+
+msgid "Member removed."
+msgstr "تمت إزالة العضو."
+
+msgid "Members"
+msgstr "الأعضاء"
+
+msgid "Message to signers (optional)"
+msgstr "رسالة إلى الموقّعين (اختياري)"
+
+msgid "More information"
+msgstr "مزيد من المعلومات"
+
+msgid "My electronic signature is legally binding and has the same effect as a handwritten signature. The time, my IP address and browser are recorded as proof of signing."
+msgstr "توقيعي الإلكتروني مُلزم قانونيًا وله نفس أثر التوقيع بخط اليد. يُسجَّل الوقت وعنوان IP والمتصفح كدليل على التوقيع."
+
+msgid "Name"
+msgstr "الاسم"
+
+msgid "Name (auto)"
+msgstr "الاسم (تلقائي)"
+
+msgid "Needs attention (out > 7 days)"
+msgstr "يحتاج إلى انتباه (مُرسل > 7 أيام)"
+
+msgid "New document"
+msgstr "مستند جديد"
+
+msgid "Next"
+msgstr "التالي"
+
+msgid "No REST API key is set. Save Settings to generate one if you use the API."
+msgstr "لم يتم تعيين مفتاح REST API. احفظ الإعدادات لإنشاء واحد إذا كنت تستخدم الـ API."
+
+msgid "No documents to show. Start by uploading a PDF in the admin."
+msgstr "لا توجد مستندات لعرضها. ابدأ برفع ملف PDF من لوحة الإدارة."
+
+msgid "No documents yet."
+msgstr "لا توجد مستندات بعد."
+
+msgid "No documents yet. Upload your first PDF to get started."
+msgstr "لا توجد مستندات بعد. ارفع أول ملف PDF للبدء."
+
+msgid "No emails were sent because the signer(s) have no email. Use \\\"Get signing link\\\" to share their link."
+msgstr "لم تُرسَل أي رسائل لأن الموقّع(ين) ليس لديهم بريد إلكتروني. استخدم \\\"الحصول على رابط التوقيع\\\" لمشاركة رابطهم."
+
+msgid "No events recorded yet."
+msgstr "لم تُسجَّل أي أحداث بعد."
+
+msgid "No extra verification"
+msgstr "بدون تحقق إضافي"
+
+msgid "No file was uploaded, or the upload failed."
+msgstr "لم يتم رفع أي ملف، أو فشل الرفع."
+
+msgid "No matching signed document was found for that ID and code."
+msgstr "لم يُعثر على مستند موقّع مطابق لهذا المعرّف والرمز."
+
+msgid "No signers added yet."
+msgstr "لم تتم إضافة موقّعين بعد."
+
+msgid "No signers yet."
+msgstr "لا يوجد موقّعون بعد."
+
+msgid "No templates yet."
+msgstr "لا توجد قوالب بعد."
+
+msgid "No webhook URL configured (optional)."
+msgstr "لم يتم إعداد عنوان webhook (اختياري)."
+
+msgid "No webhook URL is configured."
+msgstr "لم يتم إعداد عنوان webhook."
+
+msgid "No workspace"
+msgstr "لا توجد مساحة عمل"
+
+msgid "No workspace yet"
+msgstr "لا توجد مساحة عمل بعد"
+
+msgid "Not allowed"
+msgstr "غير مسموح"
+
+msgid "Not available"
+msgstr "غير متاح"
+
+msgid "Not found"
+msgstr "غير موجود"
+
+msgid "Nothing stuck — every document is moving."
+msgstr "لا شيء متوقف — كل مستند يتقدّم."
+
+msgid "Number"
+msgstr "رقم"
+
+msgid "OK"
+msgstr "حسنًا"
+
+msgid "One per line, in the form name = value. Each {{name}} in the content is replaced with its value. {{date}} and {{site}} are available automatically."
+msgstr "واحد في كل سطر، بصيغة الاسم = القيمة. يُستبدل كل {{name}} في المحتوى بقيمته. {{date}} و{{site}} متاحان تلقائيًا."
+
+msgid "Only PDF files are allowed."
+msgstr "يُسمح بملفات PDF فقط."
+
+msgid "OpenSSL (PKI signing)"
+msgstr "OpenSSL (توقيع PKI)"
+
+msgid "OpenSSL is available for cryptographic (PAdES) signing."
+msgstr "مكتبة OpenSSL متاحة للتوقيع التشفيري (PAdES)."
+
+msgid "OpenSSL is not available on this server, so PKI signing cannot be enabled."
+msgstr "مكتبة OpenSSL غير متاحة على هذا الخادم، لذا لا يمكن تفعيل توقيع PKI."
+
+msgid "OpenSSL is not available on this server, so cryptographic signing cannot be enabled."
+msgstr "مكتبة OpenSSL غير متاحة على هذا الخادم، لذا لا يمكن تفعيل التوقيع التشفيري."
+
+msgid "OpenSSL is unavailable; documents use electronic signatures only."
+msgstr "مكتبة OpenSSL غير متاحة؛ تستخدم المستندات التوقيعات الإلكترونية فقط."
+
+msgid "Optional. An RFC-3161 timestamp proves when each document was signed (PAdES-T), giving the signature long-term validity. Leave empty to disable."
+msgstr "اختياري. تُثبت طابع زمني وفق RFC-3161 وقت توقيع كل مستند (PAdES-T)، ما يمنح التوقيع صلاحية طويلة الأمد. اتركه فارغًا للتعطيل."
+
+msgid "Or start from a template"
+msgstr "أو ابدأ من قالب"
+
+msgid "Original PDF"
+msgstr "ملف PDF الأصلي"
+
+msgid "Outgoing webhook"
+msgstr "webhook صادر"
+
+msgid "Owner"
+msgstr "المالك"
+
+msgid "PDF file"
+msgstr "ملف PDF"
+
+msgid "PDF only, up to 25 MB."
+msgstr "ملفات PDF فقط، حتى 25 ميغابايت."
+
+msgid "PDF uploaded. Now add signers and place fields."
+msgstr "تم رفع ملف PDF. الآن أضف الموقّعين وضع الحقول."
+
+msgid "PHP version"
+msgstr "إصدار PHP"
+
+msgid "Page %1$d of %2$d"
+msgstr "صفحة %1$d من %2$d"
+
+msgid "Partially signed"
+msgstr "موقّع جزئيًا"
+
+msgid "Pending invitations"
+msgstr "دعوات معلّقة"
+
+msgid "Permanently delete this document and all its data?"
+msgstr "حذف هذا المستند وكل بياناته نهائيًا؟"
+
+msgid "Phone (optional)"
+msgstr "الهاتف (اختياري)"
+
+msgid "Phone for WhatsApp (optional)"
+msgstr "الهاتف لواتساب (اختياري)"
+
+msgid "Place at least one field for each signer."
+msgstr "ضع حقلًا واحدًا على الأقل لكل موقّع."
+
+msgid "Place at least one signature field before sending."
+msgstr "ضع حقل توقيع واحدًا على الأقل قبل الإرسال."
+
+msgid "Place fields"
+msgstr "وضع الحقول"
+
+msgid "Place signature fields"
+msgstr "وضع حقول التوقيع"
+
+msgid "Please add a title or some content for the document."
+msgstr "يرجى إضافة عنوان أو بعض المحتوى للمستند."
+
+msgid "Please choose a .p12/.pfx certificate file."
+msgstr "يرجى اختيار ملف شهادة بصيغة .p12/.pfx."
+
+msgid "Please choose a PDF to upload."
+msgstr "يرجى اختيار ملف PDF للرفع."
+
+msgid "Please choose one of your templates."
+msgstr "يرجى اختيار أحد قوالبك."
+
+msgid "Please complete all required fields before signing."
+msgstr "يرجى إكمال جميع الحقول المطلوبة قبل التوقيع."
+
+msgid "Please complete the highlighted items: add your signature, fill the required fields and accept the agreement."
+msgstr "يرجى إكمال العناصر المميّزة: أضف توقيعك، واملأ الحقول المطلوبة، ووافِق على الاتفاقية."
+
+msgid "Please enter the access code provided by the sender to continue."
+msgstr "يرجى إدخال رمز الوصول المقدَّم من المُرسِل للمتابعة."
+
+msgid "Please open the secure link below to view and sign it:"
+msgstr "يرجى فتح الرابط الآمن أدناه لعرضه وتوقيعه:"
+
+msgid "Please provide a name or an email for the signer."
+msgstr "يرجى تقديم اسم أو بريد إلكتروني للموقّع."
+
+msgid "Please provide a recipient for every role that has fields."
+msgstr "يرجى تقديم مستلم لكل دور يحتوي على حقول."
+
+msgid "Please provide a sub-workspace name."
+msgstr "يرجى تقديم اسم لمساحة العمل الفرعية."
+
+msgid "Please provide a valid email address."
+msgstr "يرجى تقديم عنوان بريد إلكتروني صالح."
+
+msgid "Please provide a valid email and role."
+msgstr "يرجى تقديم بريد إلكتروني ودور صالحين."
+
+msgid "Please provide at least one recipient."
+msgstr "يرجى تقديم مستلم واحد على الأقل."
+
+msgid "Please sign in"
+msgstr "يرجى تسجيل الدخول"
+
+msgid "Please sign the document at the following secure link: %s"
+msgstr "يرجى توقيع المستند عبر الرابط الآمن التالي: %s"
+
+msgid "Please verify your identity before signing."
+msgstr "يرجى التحقق من هويتك قبل التوقيع."
+
+msgid "Portal template missing."
+msgstr "قالب البوابة مفقود."
+
+msgid "Previous"
+msgstr "السابق"
+
+msgid "Problem"
+msgstr "مشكلة"
+
+msgid "Protected file storage"
+msgstr "تخزين ملفات محمي"
+
+msgid "REST API key"
+msgstr "مفتاح REST API"
+
+msgid "REST base: /wp-json/comsign/v1/documents"
+msgstr "قاعدة REST: /wp-json/comsign/v1/documents"
+
+msgid "Re-send invitations"
+msgstr "إعادة إرسال الدعوات"
+
+msgid "Ready to send"
+msgstr "جاهز للإرسال"
+
+msgid "Reason for declining (optional)"
+msgstr "سبب الرفض (اختياري)"
+
+msgid "Recent documents"
+msgstr "المستندات الأخيرة"
+
+msgid "Regenerate API key & webhook secret on save"
+msgstr "إعادة إنشاء مفتاح API وسر webhook عند الحفظ"
+
+msgid "Remind every"
+msgstr "التذكير كل"
+
+msgid "Reminder sent"
+msgstr "تم إرسال التذكير"
+
+msgid "Reminder: a document is awaiting your signature — %s"
+msgstr "تذكير: هناك مستند بانتظار توقيعك — %s"
+
+msgid "Reminders run once a day via WP-Cron. Each reminder issues a fresh signing link."
+msgstr "تُنفَّذ التذكيرات مرة واحدة يوميًا عبر WP-Cron. يصدر كل تذكير رابط توقيع جديدًا."
+
+msgid "Remove"
+msgstr "إزالة"
+
+msgid "Remove certificate"
+msgstr "إزالة الشهادة"
+
+msgid "Remove the certificate and revert to electronic signatures?"
+msgstr "إزالة الشهادة والعودة إلى التوقيعات الإلكترونية؟"
+
+msgid "Remove this member?"
+msgstr "إزالة هذا العضو؟"
+
+msgid "Remove this signer?"
+msgstr "إزالة هذا الموقّع؟"
+
+msgid "Require signing in order"
+msgstr "اشتراط التوقيع بالترتيب"
+
+msgid "Required"
+msgstr "مطلوب"
+
+msgid "Resend"
+msgstr "إعادة الإرسال"
+
+msgid "Resend code"
+msgstr "إعادة إرسال الرمز"
+
+msgid "Review &amp; send"
+msgstr "المراجعة والإرسال"
+
+msgid "Role"
+msgstr "الدور"
+
+msgid "Role %d"
+msgstr "الدور %d"
+
+msgid "Role updated."
+msgstr "تم تحديث الدور."
+
+msgid "Roles"
+msgstr "الأدوار"
+
+msgid "Running PHP %s (7.4+ required)."
+msgstr "يعمل PHP %s (مطلوب 7.4 أو أحدث)."
+
+msgid "SHA-256:"
+msgstr "SHA-256:"
+
+msgid "Save"
+msgstr "حفظ"
+
+msgid "Save CC recipients"
+msgstr "حفظ مستلمي النسخة"
+
+msgid "Save a document as a template from its management screen, then reuse it here for new documents or bulk sending."
+msgstr "احفظ مستندًا كقالب من شاشة إدارته، ثم أعد استخدامه هنا للمستندات الجديدة أو الإرسال الجماعي."
+
+msgid "Save as draft"
+msgstr "حفظ كمسودة"
+
+msgid "Save as template"
+msgstr "حفظ كقالب"
+
+msgid "Save fields"
+msgstr "حفظ الحقول"
+
+msgid "Save settings"
+msgstr "حفظ الإعدادات"
+
+msgid "Save timestamp settings"
+msgstr "حفظ إعدادات الطابع الزمني"
+
+msgid "Scan to verify this document online."
+msgstr "امسح ضوئيًا للتحقق من هذا المستند عبر الإنترنت."
+
+msgid "Scheduled tasks (WP-Cron)"
+msgstr "المهام المجدولة (WP-Cron)"
+
+msgid "Securely processed by %s"
+msgstr "تتم معالجته بأمان بواسطة %s"
+
+msgid "Select an option"
+msgstr "اختر خيارًا"
+
+msgid "Select image"
+msgstr "اختر صورة"
+
+msgid "Send"
+msgstr "إرسال"
+
+msgid "Send failed"
+msgstr "فشل الإرسال"
+
+msgid "Send for signing"
+msgstr "إرسال للتوقيع"
+
+msgid "Send invite"
+msgstr "إرسال دعوة"
+
+msgid "Send test email to %s"
+msgstr "إرسال بريد تجريبي إلى %s"
+
+msgid "Send test webhook"
+msgstr "إرسال webhook تجريبي"
+
+msgid "Sender"
+msgstr "المُرسِل"
+
+msgid "Sent"
+msgstr "تم الإرسال"
+
+msgid "Sent %1$d invitation(s). %2$d signer(s) have no email — share their link manually."
+msgstr "تم إرسال %1$d دعوة. %2$d موقّع ليس لديهم بريد إلكتروني — شارك رابطهم يدويًا."
+
+msgid "Sent %d invitation(s)."
+msgstr "تم إرسال %d دعوة."
+
+msgid "Sent by %s"
+msgstr "أُرسل بواسطة %s"
+
+msgid "Sent for signing"
+msgstr "أُرسل للتوقيع"
+
+msgid "Settings"
+msgstr "الإعدادات"
+
+msgid "Settings saved."
+msgstr "تم حفظ الإعدادات."
+
+msgid "Share via WhatsApp"
+msgstr "المشاركة عبر واتساب"
+
+msgid "Short help text under the field (optional):"
+msgstr "نص مساعدة قصير أسفل الحقل (اختياري):"
+
+msgid "Shown to signers on the signing page and in emails."
+msgstr "يظهر للموقّعين في صفحة التوقيع وفي رسائل البريد."
+
+msgid "Sign & finish"
+msgstr "التوقيع والإنهاء"
+
+msgid "Sign document"
+msgstr "توقيع المستند"
+
+msgid "Sign in"
+msgstr "تسجيل الدخول"
+
+msgid "Sign in person"
+msgstr "التوقيع حضوريًا"
+
+msgid "Sign: %s"
+msgstr "توقيع: %s"
+
+msgid "Signature"
+msgstr "التوقيع"
+
+msgid "Signature Certificate"
+msgstr "شهادة التوقيع"
+
+msgid "Signature fields saved."
+msgstr "تم حفظ حقول التوقيع."
+
+msgid "Signatures pending"
+msgstr "توقيعات معلّقة"
+
+msgid "Signed"
+msgstr "موقّع"
+
+msgid "Signed at"
+msgstr "تاريخ التوقيع"
+
+msgid "Signed by:"
+msgstr "وقّعه:"
+
+msgid "Signed copy"
+msgstr "نسخة موقّعة"
+
+msgid "Signed document"
+msgstr "مستند موقّع"
+
+msgid "Signed successfully"
+msgstr "تم التوقيع بنجاح"
+
+msgid "Signer %d"
+msgstr "الموقّع %d"
+
+msgid "Signer added."
+msgstr "تمت إضافة الموقّع."
+
+msgid "Signer not found."
+msgstr "لم يتم العثور على الموقّع."
+
+msgid "Signer removed."
+msgstr "تمت إزالة الموقّع."
+
+msgid "Signer verification updated."
+msgstr "تم تحديث التحقق من الموقّع."
+
+msgid "Signers"
+msgstr "الموقّعون"
+
+msgid "Signers: %d"
+msgstr "الموقّعون: %d"
+
+msgid "Signing deadline extended."
+msgstr "تم تمديد الموعد النهائي للتوقيع."
+
+msgid "Signing declined"
+msgstr "تم رفض التوقيع"
+
+msgid "Skip to content"
+msgstr "انتقل إلى المحتوى"
+
+msgid "Some invitations could not be sent: %s. Please check your site email settings and re-send."
+msgstr "تعذّر إرسال بعض الدعوات: %s. يرجى التحقق من إعدادات بريد موقعك وإعادة الإرسال."
+
+msgid "Status"
+msgstr "الحالة"
+
+msgid "Status:"
+msgstr "الحالة:"
+
+msgid "Storage is writable but the .htaccess guard is missing. On nginx, add a deny rule for the comsign uploads directory."
+msgstr "مجلد التخزين قابل للكتابة لكن حماية .htaccess مفقودة. على nginx، أضف قاعدة منع لمجلد رفع comsign."
+
+msgid "Sub-workspace created."
+msgstr "تم إنشاء مساحة العمل الفرعية."
+
+msgid "Sub-workspace name"
+msgstr "اسم مساحة العمل الفرعية"
+
+msgid "Switch"
+msgstr "تبديل"
+
+msgid "System Status"
+msgstr "حالة النظام"
+
+msgid "Template"
+msgstr "قالب"
+
+msgid "Template deleted."
+msgstr "تم حذف القالب."
+
+msgid "Template missing."
+msgstr "القالب مفقود."
+
+msgid "Template name"
+msgstr "اسم القالب"
+
+msgid "Template not found."
+msgstr "لم يتم العثور على القالب."
+
+msgid "Template saved."
+msgstr "تم حفظ القالب."
+
+msgid "Templates"
+msgstr "القوالب"
+
+msgid "Test email sent to %s."
+msgstr "تم إرسال بريد تجريبي إلى %s."
+
+msgid "Text"
+msgstr "نص"
+
+msgid "Thank you — your signature has been recorded. The document will be completed once the remaining participants have signed."
+msgstr "شكرًا لك — تم تسجيل توقيعك. سيكتمل المستند بمجرد توقيع باقي المشاركين."
+
+msgid "That code was not correct. Please try again."
+msgstr "الرمز غير صحيح. يرجى المحاولة مرة أخرى."
+
+msgid "The certificate could not be read. Check the file and password."
+msgstr "تعذّر قراءة الشهادة. تحقق من الملف وكلمة المرور."
+
+msgid "The certificate file is missing or too large (max 512 KB)."
+msgstr "ملف الشهادة مفقود أو كبير جدًا (الحد الأقصى 512 كيلوبايت)."
+
+msgid "The certificate file is too large (max 512 KB)."
+msgstr "ملف الشهادة كبير جدًا (الحد الأقصى 512 كيلوبايت)."
+
+msgid "The certificate must be a .p12 or .pfx file."
+msgstr "يجب أن تكون الشهادة ملفًا بصيغة .p12 أو .pfx."
+
+msgid "The daily reminder task is scheduled."
+msgstr "مهمة التذكير اليومية مجدولة."
+
+msgid "The document \\\"%s\\\" has been signed by all parties."
+msgstr "تم توقيع المستند \\\"%s\\\" من قبل جميع الأطراف."
+
+msgid "The document could not be found."
+msgstr "تعذّر العثور على المستند."
+
+msgid "The document is now fully signed by all parties. A signed copy will be sent to the relevant recipients."
+msgstr "تم الآن توقيع المستند بالكامل من قبل جميع الأطراف. ستُرسَل نسخة موقّعة إلى المستلمين المعنيين."
+
+msgid "The email could not be sent. Please check your site email settings."
+msgstr "تعذّر إرسال البريد الإلكتروني. يرجى التحقق من إعدادات بريد موقعك."
+
+msgid "The file does not look like a valid PDF."
+msgstr "لا يبدو أن الملف ملف PDF صالح."
+
+msgid "The file is too large (max 25 MB)."
+msgstr "الملف كبير جدًا (الحد الأقصى 25 ميغابايت)."
+
+msgid "The fully signed copy is attached."
+msgstr "النسخة الموقّعة بالكامل مرفقة."
+
+msgid "The protected uploads directory is missing or not writable."
+msgstr "مجلد الرفع المحمي مفقود أو غير قابل للكتابة."
+
+msgid "The reminder task is not scheduled. Reactivate the plugin."
+msgstr "مهمة التذكير غير مجدولة. أعد تفعيل الإضافة."
+
+msgid "The requested document could not be found."
+msgstr "تعذّر العثور على المستند المطلوب."
+
+msgid "The storage directory exists, is writable and carries deny rules (verify nginx separately)."
+msgstr "مجلد التخزين موجود وقابل للكتابة ويحمل قواعد منع (تحقق من nginx بشكل منفصل)."
+
+msgid "The webhook URL is invalid or points to a blocked (private/loopback) target."
+msgstr "عنوان webhook غير صالح أو يشير إلى هدف محظور (خاص/محلي)."
+
+msgid "The webhook URL is set but looks invalid or points to a blocked (private/loopback) target."
+msgstr "تم تعيين عنوان webhook لكنه يبدو غير صالح أو يشير إلى هدف محظور (خاص/محلي)."
+
+msgid "There are no templates in this workspace yet. An administrator can create one from any document."
+msgstr "لا توجد قوالب في مساحة العمل هذه بعد. يمكن للمدير إنشاء واحد من أي مستند."
+
+msgid "These checks help you confirm ComSign is correctly configured on this server."
+msgstr "تساعدك هذه الفحوص على التأكد من أن ComSign مُعدّ بشكل صحيح على هذا الخادم."
+
+msgid "These people receive the fully signed PDF by email when signing completes. They do not sign."
+msgstr "يتلقى هؤلاء الأشخاص ملف PDF الموقّع بالكامل بالبريد عند اكتمال التوقيع. وهم لا يوقّعون."
+
+msgid "These signers have no fields yet: %s. Open \\\"Place signature fields\\\"."
+msgstr "هؤلاء الموقّعون ليس لديهم حقول بعد: %s. افتح \\\"وضع حقول التوقيع\\\"."
+
+msgid "This document does not exist in your workspace."
+msgstr "هذا المستند غير موجود في مساحة عملك."
+
+msgid "This document has already been sent and can no longer be edited."
+msgstr "تم إرسال هذا المستند بالفعل ولم يعد بالإمكان تحريره."
+
+msgid "This document is authentic."
+msgstr "هذا المستند أصلي."
+
+msgid "This document is not available for editing in your workspace."
+msgstr "هذا المستند غير متاح للتحرير في مساحة عملك."
+
+msgid "This document is signed in order. You will be notified when it is your turn."
+msgstr "يُوقَّع هذا المستند بالترتيب. سيتم إشعارك عندما يحين دورك."
+
+msgid "This field is required."
+msgstr "هذا الحقل مطلوب."
+
+msgid "This is a test email from ComSign. If you received it, outgoing mail works on this server."
+msgstr "هذا بريد تجريبي من ComSign. إذا استلمته، فإن البريد الصادر يعمل على هذا الخادم."
+
+msgid "This link is personal and replaces any link previously issued to this signer."
+msgstr "هذا الرابط شخصي ويحل محل أي رابط سبق إصداره لهذا الموقّع."
+
+msgid "This link is personal — please do not forward it."
+msgstr "هذا الرابط شخصي — يرجى عدم إعادة توجيهه."
+
+msgid "This signer has no email. Share the signing link instead."
+msgstr "ليس لدى هذا الموقّع بريد إلكتروني. شارك رابط التوقيع بدلًا من ذلك."
+
+msgid "This signing link has expired."
+msgstr "انتهت صلاحية رابط التوقيع هذا."
+
+msgid "This signing link has expired. Please ask the sender for a new one."
+msgstr "انتهت صلاحية رابط التوقيع هذا. يرجى طلب رابط جديد من المُرسِل."
+
+msgid "This signing link is no longer valid."
+msgstr "لم يعد رابط التوقيع هذا صالحًا."
+
+msgid "This signing link is no longer valid. Please ask the sender for a new one."
+msgstr "لم يعد رابط التوقيع هذا صالحًا. يرجى طلب رابط جديد من المُرسِل."
+
+msgid "Timeline"
+msgstr "المخطط الزمني"
+
+msgid "Timestamp authority (TSA) URL"
+msgstr "عنوان سلطة الطابع الزمني (TSA)"
+
+msgid "Timestamp authority cleared."
+msgstr "تم مسح سلطة الطابع الزمني."
+
+msgid "Timestamp authority saved. New signatures will include a trusted timestamp."
+msgstr "تم حفظ سلطة الطابع الزمني. ستتضمن التوقيعات الجديدة طابعًا زمنيًا موثوقًا."
+
+msgid "Title:"
+msgstr "العنوان:"
+
+msgid "To do:"
+msgstr "للتنفيذ:"
+
+msgid "Total documents"
+msgstr "إجمالي المستندات"
+
+msgid "Type"
+msgstr "النوع"
+
+msgid "Type your full name"
+msgstr "اكتب اسمك الكامل"
+
+msgid "Untitled document"
+msgstr "مستند بدون عنوان"
+
+msgid "Upload & continue"
+msgstr "رفع ومتابعة"
+
+msgid "Upload &amp; continue"
+msgstr "رفع ومتابعة"
+
+msgid "Upload a PDF"
+msgstr "رفع ملف PDF"
+
+msgid "Upload a PDF (or compose one) for this document."
+msgstr "ارفع ملف PDF (أو أنشئ واحدًا) لهذا المستند."
+
+msgid "Upload a PDF, add signers, and place the fields yourself."
+msgstr "ارفع ملف PDF، وأضف الموقّعين، وضع الحقول بنفسك."
+
+msgid "Upload a PKCS#12 certificate (.p12/.pfx) to sign completed documents cryptographically (eIDAS / ComSign compatible). Without it, documents use electronic signatures."
+msgstr "ارفع شهادة PKCS#12 (‎.p12/.pfx) لتوقيع المستندات المكتملة تشفيريًا (متوافق مع eIDAS / ComSign). بدونها، تستخدم المستندات التوقيعات الإلكترونية."
+
+msgid "Upload a file"
+msgstr "رفع ملف"
+
+msgid "Upload certificate"
+msgstr "رفع شهادة"
+
+msgid "Use"
+msgstr "استخدام"
+
+msgid "Use placeholders like {{name}} or {{date}} to insert variables."
+msgstr "استخدم عناصر نائبة مثل {{name}} أو {{date}} لإدراج المتغيرات."
+
+msgid "Use template: %s"
+msgstr "استخدام القالب: %s"
+
+msgid "Use this template"
+msgstr "استخدام هذا القالب"
+
+msgid "Variables"
+msgstr "المتغيرات"
+
+msgid "Verification code (SHA-256)"
+msgstr "رمز التحقق (SHA-256)"
+
+msgid "Verification required"
+msgstr "التحقق مطلوب"
+
+msgid "Verification required."
+msgstr "التحقق مطلوب."
+
+msgid "Verify a document"
+msgstr "التحقق من مستند"
+
+msgid "Verify document"
+msgstr "التحقق من المستند"
+
+msgid "Verify identity:"
+msgstr "التحقق من الهوية:"
+
+msgid "Verify your identity"
+msgstr "تحقق من هويتك"
+
+msgid "View original"
+msgstr "عرض الأصل"
+
+msgid "Viewed"
+msgstr "تمت المشاهدة"
+
+msgid "Viewer"
+msgstr "مُشاهِد"
+
+msgid "WP-Cron is disabled; make sure a real system cron triggers wp-cron.php, or reminders will not be sent."
+msgstr "WP-Cron معطّل؛ تأكد من وجود مهمة cron حقيقية في النظام تُشغّل wp-cron.php، وإلا فلن تُرسَل التذكيرات."
+
+msgid "Waiting for an earlier signer"
+msgstr "بانتظار موقّع سابق"
+
+msgid "Warning"
+msgstr "تحذير"
+
+msgid "We sent a one-time code to %s. Enter it below to continue."
+msgstr "أرسلنا رمزًا لمرة واحدة إلى %s. أدخله أدناه للمتابعة."
+
+msgid "Webhook URL"
+msgstr "عنوان webhook"
+
+msgid "Webhook secret"
+msgstr "سر webhook"
+
+msgid "When"
+msgstr "متى"
+
+msgid "Workspace"
+msgstr "مساحة العمل"
+
+msgid "Workspace members"
+msgstr "أعضاء مساحة العمل"
+
+msgid "Workspace switched."
+msgstr "تم تبديل مساحة العمل."
+
+msgid "Workspace:"
+msgstr "مساحة العمل:"
+
+msgid "Workspace: %s"
+msgstr "مساحة العمل: %s"
+
+msgid "Write the fixed text of the document. After creating it you can place fillable and signature fields on the generated PDF."
+msgstr "اكتب النص الثابت للمستند. بعد إنشائه يمكنك وضع حقول قابلة للتعبئة وحقول توقيع على ملف PDF المُنشأ."
+
+msgid "X-ComSign-Key"
+msgstr "X-ComSign-Key"
+
+msgid "You are not allowed to access this page."
+msgstr "غير مسموح لك بالوصول إلى هذه الصفحة."
+
+msgid "You can view members but only an owner or admin can change them."
+msgstr "يمكنك عرض الأعضاء لكن المالك أو المدير فقط يمكنه تغييرهم."
+
+msgid "You cannot create documents"
+msgstr "لا يمكنك إنشاء مستندات"
+
+msgid "You cannot create documents in this workspace."
+msgstr "لا يمكنك إنشاء مستندات في مساحة العمل هذه."
+
+msgid "You cannot edit this document."
+msgstr "لا يمكنك تحرير هذا المستند."
+
+msgid "You cannot manage members of this workspace."
+msgstr "لا يمكنك إدارة أعضاء مساحة العمل هذه."
+
+msgid "You cannot remove the last owner of a workspace."
+msgstr "لا يمكنك إزالة المالك الأخير لمساحة العمل."
+
+msgid "You cannot resend invitations for this document."
+msgstr "لا يمكنك إعادة إرسال الدعوات لهذا المستند."
+
+msgid "You cannot send this document."
+msgstr "لا يمكنك إرسال هذا المستند."
+
+msgid "You do not have access to this document."
+msgstr "ليس لديك صلاحية الوصول إلى هذا المستند."
+
+msgid "You do not have permission to do that."
+msgstr "ليس لديك إذن للقيام بذلك."
+
+msgid "You have already signed this document."
+msgstr "لقد وقّعت هذا المستند بالفعل."
+
+msgid "You have already signed this document. Thank you."
+msgstr "لقد وقّعت هذا المستند بالفعل. شكرًا لك."
+
+msgid "You have been asked to review and sign the document: \\\"%s\\\"."
+msgstr "طُلب منك مراجعة وتوقيع المستند: \\\"%s\\\"."
+
+msgid "You have declined to sign this document."
+msgstr "لقد رفضت توقيع هذا المستند."
+
+msgid "You have declined to sign this document. The sender has been notified."
+msgstr "لقد رفضت توقيع هذا المستند. تم إشعار المُرسِل."
+
+msgid "You must agree to sign electronically before continuing."
+msgstr "يجب أن توافق على التوقيع إلكترونيًا قبل المتابعة."
+
+msgid "You need to sign in to access your workspace."
+msgstr "تحتاج إلى تسجيل الدخول للوصول إلى مساحة عملك."
+
+msgid "Your ComSign verification code"
+msgstr "رمز التحقق الخاص بك من ComSign"
+
+msgid "Your account is not part of any workspace. Please contact your administrator."
+msgstr "حسابك ليس جزءًا من أي مساحة عمل. يرجى التواصل مع المسؤول."
+
+msgid "Your answer"
+msgstr "إجابتك"
+
+msgid "Your role in this workspace does not allow creating documents. Please contact an administrator."
+msgstr "دورك في مساحة العمل هذه لا يسمح بإنشاء المستندات. يرجى التواصل مع المسؤول."
+
+msgid "Your signature"
+msgstr "توقيعك"
+
+msgid "Your verification code is: %1$s\\n\\nIt expires in %2$d minutes."
+msgstr "رمز التحقق الخاص بك هو: %1$s\\n\\nتنتهي صلاحيته خلال %2$d دقيقة."
+
+msgid "Your workspace"
+msgstr "مساحة عملك"
+
+msgid "customer_name = Dana Cohen\\ncontract_no = 2026-0042"
+msgstr "customer_name = Dana Cohen\\ncontract_no = 2026-0042"
+
+msgid "days"
+msgstr "أيام"
+
+msgid "days (0 = never)"
+msgstr "أيام (0 = أبدًا)"
+
+msgid "e.g. Service agreement"
+msgstr "مثال: اتفاقية خدمة"
+
+msgid "email@example.com"
+msgstr "email@example.com"
+
+msgid "wp_mail() reported a failure. Check your mail configuration (e.g. an SMTP plugin)."
+msgstr "أبلغت wp_mail() عن فشل. تحقق من إعدادات البريد لديك (مثل إضافة SMTP)."
+

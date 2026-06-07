@@ -4,7 +4,7 @@ Tags: signature, digital signature, pdf, esignature, hebrew
 Requires at least: 6.0
 Tested up to: 6.5
 Requires PHP: 7.4
-Stable tag: 0.28.0
+Stable tag: 0.29.0
 License: GPL-2.0-or-later
 License URI: https://www.gnu.org/licenses/gpl-2.0.html
 
@@ -105,6 +105,12 @@ ID and its SHA-256 code (shown on the document screen and the signature
 certificate) to confirm the document is authentic and see who signed it.
 
 == Changelog ==
+
+= 0.29.0 =
+* New languages: Arabic (ar, right-to-left) and Russian (ru_RU), each a full
+  translation of all ~510 strings. Arabic automatically renders the signing
+  pages and portal right-to-left. (These translations are initial and benefit
+  from native-speaker review.)
 
 = 0.28.0 =
 * New: PAdES-T trusted timestamps. Configure an RFC-3161 Timestamp Authority
