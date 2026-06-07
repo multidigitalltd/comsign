@@ -29,6 +29,10 @@ final class SignerAuth {
 	private const SESSION_TTL    = 2 * HOUR_IN_SECONDS;
 	private const OTP_TTL        = 10 * MINUTE_IN_SECONDS;
 
+	// Brute-force throttling for the identity challenge.
+	public const MAX_ATTEMPTS   = 5;
+	private const LOCKOUT_TTL    = 15 * MINUTE_IN_SECONDS;
+
 	/**
 	 * Available methods => human label (for the admin UI).
 	 */
@@ -152,6 +156,44 @@ final class SignerAuth {
 			return true;
 		}
 		return false;
+	}
+
+	/**
+	 * Whether the signer is currently locked out after too many failed attempts.
+	 *
+	 * @param object $signer Signer row.
+	 */
+	public static function is_locked_out( object $signer ): bool {
+		return (int) get_transient( self::attempts_key( $signer ) ) >= self::MAX_ATTEMPTS;
+	}
+
+	/**
+	 * Record one failed verification attempt (sliding lockout window).
+	 *
+	 * @param object $signer Signer row.
+	 */
+	public static function register_failed_attempt( object $signer ): void {
+		$key   = self::attempts_key( $signer );
+		$count = (int) get_transient( $key ) + 1;
+		set_transient( $key, $count, self::LOCKOUT_TTL );
+	}
+
+	/**
+	 * Clear the failed-attempt counter (e.g. after a successful verification).
+	 *
+	 * @param object $signer Signer row.
+	 */
+	public static function clear_attempts( object $signer ): void {
+		delete_transient( self::attempts_key( $signer ) );
+	}
+
+	/**
+	 * Transient key for a signer's failed-attempt counter.
+	 *
+	 * @param object $signer Signer row.
+	 */
+	private static function attempts_key( object $signer ): string {
+		return 'comsign_authfail_' . (int) $signer->id;
 	}
 
 	/**

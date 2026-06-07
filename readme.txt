@@ -4,7 +4,7 @@ Tags: signature, digital signature, pdf, esignature, hebrew
 Requires at least: 6.0
 Tested up to: 6.5
 Requires PHP: 7.4
-Stable tag: 0.31.0
+Stable tag: 0.32.0
 License: GPL-2.0-or-later
 License URI: https://www.gnu.org/licenses/gpl-2.0.html
 
@@ -105,6 +105,12 @@ ID and its SHA-256 code (shown on the document screen and the signature
 certificate) to confirm the document is authentic and see who signed it.
 
 == Changelog ==
+
+= 0.32.0 =
+* Security: the signer identity challenge (access code / email one-time code) is
+  now rate-limited. After several incorrect attempts the challenge is locked for
+  a few minutes, defeating brute-force guessing of the 6-digit code; the lockout
+  is recorded in the audit trail. Covered by a regression test.
 
 = 0.31.0 =
 * Accessibility: the signing page's Draw/Type signature switch is now a proper

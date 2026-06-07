@@ -108,3 +108,25 @@ Test::add( 'security: webhook SSRF targets are blocked', static function (): voi
 	// Clean up so we never keep a junk URL configured.
 	Settings::update( array( 'webhook_url' => '' ) );
 } );
+
+Test::add( 'security: identity challenge locks out after repeated failures', static function (): void {
+	reset_tables();
+	$svc     = new DocumentService();
+	$signers = new SignerRepository();
+
+	$doc = $svc->create_from_text( 'Doc', '<p>x</p>', array() );
+	$svc->add_signer( $doc, 'A', 'a@example.com' );
+	$signer = $signers->for_document( $doc )[0];
+
+	Test::ok( ! \ComSign\Frontend\SignerAuth::is_locked_out( $signer ), 'not locked out initially' );
+
+	for ( $i = 0; $i < \ComSign\Frontend\SignerAuth::MAX_ATTEMPTS; $i++ ) {
+		Test::ok( ! \ComSign\Frontend\SignerAuth::is_locked_out( $signer ), 'still open during attempt ' . ( $i + 1 ) );
+		\ComSign\Frontend\SignerAuth::register_failed_attempt( $signer );
+	}
+
+	Test::ok( \ComSign\Frontend\SignerAuth::is_locked_out( $signer ), 'locked out after MAX_ATTEMPTS failures' );
+
+	\ComSign\Frontend\SignerAuth::clear_attempts( $signer );
+	Test::ok( ! \ComSign\Frontend\SignerAuth::is_locked_out( $signer ), 'cleared on success' );
+} );

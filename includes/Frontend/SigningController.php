@@ -351,6 +351,15 @@ final class SigningController {
 
 		check_admin_referer( 'comsign_auth_' . $signer->id );
 
+		// Stop credential brute-forcing: lock the challenge after too many misses.
+		if ( SignerAuth::is_locked_out( $signer ) ) {
+			$this->audit->record( AuditLogger::EVENT_VIEWED, (int) $signer->document_id, (int) $signer->id, array( 'auth' => 'locked' ) );
+			$this->render_message(
+				__( 'Too many attempts', 'comsign' ),
+				__( 'Too many incorrect attempts. Please wait a few minutes and try again.', 'comsign' )
+			);
+		}
+
 		// Resend OTP on request.
 		if ( ! empty( $_POST['resend'] ) && SignerAuth::METHOD_OTP === (string) $signer->auth_method ) {
 			delete_transient( 'comsign_otp_' . (int) $signer->id );
@@ -364,10 +373,12 @@ final class SigningController {
 			: SignerAuth::verify_code( $signer, $code );
 
 		if ( ! $ok ) {
+			SignerAuth::register_failed_attempt( $signer );
 			$this->audit->record( AuditLogger::EVENT_VIEWED, (int) $signer->document_id, (int) $signer->id, array( 'auth' => 'failed' ) );
 			$this->render_auth_challenge( $signer, $raw_token, __( 'That code was not correct. Please try again.', 'comsign' ) );
 		}
 
+		SignerAuth::clear_attempts( $signer );
 		SignerAuth::mark_verified( $signer );
 		$this->audit->record( AuditLogger::EVENT_VIEWED, (int) $signer->document_id, (int) $signer->id, array( 'auth' => 'passed' ) );
 

@@ -1340,6 +1340,12 @@ msgstr "Название:"
 msgid "To do:"
 msgstr "Сделать:"
 
+msgid "Too many attempts"
+msgstr "Слишком много попыток"
+
+msgid "Too many incorrect attempts. Please wait a few minutes and try again."
+msgstr "Слишком много неверных попыток. Подождите несколько минут и попробуйте снова."
+
 msgid "Total documents"
 msgstr "Всего документов"
 

@@ -1340,6 +1340,12 @@ msgstr "العنوان:"
 msgid "To do:"
 msgstr "للتنفيذ:"
 
+msgid "Too many attempts"
+msgstr "محاولات كثيرة جدًا"
+
+msgid "Too many incorrect attempts. Please wait a few minutes and try again."
+msgstr "محاولات خاطئة كثيرة جدًا. يرجى الانتظار بضع دقائق والمحاولة مرة أخرى."
+
 msgid "Total documents"
 msgstr "إجمالي المستندات"
 
