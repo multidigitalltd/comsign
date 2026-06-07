@@ -98,17 +98,18 @@ require __DIR__ . '/partials/portal-nav.php';
 					</ul>
 				<?php endif; ?>
 
+				<?php require __DIR__ . '/partials/contacts-datalist.php'; ?>
 				<form method="post" action="<?php echo esc_url( $action ); ?>" class="comsign-recipient">
 					<input type="hidden" name="action" value="comsign_portal_add_signer">
 					<input type="hidden" name="_wpnonce" value="<?php echo esc_attr( $nonces['add_signer'] ); ?>">
 					<input type="hidden" name="document_id" value="<?php echo $doc_id; ?>">
 					<p>
 						<label for="comsign-new-name"><?php esc_html_e( 'Full name', 'comsign' ); ?></label>
-						<input type="text" id="comsign-new-name" name="name" required>
+						<input type="text" id="comsign-new-name" name="name" list="comsign-contact-names" autocomplete="off" required>
 					</p>
 					<p>
 						<label for="comsign-new-email"><?php esc_html_e( 'Email', 'comsign' ); ?></label>
-						<input type="email" id="comsign-new-email" name="email" required>
+						<input type="email" id="comsign-new-email" name="email" list="comsign-contact-emails" autocomplete="off" required>
 					</p>
 					<p>
 						<label for="comsign-new-phone"><?php esc_html_e( 'Phone (optional)', 'comsign' ); ?></label>

@@ -54,6 +54,7 @@ function reset_tables(): void {
 		\ComSign\Setup\Installer::audit_table(),
 		\ComSign\Setup\Installer::documents_table(),
 		\ComSign\Setup\Installer::templates_table(),
+		\ComSign\Setup\Installer::contacts_table(),
 	) as $table ) {
 		$wpdb->query( "DELETE FROM {$table}" ); // phpcs:ignore WordPress.DB
 	}

@@ -35,6 +35,7 @@ final class DocumentService {
 	private Mailer $mailer;
 	private SignatureProviderInterface $provider;
 	private AccountService $account;
+	private \ComSign\Database\ContactRepository $contacts;
 
 	public function __construct() {
 		$this->documents  = new DocumentRepository();
@@ -46,6 +47,7 @@ final class DocumentService {
 		$this->mailer     = new Mailer();
 		$this->provider   = new ElectronicSignatureProvider();
 		$this->account    = new AccountService();
+		$this->contacts   = new \ComSign\Database\ContactRepository();
 	}
 
 	/**
@@ -399,7 +401,7 @@ final class DocumentService {
 
 		$auth = $this->normalize_auth( $auth_method, $auth_code, $email );
 
-		return $this->signers->create(
+		$signer_id = $this->signers->create(
 			array(
 				'document_id'    => $document_id,
 				'name'           => $name,
@@ -410,6 +412,16 @@ final class DocumentService {
 				'auth_code_hash' => $auth['hash'],
 			)
 		);
+
+		// Remember the signer in the document's account address book (no-op
+		// without a valid email). Scoped to the document's own account so a
+		// contact never leaks across tenants.
+		$document = $this->documents->find( $document_id );
+		if ( $document ) {
+			$this->contacts->upsert( (int) ( $document->account_id ?? 0 ), $name, $email, $phone );
+		}
+
+		return $signer_id;
 	}
 
 	/**
@@ -747,6 +759,7 @@ final class DocumentService {
 
 		// Create a signer per valid role and remember the mapping.
 		$signer_of_role = array();
+		$account_id     = $this->creation_account_id();
 		foreach ( $valid as $index => $r ) {
 			$signer_of_role[ $index ] = $this->signers->create(
 				array(
@@ -757,6 +770,8 @@ final class DocumentService {
 					'sign_order'  => $index,
 				)
 			);
+			// Capture each recipient in the account address book.
+			$this->contacts->upsert( $account_id, (string) $r['name'], (string) $r['email'], (string) $r['phone'] );
 		}
 
 		// Recreate the fields, mapping role_index -> new signer id.

@@ -100,16 +100,18 @@ require __DIR__ . '/partials/portal-nav.php';
 
 				<h2><?php echo esc_html( $selected->name ); ?></h2>
 
+				<?php require __DIR__ . '/partials/contacts-datalist.php'; ?>
+
 				<?php foreach ( $roles as $index => $label ) : ?>
 					<fieldset class="comsign-recipient">
 						<legend><?php echo esc_html( $label ? $label : sprintf( /* translators: %d: role number. */ __( 'Signer %d', 'comsign' ), $index + 1 ) ); ?></legend>
 						<p>
 							<label for="rcpt-name-<?php echo (int) $index; ?>"><?php esc_html_e( 'Full name', 'comsign' ); ?></label>
-							<input type="text" id="rcpt-name-<?php echo (int) $index; ?>" name="recipient[<?php echo (int) $index; ?>][name]" required>
+							<input type="text" id="rcpt-name-<?php echo (int) $index; ?>" name="recipient[<?php echo (int) $index; ?>][name]" list="comsign-contact-names" autocomplete="off" required>
 						</p>
 						<p>
 							<label for="rcpt-email-<?php echo (int) $index; ?>"><?php esc_html_e( 'Email', 'comsign' ); ?></label>
-							<input type="email" id="rcpt-email-<?php echo (int) $index; ?>" name="recipient[<?php echo (int) $index; ?>][email]" required>
+							<input type="email" id="rcpt-email-<?php echo (int) $index; ?>" name="recipient[<?php echo (int) $index; ?>][email]" list="comsign-contact-emails" autocomplete="off" required>
 						</p>
 						<p>
 							<label for="rcpt-phone-<?php echo (int) $index; ?>"><?php esc_html_e( 'Phone (optional)', 'comsign' ); ?></label>

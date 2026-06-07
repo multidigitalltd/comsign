@@ -81,6 +81,14 @@ final class Installer {
 	}
 
 	/**
+	 * Contacts (address book) table name.
+	 */
+	public static function contacts_table(): string {
+		global $wpdb;
+		return $wpdb->prefix . 'comsign_contacts';
+	}
+
+	/**
 	 * Option holding the id of the default (migration) account.
 	 */
 	public const OPTION_DEFAULT_ACCOUNT = 'comsign_default_account';
@@ -239,6 +247,22 @@ final class Installer {
 			PRIMARY KEY  (id),
 			UNIQUE KEY account_email (account_id, email),
 			KEY email (email)
+		) {$charset_collate};";
+
+		// Contacts (address book): reusable signer details, scoped to an account.
+		$contacts = self::contacts_table();
+		$schema[] = "CREATE TABLE {$contacts} (
+			id BIGINT UNSIGNED NOT NULL AUTO_INCREMENT,
+			account_id BIGINT UNSIGNED NOT NULL DEFAULT 0,
+			name VARCHAR(255) NOT NULL DEFAULT '',
+			email VARCHAR(190) NOT NULL DEFAULT '',
+			phone VARCHAR(40) NOT NULL DEFAULT '',
+			created_by BIGINT UNSIGNED NOT NULL DEFAULT 0,
+			created_at DATETIME NOT NULL DEFAULT '0000-00-00 00:00:00',
+			updated_at DATETIME NOT NULL DEFAULT '0000-00-00 00:00:00',
+			PRIMARY KEY  (id),
+			UNIQUE KEY account_email (account_id, email),
+			KEY account_id (account_id)
 		) {$charset_collate};";
 
 		// Drop the legacy UNIQUE index on token_hash before dbDelta re-adds it as

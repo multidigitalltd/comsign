@@ -4,7 +4,7 @@ Tags: signature, digital signature, pdf, esignature, hebrew
 Requires at least: 6.0
 Tested up to: 6.5
 Requires PHP: 7.4
-Stable tag: 0.33.0
+Stable tag: 0.34.0
 License: GPL-2.0-or-later
 License URI: https://www.gnu.org/licenses/gpl-2.0.html
 
@@ -105,6 +105,15 @@ ID and its SHA-256 code (shown on the document screen and the signature
 certificate) to confirm the document is authentic and see who signed it.
 
 == Changelog ==
+
+= 0.34.0 =
+* New: address book. Signers are remembered per workspace as you add them, and
+  offered back as native (keyboard- and screen-reader-accessible) autocomplete
+  on the name/email fields in the portal's document editor and template
+  recipient forms - no retyping frequent recipients. Contacts are strictly
+  account-scoped and never leak across tenants.
+* Cleanup: uninstall now also drops the contacts and account/membership/invite
+  tables.
 
 = 0.33.0 =
 * New: search and status filtering on the admin Documents list too (parity with

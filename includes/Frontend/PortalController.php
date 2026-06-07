@@ -13,6 +13,7 @@ namespace ComSign\Frontend;
 
 defined( 'ABSPATH' ) || exit;
 
+use ComSign\Database\ContactRepository;
 use ComSign\Database\DocumentRepository;
 use ComSign\Database\FieldRepository;
 use ComSign\Database\SignerRepository;
@@ -34,6 +35,7 @@ final class PortalController {
 	private SignerRepository $signers;
 	private TemplateRepository $templates;
 	private FieldRepository $fields;
+	private ContactRepository $contacts;
 	private AccountService $accounts;
 	private DocumentService $service;
 
@@ -42,6 +44,7 @@ final class PortalController {
 		$this->signers   = new SignerRepository();
 		$this->templates = new TemplateRepository();
 		$this->fields    = new FieldRepository();
+		$this->contacts  = new ContactRepository();
 		$this->accounts  = new AccountService();
 		$this->service   = new DocumentService();
 	}
@@ -504,6 +507,7 @@ final class PortalController {
 				'templates'  => $templates,
 				'selected'   => $selected,
 				'roles'      => $roles,
+				'contacts'   => $this->contacts->for_accounts( $account_ids ),
 				'action'       => admin_url( 'admin-post.php' ),
 				'nonce'        => wp_create_nonce( 'comsign_portal_create' ),
 				'upload_nonce' => wp_create_nonce( 'comsign_portal_upload' ),
@@ -580,6 +584,7 @@ final class PortalController {
 				'page_title'     => $document->title ? $document->title : __( 'Edit document', 'comsign' ),
 				'nav'            => $this->nav( 'create', $user_id ),
 				'document'       => $document,
+				'contacts'       => $this->contacts->for_accounts( $account_ids ),
 				'signers'        => $signers,
 				'fields_for_js'  => $fields_for_js,
 				'signers_for_js' => $signers_for_js,
