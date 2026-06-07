@@ -51,10 +51,11 @@ jobs:
           extensions: pdo_sqlite, sqlite3, mbstring, gd
           coverage: none
 
-      - name: Provision WordPress (SQLite) + run the test suite
+      - name: Provision WordPress (SQLite)
         run: |
-          set -e
           chmod +x comsign/tests/setup-wp.sh
-          WP_LOAD=$(comsign/tests/setup-wp.sh "$RUNNER_TEMP/wp" | tail -1)
-          echo "WordPress at: $WP_LOAD"
-          COMSIGN_WP_LOAD="$WP_LOAD" php comsign/tests/run.php
+          comsign/tests/setup-wp.sh "$RUNNER_TEMP/wp"
+
+      - name: Run the integration test suite
+        run: |
+          COMSIGN_WP_LOAD="$RUNNER_TEMP/wp/wordpress/wp-load.php" php comsign/tests/run.php

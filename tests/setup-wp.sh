@@ -18,12 +18,20 @@ SQLITE_VERSION="${SQLITE_VERSION:-2.1.13}"
 # Resolve the plugin source (this repo) regardless of where we're invoked from.
 PLUGIN_SRC="$(cd "$(dirname "${BASH_SOURCE[0]}")/.." && pwd)"
 
+# Download with retries so a flaky connection to wordpress.org doesn't fail CI.
+fetch() { # url outfile
+	curl -fsSL \
+		--retry 6 --retry-delay 5 --retry-all-errors --retry-connrefused \
+		--connect-timeout 30 --max-time 300 \
+		"$1" -o "$2"
+}
+
 mkdir -p "$TARGET"
 cd "$TARGET"
 
 if [ ! -f "wordpress/wp-load.php" ]; then
 	echo "Downloading WordPress ($WP_VERSION)..." >&2
-	curl -fsSL "https://wordpress.org/${WP_VERSION}.zip" -o wp.zip
+	fetch "https://wordpress.org/${WP_VERSION}.zip" wp.zip
 	unzip -q wp.zip
 	rm -f wp.zip
 fi
@@ -35,8 +43,14 @@ mkdir -p "$DBDIR"
 # SQLite integration plugin + db.php drop-in.
 if [ ! -d "$WP/wp-content/plugins/sqlite-database-integration" ]; then
 	echo "Downloading sqlite-database-integration ($SQLITE_VERSION)..." >&2
-	curl -fsSL "https://downloads.wordpress.org/plugin/sqlite-database-integration.${SQLITE_VERSION}.zip" -o sqlite.zip
+	# Try the plugin SVN/dist host first, then fall back to GitHub if it's down.
+	fetch "https://downloads.wordpress.org/plugin/sqlite-database-integration.${SQLITE_VERSION}.zip" sqlite.zip \
+		|| fetch "https://github.com/WordPress/sqlite-database-integration/archive/refs/heads/main.zip" sqlite.zip
 	unzip -q sqlite.zip -d "$WP/wp-content/plugins"
+	# Normalise the folder name (GitHub archives unpack as <repo>-main).
+	if [ ! -d "$WP/wp-content/plugins/sqlite-database-integration" ]; then
+		mv "$WP/wp-content/plugins/sqlite-database-integration-main" "$WP/wp-content/plugins/sqlite-database-integration"
+	fi
 	rm -f sqlite.zip
 fi
 cp "$WP/wp-content/plugins/sqlite-database-integration/db.copy" "$WP/wp-content/db.php"
