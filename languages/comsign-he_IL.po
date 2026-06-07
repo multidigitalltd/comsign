@@ -108,6 +108,7 @@ msgstr "קוד גישה (לשיטת קוד הגישה)"
 msgid "Access code (shared by you)"
 msgstr "קוד גישה (שאתם משתפים)"
 
+#: includes/Frontend/views/portal-contacts.php:71
 #: includes/Frontend/views/portal-document.php:91
 msgid "Action"
 msgstr "פעולה"
@@ -127,6 +128,10 @@ msgstr "תעודה פעילה:"
 #: includes/Admin/views/new.php:16
 msgid "Add Document"
 msgstr "הוספת מסמך"
+
+#: includes/Frontend/views/portal-contacts.php:28
+msgid "Add a contact"
+msgstr "הוספת איש קשר"
 
 #: includes/Services/SendReadiness.php:108
 msgid "Add a signature (or initials) field for: %s."
@@ -349,6 +354,7 @@ msgstr "בחירת תבנית"
 msgid "Choose…"
 msgstr "בחרו…"
 
+#: includes/Frontend/views/portal-contacts.php:58
 #: includes/Frontend/views/portal-documents.php:50
 #: includes/Frontend/views/sign.php:54
 msgid "Clear"
@@ -434,6 +440,24 @@ msgstr "נדרשת הסכמה"
 msgid "Consented"
 msgstr "ניתנה הסכמה"
 
+#: includes/Frontend/PortalController.php:601
+msgid "Contact removed."
+msgstr "איש הקשר הוסר."
+
+#: includes/Frontend/PortalController.php:581
+msgid "Contact saved."
+msgstr "איש הקשר נשמר."
+
+#: includes/Frontend/PortalController.php:548
+#: includes/Frontend/PortalController.php:861
+#: includes/Frontend/views/portal-contacts.php:23
+msgid "Contacts"
+msgstr "אנשי קשר"
+
+#: includes/Frontend/PortalController.php:536
+msgid "Contacts are not available"
+msgstr "אנשי קשר אינם זמינים"
+
 #: includes/Frontend/views/auth.php:53
 msgid "Continue"
 msgstr "המשך"
@@ -500,7 +524,7 @@ msgstr "נוצר"
 msgid "Dana Cohen, dana@example.com, +972500000000\nAvi Levi, avi@example.com"
 msgstr "דנה כהן, dana@example.com, +972500000000\nאבי לוי, avi@example.com"
 
-#: includes/Frontend/PortalController.php:758
+#: includes/Frontend/PortalController.php:843
 msgid "Dashboard"
 msgstr "לוח בקרה"
 
@@ -562,7 +586,7 @@ msgstr "חתימה דיגיטלית (PKI/PAdES)"
 
 #: includes/Admin/DocumentsListTable.php:53
 #: includes/Admin/views/analytics.php:85
-#: includes/Frontend/PortalController.php:709
+#: includes/Frontend/PortalController.php:794
 #: includes/Frontend/views/partials/portal-doc-table.php:20
 #: includes/Frontend/views/sign.php:25
 #: includes/Services/DocumentService.php:356
@@ -579,7 +603,7 @@ msgstr "מזהה מסמך"
 msgid "Document content"
 msgstr "תוכן המסמך"
 
-#: includes/Frontend/PortalController.php:156
+#: includes/Frontend/PortalController.php:159
 msgid "Document created and sent for signing."
 msgstr "המסמך נוצר ונשלח לחתימה."
 
@@ -603,8 +627,8 @@ msgstr "המסמך שוכפל."
 msgid "Document file is uploaded"
 msgstr "קובץ המסמך הועלה"
 
-#: includes/Frontend/PortalController.php:538
-#: includes/Frontend/PortalController.php:694
+#: includes/Frontend/PortalController.php:623
+#: includes/Frontend/PortalController.php:779
 msgid "Document not available"
 msgstr "המסמך אינו זמין"
 
@@ -620,7 +644,7 @@ msgstr "המסמך לא נמצא."
 msgid "Document preview"
 msgstr "תצוגת מסמך"
 
-#: includes/Frontend/PortalController.php:119
+#: includes/Frontend/PortalController.php:122
 msgid "Document sent for signing."
 msgstr "המסמך נשלח לחתימה."
 
@@ -653,8 +677,8 @@ msgstr "המסמך הועלה. כעת הוסיפו חותמים והניחו ש�
 
 #: includes/Admin/Admin.php:136
 #: includes/Admin/Admin.php:137
-#: includes/Frontend/PortalController.php:665
-#: includes/Frontend/PortalController.php:763
+#: includes/Frontend/PortalController.php:750
+#: includes/Frontend/PortalController.php:848
 #: includes/Frontend/views/portal-documents.php:34
 msgid "Documents"
 msgstr "מסמכים"
@@ -691,7 +715,7 @@ msgstr "הורד"
 msgid "Draft"
 msgstr "טיוטה"
 
-#: includes/Frontend/PortalController.php:159
+#: includes/Frontend/PortalController.php:162
 msgid "Draft created."
 msgstr "הטיוטה נוצרה."
 
@@ -720,7 +744,7 @@ msgstr "כל שורה יוצרת ושולחת מסמך נפרד. פורמט: ש�
 msgid "Each signer should have somewhere to sign."
 msgstr "לכל חותם צריך להיות מקום לחתום."
 
-#: includes/Frontend/PortalController.php:584
+#: includes/Frontend/PortalController.php:669
 #: includes/Frontend/views/portal-document.php:42
 msgid "Edit document"
 msgstr "עריכת מסמך"
@@ -733,6 +757,8 @@ msgstr "חתימה אלקטרונית"
 #: includes/Admin/views/members.php:38
 #: includes/Admin/views/members.php:85
 #: includes/Admin/views/members.php:114
+#: includes/Frontend/views/portal-contacts.php:37
+#: includes/Frontend/views/portal-contacts.php:69
 #: includes/Frontend/views/portal-create.php:113
 #: includes/Frontend/views/portal-document.php:87
 #: includes/Frontend/views/portal-edit.php:40
@@ -835,7 +861,7 @@ msgstr "תווית השדה שתוצג לחותם (לא חובה):"
 msgid "Field:"
 msgstr "שדה:"
 
-#: includes/Frontend/PortalController.php:350
+#: includes/Frontend/PortalController.php:353
 msgid "Fields saved."
 msgstr "השדות נשמרו."
 
@@ -845,8 +871,8 @@ msgid "File"
 msgstr "קובץ"
 
 #: includes/Admin/Admin.php:1260
-#: includes/Frontend/PortalController.php:218
-#: includes/Frontend/PortalController.php:223
+#: includes/Frontend/PortalController.php:221
+#: includes/Frontend/PortalController.php:226
 msgid "File not available."
 msgstr "הקובץ אינו זמין."
 
@@ -875,6 +901,7 @@ msgstr "עבור חותם:"
 
 #: includes/Admin/views/edit.php:309
 #: includes/Admin/views/template-use.php:31
+#: includes/Frontend/views/portal-contacts.php:33
 #: includes/Frontend/views/portal-create.php:109
 #: includes/Frontend/views/portal-edit.php:107
 #: includes/Frontend/views/sign.php:162
@@ -975,7 +1002,7 @@ msgid "Invitation cancelled."
 msgstr "ההזמנה בוטלה."
 
 #: includes/Admin/Admin.php:519
-#: includes/Frontend/PortalController.php:203
+#: includes/Frontend/PortalController.php:206
 msgid "Invitation re-sent."
 msgstr "ההזמנה נשלחה מחדש."
 
@@ -1053,6 +1080,7 @@ msgid "My electronic signature is legally binding and has the same effect as a h
 msgstr "החתימה המקוונת שלי מחייבת מבחינה משפטית ובעלת תוקף זהה לחתימה ידנית. מועד החתימה, כתובת ה-IP והדפדפן שלי נרשמים כהוכחה לחתימה."
 
 #: includes/Admin/Admin.php:279
+#: includes/Frontend/views/portal-contacts.php:68
 #: includes/Frontend/views/portal-document.php:86
 #: includes/Frontend/views/portal-edit.php:39
 #: includes/Signature/CertificatePage.php:39
@@ -1068,8 +1096,8 @@ msgstr "שם (אוטומטי)"
 msgid "Needs attention (out > 7 days)"
 msgstr "דורש תשומת לב (נשלח לפני יותר מ-7 ימים)"
 
-#: includes/Frontend/PortalController.php:505
-#: includes/Frontend/PortalController.php:771
+#: includes/Frontend/PortalController.php:510
+#: includes/Frontend/PortalController.php:856
 #: includes/Frontend/views/portal-create.php:27
 msgid "New document"
 msgstr "מסמך חדש"
@@ -1081,6 +1109,10 @@ msgstr "הבא"
 #: includes/Support/HealthCheck.php:129
 msgid "No REST API key is set. Save Settings to generate one if you use the API."
 msgstr "לא הוגדר מפתח REST API. שמרו את ההגדרות כדי לייצר מפתח אם אתם משתמשים ב-API."
+
+#: includes/Frontend/views/portal-contacts.php:63
+msgid "No contacts yet."
+msgstr "אין עדיין אנשי קשר."
 
 #: includes/Frontend/views/partials/portal-doc-table.php:13
 msgid "No documents to show. Start by uploading a PDF in the admin."
@@ -1135,23 +1167,24 @@ msgstr "לא הוגדרה כתובת webhook (אופציונלי)."
 msgid "No webhook URL is configured."
 msgstr "לא הוגדרה כתובת webhook."
 
-#: includes/Frontend/PortalController.php:435
+#: includes/Frontend/PortalController.php:438
 msgid "No workspace"
 msgstr "אין סביבת עבודה"
 
-#: includes/Frontend/PortalController.php:436
+#: includes/Frontend/PortalController.php:439
 msgid "No workspace yet"
 msgstr "אין עדיין סביבת עבודה"
 
-#: includes/Frontend/PortalController.php:477
+#: includes/Frontend/PortalController.php:482
+#: includes/Frontend/PortalController.php:535
 msgid "Not allowed"
 msgstr "אין הרשאה"
 
-#: includes/Frontend/PortalController.php:537
+#: includes/Frontend/PortalController.php:622
 msgid "Not available"
 msgstr "לא זמין"
 
-#: includes/Frontend/PortalController.php:693
+#: includes/Frontend/PortalController.php:778
 msgid "Not found"
 msgstr "לא נמצא"
 
@@ -1230,7 +1263,7 @@ msgstr "קובץ PDF"
 msgid "PDF only, up to 25 MB."
 msgstr "PDF בלבד, עד 25 מ״ב."
 
-#: includes/Frontend/PortalController.php:265
+#: includes/Frontend/PortalController.php:268
 msgid "PDF uploaded. Now add signers and place fields."
 msgstr "ה-PDF הועלה. כעת הוסיפו חותמים ומקמו שדות."
 
@@ -1251,10 +1284,19 @@ msgstr "נחתם חלקית"
 msgid "Pending invitations"
 msgstr "הזמנות ממתינות"
 
+#: includes/Frontend/views/portal-contacts.php:24
+msgid "People you sign with are saved here automatically and offered as suggestions when you add signers."
+msgstr "אנשים שאתם חותמים איתם נשמרים כאן אוטומטית ומוצעים כהשלמה כשאתם מוסיפים חותמים."
+
 #: includes/Admin/views/edit.php:404
 msgid "Permanently delete this document and all its data?"
 msgstr "למחוק לצמיתות את המסמך הזה ואת כל הנתונים שלו?"
 
+#: includes/Frontend/views/portal-contacts.php:70
+msgid "Phone"
+msgstr "טלפון"
+
+#: includes/Frontend/views/portal-contacts.php:41
 #: includes/Frontend/views/portal-create.php:117
 #: includes/Frontend/views/portal-edit.php:115
 #: includes/Frontend/views/sign.php:170
@@ -1293,11 +1335,11 @@ msgid "Please choose a .p12/.pfx certificate file."
 msgstr "אנא בחרו קובץ תעודה .p12/.pfx."
 
 #: includes/Admin/Admin.php:403
-#: includes/Frontend/PortalController.php:250
+#: includes/Frontend/PortalController.php:253
 msgid "Please choose a PDF to upload."
 msgstr "אנא בחרו קובץ PDF להעלאה."
 
-#: includes/Frontend/PortalController.php:134
+#: includes/Frontend/PortalController.php:137
 msgid "Please choose one of your templates."
 msgstr "בחרו אחת מהתבניות שלכם."
 
@@ -1329,6 +1371,10 @@ msgstr "אנא ספקו נמען לכל תפקיד שיש לו שדות."
 msgid "Please provide a sub-workspace name."
 msgstr "נא לספק שם לסביבת העבודה המשנה."
 
+#: includes/Frontend/PortalController.php:578
+msgid "Please provide a valid email address for the contact."
+msgstr "אנא ספקו כתובת אימייל תקינה עבור איש הקשר."
+
 #: includes/Services/DocumentService.php:251
 msgid "Please provide a valid email address for the new signer."
 msgstr "אנא ספקו כתובת אימייל תקינה עבור החותם החדש."
@@ -1349,7 +1395,7 @@ msgstr "אנא ספקו לפחות נמען אחד."
 msgid "Please provide the new signer’s name."
 msgstr "אנא ספקו את שם החותם החדש."
 
-#: includes/Frontend/PortalController.php:414
+#: includes/Frontend/PortalController.php:417
 msgid "Please sign in"
 msgstr "נא להתחבר"
 
@@ -1361,7 +1407,7 @@ msgstr "אנא חתמו על המסמך בקישור המאובטח הבא: %s"
 msgid "Please verify your identity before signing."
 msgstr "אנא אמתו את זהותכם לפני החתימה."
 
-#: includes/Frontend/PortalController.php:808
+#: includes/Frontend/PortalController.php:898
 msgid "Portal template missing."
 msgstr "תבנית הפורטל חסרה."
 
@@ -1433,6 +1479,7 @@ msgstr "התזכורות רצות פעם ביום דרך WP-Cron. כל תזכו�
 #: includes/Admin/Admin.php:286
 #: includes/Admin/views/edit.php:261
 #: includes/Admin/views/members.php:73
+#: includes/Frontend/views/portal-contacts.php:85
 #: includes/Frontend/views/portal-edit.php:46
 #: includes/Frontend/views/portal-edit.php:94
 msgid "Remove"
@@ -1445,6 +1492,10 @@ msgstr "הסרת תעודה"
 #: includes/Admin/views/settings.php:135
 msgid "Remove the certificate and revert to electronic signatures?"
 msgstr "להסיר את התעודה ולחזור לחתימה אלקטרונית?"
+
+#: includes/Frontend/views/portal-contacts.php:81
+msgid "Remove this contact?"
+msgstr "להסיר את איש הקשר הזה?"
 
 #: includes/Admin/views/members.php:68
 msgid "Remove this member?"
@@ -1524,6 +1575,10 @@ msgstr "שמירה כטיוטה"
 msgid "Save as template"
 msgstr "שמירה כתבנית"
 
+#: includes/Frontend/views/portal-contacts.php:44
+msgid "Save contact"
+msgstr "שמירת איש קשר"
+
 #: includes/Admin/views/edit.php:119
 #: includes/Frontend/views/portal-edit.php:188
 msgid "Save fields"
@@ -1547,9 +1602,21 @@ msgstr "סרקו כדי לאמת את המסמך באופן מקוון."
 msgid "Scheduled tasks (WP-Cron)"
 msgstr "משימות מתוזמנות (WP-Cron)"
 
+#: includes/Frontend/views/portal-contacts.php:56
+msgid "Search"
+msgstr "חיפוש"
+
+#: includes/Frontend/views/portal-contacts.php:55
+msgid "Search by name or email…"
+msgstr "חיפוש לפי שם או אימייל…"
+
 #: includes/Frontend/views/portal-documents.php:40
 msgid "Search by title…"
 msgstr "חיפוש לפי כותרת…"
+
+#: includes/Frontend/views/portal-contacts.php:54
+msgid "Search contacts"
+msgstr "חיפוש אנשי קשר"
 
 #: includes/Admin/views/list.php:56
 #: includes/Frontend/views/portal-documents.php:39
@@ -1651,7 +1718,7 @@ msgstr "חתימה וסיום"
 msgid "Sign document"
 msgstr "חתימה על המסמך"
 
-#: includes/Frontend/PortalController.php:413
+#: includes/Frontend/PortalController.php:416
 #: includes/Frontend/views/portal-message.php:21
 msgid "Sign in"
 msgstr "התחברות"
@@ -1720,7 +1787,7 @@ msgid "Signer %d"
 msgstr "חותם %d"
 
 #: includes/Admin/Admin.php:464
-#: includes/Frontend/PortalController.php:309
+#: includes/Frontend/PortalController.php:312
 msgid "Signer added."
 msgstr "החותם נוסף."
 
@@ -1730,7 +1797,7 @@ msgid "Signer not found."
 msgstr "החותם לא נמצא."
 
 #: includes/Admin/Admin.php:503
-#: includes/Frontend/PortalController.php:330
+#: includes/Frontend/PortalController.php:333
 msgid "Signer removed."
 msgstr "החותם הוסר."
 
@@ -1861,6 +1928,10 @@ msgstr "תודה. שלחנו את המסמך באימייל לאדם שבחרת�
 msgid "That code was not correct. Please try again."
 msgstr "הקוד שגוי. נסו שוב."
 
+#: includes/Frontend/PortalController.php:597
+msgid "That contact could not be found in your workspace."
+msgstr "איש קשר זה לא נמצא במרחב העבודה שלכם."
+
 #: includes/Signature/Certificate.php:78
 msgid "The certificate could not be read. Check the file and password."
 msgstr "לא ניתן היה לקרוא את התעודה. בדקו את הקובץ והסיסמה."
@@ -1954,12 +2025,12 @@ msgstr "לחותמים אלו אין עדיין שדות: %s. פתחו את \"מ
 msgid "This document does not allow assigning to someone else."
 msgstr "מסמך זה אינו מאפשר העברה לאדם אחר."
 
-#: includes/Frontend/PortalController.php:695
+#: includes/Frontend/PortalController.php:780
 msgid "This document does not exist in your workspace."
 msgstr "מסמך זה אינו קיים בסביבת העבודה שלך."
 
-#: includes/Frontend/PortalController.php:283
-#: includes/Frontend/PortalController.php:549
+#: includes/Frontend/PortalController.php:286
+#: includes/Frontend/PortalController.php:634
 msgid "This document has already been sent and can no longer be edited."
 msgstr "המסמך כבר נשלח ולא ניתן לערוך אותו יותר."
 
@@ -1967,7 +2038,7 @@ msgstr "המסמך כבר נשלח ולא ניתן לערוך אותו יותר.
 msgid "This document is authentic."
 msgstr "מסמך זה אותנטי."
 
-#: includes/Frontend/PortalController.php:539
+#: includes/Frontend/PortalController.php:624
 msgid "This document is not available for editing in your workspace."
 msgstr "מסמך זה אינו זמין לעריכה במרחב העבודה שלכם."
 
@@ -2200,7 +2271,7 @@ msgstr "סוד Webhook"
 msgid "When"
 msgstr "מתי"
 
-#: includes/Frontend/PortalController.php:624
+#: includes/Frontend/PortalController.php:709
 #: includes/Frontend/views/partials/portal-nav.php:13
 msgid "Workspace"
 msgstr "סביבת עבודה"
@@ -2238,18 +2309,22 @@ msgstr "אינך מורשה לגשת לעמוד זה."
 msgid "You can view members but only an owner or admin can change them."
 msgstr "ניתן לצפות בחברים אך רק בעלים או מנהל יכולים לשנות אותם."
 
-#: includes/Frontend/PortalController.php:478
+#: includes/Frontend/PortalController.php:483
 msgid "You cannot create documents"
 msgstr "אינכם יכולים ליצור מסמכים"
 
-#: includes/Frontend/PortalController.php:125
-#: includes/Frontend/PortalController.php:246
+#: includes/Frontend/PortalController.php:128
+#: includes/Frontend/PortalController.php:249
 msgid "You cannot create documents in this workspace."
 msgstr "אינכם יכולים ליצור מסמכים במרחב העבודה הזה."
 
-#: includes/Frontend/PortalController.php:278
+#: includes/Frontend/PortalController.php:281
 msgid "You cannot edit this document."
 msgstr "אינכם יכולים לערוך מסמך זה."
+
+#: includes/Frontend/PortalController.php:569
+msgid "You cannot manage contacts in this workspace."
+msgstr "אינכם יכולים לנהל אנשי קשר במרחב העבודה הזה."
 
 #: includes/Admin/Admin.php:545
 msgid "You cannot manage members of this workspace."
@@ -2259,11 +2334,11 @@ msgstr "אינך יכול לנהל את חברי סביבת עבודה זו."
 msgid "You cannot remove the last owner of a workspace."
 msgstr "לא ניתן להסיר את הבעלים האחרון של סביבת עבודה."
 
-#: includes/Frontend/PortalController.php:194
+#: includes/Frontend/PortalController.php:197
 msgid "You cannot resend invitations for this document."
 msgstr "אינכם יכולים לשלוח מחדש הזמנות למסמך זה."
 
-#: includes/Frontend/PortalController.php:116
+#: includes/Frontend/PortalController.php:119
 msgid "You cannot send this document."
 msgstr "אינכם יכולים לשלוח מסמך זה."
 
@@ -2299,7 +2374,7 @@ msgstr "סירבת לחתום על מסמך זה. השולח קיבל הודעה
 msgid "You must agree to sign electronically before continuing."
 msgstr "עליך להסכים לחתום באופן אלקטרוני לפני המשך."
 
-#: includes/Frontend/PortalController.php:415
+#: includes/Frontend/PortalController.php:418
 msgid "You need to sign in to access your workspace."
 msgstr "עליך להתחבר כדי לגשת לסביבת העבודה שלך."
 
@@ -2307,7 +2382,7 @@ msgstr "עליך להתחבר כדי לגשת לסביבת העבודה שלך."
 msgid "Your ComSign verification code"
 msgstr "קוד האימות שלכם ב-ComSign"
 
-#: includes/Frontend/PortalController.php:437
+#: includes/Frontend/PortalController.php:440
 msgid "Your account is not part of any workspace. Please contact your administrator."
 msgstr "החשבון שלך אינו משויך לאף סביבת עבודה. פנה למנהל המערכת."
 
@@ -2315,9 +2390,17 @@ msgstr "החשבון שלך אינו משויך לאף סביבת עבודה. פ
 msgid "Your answer"
 msgstr "התשובה שלך"
 
-#: includes/Frontend/PortalController.php:479
+#: includes/Frontend/views/portal-contacts.php:49
+msgid "Your contacts"
+msgstr "אנשי הקשר שלכם"
+
+#: includes/Frontend/PortalController.php:484
 msgid "Your role in this workspace does not allow creating documents. Please contact an administrator."
 msgstr "התפקיד שלכם במרחב העבודה אינו מאפשר יצירת מסמכים. אנא פנו למנהל."
+
+#: includes/Frontend/PortalController.php:537
+msgid "Your role in this workspace does not allow managing contacts."
+msgstr "התפקיד שלכם במרחב העבודה אינו מאפשר ניהול אנשי קשר."
 
 #: includes/Frontend/views/sign.php:45
 msgid "Your signature"

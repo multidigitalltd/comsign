@@ -74,6 +74,9 @@ msgstr "Активный сертификат:"
 msgid "Add Document"
 msgstr "Добавить документ"
 
+msgid "Add a contact"
+msgstr "Добавить контакт"
+
 msgid "Add a signature (or initials) field for: %s."
 msgstr "Добавьте поле подписи (или инициалов) для: %s."
 
@@ -283,6 +286,18 @@ msgstr "Требуется согласие"
 
 msgid "Consented"
 msgstr "Согласие получено"
+
+msgid "Contact removed."
+msgstr "Контакт удалён."
+
+msgid "Contact saved."
+msgstr "Контакт сохранён."
+
+msgid "Contacts"
+msgstr "Контакты"
+
+msgid "Contacts are not available"
+msgstr "Контакты недоступны"
 
 msgid "Continue"
 msgstr "Продолжить"
@@ -710,6 +725,9 @@ msgstr "Далее"
 msgid "No REST API key is set. Save Settings to generate one if you use the API."
 msgstr "Ключ REST API не задан. Сохраните настройки, чтобы создать его, если используете API."
 
+msgid "No contacts yet."
+msgstr "Пока нет контактов."
+
 msgid "No documents to show. Start by uploading a PDF in the admin."
 msgstr "Нет документов для показа. Начните с загрузки PDF в админке."
 
@@ -830,8 +848,14 @@ msgstr "Подписано частично"
 msgid "Pending invitations"
 msgstr "Ожидающие приглашения"
 
+msgid "People you sign with are saved here automatically and offered as suggestions when you add signers."
+msgstr "Люди, с которыми вы подписываете, сохраняются здесь автоматически и предлагаются при добавлении подписантов."
+
 msgid "Permanently delete this document and all its data?"
 msgstr "Удалить этот документ и все его данные безвозвратно?"
+
+msgid "Phone"
+msgstr "Телефон"
 
 msgid "Phone (optional)"
 msgstr "Телефон (необязательно)"
@@ -883,6 +907,9 @@ msgstr "Пожалуйста, укажите получателя для каж�
 
 msgid "Please provide a sub-workspace name."
 msgstr "Пожалуйста, укажите название под-пространства."
+
+msgid "Please provide a valid email address for the contact."
+msgstr "Укажите корректный email контакта."
 
 msgid "Please provide a valid email address for the new signer."
 msgstr "Укажите корректный email нового подписанта."
@@ -965,6 +992,9 @@ msgstr "Удалить сертификат"
 msgid "Remove the certificate and revert to electronic signatures?"
 msgstr "Удалить сертификат и вернуться к электронным подписям?"
 
+msgid "Remove this contact?"
+msgstr "Удалить этот контакт?"
+
 msgid "Remove this member?"
 msgstr "Удалить этого участника?"
 
@@ -1019,6 +1049,9 @@ msgstr "Сохранить как черновик"
 msgid "Save as template"
 msgstr "Сохранить как шаблон"
 
+msgid "Save contact"
+msgstr "Сохранить контакт"
+
 msgid "Save fields"
 msgstr "Сохранить поля"
 
@@ -1034,8 +1067,17 @@ msgstr "Отсканируйте, чтобы проверить этот док�
 msgid "Scheduled tasks (WP-Cron)"
 msgstr "Запланированные задачи (WP-Cron)"
 
+msgid "Search"
+msgstr "Поиск"
+
+msgid "Search by name or email…"
+msgstr "Поиск по имени или email…"
+
 msgid "Search by title…"
 msgstr "Поиск по названию…"
+
+msgid "Search contacts"
+msgstr "Поиск контактов"
 
 msgid "Search documents"
 msgstr "Поиск документов"
@@ -1240,6 +1282,9 @@ msgstr "Спасибо. Мы отправили документ выбранн�
 
 msgid "That code was not correct. Please try again."
 msgstr "Код неверен. Пожалуйста, попробуйте снова."
+
+msgid "That contact could not be found in your workspace."
+msgstr "Этот контакт не найден в вашем рабочем пространстве."
 
 msgid "The certificate could not be read. Check the file and password."
 msgstr "Не удалось прочитать сертификат. Проверьте файл и пароль."
@@ -1520,6 +1565,9 @@ msgstr "Вы не можете создавать документы в этом
 msgid "You cannot edit this document."
 msgstr "Вы не можете редактировать этот документ."
 
+msgid "You cannot manage contacts in this workspace."
+msgstr "Вы не можете управлять контактами в этом рабочем пространстве."
+
 msgid "You cannot manage members of this workspace."
 msgstr "Вы не можете управлять участниками этого рабочего пространства."
 
@@ -1568,8 +1616,14 @@ msgstr "Ваша учётная запись не входит ни в одно 
 msgid "Your answer"
 msgstr "Ваш ответ"
 
+msgid "Your contacts"
+msgstr "Ваши контакты"
+
 msgid "Your role in this workspace does not allow creating documents. Please contact an administrator."
 msgstr "Ваша роль в этом рабочем пространстве не позволяет создавать документы. Обратитесь к администратору."
+
+msgid "Your role in this workspace does not allow managing contacts."
+msgstr "Ваша роль в этом рабочем пространстве не позволяет управлять контактами."
 
 msgid "Your signature"
 msgstr "Ваша подпись"

@@ -74,6 +74,9 @@ msgstr "الشهادة الفعّالة:"
 msgid "Add Document"
 msgstr "إضافة مستند"
 
+msgid "Add a contact"
+msgstr "إضافة جهة اتصال"
+
 msgid "Add a signature (or initials) field for: %s."
 msgstr "أضف حقل توقيع (أو أحرف أولى) لـ: %s."
 
@@ -283,6 +286,18 @@ msgstr "الموافقة مطلوبة"
 
 msgid "Consented"
 msgstr "تمت الموافقة"
+
+msgid "Contact removed."
+msgstr "تمت إزالة جهة الاتصال."
+
+msgid "Contact saved."
+msgstr "تم حفظ جهة الاتصال."
+
+msgid "Contacts"
+msgstr "جهات الاتصال"
+
+msgid "Contacts are not available"
+msgstr "جهات الاتصال غير متاحة"
 
 msgid "Continue"
 msgstr "متابعة"
@@ -710,6 +725,9 @@ msgstr "التالي"
 msgid "No REST API key is set. Save Settings to generate one if you use the API."
 msgstr "لم يتم تعيين مفتاح REST API. احفظ الإعدادات لإنشاء واحد إذا كنت تستخدم الـ API."
 
+msgid "No contacts yet."
+msgstr "لا توجد جهات اتصال بعد."
+
 msgid "No documents to show. Start by uploading a PDF in the admin."
 msgstr "لا توجد مستندات لعرضها. ابدأ برفع ملف PDF من لوحة الإدارة."
 
@@ -830,8 +848,14 @@ msgstr "موقّع جزئيًا"
 msgid "Pending invitations"
 msgstr "دعوات معلّقة"
 
+msgid "People you sign with are saved here automatically and offered as suggestions when you add signers."
+msgstr "يُحفظ الأشخاص الذين توقّع معهم هنا تلقائيًا ويُقترحون عند إضافة موقّعين."
+
 msgid "Permanently delete this document and all its data?"
 msgstr "حذف هذا المستند وكل بياناته نهائيًا؟"
+
+msgid "Phone"
+msgstr "الهاتف"
 
 msgid "Phone (optional)"
 msgstr "الهاتف (اختياري)"
@@ -883,6 +907,9 @@ msgstr "يرجى تقديم مستلم لكل دور يحتوي على حقول.
 
 msgid "Please provide a sub-workspace name."
 msgstr "يرجى تقديم اسم لمساحة العمل الفرعية."
+
+msgid "Please provide a valid email address for the contact."
+msgstr "يرجى تقديم عنوان بريد إلكتروني صالح لجهة الاتصال."
 
 msgid "Please provide a valid email address for the new signer."
 msgstr "يرجى تقديم عنوان بريد إلكتروني صالح للموقّع الجديد."
@@ -965,6 +992,9 @@ msgstr "إزالة الشهادة"
 msgid "Remove the certificate and revert to electronic signatures?"
 msgstr "إزالة الشهادة والعودة إلى التوقيعات الإلكترونية؟"
 
+msgid "Remove this contact?"
+msgstr "إزالة جهة الاتصال هذه؟"
+
 msgid "Remove this member?"
 msgstr "إزالة هذا العضو؟"
 
@@ -1019,6 +1049,9 @@ msgstr "حفظ كمسودة"
 msgid "Save as template"
 msgstr "حفظ كقالب"
 
+msgid "Save contact"
+msgstr "حفظ جهة الاتصال"
+
 msgid "Save fields"
 msgstr "حفظ الحقول"
 
@@ -1034,8 +1067,17 @@ msgstr "امسح ضوئيًا للتحقق من هذا المستند عبر ا�
 msgid "Scheduled tasks (WP-Cron)"
 msgstr "المهام المجدولة (WP-Cron)"
 
+msgid "Search"
+msgstr "بحث"
+
+msgid "Search by name or email…"
+msgstr "البحث بالاسم أو البريد الإلكتروني…"
+
 msgid "Search by title…"
 msgstr "البحث بالعنوان…"
+
+msgid "Search contacts"
+msgstr "البحث في جهات الاتصال"
 
 msgid "Search documents"
 msgstr "البحث في المستندات"
@@ -1240,6 +1282,9 @@ msgstr "شكرًا لك. أرسلنا المستند بالبريد إلى ال�
 
 msgid "That code was not correct. Please try again."
 msgstr "الرمز غير صحيح. يرجى المحاولة مرة أخرى."
+
+msgid "That contact could not be found in your workspace."
+msgstr "تعذّر العثور على جهة الاتصال في مساحة عملك."
 
 msgid "The certificate could not be read. Check the file and password."
 msgstr "تعذّر قراءة الشهادة. تحقق من الملف وكلمة المرور."
@@ -1520,6 +1565,9 @@ msgstr "لا يمكنك إنشاء مستندات في مساحة العمل ه�
 msgid "You cannot edit this document."
 msgstr "لا يمكنك تحرير هذا المستند."
 
+msgid "You cannot manage contacts in this workspace."
+msgstr "لا يمكنك إدارة جهات الاتصال في مساحة العمل هذه."
+
 msgid "You cannot manage members of this workspace."
 msgstr "لا يمكنك إدارة أعضاء مساحة العمل هذه."
 
@@ -1568,8 +1616,14 @@ msgstr "حسابك ليس جزءًا من أي مساحة عمل. يرجى ال�
 msgid "Your answer"
 msgstr "إجابتك"
 
+msgid "Your contacts"
+msgstr "جهات اتصالك"
+
 msgid "Your role in this workspace does not allow creating documents. Please contact an administrator."
 msgstr "دورك في مساحة العمل هذه لا يسمح بإنشاء المستندات. يرجى التواصل مع المسؤول."
+
+msgid "Your role in this workspace does not allow managing contacts."
+msgstr "دورك في مساحة العمل لا يسمح بإدارة جهات الاتصال."
 
 msgid "Your signature"
 msgstr "توقيعك"

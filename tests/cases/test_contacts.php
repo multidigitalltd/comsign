@@ -68,3 +68,29 @@ Test::add( 'contacts: signers are captured into the address book', static functi
 	$repo->delete( $id );
 	Test::equals( 0, count( $repo->for_accounts( array( $account ) ) ), 'delete removes the contact' );
 } );
+
+Test::add( 'contacts: delete is account-scoped (IDOR guard)', static function (): void {
+	reset_tables();
+	$repo     = new ContactRepository();
+	$accounts = new AccountService();
+	$account  = $accounts->default_account_id();
+
+	$id      = $repo->upsert( $account, 'Scoped', 'scoped@example.com', '' );
+	$contact = $repo->find( $id );
+	Test::ok( $contact && (int) $contact->account_id === (int) $account, 'contact stored in the default account' );
+
+	// An outsider's visible accounts do not include the contact's account, so the
+	// delete handler's guard (account_id IN visible) would block them.
+	$outsider = wp_insert_user( array(
+		'user_login' => 'c_out_' . wp_generate_password( 6, false ),
+		'user_pass'  => 'x',
+		'user_email' => 'cout_' . wp_generate_password( 6, false ) . '@example.com',
+		'role'       => 'subscriber',
+	) );
+	$outsider_visible = array_map( 'intval', $accounts->visible_account_ids( (int) $outsider ) );
+	Test::ok( ! in_array( (int) $contact->account_id, $outsider_visible, true ), 'outsider cannot reach the contact (delete blocked)' );
+
+	// The admin (a member of the default account) can.
+	$admin_visible = array_map( 'intval', $accounts->visible_account_ids( 1 ) );
+	Test::ok( in_array( (int) $contact->account_id, $admin_visible, true ), 'account member may delete it' );
+} );

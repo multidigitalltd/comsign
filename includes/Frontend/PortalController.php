@@ -67,6 +67,9 @@ final class PortalController {
 		add_action( 'admin_post_comsign_portal_add_signer', array( $this, 'handle_add_signer' ) );
 		add_action( 'admin_post_comsign_portal_delete_signer', array( $this, 'handle_delete_signer' ) );
 		add_action( 'admin_post_comsign_portal_save_fields', array( $this, 'handle_save_fields' ) );
+		// Address book management.
+		add_action( 'admin_post_comsign_portal_contact_add', array( $this, 'handle_contact_add' ) );
+		add_action( 'admin_post_comsign_portal_contact_delete', array( $this, 'handle_contact_delete' ) );
 	}
 
 	/**
@@ -450,6 +453,8 @@ final class PortalController {
 			$this->render_create( $user_id, $account_ids );
 		} elseif ( 'edit' === $view ) {
 			$this->render_edit( $user_id, $account_ids );
+		} elseif ( 'contacts' === $view ) {
+			$this->render_contacts( $user_id, $account_ids );
 		} else {
 			$this->render_dashboard( $user_id, $account_ids );
 		}
@@ -514,6 +519,86 @@ final class PortalController {
 				'switcher'     => $this->switcher( $user_id ),
 			)
 		);
+	}
+
+	/**
+	 * Address book: list, search, add and remove account contacts.
+	 *
+	 * @param int   $user_id     Current user.
+	 * @param int[] $account_ids Visible accounts.
+	 */
+	private function render_contacts( int $user_id, array $account_ids ): void {
+		if ( ! $this->can_create( $user_id ) ) {
+			$this->render(
+				'portal-message',
+				array(
+					'page_title' => __( 'Not allowed', 'comsign' ),
+					'heading'    => __( 'Contacts are not available', 'comsign' ),
+					'message'    => __( 'Your role in this workspace does not allow managing contacts.', 'comsign' ),
+					'login_url'  => '',
+				)
+			);
+		}
+
+		$search = isset( $_GET['cs'] ) ? sanitize_text_field( wp_unslash( $_GET['cs'] ) ) : ''; // phpcs:ignore WordPress.Security.NonceVerification.Recommended
+
+		$this->render(
+			'portal-contacts',
+			array(
+				'page_title'    => __( 'Contacts', 'comsign' ),
+				'nav'           => $this->nav( 'contacts', $user_id ),
+				'contacts'      => $this->contacts->for_accounts( $account_ids, $search, 300 ),
+				'search'        => $search,
+				'action'        => admin_url( 'admin-post.php' ),
+				'add_nonce'     => wp_create_nonce( 'comsign_portal_contact_add' ),
+				'delete_nonce'  => wp_create_nonce( 'comsign_portal_contact_delete' ),
+				'switcher'      => $this->switcher( $user_id ),
+			)
+		);
+	}
+
+	/**
+	 * Add (or update) a contact in the current workspace.
+	 */
+	public function handle_contact_add(): void {
+		$user_id = $this->require_login();
+		check_admin_referer( 'comsign_portal_contact_add' );
+
+		$account_id = $this->accounts->current_account_id( $user_id );
+		if ( $account_id <= 0 || ! $this->accounts->can_in_account( $user_id, $account_id, Roles::CREATE_DOCUMENTS ) ) {
+			$this->bounce( self::url(), __( 'You cannot manage contacts in this workspace.', 'comsign' ) );
+		}
+
+		$name  = isset( $_POST['name'] ) ? sanitize_text_field( wp_unslash( $_POST['name'] ) ) : '';
+		$email = isset( $_POST['email'] ) ? sanitize_email( wp_unslash( $_POST['email'] ) ) : '';
+		$phone = isset( $_POST['phone'] ) ? sanitize_text_field( wp_unslash( $_POST['phone'] ) ) : '';
+
+		$target = self::url( array( 'view' => 'contacts' ) );
+		if ( 0 === $this->contacts->upsert( $account_id, $name, $email, $phone ) ) {
+			$this->bounce( $target, __( 'Please provide a valid email address for the contact.', 'comsign' ) );
+		}
+
+		$this->bounce( $target, __( 'Contact saved.', 'comsign' ), 'success' );
+	}
+
+	/**
+	 * Delete a contact, but only one belonging to a workspace the user can see.
+	 */
+	public function handle_contact_delete(): void {
+		$user_id = $this->require_login();
+		check_admin_referer( 'comsign_portal_contact_delete' );
+
+		$id      = isset( $_POST['contact_id'] ) ? absint( wp_unslash( $_POST['contact_id'] ) ) : 0;
+		$contact = $id ? $this->contacts->find( $id ) : null;
+		$visible = array_map( 'intval', $this->accounts->visible_account_ids( $user_id ) );
+		$target  = self::url( array( 'view' => 'contacts' ) );
+
+		if ( ! $contact || ! in_array( (int) $contact->account_id, $visible, true ) ) {
+			$this->bounce( $target, __( 'That contact could not be found in your workspace.', 'comsign' ) );
+		}
+
+		$this->contacts->delete( $id );
+		$this->bounce( $target, __( 'Contact removed.', 'comsign' ), 'success' );
 	}
 
 	/**
@@ -771,6 +856,11 @@ final class PortalController {
 				'label'  => __( 'New document', 'comsign' ),
 				'url'    => self::url( array( 'view' => 'create' ) ),
 				'active' => 'create' === $active,
+			);
+			$items[] = array(
+				'label'  => __( 'Contacts', 'comsign' ),
+				'url'    => self::url( array( 'view' => 'contacts' ) ),
+				'active' => 'contacts' === $active,
 			);
 		}
 

@@ -4,7 +4,7 @@ Tags: signature, digital signature, pdf, esignature, hebrew
 Requires at least: 6.0
 Tested up to: 6.5
 Requires PHP: 7.4
-Stable tag: 0.35.0
+Stable tag: 0.36.0
 License: GPL-2.0-or-later
 License URI: https://www.gnu.org/licenses/gpl-2.0.html
 
@@ -105,6 +105,12 @@ ID and its SHA-256 code (shown on the document screen and the signature
 certificate) to confirm the document is authentic and see who signed it.
 
 == Changelog ==
+
+= 0.36.0 =
+* New: an address-book management screen in the client portal (Contacts). View,
+  search, manually add and remove your workspace's contacts. Deletion is
+  strictly account-scoped, so a user can only remove contacts from a workspace
+  they belong to.
 
 = 0.35.0 =
 * New: signing delegation ("assign to someone else"). When the sender enables it
