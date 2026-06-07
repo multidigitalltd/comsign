@@ -10,7 +10,9 @@ namespace ComSign\Services;
 defined( 'ABSPATH' ) || exit;
 
 use ComSign\Database\AccountRepository;
+use ComSign\Database\InviteRepository;
 use ComSign\Setup\Installer;
+use ComSign\Support\Roles;
 
 /**
  * Resolves which accounts a user can see (including descendant sub-accounts for
@@ -20,11 +22,13 @@ use ComSign\Setup\Installer;
 final class AccountService {
 
 	private AccountRepository $accounts;
+	private InviteRepository $invites;
 
 	private const META_CURRENT = 'comsign_current_account';
 
-	public function __construct( ?AccountRepository $accounts = null ) {
+	public function __construct( ?AccountRepository $accounts = null, ?InviteRepository $invites = null ) {
 		$this->accounts = $accounts ?? new AccountRepository();
+		$this->invites  = $invites ?? new InviteRepository();
 	}
 
 	/**
@@ -139,5 +143,133 @@ final class AccountService {
 	 */
 	public function repository(): AccountRepository {
 		return $this->accounts;
+	}
+
+	/* ---------------------------------------------------------------------
+	 * RBAC
+	 * ------------------------------------------------------------------- */
+
+	/**
+	 * A user's effective role in an account.
+	 *
+	 * Direct membership wins; otherwise, if the user is a manager (owner/admin)
+	 * of an ancestor account, that managing role applies to this sub-account.
+	 * Returns '' when the user has no access.
+	 */
+	public function effective_role_for_account( int $user_id, int $account_id ): string {
+		$direct = $this->accounts->role_of( $account_id, $user_id );
+		if ( '' !== $direct ) {
+			return $direct;
+		}
+
+		foreach ( $this->accounts->ancestor_ids( $account_id ) as $ancestor ) {
+			if ( $ancestor === $account_id ) {
+				continue;
+			}
+			$role = $this->accounts->role_of( $ancestor, $user_id );
+			if ( in_array( $role, AccountRepository::MANAGER_ROLES, true ) ) {
+				return $role;
+			}
+		}
+
+		return '';
+	}
+
+	/**
+	 * Whether a user has a permission in an account (RBAC).
+	 */
+	public function can_in_account( int $user_id, int $account_id, string $permission ): bool {
+		$role = $this->effective_role_for_account( $user_id, $account_id );
+		return '' !== $role && Roles::can( $role, $permission );
+	}
+
+	/**
+	 * Whether a user has a permission on a specific document.
+	 */
+	public function can_for_document( int $user_id, ?object $document, string $permission ): bool {
+		if ( ! $document ) {
+			return false;
+		}
+		return $this->can_in_account( $user_id, (int) ( $document->account_id ?? 0 ), $permission );
+	}
+
+	/**
+	 * The current user's role in their current account.
+	 */
+	public function current_role( int $user_id ): string {
+		return $this->effective_role_for_account( $user_id, $this->current_account_id( $user_id ) );
+	}
+
+	/* ---------------------------------------------------------------------
+	 * Invitations + onboarding
+	 * ------------------------------------------------------------------- */
+
+	/**
+	 * Invite an email to an account with a role.
+	 *
+	 * If a WP user already exists for the email they are added immediately;
+	 * otherwise a pending invitation is stored and claimed on registration/login.
+	 *
+	 * @return string 'added' if joined now, 'invited' if pending.
+	 */
+	public function invite( int $account_id, string $email, string $role ): string {
+		$email = sanitize_email( $email );
+		if ( ! is_email( $email ) || ! array_key_exists( $role, Roles::assignable() ) ) {
+			throw new \RuntimeException( __( 'Please provide a valid email and role.', 'comsign' ) );
+		}
+
+		$user = get_user_by( 'email', $email );
+		if ( $user ) {
+			$this->accounts->add_member( $account_id, (int) $user->ID, $role );
+			return 'added';
+		}
+
+		$this->invites->upsert( $account_id, $email, $role );
+		return 'invited';
+	}
+
+	/**
+	 * Claim any pending invitations for a user (by their email).
+	 *
+	 * @return int Number of memberships granted.
+	 */
+	public function claim_invites( int $user_id ): int {
+		$user = get_userdata( $user_id );
+		if ( ! $user || ! $user->user_email ) {
+			return 0;
+		}
+
+		$claimed = 0;
+		foreach ( $this->invites->for_email( $user->user_email ) as $invite ) {
+			$this->accounts->add_member( (int) $invite->account_id, $user_id, (string) $invite->role );
+			$this->invites->delete_for( (int) $invite->account_id, $user->user_email );
+			++$claimed;
+		}
+
+		return $claimed;
+	}
+
+	/**
+	 * Ensure a user belongs to at least one workspace.
+	 *
+	 * Claims pending invites first; if the user still has no membership, creates
+	 * a personal workspace and makes them its owner. This lets a brand-new user
+	 * (e.g. signing in with Google for the first time) work immediately.
+	 */
+	public function ensure_onboarded( int $user_id ): void {
+		$this->claim_invites( $user_id );
+
+		if ( $this->accounts->memberships_for_user( $user_id ) ) {
+			return;
+		}
+
+		$user = get_userdata( $user_id );
+		if ( ! $user ) {
+			return;
+		}
+
+		$name = $user->display_name ? $user->display_name : $user->user_login;
+		/* translators: %s: user display name. */
+		$this->create_account( sprintf( __( '%s\'s workspace', 'comsign' ), $name ), $user_id );
 	}
 }

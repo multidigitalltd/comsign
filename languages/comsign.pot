@@ -35,6 +35,10 @@ msgstr[1] ""
 msgid "%s (copy)"
 msgstr ""
 
+#: includes/Services/AccountService.php:273
+msgid "%s's workspace"
+msgstr ""
+
 #: includes/Admin/DocumentsListTable.php:89
 #: includes/Admin/views/analytics.php:93
 #: includes/Admin/views/edit.php:52
@@ -80,8 +84,12 @@ msgstr ""
 msgid "A signature is required."
 msgstr ""
 
-#: includes/Admin/Admin.php:576
+#: includes/Admin/Admin.php:757
 msgid "A signing link was generated. Copy it or share via WhatsApp below."
+msgstr ""
+
+#: includes/Admin/views/members.php:128
+msgid "A sub-workspace belongs under this one; managers here can see its documents too."
 msgstr ""
 
 #: includes/Support/HealthCheck.php:142
@@ -113,8 +121,8 @@ msgstr ""
 msgid "Active certificate:"
 msgstr ""
 
-#: includes/Admin/Admin.php:129
-#: includes/Admin/Admin.php:130
+#: includes/Admin/Admin.php:144
+#: includes/Admin/Admin.php:145
 #: includes/Admin/views/list.php:20
 #: includes/Admin/views/new.php:16
 msgid "Add Document"
@@ -136,6 +144,10 @@ msgstr ""
 msgid "Add signer"
 msgstr ""
 
+#: includes/Support/Roles.php:90
+msgid "Admin"
+msgstr ""
+
 #: includes/Admin/views/edit.php:67
 msgid "All parties have signed. The signed PDF and verification details are available below."
 msgstr ""
@@ -145,8 +157,8 @@ msgstr ""
 msgid "Already signed"
 msgstr ""
 
-#: includes/Admin/Admin.php:138
-#: includes/Admin/Admin.php:139
+#: includes/Admin/Admin.php:153
+#: includes/Admin/Admin.php:154
 #: includes/Admin/views/analytics.php:33
 msgid "Analytics"
 msgstr ""
@@ -206,7 +218,7 @@ msgstr ""
 msgid "Bulk send"
 msgstr ""
 
-#: includes/Admin/Admin.php:953
+#: includes/Admin/Admin.php:1136
 msgid "Bulk send complete: %d document(s) created and sent."
 msgstr ""
 
@@ -222,19 +234,23 @@ msgstr ""
 msgid "CC recipients"
 msgstr ""
 
-#: includes/Admin/Admin.php:439
+#: includes/Admin/Admin.php:463
 msgid "CC recipients saved."
+msgstr ""
+
+#: includes/Admin/views/members.php:98
+msgid "Cancel"
 msgstr ""
 
 #: includes/Admin/views/settings.php:134
 msgid "Certificate password"
 msgstr ""
 
-#: includes/Admin/Admin.php:755
+#: includes/Admin/Admin.php:938
 msgid "Certificate removed. Documents will use electronic signatures."
 msgstr ""
 
-#: includes/Admin/Admin.php:743
+#: includes/Admin/Admin.php:926
 msgid "Certificate stored. New documents will be signed with PKI/PAdES."
 msgstr ""
 
@@ -242,12 +258,12 @@ msgstr ""
 msgid "Check"
 msgstr ""
 
-#: includes/Admin/Admin.php:245
+#: includes/Admin/Admin.php:269
 #: includes/Admin/views/edit.php:103
 msgid "Checkbox"
 msgstr ""
 
-#: includes/Admin/Admin.php:246
+#: includes/Admin/Admin.php:270
 msgid "Choice"
 msgstr ""
 
@@ -263,7 +279,7 @@ msgstr ""
 msgid "Clear"
 msgstr ""
 
-#: includes/Admin/Admin.php:252
+#: includes/Admin/Admin.php:276
 msgid "Click to toggle required"
 msgstr ""
 
@@ -271,8 +287,8 @@ msgstr ""
 msgid "Code"
 msgstr ""
 
-#: includes/Admin/Admin.php:109
-#: includes/Admin/Admin.php:110
+#: includes/Admin/Admin.php:124
+#: includes/Admin/Admin.php:125
 msgid "ComSign"
 msgstr ""
 
@@ -284,7 +300,7 @@ msgstr ""
 msgid "ComSign Settings"
 msgstr ""
 
-#: includes/Admin/Admin.php:808
+#: includes/Admin/Admin.php:991
 msgid "ComSign test email"
 msgstr ""
 
@@ -346,11 +362,11 @@ msgstr ""
 msgid "Continue"
 msgstr ""
 
-#: includes/Admin/Admin.php:202
+#: includes/Admin/Admin.php:226
 msgid "Copied!"
 msgstr ""
 
-#: includes/Admin/Admin.php:203
+#: includes/Admin/Admin.php:227
 #: includes/Admin/views/edit.php:294
 msgid "Copy link"
 msgstr ""
@@ -363,7 +379,7 @@ msgstr ""
 msgid "Could not generate the document PDF."
 msgstr ""
 
-#: includes/Admin/Admin.php:254
+#: includes/Admin/Admin.php:278
 msgid "Could not load the document preview."
 msgstr ""
 
@@ -371,8 +387,16 @@ msgstr ""
 msgid "Could not store the uploaded file."
 msgstr ""
 
+#: includes/Admin/views/members.php:136
+msgid "Create"
+msgstr ""
+
 #: includes/Admin/views/template-bulk.php:41
 msgid "Create & send all"
+msgstr ""
+
+#: includes/Admin/views/members.php:127
+msgid "Create a sub-workspace"
 msgstr ""
 
 #: includes/Admin/views/new.php:79
@@ -391,11 +415,11 @@ msgstr ""
 msgid "Dana Cohen, dana@example.com, +972500000000\nAvi Levi, avi@example.com"
 msgstr ""
 
-#: includes/Frontend/PortalController.php:246
+#: includes/Frontend/PortalController.php:253
 msgid "Dashboard"
 msgstr ""
 
-#: includes/Admin/Admin.php:240
+#: includes/Admin/Admin.php:264
 msgid "Date"
 msgstr ""
 
@@ -413,7 +437,7 @@ msgstr ""
 msgid "Declined"
 msgstr ""
 
-#: includes/Setup/Installer.php:256
+#: includes/Setup/Installer.php:278
 msgid "Default workspace"
 msgstr ""
 
@@ -447,7 +471,7 @@ msgstr ""
 
 #: includes/Admin/DocumentsListTable.php:53
 #: includes/Admin/views/analytics.php:85
-#: includes/Frontend/PortalController.php:208
+#: includes/Frontend/PortalController.php:215
 #: includes/Frontend/views/partials/portal-doc-table.php:20
 #: includes/Frontend/views/sign.php:25
 #: includes/Services/DocumentService.php:276
@@ -464,23 +488,23 @@ msgstr ""
 msgid "Document content"
 msgstr ""
 
-#: includes/Admin/Admin.php:926
+#: includes/Admin/Admin.php:1109
 msgid "Document created from template. Review and send."
 msgstr ""
 
-#: includes/Admin/Admin.php:404
+#: includes/Admin/Admin.php:428
 msgid "Document created. Now add signers and place fields."
 msgstr ""
 
-#: includes/Admin/Admin.php:657
+#: includes/Admin/Admin.php:840
 msgid "Document deleted."
 msgstr ""
 
-#: includes/Admin/Admin.php:647
+#: includes/Admin/Admin.php:829
 msgid "Document duplicated."
 msgstr ""
 
-#: includes/Frontend/PortalController.php:198
+#: includes/Frontend/PortalController.php:205
 msgid "Document not available"
 msgstr ""
 
@@ -514,14 +538,14 @@ msgstr ""
 msgid "Document unavailable."
 msgstr ""
 
-#: includes/Admin/Admin.php:376
+#: includes/Admin/Admin.php:400
 msgid "Document uploaded. Now add signers and place signature fields."
 msgstr ""
 
-#: includes/Admin/Admin.php:120
-#: includes/Admin/Admin.php:121
-#: includes/Frontend/PortalController.php:173
-#: includes/Frontend/PortalController.php:251
+#: includes/Admin/Admin.php:135
+#: includes/Admin/Admin.php:136
+#: includes/Frontend/PortalController.php:180
+#: includes/Frontend/PortalController.php:258
 #: includes/Frontend/views/portal-documents.php:21
 msgid "Documents"
 msgstr ""
@@ -567,7 +591,10 @@ msgstr ""
 msgid "Electronic signature"
 msgstr ""
 
-#: includes/Admin/Admin.php:242
+#: includes/Admin/Admin.php:266
+#: includes/Admin/views/members.php:38
+#: includes/Admin/views/members.php:85
+#: includes/Admin/views/members.php:114
 #: includes/Frontend/views/portal-document.php:40
 #: includes/Signature/CertificatePage.php:40
 msgid "Email"
@@ -601,7 +628,7 @@ msgstr ""
 msgid "Endpoint responded with HTTP %d."
 msgstr ""
 
-#: includes/Admin/Admin.php:249
+#: includes/Admin/Admin.php:273
 msgid "Enter options separated by commas:"
 msgstr ""
 
@@ -647,15 +674,15 @@ msgstr ""
 msgid "Field for:"
 msgstr ""
 
-#: includes/Admin/Admin.php:250
+#: includes/Admin/Admin.php:274
 msgid "Field label shown to the signer (optional):"
 msgstr ""
 
-#: includes/Admin/Admin.php:247
+#: includes/Admin/Admin.php:271
 msgid "File"
 msgstr ""
 
-#: includes/Admin/Admin.php:1030
+#: includes/Admin/Admin.php:1213
 msgid "File not available."
 msgstr ""
 
@@ -717,7 +744,7 @@ msgstr ""
 msgid "Image support (GD)"
 msgstr ""
 
-#: includes/Admin/Admin.php:239
+#: includes/Admin/Admin.php:263
 #: includes/Admin/views/edit.php:97
 msgid "Initials"
 msgstr ""
@@ -744,12 +771,24 @@ msgstr ""
 msgid "Invalid upload."
 msgstr ""
 
-#: includes/Admin/Admin.php:480
+#: includes/Admin/Admin.php:653
+msgid "Invitation cancelled."
+msgstr ""
+
+#: includes/Admin/Admin.php:504
 msgid "Invitation re-sent."
+msgstr ""
+
+#: includes/Admin/Admin.php:594
+msgid "Invitation saved. The user will join when they sign in with this email."
 msgstr ""
 
 #: includes/Support/HealthCheck.php:118
 msgid "Invitations are sent with wp_mail(). Use “Send test email” below to confirm delivery on this server."
+msgstr ""
+
+#: includes/Admin/views/members.php:109
+msgid "Invite a member"
 msgstr ""
 
 #: includes/Frontend/SigningController.php:430
@@ -770,7 +809,7 @@ msgstr ""
 msgid "Link expires after"
 msgstr ""
 
-#: includes/Admin/Admin.php:253
+#: includes/Admin/Admin.php:277
 msgid "Loading document…"
 msgstr ""
 
@@ -780,6 +819,23 @@ msgstr ""
 
 #: includes/Admin/DocumentsListTable.php:98
 msgid "Manage"
+msgstr ""
+
+#: includes/Admin/views/members.php:37
+msgid "Member"
+msgstr ""
+
+#: includes/Admin/Admin.php:593
+msgid "Member added."
+msgstr ""
+
+#: includes/Admin/Admin.php:637
+msgid "Member removed."
+msgstr ""
+
+#: includes/Admin/Admin.php:171
+#: includes/Admin/Admin.php:172
+msgid "Members"
 msgstr ""
 
 #: includes/Admin/views/edit.php:356
@@ -795,7 +851,7 @@ msgstr ""
 msgid "My electronic signature is legally binding and has the same effect as a handwritten signature. The time, my IP address and browser are recorded as proof of signing."
 msgstr ""
 
-#: includes/Admin/Admin.php:241
+#: includes/Admin/Admin.php:265
 #: includes/Frontend/views/portal-document.php:39
 #: includes/Signature/CertificatePage.php:39
 msgid "Name"
@@ -829,7 +885,7 @@ msgstr ""
 msgid "No documents yet. Upload your first PDF to get started."
 msgstr ""
 
-#: includes/Admin/Admin.php:616
+#: includes/Admin/Admin.php:798
 msgid "No emails were sent because the signer(s) have no email. Use \"Get signing link\" to share their link."
 msgstr ""
 
@@ -870,15 +926,15 @@ msgstr ""
 msgid "No webhook URL is configured."
 msgstr ""
 
-#: includes/Frontend/PortalController.php:118
+#: includes/Frontend/PortalController.php:125
 msgid "No workspace"
 msgstr ""
 
-#: includes/Frontend/PortalController.php:119
+#: includes/Frontend/PortalController.php:126
 msgid "No workspace yet"
 msgstr ""
 
-#: includes/Frontend/PortalController.php:197
+#: includes/Frontend/PortalController.php:204
 msgid "Not found"
 msgstr ""
 
@@ -886,7 +942,7 @@ msgstr ""
 msgid "Nothing stuck — every document is moving."
 msgstr ""
 
-#: includes/Admin/Admin.php:244
+#: includes/Admin/Admin.php:268
 #: includes/Admin/views/edit.php:102
 #: includes/Database/FieldRepository.php:106
 msgid "Number"
@@ -934,6 +990,10 @@ msgstr ""
 msgid "Outgoing webhook"
 msgstr ""
 
+#: includes/Support/Roles.php:89
+msgid "Owner"
+msgstr ""
+
 #: includes/Admin/views/new.php:35
 msgid "PDF file"
 msgstr ""
@@ -953,6 +1013,10 @@ msgstr ""
 #: includes/Admin/DocumentsListTable.php:178
 #: includes/Admin/views/analytics.php:25
 msgid "Partially signed"
+msgstr ""
+
+#: includes/Admin/views/members.php:83
+msgid "Pending invitations"
 msgstr ""
 
 #: includes/Admin/views/edit.php:378
@@ -976,11 +1040,11 @@ msgstr ""
 msgid "Please add a title or some content for the document."
 msgstr ""
 
-#: includes/Admin/Admin.php:724
+#: includes/Admin/Admin.php:907
 msgid "Please choose a .p12/.pfx certificate file."
 msgstr ""
 
-#: includes/Admin/Admin.php:364
+#: includes/Admin/Admin.php:388
 msgid "Please choose a PDF to upload."
 msgstr ""
 
@@ -1008,8 +1072,16 @@ msgstr ""
 msgid "Please provide a recipient for every role that has fields."
 msgstr ""
 
+#: includes/Admin/Admin.php:668
+msgid "Please provide a sub-workspace name."
+msgstr ""
+
 #: includes/Services/DocumentService.php:390
 msgid "Please provide a valid email address."
+msgstr ""
+
+#: includes/Services/AccountService.php:218
+msgid "Please provide a valid email and role."
 msgstr ""
 
 #: includes/Services/DocumentService.php:714
@@ -1028,7 +1100,7 @@ msgstr ""
 msgid "Please verify your identity before signing."
 msgstr ""
 
-#: includes/Frontend/PortalController.php:286
+#: includes/Frontend/PortalController.php:293
 msgid "Portal template missing."
 msgstr ""
 
@@ -1087,8 +1159,9 @@ msgstr ""
 msgid "Reminders run once a day via WP-Cron. Each reminder issues a fresh signing link."
 msgstr ""
 
-#: includes/Admin/Admin.php:248
+#: includes/Admin/Admin.php:272
 #: includes/Admin/views/edit.php:261
+#: includes/Admin/views/members.php:73
 msgid "Remove"
 msgstr ""
 
@@ -1098,6 +1171,10 @@ msgstr ""
 
 #: includes/Admin/views/settings.php:123
 msgid "Remove the certificate and revert to electronic signatures?"
+msgstr ""
+
+#: includes/Admin/views/members.php:68
+msgid "Remove this member?"
 msgstr ""
 
 #: includes/Admin/views/edit.php:256
@@ -1116,8 +1193,18 @@ msgstr ""
 msgid "Resend code"
 msgstr ""
 
+#: includes/Admin/views/members.php:39
+#: includes/Admin/views/members.php:85
+#: includes/Admin/views/members.php:117
+msgid "Role"
+msgstr ""
+
 #: includes/Services/DocumentService.php:624
 msgid "Role %d"
+msgstr ""
+
+#: includes/Admin/Admin.php:614
+msgid "Role updated."
 msgstr ""
 
 #: includes/Admin/views/templates.php:30
@@ -1133,6 +1220,7 @@ msgid "SHA-256:"
 msgstr ""
 
 #: includes/Admin/views/edit.php:277
+#: includes/Admin/views/members.php:60
 msgid "Save"
 msgstr ""
 
@@ -1186,6 +1274,10 @@ msgstr ""
 msgid "Send for signing"
 msgstr ""
 
+#: includes/Admin/views/members.php:124
+msgid "Send invite"
+msgstr ""
+
 #: includes/Admin/views/health.php:66
 msgid "Send test email to %s"
 msgstr ""
@@ -1194,16 +1286,20 @@ msgstr ""
 msgid "Send test webhook"
 msgstr ""
 
+#: includes/Support/Roles.php:91
+msgid "Sender"
+msgstr ""
+
 #: includes/Admin/DocumentsListTable.php:176
 #: includes/Admin/views/analytics.php:23
 msgid "Sent"
 msgstr ""
 
-#: includes/Admin/Admin.php:620
+#: includes/Admin/Admin.php:802
 msgid "Sent %1$d invitation(s). %2$d signer(s) have no email — share their link manually."
 msgstr ""
 
-#: includes/Admin/Admin.php:627
+#: includes/Admin/Admin.php:809
 msgid "Sent %d invitation(s)."
 msgstr ""
 
@@ -1216,12 +1312,12 @@ msgstr ""
 msgid "Sent for signing"
 msgstr ""
 
-#: includes/Admin/Admin.php:156
-#: includes/Admin/Admin.php:157
+#: includes/Admin/Admin.php:180
+#: includes/Admin/Admin.php:181
 msgid "Settings"
 msgstr ""
 
-#: includes/Admin/Admin.php:777
+#: includes/Admin/Admin.php:960
 msgid "Settings saved."
 msgstr ""
 
@@ -1229,7 +1325,7 @@ msgstr ""
 msgid "Share via WhatsApp"
 msgstr ""
 
-#: includes/Admin/Admin.php:251
+#: includes/Admin/Admin.php:275
 msgid "Short help text under the field (optional):"
 msgstr ""
 
@@ -1258,7 +1354,7 @@ msgstr ""
 msgid "Sign: %s"
 msgstr ""
 
-#: includes/Admin/Admin.php:238
+#: includes/Admin/Admin.php:262
 #: includes/Admin/views/edit.php:96
 msgid "Signature"
 msgstr ""
@@ -1267,7 +1363,7 @@ msgstr ""
 msgid "Signature Certificate"
 msgstr ""
 
-#: includes/Admin/Admin.php:591
+#: includes/Admin/Admin.php:772
 msgid "Signature fields saved."
 msgstr ""
 
@@ -1306,7 +1402,7 @@ msgstr ""
 msgid "Signer %d"
 msgstr ""
 
-#: includes/Admin/Admin.php:425
+#: includes/Admin/Admin.php:449
 msgid "Signer added."
 msgstr ""
 
@@ -1315,11 +1411,11 @@ msgstr ""
 msgid "Signer not found."
 msgstr ""
 
-#: includes/Admin/Admin.php:464
+#: includes/Admin/Admin.php:488
 msgid "Signer removed."
 msgstr ""
 
-#: includes/Admin/Admin.php:453
+#: includes/Admin/Admin.php:477
 msgid "Signer verification updated."
 msgstr ""
 
@@ -1329,7 +1425,7 @@ msgstr ""
 msgid "Signers"
 msgstr ""
 
-#: includes/Admin/Admin.php:512
+#: includes/Admin/Admin.php:693
 msgid "Signing deadline extended."
 msgstr ""
 
@@ -1359,13 +1455,21 @@ msgstr ""
 msgid "Storage is writable but the .htaccess guard is missing. On nginx, add a deny rule for the comsign uploads directory."
 msgstr ""
 
+#: includes/Admin/Admin.php:674
+msgid "Sub-workspace created."
+msgstr ""
+
+#: includes/Admin/views/members.php:133
+msgid "Sub-workspace name"
+msgstr ""
+
 #: includes/Admin/views/list.php:37
 #: includes/Frontend/views/partials/portal-nav.php:36
 msgid "Switch"
 msgstr ""
 
-#: includes/Admin/Admin.php:165
-#: includes/Admin/Admin.php:166
+#: includes/Admin/Admin.php:189
+#: includes/Admin/Admin.php:190
 #: includes/Admin/views/health.php:28
 msgid "System Status"
 msgstr ""
@@ -1374,7 +1478,7 @@ msgstr ""
 msgid "Template"
 msgstr ""
 
-#: includes/Admin/Admin.php:966
+#: includes/Admin/Admin.php:1149
 msgid "Template deleted."
 msgstr ""
 
@@ -1386,27 +1490,27 @@ msgstr ""
 msgid "Template name"
 msgstr ""
 
-#: includes/Admin/Admin.php:871
+#: includes/Admin/Admin.php:1054
 #: includes/Services/DocumentService.php:686
 #: includes/Services/DocumentService.php:801
 msgid "Template not found."
 msgstr ""
 
-#: includes/Admin/Admin.php:910
+#: includes/Admin/Admin.php:1093
 msgid "Template saved."
 msgstr ""
 
-#: includes/Admin/Admin.php:147
-#: includes/Admin/Admin.php:148
+#: includes/Admin/Admin.php:162
+#: includes/Admin/Admin.php:163
 #: includes/Admin/views/templates.php:18
 msgid "Templates"
 msgstr ""
 
-#: includes/Admin/Admin.php:815
+#: includes/Admin/Admin.php:998
 msgid "Test email sent to %s."
 msgstr ""
 
-#: includes/Admin/Admin.php:243
+#: includes/Admin/Admin.php:267
 #: includes/Admin/views/edit.php:101
 msgid "Text"
 msgstr ""
@@ -1427,11 +1531,11 @@ msgstr ""
 msgid "The certificate file is missing or too large (max 512 KB)."
 msgstr ""
 
-#: includes/Admin/Admin.php:734
+#: includes/Admin/Admin.php:917
 msgid "The certificate file is too large (max 512 KB)."
 msgstr ""
 
-#: includes/Admin/Admin.php:730
+#: includes/Admin/Admin.php:913
 msgid "The certificate must be a .p12 or .pfx file."
 msgstr ""
 
@@ -1499,7 +1603,7 @@ msgstr ""
 msgid "These people receive the fully signed PDF by email when signing completes. They do not sign."
 msgstr ""
 
-#: includes/Frontend/PortalController.php:199
+#: includes/Frontend/PortalController.php:206
 msgid "This document does not exist in your workspace."
 msgstr ""
 
@@ -1515,7 +1619,7 @@ msgstr ""
 msgid "This field is required."
 msgstr ""
 
-#: includes/Admin/Admin.php:809
+#: includes/Admin/Admin.php:992
 msgid "This is a test email from ComSign. If you received it, outgoing mail works on this server."
 msgstr ""
 
@@ -1649,6 +1753,10 @@ msgstr ""
 msgid "Viewed"
 msgstr ""
 
+#: includes/Support/Roles.php:92
+msgid "Viewer"
+msgstr ""
+
 #: includes/Support/HealthCheck.php:94
 msgid "WP-Cron is disabled; make sure a real system cron triggers wp-cron.php, or reminders will not be sent."
 msgstr ""
@@ -1679,17 +1787,25 @@ msgstr ""
 msgid "When"
 msgstr ""
 
-#: includes/Frontend/PortalController.php:149
+#: includes/Frontend/PortalController.php:156
 msgid "Workspace"
 msgstr ""
 
-#: includes/Admin/Admin.php:493
+#: includes/Admin/views/members.php:23
+msgid "Workspace members"
+msgstr ""
+
+#: includes/Admin/Admin.php:517
 msgid "Workspace switched."
 msgstr ""
 
 #: includes/Admin/views/list.php:29
 #: includes/Frontend/views/partials/portal-nav.php:28
 msgid "Workspace:"
+msgstr ""
+
+#: includes/Admin/views/members.php:25
+msgid "Workspace: %s"
 msgstr ""
 
 #: includes/Admin/views/new.php:55
@@ -1700,12 +1816,28 @@ msgstr ""
 msgid "X-ComSign-Key"
 msgstr ""
 
-#: includes/Admin/Admin.php:1133
+#: includes/Admin/Admin.php:1316
 msgid "You are not allowed to access this page."
+msgstr ""
+
+#: includes/Admin/views/members.php:31
+msgid "You can view members but only an owner or admin can change them."
+msgstr ""
+
+#: includes/Admin/Admin.php:530
+msgid "You cannot manage members of this workspace."
+msgstr ""
+
+#: includes/Admin/Admin.php:633
+msgid "You cannot remove the last owner of a workspace."
 msgstr ""
 
 #: includes/Admin/Admin.php:63
 msgid "You do not have access to this document."
+msgstr ""
+
+#: includes/Admin/Admin.php:74
+msgid "You do not have permission to do that."
 msgstr ""
 
 #: includes/Frontend/SigningController.php:396
@@ -1740,7 +1872,7 @@ msgstr ""
 msgid "Your ComSign verification code"
 msgstr ""
 
-#: includes/Frontend/PortalController.php:120
+#: includes/Frontend/PortalController.php:127
 msgid "Your account is not part of any workspace. Please contact your administrator."
 msgstr ""
 
@@ -1783,7 +1915,7 @@ msgstr ""
 msgid "email@example.com"
 msgstr ""
 
-#: includes/Admin/Admin.php:817
+#: includes/Admin/Admin.php:1000
 msgid "wp_mail() reported a failure. Check your mail configuration (e.g. an SMTP plugin)."
 msgstr ""
 

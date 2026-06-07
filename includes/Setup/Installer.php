@@ -73,6 +73,14 @@ final class Installer {
 	}
 
 	/**
+	 * Fully qualified table name for pending workspace invitations.
+	 */
+	public static function invites_table(): string {
+		global $wpdb;
+		return $wpdb->prefix . 'comsign_invites';
+	}
+
+	/**
 	 * Option holding the id of the default (migration) account.
 	 */
 	public const OPTION_DEFAULT_ACCOUNT = 'comsign_default_account';
@@ -94,6 +102,7 @@ final class Installer {
 		$templates = self::templates_table();
 		$accounts      = self::accounts_table();
 		$account_users = self::account_users_table();
+		$invites       = self::invites_table();
 
 		$schema = array();
 
@@ -217,6 +226,19 @@ final class Installer {
 			PRIMARY KEY  (id),
 			UNIQUE KEY account_user (account_id, user_id),
 			KEY user_id (user_id)
+		) {$charset_collate};";
+
+		// Invitations: a pending membership for an email that has no WP user yet
+		// (or that has not joined). Claimed on registration/login.
+		$schema[] = "CREATE TABLE {$invites} (
+			id BIGINT UNSIGNED NOT NULL AUTO_INCREMENT,
+			account_id BIGINT UNSIGNED NOT NULL,
+			email VARCHAR(190) NOT NULL DEFAULT '',
+			role VARCHAR(20) NOT NULL DEFAULT 'viewer',
+			created_at DATETIME NOT NULL DEFAULT '0000-00-00 00:00:00',
+			PRIMARY KEY  (id),
+			UNIQUE KEY account_email (account_id, email),
+			KEY email (email)
 		) {$charset_collate};";
 
 		// Drop the legacy UNIQUE index on token_hash before dbDelta re-adds it as

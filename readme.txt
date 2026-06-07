@@ -4,7 +4,7 @@ Tags: signature, digital signature, pdf, esignature, hebrew
 Requires at least: 6.0
 Tested up to: 6.5
 Requires PHP: 7.4
-Stable tag: 0.21.0
+Stable tag: 0.22.0
 License: GPL-2.0-or-later
 License URI: https://www.gnu.org/licenses/gpl-2.0.html
 
@@ -105,6 +105,17 @@ ID and its SHA-256 code (shown on the document screen and the signature
 certificate) to confirm the document is authentic and see who signed it.
 
 == Changelog ==
+
+= 0.22.0 =
+* New: role-based access control (RBAC) with four workspace roles - Owner,
+  Admin, Sender and Viewer - enforced at the service layer, not just the UI.
+  Managers of a parent workspace keep their role over sub-workspaces.
+* New: a Members screen (ComSign -> Members) to invite people by email, set/
+  change their role, remove them, and create sub-workspaces.
+* New: invitations & onboarding. Inviting an email that has no account yet stores
+  a pending invite that is claimed automatically when that person signs in
+  (including via social logins such as Google). A brand-new user who opens the
+  portal with no workspace gets a personal one automatically.
 
 = 0.21.0 =
 * Security: the REST API is now tenant-scoped. GET /documents only lists the

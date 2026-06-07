@@ -67,6 +67,16 @@ final class Plugin {
 		// Front-end client portal (/comsign/app).
 		( new \ComSign\Frontend\PortalController() )->register();
 
+		// Claim pending workspace invitations when a user logs in or registers
+		// (covers email/password and social logins like Google).
+		$claim = static function ( $user_id ): void {
+			( new \ComSign\Services\AccountService() )->claim_invites( (int) $user_id );
+		};
+		add_action( 'user_register', $claim );
+		add_action( 'wp_login', static function ( $login, $user ) use ( $claim ): void {
+			$claim( $user->ID );
+		}, 10, 2 );
+
 		// Integrations: outgoing webhooks + REST API.
 		( new \ComSign\Integrations\Webhooks() )->register();
 		( new \ComSign\Integrations\RestApi() )->register();

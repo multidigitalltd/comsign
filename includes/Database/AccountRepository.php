@@ -18,6 +18,8 @@ final class AccountRepository {
 
 	public const ROLE_OWNER  = 'owner';
 	public const ROLE_ADMIN  = 'admin';
+	public const ROLE_SENDER = 'sender';
+	public const ROLE_VIEWER = 'viewer';
 	public const ROLE_MEMBER = 'member';
 
 	/**
@@ -103,6 +105,29 @@ final class AccountRepository {
 		}
 
 		return $all;
+	}
+
+	/**
+	 * An account plus every ancestor id (walking parent_id upwards).
+	 *
+	 * @return int[] Including the account itself.
+	 */
+	public function ancestor_ids( int $account_id ): array {
+		$ids     = array( $account_id );
+		$current = $this->find( $account_id );
+		$guard   = 0;
+
+		while ( $current && (int) $current->parent_id > 0 && $guard < 50 ) {
+			$parent = (int) $current->parent_id;
+			if ( in_array( $parent, $ids, true ) ) {
+				break; // cycle guard
+			}
+			$ids[]   = $parent;
+			$current = $this->find( $parent );
+			++$guard;
+		}
+
+		return $ids;
 	}
 
 	/**

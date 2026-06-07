@@ -66,6 +66,16 @@ final class Admin {
 	}
 
 	/**
+	 * Require a specific RBAC permission on a document (e.g. send/delete).
+	 */
+	private function assert_document_permission( int $document_id, string $permission ): void {
+		$document = $this->documents->find( $document_id );
+		if ( ! $document || ! $this->accounts->can_for_document( get_current_user_id(), $document, $permission ) ) {
+			wp_die( esc_html__( 'You do not have permission to do that.', 'comsign' ), '', array( 'response' => 403 ) );
+		}
+	}
+
+	/**
 	 * Hook the admin controller into WordPress.
 	 */
 	public function register(): void {
@@ -85,6 +95,11 @@ final class Admin {
 		add_action( 'admin_post_comsign_resend_signer', array( $this, 'handle_resend_signer' ) );
 		add_action( 'admin_post_comsign_extend_expiry', array( $this, 'handle_extend_expiry' ) );
 		add_action( 'admin_post_comsign_switch_account', array( $this, 'handle_switch_account' ) );
+		add_action( 'admin_post_comsign_invite_member', array( $this, 'handle_invite_member' ) );
+		add_action( 'admin_post_comsign_update_member_role', array( $this, 'handle_update_member_role' ) );
+		add_action( 'admin_post_comsign_remove_member', array( $this, 'handle_remove_member' ) );
+		add_action( 'admin_post_comsign_cancel_invite', array( $this, 'handle_cancel_invite' ) );
+		add_action( 'admin_post_comsign_create_subaccount', array( $this, 'handle_create_subaccount' ) );
 		add_action( 'admin_post_comsign_save_fields', array( $this, 'handle_save_fields' ) );
 		add_action( 'admin_post_comsign_send', array( $this, 'handle_send' ) );
 		add_action( 'admin_post_comsign_duplicate', array( $this, 'handle_duplicate' ) );
@@ -149,6 +164,15 @@ final class Admin {
 			Capabilities::MANAGE,
 			'comsign-templates',
 			array( $this, 'render_templates_page' )
+		);
+
+		add_submenu_page(
+			self::MENU_SLUG,
+			__( 'Members', 'comsign' ),
+			__( 'Members', 'comsign' ),
+			Capabilities::MANAGE,
+			'comsign-members',
+			array( $this, 'render_members_page' )
 		);
 
 		add_submenu_page(
@@ -493,6 +517,163 @@ final class Admin {
 		$this->redirect_with_notice( admin_url( 'admin.php?page=comsign' ), 'success', __( 'Workspace switched.', 'comsign' ) );
 	}
 
+	/* ---------------------------------------------------------------------
+	 * Members / workspace management
+	 * ------------------------------------------------------------------- */
+
+	/**
+	 * The current account the manager is administering, and a guard that the
+	 * current user may manage its members. Dies 403 otherwise.
+	 */
+	private function assert_member_management( int $account_id ): void {
+		if ( ! $this->accounts->can_in_account( get_current_user_id(), $account_id, \ComSign\Support\Roles::MANAGE_MEMBERS ) ) {
+			wp_die( esc_html__( 'You cannot manage members of this workspace.', 'comsign' ), '', array( 'response' => 403 ) );
+		}
+	}
+
+	/**
+	 * Members & invitations page for the current workspace.
+	 */
+	public function render_members_page(): void {
+		$this->guard();
+
+		$user_id    = get_current_user_id();
+		$account_id = $this->accounts->current_account_id( $user_id );
+		$repo       = $this->accounts->repository();
+		$invites    = new \ComSign\Database\InviteRepository();
+
+		$can_manage = $this->accounts->can_in_account( $user_id, $account_id, \ComSign\Support\Roles::MANAGE_MEMBERS );
+
+		$members = array();
+		foreach ( $repo->members_of( $account_id ) as $m ) {
+			$u = get_userdata( (int) $m->user_id );
+			$members[] = array(
+				'user_id' => (int) $m->user_id,
+				'name'    => $u ? $u->display_name : ( '#' . (int) $m->user_id ),
+				'email'   => $u ? $u->user_email : '',
+				'role'    => (string) $m->role,
+			);
+		}
+
+		$this->view(
+			'members',
+			array(
+				'account'     => $repo->find( $account_id ),
+				'members'     => $members,
+				'invites'     => $invites->for_account( $account_id ),
+				'roles'       => \ComSign\Support\Roles::assignable(),
+				'can_manage'  => $can_manage,
+				'current_uid' => $user_id,
+				'action_url'  => admin_url( 'admin-post.php' ),
+				'nonce'       => wp_create_nonce( 'comsign_members_' . $account_id ),
+				'notice'      => $this->pull_notice(),
+			)
+		);
+	}
+
+	/**
+	 * Invite a user (by email) to the current account.
+	 */
+	public function handle_invite_member(): void {
+		$this->guard();
+		$account_id = isset( $_POST['account_id'] ) ? absint( wp_unslash( $_POST['account_id'] ) ) : 0;
+		check_admin_referer( 'comsign_members_' . $account_id );
+		$this->assert_member_management( $account_id );
+
+		$email = isset( $_POST['email'] ) ? sanitize_email( wp_unslash( $_POST['email'] ) ) : '';
+		$role  = isset( $_POST['role'] ) ? sanitize_key( wp_unslash( $_POST['role'] ) ) : 'viewer';
+
+		try {
+			$result = $this->accounts->invite( $account_id, $email, $role );
+		} catch ( \Throwable $e ) {
+			$this->redirect_with_notice( admin_url( 'admin.php?page=comsign-members' ), 'error', $e->getMessage() );
+		}
+
+		$msg = 'added' === $result
+			? __( 'Member added.', 'comsign' )
+			: __( 'Invitation saved. The user will join when they sign in with this email.', 'comsign' );
+		$this->redirect_with_notice( admin_url( 'admin.php?page=comsign-members' ), 'success', $msg );
+	}
+
+	/**
+	 * Change a member's role.
+	 */
+	public function handle_update_member_role(): void {
+		$this->guard();
+		$account_id = isset( $_POST['account_id'] ) ? absint( wp_unslash( $_POST['account_id'] ) ) : 0;
+		check_admin_referer( 'comsign_members_' . $account_id );
+		$this->assert_member_management( $account_id );
+
+		$user_id = isset( $_POST['user_id'] ) ? absint( wp_unslash( $_POST['user_id'] ) ) : 0;
+		$role    = isset( $_POST['role'] ) ? sanitize_key( wp_unslash( $_POST['role'] ) ) : '';
+
+		if ( $user_id && array_key_exists( $role, \ComSign\Support\Roles::assignable() ) ) {
+			$this->accounts->repository()->add_member( $account_id, $user_id, $role );
+		}
+
+		$this->redirect_with_notice( admin_url( 'admin.php?page=comsign-members' ), 'success', __( 'Role updated.', 'comsign' ) );
+	}
+
+	/**
+	 * Remove a member from the account.
+	 */
+	public function handle_remove_member(): void {
+		$this->guard();
+		$account_id = isset( $_POST['account_id'] ) ? absint( wp_unslash( $_POST['account_id'] ) ) : 0;
+		check_admin_referer( 'comsign_members_' . $account_id );
+		$this->assert_member_management( $account_id );
+
+		$user_id = isset( $_POST['user_id'] ) ? absint( wp_unslash( $_POST['user_id'] ) ) : 0;
+
+		// Never let an account be left with no owner.
+		$repo   = $this->accounts->repository();
+		$owners = array_filter( $repo->members_of( $account_id ), static fn( $m ) => \ComSign\Database\AccountRepository::ROLE_OWNER === $m->role );
+		$target = $repo->role_of( $account_id, $user_id );
+		if ( \ComSign\Database\AccountRepository::ROLE_OWNER === $target && count( $owners ) <= 1 ) {
+			$this->redirect_with_notice( admin_url( 'admin.php?page=comsign-members' ), 'error', __( 'You cannot remove the last owner of a workspace.', 'comsign' ) );
+		}
+
+		$repo->remove_member( $account_id, $user_id );
+		$this->redirect_with_notice( admin_url( 'admin.php?page=comsign-members' ), 'success', __( 'Member removed.', 'comsign' ) );
+	}
+
+	/**
+	 * Cancel a pending invitation.
+	 */
+	public function handle_cancel_invite(): void {
+		$this->guard();
+		$account_id = isset( $_POST['account_id'] ) ? absint( wp_unslash( $_POST['account_id'] ) ) : 0;
+		check_admin_referer( 'comsign_members_' . $account_id );
+		$this->assert_member_management( $account_id );
+
+		$invite_id = isset( $_POST['invite_id'] ) ? absint( wp_unslash( $_POST['invite_id'] ) ) : 0;
+		if ( $invite_id ) {
+			( new \ComSign\Database\InviteRepository() )->delete( $invite_id );
+		}
+		$this->redirect_with_notice( admin_url( 'admin.php?page=comsign-members' ), 'success', __( 'Invitation cancelled.', 'comsign' ) );
+	}
+
+	/**
+	 * Create a sub-account under the current account (the manager keeps oversight
+	 * via the account hierarchy).
+	 */
+	public function handle_create_subaccount(): void {
+		$this->guard();
+		$account_id = isset( $_POST['account_id'] ) ? absint( wp_unslash( $_POST['account_id'] ) ) : 0;
+		check_admin_referer( 'comsign_members_' . $account_id );
+		$this->assert_member_management( $account_id );
+
+		$name = isset( $_POST['name'] ) ? sanitize_text_field( wp_unslash( $_POST['name'] ) ) : '';
+		if ( '' === $name ) {
+			$this->redirect_with_notice( admin_url( 'admin.php?page=comsign-members' ), 'error', __( 'Please provide a sub-workspace name.', 'comsign' ) );
+		}
+
+		// The current user becomes owner of the sub-account; the parent link lets
+		// managers of this account see the sub-account's documents.
+		$this->accounts->create_account( $name, get_current_user_id(), $account_id );
+		$this->redirect_with_notice( admin_url( 'admin.php?page=comsign-members' ), 'success', __( 'Sub-workspace created.', 'comsign' ) );
+	}
+
 	/**
 	 * Extend a document's signing deadline.
 	 */
@@ -595,6 +776,7 @@ final class Admin {
 		$this->guard();
 		$document_id = $this->posted_document_id();
 		check_admin_referer( 'comsign_send_' . $document_id );
+		$this->assert_document_permission( $document_id, \ComSign\Support\Roles::SEND_DOCUMENTS );
 
 		$options = array(
 			'sequential'  => ! empty( $_POST['sequential'] ),
@@ -651,6 +833,7 @@ final class Admin {
 		$this->guard();
 		$document_id = $this->posted_document_id();
 		check_admin_referer( 'comsign_delete_' . $document_id );
+		$this->assert_document_permission( $document_id, \ComSign\Support\Roles::DELETE_DOCUMENTS );
 
 		$this->service->delete( $document_id );
 

@@ -112,6 +112,13 @@ final class PortalController {
 		$account_ids = $this->accounts->visible_account_ids( $user_id );
 
 		if ( ! $account_ids ) {
+			// Claim any pending invitations and, failing that, create a personal
+			// workspace so a brand-new user (e.g. via Google sign-in) can start.
+			$this->accounts->ensure_onboarded( $user_id );
+			$account_ids = $this->accounts->visible_account_ids( $user_id );
+		}
+
+		if ( ! $account_ids ) {
 			$this->render(
 				'portal-message',
 				array(
