@@ -113,6 +113,9 @@ msgstr "Администратор"
 msgid "All parties have signed. The signed PDF and verification details are available below."
 msgstr "Все стороны подписали. Подписанный PDF и сведения для проверки доступны ниже."
 
+msgid "All statuses"
+msgstr "Все статусы"
+
 msgid "Already signed"
 msgstr "Уже подписано"
 
@@ -541,6 +544,12 @@ msgstr "Загрузка файла"
 
 msgid "Fill in the details below"
 msgstr "Заполните данные ниже"
+
+msgid "Filter"
+msgstr "Фильтр"
+
+msgid "Filter by status"
+msgstr "Фильтр по статусу"
 
 msgid "For signer:"
 msgstr "Для подписанта:"
@@ -997,6 +1006,12 @@ msgstr "Отсканируйте, чтобы проверить этот док�
 
 msgid "Scheduled tasks (WP-Cron)"
 msgstr "Запланированные задачи (WP-Cron)"
+
+msgid "Search by title…"
+msgstr "Поиск по названию…"
+
+msgid "Search documents"
+msgstr "Поиск документов"
 
 msgid "Securely processed by %s"
 msgstr "Безопасно обработано через %s"

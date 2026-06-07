@@ -190,6 +190,10 @@ msgstr ""
 msgid "All parties have signed. The signed PDF and verification details are available below."
 msgstr ""
 
+#: includes/Frontend/views/portal-documents.php:43
+msgid "All statuses"
+msgstr ""
+
 #: includes/Frontend/SigningController.php:102
 #: includes/Frontend/SigningController.php:396
 msgid "Already signed"
@@ -337,6 +341,7 @@ msgstr ""
 msgid "Choose…"
 msgstr ""
 
+#: includes/Frontend/views/portal-documents.php:50
 #: includes/Frontend/views/sign.php:54
 msgid "Clear"
 msgstr ""
@@ -483,7 +488,7 @@ msgstr ""
 msgid "Dana Cohen, dana@example.com, +972500000000\nAvi Levi, avi@example.com"
 msgstr ""
 
-#: includes/Frontend/PortalController.php:732
+#: includes/Frontend/PortalController.php:753
 msgid "Dashboard"
 msgstr ""
 
@@ -541,7 +546,7 @@ msgstr ""
 
 #: includes/Admin/DocumentsListTable.php:53
 #: includes/Admin/views/analytics.php:85
-#: includes/Frontend/PortalController.php:683
+#: includes/Frontend/PortalController.php:704
 #: includes/Frontend/views/partials/portal-doc-table.php:20
 #: includes/Frontend/views/sign.php:25
 #: includes/Services/DocumentService.php:276
@@ -583,7 +588,7 @@ msgid "Document file is uploaded"
 msgstr ""
 
 #: includes/Frontend/PortalController.php:534
-#: includes/Frontend/PortalController.php:668
+#: includes/Frontend/PortalController.php:689
 msgid "Document not available"
 msgstr ""
 
@@ -631,9 +636,9 @@ msgstr ""
 
 #: includes/Admin/Admin.php:136
 #: includes/Admin/Admin.php:137
-#: includes/Frontend/PortalController.php:643
-#: includes/Frontend/PortalController.php:737
-#: includes/Frontend/views/portal-documents.php:21
+#: includes/Frontend/PortalController.php:660
+#: includes/Frontend/PortalController.php:758
+#: includes/Frontend/views/portal-documents.php:34
 msgid "Documents"
 msgstr ""
 
@@ -830,6 +835,14 @@ msgstr ""
 
 #: includes/Frontend/views/sign.php:81
 msgid "Fill in the details below"
+msgstr ""
+
+#: includes/Frontend/views/portal-documents.php:48
+msgid "Filter"
+msgstr ""
+
+#: includes/Frontend/views/portal-documents.php:41
+msgid "Filter by status"
 msgstr ""
 
 #: includes/Frontend/views/portal-edit.php:155
@@ -1030,12 +1043,12 @@ msgid "Needs attention (out > 7 days)"
 msgstr ""
 
 #: includes/Frontend/PortalController.php:502
-#: includes/Frontend/PortalController.php:745
+#: includes/Frontend/PortalController.php:766
 #: includes/Frontend/views/portal-create.php:27
 msgid "New document"
 msgstr ""
 
-#: includes/Frontend/views/portal-documents.php:37
+#: includes/Frontend/views/portal-documents.php:68
 msgid "Next"
 msgstr ""
 
@@ -1112,7 +1125,7 @@ msgstr ""
 msgid "Not available"
 msgstr ""
 
-#: includes/Frontend/PortalController.php:667
+#: includes/Frontend/PortalController.php:688
 msgid "Not found"
 msgstr ""
 
@@ -1199,7 +1212,7 @@ msgstr ""
 msgid "PHP version"
 msgstr ""
 
-#: includes/Frontend/views/portal-documents.php:33
+#: includes/Frontend/views/portal-documents.php:64
 msgid "Page %1$d of %2$d"
 msgstr ""
 
@@ -1313,11 +1326,11 @@ msgstr ""
 msgid "Please verify your identity before signing."
 msgstr ""
 
-#: includes/Frontend/PortalController.php:782
+#: includes/Frontend/PortalController.php:803
 msgid "Portal template missing."
 msgstr ""
 
-#: includes/Frontend/views/portal-documents.php:28
+#: includes/Frontend/views/portal-documents.php:59
 msgid "Previous"
 msgstr ""
 
@@ -1493,6 +1506,14 @@ msgstr ""
 #: includes/Support/HealthCheck.php:94
 #: includes/Support/HealthCheck.php:96
 msgid "Scheduled tasks (WP-Cron)"
+msgstr ""
+
+#: includes/Frontend/views/portal-documents.php:40
+msgid "Search by title…"
+msgstr ""
+
+#: includes/Frontend/views/portal-documents.php:39
+msgid "Search documents"
 msgstr ""
 
 #: includes/Frontend/views/partials/footer.php:14
@@ -1876,7 +1897,7 @@ msgstr ""
 msgid "These signers have no fields yet: %s. Open \"Place signature fields\"."
 msgstr ""
 
-#: includes/Frontend/PortalController.php:669
+#: includes/Frontend/PortalController.php:690
 msgid "This document does not exist in your workspace."
 msgstr ""
 

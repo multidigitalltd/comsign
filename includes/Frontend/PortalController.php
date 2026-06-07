@@ -632,10 +632,27 @@ final class PortalController {
 	 * @param int[] $account_ids Visible accounts.
 	 */
 	private function render_documents( int $user_id, array $account_ids ): void {
-		$page    = isset( $_GET['paged'] ) ? max( 1, absint( wp_unslash( $_GET['paged'] ) ) ) : 1; // phpcs:ignore WordPress.Security.NonceVerification.Recommended
-		$per     = 20;
-		$total   = $this->documents->count_for_accounts( $account_ids );
-		$rows    = $this->documents->paginate_for_accounts( $account_ids, $per, ( $page - 1 ) * $per );
+		// phpcs:disable WordPress.Security.NonceVerification.Recommended
+		$page   = isset( $_GET['paged'] ) ? max( 1, absint( wp_unslash( $_GET['paged'] ) ) ) : 1;
+		$search = isset( $_GET['s'] ) ? sanitize_text_field( wp_unslash( $_GET['s'] ) ) : '';
+		$status = isset( $_GET['status'] ) ? sanitize_key( wp_unslash( $_GET['status'] ) ) : '';
+		// phpcs:enable WordPress.Security.NonceVerification.Recommended
+
+		// Only allow filtering by a real document status.
+		$statuses = array(
+			DocumentRepository::STATUS_DRAFT,
+			DocumentRepository::STATUS_SENT,
+			DocumentRepository::STATUS_SIGNED,
+			DocumentRepository::STATUS_COMPLETED,
+			DocumentRepository::STATUS_DECLINED,
+		);
+		if ( ! in_array( $status, $statuses, true ) ) {
+			$status = '';
+		}
+
+		$per   = 20;
+		$total = $this->documents->count_for_accounts( $account_ids, $search, $status );
+		$rows  = $this->documents->paginate_for_accounts( $account_ids, $per, ( $page - 1 ) * $per, $search, $status );
 
 		$this->render(
 			'portal-documents',
@@ -645,6 +662,10 @@ final class PortalController {
 				'documents'  => $this->decorate( $rows ),
 				'page'       => $page,
 				'pages'      => max( 1, (int) ceil( $total / $per ) ),
+				'search'     => $search,
+				'status'     => $status,
+				'statuses'   => $statuses,
+				'total'      => $total,
 				'switcher'   => $this->switcher( $user_id ),
 			)
 		);

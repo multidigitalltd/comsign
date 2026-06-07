@@ -515,3 +515,20 @@ body.comsign-public {
 	margin-bottom: 8px;
 }
 .comsign-editor-toolbar select { min-height: 38px; }
+
+/* ---- Portal document filter (0.30.0) ---- */
+.comsign-portal-filter {
+	display: flex;
+	flex-wrap: wrap;
+	gap: 8px;
+	align-items: center;
+	margin: 0 0 16px;
+}
+.comsign-portal-filter input[type="search"] {
+	flex: 1 1 220px;
+	min-height: 40px;
+	padding: 6px 10px;
+	border: 1px solid var( --comsign-border, #d6d9de );
+	border-radius: var( --comsign-radius-sm, 6px );
+}
+.comsign-portal-filter select { min-height: 40px; }

@@ -88,46 +88,81 @@ final class DocumentRepository {
 	 * @param int   $per_page    Items per page.
 	 * @param int   $offset      Offset.
 	 */
-	public function paginate_for_accounts( array $account_ids, int $per_page, int $offset ): array {
+	public function paginate_for_accounts( array $account_ids, int $per_page, int $offset, string $search = '', string $status = '' ): array {
 		global $wpdb;
 
-		$account_ids = array_values( array_unique( array_map( 'intval', $account_ids ) ) );
-		if ( ! $account_ids ) {
+		$scope = $this->account_scope( $account_ids, $search, $status );
+		if ( null === $scope ) {
 			return array();
 		}
 
-		$placeholders = implode( ',', array_fill( 0, count( $account_ids ), '%d' ) );
-		$args         = array_merge( $account_ids, array( $per_page, $offset ) );
+		$args = array_merge( $scope['args'], array( $per_page, $offset ) );
 
 		return $wpdb->get_results( // phpcs:ignore WordPress.DB.DirectDatabaseQuery, WordPress.DB.PreparedSQL.NotPrepared
 			$wpdb->prepare(
-				'SELECT * FROM ' . Installer::documents_table() . " WHERE account_id IN ($placeholders) ORDER BY id DESC LIMIT %d OFFSET %d",
+				'SELECT * FROM ' . Installer::documents_table() . ' ' . $scope['where'] . ' ORDER BY id DESC LIMIT %d OFFSET %d', // phpcs:ignore WordPress.DB.PreparedSQL.InterpolatedNotPrepared
 				...$args
 			)
 		);
 	}
 
 	/**
-	 * Document count restricted to a set of account ids.
+	 * Document count restricted to a set of account ids (with optional filters).
 	 *
-	 * @param int[] $account_ids Visible account ids.
+	 * @param int[]  $account_ids Visible account ids.
+	 * @param string $search      Title substring to match (optional).
+	 * @param string $status      Exact status to match (optional).
 	 */
-	public function count_for_accounts( array $account_ids ): int {
+	public function count_for_accounts( array $account_ids, string $search = '', string $status = '' ): int {
+		global $wpdb;
+
+		$scope = $this->account_scope( $account_ids, $search, $status );
+		if ( null === $scope ) {
+			return 0;
+		}
+
+		return (int) $wpdb->get_var( // phpcs:ignore WordPress.DB.DirectDatabaseQuery, WordPress.DB.PreparedSQL.NotPrepared
+			$wpdb->prepare(
+				'SELECT COUNT(*) FROM ' . Installer::documents_table() . ' ' . $scope['where'], // phpcs:ignore WordPress.DB.PreparedSQL.InterpolatedNotPrepared
+				...$scope['args']
+			)
+		);
+	}
+
+	/**
+	 * Build the shared "account scope + optional filters" WHERE clause.
+	 *
+	 * @param int[]  $account_ids Visible account ids.
+	 * @param string $search      Title substring (matched with LIKE).
+	 * @param string $status      Exact status.
+	 *
+	 * @return array{where:string,args:array}|null Null when there is no account scope.
+	 */
+	private function account_scope( array $account_ids, string $search, string $status ): ?array {
 		global $wpdb;
 
 		$account_ids = array_values( array_unique( array_map( 'intval', $account_ids ) ) );
 		if ( ! $account_ids ) {
-			return 0;
+			return null;
 		}
 
 		$placeholders = implode( ',', array_fill( 0, count( $account_ids ), '%d' ) );
+		$where        = "WHERE account_id IN ($placeholders)";
+		$args         = $account_ids;
 
-		return (int) $wpdb->get_var( // phpcs:ignore WordPress.DB.DirectDatabaseQuery, WordPress.DB.PreparedSQL.NotPrepared
-			$wpdb->prepare(
-				'SELECT COUNT(*) FROM ' . Installer::documents_table() . " WHERE account_id IN ($placeholders)",
-				...$account_ids
-			)
-		);
+		$status = trim( $status );
+		if ( '' !== $status ) {
+			$where  .= ' AND status = %s';
+			$args[]  = $status;
+		}
+
+		$search = trim( $search );
+		if ( '' !== $search ) {
+			$where  .= ' AND title LIKE %s';
+			$args[]  = '%' . $wpdb->esc_like( $search ) . '%';
+		}
+
+		return array( 'where' => $where, 'args' => $args );
 	}
 
 	/**

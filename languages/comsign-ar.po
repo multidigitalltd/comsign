@@ -113,6 +113,9 @@ msgstr "مدير"
 msgid "All parties have signed. The signed PDF and verification details are available below."
 msgstr "وقّع جميع الأطراف. ملف PDF الموقّع وتفاصيل التحقق متاحة أدناه."
 
+msgid "All statuses"
+msgstr "كل الحالات"
+
 msgid "Already signed"
 msgstr "موقّع بالفعل"
 
@@ -541,6 +544,12 @@ msgstr "رفع ملف"
 
 msgid "Fill in the details below"
 msgstr "املأ التفاصيل أدناه"
+
+msgid "Filter"
+msgstr "تصفية"
+
+msgid "Filter by status"
+msgstr "التصفية حسب الحالة"
 
 msgid "For signer:"
 msgstr "للموقّع:"
@@ -997,6 +1006,12 @@ msgstr "امسح ضوئيًا للتحقق من هذا المستند عبر ا�
 
 msgid "Scheduled tasks (WP-Cron)"
 msgstr "المهام المجدولة (WP-Cron)"
+
+msgid "Search by title…"
+msgstr "البحث بالعنوان…"
+
+msgid "Search documents"
+msgstr "البحث في المستندات"
 
 msgid "Securely processed by %s"
 msgstr "تتم معالجته بأمان بواسطة %s"

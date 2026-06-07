@@ -185,6 +185,10 @@ msgstr "מנהל"
 msgid "All parties have signed. The signed PDF and verification details are available below."
 msgstr "כל הצדדים חתמו. קובץ ה-PDF החתום ופרטי האימות זמינים למטה."
 
+#: includes/Frontend/views/portal-documents.php:43
+msgid "All statuses"
+msgstr "כל הסטטוסים"
+
 #: includes/Frontend/SigningController.php:102
 #: includes/Frontend/SigningController.php:396
 msgid "Already signed"
@@ -332,6 +336,7 @@ msgstr "בחירת תבנית"
 msgid "Choose…"
 msgstr "בחרו…"
 
+#: includes/Frontend/views/portal-documents.php:50
 #: includes/Frontend/views/sign.php:54
 msgid "Clear"
 msgstr "ניקוי"
@@ -478,7 +483,7 @@ msgstr "נוצר"
 msgid "Dana Cohen, dana@example.com, +972500000000\nAvi Levi, avi@example.com"
 msgstr "דנה כהן, dana@example.com, +972500000000\nאבי לוי, avi@example.com"
 
-#: includes/Frontend/PortalController.php:732
+#: includes/Frontend/PortalController.php:753
 msgid "Dashboard"
 msgstr "לוח בקרה"
 
@@ -536,7 +541,7 @@ msgstr "חתימה דיגיטלית (PKI/PAdES)"
 
 #: includes/Admin/DocumentsListTable.php:53
 #: includes/Admin/views/analytics.php:85
-#: includes/Frontend/PortalController.php:683
+#: includes/Frontend/PortalController.php:704
 #: includes/Frontend/views/partials/portal-doc-table.php:20
 #: includes/Frontend/views/sign.php:25
 #: includes/Services/DocumentService.php:276
@@ -578,7 +583,7 @@ msgid "Document file is uploaded"
 msgstr "קובץ המסמך הועלה"
 
 #: includes/Frontend/PortalController.php:534
-#: includes/Frontend/PortalController.php:668
+#: includes/Frontend/PortalController.php:689
 msgid "Document not available"
 msgstr "המסמך אינו זמין"
 
@@ -626,9 +631,9 @@ msgstr "המסמך הועלה. כעת הוסיפו חותמים והניחו ש�
 
 #: includes/Admin/Admin.php:136
 #: includes/Admin/Admin.php:137
-#: includes/Frontend/PortalController.php:643
-#: includes/Frontend/PortalController.php:737
-#: includes/Frontend/views/portal-documents.php:21
+#: includes/Frontend/PortalController.php:660
+#: includes/Frontend/PortalController.php:758
+#: includes/Frontend/views/portal-documents.php:34
 msgid "Documents"
 msgstr "מסמכים"
 
@@ -826,6 +831,14 @@ msgstr "העלאת קובץ"
 #: includes/Frontend/views/sign.php:81
 msgid "Fill in the details below"
 msgstr "מלאו את הפרטים הבאים"
+
+#: includes/Frontend/views/portal-documents.php:48
+msgid "Filter"
+msgstr "סינון"
+
+#: includes/Frontend/views/portal-documents.php:41
+msgid "Filter by status"
+msgstr "סינון לפי סטטוס"
 
 #: includes/Frontend/views/portal-edit.php:155
 msgid "For signer:"
@@ -1025,12 +1038,12 @@ msgid "Needs attention (out > 7 days)"
 msgstr "דורש תשומת לב (נשלח לפני יותר מ-7 ימים)"
 
 #: includes/Frontend/PortalController.php:502
-#: includes/Frontend/PortalController.php:745
+#: includes/Frontend/PortalController.php:766
 #: includes/Frontend/views/portal-create.php:27
 msgid "New document"
 msgstr "מסמך חדש"
 
-#: includes/Frontend/views/portal-documents.php:37
+#: includes/Frontend/views/portal-documents.php:68
 msgid "Next"
 msgstr "הבא"
 
@@ -1107,7 +1120,7 @@ msgstr "אין הרשאה"
 msgid "Not available"
 msgstr "לא זמין"
 
-#: includes/Frontend/PortalController.php:667
+#: includes/Frontend/PortalController.php:688
 msgid "Not found"
 msgstr "לא נמצא"
 
@@ -1194,7 +1207,7 @@ msgstr "ה-PDF הועלה. כעת הוסיפו חותמים ומקמו שדות.
 msgid "PHP version"
 msgstr "גרסת PHP"
 
-#: includes/Frontend/views/portal-documents.php:33
+#: includes/Frontend/views/portal-documents.php:64
 msgid "Page %1$d of %2$d"
 msgstr "עמוד %1$d מתוך %2$d"
 
@@ -1308,11 +1321,11 @@ msgstr "אנא חתמו על המסמך בקישור המאובטח הבא: %s"
 msgid "Please verify your identity before signing."
 msgstr "אנא אמתו את זהותכם לפני החתימה."
 
-#: includes/Frontend/PortalController.php:782
+#: includes/Frontend/PortalController.php:803
 msgid "Portal template missing."
 msgstr "תבנית הפורטל חסרה."
 
-#: includes/Frontend/views/portal-documents.php:28
+#: includes/Frontend/views/portal-documents.php:59
 msgid "Previous"
 msgstr "הקודם"
 
@@ -1489,6 +1502,14 @@ msgstr "סרקו כדי לאמת את המסמך באופן מקוון."
 #: includes/Support/HealthCheck.php:96
 msgid "Scheduled tasks (WP-Cron)"
 msgstr "משימות מתוזמנות (WP-Cron)"
+
+#: includes/Frontend/views/portal-documents.php:40
+msgid "Search by title…"
+msgstr "חיפוש לפי כותרת…"
+
+#: includes/Frontend/views/portal-documents.php:39
+msgid "Search documents"
+msgstr "חיפוש מסמכים"
 
 #: includes/Frontend/views/partials/footer.php:14
 msgid "Securely processed by %s"
@@ -1871,7 +1892,7 @@ msgstr "אנשים אלה יקבלו את ה-PDF החתום במייל עם הש
 msgid "These signers have no fields yet: %s. Open \"Place signature fields\"."
 msgstr "לחותמים אלו אין עדיין שדות: %s. פתחו את \"מיקום שדות חתימה\"."
 
-#: includes/Frontend/PortalController.php:669
+#: includes/Frontend/PortalController.php:690
 msgid "This document does not exist in your workspace."
 msgstr "מסמך זה אינו קיים בסביבת העבודה שלך."
 
