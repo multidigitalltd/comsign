@@ -4,7 +4,7 @@ Tags: signature, digital signature, pdf, esignature, hebrew
 Requires at least: 6.0
 Tested up to: 6.5
 Requires PHP: 7.4
-Stable tag: 0.26.0
+Stable tag: 0.27.0
 License: GPL-2.0-or-later
 License URI: https://www.gnu.org/licenses/gpl-2.0.html
 
@@ -105,6 +105,16 @@ ID and its SHA-256 code (shown on the document screen and the signature
 certificate) to confirm the document is authentic and see who signed it.
 
 == Changelog ==
+
+= 0.27.0 =
+* Dev: added a committed integration-test suite that boots a real WordPress
+  (SQLite) with the plugin active and exercises the service/repository layer -
+  readiness checklist, role/permission matrix, template account-scoping, the
+  shared field sanitiser, and the document compose/sign-setup/send flow
+  (44 assertions).
+* Dev: added a GitHub Actions CI workflow (PHP lint on 7.4/8.1/8.3 and the test
+  suite on 8.1/8.3) plus tests/setup-wp.sh to provision the test environment.
+  Tests and CI config are excluded from the distributed plugin ZIP.
 
 = 0.26.0 =
 * New: senders can now build a document from scratch in the client portal -

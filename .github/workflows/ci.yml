@@ -1,0 +1,60 @@
+name: CI
+
+on:
+  push:
+    branches: [ "**" ]
+  pull_request:
+
+permissions:
+  contents: read
+
+jobs:
+  lint:
+    name: PHP lint
+    runs-on: ubuntu-latest
+    strategy:
+      fail-fast: false
+      matrix:
+        php: [ "7.4", "8.1", "8.3" ]
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Set up PHP ${{ matrix.php }}
+        uses: shivammathur/setup-php@v2
+        with:
+          php-version: ${{ matrix.php }}
+          coverage: none
+
+      - name: Syntax-check every PHP file (excluding vendor)
+        run: |
+          set -e
+          find . -path ./vendor -prune -o -name '*.php' -print0 \
+            | xargs -0 -n1 -P4 php -l > /dev/null
+          echo "All PHP files parsed cleanly."
+
+  test:
+    name: Integration tests
+    runs-on: ubuntu-latest
+    strategy:
+      fail-fast: false
+      matrix:
+        php: [ "8.1", "8.3" ]
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          path: comsign
+
+      - name: Set up PHP ${{ matrix.php }}
+        uses: shivammathur/setup-php@v2
+        with:
+          php-version: ${{ matrix.php }}
+          extensions: pdo_sqlite, sqlite3, mbstring, gd
+          coverage: none
+
+      - name: Provision WordPress (SQLite) + run the test suite
+        run: |
+          set -e
+          chmod +x comsign/tests/setup-wp.sh
+          WP_LOAD=$(comsign/tests/setup-wp.sh "$RUNNER_TEMP/wp" | tail -1)
+          echo "WordPress at: $WP_LOAD"
+          COMSIGN_WP_LOAD="$WP_LOAD" php comsign/tests/run.php
