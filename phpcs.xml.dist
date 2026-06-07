@@ -1,0 +1,52 @@
+<?xml version="1.0"?>
+<ruleset name="ComSign">
+	<description>Coding standards for the ComSign plugin (WordPress + PHP cross-version).</description>
+
+	<!-- What to scan. The bundled Composer libraries are never our code. -->
+	<file>comsign.php</file>
+	<file>uninstall.php</file>
+	<file>includes</file>
+	<file>tests</file>
+
+	<exclude-pattern>*/vendor/*</exclude-pattern>
+	<exclude-pattern>*/node_modules/*</exclude-pattern>
+
+	<arg name="extensions" value="php"/>
+	<arg name="basepath" value="."/>
+	<arg name="parallel" value="8"/>
+	<arg name="colors"/>
+	<arg value="sp"/><!-- show sniff codes + progress -->
+
+	<config name="minimum_supported_wp_version" value="6.0"/>
+	<config name="testVersion" value="7.4-"/>
+
+	<!-- PHP cross-version compatibility (used as the blocking gate in CI). -->
+	<rule ref="PHPCompatibilityWP"/>
+
+	<!-- WordPress coding standards (run advisory in CI). -->
+	<rule ref="WordPress"/>
+
+	<!-- Our text domain. -->
+	<rule ref="WordPress.WP.I18n">
+		<properties>
+			<property name="text_domain" type="array">
+				<element value="comsign"/>
+			</property>
+		</properties>
+	</rule>
+
+	<!-- Our global prefixes (functions, hooks, options, etc.). -->
+	<rule ref="WordPress.NamingConventions.PrefixAllGlobals">
+		<properties>
+			<property name="prefixes" type="array">
+				<element value="comsign"/>
+				<element value="ComSign"/>
+			</property>
+		</properties>
+	</rule>
+
+	<!-- Tests use a plain assertion harness, not WP file conventions. -->
+	<rule ref="WordPress.Files.FileName">
+		<exclude-pattern>tests/*</exclude-pattern>
+	</rule>
+</ruleset>

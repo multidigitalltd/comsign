@@ -32,6 +32,39 @@ jobs:
             | xargs -0 -n1 -P4 php -l > /dev/null
           echo "All PHP files parsed cleanly."
 
+  static-analysis:
+    name: Static analysis (PHPCS)
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Set up PHP
+        uses: shivammathur/setup-php@v2
+        with:
+          php-version: "8.1"
+          coverage: none
+          tools: cs2pr
+
+      - name: Install PHP_CodeSniffer + WordPress / PHPCompatibility standards
+        run: |
+          composer global config --no-plugins allow-plugins.dealerdirect/phpcodesniffer-composer-installer true
+          composer global require --no-interaction --no-progress \
+            squizlabs/php_codesniffer \
+            wp-coding-standards/wpcs \
+            phpcompatibility/phpcompatibility-wp \
+            dealerdirect/phpcodesniffer-composer-installer
+          echo "$HOME/.composer/vendor/bin" >> "$GITHUB_PATH"
+
+      - name: Confirm installed standards
+        run: phpcs -i
+
+      - name: PHP cross-version compatibility (7.4+) — blocking
+        run: phpcs --standard=PHPCompatibilityWP --runtime-set testVersion 7.4- -p comsign.php uninstall.php includes tests
+
+      - name: WordPress coding standards — advisory
+        continue-on-error: true
+        run: phpcs -p
+
   test:
     name: Integration tests
     runs-on: ubuntu-latest
