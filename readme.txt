@@ -4,7 +4,7 @@ Tags: signature, digital signature, pdf, esignature, hebrew
 Requires at least: 6.0
 Tested up to: 6.5
 Requires PHP: 7.4
-Stable tag: 0.25.0
+Stable tag: 0.26.0
 License: GPL-2.0-or-later
 License URI: https://www.gnu.org/licenses/gpl-2.0.html
 
@@ -105,6 +105,18 @@ ID and its SHA-256 code (shown on the document screen and the signature
 certificate) to confirm the document is authentic and see who signed it.
 
 == Changelog ==
+
+= 0.26.0 =
+* New: senders can now build a document from scratch in the client portal -
+  upload a PDF, add and remove signers, and place signature/date/text and other
+  fields directly on the pages with the same drag-and-drop editor used in
+  WP-Admin. The "New document" screen now offers "Upload a PDF" alongside
+  starting from a template.
+* The pdf.js field-placement editor (editor.css + admin-editor.js) is now shared
+  between WP-Admin and the portal, and the field-payload sanitiser lives in one
+  place so both paths validate identically. All portal editor endpoints
+  (upload, add/remove signer, save fields) are RBAC-checked and limited to
+  drafts.
 
 = 0.25.0 =
 * New: a shared design-tokens stylesheet (tokens.css) loaded on every ComSign

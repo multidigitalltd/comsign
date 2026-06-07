@@ -240,6 +240,13 @@ final class Admin {
 			return;
 		}
 
+		wp_enqueue_style(
+			'comsign-editor',
+			COMSIGN_PLUGIN_URL . 'assets/css/editor.css',
+			array( 'comsign-tokens' ),
+			COMSIGN_VERSION
+		);
+
 		wp_enqueue_script(
 			'comsign-pdfjs',
 			COMSIGN_PLUGIN_URL . 'assets/vendor/pdfjs/pdf.min.js',
@@ -1278,54 +1285,7 @@ final class Admin {
 	 * @param array $fields Raw decoded fields.
 	 */
 	private function sanitize_fields( array $fields ): array {
-		$allowed_types = array(
-			FieldRepository::TYPE_SIGNATURE,
-			FieldRepository::TYPE_INITIALS,
-			FieldRepository::TYPE_DATE,
-			FieldRepository::TYPE_TEXT,
-			FieldRepository::TYPE_NUMBER,
-			FieldRepository::TYPE_CHECKBOX,
-			FieldRepository::TYPE_CHOICE,
-			FieldRepository::TYPE_ATTACHMENT,
-			FieldRepository::TYPE_NAME,
-			FieldRepository::TYPE_EMAIL,
-		);
-
-		$clean = array();
-		foreach ( $fields as $field ) {
-			if ( ! is_array( $field ) ) {
-				continue;
-			}
-			$type = isset( $field['type'] ) ? sanitize_key( $field['type'] ) : FieldRepository::TYPE_SIGNATURE;
-
-			// Choice fields carry a list of options the signer can pick from.
-			$options = null;
-			if ( FieldRepository::TYPE_CHOICE === $type && isset( $field['options'] ) && is_array( $field['options'] ) ) {
-				$options = array();
-				foreach ( $field['options'] as $opt ) {
-					$opt = sanitize_text_field( (string) $opt );
-					if ( '' !== $opt ) {
-						$options[] = $opt;
-					}
-				}
-			}
-
-			$clean[] = array(
-				'signer_id' => isset( $field['signer_id'] ) ? absint( $field['signer_id'] ) : 0,
-				'type'      => in_array( $type, $allowed_types, true ) ? $type : FieldRepository::TYPE_SIGNATURE,
-				'required'  => ! empty( $field['required'] ),
-				'page'      => isset( $field['page'] ) ? max( 1, absint( $field['page'] ) ) : 1,
-				'pos_x'     => isset( $field['pos_x'] ) ? (float) $field['pos_x'] : 0.0,
-				'pos_y'     => isset( $field['pos_y'] ) ? (float) $field['pos_y'] : 0.0,
-				'width'     => isset( $field['width'] ) ? (float) $field['width'] : 0.0,
-				'height'    => isset( $field['height'] ) ? (float) $field['height'] : 0.0,
-				'label'     => isset( $field['label'] ) ? sanitize_text_field( (string) $field['label'] ) : '',
-				'help_text' => isset( $field['help_text'] ) ? sanitize_text_field( (string) $field['help_text'] ) : '',
-				'options'   => $options,
-			);
-		}
-
-		return $clean;
+		return FieldRepository::sanitize_payload( $fields );
 	}
 
 	/**

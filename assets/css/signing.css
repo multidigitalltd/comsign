@@ -473,3 +473,45 @@ body.comsign-public {
 .comsign-readiness li.todo { color: var( --comsign-warning, #92400e ); }
 .comsign-readiness-mark { display: inline-block; width: 1.2em; font-weight: 700; }
 .comsign-readiness-hint { display: block; margin-inline-start: 1.2em; font-size: 0.9em; color: var( --comsign-muted, #6b7280 ); }
+
+/* ---- Portal field editor (0.26.0) ---- */
+/* The editor needs more room than the default reading width. */
+.comsign-shell:has( .comsign-editor-grid ) { max-width: 1200px; }
+.comsign-portal:has( .comsign-editor-grid ) { max-width: 1200px; }
+
+.comsign-create-option {
+	border: 1px solid var( --comsign-border, #e5e7eb );
+	border-radius: var( --comsign-radius, 10px );
+	padding: 16px;
+	margin-bottom: 20px;
+	background: var( --comsign-surface, #fff );
+}
+.comsign-editor-grid {
+	display: grid;
+	grid-template-columns: 320px 1fr;
+	gap: var( --comsign-space-5, 24px );
+	align-items: start;
+}
+@media ( max-width: 860px ) {
+	.comsign-editor-grid { grid-template-columns: 1fr; }
+}
+.comsign-editor-signers { list-style: none; margin: 0 0 16px; padding: 0; }
+.comsign-editor-signers li {
+	display: flex;
+	align-items: center;
+	justify-content: space-between;
+	gap: 10px;
+	padding: 10px 12px;
+	border: 1px solid var( --comsign-border, #e5e7eb );
+	border-radius: var( --comsign-radius-sm, 8px );
+	margin-bottom: 8px;
+	background: var( --comsign-surface, #fff );
+}
+.comsign-editor-toolbar {
+	display: flex;
+	flex-wrap: wrap;
+	align-items: center;
+	gap: 8px;
+	margin-bottom: 8px;
+}
+.comsign-editor-toolbar select { min-height: 38px; }

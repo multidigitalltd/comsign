@@ -51,6 +51,68 @@ final class FieldRepository {
 	);
 
 	/**
+	 * Sanitise a decoded field payload from the placement editor.
+	 *
+	 * Shared by the admin edit screen and the client portal so both apply the
+	 * same type allowlist and text sanitisation before the values reach
+	 * {@see DocumentService::save_fields()} (which clamps coordinates and
+	 * verifies signer ownership).
+	 *
+	 * @param array $fields Raw field rows decoded from JSON.
+	 *
+	 * @return array<int,array<string,mixed>>
+	 */
+	public static function sanitize_payload( array $fields ): array {
+		$allowed_types = array(
+			self::TYPE_SIGNATURE,
+			self::TYPE_INITIALS,
+			self::TYPE_DATE,
+			self::TYPE_TEXT,
+			self::TYPE_NUMBER,
+			self::TYPE_CHECKBOX,
+			self::TYPE_CHOICE,
+			self::TYPE_ATTACHMENT,
+			self::TYPE_NAME,
+			self::TYPE_EMAIL,
+		);
+
+		$clean = array();
+		foreach ( $fields as $field ) {
+			if ( ! is_array( $field ) ) {
+				continue;
+			}
+			$type = isset( $field['type'] ) ? sanitize_key( $field['type'] ) : self::TYPE_SIGNATURE;
+
+			$options = null;
+			if ( self::TYPE_CHOICE === $type && isset( $field['options'] ) && is_array( $field['options'] ) ) {
+				$options = array();
+				foreach ( $field['options'] as $opt ) {
+					$opt = sanitize_text_field( (string) $opt );
+					if ( '' !== $opt ) {
+						$options[] = $opt;
+					}
+				}
+			}
+
+			$clean[] = array(
+				'signer_id' => isset( $field['signer_id'] ) ? absint( $field['signer_id'] ) : 0,
+				'type'      => in_array( $type, $allowed_types, true ) ? $type : self::TYPE_SIGNATURE,
+				'required'  => ! empty( $field['required'] ),
+				'page'      => isset( $field['page'] ) ? max( 1, absint( $field['page'] ) ) : 1,
+				'pos_x'     => isset( $field['pos_x'] ) ? (float) $field['pos_x'] : 0.0,
+				'pos_y'     => isset( $field['pos_y'] ) ? (float) $field['pos_y'] : 0.0,
+				'width'     => isset( $field['width'] ) ? (float) $field['width'] : 0.0,
+				'height'    => isset( $field['height'] ) ? (float) $field['height'] : 0.0,
+				'label'     => isset( $field['label'] ) ? sanitize_text_field( (string) $field['label'] ) : '',
+				'help_text' => isset( $field['help_text'] ) ? sanitize_text_field( (string) $field['help_text'] ) : '',
+				'options'   => $options,
+			);
+		}
+
+		return $clean;
+	}
+
+	/**
 	 * Insert a field.
 	 *
 	 * @param array $data document_id, signer_id, type, page, pos_x, pos_y,

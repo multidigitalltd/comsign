@@ -14,6 +14,7 @@
  * @var string[]    $roles     Role labels of the chosen template.
  * @var string      $action    admin-post.php URL.
  * @var string      $nonce
+ * @var string      $upload_nonce admin-post nonce for uploading a PDF.
  * @var array|null  $switcher
  */
 
@@ -27,6 +28,25 @@ require __DIR__ . '/partials/portal-nav.php';
 
 		<?php if ( ! $selected ) : ?>
 
+			<section class="comsign-create-option" aria-labelledby="comsign-upload-h">
+				<h2 id="comsign-upload-h"><?php esc_html_e( 'Upload a PDF', 'comsign' ); ?></h2>
+				<p class="comsign-template-meta"><?php esc_html_e( 'Upload a PDF, add signers, and place the fields yourself.', 'comsign' ); ?></p>
+				<form method="post" action="<?php echo esc_url( $action ); ?>" enctype="multipart/form-data" class="comsign-portal-form">
+					<input type="hidden" name="action" value="comsign_portal_upload">
+					<input type="hidden" name="_wpnonce" value="<?php echo esc_attr( $upload_nonce ); ?>">
+					<p>
+						<label for="comsign-upload-title"><?php esc_html_e( 'Document title (optional)', 'comsign' ); ?></label>
+						<input type="text" id="comsign-upload-title" name="title">
+					</p>
+					<p>
+						<label for="comsign-upload-file"><?php esc_html_e( 'PDF file', 'comsign' ); ?></label>
+						<input type="file" id="comsign-upload-file" name="document" accept="application/pdf" required>
+					</p>
+					<p><button type="submit" class="comsign-btn comsign-btn--primary"><?php esc_html_e( 'Upload &amp; continue', 'comsign' ); ?></button></p>
+				</form>
+			</section>
+
+			<h2><?php esc_html_e( 'Or start from a template', 'comsign' ); ?></h2>
 			<ol class="comsign-steps" aria-label="<?php esc_attr_e( 'How it works', 'comsign' ); ?>">
 				<li class="is-current"><span class="comsign-step-n">1</span><?php esc_html_e( 'Choose a template', 'comsign' ); ?></li>
 				<li><span class="comsign-step-n">2</span><?php esc_html_e( 'Add recipients', 'comsign' ); ?></li>

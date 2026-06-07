@@ -14,6 +14,7 @@ namespace ComSign\Frontend;
 defined( 'ABSPATH' ) || exit;
 
 use ComSign\Database\DocumentRepository;
+use ComSign\Database\FieldRepository;
 use ComSign\Database\SignerRepository;
 use ComSign\Database\TemplateRepository;
 use ComSign\Services\AccountService;
@@ -32,6 +33,7 @@ final class PortalController {
 	private DocumentRepository $documents;
 	private SignerRepository $signers;
 	private TemplateRepository $templates;
+	private FieldRepository $fields;
 	private AccountService $accounts;
 	private DocumentService $service;
 
@@ -39,6 +41,7 @@ final class PortalController {
 		$this->documents = new DocumentRepository();
 		$this->signers   = new SignerRepository();
 		$this->templates = new TemplateRepository();
+		$this->fields    = new FieldRepository();
 		$this->accounts  = new AccountService();
 		$this->service   = new DocumentService();
 	}
@@ -56,6 +59,11 @@ final class PortalController {
 		add_action( 'admin_post_comsign_portal_create', array( $this, 'handle_create' ) );
 		add_action( 'admin_post_comsign_portal_resend', array( $this, 'handle_resend' ) );
 		add_action( 'admin_post_comsign_portal_download', array( $this, 'handle_download' ) );
+		// Build-your-own document: upload a PDF, manage signers, place fields.
+		add_action( 'admin_post_comsign_portal_upload', array( $this, 'handle_upload' ) );
+		add_action( 'admin_post_comsign_portal_add_signer', array( $this, 'handle_add_signer' ) );
+		add_action( 'admin_post_comsign_portal_delete_signer', array( $this, 'handle_delete_signer' ) );
+		add_action( 'admin_post_comsign_portal_save_fields', array( $this, 'handle_save_fields' ) );
 	}
 
 	/**
@@ -224,6 +232,124 @@ final class PortalController {
 	}
 
 	/**
+	 * Upload a PDF and start a draft, then jump into the field editor.
+	 */
+	public function handle_upload(): void {
+		$user_id = $this->require_login();
+		check_admin_referer( 'comsign_portal_upload' );
+
+		$account_id = $this->accounts->current_account_id( $user_id );
+		if ( $account_id <= 0 || ! $this->accounts->can_in_account( $user_id, $account_id, Roles::CREATE_DOCUMENTS ) ) {
+			$this->bounce( self::url(), __( 'You cannot create documents in this workspace.', 'comsign' ) );
+		}
+
+		if ( empty( $_FILES['document'] ) || ! is_array( $_FILES['document'] ) ) { // phpcs:ignore WordPress.Security.NonceVerification.Missing
+			$this->bounce( self::url( array( 'view' => 'create' ) ), __( 'Please choose a PDF to upload.', 'comsign' ) );
+		}
+
+		$title = isset( $_POST['title'] ) ? sanitize_text_field( wp_unslash( $_POST['title'] ) ) : '';
+		// $_FILES is validated inside the service (mime, magic bytes, size cap).
+		$file  = array_map( 'wp_unslash', $_FILES['document'] ); // phpcs:ignore WordPress.Security.ValidatedSanitizedInput.InputNotSanitized, WordPress.Security.NonceVerification.Missing
+
+		try {
+			$doc_id = $this->service->create_from_upload( $file, $title );
+		} catch ( \Throwable $e ) {
+			$this->bounce( self::url( array( 'view' => 'create' ) ), $e->getMessage() );
+		}
+
+		$this->bounce(
+			self::url( array( 'view' => 'edit', 'doc' => $doc_id ) ),
+			__( 'PDF uploaded. Now add signers and place fields.', 'comsign' ),
+			'success'
+		);
+	}
+
+	/**
+	 * Resolve a draft the current user may edit, or redirect away.
+	 */
+	private function require_editable_doc( int $user_id, int $doc_id ): object {
+		$document = $this->documents->find( $doc_id );
+		if ( ! $document
+			|| ! $this->accounts->can_access_document( $document, $user_id )
+			|| ! $this->accounts->can_for_document( $user_id, $document, Roles::CREATE_DOCUMENTS ) ) {
+			$this->bounce( self::url(), __( 'You cannot edit this document.', 'comsign' ) );
+		}
+		if ( DocumentRepository::STATUS_DRAFT !== $document->status ) {
+			$this->bounce(
+				self::url( array( 'view' => 'document', 'doc' => $doc_id ) ),
+				__( 'This document has already been sent and can no longer be edited.', 'comsign' )
+			);
+		}
+		return $document;
+	}
+
+	/**
+	 * Add a signer to a draft from the portal editor.
+	 */
+	public function handle_add_signer(): void {
+		$user_id = $this->require_login();
+		$doc_id  = isset( $_POST['document_id'] ) ? absint( wp_unslash( $_POST['document_id'] ) ) : 0;
+		check_admin_referer( 'comsign_portal_add_signer_' . $doc_id );
+		$this->require_editable_doc( $user_id, $doc_id );
+
+		$name   = isset( $_POST['name'] ) ? sanitize_text_field( wp_unslash( $_POST['name'] ) ) : '';
+		$email  = isset( $_POST['email'] ) ? sanitize_email( wp_unslash( $_POST['email'] ) ) : '';
+		$phone  = isset( $_POST['phone'] ) ? sanitize_text_field( wp_unslash( $_POST['phone'] ) ) : '';
+		$target = self::url( array( 'view' => 'edit', 'doc' => $doc_id ) );
+
+		try {
+			$this->service->add_signer( $doc_id, $name, $email, $phone );
+		} catch ( \Throwable $e ) {
+			$this->bounce( $target, $e->getMessage() );
+		}
+
+		$this->bounce( $target, __( 'Signer added.', 'comsign' ), 'success' );
+	}
+
+	/**
+	 * Remove a signer from a draft.
+	 */
+	public function handle_delete_signer(): void {
+		$user_id = $this->require_login();
+		$doc_id  = isset( $_POST['document_id'] ) ? absint( wp_unslash( $_POST['document_id'] ) ) : 0;
+		check_admin_referer( 'comsign_portal_delete_signer_' . $doc_id );
+		$this->require_editable_doc( $user_id, $doc_id );
+
+		$signer_id = isset( $_POST['signer_id'] ) ? absint( wp_unslash( $_POST['signer_id'] ) ) : 0;
+		$target    = self::url( array( 'view' => 'edit', 'doc' => $doc_id ) );
+
+		try {
+			$this->service->delete_signer( $doc_id, $signer_id );
+		} catch ( \Throwable $e ) {
+			$this->bounce( $target, $e->getMessage() );
+		}
+
+		$this->bounce( $target, __( 'Signer removed.', 'comsign' ), 'success' );
+	}
+
+	/**
+	 * Save the placed fields for a draft (serialised by the shared editor JS).
+	 */
+	public function handle_save_fields(): void {
+		$user_id = $this->require_login();
+		$doc_id  = isset( $_POST['document_id'] ) ? absint( wp_unslash( $_POST['document_id'] ) ) : 0;
+		check_admin_referer( 'comsign_portal_save_fields_' . $doc_id );
+		$this->require_editable_doc( $user_id, $doc_id );
+
+		$raw    = isset( $_POST['fields'] ) ? wp_unslash( $_POST['fields'] ) : '[]'; // phpcs:ignore WordPress.Security.ValidatedSanitizedInput.InputNotSanitized
+		$parsed = json_decode( (string) $raw, true );
+		$fields = is_array( $parsed ) ? FieldRepository::sanitize_payload( $parsed ) : array();
+
+		$this->service->save_fields( $doc_id, $fields );
+
+		$this->bounce(
+			self::url( array( 'view' => 'edit', 'doc' => $doc_id ) ),
+			__( 'Fields saved.', 'comsign' ),
+			'success'
+		);
+	}
+
+	/**
 	 * Redirect back to the portal with a flash notice.
 	 *
 	 * @param string $url  Target portal URL.
@@ -319,6 +445,8 @@ final class PortalController {
 			$this->render_documents( $user_id, $account_ids );
 		} elseif ( 'create' === $view ) {
 			$this->render_create( $user_id, $account_ids );
+		} elseif ( 'edit' === $view ) {
+			$this->render_edit( $user_id, $account_ids );
 		} else {
 			$this->render_dashboard( $user_id, $account_ids );
 		}
@@ -376,9 +504,102 @@ final class PortalController {
 				'templates'  => $templates,
 				'selected'   => $selected,
 				'roles'      => $roles,
-				'action'     => admin_url( 'admin-post.php' ),
-				'nonce'      => wp_create_nonce( 'comsign_portal_create' ),
-				'switcher'   => $this->switcher( $user_id ),
+				'action'       => admin_url( 'admin-post.php' ),
+				'nonce'        => wp_create_nonce( 'comsign_portal_create' ),
+				'upload_nonce' => wp_create_nonce( 'comsign_portal_upload' ),
+				'switcher'     => $this->switcher( $user_id ),
+			)
+		);
+	}
+
+	/**
+	 * Build-your-own editor: manage signers and place fields on a draft PDF.
+	 *
+	 * @param int   $user_id     Current user.
+	 * @param int[] $account_ids Visible accounts.
+	 */
+	private function render_edit( int $user_id, array $account_ids ): void {
+		$doc_id   = isset( $_GET['doc'] ) ? absint( wp_unslash( $_GET['doc'] ) ) : 0; // phpcs:ignore WordPress.Security.NonceVerification.Recommended
+		$document = $this->documents->find( $doc_id );
+
+		$can_edit = $document
+			&& $this->accounts->can_access_document( $document, $user_id )
+			&& $this->accounts->can_for_document( $user_id, $document, Roles::CREATE_DOCUMENTS );
+
+		if ( ! $can_edit ) {
+			$this->render(
+				'portal-message',
+				array(
+					'page_title' => __( 'Not available', 'comsign' ),
+					'heading'    => __( 'Document not available', 'comsign' ),
+					'message'    => __( 'This document is not available for editing in your workspace.', 'comsign' ),
+					'login_url'  => '',
+				)
+			);
+		}
+
+		// Editing fields/signers only makes sense before the document is sent.
+		if ( DocumentRepository::STATUS_DRAFT !== $document->status ) {
+			$this->bounce(
+				self::url( array( 'view' => 'document', 'doc' => $doc_id ) ),
+				__( 'This document has already been sent and can no longer be edited.', 'comsign' )
+			);
+		}
+
+		$signers = $this->signers->for_document( $doc_id );
+		$fields  = $this->fields->for_document( $doc_id );
+
+		$fields_for_js = array();
+		foreach ( $fields as $field ) {
+			$fields_for_js[] = array(
+				'signer_id' => (int) $field->signer_id,
+				'type'      => (string) $field->type,
+				'required'  => ! empty( $field->required ),
+				'page'      => (int) $field->page,
+				'pos_x'     => (float) $field->pos_x,
+				'pos_y'     => (float) $field->pos_y,
+				'width'     => (float) $field->width,
+				'height'    => (float) $field->height,
+				'label'     => (string) ( $field->label ?? '' ),
+				'help_text' => (string) ( $field->help_text ?? '' ),
+				'options'   => FieldRepository::decode_options( $field ),
+			);
+		}
+
+		$signers_for_js = array();
+		foreach ( $signers as $signer ) {
+			$signers_for_js[] = array(
+				'id'   => (int) $signer->id,
+				'name' => (string) ( $signer->name ?: $signer->email ),
+			);
+		}
+
+		$this->render(
+			'portal-edit',
+			array(
+				'page_title'     => $document->title ? $document->title : __( 'Edit document', 'comsign' ),
+				'nav'            => $this->nav( 'create', $user_id ),
+				'document'       => $document,
+				'signers'        => $signers,
+				'fields_for_js'  => $fields_for_js,
+				'signers_for_js' => $signers_for_js,
+				'readiness'      => ( new SendReadiness() )->check( $doc_id ),
+				'switcher'       => $this->switcher( $user_id ),
+				'action'         => admin_url( 'admin-post.php' ),
+				'pdf_url'        => wp_nonce_url(
+					admin_url( 'admin-post.php?action=comsign_portal_download&doc=' . $doc_id . '&file=source' ),
+					'comsign_portal_download_' . $doc_id
+				),
+				'worker_src'     => COMSIGN_PLUGIN_URL . 'assets/vendor/pdfjs/pdf.worker.min.js',
+				'pdfjs_src'      => COMSIGN_PLUGIN_URL . 'assets/vendor/pdfjs/pdf.min.js',
+				'editor_src'     => COMSIGN_PLUGIN_URL . 'assets/js/admin-editor.js',
+				'editor_css'     => COMSIGN_PLUGIN_URL . 'assets/css/editor.css',
+				'nonces'         => array(
+					'add_signer'    => wp_create_nonce( 'comsign_portal_add_signer_' . $doc_id ),
+					'delete_signer' => wp_create_nonce( 'comsign_portal_delete_signer_' . $doc_id ),
+					'save_fields'   => wp_create_nonce( 'comsign_portal_save_fields_' . $doc_id ),
+					'send'          => wp_create_nonce( 'comsign_portal_create' ),
+				),
 			)
 		);
 	}

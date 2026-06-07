@@ -38,6 +38,9 @@ require __DIR__ . '/partials/portal-nav.php';
 		</p>
 
 		<p class="comsign-portal-actions">
+			<?php if ( ! empty( $is_draft ) && ! empty( $can_send ) ) : ?>
+				<a class="comsign-btn comsign-btn--primary" href="<?php echo esc_url( \ComSign\Frontend\PortalController::url( array( 'view' => 'edit', 'doc' => (int) $document->id ) ) ); ?>"><?php esc_html_e( 'Edit document', 'comsign' ); ?></a>
+			<?php endif; ?>
 			<a class="comsign-btn" href="<?php echo esc_url( $download_url( 'source' ) ); ?>"><?php esc_html_e( 'Download original', 'comsign' ); ?></a>
 			<?php if ( ! empty( $has_signed ) ) : ?>
 				<a class="comsign-btn comsign-btn--primary" href="<?php echo esc_url( $download_url( 'signed' ) ); ?>"><?php esc_html_e( 'Download signed PDF', 'comsign' ); ?></a>
