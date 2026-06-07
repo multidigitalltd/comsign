@@ -4,7 +4,7 @@ Tags: signature, digital signature, pdf, esignature, hebrew
 Requires at least: 6.0
 Tested up to: 6.5
 Requires PHP: 7.4
-Stable tag: 0.27.1
+Stable tag: 0.28.0
 License: GPL-2.0-or-later
 License URI: https://www.gnu.org/licenses/gpl-2.0.html
 
@@ -105,6 +105,12 @@ ID and its SHA-256 code (shown on the document screen and the signature
 certificate) to confirm the document is authentic and see who signed it.
 
 == Changelog ==
+
+= 0.28.0 =
+* New: PAdES-T trusted timestamps. Configure an RFC-3161 Timestamp Authority
+  (TSA) URL in Settings and every cryptographically-signed document gets a
+  trusted timestamp embedded in its signature, proving when it was signed
+  independently of the server clock and giving the signature long-term validity.
 
 = 0.27.1 =
 * Packaging: trimmed the bundled TCPDF font set to the DejaVu Sans family

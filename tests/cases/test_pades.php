@@ -92,3 +92,11 @@ Test::add( 'pades: certificate storage + cryptographic signature', static functi
 
 	Test::ok( ! Certificate::is_configured(), 'certificate removed cleanly' );
 } );
+
+Test::add( 'pades: TSA URL config round-trip', static function (): void {
+	Certificate::set_tsa_url( 'https://freetsa.org/tsr' );
+	Test::equals( 'https://freetsa.org/tsr', Certificate::tsa_url(), 'TSA URL stored and read back' );
+
+	Certificate::set_tsa_url( '' );
+	Test::equals( '', Certificate::tsa_url(), 'TSA URL cleared' );
+} );

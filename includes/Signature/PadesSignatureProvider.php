@@ -51,6 +51,7 @@ final class PadesSignatureProvider implements SignatureProviderInterface {
 			'cert' => $pem['cert'],
 			'pkey' => $pem['pkey'],
 			'pass' => '',
+			'tsa'  => Certificate::tsa_url(),
 			'info' => array(
 				'Name'        => get_bloginfo( 'name' ),
 				'Location'    => home_url(),

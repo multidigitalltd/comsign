@@ -109,6 +109,7 @@ final class Admin {
 		add_action( 'admin_post_comsign_save_settings', array( $this, 'handle_save_settings' ) );
 		add_action( 'admin_post_comsign_upload_certificate', array( $this, 'handle_upload_certificate' ) );
 		add_action( 'admin_post_comsign_remove_certificate', array( $this, 'handle_remove_certificate' ) );
+		add_action( 'admin_post_comsign_save_tsa', array( $this, 'handle_save_tsa' ) );
 		add_action( 'admin_post_comsign_save_template', array( $this, 'handle_save_template' ) );
 		add_action( 'admin_post_comsign_use_template', array( $this, 'handle_use_template' ) );
 		add_action( 'admin_post_comsign_bulk_template', array( $this, 'handle_bulk_template' ) );
@@ -909,9 +910,11 @@ final class Admin {
 				'nonce'         => wp_create_nonce( 'comsign_save_settings' ),
 				'cert_nonce'    => wp_create_nonce( 'comsign_upload_certificate' ),
 				'remove_nonce'  => wp_create_nonce( 'comsign_remove_certificate' ),
+				'tsa_nonce'     => wp_create_nonce( 'comsign_save_tsa' ),
 				'settings'      => Settings::all(),
 				'pki_available' => \ComSign\Signature\Certificate::openssl_available(),
 				'pki_subject'   => \ComSign\Signature\Certificate::is_configured() ? \ComSign\Signature\Certificate::subject() : '',
+				'pki_tsa'       => \ComSign\Signature\Certificate::tsa_url(),
 				'notice'        => $this->pull_notice(),
 			)
 		);
@@ -963,6 +966,22 @@ final class Admin {
 		\ComSign\Signature\Certificate::remove();
 
 		$this->redirect_with_notice( admin_url( 'admin.php?page=comsign-settings' ), 'success', __( 'Certificate removed. Documents will use electronic signatures.', 'comsign' ) );
+	}
+
+	/**
+	 * Save (or clear) the RFC-3161 timestamp authority URL for PAdES-T signing.
+	 */
+	public function handle_save_tsa(): void {
+		$this->guard();
+		check_admin_referer( 'comsign_save_tsa' );
+
+		$url = isset( $_POST['tsa_url'] ) ? esc_url_raw( wp_unslash( $_POST['tsa_url'] ), array( 'https', 'http' ) ) : '';
+		\ComSign\Signature\Certificate::set_tsa_url( $url );
+
+		$message = '' !== $url
+			? __( 'Timestamp authority saved. New signatures will include a trusted timestamp.', 'comsign' )
+			: __( 'Timestamp authority cleared.', 'comsign' );
+		$this->redirect_with_notice( admin_url( 'admin.php?page=comsign-settings' ), 'success', $message );
 	}
 
 	/**

@@ -120,6 +120,18 @@ defined( 'ABSPATH' ) || exit;
 				<strong><?php echo esc_html( $pki_subject ); ?></strong>
 			</p>
 			<p class="description"><?php esc_html_e( 'Completed documents are signed with a cryptographic PKCS#7/PAdES signature.', 'comsign' ); ?></p>
+
+			<form method="post" action="<?php echo esc_url( $action_url ); ?>">
+				<input type="hidden" name="action" value="comsign_save_tsa">
+				<input type="hidden" name="_wpnonce" value="<?php echo esc_attr( $tsa_nonce ); ?>">
+				<p>
+					<label for="comsign-tsa-url"><strong><?php esc_html_e( 'Timestamp authority (TSA) URL', 'comsign' ); ?></strong></label><br>
+					<input type="url" id="comsign-tsa-url" name="tsa_url" class="regular-text" value="<?php echo esc_attr( $pki_tsa ); ?>" placeholder="https://freetsa.org/tsr">
+				</p>
+				<p class="description"><?php esc_html_e( 'Optional. An RFC-3161 timestamp proves when each document was signed (PAdES-T), giving the signature long-term validity. Leave empty to disable.', 'comsign' ); ?></p>
+				<p><button type="submit" class="button"><?php esc_html_e( 'Save timestamp settings', 'comsign' ); ?></button></p>
+			</form>
+
 			<form method="post" action="<?php echo esc_url( $action_url ); ?>" onsubmit="return confirm('<?php echo esc_js( __( 'Remove the certificate and revert to electronic signatures?', 'comsign' ) ); ?>');">
 				<input type="hidden" name="action" value="comsign_remove_certificate">
 				<input type="hidden" name="_wpnonce" value="<?php echo esc_attr( $remove_nonce ); ?>">

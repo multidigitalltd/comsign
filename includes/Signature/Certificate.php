@@ -138,6 +138,32 @@ final class Certificate {
 	}
 
 	/**
+	 * Configured RFC-3161 Time Stamping Authority URL (or '' if none).
+	 *
+	 * A trusted timestamp upgrades the signature toward long-term validity
+	 * (PAdES-T) by proving when it was made, independent of the signer's clock
+	 * and beyond the certificate's own validity window.
+	 */
+	public static function tsa_url(): string {
+		$opt = get_option( self::OPTION );
+		return is_array( $opt ) ? (string) ( $opt['tsa_url'] ?? '' ) : '';
+	}
+
+	/**
+	 * Store (or clear) the TSA URL alongside the certificate option.
+	 *
+	 * @param string $url TSA endpoint (https://...), or '' to disable.
+	 */
+	public static function set_tsa_url( string $url ): void {
+		$opt = get_option( self::OPTION );
+		if ( ! is_array( $opt ) ) {
+			$opt = array();
+		}
+		$opt['tsa_url'] = esc_url_raw( trim( $url ), array( 'https', 'http' ) );
+		update_option( self::OPTION, $opt, false );
+	}
+
+	/**
 	 * Remove the stored certificate and its option.
 	 */
 	public static function remove(): void {

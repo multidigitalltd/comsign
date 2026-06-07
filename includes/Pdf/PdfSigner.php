@@ -64,6 +64,17 @@ final class PdfSigner {
 				2,
 				(array) ( $crypto['info'] ?? array() )
 			);
+
+			// Add a trusted RFC-3161 timestamp (PAdES-T) when a TSA is configured,
+			// so the signing time is provable beyond the signer's own clock.
+			if ( ! empty( $crypto['tsa'] ) && method_exists( $pdf, 'setTimeStamp' ) ) {
+				$pdf->setTimeStamp(
+					(string) $crypto['tsa'],
+					(string) ( $crypto['tsa_user'] ?? '' ),
+					(string) ( $crypto['tsa_pass'] ?? '' ),
+					(string) ( $crypto['tsa_cert'] ?? '' )
+				);
+			}
 		}
 
 		try {
