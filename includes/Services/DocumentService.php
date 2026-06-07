@@ -649,9 +649,13 @@ final class DocumentService {
 
 		$template_id = $this->templates->create(
 			array(
-				'name'   => $name,
-				'roles'  => $roles,
-				'fields' => $fields,
+				'name'       => $name,
+				'roles'      => $roles,
+				'fields'     => $fields,
+				// Keep the template in the same account as its source document so
+				// account-scoped listings (the portal) show the right templates.
+				'account_id' => (int) ( $document->account_id ?? $this->creation_account_id() ),
+				'created_by' => get_current_user_id(),
 			)
 		);
 

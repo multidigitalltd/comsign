@@ -44,7 +44,7 @@ msgstr ""
 #: includes/Admin/views/edit.php:52
 #: includes/Admin/views/templates.php:47
 #: includes/Frontend/views/partials/portal-doc-table.php:31
-#: includes/Frontend/views/portal-document.php:22
+#: includes/Frontend/views/portal-document.php:30
 msgid "(untitled)"
 msgstr ""
 
@@ -72,7 +72,7 @@ msgstr ""
 msgid "A document is awaiting your signature — %s"
 msgstr ""
 
-#: includes/Services/DocumentService.php:1017
+#: includes/Services/DocumentService.php:1021
 msgid "A field is assigned to a signer that is not on this document. Please re-save the fields."
 msgstr ""
 
@@ -80,7 +80,7 @@ msgstr ""
 msgid "A new code has been sent."
 msgstr ""
 
-#: includes/Services/DocumentService.php:1146
+#: includes/Services/DocumentService.php:1150
 msgid "A signature is required."
 msgstr ""
 
@@ -112,6 +112,10 @@ msgstr ""
 msgid "Access code (shared by you)"
 msgstr ""
 
+#: includes/Frontend/views/portal-document.php:87
+msgid "Action"
+msgstr ""
+
 #: includes/Admin/views/edit.php:337
 #: includes/Admin/views/templates.php:32
 msgid "Actions"
@@ -132,7 +136,7 @@ msgstr ""
 msgid "Add a signature (or initials) field for: %s."
 msgstr ""
 
-#: includes/Services/DocumentService.php:927
+#: includes/Services/DocumentService.php:931
 msgid "Add at least one signer before sending."
 msgstr ""
 
@@ -142,6 +146,11 @@ msgstr ""
 
 #: includes/Admin/views/edit.php:108
 msgid "Add field"
+msgstr ""
+
+#: includes/Frontend/views/portal-create.php:32
+#: includes/Frontend/views/portal-create.php:66
+msgid "Add recipients"
 msgstr ""
 
 #: includes/Admin/views/edit.php:321
@@ -212,7 +221,7 @@ msgstr ""
 msgid "Avg. time to complete"
 msgstr ""
 
-#: includes/Frontend/views/portal-document.php:20
+#: includes/Frontend/views/portal-document.php:28
 msgid "Back to documents"
 msgstr ""
 
@@ -221,6 +230,7 @@ msgid "Back to list"
 msgstr ""
 
 #: includes/Admin/views/edit.php:342
+#: includes/Frontend/views/portal-document.php:50
 msgid "Before you can send:"
 msgstr ""
 
@@ -246,7 +256,7 @@ msgstr ""
 msgid "Bulk send complete: %d document(s) created and sent."
 msgstr ""
 
-#: includes/Services/DocumentService.php:805
+#: includes/Services/DocumentService.php:809
 msgid "Bulk send requires a template with exactly one role."
 msgstr ""
 
@@ -295,6 +305,15 @@ msgstr ""
 msgid "Choice (dropdown)"
 msgstr ""
 
+#: includes/Frontend/views/portal-create.php:72
+msgid "Choose a different template"
+msgstr ""
+
+#: includes/Frontend/views/portal-create.php:31
+#: includes/Frontend/views/portal-create.php:65
+msgid "Choose a template"
+msgstr ""
+
 #: includes/Frontend/views/sign.php:104
 msgid "Choose…"
 msgstr ""
@@ -338,7 +357,7 @@ msgstr ""
 msgid "Completed"
 msgstr ""
 
-#: includes/Services/DocumentService.php:1332
+#: includes/Services/DocumentService.php:1336
 msgid "Completed & signed: \"%s\""
 msgstr ""
 
@@ -419,6 +438,10 @@ msgstr ""
 msgid "Create & send all"
 msgstr ""
 
+#: includes/Frontend/views/portal-create.php:103
+msgid "Create &amp; send"
+msgstr ""
+
 #: includes/Admin/views/members.php:127
 msgid "Create a sub-workspace"
 msgstr ""
@@ -439,7 +462,7 @@ msgstr ""
 msgid "Dana Cohen, dana@example.com, +972500000000\nAvi Levi, avi@example.com"
 msgstr ""
 
-#: includes/Frontend/PortalController.php:253
+#: includes/Frontend/PortalController.php:511
 msgid "Dashboard"
 msgstr ""
 
@@ -495,7 +518,7 @@ msgstr ""
 
 #: includes/Admin/DocumentsListTable.php:53
 #: includes/Admin/views/analytics.php:85
-#: includes/Frontend/PortalController.php:215
+#: includes/Frontend/PortalController.php:462
 #: includes/Frontend/views/partials/portal-doc-table.php:20
 #: includes/Frontend/views/sign.php:25
 #: includes/Services/DocumentService.php:276
@@ -510,6 +533,10 @@ msgstr ""
 
 #: includes/Admin/views/new.php:60
 msgid "Document content"
+msgstr ""
+
+#: includes/Frontend/PortalController.php:145
+msgid "Document created and sent for signing."
 msgstr ""
 
 #: includes/Admin/Admin.php:1123
@@ -532,7 +559,7 @@ msgstr ""
 msgid "Document file is uploaded"
 msgstr ""
 
-#: includes/Frontend/PortalController.php:205
+#: includes/Frontend/PortalController.php:447
 msgid "Document not available"
 msgstr ""
 
@@ -540,12 +567,16 @@ msgstr ""
 #: includes/Services/DocumentService.php:270
 #: includes/Services/DocumentService.php:538
 #: includes/Services/DocumentService.php:614
-#: includes/Services/DocumentService.php:922
+#: includes/Services/DocumentService.php:926
 msgid "Document not found."
 msgstr ""
 
 #: includes/Frontend/views/sign.php:38
 msgid "Document preview"
+msgstr ""
+
+#: includes/Frontend/PortalController.php:108
+msgid "Document sent for signing."
 msgstr ""
 
 #: includes/Signature/PadesSignatureProvider.php:57
@@ -572,8 +603,8 @@ msgstr ""
 
 #: includes/Admin/Admin.php:135
 #: includes/Admin/Admin.php:136
-#: includes/Frontend/PortalController.php:180
-#: includes/Frontend/PortalController.php:258
+#: includes/Frontend/PortalController.php:422
+#: includes/Frontend/PortalController.php:516
 #: includes/Frontend/views/portal-documents.php:21
 msgid "Documents"
 msgstr ""
@@ -586,7 +617,12 @@ msgstr ""
 msgid "Download audit trail (PDF)"
 msgstr ""
 
+#: includes/Frontend/views/portal-document.php:41
+msgid "Download original"
+msgstr ""
+
 #: includes/Admin/views/edit.php:69
+#: includes/Frontend/views/portal-document.php:43
 msgid "Download signed PDF"
 msgstr ""
 
@@ -597,6 +633,10 @@ msgstr ""
 #: includes/Admin/DocumentsListTable.php:175
 #: includes/Admin/views/analytics.php:22
 msgid "Draft"
+msgstr ""
+
+#: includes/Frontend/PortalController.php:148
+msgid "Draft created."
 msgstr ""
 
 #: includes/Admin/views/edit.php:109
@@ -627,7 +667,8 @@ msgstr ""
 #: includes/Admin/views/members.php:38
 #: includes/Admin/views/members.php:85
 #: includes/Admin/views/members.php:114
-#: includes/Frontend/views/portal-document.php:40
+#: includes/Frontend/views/portal-create.php:91
+#: includes/Frontend/views/portal-document.php:83
 #: includes/Signature/CertificatePage.php:40
 msgid "Email"
 msgstr ""
@@ -685,7 +726,7 @@ msgstr ""
 msgid "Every signer has a signature field"
 msgstr ""
 
-#: includes/Services/DocumentService.php:1023
+#: includes/Services/DocumentService.php:1027
 msgid "Every signer must have at least one field. Please assign a field to each signer."
 msgstr ""
 
@@ -694,7 +735,7 @@ msgid "Expired"
 msgstr ""
 
 #: includes/Admin/views/edit.php:145
-#: includes/Frontend/views/portal-document.php:27
+#: includes/Frontend/views/portal-document.php:35
 msgid "Expires:"
 msgstr ""
 
@@ -723,6 +764,8 @@ msgid "File"
 msgstr ""
 
 #: includes/Admin/Admin.php:1227
+#: includes/Frontend/PortalController.php:207
+#: includes/Frontend/PortalController.php:212
 msgid "File not available."
 msgstr ""
 
@@ -736,6 +779,7 @@ msgstr ""
 
 #: includes/Admin/views/edit.php:309
 #: includes/Admin/views/template-use.php:31
+#: includes/Frontend/views/portal-create.php:87
 msgid "Full name"
 msgstr ""
 
@@ -761,6 +805,11 @@ msgstr ""
 
 #: includes/Email/Mailer.php:39
 msgid "Hello,"
+msgstr ""
+
+#: includes/Frontend/views/portal-create.php:30
+#: includes/Frontend/views/portal-create.php:64
+msgid "How it works"
 msgstr ""
 
 #: includes/Admin/views/new.php:20
@@ -820,6 +869,7 @@ msgid "Invitation cancelled."
 msgstr ""
 
 #: includes/Admin/Admin.php:505
+#: includes/Frontend/PortalController.php:192
 msgid "Invitation re-sent."
 msgstr ""
 
@@ -896,7 +946,7 @@ msgid "My electronic signature is legally binding and has the same effect as a h
 msgstr ""
 
 #: includes/Admin/Admin.php:265
-#: includes/Frontend/views/portal-document.php:39
+#: includes/Frontend/views/portal-document.php:82
 #: includes/Signature/CertificatePage.php:39
 msgid "Name"
 msgstr ""
@@ -907,6 +957,12 @@ msgstr ""
 
 #: includes/Admin/views/analytics.php:78
 msgid "Needs attention (out > 7 days)"
+msgstr ""
+
+#: includes/Frontend/PortalController.php:374
+#: includes/Frontend/PortalController.php:524
+#: includes/Frontend/views/portal-create.php:26
+msgid "New document"
 msgstr ""
 
 #: includes/Frontend/views/portal-documents.php:37
@@ -950,7 +1006,7 @@ msgstr ""
 msgid "No matching signed document was found for that ID and code."
 msgstr ""
 
-#: includes/Frontend/views/portal-document.php:34
+#: includes/Frontend/views/portal-document.php:77
 msgid "No signers added yet."
 msgstr ""
 
@@ -970,15 +1026,19 @@ msgstr ""
 msgid "No webhook URL is configured."
 msgstr ""
 
-#: includes/Frontend/PortalController.php:125
+#: includes/Frontend/PortalController.php:306
 msgid "No workspace"
 msgstr ""
 
-#: includes/Frontend/PortalController.php:126
+#: includes/Frontend/PortalController.php:307
 msgid "No workspace yet"
 msgstr ""
 
-#: includes/Frontend/PortalController.php:204
+#: includes/Frontend/PortalController.php:346
+msgid "Not allowed"
+msgstr ""
+
+#: includes/Frontend/PortalController.php:446
 msgid "Not found"
 msgstr ""
 
@@ -1067,6 +1127,10 @@ msgstr ""
 msgid "Permanently delete this document and all its data?"
 msgstr ""
 
+#: includes/Frontend/views/portal-create.php:95
+msgid "Phone (optional)"
+msgstr ""
+
 #: includes/Admin/views/edit.php:311
 #: includes/Admin/views/template-use.php:33
 msgid "Phone for WhatsApp (optional)"
@@ -1076,7 +1140,7 @@ msgstr ""
 msgid "Place at least one field for each signer."
 msgstr ""
 
-#: includes/Services/DocumentService.php:932
+#: includes/Services/DocumentService.php:936
 msgid "Place at least one signature field before sending."
 msgstr ""
 
@@ -1100,7 +1164,11 @@ msgstr ""
 msgid "Please choose a PDF to upload."
 msgstr ""
 
-#: includes/Services/DocumentService.php:1166
+#: includes/Frontend/PortalController.php:123
+msgid "Please choose one of your templates."
+msgstr ""
+
+#: includes/Services/DocumentService.php:1170
 msgid "Please complete all required fields before signing."
 msgstr ""
 
@@ -1120,7 +1188,7 @@ msgstr ""
 msgid "Please provide a name or an email for the signer."
 msgstr ""
 
-#: includes/Services/DocumentService.php:725
+#: includes/Services/DocumentService.php:729
 msgid "Please provide a recipient for every role that has fields."
 msgstr ""
 
@@ -1136,11 +1204,11 @@ msgstr ""
 msgid "Please provide a valid email and role."
 msgstr ""
 
-#: includes/Services/DocumentService.php:714
+#: includes/Services/DocumentService.php:718
 msgid "Please provide at least one recipient."
 msgstr ""
 
-#: includes/Frontend/PortalController.php:104
+#: includes/Frontend/PortalController.php:285
 msgid "Please sign in"
 msgstr ""
 
@@ -1152,7 +1220,7 @@ msgstr ""
 msgid "Please verify your identity before signing."
 msgstr ""
 
-#: includes/Frontend/PortalController.php:293
+#: includes/Frontend/PortalController.php:561
 msgid "Portal template missing."
 msgstr ""
 
@@ -1184,6 +1252,7 @@ msgid "Re-send invitations"
 msgstr ""
 
 #: includes/Admin/views/edit.php:342
+#: includes/Frontend/views/portal-document.php:50
 msgid "Ready to send"
 msgstr ""
 
@@ -1245,6 +1314,10 @@ msgstr ""
 msgid "Required"
 msgstr ""
 
+#: includes/Frontend/views/portal-document.php:106
+msgid "Resend"
+msgstr ""
+
 #: includes/Frontend/views/auth.php:62
 msgid "Resend code"
 msgstr ""
@@ -1292,6 +1365,10 @@ msgstr ""
 msgid "Save a document as a template from its management screen, then reuse it here for new documents or bulk sending."
 msgstr ""
 
+#: includes/Frontend/views/portal-create.php:106
+msgid "Save as draft"
+msgstr ""
+
 #: includes/Admin/views/edit.php:394
 msgid "Save as template"
 msgstr ""
@@ -1326,11 +1403,17 @@ msgstr ""
 msgid "Select image"
 msgstr ""
 
+#: includes/Frontend/views/portal-create.php:33
+#: includes/Frontend/views/portal-create.php:67
+msgid "Send"
+msgstr ""
+
 #: includes/Audit/AuditLogger.php:51
 msgid "Send failed"
 msgstr ""
 
 #: includes/Admin/views/edit.php:380
+#: includes/Frontend/views/portal-document.php:69
 msgid "Send for signing"
 msgstr ""
 
@@ -1364,7 +1447,7 @@ msgid "Sent %d invitation(s)."
 msgstr ""
 
 #: includes/Email/Mailer.php:64
-#: includes/Services/DocumentService.php:1342
+#: includes/Services/DocumentService.php:1346
 msgid "Sent by %s"
 msgstr ""
 
@@ -1401,7 +1484,7 @@ msgstr ""
 msgid "Sign document"
 msgstr ""
 
-#: includes/Frontend/PortalController.php:103
+#: includes/Frontend/PortalController.php:284
 #: includes/Frontend/views/portal-message.php:21
 msgid "Sign in"
 msgstr ""
@@ -1436,7 +1519,7 @@ msgstr ""
 msgid "Signed"
 msgstr ""
 
-#: includes/Frontend/views/portal-document.php:42
+#: includes/Frontend/views/portal-document.php:85
 #: includes/Signature/CertificatePage.php:41
 msgid "Signed at"
 msgstr ""
@@ -1458,6 +1541,7 @@ msgstr ""
 msgid "Signed successfully"
 msgstr ""
 
+#: includes/Frontend/views/portal-create.php:85
 #: includes/Signature/CertificatePage.php:37
 msgid "Signer %d"
 msgstr ""
@@ -1481,8 +1565,12 @@ msgstr ""
 
 #: includes/Admin/DocumentsListTable.php:55
 #: includes/Admin/views/edit.php:214
-#: includes/Frontend/views/portal-document.php:32
+#: includes/Frontend/views/portal-document.php:75
 msgid "Signers"
+msgstr ""
+
+#: includes/Frontend/views/portal-create.php:50
+msgid "Signers: %d"
 msgstr ""
 
 #: includes/Admin/Admin.php:694
@@ -1494,7 +1582,7 @@ msgstr ""
 msgid "Signing declined"
 msgstr ""
 
-#: includes/Services/DocumentService.php:987
+#: includes/Services/DocumentService.php:991
 msgid "Some invitations could not be sent: %s. Please check your site email settings and re-send."
 msgstr ""
 
@@ -1502,12 +1590,12 @@ msgstr ""
 #: includes/Admin/views/analytics.php:86
 #: includes/Admin/views/health.php:37
 #: includes/Frontend/views/partials/portal-doc-table.php:21
-#: includes/Frontend/views/portal-document.php:41
+#: includes/Frontend/views/portal-document.php:84
 msgid "Status"
 msgstr ""
 
 #: includes/Admin/views/edit.php:142
-#: includes/Frontend/views/portal-document.php:24
+#: includes/Frontend/views/portal-document.php:32
 msgid "Status:"
 msgstr ""
 
@@ -1551,8 +1639,8 @@ msgid "Template name"
 msgstr ""
 
 #: includes/Admin/Admin.php:1068
-#: includes/Services/DocumentService.php:686
-#: includes/Services/DocumentService.php:801
+#: includes/Services/DocumentService.php:690
+#: includes/Services/DocumentService.php:805
 msgid "Template not found."
 msgstr ""
 
@@ -1603,7 +1691,7 @@ msgstr ""
 msgid "The daily reminder task is scheduled."
 msgstr ""
 
-#: includes/Services/DocumentService.php:1337
+#: includes/Services/DocumentService.php:1341
 msgid "The document \"%s\" has been signed by all parties."
 msgstr ""
 
@@ -1627,7 +1715,7 @@ msgstr ""
 msgid "The file is too large (max 25 MB)."
 msgstr ""
 
-#: includes/Services/DocumentService.php:1339
+#: includes/Services/DocumentService.php:1343
 msgid "The fully signed copy is attached."
 msgstr ""
 
@@ -1655,6 +1743,10 @@ msgstr ""
 msgid "The webhook URL is set but looks invalid or points to a blocked (private/loopback) target."
 msgstr ""
 
+#: includes/Frontend/views/portal-create.php:38
+msgid "There are no templates in this workspace yet. An administrator can create one from any document."
+msgstr ""
+
 #: includes/Admin/views/health.php:32
 msgid "These checks help you confirm ComSign is correctly configured on this server."
 msgstr ""
@@ -1667,7 +1759,7 @@ msgstr ""
 msgid "These signers have no fields yet: %s. Open \"Place signature fields\"."
 msgstr ""
 
-#: includes/Frontend/PortalController.php:206
+#: includes/Frontend/PortalController.php:448
 msgid "This document does not exist in your workspace."
 msgstr ""
 
@@ -1777,6 +1869,10 @@ msgstr ""
 msgid "Use template: %s"
 msgstr ""
 
+#: includes/Frontend/views/portal-create.php:55
+msgid "Use this template"
+msgstr ""
+
 #: includes/Admin/views/new.php:79
 msgid "Variables"
 msgstr ""
@@ -1855,7 +1951,7 @@ msgstr ""
 msgid "When"
 msgstr ""
 
-#: includes/Frontend/PortalController.php:156
+#: includes/Frontend/PortalController.php:398
 msgid "Workspace"
 msgstr ""
 
@@ -1892,12 +1988,28 @@ msgstr ""
 msgid "You can view members but only an owner or admin can change them."
 msgstr ""
 
+#: includes/Frontend/PortalController.php:347
+msgid "You cannot create documents"
+msgstr ""
+
+#: includes/Frontend/PortalController.php:114
+msgid "You cannot create documents in this workspace."
+msgstr ""
+
 #: includes/Admin/Admin.php:531
 msgid "You cannot manage members of this workspace."
 msgstr ""
 
 #: includes/Admin/Admin.php:634
 msgid "You cannot remove the last owner of a workspace."
+msgstr ""
+
+#: includes/Frontend/PortalController.php:183
+msgid "You cannot resend invitations for this document."
+msgstr ""
+
+#: includes/Frontend/PortalController.php:105
+msgid "You cannot send this document."
 msgstr ""
 
 #: includes/Admin/Admin.php:63
@@ -1932,7 +2044,7 @@ msgstr ""
 msgid "You must agree to sign electronically before continuing."
 msgstr ""
 
-#: includes/Frontend/PortalController.php:105
+#: includes/Frontend/PortalController.php:286
 msgid "You need to sign in to access your workspace."
 msgstr ""
 
@@ -1940,12 +2052,16 @@ msgstr ""
 msgid "Your ComSign verification code"
 msgstr ""
 
-#: includes/Frontend/PortalController.php:127
+#: includes/Frontend/PortalController.php:308
 msgid "Your account is not part of any workspace. Please contact your administrator."
 msgstr ""
 
 #: includes/Database/FieldRepository.php:114
 msgid "Your answer"
+msgstr ""
+
+#: includes/Frontend/PortalController.php:348
+msgid "Your role in this workspace does not allow creating documents. Please contact an administrator."
 msgstr ""
 
 #: includes/Frontend/views/sign.php:45

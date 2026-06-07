@@ -4,7 +4,7 @@ Tags: signature, digital signature, pdf, esignature, hebrew
 Requires at least: 6.0
 Tested up to: 6.5
 Requires PHP: 7.4
-Stable tag: 0.23.0
+Stable tag: 0.24.0
 License: GPL-2.0-or-later
 License URI: https://www.gnu.org/licenses/gpl-2.0.html
 
@@ -105,6 +105,17 @@ ID and its SHA-256 code (shown on the document screen and the signature
 certificate) to confirm the document is authentic and see who signed it.
 
 == Changelog ==
+
+= 0.24.0 =
+* New: senders can now create and send documents from the client portal, not
+  just WP Admin. A "New document" flow lists your workspace's templates, lets
+  you fill in recipients per role, then creates and sends - all gated by your
+  account role (RBAC).
+* New: portal document page gained actions - download the original or signed
+  PDF, resend an invitation to a pending signer, and send a ready draft. The
+  "ready to send" checklist is shown for drafts before sending.
+* Templates are now scoped to the account they were created in, so a sender
+  only ever sees their own workspace's templates.
 
 = 0.23.0 =
 * New: a "Ready to send" checklist on the document screen that tells you in plain

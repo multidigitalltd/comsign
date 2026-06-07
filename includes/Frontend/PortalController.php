@@ -15,22 +15,32 @@ defined( 'ABSPATH' ) || exit;
 
 use ComSign\Database\DocumentRepository;
 use ComSign\Database\SignerRepository;
+use ComSign\Database\TemplateRepository;
 use ComSign\Services\AccountService;
+use ComSign\Services\DocumentService;
+use ComSign\Services\SendReadiness;
+use ComSign\Support\Roles;
+use ComSign\Support\Storage;
 
 /**
- * Routes and renders the client portal shell: dashboard, documents and a
- * read-only document detail.
+ * Routes and renders the client portal shell: dashboard, documents, document
+ * detail, and (for users with the right role) creating and sending documents
+ * from their account's templates.
  */
 final class PortalController {
 
 	private DocumentRepository $documents;
 	private SignerRepository $signers;
+	private TemplateRepository $templates;
 	private AccountService $accounts;
+	private DocumentService $service;
 
 	public function __construct() {
 		$this->documents = new DocumentRepository();
 		$this->signers   = new SignerRepository();
+		$this->templates = new TemplateRepository();
 		$this->accounts  = new AccountService();
+		$this->service   = new DocumentService();
 	}
 
 	/**
@@ -42,6 +52,10 @@ final class PortalController {
 		add_action( 'template_redirect', array( $this, 'maybe_render' ) );
 		// Switcher for portal users (login required, no admin capability needed).
 		add_action( 'admin_post_comsign_portal_switch', array( $this, 'handle_switch' ) );
+		// Create/send and per-document actions, all RBAC-checked at the service layer.
+		add_action( 'admin_post_comsign_portal_create', array( $this, 'handle_create' ) );
+		add_action( 'admin_post_comsign_portal_resend', array( $this, 'handle_resend' ) );
+		add_action( 'admin_post_comsign_portal_download', array( $this, 'handle_download' ) );
 	}
 
 	/**
@@ -59,6 +73,173 @@ final class PortalController {
 		$this->accounts->set_current_account( get_current_user_id(), $account_id );
 
 		wp_safe_redirect( self::url() );
+		exit;
+	}
+
+	/**
+	 * Require a logged-in user for an admin-post action, or bounce to login.
+	 */
+	private function require_login(): int {
+		if ( ! is_user_logged_in() ) {
+			wp_safe_redirect( wp_login_url( self::url() ) );
+			exit;
+		}
+		return get_current_user_id();
+	}
+
+	/**
+	 * Create a document from a template (and optionally send it), or send an
+	 * existing draft. All gated by the user's role in their working account.
+	 */
+	public function handle_create(): void {
+		$user_id = $this->require_login();
+		check_admin_referer( 'comsign_portal_create' );
+
+		$send = ! empty( $_POST['send'] );
+
+		// Branch: sending an existing draft vs. creating from a template.
+		$document_id = isset( $_POST['document_id'] ) ? absint( wp_unslash( $_POST['document_id'] ) ) : 0;
+		if ( $document_id ) {
+			$document = $this->documents->find( $document_id );
+			if ( ! $document || ! $this->accounts->can_for_document( $user_id, $document, Roles::SEND_DOCUMENTS ) ) {
+				$this->bounce( self::url(), __( 'You cannot send this document.', 'comsign' ) );
+			}
+			$this->send_document( $document_id );
+			$this->bounce( self::url( array( 'view' => 'document', 'doc' => $document_id ) ), __( 'Document sent for signing.', 'comsign' ), 'success' );
+		}
+
+		// Create from template.
+		$account_id  = $this->accounts->current_account_id( $user_id );
+		if ( $account_id <= 0 || ! $this->accounts->can_in_account( $user_id, $account_id, Roles::CREATE_DOCUMENTS ) ) {
+			$this->bounce( self::url(), __( 'You cannot create documents in this workspace.', 'comsign' ) );
+		}
+
+		$template_id = isset( $_POST['template_id'] ) ? absint( wp_unslash( $_POST['template_id'] ) ) : 0;
+		$template    = $template_id ? $this->templates->find( $template_id ) : null;
+
+		// The template must live in an account the user can see.
+		$visible = $this->accounts->visible_account_ids( $user_id );
+		if ( ! $template || ! in_array( (int) $template->account_id, array_map( 'intval', $visible ), true ) ) {
+			$this->bounce( self::url( array( 'view' => 'create' ) ), __( 'Please choose one of your templates.', 'comsign' ) );
+		}
+
+		// Collect recipients, indexed by role.
+		$recipients = array();
+		$posted     = isset( $_POST['recipient'] ) && is_array( $_POST['recipient'] ) ? wp_unslash( $_POST['recipient'] ) : array(); // phpcs:ignore WordPress.Security.ValidatedSanitizedInput.InputNotSanitized
+		foreach ( $posted as $index => $r ) {
+			$recipients[ (int) $index ] = array(
+				'name'  => isset( $r['name'] ) ? sanitize_text_field( $r['name'] ) : '',
+				'email' => isset( $r['email'] ) ? sanitize_email( $r['email'] ) : '',
+				'phone' => isset( $r['phone'] ) ? sanitize_text_field( $r['phone'] ) : '',
+			);
+		}
+
+		try {
+			$new_id = $this->service->create_from_template( $template_id, $recipients );
+		} catch ( \Throwable $e ) {
+			$this->bounce( self::url( array( 'view' => 'create', 'template' => $template_id ) ), $e->getMessage() );
+		}
+
+		if ( $send && $this->accounts->can_in_account( $user_id, $account_id, Roles::SEND_DOCUMENTS ) ) {
+			$this->send_document( $new_id );
+			$this->bounce( self::url( array( 'view' => 'document', 'doc' => $new_id ) ), __( 'Document created and sent for signing.', 'comsign' ), 'success' );
+		}
+
+		$this->bounce( self::url( array( 'view' => 'document', 'doc' => $new_id ) ), __( 'Draft created.', 'comsign' ), 'success' );
+	}
+
+	/**
+	 * Send a document, guarding it with the readiness checklist first.
+	 */
+	private function send_document( int $document_id ): void {
+		$readiness = ( new SendReadiness() )->check( $document_id );
+		if ( ! $readiness['ready'] ) {
+			foreach ( $readiness['items'] as $item ) {
+				if ( ! $item['ok'] ) {
+					$this->bounce( self::url( array( 'view' => 'document', 'doc' => $document_id ) ), $item['hint'] );
+				}
+			}
+		}
+		try {
+			$this->service->send( $document_id );
+		} catch ( \Throwable $e ) {
+			$this->bounce( self::url( array( 'view' => 'document', 'doc' => $document_id ) ), $e->getMessage() );
+		}
+	}
+
+	/**
+	 * Re-send the invitation to a single signer.
+	 */
+	public function handle_resend(): void {
+		$user_id     = $this->require_login();
+		$document_id = isset( $_POST['document_id'] ) ? absint( wp_unslash( $_POST['document_id'] ) ) : 0;
+		check_admin_referer( 'comsign_portal_resend_' . $document_id );
+
+		$signer_id = isset( $_POST['signer_id'] ) ? absint( wp_unslash( $_POST['signer_id'] ) ) : 0;
+		$document  = $this->documents->find( $document_id );
+		$target    = self::url( array( 'view' => 'document', 'doc' => $document_id ) );
+
+		if ( ! $document || ! $this->accounts->can_for_document( $user_id, $document, Roles::SEND_DOCUMENTS ) ) {
+			$this->bounce( self::url(), __( 'You cannot resend invitations for this document.', 'comsign' ) );
+		}
+
+		try {
+			$this->service->resend_signer( $document_id, $signer_id );
+		} catch ( \Throwable $e ) {
+			$this->bounce( $target, $e->getMessage() );
+		}
+
+		$this->bounce( $target, __( 'Invitation re-sent.', 'comsign' ), 'success' );
+	}
+
+	/**
+	 * Stream the original or signed PDF to a portal user who may see it.
+	 */
+	public function handle_download(): void {
+		$user_id     = $this->require_login();
+		$document_id = isset( $_GET['doc'] ) ? absint( wp_unslash( $_GET['doc'] ) ) : 0;
+		check_admin_referer( 'comsign_portal_download_' . $document_id );
+
+		$which    = isset( $_GET['file'] ) ? sanitize_key( wp_unslash( $_GET['file'] ) ) : 'source';
+		$document = $this->documents->find( $document_id );
+
+		if ( ! $document || ! $this->accounts->can_access_document( $document, $user_id ) ) {
+			wp_die( esc_html__( 'File not available.', 'comsign' ), '', array( 'response' => 404 ) );
+		}
+
+		$path = 'signed' === $which ? $document->signed_path : $document->source_path;
+		if ( ! $path || ! Storage::is_within_base( $path ) || ! is_file( $path ) ) {
+			wp_die( esc_html__( 'File not available.', 'comsign' ), '', array( 'response' => 404 ) );
+		}
+
+		$suffix   = 'signed' === $which ? '-signed' : '';
+		$filename = sanitize_file_name( ( $document->title ?: 'document' ) . $suffix ) . '.pdf';
+
+		nocache_headers();
+		header( 'Content-Type: application/pdf' );
+		header( 'Content-Disposition: attachment; filename="' . $filename . '"' );
+		header( 'Content-Length: ' . (string) filesize( $path ) );
+		readfile( $path ); // phpcs:ignore WordPress.WP.AlternativeFunctions.file_system_operations_readfile
+		exit;
+	}
+
+	/**
+	 * Redirect back to the portal with a flash notice.
+	 *
+	 * @param string $url  Target portal URL.
+	 * @param string $msg  Message text.
+	 * @param string $type 'error' or 'success'.
+	 */
+	private function bounce( string $url, string $msg, string $type = 'error' ): void {
+		wp_safe_redirect(
+			add_query_arg(
+				array(
+					'cs_notice' => rawurlencode( $msg ),
+					'cs_type'   => 'success' === $type ? 'success' : 'error',
+				),
+				$url
+			)
+		);
 		exit;
 	}
 
@@ -136,9 +317,70 @@ final class PortalController {
 			$this->render_document( $user_id, $account_ids );
 		} elseif ( 'documents' === $view ) {
 			$this->render_documents( $user_id, $account_ids );
+		} elseif ( 'create' === $view ) {
+			$this->render_create( $user_id, $account_ids );
 		} else {
 			$this->render_dashboard( $user_id, $account_ids );
 		}
+	}
+
+	/**
+	 * Whether the user may create/send in their current working account.
+	 */
+	private function can_create( int $user_id ): bool {
+		$account_id = $this->accounts->current_account_id( $user_id );
+		return $account_id > 0 && $this->accounts->can_in_account( $user_id, $account_id, Roles::CREATE_DOCUMENTS );
+	}
+
+	/**
+	 * "New document" flow: pick a template, then fill recipients and send.
+	 *
+	 * @param int   $user_id     Current user.
+	 * @param int[] $account_ids Visible accounts.
+	 */
+	private function render_create( int $user_id, array $account_ids ): void {
+		if ( ! $this->can_create( $user_id ) ) {
+			$this->render(
+				'portal-message',
+				array(
+					'page_title' => __( 'Not allowed', 'comsign' ),
+					'heading'    => __( 'You cannot create documents', 'comsign' ),
+					'message'    => __( 'Your role in this workspace does not allow creating documents. Please contact an administrator.', 'comsign' ),
+					'login_url'  => '',
+				)
+			);
+		}
+
+		$templates   = $this->templates->for_accounts( $account_ids );
+		$template_id = isset( $_GET['template'] ) ? absint( wp_unslash( $_GET['template'] ) ) : 0; // phpcs:ignore WordPress.Security.NonceVerification.Recommended
+		$selected    = null;
+		$roles       = array();
+
+		if ( $template_id ) {
+			foreach ( $templates as $t ) {
+				if ( (int) $t->id === $template_id ) {
+					$selected = $t;
+					break;
+				}
+			}
+			if ( $selected ) {
+				$roles = TemplateRepository::roles( $selected );
+			}
+		}
+
+		$this->render(
+			'portal-create',
+			array(
+				'page_title' => __( 'New document', 'comsign' ),
+				'nav'        => $this->nav( 'create', $user_id ),
+				'templates'  => $templates,
+				'selected'   => $selected,
+				'roles'      => $roles,
+				'action'     => admin_url( 'admin-post.php' ),
+				'nonce'      => wp_create_nonce( 'comsign_portal_create' ),
+				'switcher'   => $this->switcher( $user_id ),
+			)
+		);
 	}
 
 	/**
@@ -154,7 +396,7 @@ final class PortalController {
 			'portal-dashboard',
 			array(
 				'page_title' => __( 'Workspace', 'comsign' ),
-				'nav'        => $this->nav( 'dashboard' ),
+				'nav'        => $this->nav( 'dashboard', $user_id ),
 				'counts'     => $this->documents->status_counts_for_accounts( $account_ids ),
 				'recent'     => $this->decorate( $recent ),
 				'switcher'   => $this->switcher( $user_id ),
@@ -178,7 +420,7 @@ final class PortalController {
 			'portal-documents',
 			array(
 				'page_title' => __( 'Documents', 'comsign' ),
-				'nav'        => $this->nav( 'documents' ),
+				'nav'        => $this->nav( 'documents', $user_id ),
 				'documents'  => $this->decorate( $rows ),
 				'page'       => $page,
 				'pages'      => max( 1, (int) ceil( $total / $per ) ),
@@ -209,14 +451,30 @@ final class PortalController {
 			);
 		}
 
+		$doc_id    = (int) $document->id;
+		$can_send  = $this->accounts->can_for_document( $user_id, $document, Roles::SEND_DOCUMENTS );
+		$is_draft  = DocumentRepository::STATUS_DRAFT === $document->status;
+		$has_signed = $document->signed_path && Storage::is_within_base( $document->signed_path ) && is_file( $document->signed_path );
+
 		$this->render(
 			'portal-document',
 			array(
-				'page_title' => $document->title ? $document->title : __( 'Document', 'comsign' ),
-				'nav'        => $this->nav( 'documents' ),
-				'document'   => $document,
-				'signers'    => $this->signers->for_document( (int) $document->id ),
-				'switcher'   => $this->switcher( $user_id ),
+				'page_title'    => $document->title ? $document->title : __( 'Document', 'comsign' ),
+				'nav'           => $this->nav( 'documents', $user_id ),
+				'document'      => $document,
+				'signers'       => $this->signers->for_document( $doc_id ),
+				'switcher'      => $this->switcher( $user_id ),
+				'can_send'      => $can_send,
+				'is_draft'      => $is_draft,
+				'readiness'     => ( $is_draft && $can_send ) ? ( new SendReadiness() )->check( $doc_id ) : null,
+				'has_signed'    => (bool) $has_signed,
+				'action'        => admin_url( 'admin-post.php' ),
+				'download_url'  => static fn( string $which ) => wp_nonce_url(
+					admin_url( 'admin-post.php?action=comsign_portal_download&doc=' . $doc_id . '&file=' . $which ),
+					'comsign_portal_download_' . $doc_id
+				),
+				'resend_nonce'  => wp_create_nonce( 'comsign_portal_resend_' . $doc_id ),
+				'send_nonce'    => wp_create_nonce( 'comsign_portal_create' ),
 			)
 		);
 	}
@@ -247,8 +505,8 @@ final class PortalController {
 	 *
 	 * @return array<int,array{label:string,url:string,active:bool}>
 	 */
-	private function nav( string $active ): array {
-		return array(
+	private function nav( string $active, int $user_id = 0 ): array {
+		$items = array(
 			array(
 				'label'  => __( 'Dashboard', 'comsign' ),
 				'url'    => self::url(),
@@ -260,6 +518,16 @@ final class PortalController {
 				'active' => 'documents' === $active,
 			),
 		);
+
+		if ( $user_id && $this->can_create( $user_id ) ) {
+			$items[] = array(
+				'label'  => __( 'New document', 'comsign' ),
+				'url'    => self::url( array( 'view' => 'create' ) ),
+				'active' => 'create' === $active,
+			);
+		}
+
+		return $items;
 	}
 
 	/**
