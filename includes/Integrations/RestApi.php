@@ -9,12 +9,14 @@ namespace ComSign\Integrations;
 
 defined( 'ABSPATH' ) || exit;
 
+use ComSign\Database\AccountRepository;
 use ComSign\Database\AuditRepository;
 use ComSign\Database\DocumentRepository;
 use ComSign\Database\FieldRepository;
 use ComSign\Database\SignerRepository;
-use ComSign\Services\DocumentService;
+use ComSign\Services\AccountService;
 use ComSign\Support\Capabilities;
+use ComSign\Services\DocumentService;
 use ComSign\Support\Settings;
 use WP_REST_Request;
 use WP_REST_Response;
@@ -91,21 +93,52 @@ final class RestApi {
 	}
 
 	/**
+	 * The account ids a request may see (tenant scope).
+	 *
+	 * A logged-in user is scoped to their visible accounts (memberships +
+	 * managed sub-accounts). A request authenticated with the global API key is
+	 * scoped to the default account and its descendants — per-account API keys
+	 * are a later (per-account settings) phase.
+	 *
+	 * @return int[]
+	 */
+	private function scope_account_ids(): array {
+		$accounts = new AccountService();
+
+		$user_id = get_current_user_id();
+		if ( $user_id && current_user_can( Capabilities::MANAGE ) ) {
+			return $accounts->visible_account_ids( $user_id );
+		}
+
+		// API-key request: scope to the default account tree.
+		$default = $accounts->default_account_id();
+		return $default ? ( new AccountRepository() )->descendant_ids( $default ) : array();
+	}
+
+	/**
+	 * Whether the request may see a given document (by account scope).
+	 */
+	private function can_see( ?object $document ): bool {
+		return $document && in_array( (int) ( $document->account_id ?? 0 ), $this->scope_account_ids(), true );
+	}
+
+	/**
 	 * GET /documents
 	 */
 	public function list_documents( WP_REST_Request $request ): WP_REST_Response {
 		$documents = new DocumentRepository();
 		$per_page  = min( 100, max( 1, (int) $request->get_param( 'per_page' ) ?: 20 ) );
 		$page      = max( 1, (int) $request->get_param( 'page' ) ?: 1 );
+		$scope     = $this->scope_account_ids();
 
 		$items = array();
-		foreach ( $documents->paginate( $per_page, ( $page - 1 ) * $per_page ) as $doc ) {
+		foreach ( $documents->paginate_for_accounts( $scope, $per_page, ( $page - 1 ) * $per_page ) as $doc ) {
 			$items[] = $this->shape_document( $doc );
 		}
 
 		return new WP_REST_Response(
 			array(
-				'total' => $documents->count(),
+				'total' => $documents->count_for_accounts( $scope ),
 				'items' => $items,
 			),
 			200
@@ -120,7 +153,8 @@ final class RestApi {
 		$signers   = new SignerRepository();
 
 		$doc = $documents->find( (int) $request['id'] );
-		if ( ! $doc ) {
+		if ( ! $this->can_see( $doc ) ) {
+			// 404 (not 403) so a caller cannot probe for documents in other accounts.
 			return new WP_REST_Response( array( 'error' => 'not_found' ), 404 );
 		}
 
@@ -143,6 +177,11 @@ final class RestApi {
 	 * GET /documents/{id}/audit
 	 */
 	public function get_audit( WP_REST_Request $request ): WP_REST_Response {
+		$doc = ( new DocumentRepository() )->find( (int) $request['id'] );
+		if ( ! $this->can_see( $doc ) ) {
+			return new WP_REST_Response( array( 'error' => 'not_found' ), 404 );
+		}
+
 		$audit   = new AuditRepository();
 		$entries = array();
 		foreach ( $audit->for_document( (int) $request['id'] ) as $row ) {

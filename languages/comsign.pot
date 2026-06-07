@@ -13,19 +13,19 @@ msgstr ""
 msgid "%1$d of %2$d signed"
 msgstr ""
 
-#: includes/Services/Analytics.php:209
+#: includes/Services/Analytics.php:252
 msgid "%d day"
 msgid_plural "%d days"
 msgstr[0] ""
 msgstr[1] ""
 
-#: includes/Services/Analytics.php:205
+#: includes/Services/Analytics.php:248
 msgid "%d hour"
 msgid_plural "%d hours"
 msgstr[0] ""
 msgstr[1] ""
 
-#: includes/Services/Analytics.php:200
+#: includes/Services/Analytics.php:243
 msgid "%d minute"
 msgid_plural "%d minutes"
 msgstr[0] ""

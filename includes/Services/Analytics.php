@@ -19,12 +19,49 @@ use ComSign\Setup\Installer;
 final class Analytics {
 
 	/**
+	 * Account ids to scope to, or null for site-wide (back-compat).
+	 *
+	 * @var int[]|null
+	 */
+	private ?array $account_ids;
+
+	/**
+	 * @param int[]|null $account_ids Visible account ids, or null for no scoping.
+	 */
+	public function __construct( ?array $account_ids = null ) {
+		$this->account_ids = is_array( $account_ids ) ? array_map( 'intval', $account_ids ) : null;
+	}
+
+	/**
+	 * Whether results are scoped to a set of accounts.
+	 */
+	private function scoped(): bool {
+		return null !== $this->account_ids;
+	}
+
+	/**
+	 * SQL `IN (...)` integer list of the scoped account ids (0 when the scope is
+	 * empty, which matches nothing). Values are ints, so inlining is safe.
+	 */
+	private function account_in(): string {
+		return $this->account_ids ? implode( ',', $this->account_ids ) : '0';
+	}
+
+	/**
+	 * Optional " AND account_id IN (...)" fragment for document queries.
+	 */
+	private function and_account( string $column = 'account_id' ): string {
+		return $this->scoped() ? " AND {$column} IN (" . $this->account_in() . ')' : '';
+	}
+
+	/**
 	 * Document counts grouped by status (zero-filled for known statuses).
 	 *
 	 * @return array<string,int>
 	 */
 	public function status_counts(): array {
-		$counts = ( new DocumentRepository() )->status_counts();
+		$repo   = new DocumentRepository();
+		$counts = $this->scoped() ? $repo->status_counts_for_accounts( (array) $this->account_ids ) : $repo->status_counts();
 
 		$known = array(
 			DocumentRepository::STATUS_DRAFT,
@@ -45,7 +82,8 @@ final class Analytics {
 	 * Total document count.
 	 */
 	public function total(): int {
-		return ( new DocumentRepository() )->count();
+		$repo = new DocumentRepository();
+		return $this->scoped() ? $repo->count_for_accounts( (array) $this->account_ids ) : $repo->count();
 	}
 
 	/**
@@ -77,7 +115,7 @@ final class Analytics {
 		// a PHP computation when the function is unavailable.
 		$rows = $wpdb->get_results( // phpcs:ignore WordPress.DB.DirectDatabaseQuery, WordPress.DB.PreparedSQL.NotPrepared
 			$wpdb->prepare(
-				'SELECT created_at, updated_at FROM ' . $table . ' WHERE status = %s',
+				'SELECT created_at, updated_at FROM ' . $table . ' WHERE status = %s' . $this->and_account(),
 				DocumentRepository::STATUS_COMPLETED
 			)
 		);
@@ -111,7 +149,7 @@ final class Analytics {
 
 		return (array) $wpdb->get_results( // phpcs:ignore WordPress.DB.DirectDatabaseQuery, WordPress.DB.PreparedSQL.NotPrepared
 			$wpdb->prepare(
-				'SELECT * FROM ' . $table . ' WHERE status IN (%s, %s, %s) AND updated_at < %s ORDER BY updated_at ASC LIMIT %d',
+				'SELECT * FROM ' . $table . ' WHERE status IN (%s, %s, %s) AND updated_at < %s' . $this->and_account() . ' ORDER BY updated_at ASC LIMIT %d',
 				DocumentRepository::STATUS_SENT,
 				DocumentRepository::STATUS_VIEWED,
 				DocumentRepository::STATUS_SIGNED,
@@ -130,8 +168,13 @@ final class Analytics {
 		global $wpdb;
 		$table = Installer::signers_table();
 
+		// Signers carry no account_id; scope via their parent document.
+		$scope = $this->scoped()
+			? ' WHERE document_id IN (SELECT id FROM ' . Installer::documents_table() . ' WHERE account_id IN (' . $this->account_in() . '))'
+			: '';
+
 		$rows = $wpdb->get_results( // phpcs:ignore WordPress.DB.DirectDatabaseQuery, WordPress.DB.PreparedSQL.NotPrepared
-			'SELECT status, COUNT(*) AS total FROM ' . $table . ' GROUP BY status'
+			'SELECT status, COUNT(*) AS total FROM ' . $table . $scope . ' GROUP BY status'
 		);
 
 		$by = array();
@@ -165,7 +208,7 @@ final class Analytics {
 
 		$rows = $wpdb->get_results( // phpcs:ignore WordPress.DB.DirectDatabaseQuery, WordPress.DB.PreparedSQL.NotPrepared
 			$wpdb->prepare(
-				'SELECT updated_at FROM ' . $table . ' WHERE status = %s AND updated_at >= %s',
+				'SELECT updated_at FROM ' . $table . ' WHERE status = %s AND updated_at >= %s' . $this->and_account(),
 				DocumentRepository::STATUS_COMPLETED,
 				$cutoff
 			)

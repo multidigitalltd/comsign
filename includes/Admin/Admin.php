@@ -835,7 +835,7 @@ final class Admin {
 	public function render_analytics_page(): void {
 		$this->guard();
 
-		$analytics = new \ComSign\Services\Analytics();
+		$analytics = new \ComSign\Services\Analytics( $this->visible_account_ids() );
 
 		$this->view(
 			'analytics',

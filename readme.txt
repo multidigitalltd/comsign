@@ -4,7 +4,7 @@ Tags: signature, digital signature, pdf, esignature, hebrew
 Requires at least: 6.0
 Tested up to: 6.5
 Requires PHP: 7.4
-Stable tag: 0.20.0
+Stable tag: 0.21.0
 License: GPL-2.0-or-later
 License URI: https://www.gnu.org/licenses/gpl-2.0.html
 
@@ -105,6 +105,14 @@ ID and its SHA-256 code (shown on the document screen and the signature
 certificate) to confirm the document is authentic and see who signed it.
 
 == Changelog ==
+
+= 0.21.0 =
+* Security: the REST API is now tenant-scoped. GET /documents only lists the
+  caller's accounts; GET /documents/{id} and /audit return 404 for documents in
+  other accounts (no cross-account probing). A logged-in user is scoped to their
+  visible accounts; the global API key is scoped to the default account tree.
+* Analytics are now account-scoped: the dashboard reflects only the documents
+  and signers in the accounts the current user can see.
 
 = 0.20.0 =
 * New: client portal at /comsign/app (also ?comsign_app=1) - a clean front-end
