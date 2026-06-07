@@ -344,6 +344,7 @@ final class Admin {
 				'signers'    => $this->signers->for_document( $document_id ),
 				'fields'     => $this->fields->for_document( $document_id ),
 				'audit'      => $this->audit->for_document( $document_id ),
+				'readiness'  => ( new \ComSign\Services\SendReadiness() )->check( $document_id ),
 				'action_url' => admin_url( 'admin-post.php' ),
 				'link_flash' => $this->pull_link_flash(),
 				'nonces'     => array(
@@ -777,6 +778,19 @@ final class Admin {
 		$document_id = $this->posted_document_id();
 		check_admin_referer( 'comsign_send_' . $document_id );
 		$this->assert_document_permission( $document_id, \ComSign\Support\Roles::SEND_DOCUMENTS );
+
+		// For a first send, require the document to pass the readiness checklist.
+		$document = $this->documents->find( $document_id );
+		if ( $document && DocumentRepository::STATUS_DRAFT === $document->status ) {
+			$readiness = ( new \ComSign\Services\SendReadiness() )->check( $document_id );
+			if ( ! $readiness['ready'] ) {
+				foreach ( $readiness['items'] as $item ) {
+					if ( ! $item['ok'] ) {
+						$this->redirect_with_notice( $this->edit_url( $document_id ), 'error', $item['hint'] );
+					}
+				}
+			}
+		}
 
 		$options = array(
 			'sequential'  => ! empty( $_POST['sequential'] ),

@@ -4,7 +4,7 @@ Tags: signature, digital signature, pdf, esignature, hebrew
 Requires at least: 6.0
 Tested up to: 6.5
 Requires PHP: 7.4
-Stable tag: 0.22.0
+Stable tag: 0.23.0
 License: GPL-2.0-or-later
 License URI: https://www.gnu.org/licenses/gpl-2.0.html
 
@@ -105,6 +105,14 @@ ID and its SHA-256 code (shown on the document screen and the signature
 certificate) to confirm the document is authentic and see who signed it.
 
 == Changelog ==
+
+= 0.23.0 =
+* New: a "Ready to send" checklist on the document screen that tells you in plain
+  language exactly what is still missing - a file, signers, fields for each
+  signer, and a signature field for each signer - with a direct hint for each
+  gap. Sending a draft is blocked server-side until the checklist passes.
+* New: a step indicator on the Add Document screen framing the flow (add the
+  document -> add signers -> place fields -> review & send).
 
 = 0.22.0 =
 * New: role-based access control (RBAC) with four workspace roles - Owner,

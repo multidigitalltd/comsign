@@ -336,6 +336,25 @@ foreach ( $signers as $signer ) {
 			<div class="comsign-card">
 				<h2><?php esc_html_e( 'Actions', 'comsign' ); ?></h2>
 
+				<?php if ( $is_draft && ! empty( $readiness ) ) : ?>
+					<div class="comsign-readiness <?php echo $readiness['ready'] ? 'is-ready' : 'is-blocked'; ?>">
+						<p class="comsign-readiness-title">
+							<?php echo $readiness['ready'] ? esc_html__( 'Ready to send', 'comsign' ) : esc_html__( 'Before you can send:', 'comsign' ); ?>
+						</p>
+						<ul>
+							<?php foreach ( $readiness['items'] as $item ) : ?>
+								<li class="<?php echo $item['ok'] ? 'ok' : 'todo'; ?>">
+									<span class="comsign-readiness-mark" aria-hidden="true"><?php echo $item['ok'] ? '✓' : '○'; ?></span>
+									<?php echo esc_html( $item['label'] ); ?>
+									<?php if ( ! $item['ok'] ) : ?>
+										<span class="comsign-readiness-hint"><?php echo esc_html( $item['hint'] ); ?></span>
+									<?php endif; ?>
+								</li>
+							<?php endforeach; ?>
+						</ul>
+					</div>
+				<?php endif; ?>
+
 				<form method="post" action="<?php echo esc_url( $action_url ); ?>">
 					<input type="hidden" name="action" value="comsign_send">
 					<input type="hidden" name="document_id" value="<?php echo esc_attr( $document_id ); ?>">

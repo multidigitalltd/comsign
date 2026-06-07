@@ -17,6 +17,13 @@ defined( 'ABSPATH' ) || exit;
 
 	<?php require __DIR__ . '/partials/notice.php'; ?>
 
+	<ol class="comsign-steps" aria-label="<?php esc_attr_e( 'How signing works', 'comsign' ); ?>">
+		<li class="is-current"><span class="comsign-step-n">1</span><?php esc_html_e( 'Add the document', 'comsign' ); ?></li>
+		<li><span class="comsign-step-n">2</span><?php esc_html_e( 'Add signers', 'comsign' ); ?></li>
+		<li><span class="comsign-step-n">3</span><?php esc_html_e( 'Place fields', 'comsign' ); ?></li>
+		<li><span class="comsign-step-n">4</span><?php esc_html_e( 'Review &amp; send', 'comsign' ); ?></li>
+	</ol>
+
 	<div class="comsign-tabs comsign-admin-tabs" role="tablist">
 		<button type="button" class="comsign-tab is-active" data-tab="upload" role="tab"><?php esc_html_e( 'Upload a PDF', 'comsign' ); ?></button>
 		<button type="button" class="comsign-tab" data-tab="compose" role="tab"><?php esc_html_e( 'Compose from text', 'comsign' ); ?></button>

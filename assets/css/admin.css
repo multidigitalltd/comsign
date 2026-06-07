@@ -351,3 +351,54 @@
 	gap: 6px;
 	align-items: center;
 }
+
+/* ---- Ready-to-send checklist (0.23.0) ---- */
+.comsign-readiness {
+	border: 1px solid #e5e7eb;
+	border-radius: 8px;
+	padding: 12px 14px;
+	margin-bottom: 16px;
+	background: #f9fafb;
+}
+.comsign-readiness.is-ready { border-color: #16a34a; background: #f0fdf4; }
+.comsign-readiness.is-blocked { border-color: #d97706; background: #fffbeb; }
+.comsign-readiness-title { font-weight: 700; margin: 0 0 8px; }
+.comsign-readiness ul { margin: 0; padding: 0; list-style: none; }
+.comsign-readiness li { padding: 4px 0; }
+.comsign-readiness li.ok { color: #166534; }
+.comsign-readiness li.todo { color: #92400e; }
+.comsign-readiness-mark { display: inline-block; width: 1.2em; font-weight: 700; }
+.comsign-readiness-hint { display: block; margin-inline-start: 1.2em; font-size: 0.9em; color: #6b7280; }
+
+/* ---- Wizard steps (0.23.0) ---- */
+.comsign-steps {
+	display: flex;
+	flex-wrap: wrap;
+	gap: 8px;
+	list-style: none;
+	margin: 12px 0 20px;
+	padding: 0;
+	counter-reset: step;
+}
+.comsign-steps li {
+	display: flex;
+	align-items: center;
+	gap: 8px;
+	padding: 8px 14px;
+	border: 1px solid #e5e7eb;
+	border-radius: 999px;
+	color: #6b7280;
+	background: #fff;
+}
+.comsign-steps li.is-current { border-color: #2563eb; color: #1e3a8a; font-weight: 600; }
+.comsign-step-n {
+	display: inline-flex;
+	align-items: center;
+	justify-content: center;
+	width: 22px; height: 22px;
+	border-radius: 50%;
+	background: #e5e7eb;
+	font-size: 12px;
+	font-weight: 700;
+}
+.comsign-steps li.is-current .comsign-step-n { background: #2563eb; color: #fff; }

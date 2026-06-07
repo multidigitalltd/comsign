@@ -79,7 +79,7 @@ msgstr "קוד חדש נשלח."
 msgid "A signature is required."
 msgstr "נדרשת חתימה."
 
-#: includes/Admin/Admin.php:757
+#: includes/Admin/Admin.php:758
 msgid "A signing link was generated. Copy it or share via WhatsApp below."
 msgstr "נוצר קישור לחתימה. העתיקו אותו או שתפו בוואטסאפ למטה."
 
@@ -123,6 +123,10 @@ msgstr "תעודה פעילה:"
 msgid "Add Document"
 msgstr "הוספת מסמך"
 
+#: includes/Services/SendReadiness.php:108
+msgid "Add a signature (or initials) field for: %s."
+msgstr "הוסיפו שדה חתימה (או ראשי תיבות) עבור: %s."
+
 #: includes/Services/DocumentService.php:927
 msgid "Add at least one signer before sending."
 msgstr "יש להוסיף לפחות חותם אחד לפני השליחה."
@@ -138,6 +142,18 @@ msgstr "הוספת שדה"
 #: includes/Admin/views/edit.php:321
 msgid "Add signer"
 msgstr "הוספת חותם"
+
+#: includes/Admin/views/new.php:22
+msgid "Add signers"
+msgstr "הוספת חותמים"
+
+#: includes/Admin/views/new.php:21
+msgid "Add the document"
+msgstr "הוספת המסמך"
+
+#: includes/Services/SendReadiness.php:66
+msgid "Add the people who need to sign."
+msgstr "הוסיפו את האנשים שצריכים לחתום."
 
 #: includes/Support/Roles.php:90
 msgid "Admin"
@@ -162,11 +178,15 @@ msgstr "אנליטיקס"
 msgid "Assign a recipient to each role. The document is created as a draft so you can review it before sending."
 msgstr "שייכו נמען לכל תפקיד. המסמך נוצר כטיוטה כדי שתוכלו לבדוק לפני השליחה."
 
+#: includes/Services/SendReadiness.php:64
+msgid "At least one signer added"
+msgstr "נוסף לפחות חותם אחד"
+
 #: includes/Signature/CertificatePage.php:55
 msgid "Attachment %d"
 msgstr "קובץ מצורף %d"
 
-#: includes/Admin/views/edit.php:367
+#: includes/Admin/views/edit.php:386
 msgid "Audit report (PDF)"
 msgstr "דוח ביקורת (PDF)"
 
@@ -195,6 +215,10 @@ msgstr "חזרה למסמכים"
 msgid "Back to list"
 msgstr "חזרה לרשימה"
 
+#: includes/Admin/views/edit.php:342
+msgid "Before you can send:"
+msgstr "לפני שניתן לשלוח:"
+
 #: includes/Admin/views/settings.php:46
 msgid "Brand name"
 msgstr "שם המותג"
@@ -213,7 +237,7 @@ msgstr "דפדפן"
 msgid "Bulk send"
 msgstr "שליחה בכמות"
 
-#: includes/Admin/Admin.php:1136
+#: includes/Admin/Admin.php:1150
 msgid "Bulk send complete: %d document(s) created and sent."
 msgstr "השליחה בכמות הושלמה: %d מסמכים נוצרו ונשלחו."
 
@@ -229,7 +253,7 @@ msgstr "שליחה בכמות: %s"
 msgid "CC recipients"
 msgstr "נמעני העתק (CC)"
 
-#: includes/Admin/Admin.php:463
+#: includes/Admin/Admin.php:464
 msgid "CC recipients saved."
 msgstr "נמעני ההעתק נשמרו."
 
@@ -241,11 +265,11 @@ msgstr "ביטול"
 msgid "Certificate password"
 msgstr "סיסמת התעודה"
 
-#: includes/Admin/Admin.php:938
+#: includes/Admin/Admin.php:952
 msgid "Certificate removed. Documents will use electronic signatures."
 msgstr "התעודה הוסרה. מסמכים ייחתמו בחתימה אלקטרונית."
 
-#: includes/Admin/Admin.php:926
+#: includes/Admin/Admin.php:940
 msgid "Certificate stored. New documents will be signed with PKI/PAdES."
 msgstr "התעודה נשמרה. מסמכים חדשים ייחתמו ב-PKI/PAdES."
 
@@ -295,7 +319,7 @@ msgstr "מסמכי ComSign"
 msgid "ComSign Settings"
 msgstr "הגדרות ComSign"
 
-#: includes/Admin/Admin.php:991
+#: includes/Admin/Admin.php:1005
 msgid "ComSign test email"
 msgstr "דוא“ל בדיקה מ-ComSign"
 
@@ -333,7 +357,7 @@ msgstr "השלמות (14 ימים אחרונים)"
 msgid "Completions per day"
 msgstr "השלמות ליום"
 
-#: includes/Admin/views/new.php:22
+#: includes/Admin/views/new.php:29
 msgid "Compose from text"
 msgstr "יצירה מטקסט"
 
@@ -394,7 +418,7 @@ msgstr "יצירה ושליחה לכולם"
 msgid "Create a sub-workspace"
 msgstr "יצירת סביבת עבודה משנה"
 
-#: includes/Admin/views/new.php:79
+#: includes/Admin/views/new.php:86
 #: includes/Admin/views/template-use.php:37
 msgid "Create document"
 msgstr "יצירת מסמך"
@@ -440,7 +464,7 @@ msgstr "סביבת עבודה ברירת מחדל"
 msgid "Delete"
 msgstr "מחיקה"
 
-#: includes/Admin/views/edit.php:382
+#: includes/Admin/views/edit.php:401
 msgid "Delete document"
 msgstr "מחיקת מסמך"
 
@@ -479,25 +503,29 @@ msgstr "מסמך"
 msgid "Document ID"
 msgstr "מזהה מסמך"
 
-#: includes/Admin/views/new.php:53
+#: includes/Admin/views/new.php:60
 msgid "Document content"
 msgstr "תוכן המסמך"
 
-#: includes/Admin/Admin.php:1109
+#: includes/Admin/Admin.php:1123
 msgid "Document created from template. Review and send."
 msgstr "מסמך נוצר מתבנית. בדקו ושלחו."
 
-#: includes/Admin/Admin.php:428
+#: includes/Admin/Admin.php:429
 msgid "Document created. Now add signers and place fields."
 msgstr "המסמך נוצר. כעת הוסיפו חותמים והניחו שדות."
 
-#: includes/Admin/Admin.php:840
+#: includes/Admin/Admin.php:854
 msgid "Document deleted."
 msgstr "המסמך נמחק."
 
-#: includes/Admin/Admin.php:829
+#: includes/Admin/Admin.php:843
 msgid "Document duplicated."
 msgstr "המסמך שוכפל."
+
+#: includes/Services/SendReadiness.php:56
+msgid "Document file is uploaded"
+msgstr "קובץ המסמך הועלה"
 
 #: includes/Frontend/PortalController.php:205
 msgid "Document not available"
@@ -519,8 +547,8 @@ msgstr "תצוגת מסמך"
 msgid "Document signed via ComSign"
 msgstr "המסמך נחתם באמצעות ComSign"
 
-#: includes/Admin/views/new.php:31
-#: includes/Admin/views/new.php:49
+#: includes/Admin/views/new.php:38
+#: includes/Admin/views/new.php:56
 msgid "Document title"
 msgstr "כותרת המסמך"
 
@@ -533,7 +561,7 @@ msgstr "המסמך אינו זמין"
 msgid "Document unavailable."
 msgstr "המסמך אינו זמין."
 
-#: includes/Admin/Admin.php:400
+#: includes/Admin/Admin.php:401
 msgid "Document uploaded. Now add signers and place signature fields."
 msgstr "המסמך הועלה. כעת הוסיפו חותמים והניחו שדות חתימה."
 
@@ -581,6 +609,10 @@ msgstr "שכפול"
 #: includes/Admin/views/template-bulk.php:26
 msgid "Each line creates and sends a separate document. Format: name, email, phone (phone optional)."
 msgstr "כל שורה יוצרת ושולחת מסמך נפרד. פורמט: שם, אימייל, טלפון (טלפון אופציונלי)."
+
+#: includes/Services/SendReadiness.php:109
+msgid "Each signer should have somewhere to sign."
+msgstr "לכל חותם צריך להיות מקום לחתום."
 
 #: includes/Signature/ElectronicSignatureProvider.php:34
 msgid "Electronic signature"
@@ -640,6 +672,14 @@ msgstr "אירוע"
 msgid "Every event is POSTed here as JSON, signed with X-ComSign-Signature (HMAC-SHA256 of the body using the secret below)."
 msgstr "כל אירוע נשלח לכאן כ-JSON, חתום ב-X-ComSign-Signature (HMAC-SHA256 של גוף הבקשה עם הסוד שלמטה)."
 
+#: includes/Services/SendReadiness.php:94
+msgid "Every signer has a field to fill"
+msgstr "לכל חותם יש שדה למילוי"
+
+#: includes/Services/SendReadiness.php:104
+msgid "Every signer has a signature field"
+msgstr "לכל חותם יש שדה חתימה"
+
 #: includes/Services/DocumentService.php:1023
 msgid "Every signer must have at least one field. Please assign a field to each signer."
 msgstr "לכל חותם חייב להיות לפחות שדה אחד. אנא שייכו שדה לכל חותם."
@@ -677,7 +717,7 @@ msgstr "תווית השדה שתוצג לחותם (לא חובה):"
 msgid "File"
 msgstr "קובץ"
 
-#: includes/Admin/Admin.php:1213
+#: includes/Admin/Admin.php:1227
 msgid "File not available."
 msgstr "הקובץ אינו זמין."
 
@@ -717,6 +757,10 @@ msgstr "שלום %s, אנא עיינו במסמך שלמטה והוסיפו את
 #: includes/Email/Mailer.php:39
 msgid "Hello,"
 msgstr "שלום,"
+
+#: includes/Admin/views/new.php:20
+msgid "How signing works"
+msgstr "איך החתימה עובדת"
 
 #: includes/Database/FieldRepository.php:108
 msgid "I confirm"
@@ -766,15 +810,15 @@ msgstr "קישור לא תקין או שפג תוקפו"
 msgid "Invalid upload."
 msgstr "העלאה לא תקינה."
 
-#: includes/Admin/Admin.php:653
+#: includes/Admin/Admin.php:654
 msgid "Invitation cancelled."
 msgstr "ההזמנה בוטלה."
 
-#: includes/Admin/Admin.php:504
+#: includes/Admin/Admin.php:505
 msgid "Invitation re-sent."
 msgstr "ההזמנה נשלחה מחדש."
 
-#: includes/Admin/Admin.php:594
+#: includes/Admin/Admin.php:595
 msgid "Invitation saved. The user will join when they sign in with this email."
 msgstr "ההזמנה נשמרה. המשתמש יצטרף כשיתחבר עם אימייל זה."
 
@@ -799,7 +843,7 @@ msgstr "פעילות אחרונה"
 msgid "Link expired"
 msgstr "הקישור פג תוקף"
 
-#: includes/Admin/views/edit.php:351
+#: includes/Admin/views/edit.php:370
 #: includes/Admin/views/template-bulk.php:36
 msgid "Link expires after"
 msgstr "הקישור פג תוקף לאחר"
@@ -820,11 +864,11 @@ msgstr "ניהול"
 msgid "Member"
 msgstr "חבר"
 
-#: includes/Admin/Admin.php:593
+#: includes/Admin/Admin.php:594
 msgid "Member added."
 msgstr "החבר נוסף."
 
-#: includes/Admin/Admin.php:637
+#: includes/Admin/Admin.php:638
 msgid "Member removed."
 msgstr "החבר הוסר."
 
@@ -833,7 +877,7 @@ msgstr "החבר הוסר."
 msgid "Members"
 msgstr "חברים"
 
-#: includes/Admin/views/edit.php:356
+#: includes/Admin/views/edit.php:375
 #: includes/Admin/views/template-bulk.php:32
 msgid "Message to signers (optional)"
 msgstr "הודעה לחותמים (אופציונלי)"
@@ -880,7 +924,7 @@ msgstr "אין עדיין מסמכים."
 msgid "No documents yet. Upload your first PDF to get started."
 msgstr "אין עדיין מסמכים. העלו את קובץ ה-PDF הראשון כדי להתחיל."
 
-#: includes/Admin/Admin.php:798
+#: includes/Admin/Admin.php:812
 msgid "No emails were sent because the signer(s) have no email. Use \"Get signing link\" to share their link."
 msgstr "לא נשלחו מיילים כי לחותם/ים אין כתובת אימייל. השתמשו ב\"קבלת קישור לחתימה\" לשיתוף הקישור."
 
@@ -947,7 +991,7 @@ msgstr "מספר"
 msgid "OK"
 msgstr "תקין"
 
-#: includes/Admin/views/new.php:73
+#: includes/Admin/views/new.php:80
 msgid "One per line, in the form name = value. Each {{name}} in the content is replaced with its value. {{date}} and {{site}} are available automatically."
 msgstr "שורה אחת לכל משתנה, בפורמט name = value. כל {{name}} בתוכן יוחלף בערכו. {{date}} ו-{{site}} זמינים אוטומטית."
 
@@ -989,11 +1033,11 @@ msgstr "Webhook יוצא"
 msgid "Owner"
 msgstr "בעלים"
 
-#: includes/Admin/views/new.php:35
+#: includes/Admin/views/new.php:42
 msgid "PDF file"
 msgstr "קובץ PDF"
 
-#: includes/Admin/views/new.php:37
+#: includes/Admin/views/new.php:44
 msgid "PDF only, up to 25 MB."
 msgstr "PDF בלבד, עד 25 מ״ב."
 
@@ -1014,7 +1058,7 @@ msgstr "נחתם חלקית"
 msgid "Pending invitations"
 msgstr "הזמנות ממתינות"
 
-#: includes/Admin/views/edit.php:378
+#: includes/Admin/views/edit.php:397
 msgid "Permanently delete this document and all its data?"
 msgstr "למחוק לצמיתות את המסמך הזה ואת כל הנתונים שלו?"
 
@@ -1023,9 +1067,17 @@ msgstr "למחוק לצמיתות את המסמך הזה ואת כל הנתונ�
 msgid "Phone for WhatsApp (optional)"
 msgstr "טלפון לוואטסאפ (אופציונלי)"
 
+#: includes/Services/SendReadiness.php:99
+msgid "Place at least one field for each signer."
+msgstr "מקמו לפחות שדה אחד לכל חותם."
+
 #: includes/Services/DocumentService.php:932
 msgid "Place at least one signature field before sending."
 msgstr "הניחו לפחות שדה חתימה אחד לפני השליחה."
+
+#: includes/Admin/views/new.php:23
+msgid "Place fields"
+msgstr "מיקום שדות"
 
 #: includes/Admin/views/edit.php:82
 msgid "Place signature fields"
@@ -1035,11 +1087,11 @@ msgstr "הנחת שדות חתימה"
 msgid "Please add a title or some content for the document."
 msgstr "אנא הוסיפו כותרת או תוכן כלשהו למסמך."
 
-#: includes/Admin/Admin.php:907
+#: includes/Admin/Admin.php:921
 msgid "Please choose a .p12/.pfx certificate file."
 msgstr "אנא בחרו קובץ תעודה .p12/.pfx."
 
-#: includes/Admin/Admin.php:388
+#: includes/Admin/Admin.php:389
 msgid "Please choose a PDF to upload."
 msgstr "אנא בחרו קובץ PDF להעלאה."
 
@@ -1067,7 +1119,7 @@ msgstr "אנא הזינו שם או אימייל לחותם."
 msgid "Please provide a recipient for every role that has fields."
 msgstr "אנא ספקו נמען לכל תפקיד שיש לו שדות."
 
-#: includes/Admin/Admin.php:668
+#: includes/Admin/Admin.php:669
 msgid "Please provide a sub-workspace name."
 msgstr "נא לספק שם לסביבת העבודה המשנה."
 
@@ -1122,9 +1174,13 @@ msgstr "מפתח REST API"
 msgid "REST base: /wp-json/comsign/v1/documents"
 msgstr "בסיס REST: /wp-json/comsign/v1/documents"
 
-#: includes/Admin/views/edit.php:361
+#: includes/Admin/views/edit.php:380
 msgid "Re-send invitations"
 msgstr "שליחת הזמנות מחדש"
+
+#: includes/Admin/views/edit.php:342
+msgid "Ready to send"
+msgstr "מוכן לשליחה"
 
 #: includes/Frontend/views/sign.php:147
 msgid "Reason for declining (optional)"
@@ -1176,7 +1232,7 @@ msgstr "להסיר חבר זה?"
 msgid "Remove this signer?"
 msgstr "להסיר את החותם הזה?"
 
-#: includes/Admin/views/edit.php:347
+#: includes/Admin/views/edit.php:366
 msgid "Require signing in order"
 msgstr "דרישת חתימה לפי סדר"
 
@@ -1188,6 +1244,10 @@ msgstr "חובה"
 msgid "Resend code"
 msgstr "שליחת קוד מחדש"
 
+#: includes/Admin/views/new.php:24
+msgid "Review &amp; send"
+msgstr "סקירה ושליחה"
+
 #: includes/Admin/views/members.php:39
 #: includes/Admin/views/members.php:85
 #: includes/Admin/views/members.php:117
@@ -1198,7 +1258,7 @@ msgstr "תפקיד"
 msgid "Role %d"
 msgstr "תפקיד %d"
 
-#: includes/Admin/Admin.php:614
+#: includes/Admin/Admin.php:615
 msgid "Role updated."
 msgstr "התפקיד עודכן."
 
@@ -1227,7 +1287,7 @@ msgstr "שמירת נמעני העתק"
 msgid "Save a document as a template from its management screen, then reuse it here for new documents or bulk sending."
 msgstr "שמרו מסמך כתבנית ממסך הניהול שלו, ואז השתמשו בה כאן ליצירת מסמכים חדשים או לשליחה בכמות."
 
-#: includes/Admin/views/edit.php:375
+#: includes/Admin/views/edit.php:394
 msgid "Save as template"
 msgstr "שמירה כתבנית"
 
@@ -1265,7 +1325,7 @@ msgstr "בחירת תמונה"
 msgid "Send failed"
 msgstr "השליחה נכשלה"
 
-#: includes/Admin/views/edit.php:361
+#: includes/Admin/views/edit.php:380
 msgid "Send for signing"
 msgstr "שליחה לחתימה"
 
@@ -1290,11 +1350,11 @@ msgstr "שולח"
 msgid "Sent"
 msgstr "נשלח"
 
-#: includes/Admin/Admin.php:802
+#: includes/Admin/Admin.php:816
 msgid "Sent %1$d invitation(s). %2$d signer(s) have no email — share their link manually."
 msgstr "נשלחו %1$d הזמנות. ל-%2$d חותם/ים אין אימייל — שתפו את הקישור ידנית."
 
-#: includes/Admin/Admin.php:809
+#: includes/Admin/Admin.php:823
 msgid "Sent %d invitation(s)."
 msgstr "נשלחו %d הזמנות."
 
@@ -1312,7 +1372,7 @@ msgstr "נשלח לחתימה"
 msgid "Settings"
 msgstr "הגדרות"
 
-#: includes/Admin/Admin.php:960
+#: includes/Admin/Admin.php:974
 msgid "Settings saved."
 msgstr "ההגדרות נשמרו."
 
@@ -1358,7 +1418,7 @@ msgstr "חתימה"
 msgid "Signature Certificate"
 msgstr "תעודת חתימה"
 
-#: includes/Admin/Admin.php:772
+#: includes/Admin/Admin.php:773
 msgid "Signature fields saved."
 msgstr "שדות החתימה נשמרו."
 
@@ -1397,7 +1457,7 @@ msgstr "נחתם בהצלחה"
 msgid "Signer %d"
 msgstr "חותם %d"
 
-#: includes/Admin/Admin.php:449
+#: includes/Admin/Admin.php:450
 msgid "Signer added."
 msgstr "החותם נוסף."
 
@@ -1406,11 +1466,11 @@ msgstr "החותם נוסף."
 msgid "Signer not found."
 msgstr "החותם לא נמצא."
 
-#: includes/Admin/Admin.php:488
+#: includes/Admin/Admin.php:489
 msgid "Signer removed."
 msgstr "החותם הוסר."
 
-#: includes/Admin/Admin.php:477
+#: includes/Admin/Admin.php:478
 msgid "Signer verification updated."
 msgstr "אימות החותם עודכן."
 
@@ -1420,7 +1480,7 @@ msgstr "אימות החותם עודכן."
 msgid "Signers"
 msgstr "חותמים"
 
-#: includes/Admin/Admin.php:693
+#: includes/Admin/Admin.php:694
 msgid "Signing deadline extended."
 msgstr "מועד החתימה האחרון הוארך."
 
@@ -1450,7 +1510,7 @@ msgstr "סטטוס:"
 msgid "Storage is writable but the .htaccess guard is missing. On nginx, add a deny rule for the comsign uploads directory."
 msgstr "האחסון ניתן לכתיבה אך חסר קובץ .htaccess להגנה. ב-nginx, הוסיפו כלל deny לתיקיית ההעלאות של comsign."
 
-#: includes/Admin/Admin.php:674
+#: includes/Admin/Admin.php:675
 msgid "Sub-workspace created."
 msgstr "סביבת עבודה משנה נוצרה."
 
@@ -1473,7 +1533,7 @@ msgstr "סטטוס מערכת"
 msgid "Template"
 msgstr "תבנית"
 
-#: includes/Admin/Admin.php:1149
+#: includes/Admin/Admin.php:1163
 msgid "Template deleted."
 msgstr "התבנית נמחקה."
 
@@ -1481,17 +1541,17 @@ msgstr "התבנית נמחקה."
 msgid "Template missing."
 msgstr "תבנית חסרה."
 
-#: includes/Admin/views/edit.php:374
+#: includes/Admin/views/edit.php:393
 msgid "Template name"
 msgstr "שם התבנית"
 
-#: includes/Admin/Admin.php:1054
+#: includes/Admin/Admin.php:1068
 #: includes/Services/DocumentService.php:686
 #: includes/Services/DocumentService.php:801
 msgid "Template not found."
 msgstr "התבנית לא נמצאה."
 
-#: includes/Admin/Admin.php:1093
+#: includes/Admin/Admin.php:1107
 msgid "Template saved."
 msgstr "התבנית נשמרה."
 
@@ -1501,7 +1561,7 @@ msgstr "התבנית נשמרה."
 msgid "Templates"
 msgstr "תבניות"
 
-#: includes/Admin/Admin.php:998
+#: includes/Admin/Admin.php:1012
 msgid "Test email sent to %s."
 msgstr "דוא“ל בדיקה נשלח אל %s."
 
@@ -1526,11 +1586,11 @@ msgstr "לא ניתן היה לקרוא את התעודה. בדקו את הקו�
 msgid "The certificate file is missing or too large (max 512 KB)."
 msgstr "קובץ התעודה חסר או גדול מדי (מקסימום 512 ק\"ב)."
 
-#: includes/Admin/Admin.php:917
+#: includes/Admin/Admin.php:931
 msgid "The certificate file is too large (max 512 KB)."
 msgstr "קובץ התעודה גדול מדי (מקסימום 512 ק\"ב)."
 
-#: includes/Admin/Admin.php:913
+#: includes/Admin/Admin.php:927
 msgid "The certificate must be a .p12 or .pfx file."
 msgstr "התעודה חייבת להיות קובץ ‎.p12‎ או ‎.pfx‎."
 
@@ -1598,6 +1658,10 @@ msgstr "בדיקות אלו עוזרות לוודא ש-ComSign מוגדר נכו
 msgid "These people receive the fully signed PDF by email when signing completes. They do not sign."
 msgstr "אנשים אלה יקבלו את ה-PDF החתום במייל עם השלמת החתימות. הם אינם חותמים."
 
+#: includes/Services/SendReadiness.php:98
+msgid "These signers have no fields yet: %s. Open \"Place signature fields\"."
+msgstr "לחותמים אלו אין עדיין שדות: %s. פתחו את \"מיקום שדות חתימה\"."
+
 #: includes/Frontend/PortalController.php:206
 msgid "This document does not exist in your workspace."
 msgstr "מסמך זה אינו קיים בסביבת העבודה שלך."
@@ -1614,7 +1678,7 @@ msgstr "מסמך זה נחתם לפי סדר. תקבלו הודעה כשיגיע
 msgid "This field is required."
 msgstr "שדה זה הוא חובה."
 
-#: includes/Admin/Admin.php:992
+#: includes/Admin/Admin.php:1006
 msgid "This is a test email from ComSign. If you received it, outgoing mail works on this server."
 msgstr "זהו דוא“ל בדיקה מ-ComSign. אם קיבלתם אותו, שליחת הדואר היוצא עובדת בשרת זה."
 
@@ -1672,13 +1736,17 @@ msgstr "הקלידו את שמכם המלא"
 msgid "Untitled document"
 msgstr "מסמך ללא כותרת"
 
-#: includes/Admin/views/new.php:39
+#: includes/Admin/views/new.php:46
 msgid "Upload & continue"
 msgstr "העלאה והמשך"
 
-#: includes/Admin/views/new.php:21
+#: includes/Admin/views/new.php:28
 msgid "Upload a PDF"
 msgstr "העלאת PDF"
+
+#: includes/Services/SendReadiness.php:58
+msgid "Upload a PDF (or compose one) for this document."
+msgstr "העלו PDF (או חברו אחד) למסמך זה."
 
 #: includes/Admin/views/settings.php:129
 msgid "Upload a PKCS#12 certificate (.p12/.pfx) to sign completed documents cryptographically (eIDAS / ComSign compatible). Without it, documents use electronic signatures."
@@ -1696,7 +1764,7 @@ msgstr "העלאת תעודה"
 msgid "Use"
 msgstr "שימוש"
 
-#: includes/Admin/views/new.php:56
+#: includes/Admin/views/new.php:63
 msgid "Use placeholders like {{name}} or {{date}} to insert variables."
 msgstr "השתמשו ב-placeholders כמו {{name}} או {{date}} כדי להוסיף משתנים."
 
@@ -1704,7 +1772,7 @@ msgstr "השתמשו ב-placeholders כמו {{name}} או {{date}} כדי להו
 msgid "Use template: %s"
 msgstr "שימוש בתבנית: %s"
 
-#: includes/Admin/views/new.php:72
+#: includes/Admin/views/new.php:79
 msgid "Variables"
 msgstr "משתנים"
 
@@ -1738,7 +1806,7 @@ msgstr "אימות זהות:"
 msgid "Verify your identity"
 msgstr "אימות הזהות שלכם"
 
-#: includes/Admin/views/edit.php:366
+#: includes/Admin/views/edit.php:385
 msgid "View original"
 msgstr "צפייה במקור"
 
@@ -1790,7 +1858,7 @@ msgstr "סביבת עבודה"
 msgid "Workspace members"
 msgstr "חברי סביבת העבודה"
 
-#: includes/Admin/Admin.php:517
+#: includes/Admin/Admin.php:518
 msgid "Workspace switched."
 msgstr "סביבת העבודה הוחלפה."
 
@@ -1803,7 +1871,7 @@ msgstr "סביבת עבודה:"
 msgid "Workspace: %s"
 msgstr "סביבת עבודה: %s"
 
-#: includes/Admin/views/new.php:55
+#: includes/Admin/views/new.php:62
 msgid "Write the fixed text of the document. After creating it you can place fillable and signature fields on the generated PDF."
 msgstr "כתבו את הטקסט הקבוע של המסמך. לאחר היצירה תוכלו להניח שדות למילוי וחתימה על ה-PDF שייווצר."
 
@@ -1811,7 +1879,7 @@ msgstr "כתבו את הטקסט הקבוע של המסמך. לאחר היציר
 msgid "X-ComSign-Key"
 msgstr "X-ComSign-Key"
 
-#: includes/Admin/Admin.php:1316
+#: includes/Admin/Admin.php:1330
 msgid "You are not allowed to access this page."
 msgstr "אינך מורשה לגשת לעמוד זה."
 
@@ -1819,11 +1887,11 @@ msgstr "אינך מורשה לגשת לעמוד זה."
 msgid "You can view members but only an owner or admin can change them."
 msgstr "ניתן לצפות בחברים אך רק בעלים או מנהל יכולים לשנות אותם."
 
-#: includes/Admin/Admin.php:530
+#: includes/Admin/Admin.php:531
 msgid "You cannot manage members of this workspace."
 msgstr "אינך יכול לנהל את חברי סביבת עבודה זו."
 
-#: includes/Admin/Admin.php:633
+#: includes/Admin/Admin.php:634
 msgid "You cannot remove the last owner of a workspace."
 msgstr "לא ניתן להסיר את הבעלים האחרון של סביבת עבודה."
 
@@ -1887,7 +1955,7 @@ msgstr "קוד האימות שלכם הוא: %1$s\n\nהוא יפוג בעוד %2
 msgid "Your workspace"
 msgstr "סביבת העבודה שלך"
 
-#: includes/Admin/views/new.php:76
+#: includes/Admin/views/new.php:83
 msgid "customer_name = Dana Cohen\ncontract_no = 2026-0042"
 msgstr "customer_name = דנה כהן\ncontract_no = 2026-0042"
 
@@ -1895,13 +1963,13 @@ msgstr "customer_name = דנה כהן\ncontract_no = 2026-0042"
 msgid "days"
 msgstr "ימים"
 
-#: includes/Admin/views/edit.php:353
+#: includes/Admin/views/edit.php:372
 #: includes/Admin/views/template-bulk.php:38
 msgid "days (0 = never)"
 msgstr "ימים (0 = ללא הגבלה)"
 
-#: includes/Admin/views/new.php:32
-#: includes/Admin/views/new.php:50
+#: includes/Admin/views/new.php:39
+#: includes/Admin/views/new.php:57
 msgid "e.g. Service agreement"
 msgstr "לדוגמה: הסכם שירות"
 
@@ -1910,7 +1978,7 @@ msgstr "לדוגמה: הסכם שירות"
 msgid "email@example.com"
 msgstr "email@example.com"
 
-#: includes/Admin/Admin.php:1000
+#: includes/Admin/Admin.php:1014
 msgid "wp_mail() reported a failure. Check your mail configuration (e.g. an SMTP plugin)."
 msgstr "הפונקציה wp_mail() דיווחה על כשל. בדקו את הגדרות הדואר (למשל תוסף SMTP)."
 
