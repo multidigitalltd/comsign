@@ -1388,6 +1388,12 @@ msgstr "تبديل"
 msgid "System Status"
 msgstr "حالة النظام"
 
+msgid "Team"
+msgstr "الفريق"
+
+msgid "Team management is not available"
+msgstr "إدارة الفريق غير متاحة"
+
 msgid "Team seats: %d"
 msgstr "مقاعد الفريق: %d"
 
@@ -1595,6 +1601,9 @@ msgstr "مستندات غير محدودة"
 msgid "Untitled document"
 msgstr "مستند بدون عنوان"
 
+msgid "Update"
+msgstr "تحديث"
+
 msgid "Upload & continue"
 msgstr "رفع ومتابعة"
 
@@ -1736,6 +1745,9 @@ msgstr "لا يمكنك إدارة جهات الاتصال في مساحة ال�
 msgid "You cannot manage members of this workspace."
 msgstr "لا يمكنك إدارة أعضاء مساحة العمل هذه."
 
+msgid "You cannot manage the team for this workspace."
+msgstr "لا يمكنك إدارة الفريق لمساحة العمل هذه."
+
 msgid "You cannot remove the last owner of a workspace."
 msgstr "لا يمكنك إزالة المالك الأخير لمساحة العمل."
 
@@ -1795,6 +1807,9 @@ msgstr "دورك في مساحة العمل هذه لا يسمح بإنشاء ا
 
 msgid "Your role in this workspace does not allow managing contacts."
 msgstr "دورك في مساحة العمل لا يسمح بإدارة جهات الاتصال."
+
+msgid "Your role in this workspace does not allow managing the team."
+msgstr "دورك في مساحة العمل لا يسمح بإدارة الفريق."
 
 msgid "Your signature"
 msgstr "توقيعك"

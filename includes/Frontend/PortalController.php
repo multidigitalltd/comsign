@@ -20,6 +20,7 @@ use ComSign\Database\SignerRepository;
 use ComSign\Database\TemplateRepository;
 use ComSign\Billing\CardcomSettings;
 use ComSign\Billing\Plans;
+use ComSign\Database\AccountRepository;
 use ComSign\Services\AccountService;
 use ComSign\Services\BillingService;
 use ComSign\Services\DocumentService;
@@ -76,6 +77,10 @@ final class PortalController {
 		add_action( 'admin_post_comsign_portal_contact_delete', array( $this, 'handle_contact_delete' ) );
 		// Billing: start a Cardcom checkout for a plan.
 		add_action( 'admin_post_comsign_portal_checkout', array( $this, 'handle_checkout' ) );
+		// Team management.
+		add_action( 'admin_post_comsign_portal_invite', array( $this, 'handle_invite' ) );
+		add_action( 'admin_post_comsign_portal_member_role', array( $this, 'handle_member_role' ) );
+		add_action( 'admin_post_comsign_portal_member_remove', array( $this, 'handle_member_remove' ) );
 	}
 
 	/**
@@ -501,6 +506,8 @@ final class PortalController {
 			$this->render_contacts( $user_id, $account_ids );
 		} elseif ( 'billing' === $view ) {
 			$this->render_billing( $user_id, $account_ids );
+		} elseif ( 'team' === $view ) {
+			$this->render_team( $user_id, $account_ids );
 		} else {
 			$this->render_dashboard( $user_id, $account_ids );
 		}
@@ -536,6 +543,14 @@ final class PortalController {
 	private function can_manage_billing( int $user_id ): bool {
 		$account_id = $this->working_account_id( $user_id );
 		return $account_id > 0 && $this->accounts->can_in_account( $user_id, $account_id, Roles::MANAGE_SETTINGS );
+	}
+
+	/**
+	 * Whether the user may manage team members of their current workspace.
+	 */
+	private function can_manage_members( int $user_id ): bool {
+		$account_id = $this->working_account_id( $user_id );
+		return $account_id > 0 && $this->accounts->can_in_account( $user_id, $account_id, Roles::MANAGE_MEMBERS );
 	}
 
 	/**
@@ -776,6 +791,157 @@ final class PortalController {
 				),
 			)
 		);
+	}
+
+	/**
+	 * Team: list members + pending invites, invite, change role, remove.
+	 *
+	 * @param int   $user_id     Current user.
+	 * @param int[] $account_ids Visible accounts.
+	 */
+	private function render_team( int $user_id, array $account_ids ): void {
+		if ( ! $this->can_manage_members( $user_id ) ) {
+			$this->render(
+				'portal-message',
+				array(
+					'page_title' => __( 'Not allowed', 'comsign' ),
+					'heading'    => __( 'Team management is not available', 'comsign' ),
+					'message'    => __( 'Your role in this workspace does not allow managing the team.', 'comsign' ),
+					'login_url'  => '',
+				)
+			);
+		}
+
+		$account = $this->working_account_id( $user_id );
+		$repo    = $this->accounts->repository();
+
+		// Decorate members with their display name + email.
+		$members = array();
+		foreach ( $repo->members_of( $account ) as $m ) {
+			$u = get_userdata( (int) $m->user_id );
+			$members[] = array(
+				'user_id' => (int) $m->user_id,
+				'role'    => (string) $m->role,
+				'name'    => $u ? $u->display_name : '',
+				'email'   => $u ? $u->user_email : '',
+				'is_self' => (int) $m->user_id === $user_id,
+			);
+		}
+
+		$invites = ( new \ComSign\Database\InviteRepository() )->for_account( $account );
+
+		$this->render(
+			'portal-team',
+			array(
+				'page_title' => __( 'Team', 'comsign' ),
+				'nav'        => $this->nav( 'team', $user_id ),
+				'members'    => $members,
+				'invites'    => $invites,
+				'roles'      => Roles::assignable(),
+				'action'     => admin_url( 'admin-post.php' ),
+				'nonce'      => wp_create_nonce( 'comsign_portal_team' ),
+				'switcher'   => $this->switcher( $user_id ),
+			)
+		);
+	}
+
+	/**
+	 * Resolve and authorise the working account for a team mutation.
+	 */
+	private function require_member_management( int $user_id ): int {
+		$account = $this->working_account_id( $user_id );
+		if ( $account <= 0 || ! $this->accounts->can_in_account( $user_id, $account, Roles::MANAGE_MEMBERS ) ) {
+			$this->bounce( self::url(), __( 'You cannot manage the team for this workspace.', 'comsign' ) );
+		}
+		return $account;
+	}
+
+	/**
+	 * Invite a member (adds an existing user immediately, else records an invite).
+	 */
+	public function handle_invite(): void {
+		$user_id = $this->require_login();
+		check_admin_referer( 'comsign_portal_team' );
+		$account = $this->require_member_management( $user_id );
+
+		$email  = isset( $_POST['email'] ) ? sanitize_email( wp_unslash( $_POST['email'] ) ) : '';
+		$role   = isset( $_POST['role'] ) ? sanitize_key( wp_unslash( $_POST['role'] ) ) : '';
+		$target = self::url( array( 'view' => 'team' ) );
+
+		try {
+			$outcome = $this->accounts->invite( $account, $email, $role );
+		} catch ( \Throwable $e ) {
+			$this->bounce( $target, $e->getMessage() );
+		}
+
+		$this->bounce(
+			$target,
+			'added' === $outcome ? __( 'Member added.', 'comsign' ) : __( 'Invitation saved. The user will join when they sign in with this email.', 'comsign' ),
+			'success'
+		);
+	}
+
+	/**
+	 * Change a member's role.
+	 */
+	public function handle_member_role(): void {
+		$user_id = $this->require_login();
+		check_admin_referer( 'comsign_portal_team' );
+		$account = $this->require_member_management( $user_id );
+		$repo    = $this->accounts->repository();
+
+		$target_user = isset( $_POST['user_id'] ) ? absint( wp_unslash( $_POST['user_id'] ) ) : 0;
+		$role        = isset( $_POST['role'] ) ? sanitize_key( wp_unslash( $_POST['role'] ) ) : '';
+		$target      = self::url( array( 'view' => 'team' ) );
+
+		if ( ! array_key_exists( $role, Roles::assignable() ) || $target_user <= 0 ) {
+			$this->bounce( $target, __( 'Please provide a valid email and role.', 'comsign' ) );
+		}
+
+		// Never let the last owner be demoted away.
+		if ( AccountRepository::ROLE_OWNER === $repo->role_of( $account, $target_user ) && AccountRepository::ROLE_OWNER !== $role && $this->owner_count( $account ) <= 1 ) {
+			$this->bounce( $target, __( 'You cannot remove the last owner of a workspace.', 'comsign' ) );
+		}
+
+		$repo->add_member( $account, $target_user, $role ); // add_member upserts the role.
+		$this->bounce( $target, __( 'Role updated.', 'comsign' ), 'success' );
+	}
+
+	/**
+	 * Remove a member (or cancel a pending invite when an email is given).
+	 */
+	public function handle_member_remove(): void {
+		$user_id = $this->require_login();
+		check_admin_referer( 'comsign_portal_team' );
+		$account = $this->require_member_management( $user_id );
+		$repo    = $this->accounts->repository();
+		$target  = self::url( array( 'view' => 'team' ) );
+
+		// Cancel a pending invitation.
+		$invite_email = isset( $_POST['invite_email'] ) ? sanitize_email( wp_unslash( $_POST['invite_email'] ) ) : '';
+		if ( '' !== $invite_email ) {
+			( new \ComSign\Database\InviteRepository() )->delete_for( $account, $invite_email );
+			$this->bounce( $target, __( 'Invitation cancelled.', 'comsign' ), 'success' );
+		}
+
+		$target_user = isset( $_POST['user_id'] ) ? absint( wp_unslash( $_POST['user_id'] ) ) : 0;
+		if ( AccountRepository::ROLE_OWNER === $repo->role_of( $account, $target_user ) && $this->owner_count( $account ) <= 1 ) {
+			$this->bounce( $target, __( 'You cannot remove the last owner of a workspace.', 'comsign' ) );
+		}
+
+		$repo->remove_member( $account, $target_user );
+		$this->bounce( $target, __( 'Member removed.', 'comsign' ), 'success' );
+	}
+
+	/**
+	 * Count the owners of an account.
+	 */
+	private function owner_count( int $account_id ): int {
+		$owners = array_filter(
+			$this->accounts->repository()->members_of( $account_id ),
+			static fn( $m ) => AccountRepository::ROLE_OWNER === $m->role
+		);
+		return count( $owners );
 	}
 
 	/**
@@ -1032,6 +1198,14 @@ final class PortalController {
 				'label'  => __( 'Contacts', 'comsign' ),
 				'url'    => self::url( array( 'view' => 'contacts' ) ),
 				'active' => 'contacts' === $active,
+			);
+		}
+
+		if ( $user_id && $this->can_manage_members( $user_id ) ) {
+			$items[] = array(
+				'label'  => __( 'Team', 'comsign' ),
+				'url'    => self::url( array( 'view' => 'team' ) ),
+				'active' => 'team' === $active,
 			);
 		}
 

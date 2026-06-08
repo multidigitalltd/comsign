@@ -4,7 +4,7 @@ Tags: signature, digital signature, pdf, esignature, hebrew
 Requires at least: 6.0
 Tested up to: 6.5
 Requires PHP: 7.4
-Stable tag: 0.41.0
+Stable tag: 0.42.0
 License: GPL-2.0-or-later
 License URI: https://www.gnu.org/licenses/gpl-2.0.html
 
@@ -105,6 +105,13 @@ ID and its SHA-256 code (shown on the document screen and the signature
 certificate) to confirm the document is authentic and see who signed it.
 
 == Changelog ==
+
+= 0.42.0 =
+* New (commercial, phase 5): in-portal team management. Workspace owners/admins
+  can invite members by email, assign a role (Owner/Admin/Sender/Viewer), change
+  a member's role and remove members or cancel pending invitations — all from the
+  portal, scoped to the current workspace. The last owner can never be removed or
+  demoted.
 
 = 0.41.0 =
 * New (commercial, phase 4): automatic subscription renewal. A daily cron charges

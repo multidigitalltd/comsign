@@ -1388,6 +1388,12 @@ msgstr "Переключить"
 msgid "System Status"
 msgstr "Состояние системы"
 
+msgid "Team"
+msgstr "Команда"
+
+msgid "Team management is not available"
+msgstr "Управление командой недоступно"
+
 msgid "Team seats: %d"
 msgstr "Места в команде: %d"
 
@@ -1595,6 +1601,9 @@ msgstr "Безлимит документов"
 msgid "Untitled document"
 msgstr "Документ без названия"
 
+msgid "Update"
+msgstr "Обновить"
+
 msgid "Upload & continue"
 msgstr "Загрузить и продолжить"
 
@@ -1736,6 +1745,9 @@ msgstr "Вы не можете управлять контактами в это
 msgid "You cannot manage members of this workspace."
 msgstr "Вы не можете управлять участниками этого рабочего пространства."
 
+msgid "You cannot manage the team for this workspace."
+msgstr "Вы не можете управлять командой этого рабочего пространства."
+
 msgid "You cannot remove the last owner of a workspace."
 msgstr "Вы не можете удалить последнего владельца рабочего пространства."
 
@@ -1795,6 +1807,9 @@ msgstr "Ваша роль в этом рабочем пространстве н
 
 msgid "Your role in this workspace does not allow managing contacts."
 msgstr "Ваша роль в этом рабочем пространстве не позволяет управлять контактами."
+
+msgid "Your role in this workspace does not allow managing the team."
+msgstr "Ваша роль в этом рабочем пространстве не позволяет управлять командой."
 
 msgid "Your signature"
 msgstr "Ваша подпись"
