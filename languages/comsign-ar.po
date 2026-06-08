@@ -140,6 +140,9 @@ msgstr "إضافة المستند"
 msgid "Add the people who need to sign."
 msgstr "أضف الأشخاص الذين يجب أن يوقّعوا."
 
+msgid "Address"
+msgstr "العنوان"
+
 msgid "Admin"
 msgstr "مدير"
 
@@ -260,6 +263,9 @@ msgstr "مُلغى"
 msgid "Cardcom is not configured."
 msgstr "Cardcom غير مُعدّ."
 
+msgid "Cardcom webhook"
+msgstr "webhook لـ Cardcom"
+
 msgid "Certificate password"
 msgstr "كلمة مرور الشهادة"
 
@@ -298,6 +304,9 @@ msgstr "مسح"
 
 msgid "Click to toggle required"
 msgstr "انقر لتبديل خيار «مطلوب»"
+
+msgid "Client portal"
+msgstr "بوابة العملاء"
 
 msgid "Code"
 msgstr "الرمز"
@@ -532,6 +541,9 @@ msgstr "المستند غير متاح."
 
 msgid "Document uploaded. Now add signers and place signature fields."
 msgstr "تم رفع المستند. الآن أضف الموقّعين وضع حقول التوقيع."
+
+msgid "Document verification form — lets anyone confirm a signed document is authentic using its ID and verification code (SHA-256), and see who signed it."
+msgstr "نموذج التحقق من المستند — يتيح لأي شخص تأكيد أصالة مستند موقّع باستخدام معرّفه ورمز التحقق (SHA-256)، ومعرفة من وقّعه."
 
 msgid "Documents"
 msgstr "المستندات"
@@ -773,6 +785,9 @@ msgstr "آخر نشاط"
 msgid "Leave blank to keep the current password."
 msgstr "اتركه فارغًا للإبقاء على كلمة المرور الحالية."
 
+msgid "Link"
+msgstr "رابط"
+
 msgid "Link expired"
 msgstr "انتهت صلاحية الرابط"
 
@@ -965,6 +980,9 @@ msgstr "صفحة %1$d من %2$d"
 msgid "Partially signed"
 msgstr "موقّع جزئيًا"
 
+msgid "Paste these shortcodes into any page or post. The links are the public entry points for your customers."
+msgstr "الصق هذه الأكواد القصيرة في أي صفحة أو منشور. الروابط هي نقاط الدخول العامة لعملائك."
+
 msgid "Payment due"
 msgstr "دفعة مستحقة"
 
@@ -1093,6 +1111,9 @@ msgstr "مشكلة"
 
 msgid "Protected file storage"
 msgstr "تخزين ملفات محمي"
+
+msgid "Public pricing table — shows your plans (price, limits, features) with a “start free trial” button that signs the visitor up and gives them a workspace + trial. Put it on your pricing/landing page."
+msgstr "جدول أسعار عام — يعرض باقاتك (السعر، الحدود، الميزات) مع زر \"ابدأ تجربة مجانية\" يسجّل الزائر ويمنحه مساحة عمل + تجربة. ضعه في صفحة الأسعار/الهبوط."
 
 msgid "REST API key"
 msgstr "مفتاح REST API"
@@ -1283,6 +1304,9 @@ msgstr "أُرسل للتوقيع"
 msgid "Set this as the indicator/webhook URL in your Cardcom terminal."
 msgstr "اضبط هذا كعنوان webhook/مؤشر في محطة Cardcom الخاصة بك."
 
+msgid "Set this as the webhook/indicator URL in your Cardcom terminal so payments activate subscriptions."
+msgstr "اضبط هذا كعنوان webhook/مؤشر في محطة Cardcom حتى تُفعّل المدفوعات الاشتراكات."
+
 msgid "Settings"
 msgstr "الإعدادات"
 
@@ -1294,6 +1318,12 @@ msgstr "المشاركة عبر واتساب"
 
 msgid "Short help text under the field (optional):"
 msgstr "نص مساعدة قصير أسفل الحقل (اختياري):"
+
+msgid "Shortcode"
+msgstr "كود قصير"
+
+msgid "Shortcodes &amp; links"
+msgstr "الأكواد القصيرة والروابط"
 
 msgid "Shown to signers on the signing page and in emails."
 msgstr "يظهر للموقّعين في صفحة التوقيع وفي رسائل البريد."
@@ -1384,6 +1414,9 @@ msgstr "تعذّر إرسال بعض الدعوات: %s. يرجى التحقق �
 
 msgid "Someone else should sign this"
 msgstr "يجب أن يوقّع هذا شخص آخر"
+
+msgid "Standalone public page to verify a document (same as the [comsign_verify] shortcode)."
+msgstr "صفحة عامة مستقلة للتحقق من مستند (مثل الكود القصير [comsign_verify])."
 
 msgid "Start %d-day free trial"
 msgstr "ابدأ تجربة مجانية لمدة %d يومًا"
@@ -1679,6 +1712,9 @@ msgstr "المتغيرات"
 msgid "Verification code (SHA-256)"
 msgstr "رمز التحقق (SHA-256)"
 
+msgid "Verification page"
+msgstr "صفحة التحقق"
+
 msgid "Verification required"
 msgstr "التحقق مطلوب"
 
@@ -1739,8 +1775,14 @@ msgstr "مرحبًا! لنرسل مستندك الأول."
 msgid "Welcome! Your workspace is ready with a %d-day free trial."
 msgstr "مرحبًا! مساحة عملك جاهزة مع تجربة مجانية لمدة %d يومًا."
 
+msgid "What it does"
+msgstr "ماذا يفعل"
+
 msgid "When"
 msgstr "متى"
+
+msgid "Where signed-in customers manage, create, send and track their documents (no WP-Admin needed)."
+msgstr "حيث يدير العملاء المسجّلون مستنداتهم وينشئونها ويرسلونها ويتابعونها (دون الحاجة إلى WP-Admin)."
 
 msgid "Workspace"
 msgstr "مساحة العمل"

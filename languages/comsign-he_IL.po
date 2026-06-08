@@ -227,6 +227,10 @@ msgstr "הוספת המסמך"
 msgid "Add the people who need to sign."
 msgstr "הוסיפו את האנשים שצריכים לחתום."
 
+#: includes/Admin/views/settings.php:240
+msgid "Address"
+msgstr "כתובת"
+
 #: includes/Support/Roles.php:90
 msgid "Admin"
 msgstr "מנהל"
@@ -400,6 +404,10 @@ msgstr "בוטל"
 msgid "Cardcom is not configured."
 msgstr "קארדקום אינו מוגדר."
 
+#: includes/Admin/views/settings.php:253
+msgid "Cardcom webhook"
+msgstr "webhook של קארדקום"
+
 #: includes/Admin/views/settings.php:146
 msgid "Certificate password"
 msgstr "סיסמת התעודה"
@@ -461,6 +469,10 @@ msgstr "ניקוי"
 #: includes/Frontend/views/portal-edit.php:50
 msgid "Click to toggle required"
 msgstr "לחצו כדי לסמן כשדה חובה"
+
+#: includes/Admin/views/settings.php:207
+msgid "Client portal"
+msgstr "פורטל לקוחות"
 
 #: includes/Frontend/views/auth.php:50
 msgid "Code"
@@ -806,6 +818,10 @@ msgstr "המסמך אינו זמין."
 #: includes/Admin/Admin.php:416
 msgid "Document uploaded. Now add signers and place signature fields."
 msgstr "המסמך הועלה. כעת הוסיפו חותמים והניחו שדות חתימה."
+
+#: includes/Admin/views/settings.php:202
+msgid "Document verification form — lets anyone confirm a signed document is authentic using its ID and verification code (SHA-256), and see who signed it."
+msgstr "טופס אימות מסמך — מאפשר לכל אחד לוודא שמסמך חתום אותנטי באמצעות המזהה וקוד האימות (SHA-256), ולראות מי חתם עליו."
 
 #: includes/Admin/Admin.php:137
 #: includes/Admin/Admin.php:138
@@ -1181,6 +1197,10 @@ msgstr "פעילות אחרונה"
 msgid "Leave blank to keep the current password."
 msgstr "השאירו ריק כדי לשמור את הסיסמה הנוכחית."
 
+#: includes/Admin/views/settings.php:239
+msgid "Link"
+msgstr "קישור"
+
 #: includes/Frontend/SigningController.php:119
 #: includes/Frontend/SigningController.php:442
 msgid "Link expired"
@@ -1465,6 +1485,10 @@ msgstr "עמוד %1$d מתוך %2$d"
 msgid "Partially signed"
 msgstr "נחתם חלקית"
 
+#: includes/Admin/views/settings.php:192
+msgid "Paste these shortcodes into any page or post. The links are the public entry points for your customers."
+msgstr "הדביקו את הקודים הקצרים בכל עמוד או פוסט. הקישורים הם נקודות הכניסה הציבוריות ללקוחות שלכם."
+
 #: includes/Frontend/views/portal-billing.php:30
 msgid "Payment due"
 msgstr "תשלום נדרש"
@@ -1649,6 +1673,10 @@ msgstr "בעיה"
 #: includes/Support/HealthCheck.php:111
 msgid "Protected file storage"
 msgstr "אחסון קבצים מוגן"
+
+#: includes/Admin/views/settings.php:198
+msgid "Public pricing table — shows your plans (price, limits, features) with a “start free trial” button that signs the visitor up and gives them a workspace + trial. Put it on your pricing/landing page."
+msgstr "טבלת תמחור ציבורית — מציגה את המסלולים (מחיר, מגבלות, פיצ'רים) עם כפתור \"התחל ניסיון חינם\" שמרשם את המבקר ונותן לו מרחב עבודה + ניסיון. הציבו בעמוד התמחור/נחיתה."
 
 #: includes/Admin/views/settings.php:91
 #: includes/Support/HealthCheck.php:125
@@ -1933,6 +1961,10 @@ msgstr "נשלח לחתימה"
 msgid "Set this as the indicator/webhook URL in your Cardcom terminal."
 msgstr "הגדירו כתובת זו כ-webhook/אינדיקטור במסוף הקארדקום שלכם."
 
+#: includes/Admin/views/settings.php:255
+msgid "Set this as the webhook/indicator URL in your Cardcom terminal so payments activate subscriptions."
+msgstr "הגדירו כתובת זו כ-webhook/אינדיקטור במסוף הקארדקום כדי שתשלומים יפעילו מנויים."
+
 #: includes/Admin/Admin.php:182
 #: includes/Admin/Admin.php:183
 msgid "Settings"
@@ -1950,6 +1982,14 @@ msgstr "שיתוף בוואטסאפ"
 #: includes/Frontend/views/portal-edit.php:49
 msgid "Short help text under the field (optional):"
 msgstr "טקסט עזר קצר מתחת לשדה (לא חובה):"
+
+#: includes/Admin/views/settings.php:222
+msgid "Shortcode"
+msgstr "קוד קצר"
+
+#: includes/Admin/views/settings.php:191
+msgid "Shortcodes &amp; links"
+msgstr "קודים קצרים וקישורים"
 
 #: includes/Admin/views/settings.php:43
 msgid "Shown to signers on the signing page and in emails."
@@ -2085,6 +2125,10 @@ msgstr "חלק מההזמנות לא נשלחו: %s. אנא בדקו את הגד
 #: includes/Frontend/views/sign.php:155
 msgid "Someone else should sign this"
 msgstr "מישהו אחר צריך לחתום על זה"
+
+#: includes/Admin/views/settings.php:214
+msgid "Standalone public page to verify a document (same as the [comsign_verify] shortcode)."
+msgstr "עמוד ציבורי עצמאי לאימות מסמך (זהה לקוד הקצר [comsign_verify])."
 
 #: includes/Frontend/PricingShortcode.php:98
 msgid "Start %d-day free trial"
@@ -2507,6 +2551,10 @@ msgstr "משתנים"
 msgid "Verification code (SHA-256)"
 msgstr "קוד אימות (SHA-256)"
 
+#: includes/Admin/views/settings.php:212
+msgid "Verification page"
+msgstr "עמוד אימות"
+
 #: includes/Frontend/SigningController.php:416
 #: includes/Frontend/SigningController.php:516
 msgid "Verification required"
@@ -2594,10 +2642,19 @@ msgstr "ברוכים הבאים! בואו נשלח את המסמך הראשון 
 msgid "Welcome! Your workspace is ready with a %d-day free trial."
 msgstr "ברוכים הבאים! מרחב העבודה שלכם מוכן עם %d ימי ניסיון חינם."
 
+#: includes/Admin/views/settings.php:223
+#: includes/Admin/views/settings.php:241
+msgid "What it does"
+msgstr "מה זה עושה"
+
 #: includes/Admin/views/edit.php:192
 #: includes/Services/DocumentService.php:373
 msgid "When"
 msgstr "מתי"
+
+#: includes/Admin/views/settings.php:209
+msgid "Where signed-in customers manage, create, send and track their documents (no WP-Admin needed)."
+msgstr "היכן שלקוחות מחוברים מנהלים, יוצרים, שולחים ועוקבים אחר המסמכים שלהם (ללא צורך ב-WP-Admin)."
 
 #: includes/Frontend/PortalController.php:1074
 #: includes/Frontend/views/partials/portal-nav.php:13

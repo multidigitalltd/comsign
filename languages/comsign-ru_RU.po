@@ -140,6 +140,9 @@ msgstr "Добавить документ"
 msgid "Add the people who need to sign."
 msgstr "Добавьте людей, которые должны подписать."
 
+msgid "Address"
+msgstr "Адрес"
+
 msgid "Admin"
 msgstr "Администратор"
 
@@ -260,6 +263,9 @@ msgstr "Отменена"
 msgid "Cardcom is not configured."
 msgstr "Cardcom не настроен."
 
+msgid "Cardcom webhook"
+msgstr "Webhook Cardcom"
+
 msgid "Certificate password"
 msgstr "Пароль сертификата"
 
@@ -298,6 +304,9 @@ msgstr "Очистить"
 
 msgid "Click to toggle required"
 msgstr "Нажмите, чтобы переключить «обязательно»"
+
+msgid "Client portal"
+msgstr "Портал клиентов"
 
 msgid "Code"
 msgstr "Код"
@@ -532,6 +541,9 @@ msgstr "Документ недоступен."
 
 msgid "Document uploaded. Now add signers and place signature fields."
 msgstr "Документ загружен. Теперь добавьте подписантов и разместите поля подписи."
+
+msgid "Document verification form — lets anyone confirm a signed document is authentic using its ID and verification code (SHA-256), and see who signed it."
+msgstr "Форма проверки документа — позволяет любому подтвердить подлинность подписанного документа по его ID и коду проверки (SHA-256) и увидеть, кто его подписал."
 
 msgid "Documents"
 msgstr "Документы"
@@ -773,6 +785,9 @@ msgstr "Последняя активность"
 msgid "Leave blank to keep the current password."
 msgstr "Оставьте пустым, чтобы сохранить текущий пароль."
 
+msgid "Link"
+msgstr "Ссылка"
+
 msgid "Link expired"
 msgstr "Ссылка истекла"
 
@@ -965,6 +980,9 @@ msgstr "Страница %1$d из %2$d"
 msgid "Partially signed"
 msgstr "Подписано частично"
 
+msgid "Paste these shortcodes into any page or post. The links are the public entry points for your customers."
+msgstr "Вставьте эти шорткоды на любую страницу или запись. Ссылки — это публичные точки входа для ваших клиентов."
+
 msgid "Payment due"
 msgstr "Требуется оплата"
 
@@ -1093,6 +1111,9 @@ msgstr "Проблема"
 
 msgid "Protected file storage"
 msgstr "Защищённое хранилище файлов"
+
+msgid "Public pricing table — shows your plans (price, limits, features) with a “start free trial” button that signs the visitor up and gives them a workspace + trial. Put it on your pricing/landing page."
+msgstr "Публичная таблица тарифов — показывает ваши тарифы (цена, лимиты, функции) с кнопкой «начать бесплатный период», которая регистрирует посетителя и даёт ему рабочее пространство + пробный период. Разместите на странице тарифов/лендинге."
 
 msgid "REST API key"
 msgstr "Ключ REST API"
@@ -1283,6 +1304,9 @@ msgstr "Отправлено на подписание"
 msgid "Set this as the indicator/webhook URL in your Cardcom terminal."
 msgstr "Укажите это как URL webhook/индикатора в вашем терминале Cardcom."
 
+msgid "Set this as the webhook/indicator URL in your Cardcom terminal so payments activate subscriptions."
+msgstr "Укажите это как URL webhook/индикатора в терминале Cardcom, чтобы платежи активировали подписки."
+
 msgid "Settings"
 msgstr "Настройки"
 
@@ -1294,6 +1318,12 @@ msgstr "Поделиться через WhatsApp"
 
 msgid "Short help text under the field (optional):"
 msgstr "Короткая подсказка под полем (необязательно):"
+
+msgid "Shortcode"
+msgstr "Шорткод"
+
+msgid "Shortcodes &amp; links"
+msgstr "Шорткоды и ссылки"
 
 msgid "Shown to signers on the signing page and in emails."
 msgstr "Показывается подписантам на странице подписания и в письмах."
@@ -1384,6 +1414,9 @@ msgstr "Некоторые приглашения не удалось отпра
 
 msgid "Someone else should sign this"
 msgstr "Это должен подписать кто-то другой"
+
+msgid "Standalone public page to verify a document (same as the [comsign_verify] shortcode)."
+msgstr "Отдельная публичная страница проверки документа (как шорткод [comsign_verify])."
 
 msgid "Start %d-day free trial"
 msgstr "Начать бесплатный пробный период на %d дней"
@@ -1679,6 +1712,9 @@ msgstr "Переменные"
 msgid "Verification code (SHA-256)"
 msgstr "Код проверки (SHA-256)"
 
+msgid "Verification page"
+msgstr "Страница проверки"
+
 msgid "Verification required"
 msgstr "Требуется проверка"
 
@@ -1739,8 +1775,14 @@ msgstr "Добро пожаловать! Давайте отправим ваш 
 msgid "Welcome! Your workspace is ready with a %d-day free trial."
 msgstr "Добро пожаловать! Ваше рабочее пространство готово с %d-дневным пробным периодом."
 
+msgid "What it does"
+msgstr "Что делает"
+
 msgid "When"
 msgstr "Когда"
+
+msgid "Where signed-in customers manage, create, send and track their documents (no WP-Admin needed)."
+msgstr "Где вошедшие клиенты управляют документами, создают, отправляют и отслеживают их (без WP-Admin)."
 
 msgid "Workspace"
 msgstr "Рабочее пространство"

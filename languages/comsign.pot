@@ -232,6 +232,10 @@ msgstr ""
 msgid "Add the people who need to sign."
 msgstr ""
 
+#: includes/Admin/views/settings.php:240
+msgid "Address"
+msgstr ""
+
 #: includes/Support/Roles.php:90
 msgid "Admin"
 msgstr ""
@@ -405,6 +409,10 @@ msgstr ""
 msgid "Cardcom is not configured."
 msgstr ""
 
+#: includes/Admin/views/settings.php:253
+msgid "Cardcom webhook"
+msgstr ""
+
 #: includes/Admin/views/settings.php:146
 msgid "Certificate password"
 msgstr ""
@@ -465,6 +473,10 @@ msgstr ""
 #: includes/Admin/Admin.php:291
 #: includes/Frontend/views/portal-edit.php:50
 msgid "Click to toggle required"
+msgstr ""
+
+#: includes/Admin/views/settings.php:207
+msgid "Client portal"
 msgstr ""
 
 #: includes/Frontend/views/auth.php:50
@@ -810,6 +822,10 @@ msgstr ""
 
 #: includes/Admin/Admin.php:416
 msgid "Document uploaded. Now add signers and place signature fields."
+msgstr ""
+
+#: includes/Admin/views/settings.php:202
+msgid "Document verification form — lets anyone confirm a signed document is authentic using its ID and verification code (SHA-256), and see who signed it."
 msgstr ""
 
 #: includes/Admin/Admin.php:137
@@ -1186,6 +1202,10 @@ msgstr ""
 msgid "Leave blank to keep the current password."
 msgstr ""
 
+#: includes/Admin/views/settings.php:239
+msgid "Link"
+msgstr ""
+
 #: includes/Frontend/SigningController.php:119
 #: includes/Frontend/SigningController.php:442
 msgid "Link expired"
@@ -1470,6 +1490,10 @@ msgstr ""
 msgid "Partially signed"
 msgstr ""
 
+#: includes/Admin/views/settings.php:192
+msgid "Paste these shortcodes into any page or post. The links are the public entry points for your customers."
+msgstr ""
+
 #: includes/Frontend/views/portal-billing.php:30
 msgid "Payment due"
 msgstr ""
@@ -1653,6 +1677,10 @@ msgstr ""
 #: includes/Support/HealthCheck.php:108
 #: includes/Support/HealthCheck.php:111
 msgid "Protected file storage"
+msgstr ""
+
+#: includes/Admin/views/settings.php:198
+msgid "Public pricing table — shows your plans (price, limits, features) with a “start free trial” button that signs the visitor up and gives them a workspace + trial. Put it on your pricing/landing page."
 msgstr ""
 
 #: includes/Admin/views/settings.php:91
@@ -1938,6 +1966,10 @@ msgstr ""
 msgid "Set this as the indicator/webhook URL in your Cardcom terminal."
 msgstr ""
 
+#: includes/Admin/views/settings.php:255
+msgid "Set this as the webhook/indicator URL in your Cardcom terminal so payments activate subscriptions."
+msgstr ""
+
 #: includes/Admin/Admin.php:182
 #: includes/Admin/Admin.php:183
 msgid "Settings"
@@ -1954,6 +1986,14 @@ msgstr ""
 #: includes/Admin/Admin.php:290
 #: includes/Frontend/views/portal-edit.php:49
 msgid "Short help text under the field (optional):"
+msgstr ""
+
+#: includes/Admin/views/settings.php:222
+msgid "Shortcode"
+msgstr ""
+
+#: includes/Admin/views/settings.php:191
+msgid "Shortcodes &amp; links"
 msgstr ""
 
 #: includes/Admin/views/settings.php:43
@@ -2089,6 +2129,10 @@ msgstr ""
 
 #: includes/Frontend/views/sign.php:155
 msgid "Someone else should sign this"
+msgstr ""
+
+#: includes/Admin/views/settings.php:214
+msgid "Standalone public page to verify a document (same as the [comsign_verify] shortcode)."
 msgstr ""
 
 #: includes/Frontend/PricingShortcode.php:98
@@ -2512,6 +2556,10 @@ msgstr ""
 msgid "Verification code (SHA-256)"
 msgstr ""
 
+#: includes/Admin/views/settings.php:212
+msgid "Verification page"
+msgstr ""
+
 #: includes/Frontend/SigningController.php:416
 #: includes/Frontend/SigningController.php:516
 msgid "Verification required"
@@ -2599,9 +2647,18 @@ msgstr ""
 msgid "Welcome! Your workspace is ready with a %d-day free trial."
 msgstr ""
 
+#: includes/Admin/views/settings.php:223
+#: includes/Admin/views/settings.php:241
+msgid "What it does"
+msgstr ""
+
 #: includes/Admin/views/edit.php:192
 #: includes/Services/DocumentService.php:373
 msgid "When"
+msgstr ""
+
+#: includes/Admin/views/settings.php:209
+msgid "Where signed-in customers manage, create, send and track their documents (no WP-Admin needed)."
 msgstr ""
 
 #: includes/Frontend/PortalController.php:1074

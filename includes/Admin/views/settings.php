@@ -186,4 +186,75 @@ defined( 'ABSPATH' ) || exit;
 			<p><button type="submit" class="button button-primary"><?php esc_html_e( 'Save billing settings', 'comsign' ); ?></button></p>
 		</form>
 	</div>
+
+	<div class="comsign-card">
+		<h2><?php esc_html_e( 'Shortcodes &amp; links', 'comsign' ); ?></h2>
+		<p class="description"><?php esc_html_e( 'Paste these shortcodes into any page or post. The links are the public entry points for your customers.', 'comsign' ); ?></p>
+
+		<?php
+		$cs_shortcodes = array(
+			array(
+				'code' => '[comsign_pricing]',
+				'desc' => __( 'Public pricing table — shows your plans (price, limits, features) with a “start free trial” button that signs the visitor up and gives them a workspace + trial. Put it on your pricing/landing page.', 'comsign' ),
+			),
+			array(
+				'code' => '[comsign_verify]',
+				'desc' => __( 'Document verification form — lets anyone confirm a signed document is authentic using its ID and verification code (SHA-256), and see who signed it.', 'comsign' ),
+			),
+		);
+		$cs_links = array(
+			array(
+				'label' => __( 'Client portal', 'comsign' ),
+				'url'   => home_url( '/comsign/app' ),
+				'desc'  => __( 'Where signed-in customers manage, create, send and track their documents (no WP-Admin needed).', 'comsign' ),
+			),
+			array(
+				'label' => __( 'Verification page', 'comsign' ),
+				'url'   => home_url( '/comsign/verify' ),
+				'desc'  => __( 'Standalone public page to verify a document (same as the [comsign_verify] shortcode).', 'comsign' ),
+			),
+		);
+		?>
+
+		<table class="widefat striped" style="margin-bottom:16px;">
+			<thead>
+				<tr>
+					<th scope="col"><?php esc_html_e( 'Shortcode', 'comsign' ); ?></th>
+					<th scope="col"><?php esc_html_e( 'What it does', 'comsign' ); ?></th>
+				</tr>
+			</thead>
+			<tbody>
+				<?php foreach ( $cs_shortcodes as $sc ) : ?>
+					<tr>
+						<td><code><input type="text" readonly value="<?php echo esc_attr( $sc['code'] ); ?>" onclick="this.select()" style="width:170px;font-family:monospace;"></code></td>
+						<td><?php echo esc_html( $sc['desc'] ); ?></td>
+					</tr>
+				<?php endforeach; ?>
+			</tbody>
+		</table>
+
+		<table class="widefat striped">
+			<thead>
+				<tr>
+					<th scope="col"><?php esc_html_e( 'Link', 'comsign' ); ?></th>
+					<th scope="col"><?php esc_html_e( 'Address', 'comsign' ); ?></th>
+					<th scope="col"><?php esc_html_e( 'What it does', 'comsign' ); ?></th>
+				</tr>
+			</thead>
+			<tbody>
+				<?php foreach ( $cs_links as $ln ) : ?>
+					<tr>
+						<td><strong><?php echo esc_html( $ln['label'] ); ?></strong></td>
+						<td><a href="<?php echo esc_url( $ln['url'] ); ?>" target="_blank" rel="noopener"><?php echo esc_html( $ln['url'] ); ?></a></td>
+						<td><?php echo esc_html( $ln['desc'] ); ?></td>
+					</tr>
+				<?php endforeach; ?>
+				<tr>
+					<td><strong><?php esc_html_e( 'Cardcom webhook', 'comsign' ); ?></strong></td>
+					<td><code><?php echo esc_html( $cardcom_webhook ); ?></code></td>
+					<td><?php esc_html_e( 'Set this as the webhook/indicator URL in your Cardcom terminal so payments activate subscriptions.', 'comsign' ); ?></td>
+				</tr>
+			</tbody>
+		</table>
+	</div>
 </div>
