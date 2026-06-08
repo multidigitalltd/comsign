@@ -544,3 +544,32 @@ body.comsign-public {
 	outline-offset: 2px;
 	border-radius: var( --comsign-radius-sm, 6px );
 }
+
+/* ---- Plan & billing (0.40.0) ---- */
+.comsign-plan-grid {
+	display: grid;
+	grid-template-columns: repeat( auto-fit, minmax( 240px, 1fr ) );
+	gap: 16px;
+	margin: 0 0 24px;
+}
+.comsign-plan-card {
+	border: 1px solid var( --comsign-border, #d6d9de );
+	border-radius: var( --comsign-radius, 10px );
+	padding: 20px;
+	background: var( --comsign-surface, #fff );
+	display: flex;
+	flex-direction: column;
+}
+.comsign-plan-card.is-current {
+	border-color: var( --comsign-primary, #0b3d91 );
+	box-shadow: 0 0 0 2px var( --comsign-primary, #0b3d91 ) inset;
+}
+.comsign-plan-card h3 { margin: 0 0 4px; }
+.comsign-plan-price { margin: 4px 0 12px; }
+.comsign-plan-amount { font-size: 1.8em; font-weight: 700; }
+.comsign-plan-per { color: var( --comsign-muted, #6b7280 ); }
+.comsign-plan-limits { list-style: none; padding: 0; margin: 0 0 16px; }
+.comsign-plan-limits li { padding: 5px 0; border-bottom: 1px solid #f0f0f2; }
+.comsign-plan-actions { display: flex; flex-direction: column; gap: 8px; margin-top: auto; }
+.comsign-plan-actions .comsign-btn { width: 100%; }
+.comsign-plan-current { font-weight: 600; color: var( --comsign-success, #15803d ); margin-top: auto; }

@@ -5,6 +5,15 @@ msgstr ""
 msgid "%1$d of %2$d signed"
 msgstr "Подписано %1$d из %2$d"
 
+msgid "%1$d used, %2$d remaining."
+msgstr "Использовано: %1$d, осталось: %2$d."
+
+msgid "%d documents / month"
+msgstr "%d документов / месяц"
+
+msgid "%d documents used (unlimited)."
+msgstr "Использовано документов: %d (без ограничений)."
+
 msgid "%s (copy)"
 msgstr "%s (копия)"
 
@@ -19,6 +28,9 @@ msgstr "(без названия)"
 
 msgid "* Required"
 msgstr "* Обязательно"
+
+msgid "/ month"
+msgstr "/ месяц"
 
 msgid "14 days"
 msgstr "14 дней"
@@ -53,6 +65,9 @@ msgstr "Под-пространство относится к этому; мен
 msgid "A webhook URL is configured. Use “Send test webhook” below to confirm it is reachable."
 msgstr "URL webhook настроен. Нажмите «Отправить тестовый webhook» ниже, чтобы проверить доступность."
 
+msgid "API & webhooks"
+msgstr "API и webhooks"
+
 msgid "API name"
 msgstr "Имя API"
 
@@ -76,6 +91,9 @@ msgstr "Действие"
 
 msgid "Actions"
 msgstr "Действия"
+
+msgid "Active"
+msgstr "Активна"
 
 msgid "Active certificate:"
 msgstr "Активный сертификат:"
@@ -137,6 +155,9 @@ msgstr "Уже подписано"
 msgid "Analytics"
 msgstr "Аналитика"
 
+msgid "Annual — %s"
+msgstr "Годовой — %s"
+
 msgid "Assign a recipient to each role. The document is created as a draft so you can review it before sending."
 msgstr "Назначьте получателя на каждую роль. Документ создаётся как черновик, чтобы вы могли проверить его перед отправкой."
 
@@ -179,6 +200,12 @@ msgstr "Прежде чем отправить:"
 msgid "Billing (Cardcom)"
 msgstr "Оплата (Cardcom)"
 
+msgid "Billing is not available"
+msgstr "Оплата недоступна"
+
+msgid "Billing is not set up yet. Please contact support."
+msgstr "Оплата ещё не настроена. Обратитесь в поддержку."
+
 msgid "Billing settings saved."
 msgstr "Настройки оплаты сохранены."
 
@@ -215,6 +242,9 @@ msgstr "Получатели копии сохранены."
 msgid "Cancel"
 msgstr "Отмена"
 
+msgid "Canceled"
+msgstr "Отменена"
+
 msgid "Cardcom is not configured."
 msgstr "Cardcom не настроен."
 
@@ -241,6 +271,9 @@ msgstr "Выбор (выпадающий список)"
 
 msgid "Choose a different template"
 msgstr "Выбрать другой шаблон"
+
+msgid "Choose a plan"
+msgstr "Выберите тариф"
 
 msgid "Choose a template"
 msgstr "Выберите шаблон"
@@ -371,6 +404,9 @@ msgstr "Создать документ"
 msgid "Created"
 msgstr "Создано"
 
+msgid "Custom branding"
+msgstr "Свой брендинг"
+
 msgid "Dana Cohen, dana@example.com, +972500000000\\nAvi Levi, avi@example.com"
 msgstr "Дана Коэн, dana@example.com, +972500000000\\nАви Леви, avi@example.com"
 
@@ -382,6 +418,9 @@ msgstr "Дата"
 
 msgid "Date (auto)"
 msgstr "Дата (авто)"
+
+msgid "Days left in your free trial: %d"
+msgstr "Дней до конца пробного периода: %d"
 
 msgid "Decline to sign"
 msgstr "Отказаться подписывать"
@@ -409,6 +448,9 @@ msgstr "Доставка не удалась: %s"
 
 msgid "Details"
 msgstr "Подробности"
+
+msgid "Digital (PKI) signatures"
+msgstr "Цифровые подписи (PKI)"
 
 msgid "Digital signature (PKI / PAdES)"
 msgstr "Цифровая подпись (PKI / PAdES)"
@@ -620,6 +662,9 @@ msgstr "Фильтр по статусу"
 msgid "For signer:"
 msgstr "Для подписанта:"
 
+msgid "Free trial"
+msgstr "Пробный период"
+
 msgid "Full name"
 msgstr "Полное имя"
 
@@ -743,6 +788,9 @@ msgstr "Сообщение подписантам (необязательно)"
 msgid "Missing transaction reference."
 msgstr "Отсутствует идентификатор транзакции."
 
+msgid "Monthly — %s"
+msgstr "Месячный — %s"
+
 msgid "More information"
 msgstr "Подробнее"
 
@@ -800,6 +848,9 @@ msgstr "Подписанты ещё не добавлены."
 msgid "No signers yet."
 msgstr "Пока нет подписантов."
 
+msgid "No subscription"
+msgstr "Нет подписки"
+
 msgid "No templates yet."
 msgstr "Пока нет шаблонов."
 
@@ -836,8 +887,14 @@ msgstr "ОК"
 msgid "One per line, in the form name = value. Each {{name}} in the content is replaced with its value. {{date}} and {{site}} are available automatically."
 msgstr "По одному в строке, в виде имя = значение. Каждое {{name}} в содержимом заменяется его значением. {{date}} и {{site}} доступны автоматически."
 
+msgid "Online payment is not set up on this site yet. Please contact support to choose a paid plan."
+msgstr "Онлайн-оплата на сайте ещё не настроена. Обратитесь в поддержку, чтобы выбрать платный тариф."
+
 msgid "Only PDF files are allowed."
 msgstr "Допускаются только файлы PDF."
+
+msgid "Only a workspace owner can manage the plan and billing."
+msgstr "Управлять тарифом и оплатой может только владелец рабочего пространства."
 
 msgid "OpenSSL (PKI signing)"
 msgstr "OpenSSL (подпись PKI)"
@@ -887,6 +944,15 @@ msgstr "Страница %1$d из %2$d"
 msgid "Partially signed"
 msgstr "Подписано частично"
 
+msgid "Payment due"
+msgstr "Требуется оплата"
+
+msgid "Payment received — your plan is being activated."
+msgstr "Платёж получен — ваш тариф активируется."
+
+msgid "Payment was not completed. You can try again below."
+msgstr "Платёж не завершён. Можно попробовать снова ниже."
+
 msgid "Pending invitations"
 msgstr "Ожидающие приглашения"
 
@@ -920,6 +986,12 @@ msgstr "Размещение полей"
 msgid "Place signature fields"
 msgstr "Разместить поля подписи"
 
+msgid "Plan & billing"
+msgstr "Тариф и оплата"
+
+msgid "Plan:"
+msgstr "Тариф:"
+
 msgid "Please add a title or some content for the document."
 msgstr "Пожалуйста, добавьте название или содержимое документа."
 
@@ -928,6 +1000,9 @@ msgstr "Пожалуйста, выберите файл сертификата .
 
 msgid "Please choose a PDF to upload."
 msgstr "Пожалуйста, выберите PDF для загрузки."
+
+msgid "Please choose a valid plan."
+msgstr "Выберите корректный тариф."
 
 msgid "Please choose one of your templates."
 msgstr "Пожалуйста, выберите один из ваших шаблонов."
@@ -1048,6 +1123,9 @@ msgstr "Удалить этого участника?"
 
 msgid "Remove this signer?"
 msgstr "Удалить этого подписанта?"
+
+msgid "Renews on %s."
+msgstr "Продлевается %s."
 
 msgid "Require signing in order"
 msgstr "Требовать подписание по порядку"
@@ -1304,6 +1382,9 @@ msgstr "Переключить"
 msgid "System Status"
 msgstr "Состояние системы"
 
+msgid "Team seats: %d"
+msgstr "Места в команде: %d"
+
 msgid "Template"
 msgstr "Шаблон"
 
@@ -1445,6 +1526,9 @@ msgstr "Эта ссылка персональная и заменяет люб�
 msgid "This link is personal — please do not forward it."
 msgstr "Эта ссылка персональная — пожалуйста, не пересылайте её."
 
+msgid "This month:"
+msgstr "В этом месяце:"
+
 msgid "This signer can no longer be reassigned."
 msgstr "Этого подписанта больше нельзя переназначить."
 
@@ -1498,6 +1582,9 @@ msgstr "Введите ваше полное имя"
 
 msgid "Unexpected gateway response."
 msgstr "Неожиданный ответ платёжного шлюза."
+
+msgid "Unlimited documents"
+msgstr "Безлимит документов"
 
 msgid "Untitled document"
 msgstr "Документ без названия"
@@ -1634,6 +1721,9 @@ msgstr "Вы не можете создавать документы в этом
 msgid "You cannot edit this document."
 msgstr "Вы не можете редактировать этот документ."
 
+msgid "You cannot manage billing for this workspace."
+msgstr "Вы не можете управлять оплатой этого рабочего пространства."
+
 msgid "You cannot manage contacts in this workspace."
 msgstr "Вы не можете управлять контактами в этом рабочем пространстве."
 
@@ -1691,6 +1781,9 @@ msgstr "Ваш ответ"
 msgid "Your contacts"
 msgstr "Ваши контакты"
 
+msgid "Your current plan"
+msgstr "Ваш текущий тариф"
+
 msgid "Your role in this workspace does not allow creating documents. Please contact an administrator."
 msgstr "Ваша роль в этом рабочем пространстве не позволяет создавать документы. Обратитесь к администратору."
 
@@ -1699,6 +1792,9 @@ msgstr "Ваша роль в этом рабочем пространстве н
 
 msgid "Your signature"
 msgstr "Ваша подпись"
+
+msgid "Your subscription"
+msgstr "Ваша подписка"
 
 msgid "Your subscription is not active. Please choose a plan to keep sending documents."
 msgstr "Ваша подписка неактивна. Выберите тариф, чтобы продолжать отправку документов."

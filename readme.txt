@@ -4,7 +4,7 @@ Tags: signature, digital signature, pdf, esignature, hebrew
 Requires at least: 6.0
 Tested up to: 6.5
 Requires PHP: 7.4
-Stable tag: 0.39.0
+Stable tag: 0.40.0
 License: GPL-2.0-or-later
 License URI: https://www.gnu.org/licenses/gpl-2.0.html
 
@@ -105,6 +105,15 @@ ID and its SHA-256 code (shown on the document screen and the signature
 certificate) to confirm the document is authentic and see who signed it.
 
 == Changelog ==
+
+= 0.40.0 =
+* New (commercial, phase 3): an in-portal "Plan & billing" area. Workspace
+  owners see their subscription status, free-trial days remaining (or renewal
+  date), and this month's document usage, then pick or upgrade a plan
+  (monthly/annual) and pay through Cardcom — all without touching WP-Admin.
+* The plan picker shows each plan's price, limits and features; the current plan
+  is marked. Successful payment returns to the billing page while the verified
+  webhook activates the subscription.
 
 = 0.39.0 =
 * New (commercial, phase 2): Cardcom payment integration. Connect a Cardcom

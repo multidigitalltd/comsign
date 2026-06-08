@@ -18,9 +18,13 @@ use ComSign\Database\DocumentRepository;
 use ComSign\Database\FieldRepository;
 use ComSign\Database\SignerRepository;
 use ComSign\Database\TemplateRepository;
+use ComSign\Billing\CardcomSettings;
+use ComSign\Billing\Plans;
 use ComSign\Services\AccountService;
+use ComSign\Services\BillingService;
 use ComSign\Services\DocumentService;
 use ComSign\Services\SendReadiness;
+use ComSign\Services\SubscriptionService;
 use ComSign\Support\Roles;
 use ComSign\Support\Storage;
 
@@ -70,6 +74,8 @@ final class PortalController {
 		// Address book management.
 		add_action( 'admin_post_comsign_portal_contact_add', array( $this, 'handle_contact_add' ) );
 		add_action( 'admin_post_comsign_portal_contact_delete', array( $this, 'handle_contact_delete' ) );
+		// Billing: start a Cardcom checkout for a plan.
+		add_action( 'admin_post_comsign_portal_checkout', array( $this, 'handle_checkout' ) );
 	}
 
 	/**
@@ -493,6 +499,8 @@ final class PortalController {
 			$this->render_edit( $user_id, $account_ids );
 		} elseif ( 'contacts' === $view ) {
 			$this->render_contacts( $user_id, $account_ids );
+		} elseif ( 'billing' === $view ) {
+			$this->render_billing( $user_id, $account_ids );
 		} else {
 			$this->render_dashboard( $user_id, $account_ids );
 		}
@@ -519,6 +527,15 @@ final class PortalController {
 	 */
 	private function working_account_id( int $user_id ): int {
 		return max( 0, (int) $this->accounts->current_account_id( $user_id ) );
+	}
+
+	/**
+	 * Whether the user may manage billing for their current workspace
+	 * (owner-level: the MANAGE_SETTINGS permission).
+	 */
+	private function can_manage_billing( int $user_id ): bool {
+		$account_id = $this->working_account_id( $user_id );
+		return $account_id > 0 && $this->accounts->can_in_account( $user_id, $account_id, Roles::MANAGE_SETTINGS );
 	}
 
 	/**
@@ -762,6 +779,93 @@ final class PortalController {
 	}
 
 	/**
+	 * Plan & billing: subscription status, monthly usage and the plan picker.
+	 *
+	 * @param int   $user_id     Current user.
+	 * @param int[] $account_ids Visible accounts.
+	 */
+	private function render_billing( int $user_id, array $account_ids ): void {
+		if ( ! $this->can_manage_billing( $user_id ) ) {
+			$this->render(
+				'portal-message',
+				array(
+					'page_title' => __( 'Not allowed', 'comsign' ),
+					'heading'    => __( 'Billing is not available', 'comsign' ),
+					'message'    => __( 'Only a workspace owner can manage the plan and billing.', 'comsign' ),
+					'login_url'  => '',
+				)
+			);
+		}
+
+		$account = $this->working_account_id( $user_id );
+		$subs    = new SubscriptionService();
+
+		$this->render(
+			'portal-billing',
+			array(
+				'page_title'  => __( 'Plan & billing', 'comsign' ),
+				'nav'         => $this->nav( 'billing', $user_id ),
+				'status'      => $subs->status( $account ),
+				'subscription' => $subs->for_account( $account ),
+				'plan_id'     => $subs->plan_id( $account ),
+				'plans'       => Plans::all(),
+				'currency'    => Plans::currency(),
+				'used'        => $subs->documents_used( $account ),
+				'remaining'   => $subs->documents_remaining( $account ),
+				'configured'  => CardcomSettings::is_configured(),
+				'action'      => admin_url( 'admin-post.php' ),
+				'nonce'       => wp_create_nonce( 'comsign_portal_checkout' ),
+				'switcher'    => $this->switcher( $user_id ),
+			)
+		);
+	}
+
+	/**
+	 * Start a Cardcom checkout for the chosen plan/cycle and redirect to the
+	 * hosted payment page.
+	 */
+	public function handle_checkout(): void {
+		$user_id = $this->require_login();
+		check_admin_referer( 'comsign_portal_checkout' );
+
+		$account = $this->working_account_id( $user_id );
+		if ( $account <= 0 || ! $this->accounts->can_in_account( $user_id, $account, Roles::MANAGE_SETTINGS ) ) {
+			$this->bounce( self::url(), __( 'You cannot manage billing for this workspace.', 'comsign' ) );
+		}
+
+		$plan   = isset( $_POST['plan'] ) ? sanitize_key( wp_unslash( $_POST['plan'] ) ) : '';
+		$cycle  = ( isset( $_POST['cycle'] ) && 'annual' === $_POST['cycle'] ) ? 'annual' : 'monthly';
+		$target = self::url( array( 'view' => 'billing' ) );
+
+		if ( ! Plans::exists( $plan ) ) {
+			$this->bounce( $target, __( 'Please choose a valid plan.', 'comsign' ) );
+		}
+		if ( ! CardcomSettings::is_configured() ) {
+			$this->bounce( $target, __( 'Billing is not set up yet. Please contact support.', 'comsign' ) );
+		}
+
+		$result = ( new BillingService() )->start_checkout(
+			$account,
+			$plan,
+			$cycle,
+			array(
+				'success_url' => self::url( array( 'view' => 'billing', 'paid' => '1' ) ),
+				'failed_url'  => self::url( array( 'view' => 'billing', 'paid' => '0' ) ),
+				'webhook_url' => BillingController::webhook_url(),
+			),
+			is_rtl() ? 'he' : 'en'
+		);
+
+		if ( empty( $result['ok'] ) || empty( $result['url'] ) ) {
+			$this->bounce( $target, ! empty( $result['error'] ) ? (string) $result['error'] : __( 'Could not start checkout.', 'comsign' ) );
+		}
+
+		// Off-site to the Cardcom hosted payment page.
+		wp_redirect( esc_url_raw( (string) $result['url'] ) ); // phpcs:ignore WordPress.Security.SafeRedirect.wp_redirect_wp_redirect
+		exit;
+	}
+
+	/**
 	 * Dashboard: status summary + items needing attention + recent documents.
 	 *
 	 * @param int   $user_id     Current user.
@@ -928,6 +1032,14 @@ final class PortalController {
 				'label'  => __( 'Contacts', 'comsign' ),
 				'url'    => self::url( array( 'view' => 'contacts' ) ),
 				'active' => 'contacts' === $active,
+			);
+		}
+
+		if ( $user_id && $this->can_manage_billing( $user_id ) ) {
+			$items[] = array(
+				'label'  => __( 'Plan & billing', 'comsign' ),
+				'url'    => self::url( array( 'view' => 'billing' ) ),
+				'active' => 'billing' === $active,
 			);
 		}
 

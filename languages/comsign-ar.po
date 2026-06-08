@@ -5,6 +5,15 @@ msgstr ""
 msgid "%1$d of %2$d signed"
 msgstr "تم توقيع %1$d من %2$d"
 
+msgid "%1$d used, %2$d remaining."
+msgstr "%1$d مُستخدمة، %2$d متبقية."
+
+msgid "%d documents / month"
+msgstr "%d مستندات / شهر"
+
+msgid "%d documents used (unlimited)."
+msgstr "%d مستندات مُستخدمة (غير محدود)."
+
 msgid "%s (copy)"
 msgstr "%s (نسخة)"
 
@@ -19,6 +28,9 @@ msgstr "(بدون عنوان)"
 
 msgid "* Required"
 msgstr "* مطلوب"
+
+msgid "/ month"
+msgstr "/ شهر"
 
 msgid "14 days"
 msgstr "14 يومًا"
@@ -53,6 +65,9 @@ msgstr "تنتمي مساحة العمل الفرعية إلى هذه المسا
 msgid "A webhook URL is configured. Use “Send test webhook” below to confirm it is reachable."
 msgstr "تم إعداد عنوان webhook. استخدم «إرسال webhook تجريبي» أدناه للتأكد من إمكانية الوصول إليه."
 
+msgid "API & webhooks"
+msgstr "API و webhooks"
+
 msgid "API name"
 msgstr "اسم API"
 
@@ -76,6 +91,9 @@ msgstr "إجراء"
 
 msgid "Actions"
 msgstr "إجراءات"
+
+msgid "Active"
+msgstr "نشط"
 
 msgid "Active certificate:"
 msgstr "الشهادة الفعّالة:"
@@ -137,6 +155,9 @@ msgstr "موقّع بالفعل"
 msgid "Analytics"
 msgstr "التحليلات"
 
+msgid "Annual — %s"
+msgstr "سنوي — %s"
+
 msgid "Assign a recipient to each role. The document is created as a draft so you can review it before sending."
 msgstr "عيّن مستلمًا لكل دور. يُنشأ المستند كمسودة لتتمكن من مراجعته قبل الإرسال."
 
@@ -179,6 +200,12 @@ msgstr "قبل أن تتمكن من الإرسال:"
 msgid "Billing (Cardcom)"
 msgstr "الفوترة (Cardcom)"
 
+msgid "Billing is not available"
+msgstr "الفوترة غير متاحة"
+
+msgid "Billing is not set up yet. Please contact support."
+msgstr "لم تُعدّ الفوترة بعد. يرجى التواصل مع الدعم."
+
 msgid "Billing settings saved."
 msgstr "تم حفظ إعدادات الفوترة."
 
@@ -215,6 +242,9 @@ msgstr "تم حفظ مستلمي النسخة."
 msgid "Cancel"
 msgstr "إلغاء"
 
+msgid "Canceled"
+msgstr "مُلغى"
+
 msgid "Cardcom is not configured."
 msgstr "Cardcom غير مُعدّ."
 
@@ -241,6 +271,9 @@ msgstr "اختيار (قائمة منسدلة)"
 
 msgid "Choose a different template"
 msgstr "اختر قالبًا آخر"
+
+msgid "Choose a plan"
+msgstr "اختر باقة"
 
 msgid "Choose a template"
 msgstr "اختر قالبًا"
@@ -371,6 +404,9 @@ msgstr "إنشاء مستند"
 msgid "Created"
 msgstr "تم الإنشاء"
 
+msgid "Custom branding"
+msgstr "علامة تجارية مخصّصة"
+
 msgid "Dana Cohen, dana@example.com, +972500000000\\nAvi Levi, avi@example.com"
 msgstr "دانا كوهين, dana@example.com, ‎+972500000000\\nأبي ليفي, avi@example.com"
 
@@ -382,6 +418,9 @@ msgstr "التاريخ"
 
 msgid "Date (auto)"
 msgstr "التاريخ (تلقائي)"
+
+msgid "Days left in your free trial: %d"
+msgstr "الأيام المتبقية في تجربتك المجانية: %d"
 
 msgid "Decline to sign"
 msgstr "رفض التوقيع"
@@ -409,6 +448,9 @@ msgstr "فشل التسليم: %s"
 
 msgid "Details"
 msgstr "التفاصيل"
+
+msgid "Digital (PKI) signatures"
+msgstr "توقيعات رقمية (PKI)"
 
 msgid "Digital signature (PKI / PAdES)"
 msgstr "التوقيع الرقمي (PKI / PAdES)"
@@ -620,6 +662,9 @@ msgstr "التصفية حسب الحالة"
 msgid "For signer:"
 msgstr "للموقّع:"
 
+msgid "Free trial"
+msgstr "تجربة مجانية"
+
 msgid "Full name"
 msgstr "الاسم الكامل"
 
@@ -743,6 +788,9 @@ msgstr "رسالة إلى الموقّعين (اختياري)"
 msgid "Missing transaction reference."
 msgstr "مرجع المعاملة مفقود."
 
+msgid "Monthly — %s"
+msgstr "شهري — %s"
+
 msgid "More information"
 msgstr "مزيد من المعلومات"
 
@@ -800,6 +848,9 @@ msgstr "لم تتم إضافة موقّعين بعد."
 msgid "No signers yet."
 msgstr "لا يوجد موقّعون بعد."
 
+msgid "No subscription"
+msgstr "لا يوجد اشتراك"
+
 msgid "No templates yet."
 msgstr "لا توجد قوالب بعد."
 
@@ -836,8 +887,14 @@ msgstr "حسنًا"
 msgid "One per line, in the form name = value. Each {{name}} in the content is replaced with its value. {{date}} and {{site}} are available automatically."
 msgstr "واحد في كل سطر، بصيغة الاسم = القيمة. يُستبدل كل {{name}} في المحتوى بقيمته. {{date}} و{{site}} متاحان تلقائيًا."
 
+msgid "Online payment is not set up on this site yet. Please contact support to choose a paid plan."
+msgstr "الدفع عبر الإنترنت غير مُعدّ بعد على هذا الموقع. يرجى التواصل مع الدعم لاختيار باقة مدفوعة."
+
 msgid "Only PDF files are allowed."
 msgstr "يُسمح بملفات PDF فقط."
+
+msgid "Only a workspace owner can manage the plan and billing."
+msgstr "يمكن لمالك مساحة العمل فقط إدارة الباقة والفوترة."
 
 msgid "OpenSSL (PKI signing)"
 msgstr "OpenSSL (توقيع PKI)"
@@ -887,6 +944,15 @@ msgstr "صفحة %1$d من %2$d"
 msgid "Partially signed"
 msgstr "موقّع جزئيًا"
 
+msgid "Payment due"
+msgstr "دفعة مستحقة"
+
+msgid "Payment received — your plan is being activated."
+msgstr "تم استلام الدفعة — يتم تفعيل باقتك."
+
+msgid "Payment was not completed. You can try again below."
+msgstr "لم يكتمل الدفع. يمكنك المحاولة مرة أخرى أدناه."
+
 msgid "Pending invitations"
 msgstr "دعوات معلّقة"
 
@@ -920,6 +986,12 @@ msgstr "وضع الحقول"
 msgid "Place signature fields"
 msgstr "وضع حقول التوقيع"
 
+msgid "Plan & billing"
+msgstr "الباقة والفوترة"
+
+msgid "Plan:"
+msgstr "الباقة:"
+
 msgid "Please add a title or some content for the document."
 msgstr "يرجى إضافة عنوان أو بعض المحتوى للمستند."
 
@@ -928,6 +1000,9 @@ msgstr "يرجى اختيار ملف شهادة بصيغة .p12/.pfx."
 
 msgid "Please choose a PDF to upload."
 msgstr "يرجى اختيار ملف PDF للرفع."
+
+msgid "Please choose a valid plan."
+msgstr "يرجى اختيار باقة صالحة."
 
 msgid "Please choose one of your templates."
 msgstr "يرجى اختيار أحد قوالبك."
@@ -1048,6 +1123,9 @@ msgstr "إزالة هذا العضو؟"
 
 msgid "Remove this signer?"
 msgstr "إزالة هذا الموقّع؟"
+
+msgid "Renews on %s."
+msgstr "يتجدّد في %s."
 
 msgid "Require signing in order"
 msgstr "اشتراط التوقيع بالترتيب"
@@ -1304,6 +1382,9 @@ msgstr "تبديل"
 msgid "System Status"
 msgstr "حالة النظام"
 
+msgid "Team seats: %d"
+msgstr "مقاعد الفريق: %d"
+
 msgid "Template"
 msgstr "قالب"
 
@@ -1445,6 +1526,9 @@ msgstr "هذا الرابط شخصي ويحل محل أي رابط سبق إصد
 msgid "This link is personal — please do not forward it."
 msgstr "هذا الرابط شخصي — يرجى عدم إعادة توجيهه."
 
+msgid "This month:"
+msgstr "هذا الشهر:"
+
 msgid "This signer can no longer be reassigned."
 msgstr "لم يعد بالإمكان إعادة تعيين هذا الموقّع."
 
@@ -1498,6 +1582,9 @@ msgstr "اكتب اسمك الكامل"
 
 msgid "Unexpected gateway response."
 msgstr "استجابة غير متوقعة من بوابة الدفع."
+
+msgid "Unlimited documents"
+msgstr "مستندات غير محدودة"
 
 msgid "Untitled document"
 msgstr "مستند بدون عنوان"
@@ -1634,6 +1721,9 @@ msgstr "لا يمكنك إنشاء مستندات في مساحة العمل ه�
 msgid "You cannot edit this document."
 msgstr "لا يمكنك تحرير هذا المستند."
 
+msgid "You cannot manage billing for this workspace."
+msgstr "لا يمكنك إدارة الفوترة لمساحة العمل هذه."
+
 msgid "You cannot manage contacts in this workspace."
 msgstr "لا يمكنك إدارة جهات الاتصال في مساحة العمل هذه."
 
@@ -1691,6 +1781,9 @@ msgstr "إجابتك"
 msgid "Your contacts"
 msgstr "جهات اتصالك"
 
+msgid "Your current plan"
+msgstr "باقتك الحالية"
+
 msgid "Your role in this workspace does not allow creating documents. Please contact an administrator."
 msgstr "دورك في مساحة العمل هذه لا يسمح بإنشاء المستندات. يرجى التواصل مع المسؤول."
 
@@ -1699,6 +1792,9 @@ msgstr "دورك في مساحة العمل لا يسمح بإدارة جهات 
 
 msgid "Your signature"
 msgstr "توقيعك"
+
+msgid "Your subscription"
+msgstr "اشتراكك"
 
 msgid "Your subscription is not active. Please choose a plan to keep sending documents."
 msgstr "اشتراكك غير نشط. يرجى اختيار باقة لمواصلة إرسال المستندات."
