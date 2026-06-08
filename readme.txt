@@ -4,7 +4,7 @@ Tags: signature, digital signature, pdf, esignature, hebrew
 Requires at least: 6.0
 Tested up to: 6.5
 Requires PHP: 7.4
-Stable tag: 0.38.0
+Stable tag: 0.39.0
 License: GPL-2.0-or-later
 License URI: https://www.gnu.org/licenses/gpl-2.0.html
 
@@ -105,6 +105,18 @@ ID and its SHA-256 code (shown on the document screen and the signature
 certificate) to confirm the document is authentic and see who signed it.
 
 == Changelog ==
+
+= 0.39.0 =
+* New (commercial, phase 2): Cardcom payment integration. Connect a Cardcom
+  terminal in Settings (terminal number, API name, encrypted API password, test
+  mode) to charge subscriptions via a hosted Low Profile checkout that also
+  tokenises the card for recurring billing.
+* Security: checkout intent is carried in an HMAC-signed return value, and every
+  result is re-verified server-to-server with Cardcom before a subscription is
+  activated — a forged webhook does nothing. The recurring token is stored
+  encrypted (shared Crypto helper).
+* Provider-agnostic BillingService (gateway is injectable and fully unit-tested
+  with a fake), plus a verified Cardcom webhook endpoint.
 
 = 0.38.0 =
 * New (commercial foundation): subscription plans and trials. Three data-driven,

@@ -80,6 +80,9 @@ final class Plugin {
 		// Integrations: outgoing webhooks + REST API.
 		( new \ComSign\Integrations\Webhooks() )->register();
 		( new \ComSign\Integrations\RestApi() )->register();
+
+		// Billing: Cardcom payment webhook.
+		( new \ComSign\Frontend\BillingController() )->register();
 	}
 
 	/**

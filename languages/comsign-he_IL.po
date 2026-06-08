@@ -84,7 +84,7 @@ msgstr "קוד חדש נשלח."
 msgid "A signature is required."
 msgstr "נדרשת חתימה."
 
-#: includes/Admin/Admin.php:772
+#: includes/Admin/Admin.php:773
 msgid "A signing link was generated. Copy it or share via WhatsApp below."
 msgstr "נוצר קישור לחתימה. העתיקו אותו או שתפו בוואטסאפ למטה."
 
@@ -95,6 +95,14 @@ msgstr "סביבת עבודה משנה משתייכת לזו; מנהלים כא�
 #: includes/Support/HealthCheck.php:142
 msgid "A webhook URL is configured. Use “Send test webhook” below to confirm it is reachable."
 msgstr "כתובת webhook מוגדרת. השתמשו ב“שליחת webhook לבדיקה” למטה כדי לוודא שהיא נגישה."
+
+#: includes/Admin/views/settings.php:164
+msgid "API name"
+msgstr "שם API"
+
+#: includes/Admin/views/settings.php:168
+msgid "API password"
+msgstr "סיסמת API"
 
 #: includes/Admin/views/settings.php:60
 msgid "Accent colour"
@@ -126,8 +134,8 @@ msgstr "פעולות"
 msgid "Active certificate:"
 msgstr "תעודה פעילה:"
 
-#: includes/Admin/Admin.php:145
 #: includes/Admin/Admin.php:146
+#: includes/Admin/Admin.php:147
 #: includes/Admin/views/list.php:20
 #: includes/Admin/views/new.php:16
 msgid "Add Document"
@@ -209,8 +217,8 @@ msgstr "אפשרו לחותמים להעביר לאדם אחר"
 msgid "Already signed"
 msgstr "כבר נחתם"
 
-#: includes/Admin/Admin.php:154
 #: includes/Admin/Admin.php:155
+#: includes/Admin/Admin.php:156
 #: includes/Admin/views/analytics.php:33
 msgid "Analytics"
 msgstr "אנליטיקס"
@@ -271,6 +279,14 @@ msgstr "חזרה לרשימה"
 msgid "Before you can send:"
 msgstr "לפני שניתן לשלוח:"
 
+#: includes/Admin/views/settings.php:153
+msgid "Billing (Cardcom)"
+msgstr "חיוב (קארדקום)"
+
+#: includes/Admin/Admin.php:1009
+msgid "Billing settings saved."
+msgstr "הגדרות החיוב נשמרו."
+
 #: includes/Admin/views/settings.php:46
 msgid "Brand name"
 msgstr "שם המותג"
@@ -289,7 +305,7 @@ msgstr "דפדפן"
 msgid "Bulk send"
 msgstr "שליחה בכמות"
 
-#: includes/Admin/Admin.php:1183
+#: includes/Admin/Admin.php:1207
 msgid "Bulk send complete: %d document(s) created and sent."
 msgstr "השליחה בכמות הושלמה: %d מסמכים נוצרו ונשלחו."
 
@@ -309,7 +325,7 @@ msgstr "עסקי"
 msgid "CC recipients"
 msgstr "נמעני העתק (CC)"
 
-#: includes/Admin/Admin.php:478
+#: includes/Admin/Admin.php:479
 msgid "CC recipients saved."
 msgstr "נמעני ההעתק נשמרו."
 
@@ -317,15 +333,19 @@ msgstr "נמעני ההעתק נשמרו."
 msgid "Cancel"
 msgstr "ביטול"
 
+#: includes/Billing/CardcomGateway.php:28
+msgid "Cardcom is not configured."
+msgstr "קארדקום אינו מוגדר."
+
 #: includes/Admin/views/settings.php:146
 msgid "Certificate password"
 msgstr "סיסמת התעודה"
 
-#: includes/Admin/Admin.php:969
+#: includes/Admin/Admin.php:974
 msgid "Certificate removed. Documents will use electronic signatures."
 msgstr "התעודה הוסרה. מסמכים ייחתמו בחתימה אלקטרונית."
 
-#: includes/Admin/Admin.php:957
+#: includes/Admin/Admin.php:962
 msgid "Certificate stored. New documents will be signed with PKI/PAdES."
 msgstr "התעודה נשמרה. מסמכים חדשים ייחתמו ב-PKI/PAdES."
 
@@ -333,14 +353,14 @@ msgstr "התעודה נשמרה. מסמכים חדשים ייחתמו ב-PKI/PAd
 msgid "Check"
 msgstr "בדיקה"
 
-#: includes/Admin/Admin.php:283
+#: includes/Admin/Admin.php:284
 #: includes/Admin/views/edit.php:103
 #: includes/Frontend/views/portal-edit.php:43
 #: includes/Frontend/views/portal-edit.php:172
 msgid "Checkbox"
 msgstr "תיבת סימון"
 
-#: includes/Admin/Admin.php:284
+#: includes/Admin/Admin.php:285
 #: includes/Frontend/views/portal-edit.php:44
 msgid "Choice"
 msgstr "בחירה"
@@ -369,7 +389,7 @@ msgstr "בחרו…"
 msgid "Clear"
 msgstr "ניקוי"
 
-#: includes/Admin/Admin.php:290
+#: includes/Admin/Admin.php:291
 #: includes/Frontend/views/portal-edit.php:50
 msgid "Click to toggle required"
 msgstr "לחצו כדי לסמן כשדה חובה"
@@ -378,10 +398,14 @@ msgstr "לחצו כדי לסמן כשדה חובה"
 msgid "Code"
 msgstr "קוד"
 
-#: includes/Admin/Admin.php:125
 #: includes/Admin/Admin.php:126
+#: includes/Admin/Admin.php:127
 msgid "ComSign"
 msgstr "ComSign"
+
+#: includes/Services/BillingService.php:59
+msgid "ComSign %1$s (%2$s)"
+msgstr "ComSign %1$s (%2$s)"
 
 #: includes/Admin/views/list.php:19
 msgid "ComSign Documents"
@@ -391,7 +415,7 @@ msgstr "מסמכי ComSign"
 msgid "ComSign Settings"
 msgstr "הגדרות ComSign"
 
-#: includes/Admin/Admin.php:1038
+#: includes/Admin/Admin.php:1062
 msgid "ComSign test email"
 msgstr "דוא“ל בדיקה מ-ComSign"
 
@@ -437,6 +461,10 @@ msgstr "יצירה מטקסט"
 msgid "Confirm decline"
 msgstr "אישור סירוב"
 
+#: includes/Admin/views/settings.php:154
+msgid "Connect your Cardcom terminal to charge subscriptions. The API password is stored encrypted."
+msgstr "חברו את מסוף הקארדקום שלכם לחיוב מנויים. סיסמת ה-API נשמרת מוצפנת."
+
 #: includes/Admin/views/health.php:58
 msgid "Connectivity tests"
 msgstr "בדיקות תקשורת"
@@ -471,11 +499,11 @@ msgstr "אנשי קשר אינם זמינים"
 msgid "Continue"
 msgstr "המשך"
 
-#: includes/Admin/Admin.php:233
+#: includes/Admin/Admin.php:234
 msgid "Copied!"
 msgstr "הועתק!"
 
-#: includes/Admin/Admin.php:234
+#: includes/Admin/Admin.php:235
 #: includes/Admin/views/edit.php:294
 msgid "Copy link"
 msgstr "העתקת קישור"
@@ -488,7 +516,7 @@ msgstr "לא ניתן להשלים את החתימה"
 msgid "Could not generate the document PDF."
 msgstr "לא ניתן היה להפיק את קובץ ה-PDF של המסמך."
 
-#: includes/Admin/Admin.php:292
+#: includes/Admin/Admin.php:293
 #: includes/Frontend/views/portal-edit.php:52
 msgid "Could not load the document preview."
 msgstr "לא ניתן לטעון את תצוגת המסמך."
@@ -496,6 +524,10 @@ msgstr "לא ניתן לטעון את תצוגת המסמך."
 #: includes/Frontend/SigningController.php:535
 msgid "Could not reassign"
 msgstr "לא ניתן היה להעביר"
+
+#: includes/Billing/CardcomGateway.php:98
+msgid "Could not start checkout."
+msgstr "לא ניתן היה להתחיל את התשלום."
 
 #: includes/Services/DocumentService.php:93
 msgid "Could not store the uploaded file."
@@ -537,7 +569,7 @@ msgstr "דנה כהן, dana@example.com, +972500000000\nאבי לוי, avi@examp
 msgid "Dashboard"
 msgstr "לוח בקרה"
 
-#: includes/Admin/Admin.php:278
+#: includes/Admin/Admin.php:279
 #: includes/Frontend/views/portal-edit.php:38
 msgid "Date"
 msgstr "תאריך"
@@ -616,19 +648,19 @@ msgstr "תוכן המסמך"
 msgid "Document created and sent for signing."
 msgstr "המסמך נוצר ונשלח לחתימה."
 
-#: includes/Admin/Admin.php:1156
+#: includes/Admin/Admin.php:1180
 msgid "Document created from template. Review and send."
 msgstr "מסמך נוצר מתבנית. בדקו ושלחו."
 
-#: includes/Admin/Admin.php:443
+#: includes/Admin/Admin.php:444
 msgid "Document created. Now add signers and place fields."
 msgstr "המסמך נוצר. כעת הוסיפו חותמים והניחו שדות."
 
-#: includes/Admin/Admin.php:869
+#: includes/Admin/Admin.php:870
 msgid "Document deleted."
 msgstr "המסמך נמחק."
 
-#: includes/Admin/Admin.php:858
+#: includes/Admin/Admin.php:859
 msgid "Document duplicated."
 msgstr "המסמך שוכפל."
 
@@ -680,12 +712,12 @@ msgstr "המסמך אינו זמין"
 msgid "Document unavailable."
 msgstr "המסמך אינו זמין."
 
-#: includes/Admin/Admin.php:415
+#: includes/Admin/Admin.php:416
 msgid "Document uploaded. Now add signers and place signature fields."
 msgstr "המסמך הועלה. כעת הוסיפו חותמים והניחו שדות חתימה."
 
-#: includes/Admin/Admin.php:136
 #: includes/Admin/Admin.php:137
+#: includes/Admin/Admin.php:138
 #: includes/Frontend/PortalController.php:817
 #: includes/Frontend/PortalController.php:915
 #: includes/Frontend/views/portal-documents.php:34
@@ -762,7 +794,7 @@ msgstr "עריכת מסמך"
 msgid "Electronic signature"
 msgstr "חתימה אלקטרונית"
 
-#: includes/Admin/Admin.php:280
+#: includes/Admin/Admin.php:281
 #: includes/Admin/views/members.php:38
 #: includes/Admin/views/members.php:85
 #: includes/Admin/views/members.php:114
@@ -806,7 +838,7 @@ msgstr "קוד חד-פעמי באימייל"
 msgid "Endpoint responded with HTTP %d."
 msgstr "היעד הגיב עם HTTP %d."
 
-#: includes/Admin/Admin.php:287
+#: includes/Admin/Admin.php:288
 #: includes/Frontend/views/portal-edit.php:47
 msgid "Enter options separated by commas:"
 msgstr "הזינו אפשרויות מופרדות בפסיקים:"
@@ -865,7 +897,7 @@ msgstr "הארכת מועד אחרון ב-"
 msgid "Field for:"
 msgstr "שדה עבור:"
 
-#: includes/Admin/Admin.php:288
+#: includes/Admin/Admin.php:289
 #: includes/Frontend/views/portal-edit.php:48
 msgid "Field label shown to the signer (optional):"
 msgstr "תווית השדה שתוצג לחותם (לא חובה):"
@@ -878,12 +910,12 @@ msgstr "שדה:"
 msgid "Fields saved."
 msgstr "השדות נשמרו."
 
-#: includes/Admin/Admin.php:285
+#: includes/Admin/Admin.php:286
 #: includes/Frontend/views/portal-edit.php:45
 msgid "File"
 msgstr "קובץ"
 
-#: includes/Admin/Admin.php:1260
+#: includes/Admin/Admin.php:1284
 #: includes/Frontend/PortalController.php:222
 #: includes/Frontend/PortalController.php:227
 msgid "File not available."
@@ -980,7 +1012,7 @@ msgstr "כתובת IP"
 msgid "Image support (GD)"
 msgstr "תמיכה בתמונות (GD)"
 
-#: includes/Admin/Admin.php:277
+#: includes/Admin/Admin.php:278
 #: includes/Admin/views/edit.php:97
 #: includes/Frontend/views/portal-edit.php:37
 #: includes/Frontend/views/portal-edit.php:166
@@ -1006,20 +1038,24 @@ msgstr "קישור לא תקין."
 msgid "Invalid or expired link"
 msgstr "קישור לא תקין או שפג תוקפו"
 
+#: includes/Services/BillingService.php:47
+msgid "Invalid plan."
+msgstr "מסלול לא תקין."
+
 #: includes/Services/DocumentService.php:436
 msgid "Invalid upload."
 msgstr "העלאה לא תקינה."
 
-#: includes/Admin/Admin.php:668
+#: includes/Admin/Admin.php:669
 msgid "Invitation cancelled."
 msgstr "ההזמנה בוטלה."
 
-#: includes/Admin/Admin.php:519
+#: includes/Admin/Admin.php:520
 #: includes/Frontend/PortalController.php:207
 msgid "Invitation re-sent."
 msgstr "ההזמנה נשלחה מחדש."
 
-#: includes/Admin/Admin.php:609
+#: includes/Admin/Admin.php:610
 msgid "Invitation saved. The user will join when they sign in with this email."
 msgstr "ההזמנה נשמרה. המשתמש יצטרף כשיתחבר עם אימייל זה."
 
@@ -1039,6 +1075,10 @@ msgstr "עדיין לא הגיע תורך לחתום."
 msgid "Last activity"
 msgstr "פעילות אחרונה"
 
+#: includes/Admin/views/settings.php:171
+msgid "Leave blank to keep the current password."
+msgstr "השאירו ריק כדי לשמור את הסיסמה הנוכחית."
+
 #: includes/Frontend/SigningController.php:119
 #: includes/Frontend/SigningController.php:442
 msgid "Link expired"
@@ -1049,7 +1089,7 @@ msgstr "הקישור פג תוקף"
 msgid "Link expires after"
 msgstr "הקישור פג תוקף לאחר"
 
-#: includes/Admin/Admin.php:291
+#: includes/Admin/Admin.php:292
 #: includes/Frontend/views/portal-edit.php:51
 msgid "Loading document…"
 msgstr "טוען מסמך…"
@@ -1066,16 +1106,16 @@ msgstr "ניהול"
 msgid "Member"
 msgstr "חבר"
 
-#: includes/Admin/Admin.php:608
+#: includes/Admin/Admin.php:609
 msgid "Member added."
 msgstr "החבר נוסף."
 
-#: includes/Admin/Admin.php:652
+#: includes/Admin/Admin.php:653
 msgid "Member removed."
 msgstr "החבר הוסר."
 
-#: includes/Admin/Admin.php:172
 #: includes/Admin/Admin.php:173
+#: includes/Admin/Admin.php:174
 msgid "Members"
 msgstr "חברים"
 
@@ -1083,6 +1123,10 @@ msgstr "חברים"
 #: includes/Admin/views/template-bulk.php:32
 msgid "Message to signers (optional)"
 msgstr "הודעה לחותמים (אופציונלי)"
+
+#: includes/Billing/CardcomGateway.php:37
+msgid "Missing transaction reference."
+msgstr "חסר מזהה עסקה."
 
 #: includes/Frontend/views/sign.php:132
 msgid "More information"
@@ -1092,7 +1136,7 @@ msgstr "מידע נוסף"
 msgid "My electronic signature is legally binding and has the same effect as a handwritten signature. The time, my IP address and browser are recorded as proof of signing."
 msgstr "החתימה המקוונת שלי מחייבת מבחינה משפטית ובעלת תוקף זהה לחתימה ידנית. מועד החתימה, כתובת ה-IP והדפדפן שלי נרשמים כהוכחה לחתימה."
 
-#: includes/Admin/Admin.php:279
+#: includes/Admin/Admin.php:280
 #: includes/Frontend/views/portal-contacts.php:68
 #: includes/Frontend/views/portal-document.php:86
 #: includes/Frontend/views/portal-edit.php:39
@@ -1139,7 +1183,7 @@ msgstr "אין עדיין מסמכים."
 msgid "No documents yet. Upload your first PDF to get started."
 msgstr "אין עדיין מסמכים. העלו את קובץ ה-PDF הראשון כדי להתחיל."
 
-#: includes/Admin/Admin.php:827
+#: includes/Admin/Admin.php:828
 msgid "No emails were sent because the signer(s) have no email. Use \"Get signing link\" to share their link."
 msgstr "לא נשלחו מיילים כי לחותם/ים אין כתובת אימייל. השתמשו ב\"קבלת קישור לחתימה\" לשיתוף הקישור."
 
@@ -1205,7 +1249,7 @@ msgstr "לא נמצא"
 msgid "Nothing stuck — every document is moving."
 msgstr "שום דבר לא תקוע — כל המסמכים מתקדמים."
 
-#: includes/Admin/Admin.php:282
+#: includes/Admin/Admin.php:283
 #: includes/Admin/views/edit.php:102
 #: includes/Database/FieldRepository.php:168
 #: includes/Frontend/views/portal-edit.php:42
@@ -1347,11 +1391,11 @@ msgstr "הנחת שדות חתימה"
 msgid "Please add a title or some content for the document."
 msgstr "אנא הוסיפו כותרת או תוכן כלשהו למסמך."
 
-#: includes/Admin/Admin.php:938
+#: includes/Admin/Admin.php:943
 msgid "Please choose a .p12/.pfx certificate file."
 msgstr "אנא בחרו קובץ תעודה .p12/.pfx."
 
-#: includes/Admin/Admin.php:403
+#: includes/Admin/Admin.php:404
 #: includes/Frontend/PortalController.php:254
 msgid "Please choose a PDF to upload."
 msgstr "אנא בחרו קובץ PDF להעלאה."
@@ -1384,7 +1428,7 @@ msgstr "אנא הזינו שם או אימייל לחותם."
 msgid "Please provide a recipient for every role that has fields."
 msgstr "אנא ספקו נמען לכל תפקיד שיש לו שדות."
 
-#: includes/Admin/Admin.php:683
+#: includes/Admin/Admin.php:684
 msgid "Please provide a sub-workspace name."
 msgstr "נא לספק שם לסביבת העבודה המשנה."
 
@@ -1497,7 +1541,7 @@ msgstr "תזכורת: מסמך ממתין לחתימתך — %s"
 msgid "Reminders run once a day via WP-Cron. Each reminder issues a fresh signing link."
 msgstr "התזכורות רצות פעם ביום דרך WP-Cron. כל תזכורת מנפיקה קישור חתימה חדש."
 
-#: includes/Admin/Admin.php:286
+#: includes/Admin/Admin.php:287
 #: includes/Admin/views/edit.php:261
 #: includes/Admin/views/members.php:73
 #: includes/Frontend/views/portal-contacts.php:85
@@ -1559,7 +1603,7 @@ msgstr "תפקיד"
 msgid "Role %d"
 msgstr "תפקיד %d"
 
-#: includes/Admin/Admin.php:629
+#: includes/Admin/Admin.php:630
 msgid "Role updated."
 msgstr "התפקיד עודכן."
 
@@ -1595,6 +1639,10 @@ msgstr "שמירה כטיוטה"
 #: includes/Admin/views/edit.php:401
 msgid "Save as template"
 msgstr "שמירה כתבנית"
+
+#: includes/Admin/views/settings.php:186
+msgid "Save billing settings"
+msgstr "שמירת הגדרות חיוב"
 
 #: includes/Frontend/views/portal-contacts.php:44
 msgid "Save contact"
@@ -1692,11 +1740,11 @@ msgstr "שולח"
 msgid "Sent"
 msgstr "נשלח"
 
-#: includes/Admin/Admin.php:831
+#: includes/Admin/Admin.php:832
 msgid "Sent %1$d invitation(s). %2$d signer(s) have no email — share their link manually."
 msgstr "נשלחו %1$d הזמנות. ל-%2$d חותם/ים אין אימייל — שתפו את הקישור ידנית."
 
-#: includes/Admin/Admin.php:838
+#: includes/Admin/Admin.php:839
 msgid "Sent %d invitation(s)."
 msgstr "נשלחו %d הזמנות."
 
@@ -1709,12 +1757,16 @@ msgstr "נשלח על-ידי %s"
 msgid "Sent for signing"
 msgstr "נשלח לחתימה"
 
-#: includes/Admin/Admin.php:181
+#: includes/Admin/views/settings.php:182
+msgid "Set this as the indicator/webhook URL in your Cardcom terminal."
+msgstr "הגדירו כתובת זו כ-webhook/אינדיקטור במסוף הקארדקום שלכם."
+
 #: includes/Admin/Admin.php:182
+#: includes/Admin/Admin.php:183
 msgid "Settings"
 msgstr "הגדרות"
 
-#: includes/Admin/Admin.php:1007
+#: includes/Admin/Admin.php:1031
 msgid "Settings saved."
 msgstr "ההגדרות נשמרו."
 
@@ -1722,7 +1774,7 @@ msgstr "ההגדרות נשמרו."
 msgid "Share via WhatsApp"
 msgstr "שיתוף בוואטסאפ"
 
-#: includes/Admin/Admin.php:289
+#: includes/Admin/Admin.php:290
 #: includes/Frontend/views/portal-edit.php:49
 msgid "Short help text under the field (optional):"
 msgstr "טקסט עזר קצר מתחת לשדה (לא חובה):"
@@ -1752,7 +1804,7 @@ msgstr "חתימה במקום"
 msgid "Sign: %s"
 msgstr "חתימה: %s"
 
-#: includes/Admin/Admin.php:276
+#: includes/Admin/Admin.php:277
 #: includes/Admin/views/edit.php:96
 #: includes/Frontend/views/portal-edit.php:36
 #: includes/Frontend/views/portal-edit.php:165
@@ -1763,7 +1815,7 @@ msgstr "חתימה"
 msgid "Signature Certificate"
 msgstr "תעודת חתימה"
 
-#: includes/Admin/Admin.php:787
+#: includes/Admin/Admin.php:788
 msgid "Signature fields saved."
 msgstr "שדות החתימה נשמרו."
 
@@ -1807,7 +1859,7 @@ msgstr "נחתם בהצלחה"
 msgid "Signer %d"
 msgstr "חותם %d"
 
-#: includes/Admin/Admin.php:464
+#: includes/Admin/Admin.php:465
 #: includes/Frontend/PortalController.php:313
 msgid "Signer added."
 msgstr "החותם נוסף."
@@ -1817,12 +1869,12 @@ msgstr "החותם נוסף."
 msgid "Signer not found."
 msgstr "החותם לא נמצא."
 
-#: includes/Admin/Admin.php:503
+#: includes/Admin/Admin.php:504
 #: includes/Frontend/PortalController.php:334
 msgid "Signer removed."
 msgstr "החותם הוסר."
 
-#: includes/Admin/Admin.php:492
+#: includes/Admin/Admin.php:493
 msgid "Signer verification updated."
 msgstr "אימות החותם עודכן."
 
@@ -1837,7 +1889,7 @@ msgstr "חותמים"
 msgid "Signers: %d"
 msgstr "חותמים: %d"
 
-#: includes/Admin/Admin.php:708
+#: includes/Admin/Admin.php:709
 msgid "Signing deadline extended."
 msgstr "מועד החתימה האחרון הוארך."
 
@@ -1879,7 +1931,7 @@ msgstr "סטטוס:"
 msgid "Storage is writable but the .htaccess guard is missing. On nginx, add a deny rule for the comsign uploads directory."
 msgstr "האחסון ניתן לכתיבה אך חסר קובץ .htaccess להגנה. ב-nginx, הוסיפו כלל deny לתיקיית ההעלאות של comsign."
 
-#: includes/Admin/Admin.php:689
+#: includes/Admin/Admin.php:690
 msgid "Sub-workspace created."
 msgstr "סביבת עבודה משנה נוצרה."
 
@@ -1892,8 +1944,8 @@ msgstr "שם סביבת עבודה משנה"
 msgid "Switch"
 msgstr "החלפה"
 
-#: includes/Admin/Admin.php:190
 #: includes/Admin/Admin.php:191
+#: includes/Admin/Admin.php:192
 #: includes/Admin/views/health.php:28
 msgid "System Status"
 msgstr "סטטוס מערכת"
@@ -1902,7 +1954,7 @@ msgstr "סטטוס מערכת"
 msgid "Template"
 msgstr "תבנית"
 
-#: includes/Admin/Admin.php:1196
+#: includes/Admin/Admin.php:1220
 msgid "Template deleted."
 msgstr "התבנית נמחקה."
 
@@ -1914,27 +1966,35 @@ msgstr "תבנית חסרה."
 msgid "Template name"
 msgstr "שם התבנית"
 
-#: includes/Admin/Admin.php:1101
+#: includes/Admin/Admin.php:1125
 #: includes/Services/DocumentService.php:790
 #: includes/Services/DocumentService.php:908
 msgid "Template not found."
 msgstr "התבנית לא נמצאה."
 
-#: includes/Admin/Admin.php:1140
+#: includes/Admin/Admin.php:1164
 msgid "Template saved."
 msgstr "התבנית נשמרה."
 
-#: includes/Admin/Admin.php:163
 #: includes/Admin/Admin.php:164
+#: includes/Admin/Admin.php:165
 #: includes/Admin/views/templates.php:18
 msgid "Templates"
 msgstr "תבניות"
 
-#: includes/Admin/Admin.php:1045
+#: includes/Admin/views/settings.php:160
+msgid "Terminal number"
+msgstr "מספר מסוף"
+
+#: includes/Admin/Admin.php:1069
 msgid "Test email sent to %s."
 msgstr "דוא“ל בדיקה נשלח אל %s."
 
-#: includes/Admin/Admin.php:281
+#: includes/Admin/views/settings.php:175
+msgid "Test mode"
+msgstr "מצב בדיקה"
+
+#: includes/Admin/Admin.php:282
 #: includes/Admin/views/edit.php:101
 #: includes/Frontend/views/portal-edit.php:41
 #: includes/Frontend/views/portal-edit.php:170
@@ -1965,11 +2025,11 @@ msgstr "לא ניתן היה לקרוא את התעודה. בדקו את הקו�
 msgid "The certificate file is missing or too large (max 512 KB)."
 msgstr "קובץ התעודה חסר או גדול מדי (מקסימום 512 ק\"ב)."
 
-#: includes/Admin/Admin.php:948
+#: includes/Admin/Admin.php:953
 msgid "The certificate file is too large (max 512 KB)."
 msgstr "קובץ התעודה גדול מדי (מקסימום 512 ק\"ב)."
 
-#: includes/Admin/Admin.php:944
+#: includes/Admin/Admin.php:949
 msgid "The certificate must be a .p12 or .pfx file."
 msgstr "התעודה חייבת להיות קובץ ‎.p12‎ או ‎.pfx‎."
 
@@ -2075,7 +2135,7 @@ msgstr "מסמך זה נחתם לפי סדר. תקבלו הודעה כשיגיע
 msgid "This field is required."
 msgstr "שדה זה הוא חובה."
 
-#: includes/Admin/Admin.php:1039
+#: includes/Admin/Admin.php:1063
 msgid "This is a test email from ComSign. If you received it, outgoing mail works on this server."
 msgstr "זהו דוא“ל בדיקה מ-ComSign. אם קיבלתם אותו, שליחת הדואר היוצא עובדת בשרת זה."
 
@@ -2122,11 +2182,11 @@ msgstr "ציר זמן"
 msgid "Timestamp authority (TSA) URL"
 msgstr "כתובת רשות חותמות הזמן (TSA)"
 
-#: includes/Admin/Admin.php:984
+#: includes/Admin/Admin.php:989
 msgid "Timestamp authority cleared."
 msgstr "רשות חותמות הזמן נוקתה."
 
-#: includes/Admin/Admin.php:983
+#: includes/Admin/Admin.php:988
 msgid "Timestamp authority saved. New signatures will include a trusted timestamp."
 msgstr "רשות חותמות הזמן נשמרה. חתימות חדשות יכללו חותמת זמן מהימנה."
 
@@ -2160,6 +2220,10 @@ msgstr "הקלדה"
 #: includes/Frontend/views/sign.php:59
 msgid "Type your full name"
 msgstr "הקלידו את שמכם המלא"
+
+#: includes/Billing/CardcomGateway.php:176
+msgid "Unexpected gateway response."
+msgstr "תגובה לא צפויה משער התשלום."
 
 #: includes/Services/DocumentService.php:124
 msgid "Untitled document"
@@ -2201,6 +2265,10 @@ msgstr "העלאת תעודה"
 #: includes/Admin/views/templates.php:51
 msgid "Use"
 msgstr "שימוש"
+
+#: includes/Admin/views/settings.php:176
+msgid "Use a test terminal"
+msgstr "השתמשו במסוף בדיקה"
 
 #: includes/Admin/views/new.php:63
 msgid "Use placeholders like {{name}} or {{date}} to insert variables."
@@ -2285,6 +2353,7 @@ msgid "We will email the document to the person you choose, and your access to t
 msgstr "נשלח את המסמך באימייל לאדם שתבחרו, והגישה שלכם לקישור הזה תסתיים."
 
 #: includes/Admin/views/settings.php:84
+#: includes/Admin/views/settings.php:179
 msgid "Webhook URL"
 msgstr "כתובת Webhook"
 
@@ -2306,7 +2375,7 @@ msgstr "סביבת עבודה"
 msgid "Workspace members"
 msgstr "חברי סביבת העבודה"
 
-#: includes/Admin/Admin.php:532
+#: includes/Admin/Admin.php:533
 msgid "Workspace switched."
 msgstr "סביבת העבודה הוחלפה."
 
@@ -2327,7 +2396,7 @@ msgstr "כתבו את הטקסט הקבוע של המסמך. לאחר היציר
 msgid "X-ComSign-Key"
 msgstr "X-ComSign-Key"
 
-#: includes/Admin/Admin.php:1316
+#: includes/Admin/Admin.php:1340
 msgid "You are not allowed to access this page."
 msgstr "אינך מורשה לגשת לעמוד זה."
 
@@ -2352,11 +2421,11 @@ msgstr "אינכם יכולים לערוך מסמך זה."
 msgid "You cannot manage contacts in this workspace."
 msgstr "אינכם יכולים לנהל אנשי קשר במרחב העבודה הזה."
 
-#: includes/Admin/Admin.php:545
+#: includes/Admin/Admin.php:546
 msgid "You cannot manage members of this workspace."
 msgstr "אינך יכול לנהל את חברי סביבת עבודה זו."
 
-#: includes/Admin/Admin.php:648
+#: includes/Admin/Admin.php:649
 msgid "You cannot remove the last owner of a workspace."
 msgstr "לא ניתן להסיר את הבעלים האחרון של סביבת עבודה."
 
@@ -2449,6 +2518,10 @@ msgstr "קוד האימות שלכם הוא: %1$s\n\nהוא יפוג בעוד %2
 msgid "Your workspace"
 msgstr "סביבת העבודה שלך"
 
+#: includes/Services/BillingService.php:61
+msgid "annual"
+msgstr "שנתי"
+
 #: includes/Admin/views/new.php:83
 msgid "customer_name = Dana Cohen\ncontract_no = 2026-0042"
 msgstr "customer_name = דנה כהן\ncontract_no = 2026-0042"
@@ -2472,7 +2545,15 @@ msgstr "לדוגמה: הסכם שירות"
 msgid "email@example.com"
 msgstr "email@example.com"
 
-#: includes/Admin/Admin.php:1047
+#: includes/Services/BillingService.php:61
+msgid "monthly"
+msgstr "חודשי"
+
+#: includes/Admin/Admin.php:1071
 msgid "wp_mail() reported a failure. Check your mail configuration (e.g. an SMTP plugin)."
 msgstr "הפונקציה wp_mail() דיווחה על כשל. בדקו את הגדרות הדואר (למשל תוסף SMTP)."
+
+#: includes/Admin/views/settings.php:170
+msgid "•••••••• (unchanged)"
+msgstr "•••••••• (ללא שינוי)"
 

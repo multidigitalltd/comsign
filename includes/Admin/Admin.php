@@ -110,6 +110,7 @@ final class Admin {
 		add_action( 'admin_post_comsign_upload_certificate', array( $this, 'handle_upload_certificate' ) );
 		add_action( 'admin_post_comsign_remove_certificate', array( $this, 'handle_remove_certificate' ) );
 		add_action( 'admin_post_comsign_save_tsa', array( $this, 'handle_save_tsa' ) );
+		add_action( 'admin_post_comsign_save_cardcom', array( $this, 'handle_save_cardcom' ) );
 		add_action( 'admin_post_comsign_save_template', array( $this, 'handle_save_template' ) );
 		add_action( 'admin_post_comsign_use_template', array( $this, 'handle_use_template' ) );
 		add_action( 'admin_post_comsign_bulk_template', array( $this, 'handle_bulk_template' ) );
@@ -912,6 +913,10 @@ final class Admin {
 				'cert_nonce'    => wp_create_nonce( 'comsign_upload_certificate' ),
 				'remove_nonce'  => wp_create_nonce( 'comsign_remove_certificate' ),
 				'tsa_nonce'     => wp_create_nonce( 'comsign_save_tsa' ),
+				'cardcom_nonce' => wp_create_nonce( 'comsign_save_cardcom' ),
+				'cardcom'       => \ComSign\Billing\CardcomSettings::all(),
+				'cardcom_set'   => \ComSign\Billing\CardcomSettings::is_configured(),
+				'cardcom_webhook' => \ComSign\Frontend\BillingController::webhook_url(),
 				'settings'      => Settings::all(),
 				'pki_available' => \ComSign\Signature\Certificate::openssl_available(),
 				'pki_subject'   => \ComSign\Signature\Certificate::is_configured() ? \ComSign\Signature\Certificate::subject() : '',
@@ -983,6 +988,25 @@ final class Admin {
 			? __( 'Timestamp authority saved. New signatures will include a trusted timestamp.', 'comsign' )
 			: __( 'Timestamp authority cleared.', 'comsign' );
 		$this->redirect_with_notice( admin_url( 'admin.php?page=comsign-settings' ), 'success', $message );
+	}
+
+	/**
+	 * Save the Cardcom billing credentials.
+	 */
+	public function handle_save_cardcom(): void {
+		$this->guard();
+		check_admin_referer( 'comsign_save_cardcom' );
+
+		\ComSign\Billing\CardcomSettings::save(
+			array(
+				'terminal'     => isset( $_POST['terminal'] ) ? absint( wp_unslash( $_POST['terminal'] ) ) : 0,
+				'api_name'     => isset( $_POST['api_name'] ) ? sanitize_text_field( wp_unslash( $_POST['api_name'] ) ) : '',
+				'api_password' => isset( $_POST['api_password'] ) ? (string) wp_unslash( $_POST['api_password'] ) : '', // phpcs:ignore WordPress.Security.ValidatedSanitizedInput.InputNotSanitized -- stored encrypted, not echoed.
+				'test_mode'    => ! empty( $_POST['test_mode'] ),
+			)
+		);
+
+		$this->redirect_with_notice( admin_url( 'admin.php?page=comsign-settings' ), 'success', __( 'Billing settings saved.', 'comsign' ) );
 	}
 
 	/**

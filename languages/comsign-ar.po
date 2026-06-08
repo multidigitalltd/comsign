@@ -53,6 +53,12 @@ msgstr "تنتمي مساحة العمل الفرعية إلى هذه المسا
 msgid "A webhook URL is configured. Use “Send test webhook” below to confirm it is reachable."
 msgstr "تم إعداد عنوان webhook. استخدم «إرسال webhook تجريبي» أدناه للتأكد من إمكانية الوصول إليه."
 
+msgid "API name"
+msgstr "اسم API"
+
+msgid "API password"
+msgstr "كلمة مرور API"
+
 msgid "Accent colour"
 msgstr "لون التمييز"
 
@@ -170,6 +176,12 @@ msgstr "العودة إلى القائمة"
 msgid "Before you can send:"
 msgstr "قبل أن تتمكن من الإرسال:"
 
+msgid "Billing (Cardcom)"
+msgstr "الفوترة (Cardcom)"
+
+msgid "Billing settings saved."
+msgstr "تم حفظ إعدادات الفوترة."
+
 msgid "Brand name"
 msgstr "اسم العلامة التجارية"
 
@@ -202,6 +214,9 @@ msgstr "تم حفظ مستلمي النسخة."
 
 msgid "Cancel"
 msgstr "إلغاء"
+
+msgid "Cardcom is not configured."
+msgstr "Cardcom غير مُعدّ."
 
 msgid "Certificate password"
 msgstr "كلمة مرور الشهادة"
@@ -245,6 +260,9 @@ msgstr "الرمز"
 msgid "ComSign"
 msgstr "ComSign"
 
+msgid "ComSign %1$s (%2$s)"
+msgstr "ComSign %1$s (%2$s)"
+
 msgid "ComSign Documents"
 msgstr "مستندات ComSign"
 
@@ -283,6 +301,9 @@ msgstr "إنشاء من نص"
 
 msgid "Confirm decline"
 msgstr "تأكيد الرفض"
+
+msgid "Connect your Cardcom terminal to charge subscriptions. The API password is stored encrypted."
+msgstr "اربط محطة Cardcom الخاصة بك لتحصيل الاشتراكات. تُخزَّن كلمة مرور API مشفّرة."
 
 msgid "Connectivity tests"
 msgstr "اختبارات الاتصال"
@@ -325,6 +346,9 @@ msgstr "تعذّر تحميل معاينة المستند."
 
 msgid "Could not reassign"
 msgstr "تعذّرت الإحالة"
+
+msgid "Could not start checkout."
+msgstr "تعذّر بدء الدفع."
 
 msgid "Could not store the uploaded file."
 msgstr "تعذّر حفظ الملف المرفوع."
@@ -656,6 +680,9 @@ msgstr "رابط غير صالح."
 msgid "Invalid or expired link"
 msgstr "رابط غير صالح أو منتهٍ"
 
+msgid "Invalid plan."
+msgstr "باقة غير صالحة."
+
 msgid "Invalid upload."
 msgstr "رفع غير صالح."
 
@@ -679,6 +706,9 @@ msgstr "لم يحن دورك للتوقيع بعد."
 
 msgid "Last activity"
 msgstr "آخر نشاط"
+
+msgid "Leave blank to keep the current password."
+msgstr "اتركه فارغًا للإبقاء على كلمة المرور الحالية."
 
 msgid "Link expired"
 msgstr "انتهت صلاحية الرابط"
@@ -709,6 +739,9 @@ msgstr "الأعضاء"
 
 msgid "Message to signers (optional)"
 msgstr "رسالة إلى الموقّعين (اختياري)"
+
+msgid "Missing transaction reference."
+msgstr "مرجع المعاملة مفقود."
 
 msgid "More information"
 msgstr "مزيد من المعلومات"
@@ -1064,6 +1097,9 @@ msgstr "حفظ كمسودة"
 msgid "Save as template"
 msgstr "حفظ كقالب"
 
+msgid "Save billing settings"
+msgstr "حفظ إعدادات الفوترة"
+
 msgid "Save contact"
 msgstr "حفظ جهة الاتصال"
 
@@ -1141,6 +1177,9 @@ msgstr "أُرسل بواسطة %s"
 
 msgid "Sent for signing"
 msgstr "أُرسل للتوقيع"
+
+msgid "Set this as the indicator/webhook URL in your Cardcom terminal."
+msgstr "اضبط هذا كعنوان webhook/مؤشر في محطة Cardcom الخاصة بك."
 
 msgid "Settings"
 msgstr "الإعدادات"
@@ -1286,8 +1325,14 @@ msgstr "تم حفظ القالب."
 msgid "Templates"
 msgstr "القوالب"
 
+msgid "Terminal number"
+msgstr "رقم المحطة"
+
 msgid "Test email sent to %s."
 msgstr "تم إرسال بريد تجريبي إلى %s."
+
+msgid "Test mode"
+msgstr "وضع الاختبار"
 
 msgid "Text"
 msgstr "نص"
@@ -1451,6 +1496,9 @@ msgstr "النوع"
 msgid "Type your full name"
 msgstr "اكتب اسمك الكامل"
 
+msgid "Unexpected gateway response."
+msgstr "استجابة غير متوقعة من بوابة الدفع."
+
 msgid "Untitled document"
 msgstr "مستند بدون عنوان"
 
@@ -1480,6 +1528,9 @@ msgstr "رفع شهادة"
 
 msgid "Use"
 msgstr "استخدام"
+
+msgid "Use a test terminal"
+msgstr "استخدام محطة اختبار"
 
 msgid "Use placeholders like {{name}} or {{date}} to insert variables."
 msgstr "استخدم عناصر نائبة مثل {{name}} أو {{date}} لإدراج المتغيرات."
@@ -1658,6 +1709,9 @@ msgstr "رمز التحقق الخاص بك هو: %1$s\\n\\nتنتهي صلاح�
 msgid "Your workspace"
 msgstr "مساحة عملك"
 
+msgid "annual"
+msgstr "سنوي"
+
 msgid "customer_name = Dana Cohen\\ncontract_no = 2026-0042"
 msgstr "customer_name = Dana Cohen\\ncontract_no = 2026-0042"
 
@@ -1673,6 +1727,12 @@ msgstr "مثال: اتفاقية خدمة"
 msgid "email@example.com"
 msgstr "email@example.com"
 
+msgid "monthly"
+msgstr "شهري"
+
 msgid "wp_mail() reported a failure. Check your mail configuration (e.g. an SMTP plugin)."
 msgstr "أبلغت wp_mail() عن فشل. تحقق من إعدادات البريد لديك (مثل إضافة SMTP)."
+
+msgid "•••••••• (unchanged)"
+msgstr "•••••••• (دون تغيير)"
 

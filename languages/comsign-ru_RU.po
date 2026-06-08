@@ -53,6 +53,12 @@ msgstr "Под-пространство относится к этому; мен
 msgid "A webhook URL is configured. Use “Send test webhook” below to confirm it is reachable."
 msgstr "URL webhook настроен. Нажмите «Отправить тестовый webhook» ниже, чтобы проверить доступность."
 
+msgid "API name"
+msgstr "Имя API"
+
+msgid "API password"
+msgstr "Пароль API"
+
 msgid "Accent colour"
 msgstr "Акцентный цвет"
 
@@ -170,6 +176,12 @@ msgstr "Назад к списку"
 msgid "Before you can send:"
 msgstr "Прежде чем отправить:"
 
+msgid "Billing (Cardcom)"
+msgstr "Оплата (Cardcom)"
+
+msgid "Billing settings saved."
+msgstr "Настройки оплаты сохранены."
+
 msgid "Brand name"
 msgstr "Название бренда"
 
@@ -202,6 +214,9 @@ msgstr "Получатели копии сохранены."
 
 msgid "Cancel"
 msgstr "Отмена"
+
+msgid "Cardcom is not configured."
+msgstr "Cardcom не настроен."
 
 msgid "Certificate password"
 msgstr "Пароль сертификата"
@@ -245,6 +260,9 @@ msgstr "Код"
 msgid "ComSign"
 msgstr "ComSign"
 
+msgid "ComSign %1$s (%2$s)"
+msgstr "ComSign %1$s (%2$s)"
+
 msgid "ComSign Documents"
 msgstr "Документы ComSign"
 
@@ -283,6 +301,9 @@ msgstr "Создать из текста"
 
 msgid "Confirm decline"
 msgstr "Подтвердить отказ"
+
+msgid "Connect your Cardcom terminal to charge subscriptions. The API password is stored encrypted."
+msgstr "Подключите терминал Cardcom для оплаты подписок. Пароль API хранится в зашифрованном виде."
 
 msgid "Connectivity tests"
 msgstr "Тесты подключения"
@@ -325,6 +346,9 @@ msgstr "Не удалось загрузить предпросмотр доку
 
 msgid "Could not reassign"
 msgstr "Не удалось передать"
+
+msgid "Could not start checkout."
+msgstr "Не удалось начать оплату."
 
 msgid "Could not store the uploaded file."
 msgstr "Не удалось сохранить загруженный файл."
@@ -656,6 +680,9 @@ msgstr "Недействительная ссылка."
 msgid "Invalid or expired link"
 msgstr "Недействительная или истёкшая ссылка"
 
+msgid "Invalid plan."
+msgstr "Недопустимый тариф."
+
 msgid "Invalid upload."
 msgstr "Недопустимая загрузка."
 
@@ -679,6 +706,9 @@ msgstr "Сейчас не ваша очередь подписывать."
 
 msgid "Last activity"
 msgstr "Последняя активность"
+
+msgid "Leave blank to keep the current password."
+msgstr "Оставьте пустым, чтобы сохранить текущий пароль."
 
 msgid "Link expired"
 msgstr "Ссылка истекла"
@@ -709,6 +739,9 @@ msgstr "Участники"
 
 msgid "Message to signers (optional)"
 msgstr "Сообщение подписантам (необязательно)"
+
+msgid "Missing transaction reference."
+msgstr "Отсутствует идентификатор транзакции."
 
 msgid "More information"
 msgstr "Подробнее"
@@ -1064,6 +1097,9 @@ msgstr "Сохранить как черновик"
 msgid "Save as template"
 msgstr "Сохранить как шаблон"
 
+msgid "Save billing settings"
+msgstr "Сохранить настройки оплаты"
+
 msgid "Save contact"
 msgstr "Сохранить контакт"
 
@@ -1141,6 +1177,9 @@ msgstr "Отправлено через %s"
 
 msgid "Sent for signing"
 msgstr "Отправлено на подписание"
+
+msgid "Set this as the indicator/webhook URL in your Cardcom terminal."
+msgstr "Укажите это как URL webhook/индикатора в вашем терминале Cardcom."
 
 msgid "Settings"
 msgstr "Настройки"
@@ -1286,8 +1325,14 @@ msgstr "Шаблон сохранён."
 msgid "Templates"
 msgstr "Шаблоны"
 
+msgid "Terminal number"
+msgstr "Номер терминала"
+
 msgid "Test email sent to %s."
 msgstr "Тестовое письмо отправлено на %s."
+
+msgid "Test mode"
+msgstr "Тестовый режим"
 
 msgid "Text"
 msgstr "Текст"
@@ -1451,6 +1496,9 @@ msgstr "Тип"
 msgid "Type your full name"
 msgstr "Введите ваше полное имя"
 
+msgid "Unexpected gateway response."
+msgstr "Неожиданный ответ платёжного шлюза."
+
 msgid "Untitled document"
 msgstr "Документ без названия"
 
@@ -1480,6 +1528,9 @@ msgstr "Загрузить сертификат"
 
 msgid "Use"
 msgstr "Использовать"
+
+msgid "Use a test terminal"
+msgstr "Использовать тестовый терминал"
 
 msgid "Use placeholders like {{name}} or {{date}} to insert variables."
 msgstr "Используйте подстановки вроде {{name}} или {{date}} для вставки переменных."
@@ -1658,6 +1709,9 @@ msgstr "Ваш код проверки: %1$s\\n\\nОн истекает чере
 msgid "Your workspace"
 msgstr "Ваше рабочее пространство"
 
+msgid "annual"
+msgstr "годовой"
+
 msgid "customer_name = Dana Cohen\\ncontract_no = 2026-0042"
 msgstr "customer_name = Dana Cohen\\ncontract_no = 2026-0042"
 
@@ -1673,6 +1727,12 @@ msgstr "напр. Договор оказания услуг"
 msgid "email@example.com"
 msgstr "email@example.com"
 
+msgid "monthly"
+msgstr "месячный"
+
 msgid "wp_mail() reported a failure. Check your mail configuration (e.g. an SMTP plugin)."
 msgstr "wp_mail() сообщила об ошибке. Проверьте настройки почты (например, плагин SMTP)."
+
+msgid "•••••••• (unchanged)"
+msgstr "•••••••• (без изменений)"
 

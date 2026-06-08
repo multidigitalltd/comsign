@@ -148,4 +148,42 @@ defined( 'ABSPATH' ) || exit;
 			</form>
 		<?php endif; ?>
 	</div>
+
+	<div class="comsign-card">
+		<h2><?php esc_html_e( 'Billing (Cardcom)', 'comsign' ); ?></h2>
+		<p class="description"><?php esc_html_e( 'Connect your Cardcom terminal to charge subscriptions. The API password is stored encrypted.', 'comsign' ); ?></p>
+		<form method="post" action="<?php echo esc_url( $action_url ); ?>">
+			<input type="hidden" name="action" value="comsign_save_cardcom">
+			<input type="hidden" name="_wpnonce" value="<?php echo esc_attr( $cardcom_nonce ); ?>">
+			<table class="form-table" role="presentation">
+				<tr>
+					<th scope="row"><label for="comsign-cc-terminal"><?php esc_html_e( 'Terminal number', 'comsign' ); ?></label></th>
+					<td><input type="number" id="comsign-cc-terminal" name="terminal" value="<?php echo esc_attr( (string) $cardcom['terminal'] ); ?>" class="regular-text"></td>
+				</tr>
+				<tr>
+					<th scope="row"><label for="comsign-cc-apiname"><?php esc_html_e( 'API name', 'comsign' ); ?></label></th>
+					<td><input type="text" id="comsign-cc-apiname" name="api_name" value="<?php echo esc_attr( $cardcom['api_name'] ); ?>" class="regular-text" autocomplete="off"></td>
+				</tr>
+				<tr>
+					<th scope="row"><label for="comsign-cc-apipass"><?php esc_html_e( 'API password', 'comsign' ); ?></label></th>
+					<td>
+						<input type="password" id="comsign-cc-apipass" name="api_password" class="regular-text" autocomplete="new-password" placeholder="<?php echo $cardcom_set ? esc_attr__( '•••••••• (unchanged)', 'comsign' ) : ''; ?>">
+						<p class="description"><?php esc_html_e( 'Leave blank to keep the current password.', 'comsign' ); ?></p>
+					</td>
+				</tr>
+				<tr>
+					<th scope="row"><?php esc_html_e( 'Test mode', 'comsign' ); ?></th>
+					<td><label><input type="checkbox" name="test_mode" value="1" <?php checked( $cardcom['test_mode'] ); ?>> <?php esc_html_e( 'Use a test terminal', 'comsign' ); ?></label></td>
+				</tr>
+				<tr>
+					<th scope="row"><?php esc_html_e( 'Webhook URL', 'comsign' ); ?></th>
+					<td>
+						<code><?php echo esc_html( $cardcom_webhook ); ?></code>
+						<p class="description"><?php esc_html_e( 'Set this as the indicator/webhook URL in your Cardcom terminal.', 'comsign' ); ?></p>
+					</td>
+				</tr>
+			</table>
+			<p><button type="submit" class="button button-primary"><?php esc_html_e( 'Save billing settings', 'comsign' ); ?></button></p>
+		</form>
+	</div>
 </div>
