@@ -131,9 +131,10 @@ final class PortalController {
 		$template_id = isset( $_POST['template_id'] ) ? absint( wp_unslash( $_POST['template_id'] ) ) : 0;
 		$template    = $template_id ? $this->templates->find( $template_id ) : null;
 
-		// The template must live in an account the user can see.
-		$visible = $this->accounts->visible_account_ids( $user_id );
-		if ( ! $template || ! in_array( (int) $template->account_id, array_map( 'intval', $visible ), true ) ) {
+		// The template must belong to the exact workspace we are creating in —
+		// never merely a "visible" descendant/parent — so a template can't be
+		// copied across tenant boundaries.
+		if ( ! $template || (int) $template->account_id !== $account_id ) {
 			$this->bounce( self::url( array( 'view' => 'create' ) ), __( 'Please choose one of your templates.', 'comsign' ) );
 		}
 
@@ -358,21 +359,58 @@ final class PortalController {
 	/**
 	 * Redirect back to the portal with a flash notice.
 	 *
-	 * @param string $url  Target portal URL.
+	 * The message is stashed in a short-lived per-user transient (read once on
+	 * the next page load) rather than a query parameter, so user-facing text —
+	 * including mapped exception messages — never lands in the URL, browser
+	 * history, server logs, analytics or referrers.
+	 *
+	 * @param string $url  Target portal URL (no notice params added).
 	 * @param string $msg  Message text.
 	 * @param string $type 'error' or 'success'.
 	 */
 	private function bounce( string $url, string $msg, string $type = 'error' ): void {
-		wp_safe_redirect(
-			add_query_arg(
-				array(
-					'cs_notice' => rawurlencode( $msg ),
-					'cs_type'   => 'success' === $type ? 'success' : 'error',
-				),
-				$url
-			)
-		);
+		self::set_flash( get_current_user_id(), $msg, $type );
+		wp_safe_redirect( $url );
 		exit;
+	}
+
+	/**
+	 * Store a one-shot flash message for a user.
+	 */
+	public static function set_flash( int $user_id, string $msg, string $type = 'error' ): void {
+		if ( $user_id <= 0 ) {
+			return;
+		}
+		set_transient(
+			'comsign_flash_' . $user_id,
+			array(
+				'msg'  => $msg,
+				'type' => 'success' === $type ? 'success' : 'error',
+			),
+			60
+		);
+	}
+
+	/**
+	 * Read and clear the current user's flash message (or null).
+	 *
+	 * @return array{msg:string,type:string}|null
+	 */
+	public static function take_flash(): ?array {
+		$user_id = get_current_user_id();
+		if ( $user_id <= 0 ) {
+			return null;
+		}
+		$key   = 'comsign_flash_' . $user_id;
+		$flash = get_transient( $key );
+		if ( ! is_array( $flash ) || empty( $flash['msg'] ) ) {
+			return null;
+		}
+		delete_transient( $key );
+		return array(
+			'msg'  => (string) $flash['msg'],
+			'type' => 'success' === ( $flash['type'] ?? '' ) ? 'success' : 'error',
+		);
 	}
 
 	/**
@@ -469,6 +507,31 @@ final class PortalController {
 	}
 
 	/**
+	 * The single workspace the user is currently acting in.
+	 *
+	 * Creation-side data (new documents, templates, contacts, address book) is
+	 * scoped to this account — never to the wider "visible" set that includes
+	 * descendant workspaces. Descendants remain read-only oversight in the
+	 * document list; they are not implicit creation/copy targets, which keeps
+	 * tenant boundaries airtight.
+	 *
+	 * @return int Account id (0 when none).
+	 */
+	private function working_account_id( int $user_id ): int {
+		return max( 0, (int) $this->accounts->current_account_id( $user_id ) );
+	}
+
+	/**
+	 * The working account as a single-element scope array (or empty).
+	 *
+	 * @return int[]
+	 */
+	private function working_scope( int $user_id ): array {
+		$id = $this->working_account_id( $user_id );
+		return $id > 0 ? array( $id ) : array();
+	}
+
+	/**
 	 * "New document" flow: pick a template, then fill recipients and send.
 	 *
 	 * @param int   $user_id     Current user.
@@ -487,7 +550,8 @@ final class PortalController {
 			);
 		}
 
-		$templates   = $this->templates->for_accounts( $account_ids );
+		$scope       = $this->working_scope( $user_id );
+		$templates   = $this->templates->for_accounts( $scope );
 		$template_id = isset( $_GET['template'] ) ? absint( wp_unslash( $_GET['template'] ) ) : 0; // phpcs:ignore WordPress.Security.NonceVerification.Recommended
 		$selected    = null;
 		$roles       = array();
@@ -512,7 +576,7 @@ final class PortalController {
 				'templates'  => $templates,
 				'selected'   => $selected,
 				'roles'      => $roles,
-				'contacts'   => $this->contacts->for_accounts( $account_ids ),
+				'contacts'   => $this->contacts->for_accounts( $scope ),
 				'action'       => admin_url( 'admin-post.php' ),
 				'nonce'        => wp_create_nonce( 'comsign_portal_create' ),
 				'upload_nonce' => wp_create_nonce( 'comsign_portal_upload' ),
@@ -547,7 +611,7 @@ final class PortalController {
 			array(
 				'page_title'    => __( 'Contacts', 'comsign' ),
 				'nav'           => $this->nav( 'contacts', $user_id ),
-				'contacts'      => $this->contacts->for_accounts( $account_ids, $search, 300 ),
+				'contacts'      => $this->contacts->for_accounts( $this->working_scope( $user_id ), $search, 300 ),
 				'search'        => $search,
 				'action'        => admin_url( 'admin-post.php' ),
 				'add_nonce'     => wp_create_nonce( 'comsign_portal_contact_add' ),
@@ -582,7 +646,7 @@ final class PortalController {
 	}
 
 	/**
-	 * Delete a contact, but only one belonging to a workspace the user can see.
+	 * Delete a contact belonging to the user's current workspace.
 	 */
 	public function handle_contact_delete(): void {
 		$user_id = $this->require_login();
@@ -590,10 +654,11 @@ final class PortalController {
 
 		$id      = isset( $_POST['contact_id'] ) ? absint( wp_unslash( $_POST['contact_id'] ) ) : 0;
 		$contact = $id ? $this->contacts->find( $id ) : null;
-		$visible = array_map( 'intval', $this->accounts->visible_account_ids( $user_id ) );
+		$account = $this->working_account_id( $user_id );
 		$target  = self::url( array( 'view' => 'contacts' ) );
 
-		if ( ! $contact || ! in_array( (int) $contact->account_id, $visible, true ) ) {
+		// The contact must belong to the exact workspace being managed.
+		if ( ! $contact || $account <= 0 || (int) $contact->account_id !== $account ) {
 			$this->bounce( $target, __( 'That contact could not be found in your workspace.', 'comsign' ) );
 		}
 
@@ -669,7 +734,9 @@ final class PortalController {
 				'page_title'     => $document->title ? $document->title : __( 'Edit document', 'comsign' ),
 				'nav'            => $this->nav( 'create', $user_id ),
 				'document'       => $document,
-				'contacts'       => $this->contacts->for_accounts( $account_ids ),
+				// Address-book autocomplete is scoped to THIS document's workspace,
+				// never the wider visible set.
+				'contacts'       => $this->contacts->for_accounts( array( (int) $document->account_id ) ),
 				'signers'        => $signers,
 				'fields_for_js'  => $fields_for_js,
 				'signers_for_js' => $signers_for_js,

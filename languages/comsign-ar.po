@@ -11,6 +11,9 @@ msgstr "%s (نسخة)"
 msgid "%s's workspace"
 msgstr "مساحة عمل %s"
 
+msgid "%s’s workspace"
+msgstr "مساحة عمل %s"
+
 msgid "(untitled)"
 msgstr "(بدون عنوان)"
 
@@ -854,6 +857,9 @@ msgstr "يُحفظ الأشخاص الذين توقّع معهم هنا تلقا
 msgid "Permanently delete this document and all its data?"
 msgstr "حذف هذا المستند وكل بياناته نهائيًا؟"
 
+msgid "Personal workspace"
+msgstr "مساحة عمل شخصية"
+
 msgid "Phone"
 msgstr "الهاتف"
 
@@ -931,6 +937,9 @@ msgstr "يرجى تسجيل الدخول"
 
 msgid "Please sign the document at the following secure link: %s"
 msgstr "يرجى توقيع المستند عبر الرابط الآمن التالي: %s"
+
+msgid "Please verify your identity before assigning to someone else."
+msgstr "يرجى التحقق من هويتك قبل الإحالة إلى شخص آخر."
 
 msgid "Please verify your identity before signing."
 msgstr "يرجى التحقق من هويتك قبل التوقيع."

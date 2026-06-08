@@ -52,21 +52,21 @@ final class Roles {
 				self::MANAGE_TEMPLATES,
 				self::MANAGE_MEMBERS,
 			),
+			// A sender prepares and sends from approved templates, but does not
+			// author reusable templates (least privilege).
 			AccountRepository::ROLE_SENDER => array(
 				self::VIEW_DOCUMENTS,
 				self::CREATE_DOCUMENTS,
 				self::SEND_DOCUMENTS,
-				self::MANAGE_TEMPLATES,
 			),
 			AccountRepository::ROLE_VIEWER => array(
 				self::VIEW_DOCUMENTS,
 			),
-			// Legacy 'member' behaves like a sender (its historical capability).
+			// Legacy 'member' behaves like a sender.
 			AccountRepository::ROLE_MEMBER => array(
 				self::VIEW_DOCUMENTS,
 				self::CREATE_DOCUMENTS,
 				self::SEND_DOCUMENTS,
-				self::MANAGE_TEMPLATES,
 			),
 		);
 	}

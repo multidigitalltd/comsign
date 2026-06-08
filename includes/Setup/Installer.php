@@ -311,42 +311,77 @@ final class Installer {
 			update_option( self::OPTION_DEFAULT_ACCOUNT, $default_id );
 		}
 
-		// 2) Backfill account_id on pre-existing rows (account_id = 0).
 		$docs = self::documents_table();
 		$tpl  = self::templates_table();
-		$wpdb->query( $wpdb->prepare( "UPDATE {$docs} SET account_id = %d WHERE account_id = 0", $default_id ) ); // phpcs:ignore WordPress.DB
-		$wpdb->query( $wpdb->prepare( "UPDATE {$tpl} SET account_id = %d WHERE account_id = 0", $default_id ) );  // phpcs:ignore WordPress.DB
+		$au   = self::account_users_table();
 
-		// 3) Make every current manager (and every past document creator) an
-		//    owner of the default account, so existing access is preserved.
-		$au       = self::account_users_table();
-		$user_ids = array();
+		// 2) Site administrators own the shared default workspace (so the admin
+		//    UI keeps working). Note: we do NOT make every past creator an owner
+		//    of the shared workspace — that would let each creator read every
+		//    other creator's legacy documents (a tenant-isolation leak).
 		foreach ( get_users( array( 'fields' => array( 'ID' ) ) ) as $u ) {
 			$uid = (int) $u->ID;
-			// Core administrators (manage_options) always qualify, so the
-			// activating admin becomes an owner even before the custom cap is
-			// granted; plus anyone already holding the ComSign manage cap.
 			if ( user_can( $uid, 'manage_options' ) || user_can( $uid, \ComSign\Support\Capabilities::MANAGE ) ) {
-				$user_ids[] = $uid;
+				self::ensure_membership( $default_id, $uid, 'owner' );
 			}
 		}
-		$creators = $wpdb->get_col( "SELECT DISTINCT created_by FROM {$docs} WHERE created_by > 0" ); // phpcs:ignore WordPress.DB
-		$user_ids = array_unique( array_merge( $user_ids, array_map( 'intval', (array) $creators ) ) );
 
-		foreach ( $user_ids as $uid ) {
-			$has = (int) $wpdb->get_var( $wpdb->prepare( "SELECT id FROM {$au} WHERE account_id = %d AND user_id = %d", $default_id, $uid ) ); // phpcs:ignore WordPress.DB
-			if ( ! $has ) {
-				$wpdb->insert( // phpcs:ignore WordPress.DB.DirectDatabaseQuery
-					$au,
-					array(
-						'account_id' => $default_id,
-						'user_id'    => $uid,
-						'role'       => 'owner',
-						'created_at' => $now,
-					),
-					array( '%d', '%d', '%s', '%s' )
-				);
+		// 3) Give each legacy creator their OWN workspace and move only their
+		//    own documents/templates into it, preserving per-creator isolation.
+		//    Only rows still unassigned (account_id = 0) are touched, so this is
+		//    a one-time backfill and a no-op on fresh/commercial installs.
+		$creators = array_map( 'intval', (array) $wpdb->get_col( "SELECT DISTINCT created_by FROM {$docs} WHERE account_id = 0 AND created_by > 0" ) ); // phpcs:ignore WordPress.DB
+		$tpl_creators = array_map( 'intval', (array) $wpdb->get_col( "SELECT DISTINCT created_by FROM {$tpl} WHERE account_id = 0 AND created_by > 0" ) ); // phpcs:ignore WordPress.DB
+		foreach ( array_unique( array_merge( $creators, $tpl_creators ) ) as $uid ) {
+			if ( $uid <= 0 ) {
+				continue;
 			}
+			$user = get_userdata( $uid );
+			$name = $user
+				/* translators: %s: user display name. */
+				? sprintf( __( '%s’s workspace', 'comsign' ), $user->display_name )
+				: __( 'Personal workspace', 'comsign' );
+
+			$wpdb->insert( // phpcs:ignore WordPress.DB.DirectDatabaseQuery
+				$accounts,
+				array( 'name' => $name, 'parent_id' => 0, 'tier' => 'free', 'created_at' => $now ),
+				array( '%s', '%d', '%s', '%s' )
+			);
+			$ws = (int) $wpdb->insert_id;
+			self::ensure_membership( $ws, $uid, 'owner' );
+
+			$wpdb->query( $wpdb->prepare( "UPDATE {$docs} SET account_id = %d WHERE account_id = 0 AND created_by = %d", $ws, $uid ) ); // phpcs:ignore WordPress.DB
+			$wpdb->query( $wpdb->prepare( "UPDATE {$tpl} SET account_id = %d WHERE account_id = 0 AND created_by = %d", $ws, $uid ) );  // phpcs:ignore WordPress.DB
+		}
+
+		// 4) Anything left with no creator (created_by = 0) goes to the shared
+		//    default workspace, which only site admins own.
+		$wpdb->query( $wpdb->prepare( "UPDATE {$docs} SET account_id = %d WHERE account_id = 0", $default_id ) ); // phpcs:ignore WordPress.DB
+		$wpdb->query( $wpdb->prepare( "UPDATE {$tpl} SET account_id = %d WHERE account_id = 0", $default_id ) );  // phpcs:ignore WordPress.DB
+	}
+
+	/**
+	 * Add a membership row if the user is not already a member of the account.
+	 *
+	 * @param int    $account_id Account id.
+	 * @param int    $user_id    User id.
+	 * @param string $role       Role slug.
+	 */
+	private static function ensure_membership( int $account_id, int $user_id, string $role ): void {
+		global $wpdb;
+		$au  = self::account_users_table();
+		$has = (int) $wpdb->get_var( $wpdb->prepare( "SELECT id FROM {$au} WHERE account_id = %d AND user_id = %d", $account_id, $user_id ) ); // phpcs:ignore WordPress.DB
+		if ( ! $has ) {
+			$wpdb->insert( // phpcs:ignore WordPress.DB.DirectDatabaseQuery
+				$au,
+				array(
+					'account_id' => $account_id,
+					'user_id'    => $user_id,
+					'role'       => $role,
+					'created_at' => current_time( 'mysql', true ),
+				),
+				array( '%d', '%d', '%s', '%s' )
+			);
 		}
 	}
 

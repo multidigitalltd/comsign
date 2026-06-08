@@ -25,6 +25,12 @@ Test::add( 'rbac: role matrix', static function (): void {
 	Test::ok( Roles::can( AccountRepository::ROLE_SENDER, Roles::SEND_DOCUMENTS ), 'sender sends' );
 	Test::ok( ! Roles::can( AccountRepository::ROLE_SENDER, Roles::MANAGE_MEMBERS ), 'sender cannot manage members' );
 
+	// Least privilege: a sender uses templates but does NOT author them.
+	Test::ok( ! Roles::can( AccountRepository::ROLE_SENDER, Roles::MANAGE_TEMPLATES ), 'sender cannot manage templates' );
+	Test::ok( ! Roles::can( AccountRepository::ROLE_MEMBER, Roles::MANAGE_TEMPLATES ), 'legacy member cannot manage templates' );
+	Test::ok( Roles::can( AccountRepository::ROLE_ADMIN, Roles::MANAGE_TEMPLATES ), 'admin manages templates' );
+	Test::ok( Roles::can( AccountRepository::ROLE_OWNER, Roles::MANAGE_TEMPLATES ), 'owner manages templates' );
+
 	// Admin can manage members but not settings.
 	Test::ok( Roles::can( AccountRepository::ROLE_ADMIN, Roles::MANAGE_MEMBERS ), 'admin manages members' );
 	Test::ok( ! Roles::can( AccountRepository::ROLE_ADMIN, Roles::MANAGE_SETTINGS ), 'admin cannot manage settings' );

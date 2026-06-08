@@ -78,3 +78,30 @@ Test::add( 'delegation: refused when not allowed or already signed', static func
 		$svc->delegate_signer( $document, $signer, 'X', 'not-an-email', '' );
 	}, 'delegation requires a valid email' );
 } );
+
+Test::add( 'delegation: required verification is upgraded to OTP, not dropped', static function (): void {
+	reset_tables();
+	$svc     = new DocumentService();
+	$docs    = new DocumentRepository();
+	$signers = new SignerRepository();
+
+	$doc_id = $svc->create_from_text( 'Doc', '<p>x</p>', array() );
+	$a      = $svc->add_signer( $doc_id, 'Original', 'orig@example.com' );
+	// Sender required a shared access code for this signer.
+	$svc->set_signer_auth( $doc_id, $a, 'code', 'SECRET12' );
+	$svc->save_fields( $doc_id, array(
+		array( 'signer_id' => $a, 'type' => 'signature', 'page' => 1, 'pos_x' => .1, 'pos_y' => .1, 'width' => .3, 'height' => .08 ),
+	) );
+	$svc->send( $doc_id, array( 'allow_delegation' => true ) );
+
+	$document = $docs->find( $doc_id );
+	$signer   = $signers->find( $a );
+	Test::equals( 'code', (string) $signer->auth_method, 'starts with the shared access code' );
+
+	$svc->delegate_signer( $document, $signer, 'New Person', 'new@example.com', '' );
+
+	$updated = $signers->find( $a );
+	// A shared code can't transfer to a new person, so the delegate is verified
+	// by email OTP — the policy is preserved, not silently dropped to "none".
+	Test::equals( 'email_otp', (string) $updated->auth_method, 'code-protected slot becomes OTP on delegation' );
+} );

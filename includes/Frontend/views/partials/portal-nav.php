@@ -39,15 +39,13 @@ defined( 'ABSPATH' ) || exit;
 </nav>
 
 <?php
-// Flash notice carried across the post/redirect/get cycle.
-// phpcs:disable WordPress.Security.NonceVerification.Recommended
-$cs_notice = isset( $_GET['cs_notice'] ) ? sanitize_text_field( wp_unslash( $_GET['cs_notice'] ) ) : '';
-$cs_type   = ( isset( $_GET['cs_type'] ) && 'success' === $_GET['cs_type'] ) ? 'success' : 'error';
-// phpcs:enable WordPress.Security.NonceVerification.Recommended
-if ( '' !== $cs_notice ) :
+// Flash notice carried across the post/redirect/get cycle via a per-user
+// transient (never via the URL), read once here.
+$cs_flash = \ComSign\Frontend\PortalController::take_flash();
+if ( null !== $cs_flash ) :
 	?>
-	<div class="comsign-portal-flash is-<?php echo esc_attr( $cs_type ); ?>" role="status">
-		<?php echo esc_html( $cs_notice ); ?>
+	<div class="comsign-portal-flash is-<?php echo esc_attr( $cs_flash['type'] ); ?>" role="status">
+		<?php echo esc_html( $cs_flash['msg'] ); ?>
 	</div>
 	<?php
 endif;

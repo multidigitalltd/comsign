@@ -510,6 +510,16 @@ final class SigningController {
 
 		check_admin_referer( 'comsign_delegate_' . $signer->id );
 
+		// Delegation transfers control of the signing slot, so it must pass the
+		// same identity gate as viewing/signing — never reassign on a token alone.
+		if ( SignerAuth::requires( $signer ) && ! SignerAuth::verified( $signer ) ) {
+			$this->render_message( __( 'Verification required', 'comsign' ), __( 'Please verify your identity before assigning to someone else.', 'comsign' ) );
+		}
+
+		if ( SignerRepository::STATUS_SIGNED === $signer->status ) {
+			$this->render_message( __( 'Already signed', 'comsign' ), __( 'You have already signed this document.', 'comsign' ) );
+		}
+
 		$document = $this->documents->find( (int) $signer->document_id );
 		if ( ! $document ) {
 			$this->render_message( __( 'Document unavailable', 'comsign' ), __( 'The document could not be found.', 'comsign' ) );

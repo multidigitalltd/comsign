@@ -4,7 +4,7 @@ Tags: signature, digital signature, pdf, esignature, hebrew
 Requires at least: 6.0
 Tested up to: 6.5
 Requires PHP: 7.4
-Stable tag: 0.36.0
+Stable tag: 0.37.0
 License: GPL-2.0-or-later
 License URI: https://www.gnu.org/licenses/gpl-2.0.html
 
@@ -105,6 +105,25 @@ ID and its SHA-256 code (shown on the document screen and the signature
 certificate) to confirm the document is authentic and see who signed it.
 
 == Changelog ==
+
+= 0.37.0 =
+* Security/tenant isolation: portal template lists, the address book and
+  recipient autocomplete are now scoped to the exact working workspace (or the
+  edited document's workspace), never the wider "visible" set — a template or
+  contact can no longer cross workspace boundaries. Creating from a template now
+  requires the template to belong to the current workspace.
+* Security: the legacy account migration no longer drops every past document
+  creator into one shared workspace as owner (which over-shared documents).
+  Each legacy creator now gets their own workspace with only their documents;
+  only site admins own the shared default workspace.
+* Security: signing delegation now enforces the same identity challenge as
+  signing, and a verification requirement is upgraded to email OTP for the
+  delegate (never silently dropped); the auth-policy change is audited.
+* Security: flash messages move through a short-lived per-user transient instead
+  of URL query parameters, so user-facing/exception text never lands in the URL,
+  history or logs.
+* Least privilege: the "sender" role no longer includes manage-templates;
+  authoring reusable templates is reserved for admins/owners.
 
 = 0.36.0 =
 * New: an address-book management screen in the client portal (Contacts). View,

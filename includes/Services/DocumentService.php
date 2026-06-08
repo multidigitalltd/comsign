@@ -255,12 +255,17 @@ final class DocumentService {
 		}
 
 		$old_email = (string) $signer->email;
+		$old_auth  = (string) ( $signer->auth_method ?? \ComSign\Frontend\SignerAuth::METHOD_NONE );
 
-		// Preserve an email-OTP requirement (it works for any address); a shared
-		// access code can't be known by the delegate, so it falls back to none.
-		$new_auth = ( \ComSign\Frontend\SignerAuth::METHOD_OTP === (string) ( $signer->auth_method ?? '' ) )
-			? \ComSign\Frontend\SignerAuth::METHOD_OTP
-			: \ComSign\Frontend\SignerAuth::METHOD_NONE;
+		// Transferring control to a new person should not silently weaken the
+		// signer-auth policy. If the sender required ANY verification (a shared
+		// access code or email OTP), the delegate is verified by email OTP — a
+		// shared code can't be known by the new person, and OTP works for any
+		// address. Only when no verification was required does the delegate
+		// inherit "none".
+		$new_auth = ( \ComSign\Frontend\SignerAuth::METHOD_NONE === $old_auth )
+			? \ComSign\Frontend\SignerAuth::METHOD_NONE
+			: \ComSign\Frontend\SignerAuth::METHOD_OTP;
 
 		$raw = Tokens::generate();
 		$this->signers->update(
@@ -287,7 +292,12 @@ final class DocumentService {
 			AuditLogger::EVENT_DELEGATED,
 			(int) $document->id,
 			(int) $signer->id,
-			array( 'from' => $old_email, 'to' => $email )
+			array(
+				'from'          => $old_email,
+				'to'            => $email,
+				'auth_was'      => $old_auth,
+				'auth_now'      => $new_auth,
+			)
 		);
 
 		$fresh = $this->signers->find( (int) $signer->id );

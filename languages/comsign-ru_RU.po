@@ -11,6 +11,9 @@ msgstr "%s (копия)"
 msgid "%s's workspace"
 msgstr "Рабочее пространство %s"
 
+msgid "%s’s workspace"
+msgstr "Рабочее пространство %s"
+
 msgid "(untitled)"
 msgstr "(без названия)"
 
@@ -854,6 +857,9 @@ msgstr "Люди, с которыми вы подписываете, сохра�
 msgid "Permanently delete this document and all its data?"
 msgstr "Удалить этот документ и все его данные безвозвратно?"
 
+msgid "Personal workspace"
+msgstr "Личное рабочее пространство"
+
 msgid "Phone"
 msgstr "Телефон"
 
@@ -931,6 +937,9 @@ msgstr "Пожалуйста, войдите"
 
 msgid "Please sign the document at the following secure link: %s"
 msgstr "Пожалуйста, подпишите документ по защищённой ссылке: %s"
+
+msgid "Please verify your identity before assigning to someone else."
+msgstr "Пожалуйста, подтвердите личность перед передачей другому человеку."
 
 msgid "Please verify your identity before signing."
 msgstr "Пожалуйста, подтвердите личность перед подписанием."
