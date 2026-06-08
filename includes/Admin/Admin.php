@@ -194,6 +194,20 @@ final class Admin {
 			'comsign-health',
 			array( $this, 'render_health_page' )
 		);
+
+		// Operator-only: cross-tenant overview of every workspace. Requires the
+		// true site capability (not just the plugin's manage cap), since it shows
+		// data across all customers.
+		if ( current_user_can( 'manage_options' ) ) {
+			add_submenu_page(
+				self::MENU_SLUG,
+				__( 'Workspaces', 'comsign' ),
+				__( 'Workspaces', 'comsign' ),
+				'manage_options',
+				'comsign-workspaces',
+				array( $this, 'render_workspaces_page' )
+			);
+		}
 	}
 
 	/**
@@ -1045,6 +1059,55 @@ final class Admin {
 				'nonce'      => wp_create_nonce( 'comsign_health_actions' ),
 				'admin_mail' => wp_get_current_user()->user_email,
 				'notice'     => $this->pull_notice(),
+			)
+		);
+	}
+
+	/**
+	 * Operator-only cross-tenant overview of every workspace.
+	 */
+	public function render_workspaces_page(): void {
+		if ( ! current_user_can( 'manage_options' ) ) {
+			wp_die( esc_html__( 'You are not allowed to access this page.', 'comsign' ) );
+		}
+
+		$accounts = $this->accounts->repository();
+		$subs     = new \ComSign\Services\SubscriptionService();
+		$docs     = $this->documents;
+		$rows     = array();
+
+		foreach ( $accounts->all() as $account ) {
+			$id      = (int) $account->id;
+			$members = $accounts->members_of( $id );
+
+			$owners = array();
+			foreach ( $members as $m ) {
+				if ( \ComSign\Database\AccountRepository::ROLE_OWNER === $m->role ) {
+					$u = get_userdata( (int) $m->user_id );
+					if ( $u ) {
+						$owners[] = $u->user_email;
+					}
+				}
+			}
+
+			$rows[] = array(
+				'id'          => $id,
+				'name'        => (string) $account->name,
+				'owners'      => $owners,
+				'members'     => count( $members ),
+				'documents'   => $docs->count_for_accounts( array( $id ) ),
+				'plan'        => $subs->plan_id( $id ),
+				'status'      => $subs->status( $id ),
+				'created_at'  => (string) ( $account->created_at ?? '' ),
+			);
+		}
+
+		$this->view(
+			'workspaces',
+			array(
+				'rows'   => $rows,
+				'plans'  => \ComSign\Billing\Plans::all(),
+				'notice' => $this->pull_notice(),
 			)
 		);
 	}

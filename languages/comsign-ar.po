@@ -632,6 +632,9 @@ msgstr "المؤسسات"
 msgid "Event"
 msgstr "الحدث"
 
+msgid "Every customer workspace on this site, with its plan, members and document count. Only you (the site operator) can see this cross-tenant view."
+msgstr "كل مساحة عمل عميل على هذا الموقع، مع باقتها وأعضائها وعدد مستنداتها. أنت وحدك (مشغّل الموقع) ترى هذا العرض عبر المستأجرين."
+
 msgid "Every event is POSTed here as JSON, signed with X-ComSign-Signature (HMAC-SHA256 of the body using the secret below)."
 msgstr "يُرسَل كل حدث هنا عبر POST بصيغة JSON، موقّعًا بـ X-ComSign-Signature (HMAC-SHA256 للمحتوى باستخدام السر أدناه)."
 
@@ -911,6 +914,9 @@ msgstr "لا توجد مساحة عمل"
 msgid "No workspace yet"
 msgstr "لا توجد مساحة عمل بعد"
 
+msgid "No workspaces yet."
+msgstr "لا توجد مساحات عمل بعد."
+
 msgid "Not allowed"
 msgstr "غير مسموح"
 
@@ -974,6 +980,9 @@ msgstr "webhook صادر"
 msgid "Owner"
 msgstr "المالك"
 
+msgid "Owner(s)"
+msgstr "المالك/المالكون"
+
 msgid "PDF file"
 msgstr "ملف PDF"
 
@@ -1036,6 +1045,9 @@ msgstr "وضع الحقول"
 
 msgid "Place signature fields"
 msgstr "وضع حقول التوقيع"
+
+msgid "Plan"
+msgstr "الباقة"
 
 msgid "Plan & billing"
 msgstr "الباقة والفوترة"
@@ -1816,6 +1828,9 @@ msgstr "مساحة العمل:"
 
 msgid "Workspace: %s"
 msgstr "مساحة العمل: %s"
+
+msgid "Workspaces"
+msgstr "مساحات العمل"
 
 msgid "Write the fixed text of the document. After creating it you can place fillable and signature fields on the generated PDF."
 msgstr "اكتب النص الثابت للمستند. بعد إنشائه يمكنك وضع حقول قابلة للتعبئة وحقول توقيع على ملف PDF المُنشأ."

@@ -632,6 +632,9 @@ msgstr "Корпоративный"
 msgid "Event"
 msgstr "Событие"
 
+msgid "Every customer workspace on this site, with its plan, members and document count. Only you (the site operator) can see this cross-tenant view."
+msgstr "Каждое рабочее пространство клиента на этом сайте с его тарифом, участниками и количеством документов. Только вы (оператор сайта) видите этот межарендный обзор."
+
 msgid "Every event is POSTed here as JSON, signed with X-ComSign-Signature (HMAC-SHA256 of the body using the secret below)."
 msgstr "Каждое событие отправляется сюда методом POST в формате JSON, подписанное X-ComSign-Signature (HMAC-SHA256 тела с секретом ниже)."
 
@@ -911,6 +914,9 @@ msgstr "Нет рабочего пространства"
 msgid "No workspace yet"
 msgstr "Пока нет рабочего пространства"
 
+msgid "No workspaces yet."
+msgstr "Пока нет рабочих пространств."
+
 msgid "Not allowed"
 msgstr "Не разрешено"
 
@@ -974,6 +980,9 @@ msgstr "Исходящий webhook"
 msgid "Owner"
 msgstr "Владелец"
 
+msgid "Owner(s)"
+msgstr "Владелец(ы)"
+
 msgid "PDF file"
 msgstr "Файл PDF"
 
@@ -1036,6 +1045,9 @@ msgstr "Размещение полей"
 
 msgid "Place signature fields"
 msgstr "Разместить поля подписи"
+
+msgid "Plan"
+msgstr "Тариф"
 
 msgid "Plan & billing"
 msgstr "Тариф и оплата"
@@ -1816,6 +1828,9 @@ msgstr "Рабочее пространство:"
 
 msgid "Workspace: %s"
 msgstr "Рабочее пространство: %s"
+
+msgid "Workspaces"
+msgstr "Рабочие пространства"
 
 msgid "Write the fixed text of the document. After creating it you can place fillable and signature fields on the generated PDF."
 msgstr "Напишите фиксированный текст документа. После создания вы сможете разместить заполняемые поля и поля подписи на созданном PDF."

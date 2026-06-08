@@ -4,7 +4,7 @@ Tags: signature, digital signature, pdf, esignature, hebrew
 Requires at least: 6.0
 Tested up to: 6.5
 Requires PHP: 7.4
-Stable tag: 0.50.0
+Stable tag: 0.51.0
 License: GPL-2.0-or-later
 License URI: https://www.gnu.org/licenses/gpl-2.0.html
 
@@ -105,6 +105,13 @@ ID and its SHA-256 code (shown on the document screen and the signature
 certificate) to confirm the document is authentic and see who signed it.
 
 == Changelog ==
+
+= 0.51.0 =
+* New: an operator-only "Workspaces" admin screen (ComSign → Workspaces) that
+  lists every customer workspace with its owner(s), plan, subscription status,
+  member count, document count and creation date — the cross-tenant overview a
+  SaaS operator needs. Visible only to true site administrators (manage_options),
+  so it never leaks across tenants in the portal.
 
 = 0.50.0 =
 * New: an Insights page in the portal — total documents, completion rate,
