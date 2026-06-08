@@ -166,9 +166,15 @@ class CardcomGateway implements GatewayInterface {
 		if ( isset( $json['TokenInfo']['Token'] ) ) {
 			$token = (string) $json['TokenInfo']['Token'];
 		}
-		$amount = 0.0;
+		$amount   = 0.0;
+		$currency = '';
 		if ( isset( $json['TranzactionInfo']['Amount'] ) ) {
 			$amount = (float) $json['TranzactionInfo']['Amount'];
+		}
+		if ( isset( $json['TranzactionInfo']['CoinId'] ) ) {
+			$currency = self::coin_to_currency( (int) $json['TranzactionInfo']['CoinId'] );
+		} elseif ( isset( $json['TranzactionInfo']['ISOCoinId'] ) ) {
+			$currency = self::coin_to_currency( (int) $json['TranzactionInfo']['ISOCoinId'] );
 		}
 
 		return array(
@@ -177,15 +183,24 @@ class CardcomGateway implements GatewayInterface {
 			'return_value' => (string) ( $json['ReturnValue'] ?? '' ),
 			'token'        => $token,
 			'amount'       => $amount,
+			'currency'     => $currency,
 			'error'        => $paid ? '' : (string) ( $json['Description'] ?? '' ),
 		);
+	}
+
+	/**
+	 * Map a Cardcom ISO coin id to a currency code (only the ones we charge in).
+	 */
+	private static function coin_to_currency( int $coin ): string {
+		$map = array( self::COIN_ILS => 'ILS', 2 => 'USD', 978 => 'EUR' );
+		return $map[ $coin ] ?? '';
 	}
 
 	/**
 	 * A normalised verification failure.
 	 */
 	private function verify_failure( string $error ): array {
-		return array( 'ok' => false, 'paid' => false, 'return_value' => '', 'token' => '', 'amount' => 0.0, 'error' => $error );
+		return array( 'ok' => false, 'paid' => false, 'return_value' => '', 'token' => '', 'amount' => 0.0, 'currency' => '', 'error' => $error );
 	}
 
 	/* ---------------------------------------------------------------------

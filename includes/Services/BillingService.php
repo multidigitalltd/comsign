@@ -89,7 +89,22 @@ final class BillingService {
 			return false; // forged or stale return value
 		}
 
-		$cycle      = $intent['cycle'];
+		$cycle = $intent['cycle'];
+
+		// The HMAC proves account|plan|cycle and the gateway says "paid", but we
+		// must also confirm the customer actually paid the price we asked for, in
+		// the expected currency — a mismatched or partial payment must not unlock
+		// a plan. (Currency is only checked when the gateway reports one.)
+		$expected_amount = Plans::price( $intent['plan'], $cycle );
+		$paid_amount     = (float) ( $result['amount'] ?? 0 );
+		if ( $expected_amount > 0 && abs( $paid_amount - $expected_amount ) > 0.01 ) {
+			return false;
+		}
+		$paid_currency = (string) ( $result['currency'] ?? '' );
+		if ( '' !== $paid_currency && 0 !== strcasecmp( $paid_currency, Plans::currency() ) ) {
+			return false;
+		}
+
 		$period_end = gmdate(
 			'Y-m-d H:i:s',
 			strtotime( 'annual' === $cycle ? '+1 year' : '+1 month' )

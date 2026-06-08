@@ -4,7 +4,7 @@ Tags: signature, digital signature, pdf, esignature, hebrew
 Requires at least: 6.0
 Tested up to: 6.5
 Requires PHP: 7.4
-Stable tag: 0.53.0
+Stable tag: 0.54.0
 License: GPL-2.0-or-later
 License URI: https://www.gnu.org/licenses/gpl-2.0.html
 
@@ -105,6 +105,29 @@ ID and its SHA-256 code (shown on the document screen and the signature
 certificate) to confirm the document is authentic and see who signed it.
 
 == Changelog ==
+
+= 0.54.0 =
+* Security: CSV export now neutralises spreadsheet formula injection — cells
+  starting with =, +, -, @ or a control character are escaped so a malicious
+  document title can't run formulas when the file is opened in Excel/Sheets.
+* Security: payment verification now also checks the paid amount and currency
+  against the signed checkout intent — a partial or mismatched payment can no
+  longer activate a plan.
+* Security: stored billing tokens and gateway credentials now use authenticated
+  encryption (AES-256-GCM, or AES-256-CBC + HMAC where GCM is unavailable);
+  tampering is detected before decryption. Existing values are read transparently.
+* Security: the public Cardcom webhook now validates the reference format,
+  rate-limits verification attempts per IP, and logs repeated abuse — forged
+  calls already could not activate anything, and now can't create noise/cost.
+* Billing: cancelling a paid subscription now keeps access until the end of the
+  paid period (it stops auto-renewing) instead of cutting off immediately, with
+  a clear "ends on <date>" notice and a one-click "keep my subscription".
+* Operator: manual plan changes, suspensions and reactivations are now recorded
+  in an operator audit log (who, which workspace, old/new plan & status, time,
+  reason) shown on the Workspaces screen; owners are emailed on suspend/reactivate.
+* Accessibility: the Insights completions chart now has a visually-hidden table
+  of each day's date and count for screen-reader and keyboard users.
+* Dev: a CI guard fails the build on common broken-UTF-8 (mojibake) sequences.
 
 = 0.53.0 =
 * New: a [comsign_portal] shortcode. Put it on any page (e.g. "My account") and

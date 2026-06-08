@@ -33,7 +33,7 @@ interface GatewayInterface {
 	 *
 	 * @param string $reference Gateway reference (e.g. Cardcom LowProfileId).
 	 *
-	 * @return array{ok:bool,paid:bool,return_value:string,token:string,amount:float,error:string}
+	 * @return array{ok:bool,paid:bool,return_value:string,token:string,amount:float,currency:string,error:string}
 	 */
 	public function verify_transaction( string $reference ): array;
 

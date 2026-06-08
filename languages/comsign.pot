@@ -13,7 +13,7 @@ msgstr ""
 msgid "%1$d of %2$d signed"
 msgstr ""
 
-#: includes/Frontend/views/portal-billing.php:101
+#: includes/Frontend/views/portal-billing.php:112
 msgid "%1$d used, %2$d remaining."
 msgstr ""
 
@@ -24,11 +24,11 @@ msgstr[0] ""
 msgstr[1] ""
 
 #: includes/Frontend/PricingShortcode.php:83
-#: includes/Frontend/views/portal-billing.php:134
+#: includes/Frontend/views/portal-billing.php:151
 msgid "%d documents / month"
 msgstr ""
 
-#: includes/Frontend/views/portal-billing.php:98
+#: includes/Frontend/views/portal-billing.php:109
 msgid "%d documents used (unlimited)."
 msgstr ""
 
@@ -52,7 +52,7 @@ msgstr ""
 msgid "%s's workspace"
 msgstr ""
 
-#: includes/Setup/Installer.php:367
+#: includes/Setup/Installer.php:394
 msgid "%s’s workspace"
 msgstr ""
 
@@ -63,7 +63,7 @@ msgstr ""
 #: includes/Frontend/views/partials/portal-doc-table.php:31
 #: includes/Frontend/views/portal-document.php:30
 #: includes/Frontend/views/portal-edit.php:65
-#: includes/Frontend/views/portal-insights.php:84
+#: includes/Frontend/views/portal-insights.php:101
 msgid "(untitled)"
 msgstr ""
 
@@ -72,7 +72,7 @@ msgid "* Required"
 msgstr ""
 
 #: includes/Frontend/PricingShortcode.php:74
-#: includes/Frontend/views/portal-billing.php:127
+#: includes/Frontend/views/portal-billing.php:144
 msgid "/ month"
 msgstr ""
 
@@ -121,7 +121,7 @@ msgid "A webhook URL is configured. Use “Send test webhook” below to confirm
 msgstr ""
 
 #: includes/Frontend/PricingShortcode.php:92
-#: includes/Frontend/views/portal-billing.php:143
+#: includes/Frontend/views/portal-billing.php:160
 msgid "API & webhooks"
 msgstr ""
 
@@ -149,6 +149,7 @@ msgstr ""
 msgid "Access code (shared by you)"
 msgstr ""
 
+#: includes/Admin/views/workspaces.php:139
 #: includes/Frontend/views/portal-contacts.php:71
 #: includes/Frontend/views/portal-document.php:91
 #: includes/Frontend/views/portal-team.php:55
@@ -165,8 +166,8 @@ msgstr ""
 msgid "Actions"
 msgstr ""
 
-#: includes/Admin/views/workspaces.php:22
-#: includes/Frontend/views/portal-billing.php:30
+#: includes/Admin/views/workspaces.php:23
+#: includes/Frontend/views/portal-billing.php:31
 msgid "Active"
 msgstr ""
 
@@ -247,7 +248,7 @@ msgid "All parties have signed. The signed PDF and verification details are avai
 msgstr ""
 
 #: includes/Admin/DocumentsListTable.php:117
-#: includes/Admin/views/workspaces.php:39
+#: includes/Admin/views/workspaces.php:40
 #: includes/Frontend/views/portal-documents.php:43
 msgid "All statuses"
 msgstr ""
@@ -262,13 +263,17 @@ msgstr ""
 msgid "Already signed"
 msgstr ""
 
+#: includes/Admin/views/workspaces.php:125
+msgid "An audit trail of manual plan changes, suspensions and reactivations."
+msgstr ""
+
 #: includes/Admin/Admin.php:156
 #: includes/Admin/Admin.php:157
 #: includes/Admin/views/analytics.php:33
 msgid "Analytics"
 msgstr ""
 
-#: includes/Frontend/views/portal-billing.php:171
+#: includes/Frontend/views/portal-billing.php:188
 msgid "Annual — %s"
 msgstr ""
 
@@ -337,11 +342,11 @@ msgstr ""
 msgid "Billing (Cardcom)"
 msgstr ""
 
-#: includes/Frontend/PortalController.php:1077
+#: includes/Frontend/PortalController.php:1078
 msgid "Billing is not available"
 msgstr ""
 
-#: includes/Frontend/PortalController.php:1185
+#: includes/Frontend/PortalController.php:1187
 msgid "Billing is not set up yet. Please contact support."
 msgstr ""
 
@@ -367,7 +372,7 @@ msgstr ""
 msgid "Bulk send"
 msgstr ""
 
-#: includes/Admin/Admin.php:1333
+#: includes/Admin/Admin.php:1361
 msgid "Bulk send complete: %d document(s) created and sent."
 msgstr ""
 
@@ -396,16 +401,16 @@ msgstr ""
 msgid "Cancel"
 msgstr ""
 
-#: includes/Frontend/views/portal-billing.php:110
+#: includes/Frontend/views/portal-billing.php:127
 msgid "Cancel subscription"
 msgstr ""
 
-#: includes/Frontend/views/portal-billing.php:107
+#: includes/Frontend/views/portal-billing.php:124
 msgid "Cancel your subscription? You will keep access until the end of the current period."
 msgstr ""
 
-#: includes/Admin/views/workspaces.php:24
-#: includes/Frontend/views/portal-billing.php:32
+#: includes/Admin/views/workspaces.php:25
+#: includes/Frontend/views/portal-billing.php:33
 msgid "Canceled"
 msgstr ""
 
@@ -428,6 +433,10 @@ msgstr ""
 
 #: includes/Admin/Admin.php:977
 msgid "Certificate stored. New documents will be signed with PKI/PAdES."
+msgstr ""
+
+#: includes/Admin/views/workspaces.php:140
+msgid "Change"
 msgstr ""
 
 #: includes/Admin/views/health.php:38
@@ -455,7 +464,7 @@ msgstr ""
 msgid "Choose a different template"
 msgstr ""
 
-#: includes/Frontend/views/portal-billing.php:119
+#: includes/Frontend/views/portal-billing.php:136
 #: includes/Frontend/views/portal-dashboard.php:38
 msgid "Choose a plan"
 msgstr ""
@@ -469,7 +478,7 @@ msgstr ""
 msgid "Choose…"
 msgstr ""
 
-#: includes/Admin/views/workspaces.php:46
+#: includes/Admin/views/workspaces.php:47
 #: includes/Frontend/views/portal-contacts.php:58
 #: includes/Frontend/views/portal-documents.php:50
 #: includes/Frontend/views/sign.php:54
@@ -498,7 +507,7 @@ msgstr ""
 msgid "ComSign %1$s (%2$s)"
 msgstr ""
 
-#: includes/Services/BillingService.php:138
+#: includes/Services/BillingService.php:153
 msgid "ComSign %1$s (%2$s) renewal"
 msgstr ""
 
@@ -510,7 +519,7 @@ msgstr ""
 msgid "ComSign Settings"
 msgstr ""
 
-#: includes/Admin/Admin.php:1188
+#: includes/Admin/Admin.php:1216
 msgid "ComSign test email"
 msgstr ""
 
@@ -521,6 +530,7 @@ msgstr ""
 #: includes/Admin/DocumentsListTable.php:232
 #: includes/Admin/views/analytics.php:26
 #: includes/Audit/AuditLogger.php:49
+#: includes/Frontend/views/portal-insights.php:66
 msgid "Completed"
 msgstr ""
 
@@ -547,8 +557,11 @@ msgid "Completions (last 14 days)"
 msgstr ""
 
 #: includes/Admin/views/analytics.php:70
-#: includes/Frontend/views/portal-insights.php:56
 msgid "Completions per day"
+msgstr ""
+
+#: includes/Frontend/views/portal-insights.php:62
+msgid "Completions per day (last 14 days)"
 msgstr ""
 
 #: includes/Admin/views/new.php:29
@@ -575,21 +588,21 @@ msgstr ""
 msgid "Consented"
 msgstr ""
 
-#: includes/Frontend/PortalController.php:816
+#: includes/Frontend/PortalController.php:817
 msgid "Contact removed."
 msgstr ""
 
-#: includes/Frontend/PortalController.php:795
+#: includes/Frontend/PortalController.php:796
 msgid "Contact saved."
 msgstr ""
 
-#: includes/Frontend/PortalController.php:762
-#: includes/Frontend/PortalController.php:1444
+#: includes/Frontend/PortalController.php:763
+#: includes/Frontend/PortalController.php:1462
 #: includes/Frontend/views/portal-contacts.php:23
 msgid "Contacts"
 msgstr ""
 
-#: includes/Frontend/PortalController.php:750
+#: includes/Frontend/PortalController.php:751
 msgid "Contacts are not available"
 msgstr ""
 
@@ -624,7 +637,7 @@ msgid "Could not reassign"
 msgstr ""
 
 #: includes/Billing/CardcomGateway.php:140
-#: includes/Frontend/PortalController.php:1201
+#: includes/Frontend/PortalController.php:1203
 msgid "Could not start checkout."
 msgstr ""
 
@@ -659,7 +672,7 @@ msgstr ""
 
 #: includes/Admin/DocumentsListTable.php:56
 #: includes/Admin/views/templates.php:31
-#: includes/Admin/views/workspaces.php:62
+#: includes/Admin/views/workspaces.php:63
 #: includes/Audit/AuditLogger.php:44
 #: includes/Frontend/views/partials/portal-doc-table.php:23
 #: includes/Frontend/views/partials/portal-doc-table.php:36
@@ -668,20 +681,25 @@ msgid "Created"
 msgstr ""
 
 #: includes/Frontend/PricingShortcode.php:89
-#: includes/Frontend/views/portal-billing.php:140
+#: includes/Frontend/views/portal-billing.php:157
 msgid "Custom branding"
+msgstr ""
+
+#: includes/Frontend/views/portal-insights.php:56
+msgid "Daily completions for the last 14 days. A text table follows below."
 msgstr ""
 
 #: includes/Admin/views/template-bulk.php:28
 msgid "Dana Cohen, dana@example.com, +972500000000\nAvi Levi, avi@example.com"
 msgstr ""
 
-#: includes/Frontend/PortalController.php:1421
+#: includes/Frontend/PortalController.php:1439
 msgid "Dashboard"
 msgstr ""
 
 #: includes/Admin/Admin.php:294
 #: includes/Frontend/views/portal-edit.php:38
+#: includes/Frontend/views/portal-insights.php:65
 msgid "Date"
 msgstr ""
 
@@ -690,7 +708,7 @@ msgstr ""
 msgid "Date (auto)"
 msgstr ""
 
-#: includes/Frontend/views/portal-billing.php:81
+#: includes/Frontend/views/portal-billing.php:82
 msgid "Days left in your free trial: %d"
 msgstr ""
 
@@ -704,7 +722,7 @@ msgstr ""
 msgid "Declined"
 msgstr ""
 
-#: includes/Setup/Installer.php:328
+#: includes/Setup/Installer.php:355
 msgid "Default workspace"
 msgstr ""
 
@@ -733,7 +751,7 @@ msgid "Details"
 msgstr ""
 
 #: includes/Frontend/PricingShortcode.php:86
-#: includes/Frontend/views/portal-billing.php:137
+#: includes/Frontend/views/portal-billing.php:154
 msgid "Digital (PKI) signatures"
 msgstr ""
 
@@ -747,7 +765,7 @@ msgstr ""
 
 #: includes/Admin/DocumentsListTable.php:53
 #: includes/Admin/views/analytics.php:85
-#: includes/Frontend/PortalController.php:1372
+#: includes/Frontend/PortalController.php:1390
 #: includes/Frontend/views/partials/portal-doc-table.php:20
 #: includes/Frontend/views/partials/portal-doc-table.php:29
 #: includes/Frontend/views/sign.php:25
@@ -765,11 +783,11 @@ msgstr ""
 msgid "Document content"
 msgstr ""
 
-#: includes/Frontend/PortalController.php:177
+#: includes/Frontend/PortalController.php:178
 msgid "Document created and sent for signing."
 msgstr ""
 
-#: includes/Admin/Admin.php:1306
+#: includes/Admin/Admin.php:1334
 msgid "Document created from template. Review and send."
 msgstr ""
 
@@ -789,8 +807,8 @@ msgstr ""
 msgid "Document file is uploaded"
 msgstr ""
 
-#: includes/Frontend/PortalController.php:838
-#: includes/Frontend/PortalController.php:1357
+#: includes/Frontend/PortalController.php:839
+#: includes/Frontend/PortalController.php:1375
 msgid "Document not available"
 msgstr ""
 
@@ -806,7 +824,7 @@ msgstr ""
 msgid "Document preview"
 msgstr ""
 
-#: includes/Frontend/PortalController.php:139
+#: includes/Frontend/PortalController.php:140
 msgid "Document sent for signing."
 msgstr ""
 
@@ -843,15 +861,15 @@ msgstr ""
 
 #: includes/Admin/Admin.php:138
 #: includes/Admin/Admin.php:139
-#: includes/Admin/views/workspaces.php:61
-#: includes/Frontend/PortalController.php:1328
-#: includes/Frontend/PortalController.php:1426
+#: includes/Admin/views/workspaces.php:62
+#: includes/Frontend/PortalController.php:1346
+#: includes/Frontend/PortalController.php:1444
 #: includes/Frontend/views/portal-documents.php:34
 msgid "Documents"
 msgstr ""
 
 #: includes/Admin/views/analytics.php:55
-#: includes/Frontend/views/portal-insights.php:64
+#: includes/Frontend/views/portal-insights.php:81
 msgid "Documents by status"
 msgstr ""
 
@@ -883,7 +901,7 @@ msgstr ""
 msgid "Draft"
 msgstr ""
 
-#: includes/Frontend/PortalController.php:180
+#: includes/Frontend/PortalController.php:181
 msgid "Draft created."
 msgstr ""
 
@@ -912,7 +930,7 @@ msgstr ""
 msgid "Each signer should have somewhere to sign."
 msgstr ""
 
-#: includes/Frontend/PortalController.php:884
+#: includes/Frontend/PortalController.php:885
 #: includes/Frontend/views/portal-document.php:42
 msgid "Edit document"
 msgstr ""
@@ -990,7 +1008,7 @@ msgstr ""
 msgid "Event"
 msgstr ""
 
-#: includes/Admin/views/workspaces.php:31
+#: includes/Admin/views/workspaces.php:32
 msgid "Every customer workspace on this site, with its plan, members and document count. Only you (the site operator) can see this cross-tenant view."
 msgstr ""
 
@@ -1010,9 +1028,9 @@ msgstr ""
 msgid "Every signer must have at least one field. Please assign a field to each signer."
 msgstr ""
 
-#: includes/Admin/views/workspaces.php:25
+#: includes/Admin/views/workspaces.php:26
 #: includes/Audit/AuditLogger.php:54
-#: includes/Frontend/views/portal-billing.php:33
+#: includes/Frontend/views/portal-billing.php:34
 msgid "Expired"
 msgstr ""
 
@@ -1050,7 +1068,7 @@ msgstr ""
 msgid "Field:"
 msgstr ""
 
-#: includes/Frontend/PortalController.php:410
+#: includes/Frontend/PortalController.php:411
 msgid "Fields saved."
 msgstr ""
 
@@ -1059,9 +1077,9 @@ msgstr ""
 msgid "File"
 msgstr ""
 
-#: includes/Admin/Admin.php:1410
-#: includes/Frontend/PortalController.php:239
-#: includes/Frontend/PortalController.php:244
+#: includes/Admin/Admin.php:1438
+#: includes/Frontend/PortalController.php:240
+#: includes/Frontend/PortalController.php:245
 msgid "File not available."
 msgstr ""
 
@@ -1075,7 +1093,7 @@ msgid "Fill in the details below"
 msgstr ""
 
 #: includes/Admin/DocumentsListTable.php:127
-#: includes/Admin/views/workspaces.php:44
+#: includes/Admin/views/workspaces.php:45
 #: includes/Frontend/views/portal-documents.php:48
 msgid "Filter"
 msgstr ""
@@ -1089,8 +1107,8 @@ msgstr ""
 msgid "For signer:"
 msgstr ""
 
-#: includes/Admin/views/workspaces.php:21
-#: includes/Frontend/views/portal-billing.php:29
+#: includes/Admin/views/workspaces.php:22
+#: includes/Frontend/views/portal-billing.php:30
 msgid "Free trial"
 msgstr ""
 
@@ -1113,6 +1131,10 @@ msgstr ""
 
 #: includes/Admin/views/edit.php:236
 msgid "Get signing link"
+msgstr ""
+
+#: includes/Services/BillingNotifications.php:123
+msgid "Good news — your workspace has been reactivated and you can send documents again."
 msgstr ""
 
 #: includes/Email/Mailer.php:38
@@ -1150,6 +1172,7 @@ msgid "I have read the document and I agree to sign it electronically."
 msgstr ""
 
 #: includes/Admin/views/edit.php:193
+#: includes/Admin/views/workspaces.php:142
 #: includes/Services/DocumentService.php:374
 msgid "IP"
 msgstr ""
@@ -1169,8 +1192,8 @@ msgstr ""
 msgid "Initials"
 msgstr ""
 
-#: includes/Frontend/PortalController.php:1245
-#: includes/Frontend/PortalController.php:1431
+#: includes/Frontend/PortalController.php:1263
+#: includes/Frontend/PortalController.php:1449
 #: includes/Frontend/views/portal-insights.php:29
 msgid "Insights"
 msgstr ""
@@ -1203,17 +1226,17 @@ msgid "Invalid upload."
 msgstr ""
 
 #: includes/Admin/Admin.php:684
-#: includes/Frontend/PortalController.php:1042
+#: includes/Frontend/PortalController.php:1043
 msgid "Invitation cancelled."
 msgstr ""
 
 #: includes/Admin/Admin.php:535
-#: includes/Frontend/PortalController.php:224
+#: includes/Frontend/PortalController.php:225
 msgid "Invitation re-sent."
 msgstr ""
 
 #: includes/Admin/Admin.php:625
-#: includes/Frontend/PortalController.php:997
+#: includes/Frontend/PortalController.php:998
 msgid "Invitation saved. The user will join when they sign in with this email."
 msgstr ""
 
@@ -1228,6 +1251,10 @@ msgstr ""
 
 #: includes/Frontend/SigningController.php:446
 msgid "It is not your turn to sign yet."
+msgstr ""
+
+#: includes/Frontend/views/portal-billing.php:121
+msgid "Keep my subscription"
 msgstr ""
 
 #: includes/Admin/views/analytics.php:87
@@ -1262,7 +1289,7 @@ msgid "Logo URL"
 msgstr ""
 
 #: includes/Admin/DocumentsListTable.php:151
-#: includes/Admin/views/workspaces.php:63
+#: includes/Admin/views/workspaces.php:64
 msgid "Manage"
 msgstr ""
 
@@ -1271,18 +1298,18 @@ msgid "Member"
 msgstr ""
 
 #: includes/Admin/Admin.php:624
-#: includes/Frontend/PortalController.php:997
+#: includes/Frontend/PortalController.php:998
 msgid "Member added."
 msgstr ""
 
 #: includes/Admin/Admin.php:668
-#: includes/Frontend/PortalController.php:1051
+#: includes/Frontend/PortalController.php:1052
 msgid "Member removed."
 msgstr ""
 
 #: includes/Admin/Admin.php:174
 #: includes/Admin/Admin.php:175
-#: includes/Admin/views/workspaces.php:60
+#: includes/Admin/views/workspaces.php:61
 msgid "Members"
 msgstr ""
 
@@ -1299,7 +1326,7 @@ msgstr ""
 msgid "Missing transaction reference."
 msgstr ""
 
-#: includes/Frontend/views/portal-billing.php:159
+#: includes/Frontend/views/portal-billing.php:176
 msgid "Monthly — %s"
 msgstr ""
 
@@ -1329,12 +1356,12 @@ msgid "Name (auto)"
 msgstr ""
 
 #: includes/Admin/views/analytics.php:78
-#: includes/Frontend/views/portal-insights.php:76
+#: includes/Frontend/views/portal-insights.php:93
 msgid "Needs attention (out > 7 days)"
 msgstr ""
 
-#: includes/Frontend/PortalController.php:724
-#: includes/Frontend/PortalController.php:1439
+#: includes/Frontend/PortalController.php:725
+#: includes/Frontend/PortalController.php:1457
 #: includes/Frontend/views/portal-create.php:27
 #: includes/Frontend/views/portal-dashboard.php:63
 msgid "New document"
@@ -1397,8 +1424,8 @@ msgstr ""
 msgid "No signers yet."
 msgstr ""
 
-#: includes/Admin/views/workspaces.php:26
-#: includes/Frontend/views/portal-billing.php:34
+#: includes/Admin/views/workspaces.php:27
+#: includes/Frontend/views/portal-billing.php:35
 msgid "No subscription"
 msgstr ""
 
@@ -1414,39 +1441,39 @@ msgstr ""
 msgid "No webhook URL is configured."
 msgstr ""
 
-#: includes/Frontend/PortalController.php:603
+#: includes/Frontend/PortalController.php:604
 msgid "No workspace"
 msgstr ""
 
-#: includes/Frontend/PortalController.php:604
+#: includes/Frontend/PortalController.php:605
 msgid "No workspace yet"
 msgstr ""
 
-#: includes/Admin/views/workspaces.php:51
+#: includes/Admin/views/workspaces.php:52
 msgid "No workspaces yet."
 msgstr ""
 
-#: includes/Frontend/PortalController.php:695
-#: includes/Frontend/PortalController.php:749
-#: includes/Frontend/PortalController.php:925
-#: includes/Frontend/PortalController.php:1076
+#: includes/Frontend/PortalController.php:696
+#: includes/Frontend/PortalController.php:750
+#: includes/Frontend/PortalController.php:926
+#: includes/Frontend/PortalController.php:1077
 msgid "Not allowed"
 msgstr ""
 
-#: includes/Frontend/PortalController.php:837
+#: includes/Frontend/PortalController.php:838
 msgid "Not available"
 msgstr ""
 
-#: includes/Frontend/PortalController.php:1356
+#: includes/Frontend/PortalController.php:1374
 msgid "Not found"
 msgstr ""
 
 #: includes/Admin/views/analytics.php:80
-#: includes/Frontend/views/portal-insights.php:78
+#: includes/Frontend/views/portal-insights.php:95
 msgid "Nothing stuck — every document is moving."
 msgstr ""
 
-#: includes/Frontend/PortalController.php:267
+#: includes/Frontend/PortalController.php:268
 msgid "Nothing to export."
 msgstr ""
 
@@ -1466,7 +1493,7 @@ msgstr ""
 msgid "One per line, in the form name = value. Each {{name}} in the content is replaced with its value. {{date}} and {{site}} are available automatically."
 msgstr ""
 
-#: includes/Frontend/views/portal-billing.php:116
+#: includes/Frontend/views/portal-billing.php:133
 msgid "Online payment is not set up on this site yet. Please contact support to choose a paid plan."
 msgstr ""
 
@@ -1474,11 +1501,11 @@ msgstr ""
 msgid "Only PDF files are allowed."
 msgstr ""
 
-#: includes/Frontend/PortalController.php:1078
+#: includes/Frontend/PortalController.php:1079
 msgid "Only a workspace owner can manage the plan and billing."
 msgstr ""
 
-#: includes/Frontend/PortalController.php:566
+#: includes/Frontend/PortalController.php:567
 msgid "Open your area"
 msgstr ""
 
@@ -1500,6 +1527,10 @@ msgstr ""
 
 #: includes/Support/HealthCheck.php:82
 msgid "OpenSSL is unavailable; documents use electronic signatures only."
+msgstr ""
+
+#: includes/Admin/views/workspaces.php:137
+msgid "Operator"
 msgstr ""
 
 #: includes/Admin/views/settings.php:259
@@ -1532,7 +1563,7 @@ msgstr ""
 msgid "Owner"
 msgstr ""
 
-#: includes/Admin/views/workspaces.php:57
+#: includes/Admin/views/workspaces.php:58
 msgid "Owner(s)"
 msgstr ""
 
@@ -1545,7 +1576,7 @@ msgstr ""
 msgid "PDF only, up to 25 MB."
 msgstr ""
 
-#: includes/Frontend/PortalController.php:325
+#: includes/Frontend/PortalController.php:326
 msgid "PDF uploaded. Now add signers and place fields."
 msgstr ""
 
@@ -1566,16 +1597,16 @@ msgstr ""
 msgid "Paste these shortcodes into any page or post. The links are the public entry points for your customers."
 msgstr ""
 
-#: includes/Admin/views/workspaces.php:23
-#: includes/Frontend/views/portal-billing.php:31
+#: includes/Admin/views/workspaces.php:24
+#: includes/Frontend/views/portal-billing.php:32
 msgid "Payment due"
 msgstr ""
 
-#: includes/Frontend/views/portal-billing.php:56
+#: includes/Frontend/views/portal-billing.php:57
 msgid "Payment received — your plan is now active."
 msgstr ""
 
-#: includes/Frontend/views/portal-billing.php:60
+#: includes/Frontend/views/portal-billing.php:61
 msgid "Payment was not completed. You can try again below."
 msgstr ""
 
@@ -1592,7 +1623,7 @@ msgstr ""
 msgid "Permanently delete this document and all its data?"
 msgstr ""
 
-#: includes/Setup/Installer.php:368
+#: includes/Setup/Installer.php:395
 msgid "Personal workspace"
 msgstr ""
 
@@ -1631,22 +1662,22 @@ msgstr ""
 msgid "Place signature fields"
 msgstr ""
 
-#: includes/Admin/views/workspaces.php:58
-#: includes/Admin/views/workspaces.php:82
+#: includes/Admin/views/workspaces.php:59
+#: includes/Admin/views/workspaces.php:83
 msgid "Plan"
 msgstr ""
 
-#: includes/Frontend/PortalController.php:1096
-#: includes/Frontend/PortalController.php:1460
-#: includes/Frontend/views/portal-billing.php:53
+#: includes/Frontend/PortalController.php:1097
+#: includes/Frontend/PortalController.php:1478
+#: includes/Frontend/views/portal-billing.php:54
 msgid "Plan & billing"
 msgstr ""
 
-#: includes/Admin/Admin.php:1161
+#: includes/Admin/Admin.php:1173
 msgid "Plan updated."
 msgstr ""
 
-#: includes/Frontend/views/portal-billing.php:72
+#: includes/Frontend/views/portal-billing.php:73
 msgid "Plan:"
 msgstr ""
 
@@ -1659,16 +1690,16 @@ msgid "Please choose a .p12/.pfx certificate file."
 msgstr ""
 
 #: includes/Admin/Admin.php:419
-#: includes/Frontend/PortalController.php:310
+#: includes/Frontend/PortalController.php:311
 msgid "Please choose a PDF to upload."
 msgstr ""
 
-#: includes/Admin/Admin.php:1156
-#: includes/Frontend/PortalController.php:1182
+#: includes/Admin/Admin.php:1161
+#: includes/Frontend/PortalController.php:1184
 msgid "Please choose a valid plan."
 msgstr ""
 
-#: includes/Frontend/PortalController.php:155
+#: includes/Frontend/PortalController.php:156
 msgid "Please choose one of your templates."
 msgstr ""
 
@@ -1700,7 +1731,7 @@ msgstr ""
 msgid "Please provide a sub-workspace name."
 msgstr ""
 
-#: includes/Frontend/PortalController.php:792
+#: includes/Frontend/PortalController.php:793
 msgid "Please provide a valid email address for the contact."
 msgstr ""
 
@@ -1712,7 +1743,7 @@ msgstr ""
 msgid "Please provide a valid email address."
 msgstr ""
 
-#: includes/Frontend/PortalController.php:1016
+#: includes/Frontend/PortalController.php:1017
 #: includes/Services/AccountService.php:221
 msgid "Please provide a valid email and role."
 msgstr ""
@@ -1725,7 +1756,7 @@ msgstr ""
 msgid "Please provide the new signer’s name."
 msgstr ""
 
-#: includes/Frontend/PortalController.php:582
+#: includes/Frontend/PortalController.php:583
 msgid "Please sign in"
 msgstr ""
 
@@ -1741,7 +1772,7 @@ msgstr ""
 msgid "Please verify your identity before signing."
 msgstr ""
 
-#: includes/Frontend/PortalController.php:1497
+#: includes/Frontend/PortalController.php:1515
 msgid "Portal template missing."
 msgstr ""
 
@@ -1780,7 +1811,8 @@ msgstr ""
 msgid "Re-send invitations"
 msgstr ""
 
-#: includes/Admin/views/workspaces.php:100
+#: includes/Admin/views/workspaces.php:103
+#: includes/Admin/views/workspaces.php:130
 msgid "Reactivate"
 msgstr ""
 
@@ -1790,12 +1822,27 @@ msgstr ""
 msgid "Ready to send"
 msgstr ""
 
+#: includes/Admin/views/workspaces.php:141
+msgid "Reason"
+msgstr ""
+
+#: includes/Admin/views/workspaces.php:101
+#: includes/Admin/views/workspaces.php:102
+#: includes/Admin/views/workspaces.php:111
+#: includes/Admin/views/workspaces.php:112
+msgid "Reason (optional)"
+msgstr ""
+
 #: includes/Frontend/views/sign.php:148
 msgid "Reason for declining (optional)"
 msgstr ""
 
 #: includes/Frontend/views/portal-dashboard.php:66
 msgid "Recent documents"
+msgstr ""
+
+#: includes/Admin/views/workspaces.php:124
+msgid "Recent operator actions"
 msgstr ""
 
 #: includes/Admin/views/settings.php:104
@@ -1850,7 +1897,7 @@ msgstr ""
 msgid "Remove this signer?"
 msgstr ""
 
-#: includes/Frontend/views/portal-billing.php:88
+#: includes/Frontend/views/portal-billing.php:98
 msgid "Renews on %s."
 msgstr ""
 
@@ -1893,7 +1940,7 @@ msgid "Role %d"
 msgstr ""
 
 #: includes/Admin/Admin.php:645
-#: includes/Frontend/PortalController.php:1025
+#: includes/Frontend/PortalController.php:1026
 msgid "Role updated."
 msgstr ""
 
@@ -1969,7 +2016,7 @@ msgstr ""
 msgid "Search by name or email…"
 msgstr ""
 
-#: includes/Admin/views/workspaces.php:37
+#: includes/Admin/views/workspaces.php:38
 msgid "Search by name…"
 msgstr ""
 
@@ -2056,7 +2103,8 @@ msgstr ""
 msgid "Sent for signing"
 msgstr ""
 
-#: includes/Admin/views/workspaces.php:92
+#: includes/Admin/views/workspaces.php:93
+#: includes/Admin/views/workspaces.php:128
 msgid "Set plan"
 msgstr ""
 
@@ -2098,7 +2146,7 @@ msgstr ""
 msgid "Sign document"
 msgstr ""
 
-#: includes/Frontend/PortalController.php:581
+#: includes/Frontend/PortalController.php:582
 #: includes/Frontend/views/portal-message.php:21
 msgid "Sign in"
 msgstr ""
@@ -2107,7 +2155,7 @@ msgstr ""
 msgid "Sign in person"
 msgstr ""
 
-#: includes/Frontend/PortalController.php:564
+#: includes/Frontend/PortalController.php:565
 msgid "Sign in to your area"
 msgstr ""
 
@@ -2175,7 +2223,7 @@ msgid "Signer %d"
 msgstr ""
 
 #: includes/Admin/Admin.php:480
-#: includes/Frontend/PortalController.php:369
+#: includes/Frontend/PortalController.php:370
 msgid "Signer added."
 msgstr ""
 
@@ -2185,7 +2233,7 @@ msgid "Signer not found."
 msgstr ""
 
 #: includes/Admin/Admin.php:519
-#: includes/Frontend/PortalController.php:390
+#: includes/Frontend/PortalController.php:391
 msgid "Signer removed."
 msgstr ""
 
@@ -2240,7 +2288,7 @@ msgstr ""
 #: includes/Admin/DocumentsListTable.php:54
 #: includes/Admin/views/analytics.php:86
 #: includes/Admin/views/health.php:37
-#: includes/Admin/views/workspaces.php:59
+#: includes/Admin/views/workspaces.php:60
 #: includes/Frontend/views/partials/portal-doc-table.php:21
 #: includes/Frontend/views/partials/portal-doc-table.php:34
 #: includes/Frontend/views/portal-document.php:88
@@ -2250,7 +2298,7 @@ msgid "Status"
 msgstr ""
 
 #: includes/Admin/views/edit.php:142
-#: includes/Frontend/views/portal-billing.php:66
+#: includes/Frontend/views/portal-billing.php:67
 #: includes/Frontend/views/portal-document.php:32
 msgid "Status:"
 msgstr ""
@@ -2267,11 +2315,12 @@ msgstr ""
 msgid "Sub-workspace name"
 msgstr ""
 
-#: includes/Admin/views/workspaces.php:108
+#: includes/Admin/views/workspaces.php:113
+#: includes/Admin/views/workspaces.php:129
 msgid "Suspend"
 msgstr ""
 
-#: includes/Admin/views/workspaces.php:103
+#: includes/Admin/views/workspaces.php:106
 msgid "Suspend this workspace?"
 msgstr ""
 
@@ -2286,18 +2335,18 @@ msgstr ""
 msgid "System Status"
 msgstr ""
 
-#: includes/Frontend/PortalController.php:954
-#: includes/Frontend/PortalController.php:1452
+#: includes/Frontend/PortalController.php:955
+#: includes/Frontend/PortalController.php:1470
 #: includes/Frontend/views/portal-team.php:23
 msgid "Team"
 msgstr ""
 
-#: includes/Frontend/PortalController.php:926
+#: includes/Frontend/PortalController.php:927
 msgid "Team management is not available"
 msgstr ""
 
 #: includes/Frontend/PricingShortcode.php:84
-#: includes/Frontend/views/portal-billing.php:135
+#: includes/Frontend/views/portal-billing.php:152
 msgid "Team seats: %d"
 msgstr ""
 
@@ -2305,7 +2354,7 @@ msgstr ""
 msgid "Template"
 msgstr ""
 
-#: includes/Admin/Admin.php:1346
+#: includes/Admin/Admin.php:1374
 msgid "Template deleted."
 msgstr ""
 
@@ -2317,13 +2366,13 @@ msgstr ""
 msgid "Template name"
 msgstr ""
 
-#: includes/Admin/Admin.php:1251
+#: includes/Admin/Admin.php:1279
 #: includes/Services/DocumentService.php:790
 #: includes/Services/DocumentService.php:908
 msgid "Template not found."
 msgstr ""
 
-#: includes/Admin/Admin.php:1290
+#: includes/Admin/Admin.php:1318
 msgid "Template saved."
 msgstr ""
 
@@ -2337,7 +2386,7 @@ msgstr ""
 msgid "Terminal number"
 msgstr ""
 
-#: includes/Admin/Admin.php:1195
+#: includes/Admin/Admin.php:1223
 msgid "Test email sent to %s."
 msgstr ""
 
@@ -2364,7 +2413,7 @@ msgstr ""
 msgid "That code was not correct. Please try again."
 msgstr ""
 
-#: includes/Frontend/PortalController.php:812
+#: includes/Frontend/PortalController.php:813
 msgid "That contact could not be found in your workspace."
 msgstr ""
 
@@ -2465,12 +2514,12 @@ msgstr ""
 msgid "This document does not allow assigning to someone else."
 msgstr ""
 
-#: includes/Frontend/PortalController.php:1358
+#: includes/Frontend/PortalController.php:1376
 msgid "This document does not exist in your workspace."
 msgstr ""
 
-#: includes/Frontend/PortalController.php:343
-#: includes/Frontend/PortalController.php:849
+#: includes/Frontend/PortalController.php:344
+#: includes/Frontend/PortalController.php:850
 msgid "This document has already been sent and can no longer be edited."
 msgstr ""
 
@@ -2478,7 +2527,7 @@ msgstr ""
 msgid "This document is authentic."
 msgstr ""
 
-#: includes/Frontend/PortalController.php:839
+#: includes/Frontend/PortalController.php:840
 msgid "This document is not available for editing in your workspace."
 msgstr ""
 
@@ -2490,7 +2539,7 @@ msgstr ""
 msgid "This field is required."
 msgstr ""
 
-#: includes/Admin/Admin.php:1189
+#: includes/Admin/Admin.php:1217
 msgid "This is a test email from ComSign. If you received it, outgoing mail works on this server."
 msgstr ""
 
@@ -2502,7 +2551,7 @@ msgstr ""
 msgid "This link is personal — please do not forward it."
 msgstr ""
 
-#: includes/Frontend/views/portal-billing.php:94
+#: includes/Frontend/views/portal-billing.php:105
 msgid "This month:"
 msgstr ""
 
@@ -2593,16 +2642,16 @@ msgstr ""
 msgid "Type your full name"
 msgstr ""
 
-#: includes/Billing/CardcomGateway.php:218
+#: includes/Billing/CardcomGateway.php:233
 msgid "Unexpected gateway response."
 msgstr ""
 
-#: includes/Admin/Admin.php:1175
+#: includes/Admin/Admin.php:1203
 msgid "Unknown action."
 msgstr ""
 
 #: includes/Frontend/PricingShortcode.php:83
-#: includes/Frontend/views/portal-billing.php:134
+#: includes/Frontend/views/portal-billing.php:151
 msgid "Unlimited documents"
 msgstr ""
 
@@ -2746,7 +2795,7 @@ msgstr ""
 msgid "We could not charge your subscription. Your workspace will keep working for now, but please update your payment to avoid interruption."
 msgstr ""
 
-#: includes/Frontend/views/portal-billing.php:58
+#: includes/Frontend/views/portal-billing.php:59
 msgid "We could not confirm your payment. If you were charged, it will activate shortly — otherwise you can try again below."
 msgstr ""
 
@@ -2788,6 +2837,7 @@ msgid "What it does"
 msgstr ""
 
 #: includes/Admin/views/edit.php:192
+#: includes/Admin/views/workspaces.php:136
 #: includes/Services/DocumentService.php:373
 msgid "When"
 msgstr ""
@@ -2796,8 +2846,9 @@ msgstr ""
 msgid "Where signed-in customers manage, create, send and track their documents (no WP-Admin needed)."
 msgstr ""
 
-#: includes/Admin/views/workspaces.php:56
-#: includes/Frontend/PortalController.php:1282
+#: includes/Admin/views/workspaces.php:57
+#: includes/Admin/views/workspaces.php:138
+#: includes/Frontend/PortalController.php:1300
 #: includes/Frontend/views/partials/portal-nav.php:13
 msgid "Workspace"
 msgstr ""
@@ -2807,15 +2858,15 @@ msgstr ""
 msgid "Workspace members"
 msgstr ""
 
-#: includes/Admin/Admin.php:1149
+#: includes/Admin/Admin.php:1151
 msgid "Workspace not found."
 msgstr ""
 
-#: includes/Admin/Admin.php:1172
+#: includes/Admin/Admin.php:1200
 msgid "Workspace reactivated."
 msgstr ""
 
-#: includes/Admin/Admin.php:1166
+#: includes/Admin/Admin.php:1186
 msgid "Workspace suspended."
 msgstr ""
 
@@ -2834,7 +2885,7 @@ msgstr ""
 
 #: includes/Admin/Admin.php:205
 #: includes/Admin/Admin.php:206
-#: includes/Admin/views/workspaces.php:30
+#: includes/Admin/views/workspaces.php:31
 msgid "Workspaces"
 msgstr ""
 
@@ -2847,8 +2898,8 @@ msgid "X-ComSign-Key"
 msgstr ""
 
 #: includes/Admin/Admin.php:1072
-#: includes/Admin/Admin.php:1139
-#: includes/Admin/Admin.php:1466
+#: includes/Admin/Admin.php:1140
+#: includes/Admin/Admin.php:1494
 msgid "You are not allowed to access this page."
 msgstr ""
 
@@ -2860,25 +2911,26 @@ msgstr ""
 msgid "You can view members but only an owner or admin can change them."
 msgstr ""
 
-#: includes/Frontend/PortalController.php:696
+#: includes/Frontend/PortalController.php:697
 msgid "You cannot create documents"
 msgstr ""
 
-#: includes/Frontend/PortalController.php:145
-#: includes/Frontend/PortalController.php:306
+#: includes/Frontend/PortalController.php:146
+#: includes/Frontend/PortalController.php:307
 msgid "You cannot create documents in this workspace."
 msgstr ""
 
-#: includes/Frontend/PortalController.php:338
+#: includes/Frontend/PortalController.php:339
 msgid "You cannot edit this document."
 msgstr ""
 
-#: includes/Frontend/PortalController.php:1174
-#: includes/Frontend/PortalController.php:1226
+#: includes/Frontend/PortalController.php:1176
+#: includes/Frontend/PortalController.php:1228
+#: includes/Frontend/PortalController.php:1244
 msgid "You cannot manage billing for this workspace."
 msgstr ""
 
-#: includes/Frontend/PortalController.php:783
+#: includes/Frontend/PortalController.php:784
 msgid "You cannot manage contacts in this workspace."
 msgstr ""
 
@@ -2886,21 +2938,21 @@ msgstr ""
 msgid "You cannot manage members of this workspace."
 msgstr ""
 
-#: includes/Frontend/PortalController.php:972
+#: includes/Frontend/PortalController.php:973
 msgid "You cannot manage the team for this workspace."
 msgstr ""
 
 #: includes/Admin/Admin.php:664
-#: includes/Frontend/PortalController.php:1021
-#: includes/Frontend/PortalController.php:1047
+#: includes/Frontend/PortalController.php:1022
+#: includes/Frontend/PortalController.php:1048
 msgid "You cannot remove the last owner of a workspace."
 msgstr ""
 
-#: includes/Frontend/PortalController.php:215
+#: includes/Frontend/PortalController.php:216
 msgid "You cannot resend invitations for this document."
 msgstr ""
 
-#: includes/Frontend/PortalController.php:136
+#: includes/Frontend/PortalController.php:137
 msgid "You cannot send this document."
 msgstr ""
 
@@ -2933,7 +2985,7 @@ msgstr ""
 msgid "You have declined to sign this document. The sender has been notified."
 msgstr ""
 
-#: includes/Services/SubscriptionService.php:181
+#: includes/Services/SubscriptionService.php:183
 msgid "You have reached your plan’s monthly document limit. Upgrade your plan to send more."
 msgstr ""
 
@@ -2941,7 +2993,7 @@ msgstr ""
 msgid "You must agree to sign electronically before continuing."
 msgstr ""
 
-#: includes/Frontend/PortalController.php:583
+#: includes/Frontend/PortalController.php:584
 msgid "You need to sign in to access your workspace."
 msgstr ""
 
@@ -2949,11 +3001,19 @@ msgstr ""
 msgid "Your %s free trial is ending soon"
 msgstr ""
 
+#: includes/Services/BillingNotifications.php:122
+msgid "Your %s workspace has been reactivated"
+msgstr ""
+
+#: includes/Services/BillingNotifications.php:125
+msgid "Your %s workspace has been suspended"
+msgstr ""
+
 #: includes/Frontend/SignerAuth.php:132
 msgid "Your ComSign verification code"
 msgstr ""
 
-#: includes/Frontend/PortalController.php:605
+#: includes/Frontend/PortalController.php:606
 msgid "Your account is not part of any workspace. Please contact your administrator."
 msgstr ""
 
@@ -2965,7 +3025,7 @@ msgstr ""
 msgid "Your contacts"
 msgstr ""
 
-#: includes/Frontend/views/portal-billing.php:148
+#: includes/Frontend/views/portal-billing.php:165
 msgid "Your current plan"
 msgstr ""
 
@@ -2973,15 +3033,15 @@ msgstr ""
 msgid "Your free trial ends in %d days."
 msgstr ""
 
-#: includes/Frontend/PortalController.php:697
+#: includes/Frontend/PortalController.php:698
 msgid "Your role in this workspace does not allow creating documents. Please contact an administrator."
 msgstr ""
 
-#: includes/Frontend/PortalController.php:751
+#: includes/Frontend/PortalController.php:752
 msgid "Your role in this workspace does not allow managing contacts."
 msgstr ""
 
-#: includes/Frontend/PortalController.php:927
+#: includes/Frontend/PortalController.php:928
 msgid "Your role in this workspace does not allow managing the team."
 msgstr ""
 
@@ -2989,16 +3049,24 @@ msgstr ""
 msgid "Your signature"
 msgstr ""
 
-#: includes/Frontend/views/portal-billing.php:64
+#: includes/Frontend/views/portal-billing.php:65
 msgid "Your subscription"
 msgstr ""
 
-#: includes/Frontend/PortalController.php:1230
-msgid "Your subscription has been canceled."
+#: includes/Services/SubscriptionService.php:179
+msgid "Your subscription is not active. Please choose a plan to keep sending documents."
 msgstr ""
 
-#: includes/Services/SubscriptionService.php:177
-msgid "Your subscription is not active. Please choose a plan to keep sending documents."
+#: includes/Frontend/views/portal-billing.php:91
+msgid "Your subscription is set to cancel. You keep full access until %s, after which it will not renew."
+msgstr ""
+
+#: includes/Frontend/PortalController.php:1248
+msgid "Your subscription will continue to renew."
+msgstr ""
+
+#: includes/Frontend/PortalController.php:1232
+msgid "Your subscription will not renew. You keep access until the end of the current period."
 msgstr ""
 
 #: includes/Frontend/SignerAuth.php:135
@@ -3009,9 +3077,13 @@ msgstr ""
 msgid "Your workspace"
 msgstr ""
 
-#: includes/Admin/views/workspaces.php:90
+#: includes/Services/BillingNotifications.php:126
+msgid "Your workspace has been suspended. Please contact support if you believe this is a mistake."
+msgstr ""
+
+#: includes/Admin/views/workspaces.php:91
 #: includes/Services/BillingService.php:61
-#: includes/Services/BillingService.php:140
+#: includes/Services/BillingService.php:155
 msgid "annual"
 msgstr ""
 
@@ -3038,9 +3110,9 @@ msgstr ""
 msgid "email@example.com"
 msgstr ""
 
-#: includes/Admin/views/workspaces.php:89
+#: includes/Admin/views/workspaces.php:90
 #: includes/Services/BillingService.php:61
-#: includes/Services/BillingService.php:140
+#: includes/Services/BillingService.php:155
 msgid "monthly"
 msgstr ""
 
@@ -3048,7 +3120,7 @@ msgstr ""
 msgid "or %s / year"
 msgstr ""
 
-#: includes/Admin/Admin.php:1197
+#: includes/Admin/Admin.php:1225
 msgid "wp_mail() reported a failure. Check your mail configuration (e.g. an SMTP plugin)."
 msgstr ""
 

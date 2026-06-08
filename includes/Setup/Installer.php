@@ -97,6 +97,14 @@ final class Installer {
 	}
 
 	/**
+	 * Operator (cross-tenant admin) action log table name.
+	 */
+	public static function operator_log_table(): string {
+		global $wpdb;
+		return $wpdb->prefix . 'comsign_operator_log';
+	}
+
+	/**
 	 * Option holding the id of the default (migration) account.
 	 */
 	public const OPTION_DEFAULT_ACCOUNT = 'comsign_default_account';
@@ -284,11 +292,30 @@ final class Installer {
 			status VARCHAR(20) NOT NULL DEFAULT 'trialing',
 			trial_ends_at DATETIME DEFAULT NULL,
 			current_period_end DATETIME DEFAULT NULL,
+			cancel_at_period_end TINYINT(1) NOT NULL DEFAULT 0,
 			cardcom_token VARCHAR(255) NOT NULL DEFAULT '',
 			created_at DATETIME NOT NULL DEFAULT '0000-00-00 00:00:00',
 			updated_at DATETIME NOT NULL DEFAULT '0000-00-00 00:00:00',
 			PRIMARY KEY  (id),
 			UNIQUE KEY account_id (account_id)
+		) {$charset_collate};";
+
+		$operator_log = self::operator_log_table();
+		$schema[] = "CREATE TABLE {$operator_log} (
+			id BIGINT UNSIGNED NOT NULL AUTO_INCREMENT,
+			actor_id BIGINT UNSIGNED NOT NULL DEFAULT 0,
+			account_id BIGINT UNSIGNED NOT NULL DEFAULT 0,
+			action VARCHAR(40) NOT NULL DEFAULT '',
+			old_plan VARCHAR(40) NOT NULL DEFAULT '',
+			old_status VARCHAR(20) NOT NULL DEFAULT '',
+			new_plan VARCHAR(40) NOT NULL DEFAULT '',
+			new_status VARCHAR(20) NOT NULL DEFAULT '',
+			reason VARCHAR(255) NOT NULL DEFAULT '',
+			ip VARCHAR(45) NOT NULL DEFAULT '',
+			created_at DATETIME NOT NULL DEFAULT '0000-00-00 00:00:00',
+			PRIMARY KEY  (id),
+			KEY account_id (account_id),
+			KEY actor_id (actor_id)
 		) {$charset_collate};";
 
 		// Drop the legacy UNIQUE index on token_hash before dbDelta re-adds it as

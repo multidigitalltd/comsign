@@ -44,12 +44,13 @@ final class SubscriptionRepository {
 		$table = Installer::subscriptions_table();
 
 		$fields = array(
-			'plan'               => isset( $data['plan'] ) ? (string) $data['plan'] : null,
-			'cycle'              => isset( $data['cycle'] ) ? (string) $data['cycle'] : null,
-			'status'             => isset( $data['status'] ) ? (string) $data['status'] : null,
-			'trial_ends_at'      => array_key_exists( 'trial_ends_at', $data ) ? $data['trial_ends_at'] : null,
-			'current_period_end' => array_key_exists( 'current_period_end', $data ) ? $data['current_period_end'] : null,
-			'cardcom_token'      => isset( $data['cardcom_token'] ) ? (string) $data['cardcom_token'] : null,
+			'plan'                 => isset( $data['plan'] ) ? (string) $data['plan'] : null,
+			'cycle'                => isset( $data['cycle'] ) ? (string) $data['cycle'] : null,
+			'status'               => isset( $data['status'] ) ? (string) $data['status'] : null,
+			'trial_ends_at'        => array_key_exists( 'trial_ends_at', $data ) ? $data['trial_ends_at'] : null,
+			'current_period_end'   => array_key_exists( 'current_period_end', $data ) ? $data['current_period_end'] : null,
+			'cancel_at_period_end' => array_key_exists( 'cancel_at_period_end', $data ) ? (int) $data['cancel_at_period_end'] : null,
+			'cardcom_token'        => isset( $data['cardcom_token'] ) ? (string) $data['cardcom_token'] : null,
 		);
 		// Drop untouched keys so we never overwrite with null unintentionally.
 		$fields = array_filter( $fields, static fn( $v ) => null !== $v );
@@ -88,7 +89,7 @@ final class SubscriptionRepository {
 		$now = current_time( 'mysql', true );
 		return $wpdb->get_results( // phpcs:ignore WordPress.DB.DirectDatabaseQuery, WordPress.DB.PreparedSQL.NotPrepared
 			$wpdb->prepare(
-				'SELECT * FROM ' . Installer::subscriptions_table() . " WHERE status = 'active' AND cardcom_token <> '' AND current_period_end IS NOT NULL AND current_period_end <= %s",
+				'SELECT * FROM ' . Installer::subscriptions_table() . " WHERE status = 'active' AND cancel_at_period_end = 0 AND cardcom_token <> '' AND current_period_end IS NOT NULL AND current_period_end <= %s",
 				$now
 			)
 		);

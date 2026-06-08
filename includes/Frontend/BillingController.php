@@ -38,13 +38,38 @@ final class BillingController {
 		return admin_url( 'admin-post.php?action=comsign_cardcom_webhook' );
 	}
 
+	/** Max accepted Low Profile reference length (Cardcom ids are short). */
+	private const REF_MAX_LEN = 64;
+	/** Verification attempts allowed per client IP per window. */
+	private const RATE_LIMIT = 30;
+	/** Rate-limit window, seconds. */
+	private const RATE_WINDOW = 600;
+
 	/**
 	 * Handle the Cardcom result notification.
+	 *
+	 * This endpoint is public and unauthenticated (Cardcom posts to it), so it is
+	 * a noise/abuse vector even though a forged call can never activate anything
+	 * (the reference is re-verified server-to-server and matched to our HMAC
+	 * intent). We therefore: reject malformed references without any outbound
+	 * call, rate-limit verification attempts per IP, and log repeated abuse.
 	 */
 	public function handle_webhook(): void {
 		$reference = $this->reference_from_request();
-		if ( '' !== $reference ) {
-			( new BillingService() )->complete_from_reference( $reference );
+
+		if ( '' !== $reference && $this->is_valid_reference( $reference ) ) {
+			if ( $this->within_rate_limit() ) {
+				( new BillingService() )->complete_from_reference( $reference );
+			} else {
+				$this->note_abuse( 'rate-limited' );
+				status_header( 429 );
+				echo 'Too Many Requests';
+				exit;
+			}
+		} elseif ( '' !== $reference ) {
+			// A non-empty but malformed reference is a strong abuse signal; never
+			// make an outbound call for it.
+			$this->note_abuse( 'invalid-reference' );
 		}
 
 		// Always acknowledge so the gateway does not retry indefinitely; the
@@ -52,6 +77,46 @@ final class BillingController {
 		status_header( 200 );
 		echo 'OK';
 		exit;
+	}
+
+	/**
+	 * Whether a reference looks like a legitimate Cardcom Low Profile id
+	 * (GUID-ish: letters, digits and dashes, bounded length).
+	 */
+	private function is_valid_reference( string $reference ): bool {
+		return strlen( $reference ) >= 8
+			&& strlen( $reference ) <= self::REF_MAX_LEN
+			&& 1 === preg_match( '/^[A-Za-z0-9\-]+$/', $reference );
+	}
+
+	/**
+	 * Lightweight per-IP rate limit on verification attempts, backed by a
+	 * transient counter. Returns false once the cap for the window is hit.
+	 */
+	private function within_rate_limit(): bool {
+		$ip = isset( $_SERVER['REMOTE_ADDR'] ) ? sanitize_text_field( wp_unslash( $_SERVER['REMOTE_ADDR'] ) ) : 'unknown';
+		$key   = 'comsign_cc_wh_' . md5( $ip );
+		$count = (int) get_transient( $key );
+		if ( $count >= self::RATE_LIMIT ) {
+			return false;
+		}
+		set_transient( $key, $count + 1, self::RATE_WINDOW );
+		return true;
+	}
+
+	/**
+	 * Record a webhook abuse signal (rate-limit hit / malformed reference) so a
+	 * site owner can spot a pattern. Kept to error_log to avoid a noisy table.
+	 */
+	private function note_abuse( string $reason ): void {
+		$ip  = isset( $_SERVER['REMOTE_ADDR'] ) ? sanitize_text_field( wp_unslash( $_SERVER['REMOTE_ADDR'] ) ) : 'unknown';
+		$key = 'comsign_cc_wh_bad_' . md5( $ip );
+		$n   = (int) get_transient( $key ) + 1;
+		set_transient( $key, $n, self::RATE_WINDOW );
+		if ( $n <= 3 || 0 === $n % 25 ) {
+			// phpcs:ignore WordPress.PHP.DevelopmentFunctions.error_log_error_log
+			error_log( sprintf( 'ComSign: Cardcom webhook %s from %s (%d in window).', $reason, $ip, $n ) );
+		}
 	}
 
 	/**

@@ -425,6 +425,7 @@ body.comsign-public {
 }
 .comsign-portal-flash.is-success { background: var( --comsign-success-bg, #f0fdf4 ); border-color: var( --comsign-success, #16a34a ); color: var( --comsign-success, #166534 ); }
 .comsign-portal-flash.is-error { background: var( --comsign-danger-bg, #fef2f2 ); border-color: var( --comsign-danger, #dc2626 ); color: var( --comsign-danger, #991b1b ); }
+.comsign-portal-flash.is-warning { background: var( --comsign-warning-bg, #fffbeb ); border-color: var( --comsign-warning, #d97706 ); color: var( --comsign-warning-text, #92400e ); }
 
 .comsign-portal-actions { display: flex; flex-wrap: wrap; gap: 8px; margin: 8px 0 16px; }
 

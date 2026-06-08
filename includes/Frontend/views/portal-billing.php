@@ -7,6 +7,7 @@
  * @var string       $page_title
  * @var array        $nav
  * @var bool|null    $activated     Checkout return result (true/false/null).
+ * @var bool         $canceling     Active but scheduled to cancel at period end.
  * @var string       $status        Effective subscription status.
  * @var object|null  $subscription  Raw subscription row.
  * @var string       $plan_id       Current plan id.
@@ -82,12 +83,22 @@ $paid = isset( $_GET['paid'] ) ? sanitize_key( wp_unslash( $_GET['paid'] ) ) : '
 					?>
 				</p>
 			<?php elseif ( $subscription && SubscriptionService::STATUS_ACTIVE === $status && ! empty( $subscription->current_period_end ) ) : ?>
-				<p class="comsign-intro">
-					<?php
-					/* translators: %s: renewal date. */
-					echo esc_html( sprintf( __( 'Renews on %s.', 'comsign' ), mysql2date( get_option( 'date_format' ), get_date_from_gmt( (string) $subscription->current_period_end ) ) ) );
-					?>
-				</p>
+				<?php $period_date = mysql2date( get_option( 'date_format' ), get_date_from_gmt( (string) $subscription->current_period_end ) ); ?>
+				<?php if ( $canceling ) : ?>
+					<p class="comsign-portal-flash is-warning" role="status">
+						<?php
+						/* translators: %s: end date. */
+						echo esc_html( sprintf( __( 'Your subscription is set to cancel. You keep full access until %s, after which it will not renew.', 'comsign' ), $period_date ) );
+						?>
+					</p>
+				<?php else : ?>
+					<p class="comsign-intro">
+						<?php
+						/* translators: %s: renewal date. */
+						echo esc_html( sprintf( __( 'Renews on %s.', 'comsign' ), $period_date ) );
+						?>
+					</p>
+				<?php endif; ?>
 			<?php endif; ?>
 
 			<p>
@@ -103,7 +114,13 @@ $paid = isset( $_GET['paid'] ) ? sanitize_key( wp_unslash( $_GET['paid'] ) ) : '
 				?>
 			</p>
 
-			<?php if ( in_array( $status, array( SubscriptionService::STATUS_ACTIVE, SubscriptionService::STATUS_PAST_DUE ), true ) ) : ?>
+			<?php if ( $canceling ) : ?>
+				<form method="post" action="<?php echo esc_url( $action ); ?>">
+					<input type="hidden" name="action" value="comsign_portal_resume_sub">
+					<input type="hidden" name="_wpnonce" value="<?php echo esc_attr( $nonce ); ?>">
+					<button type="submit" class="comsign-btn comsign-btn--primary comsign-btn--small"><?php esc_html_e( 'Keep my subscription', 'comsign' ); ?></button>
+				</form>
+			<?php elseif ( in_array( $status, array( SubscriptionService::STATUS_ACTIVE, SubscriptionService::STATUS_PAST_DUE ), true ) ) : ?>
 				<form method="post" action="<?php echo esc_url( $action ); ?>" onsubmit="return confirm('<?php echo esc_js( __( 'Cancel your subscription? You will keep access until the end of the current period.', 'comsign' ) ); ?>');">
 					<input type="hidden" name="action" value="comsign_portal_cancel_sub">
 					<input type="hidden" name="_wpnonce" value="<?php echo esc_attr( $nonce ); ?>">

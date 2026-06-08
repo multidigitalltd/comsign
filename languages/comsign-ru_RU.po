@@ -158,6 +158,9 @@ msgstr "Разрешить подписантам передавать подп�
 msgid "Already signed"
 msgstr "Уже подписано"
 
+msgid "An audit trail of manual plan changes, suspensions and reactivations."
+msgstr "Журнал аудита ручных изменений тарифа, приостановок и возобновлений."
+
 msgid "Analytics"
 msgstr "Аналитика"
 
@@ -275,6 +278,9 @@ msgstr "Сертификат удалён. Документы будут исп�
 msgid "Certificate stored. New documents will be signed with PKI/PAdES."
 msgstr "Сертификат сохранён. Новые документы будут подписываться с PKI/PAdES."
 
+msgid "Change"
+msgstr "Изменение"
+
 msgid "Check"
 msgstr "Проверить"
 
@@ -352,6 +358,9 @@ msgstr "Завершения (последние 14 дней)"
 
 msgid "Completions per day"
 msgstr "Завершений в день"
+
+msgid "Completions per day (last 14 days)"
+msgstr "Завершения по дням (последние 14 дней)"
 
 msgid "Compose from text"
 msgstr "Создать из текста"
@@ -433,6 +442,9 @@ msgstr "Создано"
 
 msgid "Custom branding"
 msgstr "Свой брендинг"
+
+msgid "Daily completions for the last 14 days. A text table follows below."
+msgstr "Ежедневные завершения за последние 14 дней. Ниже следует текстовая таблица."
 
 msgid "Dana Cohen, dana@example.com, +972500000000\\nAvi Levi, avi@example.com"
 msgstr "Дана Коэн, dana@example.com, +972500000000\\nАви Леви, avi@example.com"
@@ -713,6 +725,9 @@ msgstr "Библиотека GD отсутствует; изображения �
 msgid "Get signing link"
 msgstr "Получить ссылку для подписания"
 
+msgid "Good news — your workspace has been reactivated and you can send documents again."
+msgstr "Хорошие новости — ваше рабочее пространство возобновлено, можно снова отправлять документы."
+
 msgid "Hello %s,"
 msgstr "Здравствуйте, %s,"
 
@@ -787,6 +802,9 @@ msgstr "Пригласить участника"
 
 msgid "It is not your turn to sign yet."
 msgstr "Сейчас не ваша очередь подписывать."
+
+msgid "Keep my subscription"
+msgstr "Оставить подписку"
 
 msgid "Last activity"
 msgstr "Последняя активность"
@@ -967,6 +985,9 @@ msgstr "OpenSSL недоступен на этом сервере, поэтом�
 
 msgid "OpenSSL is unavailable; documents use electronic signatures only."
 msgstr "OpenSSL недоступен; документы используют только электронные подписи."
+
+msgid "Operator"
+msgstr "Оператор"
 
 msgid "Optional safety net. Payments activate automatically when the customer returns from Cardcom; this URL is sent per-transaction, so there is nothing to set in your terminal."
 msgstr "Необязательная подстраховка. Платежи активируются автоматически при возврате клиента из Cardcom; этот URL отправляется для каждой транзакции отдельно, поэтому ничего настраивать в терминале не нужно."
@@ -1166,11 +1187,20 @@ msgstr "Возобновить"
 msgid "Ready to send"
 msgstr "Готово к отправке"
 
+msgid "Reason"
+msgstr "Причина"
+
+msgid "Reason (optional)"
+msgstr "Причина (необязательно)"
+
 msgid "Reason for declining (optional)"
 msgstr "Причина отказа (необязательно)"
 
 msgid "Recent documents"
 msgstr "Недавние документы"
+
+msgid "Recent operator actions"
+msgstr "Недавние действия оператора"
 
 msgid "Regenerate API key & webhook secret on save"
 msgstr "Перегенерировать ключ API и секрет webhook при сохранении"
@@ -1955,6 +1985,12 @@ msgstr "Чтобы войти в рабочее пространство, нео
 msgid "Your %s free trial is ending soon"
 msgstr "Ваш бесплатный пробный период в %s скоро заканчивается"
 
+msgid "Your %s workspace has been reactivated"
+msgstr "Ваше рабочее пространство в %s возобновлено"
+
+msgid "Your %s workspace has been suspended"
+msgstr "Ваше рабочее пространство в %s приостановлено"
+
 msgid "Your ComSign verification code"
 msgstr "Ваш код проверки ComSign"
 
@@ -1988,17 +2024,26 @@ msgstr "Ваша подпись"
 msgid "Your subscription"
 msgstr "Ваша подписка"
 
-msgid "Your subscription has been canceled."
-msgstr "Ваша подписка отменена."
-
 msgid "Your subscription is not active. Please choose a plan to keep sending documents."
 msgstr "Ваша подписка неактивна. Выберите тариф, чтобы продолжать отправку документов."
+
+msgid "Your subscription is set to cancel. You keep full access until %s, after which it will not renew."
+msgstr "Ваша подписка запланирована к отмене. Полный доступ сохраняется до %s, после чего она не продлится."
+
+msgid "Your subscription will continue to renew."
+msgstr "Ваша подписка продолжит продлеваться."
+
+msgid "Your subscription will not renew. You keep access until the end of the current period."
+msgstr "Ваша подписка не будет продлена. Доступ сохраняется до конца текущего периода."
 
 msgid "Your verification code is: %1$s\\n\\nIt expires in %2$d minutes."
 msgstr "Ваш код проверки: %1$s\\n\\nОн истекает через %2$d минут."
 
 msgid "Your workspace"
 msgstr "Ваше рабочее пространство"
+
+msgid "Your workspace has been suspended. Please contact support if you believe this is a mistake."
+msgstr "Ваше рабочее пространство приостановлено. Свяжитесь с поддержкой, если считаете это ошибкой."
 
 msgid "annual"
 msgstr "годовой"

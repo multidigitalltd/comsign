@@ -48,3 +48,35 @@ Test::add( 'export: documents render as CSV with a header and BOM', static funct
 	// The hash is included.
 	Test::ok( false !== strpos( $csv, str_repeat( 'a', 64 ) ), 'verification hash included' );
 } );
+
+Test::add( 'export: spreadsheet formula injection is neutralised', static function (): void {
+	$payloads = array(
+		'=HYPERLINK("http://evil","click")',
+		'+1+1',
+		'-2+3',
+		'@SUM(A1:A9)',
+		"\t=cmd|'/c calc'!A1",
+	);
+	foreach ( $payloads as $payload ) {
+		$out = DocumentExport::sanitize_cell( $payload );
+		Test::equals( "'", $out[0], 'risky cell is prefixed with a quote: ' . $payload );
+		Test::equals( $payload, substr( $out, 1 ), 'original value preserved after the quote' );
+	}
+
+	// Safe values are untouched.
+	Test::equals( 'Lease 2026', DocumentExport::sanitize_cell( 'Lease 2026' ), 'plain text untouched' );
+	Test::equals( '', DocumentExport::sanitize_cell( '' ), 'empty stays empty' );
+
+	// End-to-end: a malicious title comes out escaped in the CSV body.
+	$csv = DocumentExport::to_csv( array(
+		(object) array(
+			'title'         => '=HYPERLINK("http://evil")',
+			'status'        => 'draft',
+			'signer_signed' => 0,
+			'signer_total'  => 1,
+			'created_at'    => '',
+			'signed_hash'   => '',
+		),
+	) );
+	Test::ok( false !== strpos( $csv, "'=HYPERLINK" ), 'formula in CSV body is escaped' );
+} );

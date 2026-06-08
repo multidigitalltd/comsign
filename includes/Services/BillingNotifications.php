@@ -109,6 +109,28 @@ final class BillingNotifications {
 	}
 
 	/**
+	 * Email a workspace's owners that an operator changed their subscription
+	 * status (suspended or reactivated).
+	 *
+	 * @param int    $account_id Account id.
+	 * @param string $change     'suspended' | 'reactivated'.
+	 */
+	public function send_workspace_status_change( int $account_id, string $change ): void {
+		$reactivated = 'reactivated' === $change;
+		foreach ( $this->owner_emails( $account_id ) as $email ) {
+			if ( $reactivated ) {
+				$subject = sprintf( /* translators: %s: brand name. */ __( 'Your %s workspace has been reactivated', 'comsign' ), Settings::brand_name() );
+				$body    = __( 'Good news — your workspace has been reactivated and you can send documents again.', 'comsign' ) . "\n\n";
+			} else {
+				$subject = sprintf( /* translators: %s: brand name. */ __( 'Your %s workspace has been suspended', 'comsign' ), Settings::brand_name() );
+				$body    = __( 'Your workspace has been suspended. Please contact support if you believe this is a mistake.', 'comsign' ) . "\n\n";
+			}
+			$body .= \ComSign\Frontend\PortalController::url( array( 'view' => 'billing' ) );
+			wp_mail( $email, $subject, $body );
+		}
+	}
+
+	/**
 	 * Owner email addresses for an account.
 	 *
 	 * @return string[]

@@ -95,7 +95,9 @@ final class SubscriptionService {
 			return self::STATUS_EXPIRED;
 		}
 		if ( self::STATUS_ACTIVE === $sub->status && $sub->current_period_end && $this->is_past( $sub->current_period_end ) ) {
-			return self::STATUS_PAST_DUE;
+			// A subscription scheduled to cancel simply ends when the paid period
+			// runs out; one that should have renewed is payment-due.
+			return ! empty( $sub->cancel_at_period_end ) ? self::STATUS_EXPIRED : self::STATUS_PAST_DUE;
 		}
 		return (string) $sub->status;
 	}
@@ -209,10 +211,12 @@ final class SubscriptionService {
 	 */
 	public function activate( int $account_id, string $plan, string $cycle, string $period_end, string $token = '' ): void {
 		$data = array(
-			'plan'               => Plans::exists( $plan ) ? $plan : Plans::default_id(),
-			'cycle'              => 'annual' === $cycle ? 'annual' : 'monthly',
-			'status'             => self::STATUS_ACTIVE,
-			'current_period_end' => $period_end,
+			'plan'                 => Plans::exists( $plan ) ? $plan : Plans::default_id(),
+			'cycle'                => 'annual' === $cycle ? 'annual' : 'monthly',
+			'status'               => self::STATUS_ACTIVE,
+			'current_period_end'   => $period_end,
+			// A fresh payment / reactivation clears any pending cancellation.
+			'cancel_at_period_end' => 0,
 		);
 		if ( '' !== $token ) {
 			$data['cardcom_token'] = $token;
@@ -221,10 +225,35 @@ final class SubscriptionService {
 	}
 
 	/**
-	 * Cancel a subscription (access continues until period end if set).
+	 * Cancel a subscription.
+	 *
+	 * If the account still has paid time left, the cancellation is scheduled for
+	 * the end of the current period: the status stays active and access
+	 * continues until then, but the subscription will not auto-renew. With no
+	 * paid period left (e.g. a trial), the cancellation takes effect immediately.
 	 */
 	public function cancel( int $account_id ): void {
-		$this->subs->upsert( $account_id, array( 'status' => self::STATUS_CANCELED ) );
+		$sub = $this->subs->for_account( $account_id );
+		if ( $sub && self::STATUS_ACTIVE === $sub->status && ! empty( $sub->current_period_end ) && ! $this->is_past( $sub->current_period_end ) ) {
+			$this->subs->upsert( $account_id, array( 'cancel_at_period_end' => 1 ) );
+			return;
+		}
+		$this->subs->upsert( $account_id, array( 'status' => self::STATUS_CANCELED, 'cancel_at_period_end' => 0 ) );
+	}
+
+	/**
+	 * Undo a scheduled cancellation (keep the subscription renewing).
+	 */
+	public function resume( int $account_id ): void {
+		$this->subs->upsert( $account_id, array( 'cancel_at_period_end' => 0 ) );
+	}
+
+	/**
+	 * Whether the account is active but scheduled to cancel at period end.
+	 */
+	public function is_canceling( int $account_id ): bool {
+		$sub = $this->subs->for_account( $account_id );
+		return $sub && ! empty( $sub->cancel_at_period_end ) && self::STATUS_ACTIVE === (string) $sub->status;
 	}
 
 	/**

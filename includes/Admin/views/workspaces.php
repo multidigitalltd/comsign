@@ -8,9 +8,10 @@
  * @var array      $plans      Plan catalogue.
  * @var string     $search     Active name search.
  * @var string     $status     Active status filter.
- * @var string     $action_url admin-post.php URL.
+ * @var string     $action_url   admin-post.php URL.
  * @var string     $nonce
  * @var array|null $notice
+ * @var array      $operator_log Recent operator actions (newest first).
  */
 
 defined( 'ABSPATH' ) || exit;
@@ -97,6 +98,8 @@ $status_labels = array(
 									<input type="hidden" name="_wpnonce" value="<?php echo esc_attr( $nonce ); ?>">
 									<input type="hidden" name="account_id" value="<?php echo (int) $row['id']; ?>">
 									<input type="hidden" name="op" value="reactivate">
+									<label class="screen-reader-text" for="ws-reason-r-<?php echo (int) $row['id']; ?>"><?php esc_html_e( 'Reason (optional)', 'comsign' ); ?></label>
+									<input type="text" id="ws-reason-r-<?php echo (int) $row['id']; ?>" name="reason" maxlength="255" placeholder="<?php esc_attr_e( 'Reason (optional)', 'comsign' ); ?>" style="width:140px;">
 									<button type="submit" class="button button-small"><?php esc_html_e( 'Reactivate', 'comsign' ); ?></button>
 								</form>
 							<?php else : ?>
@@ -105,10 +108,51 @@ $status_labels = array(
 									<input type="hidden" name="_wpnonce" value="<?php echo esc_attr( $nonce ); ?>">
 									<input type="hidden" name="account_id" value="<?php echo (int) $row['id']; ?>">
 									<input type="hidden" name="op" value="suspend">
+									<label class="screen-reader-text" for="ws-reason-s-<?php echo (int) $row['id']; ?>"><?php esc_html_e( 'Reason (optional)', 'comsign' ); ?></label>
+									<input type="text" id="ws-reason-s-<?php echo (int) $row['id']; ?>" name="reason" maxlength="255" placeholder="<?php esc_attr_e( 'Reason (optional)', 'comsign' ); ?>" style="width:140px;">
 									<button type="submit" class="button button-small button-link-delete"><?php esc_html_e( 'Suspend', 'comsign' ); ?></button>
 								</form>
 							<?php endif; ?>
 						</td>
+					</tr>
+				<?php endforeach; ?>
+			</tbody>
+		</table>
+	<?php endif; ?>
+
+	<?php if ( ! empty( $operator_log ) ) : ?>
+		<h2 style="margin-top:32px;"><?php esc_html_e( 'Recent operator actions', 'comsign' ); ?></h2>
+		<p class="description"><?php esc_html_e( 'An audit trail of manual plan changes, suspensions and reactivations.', 'comsign' ); ?></p>
+		<?php
+		$action_labels = array(
+			'set_plan'   => __( 'Set plan', 'comsign' ),
+			'suspend'    => __( 'Suspend', 'comsign' ),
+			'reactivate' => __( 'Reactivate', 'comsign' ),
+		);
+		?>
+		<table class="widefat striped">
+			<thead>
+				<tr>
+					<th scope="col"><?php esc_html_e( 'When', 'comsign' ); ?></th>
+					<th scope="col"><?php esc_html_e( 'Operator', 'comsign' ); ?></th>
+					<th scope="col"><?php esc_html_e( 'Workspace', 'comsign' ); ?></th>
+					<th scope="col"><?php esc_html_e( 'Action', 'comsign' ); ?></th>
+					<th scope="col"><?php esc_html_e( 'Change', 'comsign' ); ?></th>
+					<th scope="col"><?php esc_html_e( 'Reason', 'comsign' ); ?></th>
+					<th scope="col"><?php esc_html_e( 'IP', 'comsign' ); ?></th>
+				</tr>
+			</thead>
+			<tbody>
+				<?php foreach ( $operator_log as $entry ) : ?>
+					<?php $actor = get_userdata( (int) $entry->actor_id ); ?>
+					<tr>
+						<td><?php echo esc_html( '' !== (string) $entry->created_at && '0000-00-00 00:00:00' !== (string) $entry->created_at ? mysql2date( get_option( 'date_format' ) . ' ' . get_option( 'time_format' ), get_date_from_gmt( (string) $entry->created_at ) ) : '—' ); ?></td>
+						<td><?php echo esc_html( $actor ? $actor->user_login : '#' . (int) $entry->actor_id ); ?></td>
+						<td>#<?php echo (int) $entry->account_id; ?></td>
+						<td><?php echo esc_html( $action_labels[ $entry->action ] ?? (string) $entry->action ); ?></td>
+						<td><?php echo esc_html( (string) $entry->old_plan . '/' . (string) $entry->old_status . ' → ' . (string) $entry->new_plan . '/' . (string) $entry->new_status ); ?></td>
+						<td><?php echo esc_html( (string) $entry->reason ); ?></td>
+						<td><?php echo esc_html( (string) $entry->ip ); ?></td>
 					</tr>
 				<?php endforeach; ?>
 			</tbody>

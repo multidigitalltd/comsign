@@ -158,6 +158,9 @@ msgstr "السماح للموقّعين بإحالة التوقيع إلى شخ�
 msgid "Already signed"
 msgstr "موقّع بالفعل"
 
+msgid "An audit trail of manual plan changes, suspensions and reactivations."
+msgstr "سجل تدقيق لتغييرات الخطة اليدوية وعمليات التعليق وإعادة التفعيل."
+
 msgid "Analytics"
 msgstr "التحليلات"
 
@@ -275,6 +278,9 @@ msgstr "تمت إزالة الشهادة. ستستخدم المستندات ال
 msgid "Certificate stored. New documents will be signed with PKI/PAdES."
 msgstr "تم حفظ الشهادة. ستُوقّع المستندات الجديدة باستخدام PKI/PAdES."
 
+msgid "Change"
+msgstr "التغيير"
+
 msgid "Check"
 msgstr "تحقق"
 
@@ -352,6 +358,9 @@ msgstr "الإكمالات (آخر 14 يومًا)"
 
 msgid "Completions per day"
 msgstr "الإكمالات في اليوم"
+
+msgid "Completions per day (last 14 days)"
+msgstr "الإنجازات يوميًا (آخر 14 يومًا)"
 
 msgid "Compose from text"
 msgstr "إنشاء من نص"
@@ -433,6 +442,9 @@ msgstr "تم الإنشاء"
 
 msgid "Custom branding"
 msgstr "علامة تجارية مخصّصة"
+
+msgid "Daily completions for the last 14 days. A text table follows below."
+msgstr "الإنجازات اليومية لآخر 14 يومًا. يلي ذلك جدول نصي بالأسفل."
 
 msgid "Dana Cohen, dana@example.com, +972500000000\\nAvi Levi, avi@example.com"
 msgstr "دانا كوهين, dana@example.com, ‎+972500000000\\nأبي ليفي, avi@example.com"
@@ -713,6 +725,9 @@ msgstr "مكتبة GD مفقودة؛ لا يمكن معالجة صور التو�
 msgid "Get signing link"
 msgstr "الحصول على رابط التوقيع"
 
+msgid "Good news — your workspace has been reactivated and you can send documents again."
+msgstr "أخبار جيدة — تمت إعادة تفعيل مساحة عملك ويمكنك إرسال المستندات مجددًا."
+
 msgid "Hello %s,"
 msgstr "مرحبًا %s،"
 
@@ -787,6 +802,9 @@ msgstr "دعوة عضو"
 
 msgid "It is not your turn to sign yet."
 msgstr "لم يحن دورك للتوقيع بعد."
+
+msgid "Keep my subscription"
+msgstr "الاحتفاظ باشتراكي"
 
 msgid "Last activity"
 msgstr "آخر نشاط"
@@ -967,6 +985,9 @@ msgstr "مكتبة OpenSSL غير متاحة على هذا الخادم، لذا
 
 msgid "OpenSSL is unavailable; documents use electronic signatures only."
 msgstr "مكتبة OpenSSL غير متاحة؛ تستخدم المستندات التوقيعات الإلكترونية فقط."
+
+msgid "Operator"
+msgstr "المشغّل"
 
 msgid "Optional safety net. Payments activate automatically when the customer returns from Cardcom; this URL is sent per-transaction, so there is nothing to set in your terminal."
 msgstr "شبكة أمان اختيارية. تُفعَّل المدفوعات تلقائيًا عند عودة العميل من Cardcom؛ يُرسَل هذا العنوان لكل معاملة على حدة، لذا لا حاجة لضبط أي شيء في الموقف (terminal) لديك."
@@ -1166,11 +1187,20 @@ msgstr "إعادة التفعيل"
 msgid "Ready to send"
 msgstr "جاهز للإرسال"
 
+msgid "Reason"
+msgstr "السبب"
+
+msgid "Reason (optional)"
+msgstr "السبب (اختياري)"
+
 msgid "Reason for declining (optional)"
 msgstr "سبب الرفض (اختياري)"
 
 msgid "Recent documents"
 msgstr "المستندات الأخيرة"
+
+msgid "Recent operator actions"
+msgstr "إجراءات المشغّل الأخيرة"
 
 msgid "Regenerate API key & webhook secret on save"
 msgstr "إعادة إنشاء مفتاح API وسر webhook عند الحفظ"
@@ -1955,6 +1985,12 @@ msgstr "تحتاج إلى تسجيل الدخول للوصول إلى مساحة
 msgid "Your %s free trial is ending soon"
 msgstr "تجربتك المجانية في %s على وشك الانتهاء"
 
+msgid "Your %s workspace has been reactivated"
+msgstr "تمت إعادة تفعيل مساحة عملك في %s"
+
+msgid "Your %s workspace has been suspended"
+msgstr "تم تعليق مساحة عملك في %s"
+
 msgid "Your ComSign verification code"
 msgstr "رمز التحقق الخاص بك من ComSign"
 
@@ -1988,17 +2024,26 @@ msgstr "توقيعك"
 msgid "Your subscription"
 msgstr "اشتراكك"
 
-msgid "Your subscription has been canceled."
-msgstr "تم إلغاء اشتراكك."
-
 msgid "Your subscription is not active. Please choose a plan to keep sending documents."
 msgstr "اشتراكك غير نشط. يرجى اختيار باقة لمواصلة إرسال المستندات."
+
+msgid "Your subscription is set to cancel. You keep full access until %s, after which it will not renew."
+msgstr "اشتراكك مُجدوَل للإلغاء. تحتفظ بوصول كامل حتى %s، وبعدها لن يتجدد."
+
+msgid "Your subscription will continue to renew."
+msgstr "سيستمر اشتراكك في التجديد."
+
+msgid "Your subscription will not renew. You keep access until the end of the current period."
+msgstr "لن يتجدد اشتراكك. تحتفظ بالوصول حتى نهاية الفترة الحالية."
 
 msgid "Your verification code is: %1$s\\n\\nIt expires in %2$d minutes."
 msgstr "رمز التحقق الخاص بك هو: %1$s\\n\\nتنتهي صلاحيته خلال %2$d دقيقة."
 
 msgid "Your workspace"
 msgstr "مساحة عملك"
+
+msgid "Your workspace has been suspended. Please contact support if you believe this is a mistake."
+msgstr "تم تعليق مساحة عملك. يرجى التواصل مع الدعم إذا كنت تعتقد أن هذا خطأ."
 
 msgid "annual"
 msgstr "سنوي"

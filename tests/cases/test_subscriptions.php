@@ -122,3 +122,52 @@ Test::add( 'subscriptions: send() is gated by the subscription', static function
 		$svc->send( $doc_id );
 	}, 'send() is refused when the workspace subscription is inactive' );
 } );
+
+Test::add( 'subscriptions: cancellation keeps access until period end', static function (): void {
+	reset_tables();
+	$subs = new SubscriptionService();
+	$repo = new SubscriptionRepository();
+	$acct = 91010;
+
+	// Active subscription with a paid period a week into the future.
+	$subs->start_trial( $acct, 'business' );
+	$future = gmdate( 'Y-m-d H:i:s', time() + 7 * DAY_IN_SECONDS );
+	$subs->activate( $acct, 'business', 'monthly', $future );
+	Test::ok( ! $subs->is_canceling( $acct ), 'not canceling right after activation' );
+
+	// Cancelling schedules end-of-period: still active, still able to send.
+	$subs->cancel( $acct );
+	Test::equals( SubscriptionService::STATUS_ACTIVE, $subs->status( $acct ), 'stays active until period end' );
+	Test::ok( $subs->is_active( $acct ), 'access continues after scheduling cancellation' );
+	Test::ok( $subs->is_canceling( $acct ), 'flagged as canceling' );
+
+	// A scheduled-cancel subscription is excluded from auto-renewal.
+	$repo->set_datetime( $acct, 'current_period_end', gmdate( 'Y-m-d H:i:s', time() - 3600 ) );
+	$due_ids = array_map( static fn( $r ) => (int) $r->account_id, $repo->due_for_renewal() );
+	Test::ok( ! in_array( $acct, $due_ids, true ), 'not picked up for renewal once canceling' );
+
+	// Once the period has passed, it reports expired (not payment-due).
+	Test::equals( SubscriptionService::STATUS_EXPIRED, $subs->status( $acct ), 'expires after the period ends' );
+	Test::ok( ! $subs->is_active( $acct ), 'no access after expiry' );
+
+	// Resuming before expiry keeps it renewing.
+	reset_tables();
+	$subs->start_trial( $acct, 'business' );
+	$subs->activate( $acct, 'business', 'monthly', $future );
+	$subs->cancel( $acct );
+	$subs->resume( $acct );
+	Test::ok( ! $subs->is_canceling( $acct ), 'resume clears the schedule' );
+	Test::equals( SubscriptionService::STATUS_ACTIVE, $subs->status( $acct ), 'still active after resume' );
+} );
+
+Test::add( 'subscriptions: cancelling a trial takes effect immediately', static function (): void {
+	reset_tables();
+	$subs = new SubscriptionService();
+	$acct = 91011;
+
+	// A trial has no paid period, so cancellation is immediate.
+	$subs->start_trial( $acct, 'solo' );
+	$subs->cancel( $acct );
+	Test::equals( SubscriptionService::STATUS_CANCELED, $subs->status( $acct ), 'trial cancels immediately' );
+	Test::ok( ! $subs->is_active( $acct ), 'no access after cancelling a trial' );
+} );

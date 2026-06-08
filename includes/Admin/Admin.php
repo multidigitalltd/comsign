@@ -1119,13 +1119,14 @@ final class Admin {
 		$this->view(
 			'workspaces',
 			array(
-				'rows'       => $rows,
-				'plans'      => \ComSign\Billing\Plans::all(),
-				'search'     => $search,
-				'status'     => $status,
-				'action_url' => admin_url( 'admin-post.php' ),
-				'nonce'      => wp_create_nonce( 'comsign_workspace_action' ),
-				'notice'     => $this->pull_notice(),
+				'rows'         => $rows,
+				'plans'        => \ComSign\Billing\Plans::all(),
+				'search'       => $search,
+				'status'       => $status,
+				'action_url'   => admin_url( 'admin-post.php' ),
+				'nonce'        => wp_create_nonce( 'comsign_workspace_action' ),
+				'notice'       => $this->pull_notice(),
+				'operator_log' => \ComSign\Audit\OperatorLog::recent( 25 ),
 			)
 		);
 	}
@@ -1142,12 +1143,16 @@ final class Admin {
 
 		$account_id = isset( $_POST['account_id'] ) ? absint( wp_unslash( $_POST['account_id'] ) ) : 0;
 		$op         = isset( $_POST['op'] ) ? sanitize_key( wp_unslash( $_POST['op'] ) ) : '';
+		$reason     = isset( $_POST['reason'] ) ? sanitize_text_field( wp_unslash( $_POST['reason'] ) ) : '';
 		$subs       = new \ComSign\Services\SubscriptionService();
 		$back       = admin_url( 'admin.php?page=comsign-workspaces' );
 
 		if ( $account_id <= 0 ) {
 			$this->redirect_with_notice( $back, 'error', __( 'Workspace not found.', 'comsign' ) );
 		}
+
+		// Snapshot before, for the operator audit trail.
+		$before = array( 'plan' => $subs->plan_id( $account_id ), 'status' => $subs->status( $account_id ) );
 
 		if ( 'set_plan' === $op ) {
 			$plan  = isset( $_POST['plan'] ) ? sanitize_key( wp_unslash( $_POST['plan'] ) ) : '';
@@ -1158,17 +1163,40 @@ final class Admin {
 			// Operator override: activate without taking payment, one period ahead.
 			$period_end = gmdate( 'Y-m-d H:i:s', strtotime( 'annual' === $cycle ? '+1 year' : '+1 month' ) );
 			$subs->activate( $account_id, $plan, $cycle, $period_end );
+			\ComSign\Audit\OperatorLog::record(
+				$account_id,
+				\ComSign\Audit\OperatorLog::ACTION_SET_PLAN,
+				$before,
+				array( 'plan' => $subs->plan_id( $account_id ), 'status' => $subs->status( $account_id ) ),
+				$reason
+			);
 			$this->redirect_with_notice( $back, 'success', __( 'Plan updated.', 'comsign' ) );
 		}
 
 		if ( 'suspend' === $op ) {
 			$subs->cancel( $account_id );
+			\ComSign\Audit\OperatorLog::record(
+				$account_id,
+				\ComSign\Audit\OperatorLog::ACTION_SUSPEND,
+				$before,
+				array( 'plan' => $subs->plan_id( $account_id ), 'status' => $subs->status( $account_id ) ),
+				$reason
+			);
+			( new \ComSign\Services\BillingNotifications() )->send_workspace_status_change( $account_id, 'suspended' );
 			$this->redirect_with_notice( $back, 'success', __( 'Workspace suspended.', 'comsign' ) );
 		}
 
 		if ( 'reactivate' === $op ) {
 			$period_end = gmdate( 'Y-m-d H:i:s', strtotime( '+1 month' ) );
 			$subs->activate( $account_id, $subs->plan_id( $account_id ), 'monthly', $period_end );
+			\ComSign\Audit\OperatorLog::record(
+				$account_id,
+				\ComSign\Audit\OperatorLog::ACTION_REACTIVATE,
+				$before,
+				array( 'plan' => $subs->plan_id( $account_id ), 'status' => $subs->status( $account_id ) ),
+				$reason
+			);
+			( new \ComSign\Services\BillingNotifications() )->send_workspace_status_change( $account_id, 'reactivated' );
 			$this->redirect_with_notice( $back, 'success', __( 'Workspace reactivated.', 'comsign' ) );
 		}
 

@@ -20,14 +20,21 @@ use ComSign\Support\Crypto;
  */
 final class FakeGateway implements GatewayInterface {
 
-	public string $captured_return = '';
-	public bool $paid              = true;
-	public string $token           = 'TOK-123';
-	public bool $renew_ok          = true;
-	public int $charges            = 0;
+	public string $captured_return   = '';
+	public float $captured_amount    = 0.0;
+	public string $captured_currency = 'ILS';
+	public bool $paid                = true;
+	public string $token             = 'TOK-123';
+	public bool $renew_ok            = true;
+	public int $charges              = 0;
+	/** When set (>0), verify reports this amount instead of the charged one. */
+	public float $report_amount   = 0.0;
+	public string $report_currency = '';
 
 	public function create_checkout( array $args ): array {
-		$this->captured_return = (string) ( $args['return_value'] ?? '' );
+		$this->captured_return   = (string) ( $args['return_value'] ?? '' );
+		$this->captured_amount   = (float) ( $args['amount'] ?? 0 );
+		$this->captured_currency = (string) ( $args['currency'] ?? 'ILS' );
 		return array( 'ok' => true, 'url' => 'https://pay.example/checkout/abc', 'reference' => 'LP-ABC', 'error' => '' );
 	}
 
@@ -37,7 +44,8 @@ final class FakeGateway implements GatewayInterface {
 			'paid'         => $this->paid,
 			'return_value' => $this->captured_return,
 			'token'        => $this->token,
-			'amount'       => 149.0,
+			'amount'       => $this->report_amount > 0 ? $this->report_amount : $this->captured_amount,
+			'currency'     => '' !== $this->report_currency ? $this->report_currency : $this->captured_currency,
 			'error'        => '',
 		);
 	}
@@ -113,6 +121,35 @@ Test::add( 'billing: unpaid or forged results never activate', static function (
 	$fake2->captured_return = '50502|business|monthly|deadbeef'; // bad signature
 	$svc2 = new BillingService( $fake2 );
 	Test::ok( ! $svc2->complete_from_reference( 'LP-ABC' ), 'forged return value rejected' );
+} );
+
+Test::add( 'billing: a wrong amount or currency never activates', static function (): void {
+	reset_tables();
+	$subs = new SubscriptionService();
+	$acct = 50503;
+	$subs->start_trial( $acct, 'solo' );
+
+	// Paid, valid intent, but the gateway reports a smaller (partial) amount.
+	$fake = new FakeGateway();
+	$fake->report_amount = 1.0; // not the real plan price
+	$svc = new BillingService( $fake );
+	$svc->start_checkout( $acct, 'business', 'monthly', array() );
+	Test::ok( ! $svc->complete_from_reference( 'LP-ABC' ), 'partial/mismatched amount rejected' );
+	Test::equals( SubscriptionService::STATUS_TRIALING, $subs->status( $acct ), 'still trialing after amount mismatch' );
+
+	// Paid the right amount but in the wrong currency.
+	$fake2 = new FakeGateway();
+	$fake2->report_currency = 'USD';
+	$svc2 = new BillingService( $fake2 );
+	$svc2->start_checkout( $acct, 'business', 'monthly', array() );
+	Test::ok( ! $svc2->complete_from_reference( 'LP-ABC' ), 'wrong currency rejected' );
+
+	// Correct amount + currency activates.
+	$fake3 = new FakeGateway();
+	$svc3 = new BillingService( $fake3 );
+	$svc3->start_checkout( $acct, 'business', 'monthly', array() );
+	Test::ok( $svc3->complete_from_reference( 'LP-ABC' ), 'correct amount + currency activates' );
+	Test::equals( SubscriptionService::STATUS_ACTIVE, $subs->status( $acct ), 'active after correct payment' );
 } );
 
 Test::add( 'billing: due renewals are charged and the period is extended', static function (): void {

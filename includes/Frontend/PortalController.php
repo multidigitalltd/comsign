@@ -83,6 +83,7 @@ final class PortalController {
 		// Billing: start a Cardcom checkout for a plan.
 		add_action( 'admin_post_comsign_portal_checkout', array( $this, 'handle_checkout' ) );
 		add_action( 'admin_post_comsign_portal_cancel_sub', array( $this, 'handle_cancel_subscription' ) );
+		add_action( 'admin_post_comsign_portal_resume_sub', array( $this, 'handle_resume_subscription' ) );
 		// Team management.
 		add_action( 'admin_post_comsign_portal_invite', array( $this, 'handle_invite' ) );
 		add_action( 'admin_post_comsign_portal_member_role', array( $this, 'handle_member_role' ) );
@@ -1096,6 +1097,7 @@ final class PortalController {
 				'page_title'  => __( 'Plan & billing', 'comsign' ),
 				'nav'         => $this->nav( 'billing', $user_id ),
 				'activated'   => $activated,
+				'canceling'   => $subs->is_canceling( $account ),
 				'status'      => $subs->status( $account ),
 				'subscription' => $subs->for_account( $account ),
 				'plan_id'     => $subs->plan_id( $account ),
@@ -1227,7 +1229,23 @@ final class PortalController {
 		}
 
 		( new SubscriptionService() )->cancel( $account );
-		$this->bounce( self::url( array( 'view' => 'billing' ) ), __( 'Your subscription has been canceled.', 'comsign' ), 'success' );
+		$this->bounce( self::url( array( 'view' => 'billing' ) ), __( 'Your subscription will not renew. You keep access until the end of the current period.', 'comsign' ), 'success' );
+	}
+
+	/**
+	 * Undo a scheduled cancellation (keep the subscription renewing).
+	 */
+	public function handle_resume_subscription(): void {
+		$user_id = $this->require_login();
+		check_admin_referer( 'comsign_portal_checkout' );
+
+		$account = $this->working_account_id( $user_id );
+		if ( $account <= 0 || ! $this->accounts->can_in_account( $user_id, $account, Roles::MANAGE_SETTINGS ) ) {
+			$this->bounce( self::url(), __( 'You cannot manage billing for this workspace.', 'comsign' ) );
+		}
+
+		( new SubscriptionService() )->resume( $account );
+		$this->bounce( self::url( array( 'view' => 'billing' ) ), __( 'Your subscription will continue to renew.', 'comsign' ), 'success' );
 	}
 
 	/**

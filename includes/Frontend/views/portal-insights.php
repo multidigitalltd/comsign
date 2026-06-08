@@ -53,11 +53,28 @@ $max = max( 1, max( array_map( 'intval', $series ? $series : array( 0 ) ) ) );
 
 			<section class="comsign-card" aria-labelledby="comsign-spark-h">
 				<h2 id="comsign-spark-h"><?php esc_html_e( 'Completions (last 14 days)', 'comsign' ); ?></h2>
-				<div class="comsign-spark" role="img" aria-label="<?php esc_attr_e( 'Completions per day', 'comsign' ); ?>">
+				<div class="comsign-spark" role="img" aria-label="<?php esc_attr_e( 'Daily completions for the last 14 days. A text table follows below.', 'comsign' ); ?>" aria-hidden="false">
 					<?php foreach ( $series as $day => $count ) : ?>
 						<span class="comsign-spark-bar" style="height: <?php echo esc_attr( (string) max( 3, (int) round( ( (int) $count / $max ) * 100 ) ) ); ?>%;" title="<?php echo esc_attr( $day . ': ' . (int) $count ); ?>"></span>
 					<?php endforeach; ?>
 				</div>
+				<table class="comsign-sr-only">
+					<caption><?php esc_html_e( 'Completions per day (last 14 days)', 'comsign' ); ?></caption>
+					<thead>
+						<tr>
+							<th scope="col"><?php esc_html_e( 'Date', 'comsign' ); ?></th>
+							<th scope="col"><?php esc_html_e( 'Completed', 'comsign' ); ?></th>
+						</tr>
+					</thead>
+					<tbody>
+						<?php foreach ( $series as $day => $count ) : ?>
+							<tr>
+								<th scope="row"><?php echo esc_html( mysql2date( get_option( 'date_format' ), (string) $day ) ); ?></th>
+								<td><?php echo esc_html( (string) (int) $count ); ?></td>
+							</tr>
+						<?php endforeach; ?>
+					</tbody>
+				</table>
 			</section>
 
 			<section class="comsign-card" aria-labelledby="comsign-bystatus-h">
