@@ -74,6 +74,7 @@ final class PortalController {
 		add_action( 'admin_post_comsign_portal_export', array( $this, 'handle_export' ) );
 		// Build-your-own document: upload a PDF, manage signers, place fields.
 		add_action( 'admin_post_comsign_portal_upload', array( $this, 'handle_upload' ) );
+		add_action( 'admin_post_comsign_portal_compose', array( $this, 'handle_compose' ) );
 		add_action( 'admin_post_comsign_portal_add_signer', array( $this, 'handle_add_signer' ) );
 		add_action( 'admin_post_comsign_portal_delete_signer', array( $this, 'handle_delete_signer' ) );
 		add_action( 'admin_post_comsign_portal_save_fields', array( $this, 'handle_save_fields' ) );
@@ -326,6 +327,50 @@ final class PortalController {
 			__( 'PDF uploaded. Now add signers and place fields.', 'comsign' ),
 			'success'
 		);
+	}
+
+	/**
+	 * Compose a document from typed text and auto-place a signature block, then
+	 * optionally send it — no manual field dragging.
+	 */
+	public function handle_compose(): void {
+		$user_id = $this->require_login();
+		check_admin_referer( 'comsign_portal_compose' );
+
+		$account_id = $this->accounts->current_account_id( $user_id );
+		if ( $account_id <= 0 || ! $this->accounts->can_in_account( $user_id, $account_id, Roles::CREATE_DOCUMENTS ) ) {
+			$this->bounce( self::url(), __( 'You cannot create documents in this workspace.', 'comsign' ) );
+		}
+
+		$title = isset( $_POST['title'] ) ? sanitize_text_field( wp_unslash( $_POST['title'] ) ) : '';
+		$html  = isset( $_POST['content'] ) ? wp_kses_post( wp_unslash( $_POST['content'] ) ) : ''; // phpcs:ignore WordPress.Security.ValidatedSanitizedInput.InputNotSanitized
+
+		// Recipients + the field types each one should sign.
+		$signers = array();
+		$posted  = isset( $_POST['recipient'] ) && is_array( $_POST['recipient'] ) ? wp_unslash( $_POST['recipient'] ) : array(); // phpcs:ignore WordPress.Security.ValidatedSanitizedInput.InputNotSanitized
+		foreach ( $posted as $r ) {
+			$fields = isset( $r['fields'] ) && is_array( $r['fields'] ) ? array_map( 'sanitize_key', $r['fields'] ) : array( 'signature', 'name', 'date' );
+			$signers[] = array(
+				'name'   => isset( $r['name'] ) ? sanitize_text_field( $r['name'] ) : '',
+				'email'  => isset( $r['email'] ) ? sanitize_email( $r['email'] ) : '',
+				'phone'  => isset( $r['phone'] ) ? sanitize_text_field( $r['phone'] ) : '',
+				'fields' => $fields,
+			);
+		}
+
+		try {
+			$doc_id = $this->service->compose_with_signatures( $title, $html, $signers );
+		} catch ( \Throwable $e ) {
+			$this->bounce( self::url( array( 'view' => 'create', 'type' => 'text' ) ), $e->getMessage() );
+		}
+
+		// Send straight away, or leave as a draft to review.
+		if ( ! empty( $_POST['send'] ) && $this->accounts->can_in_account( $user_id, $account_id, Roles::SEND_DOCUMENTS ) ) {
+			$this->send_document( $doc_id );
+			$this->bounce( self::url( array( 'view' => 'document', 'doc' => $doc_id ) ), __( 'Document sent for signing.', 'comsign' ), 'success' );
+		}
+
+		$this->bounce( self::url( array( 'view' => 'document', 'doc' => $doc_id ) ), __( 'Document created.', 'comsign' ), 'success' );
 	}
 
 	/**
@@ -719,11 +764,21 @@ final class PortalController {
 			}
 		}
 
+		// Which creation type the wizard is on: chooser | upload | text | template.
+		$type = isset( $_GET['type'] ) ? sanitize_key( wp_unslash( $_GET['type'] ) ) : ''; // phpcs:ignore WordPress.Security.NonceVerification.Recommended
+		if ( $selected ) {
+			$type = 'template';
+		}
+		if ( ! in_array( $type, array( 'upload', 'text', 'template' ), true ) ) {
+			$type = '';
+		}
+
 		$this->render(
 			'portal-create',
 			array(
 				'page_title' => __( 'New document', 'comsign' ),
 				'nav'        => $this->nav( 'create', $user_id ),
+				'type'         => $type,
 				'templates'  => $templates,
 				'selected'   => $selected,
 				'roles'      => $roles,
@@ -731,6 +786,7 @@ final class PortalController {
 				'action'       => admin_url( 'admin-post.php' ),
 				'nonce'        => wp_create_nonce( 'comsign_portal_create' ),
 				'upload_nonce' => wp_create_nonce( 'comsign_portal_upload' ),
+				'compose_nonce' => wp_create_nonce( 'comsign_portal_compose' ),
 				'switcher'     => $this->switcher( $user_id ),
 			)
 		);

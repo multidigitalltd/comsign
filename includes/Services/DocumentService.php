@@ -147,6 +147,175 @@ final class DocumentService {
 	}
 
 	/**
+	 * Compose a document from text and auto-place a signature block — no manual
+	 * field dragging. Each signer gets the chosen field types laid out in a row
+	 * on a dedicated final "Signatures" page.
+	 *
+	 * @param string $title     Document title.
+	 * @param string $html      Sanitised HTML body.
+	 * @param array  $signers   List of ['name','email','phone','fields'] where
+	 *                          fields is a subset of signature/name/date/initials.
+	 * @param array  $variables Merge variables.
+	 *
+	 * @return int New document id.
+	 *
+	 * @throws \RuntimeException On empty content, no signers, or PDF failure.
+	 */
+	public function compose_with_signatures( string $title, string $html, array $signers, array $variables = array() ): int {
+		if ( empty( $signers ) ) {
+			throw new \RuntimeException( __( 'Add at least one signer before sending.', 'comsign' ) );
+		}
+		if ( '' === trim( wp_strip_all_tags( $html ) ) && '' === trim( $title ) ) {
+			throw new \RuntimeException( __( 'Please add a title or some content for the document.', 'comsign' ) );
+		}
+
+		$variables = $this->merge_variables( $variables );
+		$title     = $this->apply_variables( $title, $variables );
+		$html      = $this->apply_variables( $html, $variables );
+		$title     = '' !== $title ? $title : __( 'Untitled document', 'comsign' );
+
+		$document_id = $this->documents->create(
+			array(
+				'title'      => $title,
+				'account_id' => $this->creation_account_id(),
+				'created_by' => get_current_user_id(),
+			)
+		);
+
+		$destination = Storage::document_path( $document_id, 'source' );
+		try {
+			$pages = ( new \ComSign\Pdf\PdfComposer() )->render( $title, $html, $destination, true );
+		} catch ( \Throwable $e ) {
+			$this->documents->delete( $document_id );
+			throw new \RuntimeException( $e->getMessage() );
+		}
+		$this->documents->update( $document_id, array( 'source_path' => $destination ) );
+
+		// Create signers, remembering each one's chosen field types.
+		$signer_specs = array();
+		foreach ( $signers as $s ) {
+			$name  = isset( $s['name'] ) ? sanitize_text_field( (string) $s['name'] ) : '';
+			$email = isset( $s['email'] ) ? sanitize_email( (string) $s['email'] ) : '';
+			if ( '' === $name || ! is_email( $email ) ) {
+				continue;
+			}
+			$signer_id = $this->add_signer( $document_id, $name, $email, isset( $s['phone'] ) ? sanitize_text_field( (string) $s['phone'] ) : '' );
+			$types     = isset( $s['fields'] ) && is_array( $s['fields'] ) ? $s['fields'] : array( 'signature', 'name', 'date' );
+			$signer_specs[] = array( 'signer_id' => $signer_id, 'name' => $name, 'fields' => $types );
+		}
+		if ( empty( $signer_specs ) ) {
+			$this->documents->delete( $document_id );
+			throw new \RuntimeException( __( 'Add at least one signer before sending.', 'comsign' ) );
+		}
+
+		$fields = self::signature_block_fields( $signer_specs, $pages );
+		$this->save_fields( $document_id, $fields );
+
+		$this->audit->record( AuditLogger::EVENT_CREATED, $document_id, 0, array( 'title' => $title, 'source' => 'composed' ) );
+
+		return $document_id;
+	}
+
+	/**
+	 * Compute an auto-placed signature block: for each signer, lay their chosen
+	 * field types out in a row on the given page. Positions are fractions of the
+	 * page (0..1), resolution-independent like the manual editor.
+	 *
+	 * Pure (no I/O) so it can be unit-tested.
+	 *
+	 * @param array $signer_specs List of ['signer_id','name','fields'].
+	 * @param int   $page         1-based page number to place the block on.
+	 *
+	 * @return array Field rows ready for {@see save_fields()}.
+	 */
+	public static function signature_block_fields( array $signer_specs, int $page ): array {
+		$allowed = array( 'signature', 'initials', 'name', 'date' );
+		$count   = max( 1, count( $signer_specs ) );
+		$page    = max( 1, $page );
+
+		// Vertical band beneath the "Signatures" heading, split into one row per
+		// signer (capped so a single signer's row isn't enormous).
+		$top     = 0.16;
+		$bottom  = 0.92;
+		$row_h   = min( 0.18, ( $bottom - $top ) / $count );
+
+		$fields = array();
+		$i      = 0;
+		foreach ( $signer_specs as $spec ) {
+			$signer_id = (int) ( $spec['signer_id'] ?? 0 );
+			$name      = (string) ( $spec['name'] ?? '' );
+			$types     = array_values( array_intersect( $allowed, array_map( 'strval', (array) ( $spec['fields'] ?? array() ) ) ) );
+			if ( empty( $types ) ) {
+				$types = array( 'signature', 'name', 'date' );
+			}
+			if ( $signer_id <= 0 ) {
+				++$i;
+				continue;
+			}
+
+			$y = $top + $i * $row_h;
+
+			// The signature/initials sit on the left; name/date stack on the right.
+			$has_sig = in_array( 'signature', $types, true ) || in_array( 'initials', $types, true );
+			$right_types = array_values( array_diff( $types, array( 'signature', 'initials' ) ) );
+
+			if ( $has_sig ) {
+				$sig_type = in_array( 'signature', $types, true ) ? 'signature' : 'initials';
+				$fields[] = self::field_row( $signer_id, $sig_type, $page, 0.08, $y + $row_h * 0.10, 0.36, $row_h * 0.55, self::field_label( $sig_type, $name ), true );
+			}
+
+			$rx = $has_sig ? 0.50 : 0.08;
+			$rw = $has_sig ? 0.42 : 0.50;
+			$n  = max( 1, count( $right_types ) );
+			$rh = min( $row_h * 0.32, ( $row_h * 0.8 ) / $n );
+			$ry = $y + $row_h * 0.10;
+			foreach ( $right_types as $t ) {
+				$fields[] = self::field_row( $signer_id, $t, $page, $rx, $ry, $rw, $rh, self::field_label( $t, $name ), false );
+				$ry += $rh + $row_h * 0.06;
+			}
+
+			++$i;
+		}
+
+		return $fields;
+	}
+
+	/**
+	 * Build a single field row for the auto-placed signature block.
+	 */
+	private static function field_row( int $signer_id, string $type, int $page, float $x, float $y, float $w, float $h, string $label, bool $required ): array {
+		return array(
+			'signer_id' => $signer_id,
+			'type'      => $type,
+			'page'      => $page,
+			'pos_x'     => round( $x, 4 ),
+			'pos_y'     => round( $y, 4 ),
+			'width'     => round( $w, 4 ),
+			'height'    => round( $h, 4 ),
+			'label'     => $label,
+			'required'  => $required,
+		);
+	}
+
+	/**
+	 * A signer-facing label for an auto-placed field.
+	 */
+	private static function field_label( string $type, string $name ): string {
+		switch ( $type ) {
+			case 'signature':
+				return '' !== $name ? sprintf( /* translators: %s: signer name. */ __( 'Signature — %s', 'comsign' ), $name ) : __( 'Signature', 'comsign' );
+			case 'initials':
+				return __( 'Initials', 'comsign' );
+			case 'name':
+				return __( 'Full name', 'comsign' );
+			case 'date':
+				return __( 'Date', 'comsign' );
+			default:
+				return ucfirst( $type );
+		}
+	}
+
+	/**
 	 * Merge user-supplied variables with built-in automatic ones.
 	 *
 	 * @param array $variables User variables (name => value).

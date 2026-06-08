@@ -487,6 +487,51 @@ body.comsign-public {
 	margin-bottom: 20px;
 	background: var( --comsign-surface, #fff );
 }
+
+/* Step 1: how to create — choice cards. */
+.comsign-choice-grid {
+	display: grid;
+	grid-template-columns: repeat( auto-fit, minmax( 220px, 1fr ) );
+	gap: var( --comsign-space-4, 16px );
+	margin: 16px 0 8px;
+}
+.comsign-choice {
+	display: flex;
+	flex-direction: column;
+	gap: 8px;
+	padding: 22px 18px;
+	border: 1px solid var( --comsign-border, #e5e7eb );
+	border-radius: var( --comsign-radius, 12px );
+	background: var( --comsign-surface, #fff );
+	text-decoration: none;
+	color: inherit;
+	box-shadow: 0 1px 2px rgba( 0, 0, 0, 0.04 );
+	transition: border-color .15s, box-shadow .15s, transform .15s;
+}
+.comsign-choice:hover,
+.comsign-choice:focus-visible {
+	border-color: var( --comsign-primary, #2563eb );
+	box-shadow: 0 6px 18px rgba( 37, 99, 235, 0.12 );
+	transform: translateY( -2px );
+}
+.comsign-choice.is-disabled {
+	opacity: .55;
+	pointer-events: none;
+}
+.comsign-choice-icon { font-size: 30px; line-height: 1; }
+.comsign-choice-title { font-size: 16px; font-weight: 700; }
+.comsign-choice-desc { font-size: 13px; color: var( --comsign-muted, #6b7280 ); }
+
+/* Per-signer field picker in the "write text" flow. */
+.comsign-field-picker {
+	border: 1px dashed var( --comsign-border, #e5e7eb );
+	border-radius: 8px;
+	padding: 8px 12px;
+	margin-top: 8px;
+}
+.comsign-field-picker legend { font-size: 12px; font-weight: 600; color: var( --comsign-muted, #6b7280 ); padding: 0 4px; }
+.comsign-field-picker label { display: inline-flex; align-items: center; gap: 6px; font-weight: 500; margin: 4px 14px 4px 0; }
+.comsign-field-picker input { width: auto; }
 .comsign-editor-grid {
 	display: grid;
 	grid-template-columns: 320px 1fr;

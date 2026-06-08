@@ -4,7 +4,7 @@ Tags: signature, digital signature, pdf, esignature, hebrew
 Requires at least: 6.0
 Tested up to: 6.5
 Requires PHP: 7.4
-Stable tag: 0.54.0
+Stable tag: 0.55.0
 License: GPL-2.0-or-later
 License URI: https://www.gnu.org/licenses/gpl-2.0.html
 
@@ -105,6 +105,14 @@ ID and its SHA-256 code (shown on the document screen and the signature
 certificate) to confirm the document is authentic and see who signed it.
 
 == Changelog ==
+
+= 0.55.0 =
+* New: the portal "New document" flow is now a guided multi-step wizard. Step 1
+  lets you choose how to start — write text, upload a PDF, or use a template.
+* New: "Write text" documents. Type the document, tick which fields each signer
+  needs (signature, full name, date signed, initials), and ComSign composes the
+  PDF and auto-places a tidy signature block on a final "Signatures" page — no
+  dragging. Create and send in one step, or save as a draft.
 
 = 0.54.0 =
 * Security: CSV export now neutralises spreadsheet formula injection — cells

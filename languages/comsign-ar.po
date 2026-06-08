@@ -206,6 +206,9 @@ msgstr "العودة إلى المستندات"
 msgid "Back to list"
 msgstr "العودة إلى القائمة"
 
+msgid "Basic formatting is allowed. A “Signatures” page is added automatically."
+msgstr "يُسمح بالتنسيق الأساسي. تُضاف صفحة \"التواقيع\" تلقائيًا."
+
 msgid "Before you can send:"
 msgstr "قبل أن تتمكن من الإرسال:"
 
@@ -293,8 +296,8 @@ msgstr "اختيار"
 msgid "Choice (dropdown)"
 msgstr "اختيار (قائمة منسدلة)"
 
-msgid "Choose a different template"
-msgstr "اختر قالبًا آخر"
+msgid "Choose a different way to start"
+msgstr "اختر طريقة أخرى للبدء"
 
 msgid "Choose a plan"
 msgstr "اختر باقة"
@@ -458,6 +461,9 @@ msgstr "التاريخ"
 msgid "Date (auto)"
 msgstr "التاريخ (تلقائي)"
 
+msgid "Date signed"
+msgstr "تاريخ التوقيع"
+
 msgid "Days left in your free trial: %d"
 msgstr "الأيام المتبقية في تجربتك المجانية: %d"
 
@@ -511,6 +517,9 @@ msgstr "تم إنشاء المستند وإرساله للتوقيع."
 
 msgid "Document created from template. Review and send."
 msgstr "تم إنشاء المستند من قالب. راجِعه وأرسِله."
+
+msgid "Document created."
+msgstr "تم إنشاء المستند."
 
 msgid "Document created. Now add signers and place fields."
 msgstr "تم إنشاء المستند. الآن أضف الموقّعين وضع الحقول."
@@ -689,6 +698,9 @@ msgstr "حقل:"
 msgid "Fields saved."
 msgstr "تم حفظ الحقول."
 
+msgid "Fields to add for this signer"
+msgstr "الحقول المراد إضافتها لهذا الموقّع"
+
 msgid "File"
 msgstr "ملف"
 
@@ -745,6 +757,9 @@ msgstr "كيف يعمل التوقيع"
 
 msgid "How to add a document"
 msgstr "كيفية إضافة مستند"
+
+msgid "How would you like to create this document?"
+msgstr "كيف تريد إنشاء هذا المستند؟"
 
 msgid "I confirm"
 msgstr "أؤكّد"
@@ -917,6 +932,9 @@ msgstr "لا يوجد موقّعون بعد."
 msgid "No subscription"
 msgstr "لا يوجد اشتراك"
 
+msgid "No templates in this workspace yet."
+msgstr "لا توجد قوالب في مساحة العمل هذه بعد."
+
 msgid "No templates yet."
 msgstr "لا توجد قوالب بعد."
 
@@ -997,9 +1015,6 @@ msgstr "اختياري. تُثبت طابع زمني وفق RFC-3161 وقت تو
 
 msgid "Optional. Payments are confirmed automatically when the customer returns from Cardcom, so you do not need to configure anything in your terminal. ComSign also sends this URL with each transaction as a safety net — it is per-transaction and will not affect other systems that share the same Cardcom terminal."
 msgstr "اختياري. تُؤكَّد المدفوعات تلقائيًا عند عودة العميل من Cardcom، لذا لا حاجة لضبط أي شيء في الموقف لديك. كما يرسل ComSign هذا العنوان مع كل معاملة كشبكة أمان — وهو لكل معاملة على حدة ولن يؤثر على أنظمة أخرى تشترك في نفس موقف Cardcom."
-
-msgid "Or start from a template"
-msgstr "أو ابدأ من قالب"
 
 msgid "Original PDF"
 msgstr "ملف PDF الأصلي"
@@ -1427,6 +1442,12 @@ msgstr "تم حفظ حقول التوقيع."
 msgid "Signature method"
 msgstr "طريقة التوقيع"
 
+msgid "Signature — %s"
+msgstr "التوقيع — %s"
+
+msgid "Signatures"
+msgstr "التواقيع"
+
 msgid "Signatures pending"
 msgstr "توقيعات معلّقة"
 
@@ -1492,6 +1513,9 @@ msgstr "صفحة عامة مستقلة للتحقق من مستند (مثل ال
 
 msgid "Start %d-day free trial"
 msgstr "ابدأ تجربة مجانية لمدة %d يومًا"
+
+msgid "Start from a saved template and just add recipients."
+msgstr "ابدأ من قالب محفوظ وأضف المستلمين فقط."
 
 msgid "Status"
 msgstr "الحالة"
@@ -1733,6 +1757,9 @@ msgstr "إجمالي الموقّعين"
 msgid "Type"
 msgstr "النوع"
 
+msgid "Type the document and pick which fields each signer fills. We place the signature block for you — no dragging."
+msgstr "اكتب المستند واختر الحقول التي يملؤها كل موقّع. نضع كتلة التوقيع نيابةً عنك — دون سحب."
+
 msgid "Type your full name"
 msgstr "اكتب اسمك الكامل"
 
@@ -1778,11 +1805,17 @@ msgstr "ارفع شهادة PKCS#12 (‎.p12/.pfx) لتوقيع المستندا
 msgid "Upload a file"
 msgstr "رفع ملف"
 
+msgid "Upload a scanned or existing PDF and place the fields exactly where you want them."
+msgstr "ارفع ملف PDF ممسوحًا أو موجودًا وضع الحقول حيث تريد تمامًا."
+
 msgid "Upload certificate"
 msgstr "رفع شهادة"
 
 msgid "Use"
 msgstr "استخدام"
+
+msgid "Use a template"
+msgstr "استخدام قالب"
 
 msgid "Use a test terminal"
 msgstr "استخدام محطة اختبار"
@@ -1880,6 +1913,9 @@ msgstr "متى"
 msgid "Where signed-in customers manage, create, send and track their documents (no WP-Admin needed)."
 msgstr "حيث يدير العملاء المسجّلون مستنداتهم وينشئونها ويرسلونها ويتابعونها (دون الحاجة إلى WP-Admin)."
 
+msgid "Who needs to sign?"
+msgstr "من يحتاج إلى التوقيع؟"
+
 msgid "Workspace"
 msgstr "مساحة العمل"
 
@@ -1906,6 +1942,12 @@ msgstr "مساحة العمل: %s"
 
 msgid "Workspaces"
 msgstr "مساحات العمل"
+
+msgid "Write text"
+msgstr "كتابة نص"
+
+msgid "Write the document"
+msgstr "كتابة المستند"
 
 msgid "Write the fixed text of the document. After creating it you can place fillable and signature fields on the generated PDF."
 msgstr "اكتب النص الثابت للمستند. بعد إنشائه يمكنك وضع حقول قابلة للتعبئة وحقول توقيع على ملف PDF المُنشأ."

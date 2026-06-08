@@ -206,6 +206,9 @@ msgstr "Назад к документам"
 msgid "Back to list"
 msgstr "Назад к списку"
 
+msgid "Basic formatting is allowed. A “Signatures” page is added automatically."
+msgstr "Допускается базовое форматирование. Страница «Подписи» добавляется автоматически."
+
 msgid "Before you can send:"
 msgstr "Прежде чем отправить:"
 
@@ -293,8 +296,8 @@ msgstr "Выбор"
 msgid "Choice (dropdown)"
 msgstr "Выбор (выпадающий список)"
 
-msgid "Choose a different template"
-msgstr "Выбрать другой шаблон"
+msgid "Choose a different way to start"
+msgstr "Выбрать другой способ начать"
 
 msgid "Choose a plan"
 msgstr "Выберите тариф"
@@ -458,6 +461,9 @@ msgstr "Дата"
 msgid "Date (auto)"
 msgstr "Дата (авто)"
 
+msgid "Date signed"
+msgstr "Дата подписания"
+
 msgid "Days left in your free trial: %d"
 msgstr "Дней до конца пробного периода: %d"
 
@@ -511,6 +517,9 @@ msgstr "Документ создан и отправлен на подписа�
 
 msgid "Document created from template. Review and send."
 msgstr "Документ создан из шаблона. Проверьте и отправьте."
+
+msgid "Document created."
+msgstr "Документ создан."
 
 msgid "Document created. Now add signers and place fields."
 msgstr "Документ создан. Теперь добавьте подписантов и разместите поля."
@@ -689,6 +698,9 @@ msgstr "Поле:"
 msgid "Fields saved."
 msgstr "Поля сохранены."
 
+msgid "Fields to add for this signer"
+msgstr "Поля для этого подписанта"
+
 msgid "File"
 msgstr "Файл"
 
@@ -745,6 +757,9 @@ msgstr "Как работает подписание"
 
 msgid "How to add a document"
 msgstr "Как добавить документ"
+
+msgid "How would you like to create this document?"
+msgstr "Как вы хотите создать этот документ?"
 
 msgid "I confirm"
 msgstr "Подтверждаю"
@@ -917,6 +932,9 @@ msgstr "Пока нет подписантов."
 msgid "No subscription"
 msgstr "Нет подписки"
 
+msgid "No templates in this workspace yet."
+msgstr "В этом рабочем пространстве пока нет шаблонов."
+
 msgid "No templates yet."
 msgstr "Пока нет шаблонов."
 
@@ -997,9 +1015,6 @@ msgstr "Необязательно. Метка времени по RFC-3161 по
 
 msgid "Optional. Payments are confirmed automatically when the customer returns from Cardcom, so you do not need to configure anything in your terminal. ComSign also sends this URL with each transaction as a safety net — it is per-transaction and will not affect other systems that share the same Cardcom terminal."
 msgstr "Необязательно. Платежи подтверждаются автоматически при возврате клиента из Cardcom, поэтому в терминале ничего настраивать не нужно. ComSign также отправляет этот URL с каждой транзакцией как подстраховку — он привязан к транзакции и не влияет на другие системы, использующие тот же терминал Cardcom."
-
-msgid "Or start from a template"
-msgstr "Или начните с шаблона"
 
 msgid "Original PDF"
 msgstr "Оригинальный PDF"
@@ -1427,6 +1442,12 @@ msgstr "Поля подписи сохранены."
 msgid "Signature method"
 msgstr "Способ подписи"
 
+msgid "Signature — %s"
+msgstr "Подпись — %s"
+
+msgid "Signatures"
+msgstr "Подписи"
+
 msgid "Signatures pending"
 msgstr "Ожидают подписи"
 
@@ -1492,6 +1513,9 @@ msgstr "Отдельная публичная страница проверки 
 
 msgid "Start %d-day free trial"
 msgstr "Начать бесплатный пробный период на %d дней"
+
+msgid "Start from a saved template and just add recipients."
+msgstr "Начните с сохранённого шаблона и просто добавьте получателей."
 
 msgid "Status"
 msgstr "Статус"
@@ -1733,6 +1757,9 @@ msgstr "Всего подписантов"
 msgid "Type"
 msgstr "Тип"
 
+msgid "Type the document and pick which fields each signer fills. We place the signature block for you — no dragging."
+msgstr "Введите текст документа и выберите, какие поля заполняет каждый подписант. Блок подписи мы разместим за вас — без перетаскивания."
+
 msgid "Type your full name"
 msgstr "Введите ваше полное имя"
 
@@ -1778,11 +1805,17 @@ msgstr "Загрузите сертификат PKCS#12 (.p12/.pfx) для кр�
 msgid "Upload a file"
 msgstr "Загрузить файл"
 
+msgid "Upload a scanned or existing PDF and place the fields exactly where you want them."
+msgstr "Загрузите отсканированный или готовый PDF и разместите поля именно там, где нужно."
+
 msgid "Upload certificate"
 msgstr "Загрузить сертификат"
 
 msgid "Use"
 msgstr "Использовать"
+
+msgid "Use a template"
+msgstr "Использовать шаблон"
 
 msgid "Use a test terminal"
 msgstr "Использовать тестовый терминал"
@@ -1880,6 +1913,9 @@ msgstr "Когда"
 msgid "Where signed-in customers manage, create, send and track their documents (no WP-Admin needed)."
 msgstr "Где вошедшие клиенты управляют документами, создают, отправляют и отслеживают их (без WP-Admin)."
 
+msgid "Who needs to sign?"
+msgstr "Кто должен подписать?"
+
 msgid "Workspace"
 msgstr "Рабочее пространство"
 
@@ -1906,6 +1942,12 @@ msgstr "Рабочее пространство: %s"
 
 msgid "Workspaces"
 msgstr "Рабочие пространства"
+
+msgid "Write text"
+msgstr "Написать текст"
+
+msgid "Write the document"
+msgstr "Написание документа"
 
 msgid "Write the fixed text of the document. After creating it you can place fillable and signature fields on the generated PDF."
 msgstr "Напишите фиксированный текст документа. После создания вы сможете разместить заполняемые поля и поля подписи на созданном PDF."

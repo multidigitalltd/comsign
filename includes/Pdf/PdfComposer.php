@@ -21,13 +21,18 @@ final class PdfComposer {
 	/**
 	 * Render HTML content to a PDF file.
 	 *
-	 * @param string $title       Document title (used for metadata + heading).
-	 * @param string $html        Sanitised HTML body.
-	 * @param string $output_path Absolute path to write the PDF.
+	 * @param string $title          Document title (used for metadata + heading).
+	 * @param string $html           Sanitised HTML body.
+	 * @param string $output_path    Absolute path to write the PDF.
+	 * @param bool   $signature_page When true, append a clean final page headed
+	 *                               "Signatures" with whitespace for an
+	 *                               auto-placed signature block.
+	 *
+	 * @return int Total number of pages written.
 	 *
 	 * @throws \RuntimeException On write failure.
 	 */
-	public function render( string $title, string $html, string $output_path ): void {
+	public function render( string $title, string $html, string $output_path, bool $signature_page = false ): int {
 		$pdf = new \TCPDF( 'P', 'pt', 'A4', true, 'UTF-8' );
 
 		$pdf->SetCreator( 'ComSign' );
@@ -58,6 +63,14 @@ final class PdfComposer {
 
 		$pdf->writeHTML( $body, true, false, true, false, '' );
 
+		// A clean final page that the signature block is auto-placed onto.
+		if ( $signature_page ) {
+			$pdf->AddPage();
+			$pdf->writeHTML( '<h2 style="font-size:15pt;">' . esc_html__( 'Signatures', 'comsign' ) . '</h2>', true, false, true, false, '' );
+		}
+
+		$pages = (int) $pdf->getNumPages();
+
 		$dir = dirname( $output_path );
 		if ( ! is_dir( $dir ) ) {
 			wp_mkdir_p( $dir );
@@ -68,5 +81,7 @@ final class PdfComposer {
 		if ( ! is_file( $output_path ) ) {
 			throw new \RuntimeException( __( 'Could not generate the document PDF.', 'comsign' ) );
 		}
+
+		return $pages;
 	}
 }
