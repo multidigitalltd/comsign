@@ -151,6 +151,7 @@ final class BillingService {
 				$charged++;
 			} else {
 				$this->subscriptions->mark_past_due( (int) $sub->account_id );
+				( new BillingNotifications() )->send_payment_failed( (int) $sub->account_id );
 				$failed++;
 			}
 		}

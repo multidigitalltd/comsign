@@ -89,6 +89,9 @@ msgstr "Код доступа (передаёте вы)"
 msgid "Action"
 msgstr "Действие"
 
+msgid "Action needed: %s payment failed"
+msgstr "Требуется действие: платёж в %s не прошёл"
+
 msgid "Actions"
 msgstr "Действия"
 
@@ -1625,6 +1628,9 @@ msgstr "Документ без названия"
 msgid "Update"
 msgstr "Обновить"
 
+msgid "Update your billing here:"
+msgstr "Обновите платёжные данные здесь:"
+
 msgid "Upload & continue"
 msgstr "Загрузить и продолжить"
 
@@ -1708,6 +1714,9 @@ msgstr "Ожидание предыдущего подписанта"
 
 msgid "Warning"
 msgstr "Предупреждение"
+
+msgid "We could not charge your subscription. Your workspace will keep working for now, but please update your payment to avoid interruption."
+msgstr "Нам не удалось списать оплату подписки. Пока рабочее пространство продолжит работать, но обновите способ оплаты, чтобы избежать перерыва."
 
 msgid "We sent a one-time code to %s. Enter it below to continue."
 msgstr "Мы отправили одноразовый код на %s. Введите его ниже, чтобы продолжить."

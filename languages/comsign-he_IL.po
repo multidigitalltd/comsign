@@ -150,6 +150,10 @@ msgstr "קוד גישה (שאתם משתפים)"
 msgid "Action"
 msgstr "פעולה"
 
+#: includes/Services/BillingNotifications.php:82
+msgid "Action needed: %s payment failed"
+msgstr "נדרשת פעולה: התשלום ב-%s נכשל"
+
 #: includes/Admin/views/edit.php:337
 #: includes/Admin/views/templates.php:32
 msgid "Actions"
@@ -1895,7 +1899,7 @@ msgstr "שליחת דוא“ל בדיקה אל %s"
 msgid "Send test webhook"
 msgstr "שליחת webhook לבדיקה"
 
-#: includes/Services/BillingNotifications.php:86
+#: includes/Services/BillingNotifications.php:105
 msgid "Send your first document for signing here:"
 msgstr "שלחו את המסמך הראשון שלכם לחתימה כאן:"
 
@@ -2434,6 +2438,10 @@ msgstr "מסמך ללא כותרת"
 msgid "Update"
 msgstr "עדכון"
 
+#: includes/Services/BillingNotifications.php:86
+msgid "Update your billing here:"
+msgstr "עדכנו את פרטי החיוב כאן:"
+
 #: includes/Admin/views/new.php:46
 msgid "Upload & continue"
 msgstr "העלאה והמשך"
@@ -2553,6 +2561,10 @@ msgstr "ממתינים לחותם קודם"
 msgid "Warning"
 msgstr "אזהרה"
 
+#: includes/Services/BillingNotifications.php:85
+msgid "We could not charge your subscription. Your workspace will keep working for now, but please update your payment to avoid interruption."
+msgstr "לא הצלחנו לחייב את המנוי שלכם. מרחב העבודה ימשיך לעבוד בינתיים, אך אנא עדכנו את אמצעי התשלום כדי למנוע הפרעה."
+
 #: includes/Frontend/views/auth.php:31
 msgid "We sent a one-time code to %s. Enter it below to continue."
 msgstr "שלחנו קוד חד-פעמי אל %s. הזינו אותו כאן כדי להמשיך."
@@ -2570,7 +2582,7 @@ msgstr "כתובת Webhook"
 msgid "Webhook secret"
 msgstr "סוד Webhook"
 
-#: includes/Services/BillingNotifications.php:82
+#: includes/Services/BillingNotifications.php:101
 msgid "Welcome to %s"
 msgstr "ברוכים הבאים ל-%s"
 
@@ -2578,7 +2590,7 @@ msgstr "ברוכים הבאים ל-%s"
 msgid "Welcome! Let’s send your first document."
 msgstr "ברוכים הבאים! בואו נשלח את המסמך הראשון שלכם."
 
-#: includes/Services/BillingNotifications.php:85
+#: includes/Services/BillingNotifications.php:104
 msgid "Welcome! Your workspace is ready with a %d-day free trial."
 msgstr "ברוכים הבאים! מרחב העבודה שלכם מוכן עם %d ימי ניסיון חינם."
 

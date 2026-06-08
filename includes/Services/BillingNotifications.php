@@ -71,6 +71,25 @@ final class BillingNotifications {
 	}
 
 	/**
+	 * Email a workspace's owners that an automatic renewal charge failed.
+	 *
+	 * @param int $account_id Account id.
+	 */
+	public function send_payment_failed( int $account_id ): void {
+		foreach ( $this->owner_emails( $account_id ) as $email ) {
+			$subject = sprintf(
+				/* translators: %s: brand name. */
+				__( 'Action needed: %s payment failed', 'comsign' ),
+				Settings::brand_name()
+			);
+			$body  = __( 'We could not charge your subscription. Your workspace will keep working for now, but please update your payment to avoid interruption.', 'comsign' ) . "\n\n";
+			$body .= __( 'Update your billing here:', 'comsign' ) . "\n";
+			$body .= \ComSign\Frontend\PortalController::url( array( 'view' => 'billing' ) );
+			wp_mail( $email, $subject, $body );
+		}
+	}
+
+	/**
 	 * Email a new workspace's owner a short welcome.
 	 *
 	 * @param int $account_id Account id.

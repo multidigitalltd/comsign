@@ -4,7 +4,7 @@ Tags: signature, digital signature, pdf, esignature, hebrew
 Requires at least: 6.0
 Tested up to: 6.5
 Requires PHP: 7.4
-Stable tag: 0.45.0
+Stable tag: 0.46.0
 License: GPL-2.0-or-later
 License URI: https://www.gnu.org/licenses/gpl-2.0.html
 
@@ -105,6 +105,11 @@ ID and its SHA-256 code (shown on the document screen and the signature
 certificate) to confirm the document is authentic and see who signed it.
 
 == Changelog ==
+
+= 0.46.0 =
+* New: when an automatic renewal charge fails, the workspace owner is emailed a
+  payment-failed notice with a link to update billing (the account is also
+  marked payment-due).
 
 = 0.45.0 =
 * New: a public pricing table shortcode, [comsign_pricing], for marketing pages.

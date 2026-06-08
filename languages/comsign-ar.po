@@ -89,6 +89,9 @@ msgstr "رمز الوصول (تشاركه أنت)"
 msgid "Action"
 msgstr "إجراء"
 
+msgid "Action needed: %s payment failed"
+msgstr "إجراء مطلوب: فشل الدفع في %s"
+
 msgid "Actions"
 msgstr "إجراءات"
 
@@ -1625,6 +1628,9 @@ msgstr "مستند بدون عنوان"
 msgid "Update"
 msgstr "تحديث"
 
+msgid "Update your billing here:"
+msgstr "حدّث بيانات الفوترة هنا:"
+
 msgid "Upload & continue"
 msgstr "رفع ومتابعة"
 
@@ -1708,6 +1714,9 @@ msgstr "بانتظار موقّع سابق"
 
 msgid "Warning"
 msgstr "تحذير"
+
+msgid "We could not charge your subscription. Your workspace will keep working for now, but please update your payment to avoid interruption."
+msgstr "لم نتمكن من تحصيل اشتراكك. ستظل مساحة عملك تعمل في الوقت الحالي، لكن يرجى تحديث وسيلة الدفع لتجنّب الانقطاع."
 
 msgid "We sent a one-time code to %s. Enter it below to continue."
 msgstr "أرسلنا رمزًا لمرة واحدة إلى %s. أدخله أدناه للمتابعة."
