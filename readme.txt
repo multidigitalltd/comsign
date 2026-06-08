@@ -4,7 +4,7 @@ Tags: signature, digital signature, pdf, esignature, hebrew
 Requires at least: 6.0
 Tested up to: 6.5
 Requires PHP: 7.4
-Stable tag: 0.51.0
+Stable tag: 0.52.0
 License: GPL-2.0-or-later
 License URI: https://www.gnu.org/licenses/gpl-2.0.html
 
@@ -105,6 +105,15 @@ ID and its SHA-256 code (shown on the document screen and the signature
 certificate) to confirm the document is authentic and see who signed it.
 
 == Changelog ==
+
+= 0.52.0 =
+* New: operator actions on the Workspaces screen — change any workspace's plan
+  manually (monthly or annual, no payment required), and suspend or reactivate a
+  workspace's subscription. All actions are nonce-protected and restricted to
+  true site administrators (manage_options).
+* New: search and status filtering on the Workspaces screen, so a SaaS operator
+  can quickly find a workspace by name or narrow the list to a subscription
+  status (trialing, active, payment due, canceled, expired or none).
 
 = 0.51.0 =
 * New: an operator-only "Workspaces" admin screen (ComSign → Workspaces) that

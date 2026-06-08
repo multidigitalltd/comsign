@@ -633,7 +633,7 @@ msgid "Event"
 msgstr "Событие"
 
 msgid "Every customer workspace on this site, with its plan, members and document count. Only you (the site operator) can see this cross-tenant view."
-msgstr "Каждое рабочее пространство клиента на этом сайте с его тарифом, участниками и количеством документов. Только вы (оператор сайта) видите этот межарендный обзор."
+msgstr "Каждое рабочее пространство клиента на этом сайте с его тарифом, участниками и числом документов. Только вы (оператор сайта) видите это межарендаторное представление."
 
 msgid "Every event is POSTed here as JSON, signed with X-ComSign-Signature (HMAC-SHA256 of the body using the secret below)."
 msgstr "Каждое событие отправляется сюда методом POST в формате JSON, подписанное X-ComSign-Signature (HMAC-SHA256 тела с секретом ниже)."
@@ -1052,6 +1052,9 @@ msgstr "Тариф"
 msgid "Plan & billing"
 msgstr "Тариф и оплата"
 
+msgid "Plan updated."
+msgstr "Тариф обновлён."
+
 msgid "Plan:"
 msgstr "Тариф:"
 
@@ -1147,6 +1150,9 @@ msgstr "База REST: /wp-json/comsign/v1/documents"
 
 msgid "Re-send invitations"
 msgstr "Отправить приглашения повторно"
+
+msgid "Reactivate"
+msgstr "Возобновить"
 
 msgid "Ready to send"
 msgstr "Готово к отправке"
@@ -1268,6 +1274,9 @@ msgstr "Поиск"
 msgid "Search by name or email…"
 msgstr "Поиск по имени или email…"
 
+msgid "Search by name…"
+msgstr "Поиск по имени…"
+
 msgid "Search by title…"
 msgstr "Поиск по названию…"
 
@@ -1324,6 +1333,9 @@ msgstr "Отправлено через %s"
 
 msgid "Sent for signing"
 msgstr "Отправлено на подписание"
+
+msgid "Set plan"
+msgstr "Задать тариф"
 
 msgid "Set this as the indicator/webhook URL in your Cardcom terminal."
 msgstr "Укажите это как URL webhook/индикатора в вашем терминале Cardcom."
@@ -1459,6 +1471,12 @@ msgstr "Под-пространство создано."
 
 msgid "Sub-workspace name"
 msgstr "Название под-пространства"
+
+msgid "Suspend"
+msgstr "Приостановить"
+
+msgid "Suspend this workspace?"
+msgstr "Приостановить это рабочее пространство?"
 
 msgid "Switch"
 msgstr "Переключить"
@@ -1682,6 +1700,9 @@ msgstr "Введите ваше полное имя"
 msgid "Unexpected gateway response."
 msgstr "Неожиданный ответ платёжного шлюза."
 
+msgid "Unknown action."
+msgstr "Неизвестное действие."
+
 msgid "Unlimited documents"
 msgstr "Безлимит документов"
 
@@ -1819,6 +1840,15 @@ msgstr "Рабочее пространство"
 
 msgid "Workspace members"
 msgstr "Участники рабочего пространства"
+
+msgid "Workspace not found."
+msgstr "Рабочее пространство не найдено."
+
+msgid "Workspace reactivated."
+msgstr "Рабочее пространство возобновлено."
+
+msgid "Workspace suspended."
+msgstr "Рабочее пространство приостановлено."
 
 msgid "Workspace switched."
 msgstr "Рабочее пространство переключено."

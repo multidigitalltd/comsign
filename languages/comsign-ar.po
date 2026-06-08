@@ -633,7 +633,7 @@ msgid "Event"
 msgstr "الحدث"
 
 msgid "Every customer workspace on this site, with its plan, members and document count. Only you (the site operator) can see this cross-tenant view."
-msgstr "كل مساحة عمل عميل على هذا الموقع، مع باقتها وأعضائها وعدد مستنداتها. أنت وحدك (مشغّل الموقع) ترى هذا العرض عبر المستأجرين."
+msgstr "كل مساحة عمل لعميل على هذا الموقع، مع خطتها وأعضائها وعدد مستنداتها. أنت وحدك (مشغّل الموقع) ترى هذا العرض عبر المستأجرين."
 
 msgid "Every event is POSTed here as JSON, signed with X-ComSign-Signature (HMAC-SHA256 of the body using the secret below)."
 msgstr "يُرسَل كل حدث هنا عبر POST بصيغة JSON، موقّعًا بـ X-ComSign-Signature (HMAC-SHA256 للمحتوى باستخدام السر أدناه)."
@@ -1047,10 +1047,13 @@ msgid "Place signature fields"
 msgstr "وضع حقول التوقيع"
 
 msgid "Plan"
-msgstr "الباقة"
+msgstr "الخطة"
 
 msgid "Plan & billing"
 msgstr "الباقة والفوترة"
+
+msgid "Plan updated."
+msgstr "تم تحديث الخطة."
 
 msgid "Plan:"
 msgstr "الباقة:"
@@ -1147,6 +1150,9 @@ msgstr "قاعدة REST: /wp-json/comsign/v1/documents"
 
 msgid "Re-send invitations"
 msgstr "إعادة إرسال الدعوات"
+
+msgid "Reactivate"
+msgstr "إعادة التفعيل"
 
 msgid "Ready to send"
 msgstr "جاهز للإرسال"
@@ -1268,6 +1274,9 @@ msgstr "بحث"
 msgid "Search by name or email…"
 msgstr "البحث بالاسم أو البريد الإلكتروني…"
 
+msgid "Search by name…"
+msgstr "البحث بالاسم…"
+
 msgid "Search by title…"
 msgstr "البحث بالعنوان…"
 
@@ -1324,6 +1333,9 @@ msgstr "أُرسل بواسطة %s"
 
 msgid "Sent for signing"
 msgstr "أُرسل للتوقيع"
+
+msgid "Set plan"
+msgstr "تعيين الخطة"
 
 msgid "Set this as the indicator/webhook URL in your Cardcom terminal."
 msgstr "اضبط هذا كعنوان webhook/مؤشر في محطة Cardcom الخاصة بك."
@@ -1459,6 +1471,12 @@ msgstr "تم إنشاء مساحة العمل الفرعية."
 
 msgid "Sub-workspace name"
 msgstr "اسم مساحة العمل الفرعية"
+
+msgid "Suspend"
+msgstr "تعليق"
+
+msgid "Suspend this workspace?"
+msgstr "تعليق مساحة العمل هذه؟"
 
 msgid "Switch"
 msgstr "تبديل"
@@ -1682,6 +1700,9 @@ msgstr "اكتب اسمك الكامل"
 msgid "Unexpected gateway response."
 msgstr "استجابة غير متوقعة من بوابة الدفع."
 
+msgid "Unknown action."
+msgstr "إجراء غير معروف."
+
 msgid "Unlimited documents"
 msgstr "مستندات غير محدودة"
 
@@ -1819,6 +1840,15 @@ msgstr "مساحة العمل"
 
 msgid "Workspace members"
 msgstr "أعضاء مساحة العمل"
+
+msgid "Workspace not found."
+msgstr "مساحة العمل غير موجودة."
+
+msgid "Workspace reactivated."
+msgstr "تمت إعادة تفعيل مساحة العمل."
+
+msgid "Workspace suspended."
+msgstr "تم تعليق مساحة العمل."
 
 msgid "Workspace switched."
 msgstr "تم تبديل مساحة العمل."

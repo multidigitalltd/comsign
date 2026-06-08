@@ -111,6 +111,7 @@ final class Admin {
 		add_action( 'admin_post_comsign_remove_certificate', array( $this, 'handle_remove_certificate' ) );
 		add_action( 'admin_post_comsign_save_tsa', array( $this, 'handle_save_tsa' ) );
 		add_action( 'admin_post_comsign_save_cardcom', array( $this, 'handle_save_cardcom' ) );
+		add_action( 'admin_post_comsign_workspace_action', array( $this, 'handle_workspace_action' ) );
 		add_action( 'admin_post_comsign_save_template', array( $this, 'handle_save_template' ) );
 		add_action( 'admin_post_comsign_use_template', array( $this, 'handle_use_template' ) );
 		add_action( 'admin_post_comsign_bulk_template', array( $this, 'handle_bulk_template' ) );
@@ -1071,16 +1072,29 @@ final class Admin {
 			wp_die( esc_html__( 'You are not allowed to access this page.', 'comsign' ) );
 		}
 
+		// phpcs:disable WordPress.Security.NonceVerification.Recommended
+		$search = isset( $_GET['s'] ) ? sanitize_text_field( wp_unslash( $_GET['s'] ) ) : '';
+		$status = isset( $_GET['status'] ) ? sanitize_key( wp_unslash( $_GET['status'] ) ) : '';
+		// phpcs:enable WordPress.Security.NonceVerification.Recommended
+
 		$accounts = $this->accounts->repository();
 		$subs     = new \ComSign\Services\SubscriptionService();
 		$docs     = $this->documents;
 		$rows     = array();
 
 		foreach ( $accounts->all() as $account ) {
-			$id      = (int) $account->id;
-			$members = $accounts->members_of( $id );
+			$id          = (int) $account->id;
+			$acct_status = $subs->status( $id );
 
-			$owners = array();
+			if ( '' !== $search && false === stripos( (string) $account->name, $search ) ) {
+				continue;
+			}
+			if ( '' !== $status && $status !== $acct_status ) {
+				continue;
+			}
+
+			$members = $accounts->members_of( $id );
+			$owners  = array();
 			foreach ( $members as $m ) {
 				if ( \ComSign\Database\AccountRepository::ROLE_OWNER === $m->role ) {
 					$u = get_userdata( (int) $m->user_id );
@@ -1091,25 +1105,74 @@ final class Admin {
 			}
 
 			$rows[] = array(
-				'id'          => $id,
-				'name'        => (string) $account->name,
-				'owners'      => $owners,
-				'members'     => count( $members ),
-				'documents'   => $docs->count_for_accounts( array( $id ) ),
-				'plan'        => $subs->plan_id( $id ),
-				'status'      => $subs->status( $id ),
-				'created_at'  => (string) ( $account->created_at ?? '' ),
+				'id'         => $id,
+				'name'       => (string) $account->name,
+				'owners'     => $owners,
+				'members'    => count( $members ),
+				'documents'  => $docs->count_for_accounts( array( $id ) ),
+				'plan'       => $subs->plan_id( $id ),
+				'status'     => $acct_status,
+				'created_at' => (string) ( $account->created_at ?? '' ),
 			);
 		}
 
 		$this->view(
 			'workspaces',
 			array(
-				'rows'   => $rows,
-				'plans'  => \ComSign\Billing\Plans::all(),
-				'notice' => $this->pull_notice(),
+				'rows'       => $rows,
+				'plans'      => \ComSign\Billing\Plans::all(),
+				'search'     => $search,
+				'status'     => $status,
+				'action_url' => admin_url( 'admin-post.php' ),
+				'nonce'      => wp_create_nonce( 'comsign_workspace_action' ),
+				'notice'     => $this->pull_notice(),
 			)
 		);
+	}
+
+	/**
+	 * Operator action on a workspace subscription: set a plan, suspend or
+	 * reactivate. Site-operator only.
+	 */
+	public function handle_workspace_action(): void {
+		if ( ! current_user_can( 'manage_options' ) ) {
+			wp_die( esc_html__( 'You are not allowed to access this page.', 'comsign' ) );
+		}
+		check_admin_referer( 'comsign_workspace_action' );
+
+		$account_id = isset( $_POST['account_id'] ) ? absint( wp_unslash( $_POST['account_id'] ) ) : 0;
+		$op         = isset( $_POST['op'] ) ? sanitize_key( wp_unslash( $_POST['op'] ) ) : '';
+		$subs       = new \ComSign\Services\SubscriptionService();
+		$back       = admin_url( 'admin.php?page=comsign-workspaces' );
+
+		if ( $account_id <= 0 ) {
+			$this->redirect_with_notice( $back, 'error', __( 'Workspace not found.', 'comsign' ) );
+		}
+
+		if ( 'set_plan' === $op ) {
+			$plan  = isset( $_POST['plan'] ) ? sanitize_key( wp_unslash( $_POST['plan'] ) ) : '';
+			$cycle = ( isset( $_POST['cycle'] ) && 'annual' === $_POST['cycle'] ) ? 'annual' : 'monthly';
+			if ( ! \ComSign\Billing\Plans::exists( $plan ) ) {
+				$this->redirect_with_notice( $back, 'error', __( 'Please choose a valid plan.', 'comsign' ) );
+			}
+			// Operator override: activate without taking payment, one period ahead.
+			$period_end = gmdate( 'Y-m-d H:i:s', strtotime( 'annual' === $cycle ? '+1 year' : '+1 month' ) );
+			$subs->activate( $account_id, $plan, $cycle, $period_end );
+			$this->redirect_with_notice( $back, 'success', __( 'Plan updated.', 'comsign' ) );
+		}
+
+		if ( 'suspend' === $op ) {
+			$subs->cancel( $account_id );
+			$this->redirect_with_notice( $back, 'success', __( 'Workspace suspended.', 'comsign' ) );
+		}
+
+		if ( 'reactivate' === $op ) {
+			$period_end = gmdate( 'Y-m-d H:i:s', strtotime( '+1 month' ) );
+			$subs->activate( $account_id, $subs->plan_id( $account_id ), 'monthly', $period_end );
+			$this->redirect_with_notice( $back, 'success', __( 'Workspace reactivated.', 'comsign' ) );
+		}
+
+		$this->redirect_with_notice( $back, 'error', __( 'Unknown action.', 'comsign' ) );
 	}
 
 	/**
