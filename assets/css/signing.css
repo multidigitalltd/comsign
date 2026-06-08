@@ -636,3 +636,29 @@ body.comsign-public {
 	/* Action cells (forms/buttons) align to the end without a label gap. */
 	.comsign-cards-on-mobile td:not([data-label])::before { content: ""; }
 }
+
+/* ---- Portal insights (0.50.0) ---- */
+.comsign-spark {
+	display: flex;
+	align-items: flex-end;
+	gap: 4px;
+	height: 120px;
+	padding-top: 8px;
+}
+.comsign-spark-bar {
+	flex: 1;
+	min-width: 6px;
+	background: var( --comsign-primary, #0b3d91 );
+	border-radius: 3px 3px 0 0;
+	opacity: 0.85;
+}
+.comsign-status-list { list-style: none; margin: 0; padding: 0; }
+.comsign-status-list li {
+	display: flex;
+	align-items: center;
+	justify-content: space-between;
+	gap: 12px;
+	padding: 8px 0;
+	border-bottom: 1px solid #f0f0f2;
+}
+.comsign-status-list li:last-child { border-bottom: 0; }

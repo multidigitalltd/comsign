@@ -746,6 +746,9 @@ msgstr "Поддержка изображений (GD)"
 msgid "Initials"
 msgstr "Инициалы"
 
+msgid "Insights"
+msgstr "Аналитика"
+
 msgid "Integrations"
 msgstr "Интеграции"
 
@@ -859,6 +862,9 @@ msgstr "Пока нет контактов."
 
 msgid "No credit card required to start. Cancel anytime."
 msgstr "Для начала не нужна банковская карта. Отмена в любой момент."
+
+msgid "No data yet — send a document to start seeing insights."
+msgstr "Пока нет данных — отправьте документ, чтобы увидеть аналитику."
 
 msgid "No documents yet."
 msgstr "Пока нет документов."

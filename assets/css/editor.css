@@ -88,3 +88,31 @@
 .comsign-field--required .comsign-field-label {
 	font-weight: 600;
 }
+
+/* ---- Mobile editor: pan-friendly canvas + larger touch targets (0.50.0) ---- */
+.comsign-pdf {
+	-webkit-overflow-scrolling: touch;
+	touch-action: pan-x pan-y;
+}
+@media ( max-width: 600px ) {
+	/* Bigger, thumb-friendly remove/resize handles. */
+	.comsign-field-remove {
+		width: 28px;
+		height: 28px;
+		line-height: 26px;
+		font-size: 18px;
+		top: -14px;
+		inset-inline-end: -14px;
+	}
+	.comsign-field-resize {
+		width: 20px;
+		height: 20px;
+		bottom: -8px;
+		inset-inline-end: -8px;
+	}
+	/* Toolbar wraps; primary actions span the width. */
+	.comsign-editor-toolbar { gap: 10px; }
+	.comsign-editor-toolbar select,
+	#comsign-add-field,
+	#comsign-save-fields { width: 100%; }
+}

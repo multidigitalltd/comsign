@@ -746,6 +746,9 @@ msgstr "دعم الصور (GD)"
 msgid "Initials"
 msgstr "الأحرف الأولى"
 
+msgid "Insights"
+msgstr "رؤى"
+
 msgid "Integrations"
 msgstr "التكاملات"
 
@@ -859,6 +862,9 @@ msgstr "لا توجد جهات اتصال بعد."
 
 msgid "No credit card required to start. Cancel anytime."
 msgstr "لا حاجة لبطاقة ائتمان للبدء. يمكنك الإلغاء في أي وقت."
+
+msgid "No data yet — send a document to start seeing insights."
+msgstr "لا توجد بيانات بعد — أرسل مستندًا لبدء رؤية الرؤى."
 
 msgid "No documents yet."
 msgstr "لا توجد مستندات بعد."

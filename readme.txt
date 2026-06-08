@@ -4,7 +4,7 @@ Tags: signature, digital signature, pdf, esignature, hebrew
 Requires at least: 6.0
 Tested up to: 6.5
 Requires PHP: 7.4
-Stable tag: 0.49.0
+Stable tag: 0.50.0
 License: GPL-2.0-or-later
 License URI: https://www.gnu.org/licenses/gpl-2.0.html
 
@@ -105,6 +105,15 @@ ID and its SHA-256 code (shown on the document screen and the signature
 certificate) to confirm the document is authentic and see who signed it.
 
 == Changelog ==
+
+= 0.50.0 =
+* New: an Insights page in the portal — total documents, completion rate,
+  average time to complete, signatures pending, a 14-day completions sparkline,
+  a by-status breakdown and a "needs attention" list of documents stuck over a
+  week, all scoped to your workspaces.
+* Mobile: the field-placement editor is more touch-friendly — pan-scrollable
+  preview, larger remove/resize handles, and full-width toolbar actions on small
+  screens.
 
 = 0.49.0 =
 * New: export your documents to CSV from the portal. The "Export CSV" button on

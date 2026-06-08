@@ -539,6 +539,8 @@ final class PortalController {
 			$this->render_document( $user_id, $account_ids );
 		} elseif ( 'documents' === $view ) {
 			$this->render_documents( $user_id, $account_ids );
+		} elseif ( 'insights' === $view ) {
+			$this->render_insights( $user_id, $account_ids );
 		} elseif ( 'create' === $view ) {
 			$this->render_create( $user_id, $account_ids );
 		} elseif ( 'edit' === $view ) {
@@ -1089,6 +1091,32 @@ final class PortalController {
 	}
 
 	/**
+	 * Insights: read-only analytics over the user's visible workspaces.
+	 *
+	 * @param int   $user_id     Current user.
+	 * @param int[] $account_ids Visible accounts.
+	 */
+	private function render_insights( int $user_id, array $account_ids ): void {
+		$analytics = new \ComSign\Services\Analytics( $account_ids );
+
+		$this->render(
+			'portal-insights',
+			array(
+				'page_title'  => __( 'Insights', 'comsign' ),
+				'nav'         => $this->nav( 'insights', $user_id ),
+				'total'       => $analytics->total(),
+				'rate'        => $analytics->completion_rate(),
+				'avg_seconds' => $analytics->avg_completion_seconds(),
+				'counts'      => $analytics->status_counts(),
+				'signers'     => $analytics->signer_stats(),
+				'series'      => $analytics->completions_by_day( 14 ),
+				'stuck'       => $analytics->stuck( 7, 10 ),
+				'switcher'    => $this->switcher( $user_id ),
+			)
+		);
+	}
+
+	/**
 	 * Dashboard: status summary + items needing attention + recent documents.
 	 *
 	 * @param int   $user_id     Current user.
@@ -1258,6 +1286,11 @@ final class PortalController {
 				'label'  => __( 'Documents', 'comsign' ),
 				'url'    => self::url( array( 'view' => 'documents' ) ),
 				'active' => 'documents' === $active,
+			),
+			array(
+				'label'  => __( 'Insights', 'comsign' ),
+				'url'    => self::url( array( 'view' => 'insights' ) ),
+				'active' => 'insights' === $active,
 			),
 		);
 
