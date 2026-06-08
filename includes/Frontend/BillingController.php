@@ -12,11 +12,17 @@ defined( 'ABSPATH' ) || exit;
 use ComSign\Services\BillingService;
 
 /**
- * Receives Cardcom's server-to-server result notification. The webhook is not
- * trusted on its face: it only carries a transaction reference, which
- * {@see BillingService::complete_from_reference()} re-verifies directly with
- * Cardcom (using our credentials) and against our HMAC-signed return value
- * before any subscription is activated. A forged call therefore does nothing.
+ * Optional safety net for Cardcom's per-transaction notification (the
+ * WebHookUrl passed with each Low Profile checkout — not a terminal-wide
+ * indicator, so it never interferes with other systems sharing the same
+ * Cardcom terminal).
+ *
+ * Activation normally happens on the customer's browser return
+ * ({@see PortalController::maybe_complete_checkout()}); this endpoint only
+ * matters when the browser never makes it back. Either way the reference is
+ * re-verified directly with Cardcom (GetLpResult) and checked against our
+ * HMAC-signed return value before anything is activated, so a forged call does
+ * nothing and a missing webhook costs nothing.
  */
 final class BillingController {
 

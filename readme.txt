@@ -4,7 +4,7 @@ Tags: signature, digital signature, pdf, esignature, hebrew
 Requires at least: 6.0
 Tested up to: 6.5
 Requires PHP: 7.4
-Stable tag: 0.52.0
+Stable tag: 0.53.0
 License: GPL-2.0-or-later
 License URI: https://www.gnu.org/licenses/gpl-2.0.html
 
@@ -105,6 +105,18 @@ ID and its SHA-256 code (shown on the document screen and the signature
 certificate) to confirm the document is authentic and see who signed it.
 
 == Changelog ==
+
+= 0.53.0 =
+* New: a [comsign_portal] shortcode. Put it on any page (e.g. "My account") and
+  that page becomes your customers' personal area — manage, create, send and
+  track documents and billing on your own URL. The built-in /comsign/app page
+  keeps working, and portal links automatically follow the page when present.
+* Fix: Cardcom payments now activate the moment the customer returns from
+  checkout, via a direct server-to-server verification (GetLpResult) of that
+  single transaction. Activation no longer depends on configuring a terminal-
+  wide indicator/webhook, so it works correctly even when the same Cardcom
+  terminal is shared with other systems. The per-transaction webhook remains an
+  optional safety net for when the customer's browser never returns.
 
 = 0.52.0 =
 * New: operator actions on the Workspaces screen — change any workspace's plan

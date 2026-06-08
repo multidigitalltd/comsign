@@ -263,8 +263,8 @@ msgstr "Отменена"
 msgid "Cardcom is not configured."
 msgstr "Cardcom не настроен."
 
-msgid "Cardcom webhook"
-msgstr "Webhook Cardcom"
+msgid "Cardcom webhook (optional)"
+msgstr "Вебхук Cardcom (необязательно)"
 
 msgid "Certificate password"
 msgstr "Пароль сертификата"
@@ -950,6 +950,9 @@ msgstr "Допускаются только файлы PDF."
 msgid "Only a workspace owner can manage the plan and billing."
 msgstr "Управлять тарифом и оплатой может только владелец рабочего пространства."
 
+msgid "Open your area"
+msgstr "Открыть личный кабинет"
+
 msgid "OpenSSL (PKI signing)"
 msgstr "OpenSSL (подпись PKI)"
 
@@ -965,8 +968,14 @@ msgstr "OpenSSL недоступен на этом сервере, поэтом�
 msgid "OpenSSL is unavailable; documents use electronic signatures only."
 msgstr "OpenSSL недоступен; документы используют только электронные подписи."
 
+msgid "Optional safety net. Payments activate automatically when the customer returns from Cardcom; this URL is sent per-transaction, so there is nothing to set in your terminal."
+msgstr "Необязательная подстраховка. Платежи активируются автоматически при возврате клиента из Cardcom; этот URL отправляется для каждой транзакции отдельно, поэтому ничего настраивать в терминале не нужно."
+
 msgid "Optional. An RFC-3161 timestamp proves when each document was signed (PAdES-T), giving the signature long-term validity. Leave empty to disable."
 msgstr "Необязательно. Метка времени по RFC-3161 подтверждает, когда был подписан каждый документ (PAdES-T), давая подписи долгосрочную действительность. Оставьте пустым, чтобы отключить."
+
+msgid "Optional. Payments are confirmed automatically when the customer returns from Cardcom, so you do not need to configure anything in your terminal. ComSign also sends this URL with each transaction as a safety net — it is per-transaction and will not affect other systems that share the same Cardcom terminal."
+msgstr "Необязательно. Платежи подтверждаются автоматически при возврате клиента из Cardcom, поэтому в терминале ничего настраивать не нужно. ComSign также отправляет этот URL с каждой транзакцией как подстраховку — он привязан к транзакции и не влияет на другие системы, использующие тот же терминал Cardcom."
 
 msgid "Or start from a template"
 msgstr "Или начните с шаблона"
@@ -1007,8 +1016,8 @@ msgstr "Вставьте эти шорткоды на любую страниц�
 msgid "Payment due"
 msgstr "Требуется оплата"
 
-msgid "Payment received — your plan is being activated."
-msgstr "Платёж получен — ваш тариф активируется."
+msgid "Payment received — your plan is now active."
+msgstr "Платёж получен — ваш тариф теперь активен."
 
 msgid "Payment was not completed. You can try again below."
 msgstr "Платёж не завершён. Можно попробовать снова ниже."
@@ -1337,12 +1346,6 @@ msgstr "Отправлено на подписание"
 msgid "Set plan"
 msgstr "Задать тариф"
 
-msgid "Set this as the indicator/webhook URL in your Cardcom terminal."
-msgstr "Укажите это как URL webhook/индикатора в вашем терминале Cardcom."
-
-msgid "Set this as the webhook/indicator URL in your Cardcom terminal so payments activate subscriptions."
-msgstr "Укажите это как URL webhook/индикатора в терминале Cardcom, чтобы платежи активировали подписки."
-
 msgid "Settings"
 msgstr "Настройки"
 
@@ -1375,6 +1378,9 @@ msgstr "Войти"
 
 msgid "Sign in person"
 msgstr "Подписать лично"
+
+msgid "Sign in to your area"
+msgstr "Войдите в личный кабинет"
 
 msgid "Sign: %s"
 msgstr "Подписать: %s"
@@ -1549,6 +1555,9 @@ msgstr "Файл сертификата слишком большой (макс.
 
 msgid "The certificate must be a .p12 or .pfx file."
 msgstr "Сертификат должен быть файлом .p12 или .pfx."
+
+msgid "The customer personal area — put this on a page (e.g. “My account”) and signed-in customers manage, create, send and track their documents and billing there, on your own URL. (The built-in /comsign/app page works too.)"
+msgstr "Личный кабинет клиента — разместите это на странице (например, «Мой аккаунт»), и вошедшие клиенты будут управлять, создавать, отправлять и отслеживать свои документы и оплату прямо там, на вашем адресе. (Встроенная страница /comsign/app тоже работает.)"
 
 msgid "The daily reminder task is scheduled."
 msgstr "Ежедневная задача напоминаний запланирована."
@@ -1805,6 +1814,9 @@ msgstr "Предупреждение"
 msgid "We could not charge your subscription. Your workspace will keep working for now, but please update your payment to avoid interruption."
 msgstr "Нам не удалось списать оплату подписки. Пока рабочее пространство продолжит работать, но обновите способ оплаты, чтобы избежать перерыва."
 
+msgid "We could not confirm your payment. If you were charged, it will activate shortly — otherwise you can try again below."
+msgstr "Не удалось подтвердить ваш платёж. Если средства были списаны, тариф активируется в ближайшее время — иначе попробуйте снова ниже."
+
 msgid "We sent a one-time code to %s. Enter it below to continue."
 msgstr "Мы отправили одноразовый код на %s. Введите его ниже, чтобы продолжить."
 
@@ -1813,6 +1825,9 @@ msgstr "Мы отправим документ выбранному вами ч�
 
 msgid "Webhook URL"
 msgstr "URL webhook"
+
+msgid "Webhook URL (optional)"
+msgstr "URL вебхука (необязательно)"
 
 msgid "Webhook secret"
 msgstr "Секрет webhook"

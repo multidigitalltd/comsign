@@ -176,10 +176,10 @@ defined( 'ABSPATH' ) || exit;
 					<td><label><input type="checkbox" name="test_mode" value="1" <?php checked( $cardcom['test_mode'] ); ?>> <?php esc_html_e( 'Use a test terminal', 'comsign' ); ?></label></td>
 				</tr>
 				<tr>
-					<th scope="row"><?php esc_html_e( 'Webhook URL', 'comsign' ); ?></th>
+					<th scope="row"><?php esc_html_e( 'Webhook URL (optional)', 'comsign' ); ?></th>
 					<td>
 						<code><?php echo esc_html( $cardcom_webhook ); ?></code>
-						<p class="description"><?php esc_html_e( 'Set this as the indicator/webhook URL in your Cardcom terminal.', 'comsign' ); ?></p>
+						<p class="description"><?php esc_html_e( 'Optional. Payments are confirmed automatically when the customer returns from Cardcom, so you do not need to configure anything in your terminal. ComSign also sends this URL with each transaction as a safety net — it is per-transaction and will not affect other systems that share the same Cardcom terminal.', 'comsign' ); ?></p>
 					</td>
 				</tr>
 			</table>
@@ -200,6 +200,10 @@ defined( 'ABSPATH' ) || exit;
 			array(
 				'code' => '[comsign_verify]',
 				'desc' => __( 'Document verification form — lets anyone confirm a signed document is authentic using its ID and verification code (SHA-256), and see who signed it.', 'comsign' ),
+			),
+			array(
+				'code' => '[comsign_portal]',
+				'desc' => __( 'The customer personal area — put this on a page (e.g. “My account”) and signed-in customers manage, create, send and track their documents and billing there, on your own URL. (The built-in /comsign/app page works too.)', 'comsign' ),
 			),
 		);
 		$cs_links = array(
@@ -250,9 +254,9 @@ defined( 'ABSPATH' ) || exit;
 					</tr>
 				<?php endforeach; ?>
 				<tr>
-					<td><strong><?php esc_html_e( 'Cardcom webhook', 'comsign' ); ?></strong></td>
+					<td><strong><?php esc_html_e( 'Cardcom webhook (optional)', 'comsign' ); ?></strong></td>
 					<td><code><?php echo esc_html( $cardcom_webhook ); ?></code></td>
-					<td><?php esc_html_e( 'Set this as the webhook/indicator URL in your Cardcom terminal so payments activate subscriptions.', 'comsign' ); ?></td>
+					<td><?php esc_html_e( 'Optional safety net. Payments activate automatically when the customer returns from Cardcom; this URL is sent per-transaction, so there is nothing to set in your terminal.', 'comsign' ); ?></td>
 				</tr>
 			</tbody>
 		</table>

@@ -6,6 +6,7 @@
  *
  * @var string       $page_title
  * @var array        $nav
+ * @var bool|null    $activated     Checkout return result (true/false/null).
  * @var string       $status        Effective subscription status.
  * @var object|null  $subscription  Raw subscription row.
  * @var string       $plan_id       Current plan id.
@@ -42,16 +43,19 @@ $money = static function ( float $amount ) use ( $currency ): string {
 require __DIR__ . '/partials/header.php';
 require __DIR__ . '/partials/portal-nav.php';
 
-// Cardcom redirects back here with ?paid=1 (or 0); the webhook does the real
-// activation, so we just acknowledge.
+// Cardcom redirects back here after checkout. $activated is the authoritative
+// result of the server-to-server verification done in the controller:
+// true = paid & plan activated, false = not completed, null = not a return.
 // phpcs:ignore WordPress.Security.NonceVerification.Recommended
 $paid = isset( $_GET['paid'] ) ? sanitize_key( wp_unslash( $_GET['paid'] ) ) : '';
 ?>
 	<main id="comsign-main" tabindex="-1" class="comsign-portal">
 		<h1><?php esc_html_e( 'Plan & billing', 'comsign' ); ?></h1>
 
-		<?php if ( '1' === $paid ) : ?>
-			<div class="comsign-portal-flash is-success" role="status"><?php esc_html_e( 'Payment received — your plan is being activated.', 'comsign' ); ?></div>
+		<?php if ( true === $activated ) : ?>
+			<div class="comsign-portal-flash is-success" role="status"><?php esc_html_e( 'Payment received — your plan is now active.', 'comsign' ); ?></div>
+		<?php elseif ( false === $activated ) : ?>
+			<div class="comsign-portal-flash is-error" role="status"><?php esc_html_e( 'We could not confirm your payment. If you were charged, it will activate shortly — otherwise you can try again below.', 'comsign' ); ?></div>
 		<?php elseif ( '0' === $paid ) : ?>
 			<div class="comsign-portal-flash is-error" role="status"><?php esc_html_e( 'Payment was not completed. You can try again below.', 'comsign' ); ?></div>
 		<?php endif; ?>

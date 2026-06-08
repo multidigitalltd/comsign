@@ -61,6 +61,10 @@ final class PortalController {
 		add_action( 'init', array( __CLASS__, 'register_route' ) );
 		add_filter( 'query_vars', array( $this, 'register_query_var' ) );
 		add_action( 'template_redirect', array( $this, 'maybe_render' ) );
+		// [comsign_portal] turns any page into the client's personal area. The
+		// page is detected at template_redirect; the callback is a fallback.
+		add_shortcode( 'comsign_portal', array( $this, 'render_shortcode' ) );
+		add_action( 'save_post', array( __CLASS__, 'flush_portal_page_cache' ) );
 		// Switcher for portal users (login required, no admin capability needed).
 		add_action( 'admin_post_comsign_portal_switch', array( $this, 'handle_switch' ) );
 		// Create/send and per-document actions, all RBAC-checked at the service layer.
@@ -485,17 +489,88 @@ final class PortalController {
 	/**
 	 * Portal URL helper.
 	 *
+	 * When the site has a page hosting the [comsign_portal] shortcode, all portal
+	 * links point at that friendly page; otherwise they fall back to the built-in
+	 * /comsign/app route. Either way the view/doc args are read from the query
+	 * string, so navigation works the same in both setups.
+	 *
 	 * @param array $args Extra query args (view, doc...).
 	 */
 	public static function url( array $args = array() ): string {
+		$page_id = self::portal_page_id();
+		if ( $page_id > 0 ) {
+			$permalink = get_permalink( $page_id );
+			if ( $permalink ) {
+				return $args ? add_query_arg( $args, $permalink ) : $permalink;
+			}
+		}
 		return add_query_arg( array_merge( array( 'comsign_app' => '1' ), $args ), home_url( '/' ) );
+	}
+
+	/**
+	 * The published page that hosts the [comsign_portal] shortcode, if any.
+	 *
+	 * Cached in a transient and invalidated on save_post so the lookup runs at
+	 * most once per request cycle.
+	 */
+	public static function portal_page_id(): int {
+		$cached = get_transient( 'comsign_portal_page' );
+		if ( false !== $cached ) {
+			return (int) $cached;
+		}
+
+		global $wpdb;
+		$id = (int) $wpdb->get_var( // phpcs:ignore WordPress.DB.DirectDatabaseQuery
+			"SELECT ID FROM {$wpdb->posts}
+			 WHERE post_status = 'publish' AND post_type IN ( 'page', 'post' )
+			   AND post_content LIKE '%[comsign_portal%'
+			 ORDER BY ID ASC LIMIT 1"
+		);
+		set_transient( 'comsign_portal_page', $id, DAY_IN_SECONDS );
+		return $id;
+	}
+
+	/**
+	 * Drop the cached portal-page lookup (a page may have gained/lost the
+	 * shortcode).
+	 */
+	public static function flush_portal_page_cache(): void {
+		delete_transient( 'comsign_portal_page' );
+	}
+
+	/**
+	 * Whether the current front-end request should render the portal: either the
+	 * /comsign/app route, or a singular page/post carrying [comsign_portal].
+	 */
+	private function is_portal_request(): bool {
+		if ( ! empty( $_GET['comsign_app'] ) || get_query_var( 'comsign_app' ) ) { // phpcs:ignore WordPress.Security.NonceVerification.Recommended
+			return true;
+		}
+		if ( is_singular() ) {
+			$post = get_post();
+			if ( $post instanceof \WP_Post && has_shortcode( (string) $post->post_content, 'comsign_portal' ) ) {
+				return true;
+			}
+		}
+		return false;
+	}
+
+	/**
+	 * Fallback shortcode output. In practice {@see maybe_render()} intercepts the
+	 * page before the content runs, so this only shows if rendering was bypassed.
+	 */
+	public function render_shortcode(): string {
+		if ( ! is_user_logged_in() ) {
+			return '<p><a href="' . esc_url( wp_login_url( self::url() ) ) . '">' . esc_html__( 'Sign in to your area', 'comsign' ) . '</a></p>';
+		}
+		return '<p><a href="' . esc_url( self::url() ) . '">' . esc_html__( 'Open your area', 'comsign' ) . '</a></p>';
 	}
 
 	/**
 	 * Render the portal if this request targets it.
 	 */
 	public function maybe_render(): void {
-		if ( empty( $_GET['comsign_app'] ) && ! get_query_var( 'comsign_app' ) ) { // phpcs:ignore WordPress.Security.NonceVerification.Recommended
+		if ( ! $this->is_portal_request() ) {
 			return;
 		}
 
@@ -1009,11 +1084,18 @@ final class PortalController {
 		$account = $this->working_account_id( $user_id );
 		$subs    = new SubscriptionService();
 
+		// Authoritative activation on the browser return: verify the transaction
+		// directly with Cardcom (GetLpResult) and activate the plan. This is the
+		// primary completion path; the optional per-transaction webhook is only a
+		// safety net for when the customer's browser never makes it back.
+		$activated = $this->maybe_complete_checkout( $user_id, $account );
+
 		$this->render(
 			'portal-billing',
 			array(
 				'page_title'  => __( 'Plan & billing', 'comsign' ),
 				'nav'         => $this->nav( 'billing', $user_id ),
+				'activated'   => $activated,
 				'status'      => $subs->status( $account ),
 				'subscription' => $subs->for_account( $account ),
 				'plan_id'     => $subs->plan_id( $account ),
@@ -1027,6 +1109,56 @@ final class PortalController {
 				'switcher'    => $this->switcher( $user_id ),
 			)
 		);
+	}
+
+	/**
+	 * Finalise a returning Cardcom checkout.
+	 *
+	 * Picks up the Low Profile reference from the redirect (Cardcom appends it)
+	 * or, failing that, from the transient we stored when checkout began, then
+	 * re-verifies the transaction server-to-server and activates the plan. The
+	 * activation target comes from the HMAC-signed ReturnValue inside the verify
+	 * response, so a forged return cannot activate someone else's workspace.
+	 *
+	 * @param int $user_id Current user.
+	 * @param int $account Working account id.
+	 *
+	 * @return bool|null true = activated, false = not completed, null = not a return.
+	 */
+	private function maybe_complete_checkout( int $user_id, int $account ): ?bool {
+		// phpcs:disable WordPress.Security.NonceVerification.Recommended
+		$reference = '';
+		foreach ( array( 'LowProfileId', 'lowprofilecode', 'low_profile_id' ) as $key ) {
+			if ( ! empty( $_GET[ $key ] ) ) {
+				$reference = sanitize_text_field( wp_unslash( $_GET[ $key ] ) );
+				break;
+			}
+		}
+		// Only the explicit return from Cardcom (?paid=… or a Low Profile id)
+		// triggers verification — a normal billing visit must never re-charge or
+		// re-check a stale reference.
+		$is_return = isset( $_GET['paid'] ) || '' !== $reference;
+		// phpcs:enable WordPress.Security.NonceVerification.Recommended
+
+		if ( ! $is_return ) {
+			return null; // Not a checkout return.
+		}
+		if ( '' === $reference ) {
+			$stored = get_transient( 'comsign_lp_ref_' . $account );
+			if ( is_string( $stored ) && '' !== $stored ) {
+				$reference = $stored;
+			}
+		}
+		if ( $account <= 0 || ! $this->accounts->can_in_account( $user_id, $account, Roles::MANAGE_SETTINGS ) ) {
+			return false;
+		}
+		if ( '' === $reference ) {
+			return false; // Returned, but nothing to verify.
+		}
+
+		$activated = ( new BillingService() )->complete_from_reference( $reference );
+		delete_transient( 'comsign_lp_ref_' . $account );
+		return $activated;
 	}
 
 	/**
@@ -1067,6 +1199,14 @@ final class PortalController {
 
 		if ( empty( $result['ok'] ) || empty( $result['url'] ) ) {
 			$this->bounce( $target, ! empty( $result['error'] ) ? (string) $result['error'] : __( 'Could not start checkout.', 'comsign' ) );
+		}
+
+		// Remember the transaction reference so we can verify it server-to-server
+		// when the customer returns — even if Cardcom does not append it to the
+		// redirect. This makes activation self-contained per transaction and
+		// independent of any terminal-wide indicator/webhook configuration.
+		if ( ! empty( $result['reference'] ) ) {
+			set_transient( 'comsign_lp_ref_' . $account, (string) $result['reference'], 2 * HOUR_IN_SECONDS );
 		}
 
 		// Off-site to the Cardcom hosted payment page.

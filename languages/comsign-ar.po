@@ -263,8 +263,8 @@ msgstr "مُلغى"
 msgid "Cardcom is not configured."
 msgstr "Cardcom غير مُعدّ."
 
-msgid "Cardcom webhook"
-msgstr "webhook لـ Cardcom"
+msgid "Cardcom webhook (optional)"
+msgstr "ويب هوك Cardcom (اختياري)"
 
 msgid "Certificate password"
 msgstr "كلمة مرور الشهادة"
@@ -950,6 +950,9 @@ msgstr "يُسمح بملفات PDF فقط."
 msgid "Only a workspace owner can manage the plan and billing."
 msgstr "يمكن لمالك مساحة العمل فقط إدارة الباقة والفوترة."
 
+msgid "Open your area"
+msgstr "افتح منطقتك الشخصية"
+
 msgid "OpenSSL (PKI signing)"
 msgstr "OpenSSL (توقيع PKI)"
 
@@ -965,8 +968,14 @@ msgstr "مكتبة OpenSSL غير متاحة على هذا الخادم، لذا
 msgid "OpenSSL is unavailable; documents use electronic signatures only."
 msgstr "مكتبة OpenSSL غير متاحة؛ تستخدم المستندات التوقيعات الإلكترونية فقط."
 
+msgid "Optional safety net. Payments activate automatically when the customer returns from Cardcom; this URL is sent per-transaction, so there is nothing to set in your terminal."
+msgstr "شبكة أمان اختيارية. تُفعَّل المدفوعات تلقائيًا عند عودة العميل من Cardcom؛ يُرسَل هذا العنوان لكل معاملة على حدة، لذا لا حاجة لضبط أي شيء في الموقف (terminal) لديك."
+
 msgid "Optional. An RFC-3161 timestamp proves when each document was signed (PAdES-T), giving the signature long-term validity. Leave empty to disable."
 msgstr "اختياري. تُثبت طابع زمني وفق RFC-3161 وقت توقيع كل مستند (PAdES-T)، ما يمنح التوقيع صلاحية طويلة الأمد. اتركه فارغًا للتعطيل."
+
+msgid "Optional. Payments are confirmed automatically when the customer returns from Cardcom, so you do not need to configure anything in your terminal. ComSign also sends this URL with each transaction as a safety net — it is per-transaction and will not affect other systems that share the same Cardcom terminal."
+msgstr "اختياري. تُؤكَّد المدفوعات تلقائيًا عند عودة العميل من Cardcom، لذا لا حاجة لضبط أي شيء في الموقف لديك. كما يرسل ComSign هذا العنوان مع كل معاملة كشبكة أمان — وهو لكل معاملة على حدة ولن يؤثر على أنظمة أخرى تشترك في نفس موقف Cardcom."
 
 msgid "Or start from a template"
 msgstr "أو ابدأ من قالب"
@@ -1007,8 +1016,8 @@ msgstr "الصق هذه الأكواد القصيرة في أي صفحة أو م
 msgid "Payment due"
 msgstr "دفعة مستحقة"
 
-msgid "Payment received — your plan is being activated."
-msgstr "تم استلام الدفعة — يتم تفعيل باقتك."
+msgid "Payment received — your plan is now active."
+msgstr "تم استلام الدفع — خطتك مفعّلة الآن."
 
 msgid "Payment was not completed. You can try again below."
 msgstr "لم يكتمل الدفع. يمكنك المحاولة مرة أخرى أدناه."
@@ -1337,12 +1346,6 @@ msgstr "أُرسل للتوقيع"
 msgid "Set plan"
 msgstr "تعيين الخطة"
 
-msgid "Set this as the indicator/webhook URL in your Cardcom terminal."
-msgstr "اضبط هذا كعنوان webhook/مؤشر في محطة Cardcom الخاصة بك."
-
-msgid "Set this as the webhook/indicator URL in your Cardcom terminal so payments activate subscriptions."
-msgstr "اضبط هذا كعنوان webhook/مؤشر في محطة Cardcom حتى تُفعّل المدفوعات الاشتراكات."
-
 msgid "Settings"
 msgstr "الإعدادات"
 
@@ -1375,6 +1378,9 @@ msgstr "تسجيل الدخول"
 
 msgid "Sign in person"
 msgstr "التوقيع حضوريًا"
+
+msgid "Sign in to your area"
+msgstr "سجّل الدخول إلى منطقتك"
 
 msgid "Sign: %s"
 msgstr "توقيع: %s"
@@ -1549,6 +1555,9 @@ msgstr "ملف الشهادة كبير جدًا (الحد الأقصى 512 كي�
 
 msgid "The certificate must be a .p12 or .pfx file."
 msgstr "يجب أن تكون الشهادة ملفًا بصيغة .p12 أو .pfx."
+
+msgid "The customer personal area — put this on a page (e.g. “My account”) and signed-in customers manage, create, send and track their documents and billing there, on your own URL. (The built-in /comsign/app page works too.)"
+msgstr "المنطقة الشخصية للعميل — ضع هذا في صفحة (مثل «حسابي») وسيدير العملاء المسجّلون مستنداتهم وفواتيرهم وينشئونها ويرسلونها ويتابعونها هناك على عنوانك الخاص. (تعمل صفحة ‎/comsign/app‎ المدمجة أيضًا.)"
 
 msgid "The daily reminder task is scheduled."
 msgstr "مهمة التذكير اليومية مجدولة."
@@ -1805,6 +1814,9 @@ msgstr "تحذير"
 msgid "We could not charge your subscription. Your workspace will keep working for now, but please update your payment to avoid interruption."
 msgstr "لم نتمكن من تحصيل اشتراكك. ستظل مساحة عملك تعمل في الوقت الحالي، لكن يرجى تحديث وسيلة الدفع لتجنّب الانقطاع."
 
+msgid "We could not confirm your payment. If you were charged, it will activate shortly — otherwise you can try again below."
+msgstr "تعذّر علينا تأكيد دفعتك. إذا تم خصم المبلغ فسيُفعَّل قريبًا — وإلا يمكنك المحاولة مرة أخرى أدناه."
+
 msgid "We sent a one-time code to %s. Enter it below to continue."
 msgstr "أرسلنا رمزًا لمرة واحدة إلى %s. أدخله أدناه للمتابعة."
 
@@ -1813,6 +1825,9 @@ msgstr "سنرسل المستند بالبريد إلى الشخص الذي تخ
 
 msgid "Webhook URL"
 msgstr "عنوان webhook"
+
+msgid "Webhook URL (optional)"
+msgstr "عنوان الويب هوك (اختياري)"
 
 msgid "Webhook secret"
 msgstr "سر webhook"
