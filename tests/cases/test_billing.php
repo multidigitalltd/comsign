@@ -23,6 +23,8 @@ final class FakeGateway implements GatewayInterface {
 	public string $captured_return = '';
 	public bool $paid              = true;
 	public string $token           = 'TOK-123';
+	public bool $renew_ok          = true;
+	public int $charges            = 0;
 
 	public function create_checkout( array $args ): array {
 		$this->captured_return = (string) ( $args['return_value'] ?? '' );
@@ -38,6 +40,11 @@ final class FakeGateway implements GatewayInterface {
 			'amount'       => 149.0,
 			'error'        => '',
 		);
+	}
+
+	public function charge_token( array $args ): array {
+		$this->charges++;
+		return array( 'ok' => true, 'paid' => $this->renew_ok, 'error' => '' );
 	}
 }
 
@@ -106,4 +113,41 @@ Test::add( 'billing: unpaid or forged results never activate', static function (
 	$fake2->captured_return = '50502|business|monthly|deadbeef'; // bad signature
 	$svc2 = new BillingService( $fake2 );
 	Test::ok( ! $svc2->complete_from_reference( 'LP-ABC' ), 'forged return value rejected' );
+} );
+
+Test::add( 'billing: due renewals are charged and the period is extended', static function (): void {
+	reset_tables();
+	$fake = new FakeGateway();
+	$svc  = new BillingService( $fake );
+	$subs = new SubscriptionService();
+	$repo = new SubscriptionRepository();
+	$acct = 50601;
+
+	// An active subscription with a stored token whose period has just ended.
+	$subs->start_trial( $acct, 'business' );
+	$subs->activate( $acct, 'business', 'monthly', gmdate( 'Y-m-d H:i:s', time() - 3600 ), Crypto::encrypt( 'TOK-RENEW' ) );
+
+	$result = $svc->run_renewals();
+	Test::equals( 1, $result['charged'], 'one renewal charged' );
+	Test::equals( 1, $fake->charges, 'the gateway was charged once' );
+
+	$row = $repo->for_account( $acct );
+	Test::equals( SubscriptionService::STATUS_ACTIVE, $subs->status( $acct ), 'still active after renewal' );
+	Test::ok( strtotime( $row->current_period_end . ' UTC' ) > time(), 'period extended into the future' );
+} );
+
+Test::add( 'billing: a failed renewal marks the account past_due', static function (): void {
+	reset_tables();
+	$fake = new FakeGateway();
+	$fake->renew_ok = false;
+	$svc  = new BillingService( $fake );
+	$subs = new SubscriptionService();
+	$acct = 50602;
+
+	$subs->start_trial( $acct, 'business' );
+	$subs->activate( $acct, 'business', 'monthly', gmdate( 'Y-m-d H:i:s', time() - 3600 ), Crypto::encrypt( 'TOK-X' ) );
+
+	$result = $svc->run_renewals();
+	Test::equals( 1, $result['failed'], 'the renewal is recorded as failed' );
+	Test::equals( SubscriptionService::STATUS_PAST_DUE, $subs->status( $acct ), 'account is now past due' );
 } );

@@ -379,6 +379,7 @@ msgid "Canceled"
 msgstr ""
 
 #: includes/Billing/CardcomGateway.php:28
+#: includes/Billing/CardcomGateway.php:53
 msgid "Cardcom is not configured."
 msgstr ""
 
@@ -454,6 +455,10 @@ msgstr ""
 
 #: includes/Services/BillingService.php:59
 msgid "ComSign %1$s (%2$s)"
+msgstr ""
+
+#: includes/Services/BillingService.php:138
+msgid "ComSign %1$s (%2$s) renewal"
 msgstr ""
 
 #: includes/Admin/views/list.php:19
@@ -574,7 +579,7 @@ msgstr ""
 msgid "Could not reassign"
 msgstr ""
 
-#: includes/Billing/CardcomGateway.php:98
+#: includes/Billing/CardcomGateway.php:140
 #: includes/Frontend/PortalController.php:860
 msgid "Could not start checkout."
 msgstr ""
@@ -1189,6 +1194,10 @@ msgstr ""
 #: includes/Admin/views/edit.php:382
 #: includes/Admin/views/template-bulk.php:32
 msgid "Message to signers (optional)"
+msgstr ""
+
+#: includes/Billing/CardcomGateway.php:57
+msgid "Missing billing token."
 msgstr ""
 
 #: includes/Billing/CardcomGateway.php:37
@@ -2344,7 +2353,7 @@ msgstr ""
 msgid "Type your full name"
 msgstr ""
 
-#: includes/Billing/CardcomGateway.php:176
+#: includes/Billing/CardcomGateway.php:218
 msgid "Unexpected gateway response."
 msgstr ""
 
@@ -2658,6 +2667,7 @@ msgid "Your workspace"
 msgstr ""
 
 #: includes/Services/BillingService.php:61
+#: includes/Services/BillingService.php:140
 msgid "annual"
 msgstr ""
 
@@ -2685,6 +2695,7 @@ msgid "email@example.com"
 msgstr ""
 
 #: includes/Services/BillingService.php:61
+#: includes/Services/BillingService.php:140
 msgid "monthly"
 msgstr ""
 

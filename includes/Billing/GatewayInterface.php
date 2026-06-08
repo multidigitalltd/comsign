@@ -36,4 +36,13 @@ interface GatewayInterface {
 	 * @return array{ok:bool,paid:bool,return_value:string,token:string,amount:float,error:string}
 	 */
 	public function verify_transaction( string $reference ): array;
+
+	/**
+	 * Charge a stored recurring-billing token (for renewals).
+	 *
+	 * @param array $args token, amount, currency, product_name.
+	 *
+	 * @return array{ok:bool,paid:bool,error:string}
+	 */
+	public function charge_token( array $args ): array;
 }

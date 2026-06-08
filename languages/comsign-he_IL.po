@@ -374,6 +374,7 @@ msgid "Canceled"
 msgstr "בוטל"
 
 #: includes/Billing/CardcomGateway.php:28
+#: includes/Billing/CardcomGateway.php:53
 msgid "Cardcom is not configured."
 msgstr "קארדקום אינו מוגדר."
 
@@ -450,6 +451,10 @@ msgstr "ComSign"
 #: includes/Services/BillingService.php:59
 msgid "ComSign %1$s (%2$s)"
 msgstr "ComSign %1$s (%2$s)"
+
+#: includes/Services/BillingService.php:138
+msgid "ComSign %1$s (%2$s) renewal"
+msgstr "חידוש ComSign %1$s (%2$s)"
 
 #: includes/Admin/views/list.php:19
 msgid "ComSign Documents"
@@ -569,7 +574,7 @@ msgstr "לא ניתן לטעון את תצוגת המסמך."
 msgid "Could not reassign"
 msgstr "לא ניתן היה להעביר"
 
-#: includes/Billing/CardcomGateway.php:98
+#: includes/Billing/CardcomGateway.php:140
 #: includes/Frontend/PortalController.php:860
 msgid "Could not start checkout."
 msgstr "לא ניתן היה להתחיל את התשלום."
@@ -1185,6 +1190,10 @@ msgstr "חברים"
 #: includes/Admin/views/template-bulk.php:32
 msgid "Message to signers (optional)"
 msgstr "הודעה לחותמים (אופציונלי)"
+
+#: includes/Billing/CardcomGateway.php:57
+msgid "Missing billing token."
+msgstr "חסר טוקן חיוב."
 
 #: includes/Billing/CardcomGateway.php:37
 msgid "Missing transaction reference."
@@ -2339,7 +2348,7 @@ msgstr "הקלדה"
 msgid "Type your full name"
 msgstr "הקלידו את שמכם המלא"
 
-#: includes/Billing/CardcomGateway.php:176
+#: includes/Billing/CardcomGateway.php:218
 msgid "Unexpected gateway response."
 msgstr "תגובה לא צפויה משער התשלום."
 
@@ -2653,6 +2662,7 @@ msgid "Your workspace"
 msgstr "סביבת העבודה שלך"
 
 #: includes/Services/BillingService.php:61
+#: includes/Services/BillingService.php:140
 msgid "annual"
 msgstr "שנתי"
 
@@ -2680,6 +2690,7 @@ msgid "email@example.com"
 msgstr "email@example.com"
 
 #: includes/Services/BillingService.php:61
+#: includes/Services/BillingService.php:140
 msgid "monthly"
 msgstr "חודשי"
 

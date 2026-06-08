@@ -296,6 +296,9 @@ msgstr "ComSign"
 msgid "ComSign %1$s (%2$s)"
 msgstr "ComSign %1$s (%2$s)"
 
+msgid "ComSign %1$s (%2$s) renewal"
+msgstr "تجديد ComSign %1$s (%2$s)"
+
 msgid "ComSign Documents"
 msgstr "مستندات ComSign"
 
@@ -784,6 +787,9 @@ msgstr "الأعضاء"
 
 msgid "Message to signers (optional)"
 msgstr "رسالة إلى الموقّعين (اختياري)"
+
+msgid "Missing billing token."
+msgstr "رمز الفوترة مفقود."
 
 msgid "Missing transaction reference."
 msgstr "مرجع المعاملة مفقود."

@@ -106,6 +106,58 @@ final class BillingService {
 		return true;
 	}
 
+	/**
+	 * Charge due renewals against their stored tokens (called by cron).
+	 *
+	 * On a successful charge the paid period is extended; on failure the
+	 * subscription is marked past_due so access is gated until it is fixed.
+	 *
+	 * @return array{charged:int,failed:int}
+	 */
+	public function run_renewals(): array {
+		$repo    = new \ComSign\Database\SubscriptionRepository();
+		$charged = 0;
+		$failed  = 0;
+
+		foreach ( $repo->due_for_renewal() as $sub ) {
+			$plan  = (string) $sub->plan;
+			$cycle = 'annual' === $sub->cycle ? 'annual' : 'monthly';
+			$token = \ComSign\Support\Crypto::decrypt( (string) $sub->cardcom_token );
+			if ( '' === $token || ! Plans::exists( $plan ) ) {
+				$failed++;
+				continue;
+			}
+
+			$result = $this->gateway->charge_token(
+				array(
+					'token'        => $token,
+					'amount'       => Plans::price( $plan, $cycle ),
+					'currency'     => Plans::currency(),
+					'product_name' => sprintf(
+						/* translators: 1: plan name, 2: cycle. */
+						__( 'ComSign %1$s (%2$s) renewal', 'comsign' ),
+						(string) ( Plans::get( $plan )['name'] ?? $plan ),
+						'annual' === $cycle ? __( 'annual', 'comsign' ) : __( 'monthly', 'comsign' )
+					),
+				)
+			);
+
+			if ( ! empty( $result['ok'] ) && ! empty( $result['paid'] ) ) {
+				$repo->set_datetime(
+					(int) $sub->account_id,
+					'current_period_end',
+					gmdate( 'Y-m-d H:i:s', strtotime( 'annual' === $cycle ? '+1 year' : '+1 month' ) )
+				);
+				$charged++;
+			} else {
+				$this->subscriptions->mark_past_due( (int) $sub->account_id );
+				$failed++;
+			}
+		}
+
+		return array( 'charged' => $charged, 'failed' => $failed );
+	}
+
 	/* ---------------------------------------------------------------------
 	 * Signed return value (checkout intent)
 	 * ------------------------------------------------------------------- */

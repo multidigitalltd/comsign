@@ -46,6 +46,12 @@ final class Cron {
 	 * Daily callback: send reminders if the feature is enabled.
 	 */
 	public function run(): void {
+		// Charge any subscription renewals that are due (no-op without a
+		// configured gateway / stored tokens).
+		if ( \ComSign\Billing\CardcomSettings::is_configured() ) {
+			( new \ComSign\Services\BillingService() )->run_renewals();
+		}
+
 		if ( ! Settings::get( 'reminders_enabled' ) ) {
 			return;
 		}

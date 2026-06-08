@@ -296,6 +296,9 @@ msgstr "ComSign"
 msgid "ComSign %1$s (%2$s)"
 msgstr "ComSign %1$s (%2$s)"
 
+msgid "ComSign %1$s (%2$s) renewal"
+msgstr "Продление ComSign %1$s (%2$s)"
+
 msgid "ComSign Documents"
 msgstr "Документы ComSign"
 
@@ -784,6 +787,9 @@ msgstr "Участники"
 
 msgid "Message to signers (optional)"
 msgstr "Сообщение подписантам (необязательно)"
+
+msgid "Missing billing token."
+msgstr "Отсутствует токен оплаты."
 
 msgid "Missing transaction reference."
 msgstr "Отсутствует идентификатор транзакции."

@@ -4,7 +4,7 @@ Tags: signature, digital signature, pdf, esignature, hebrew
 Requires at least: 6.0
 Tested up to: 6.5
 Requires PHP: 7.4
-Stable tag: 0.40.0
+Stable tag: 0.41.0
 License: GPL-2.0-or-later
 License URI: https://www.gnu.org/licenses/gpl-2.0.html
 
@@ -105,6 +105,12 @@ ID and its SHA-256 code (shown on the document screen and the signature
 certificate) to confirm the document is authentic and see who signed it.
 
 == Changelog ==
+
+= 0.41.0 =
+* New (commercial, phase 4): automatic subscription renewal. A daily cron charges
+  each active subscription's stored (encrypted) Cardcom token when its paid
+  period ends, extending the period on success and marking the account
+  payment-due on failure (which gates sending until it is resolved).
 
 = 0.40.0 =
 * New (commercial, phase 3): an in-portal "Plan & billing" area. Workspace

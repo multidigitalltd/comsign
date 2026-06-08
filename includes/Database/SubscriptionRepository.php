@@ -78,6 +78,23 @@ final class SubscriptionRepository {
 	}
 
 	/**
+	 * Active subscriptions whose paid period has ended and that have a stored
+	 * recurring token — i.e. due for an automatic renewal charge.
+	 *
+	 * @return object[]
+	 */
+	public function due_for_renewal(): array {
+		global $wpdb;
+		$now = current_time( 'mysql', true );
+		return $wpdb->get_results( // phpcs:ignore WordPress.DB.DirectDatabaseQuery, WordPress.DB.PreparedSQL.NotPrepared
+			$wpdb->prepare(
+				'SELECT * FROM ' . Installer::subscriptions_table() . " WHERE status = 'active' AND cardcom_token <> '' AND current_period_end IS NOT NULL AND current_period_end <= %s",
+				$now
+			)
+		);
+	}
+
+	/**
 	 * Set (or clear) the trial / current-period end datetimes.
 	 *
 	 * $wpdb->update() can't write SQL NULL reliably, so this uses a prepared

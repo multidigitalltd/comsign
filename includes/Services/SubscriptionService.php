@@ -228,6 +228,13 @@ final class SubscriptionService {
 	}
 
 	/**
+	 * Flag a subscription as payment-due (a renewal charge failed).
+	 */
+	public function mark_past_due( int $account_id ): void {
+		$this->subs->upsert( $account_id, array( 'status' => self::STATUS_PAST_DUE ) );
+	}
+
+	/**
 	 * Whether a stored UTC datetime is in the past.
 	 *
 	 * @param string|null $datetime UTC 'Y-m-d H:i:s' or null.

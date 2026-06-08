@@ -48,9 +48,51 @@ class CardcomGateway implements GatewayInterface {
 		return $this->parse_verify_response( $response );
 	}
 
+	public function charge_token( array $args ): array {
+		if ( ! CardcomSettings::is_configured() ) {
+			return array( 'ok' => false, 'paid' => false, 'error' => __( 'Cardcom is not configured.', 'comsign' ) );
+		}
+		$token = (string) ( $args['token'] ?? '' );
+		if ( '' === $token ) {
+			return array( 'ok' => false, 'paid' => false, 'error' => __( 'Missing billing token.', 'comsign' ) );
+		}
+
+		$response = $this->request(
+			'/Transactions/Transaction',
+			array(
+				'TerminalNumber' => CardcomSettings::terminal(),
+				'ApiName'        => CardcomSettings::api_name(),
+				'Amount'         => round( (float) ( $args['amount'] ?? 0 ), 2 ),
+				'ISOCoinId'      => self::COIN_ILS,
+				'ProductName'    => mb_substr( (string) ( $args['product_name'] ?? 'ComSign' ), 0, 250 ),
+				'Token'          => $token,
+			)
+		);
+		return $this->parse_charge_response( $response );
+	}
+
 	/* ---------------------------------------------------------------------
 	 * Pure logic (unit-testable)
 	 * ------------------------------------------------------------------- */
+
+	/**
+	 * Parse a token-charge response.
+	 *
+	 * @param array $json Decoded JSON (or an error marker).
+	 *
+	 * @return array{ok:bool,paid:bool,error:string}
+	 */
+	public function parse_charge_response( array $json ): array {
+		if ( isset( $json['__error'] ) ) {
+			return array( 'ok' => false, 'paid' => false, 'error' => (string) $json['__error'] );
+		}
+		$paid = 0 === (int) ( $json['ResponseCode'] ?? -1 );
+		return array(
+			'ok'    => true,
+			'paid'  => $paid,
+			'error' => $paid ? '' : (string) ( $json['Description'] ?? '' ),
+		);
+	}
 
 	/**
 	 * Build the LowProfile/Create request body.
