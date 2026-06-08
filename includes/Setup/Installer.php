@@ -89,6 +89,14 @@ final class Installer {
 	}
 
 	/**
+	 * Subscriptions (one row per account) table name.
+	 */
+	public static function subscriptions_table(): string {
+		global $wpdb;
+		return $wpdb->prefix . 'comsign_subscriptions';
+	}
+
+	/**
 	 * Option holding the id of the default (migration) account.
 	 */
 	public const OPTION_DEFAULT_ACCOUNT = 'comsign_default_account';
@@ -264,6 +272,23 @@ final class Installer {
 			PRIMARY KEY  (id),
 			UNIQUE KEY account_email (account_id, email),
 			KEY account_id (account_id)
+		) {$charset_collate};";
+
+		// Subscriptions: one row per account holds its plan + billing state.
+		$subs = self::subscriptions_table();
+		$schema[] = "CREATE TABLE {$subs} (
+			id BIGINT UNSIGNED NOT NULL AUTO_INCREMENT,
+			account_id BIGINT UNSIGNED NOT NULL DEFAULT 0,
+			plan VARCHAR(40) NOT NULL DEFAULT '',
+			cycle VARCHAR(10) NOT NULL DEFAULT 'monthly',
+			status VARCHAR(20) NOT NULL DEFAULT 'trialing',
+			trial_ends_at DATETIME DEFAULT NULL,
+			current_period_end DATETIME DEFAULT NULL,
+			cardcom_token VARCHAR(255) NOT NULL DEFAULT '',
+			created_at DATETIME NOT NULL DEFAULT '0000-00-00 00:00:00',
+			updated_at DATETIME NOT NULL DEFAULT '0000-00-00 00:00:00',
+			PRIMARY KEY  (id),
+			UNIQUE KEY account_id (account_id)
 		) {$charset_collate};";
 
 		// Drop the legacy UNIQUE index on token_hash before dbDelta re-adds it as

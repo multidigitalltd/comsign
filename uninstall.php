@@ -20,6 +20,7 @@ $tables = array(
 	$wpdb->prefix . 'comsign_audit',
 	$wpdb->prefix . 'comsign_templates',
 	$wpdb->prefix . 'comsign_contacts',
+	$wpdb->prefix . 'comsign_subscriptions',
 	$wpdb->prefix . 'comsign_accounts',
 	$wpdb->prefix . 'comsign_account_users',
 	$wpdb->prefix . 'comsign_invites',

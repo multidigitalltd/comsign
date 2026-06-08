@@ -4,7 +4,7 @@ Tags: signature, digital signature, pdf, esignature, hebrew
 Requires at least: 6.0
 Tested up to: 6.5
 Requires PHP: 7.4
-Stable tag: 0.37.0
+Stable tag: 0.38.0
 License: GPL-2.0-or-later
 License URI: https://www.gnu.org/licenses/gpl-2.0.html
 
@@ -105,6 +105,17 @@ ID and its SHA-256 code (shown on the document screen and the signature
 certificate) to confirm the document is authentic and see who signed it.
 
 == Changelog ==
+
+= 0.38.0 =
+* New (commercial foundation): subscription plans and trials. Three data-driven,
+  filterable plans (Solo / Business / Enterprise) each with a 30-day free trial,
+  monthly+annual pricing, per-plan limits (documents/month, seats, storage) and
+  feature flags (PKI, branding, API, webhooks). Every new workspace
+  automatically starts a trial on the entry plan.
+* Plan enforcement: sending a document is now gated by an active subscription
+  and the plan's monthly document quota; existing (unmanaged) workspaces are
+  grandfathered and never limited. Cardcom billing and the in-portal billing
+  area follow in the next releases.
 
 = 0.37.0 =
 * Security/tenant isolation: portal template lists, the address book and

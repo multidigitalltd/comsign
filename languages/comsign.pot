@@ -35,11 +35,11 @@ msgstr[1] ""
 msgid "%s (copy)"
 msgstr ""
 
-#: includes/Services/AccountService.php:273
+#: includes/Services/AccountService.php:275
 msgid "%s's workspace"
 msgstr ""
 
-#: includes/Setup/Installer.php:342
+#: includes/Setup/Installer.php:367
 msgid "%s’s workspace"
 msgstr ""
 
@@ -77,7 +77,7 @@ msgstr ""
 msgid "A document is awaiting your signature — %s"
 msgstr ""
 
-#: includes/Services/DocumentService.php:1125
+#: includes/Services/DocumentService.php:1132
 msgid "A field is assigned to a signer that is not on this document. Please re-save the fields."
 msgstr ""
 
@@ -85,7 +85,7 @@ msgstr ""
 msgid "A new code has been sent."
 msgstr ""
 
-#: includes/Services/DocumentService.php:1254
+#: includes/Services/DocumentService.php:1261
 msgid "A signature is required."
 msgstr ""
 
@@ -150,7 +150,7 @@ msgstr ""
 msgid "Add a signer first, then drag fields onto the document."
 msgstr ""
 
-#: includes/Services/DocumentService.php:1034
+#: includes/Services/DocumentService.php:1041
 msgid "Add at least one signer before sending."
 msgstr ""
 
@@ -306,6 +306,10 @@ msgstr ""
 msgid "Bulk send: %s"
 msgstr ""
 
+#: includes/Billing/Plans.php:62
+msgid "Business"
+msgstr ""
+
 #: includes/Admin/views/edit.php:325
 msgid "CC recipients"
 msgstr ""
@@ -406,7 +410,7 @@ msgstr ""
 msgid "Completed"
 msgstr ""
 
-#: includes/Services/DocumentService.php:1440
+#: includes/Services/DocumentService.php:1447
 msgid "Completed & signed: \"%s\""
 msgstr ""
 
@@ -558,7 +562,7 @@ msgstr ""
 msgid "Declined"
 msgstr ""
 
-#: includes/Setup/Installer.php:303
+#: includes/Setup/Installer.php:328
 msgid "Default workspace"
 msgstr ""
 
@@ -816,6 +820,10 @@ msgstr ""
 msgid "Enter the document ID and its verification code to confirm it is authentic and see who signed it."
 msgstr ""
 
+#: includes/Billing/Plans.php:73
+msgid "Enterprise"
+msgstr ""
+
 #: includes/Admin/views/edit.php:191
 #: includes/Services/DocumentService.php:372
 msgid "Event"
@@ -833,7 +841,7 @@ msgstr ""
 msgid "Every signer has a signature field"
 msgstr ""
 
-#: includes/Services/DocumentService.php:1131
+#: includes/Services/DocumentService.php:1138
 msgid "Every signer must have at least one field. Please assign a field to each signer."
 msgstr ""
 
@@ -1302,7 +1310,7 @@ msgstr ""
 msgid "Permanently delete this document and all its data?"
 msgstr ""
 
-#: includes/Setup/Installer.php:343
+#: includes/Setup/Installer.php:368
 msgid "Personal workspace"
 msgstr ""
 
@@ -1326,7 +1334,7 @@ msgstr ""
 msgid "Place at least one field for each signer."
 msgstr ""
 
-#: includes/Services/DocumentService.php:1039
+#: includes/Services/DocumentService.php:1046
 msgid "Place at least one signature field before sending."
 msgstr ""
 
@@ -1357,7 +1365,7 @@ msgstr ""
 msgid "Please choose one of your templates."
 msgstr ""
 
-#: includes/Services/DocumentService.php:1274
+#: includes/Services/DocumentService.php:1281
 msgid "Please complete all required fields before signing."
 msgstr ""
 
@@ -1397,7 +1405,7 @@ msgstr ""
 msgid "Please provide a valid email address."
 msgstr ""
 
-#: includes/Services/AccountService.php:218
+#: includes/Services/AccountService.php:220
 msgid "Please provide a valid email and role."
 msgstr ""
 
@@ -1698,7 +1706,7 @@ msgid "Sent %d invitation(s)."
 msgstr ""
 
 #: includes/Email/Mailer.php:64
-#: includes/Services/DocumentService.php:1450
+#: includes/Services/DocumentService.php:1457
 msgid "Sent by %s"
 msgstr ""
 
@@ -1847,7 +1855,11 @@ msgstr ""
 msgid "Skip to content"
 msgstr ""
 
-#: includes/Services/DocumentService.php:1095
+#: includes/Billing/Plans.php:51
+msgid "Solo"
+msgstr ""
+
+#: includes/Services/DocumentService.php:1102
 msgid "Some invitations could not be sent: %s. Please check your site email settings and re-send."
 msgstr ""
 
@@ -1970,7 +1982,7 @@ msgstr ""
 msgid "The daily reminder task is scheduled."
 msgstr ""
 
-#: includes/Services/DocumentService.php:1445
+#: includes/Services/DocumentService.php:1452
 msgid "The document \"%s\" has been signed by all parties."
 msgstr ""
 
@@ -1995,7 +2007,7 @@ msgstr ""
 msgid "The file is too large (max 25 MB)."
 msgstr ""
 
-#: includes/Services/DocumentService.php:1447
+#: includes/Services/DocumentService.php:1454
 msgid "The fully signed copy is attached."
 msgstr ""
 
@@ -2390,6 +2402,10 @@ msgstr ""
 msgid "You have declined to sign this document. The sender has been notified."
 msgstr ""
 
+#: includes/Services/SubscriptionService.php:181
+msgid "You have reached your plan’s monthly document limit. Upgrade your plan to send more."
+msgstr ""
+
 #: includes/Frontend/SigningController.php:421
 msgid "You must agree to sign electronically before continuing."
 msgstr ""
@@ -2424,6 +2440,10 @@ msgstr ""
 
 #: includes/Frontend/views/sign.php:45
 msgid "Your signature"
+msgstr ""
+
+#: includes/Services/SubscriptionService.php:177
+msgid "Your subscription is not active. Please choose a plan to keep sending documents."
 msgstr ""
 
 #: includes/Frontend/SignerAuth.php:135

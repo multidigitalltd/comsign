@@ -30,11 +30,11 @@ msgstr "%d דקות"
 msgid "%s (copy)"
 msgstr "%s (עותק)"
 
-#: includes/Services/AccountService.php:273
+#: includes/Services/AccountService.php:275
 msgid "%s's workspace"
 msgstr "סביבת העבודה של %s"
 
-#: includes/Setup/Installer.php:342
+#: includes/Setup/Installer.php:367
 msgid "%s’s workspace"
 msgstr "מרחב העבודה של %s"
 
@@ -72,7 +72,7 @@ msgstr "מפתח REST API מוגדר."
 msgid "A document is awaiting your signature — %s"
 msgstr "מסמך ממתין לחתימתך — %s"
 
-#: includes/Services/DocumentService.php:1125
+#: includes/Services/DocumentService.php:1132
 msgid "A field is assigned to a signer that is not on this document. Please re-save the fields."
 msgstr "שדה משויך לחותם שאינו במסמך זה. אנא שמרו מחדש את השדות."
 
@@ -80,7 +80,7 @@ msgstr "שדה משויך לחותם שאינו במסמך זה. אנא שמרו
 msgid "A new code has been sent."
 msgstr "קוד חדש נשלח."
 
-#: includes/Services/DocumentService.php:1254
+#: includes/Services/DocumentService.php:1261
 msgid "A signature is required."
 msgstr "נדרשת חתימה."
 
@@ -145,7 +145,7 @@ msgstr "הוסיפו שדה חתימה (או ראשי תיבות) עבור: %s."
 msgid "Add a signer first, then drag fields onto the document."
 msgstr "הוסיפו תחילה חותם, ואז גררו שדות אל המסמך."
 
-#: includes/Services/DocumentService.php:1034
+#: includes/Services/DocumentService.php:1041
 msgid "Add at least one signer before sending."
 msgstr "יש להוסיף לפחות חותם אחד לפני השליחה."
 
@@ -301,6 +301,10 @@ msgstr "שליחה בכמות דורשת תבנית עם תפקיד אחד בד�
 msgid "Bulk send: %s"
 msgstr "שליחה בכמות: %s"
 
+#: includes/Billing/Plans.php:62
+msgid "Business"
+msgstr "עסקי"
+
 #: includes/Admin/views/edit.php:325
 msgid "CC recipients"
 msgstr "נמעני העתק (CC)"
@@ -401,7 +405,7 @@ msgstr "ComSign: חסרות תלויות. יש להריץ \"composer install\" �
 msgid "Completed"
 msgstr "הושלם"
 
-#: includes/Services/DocumentService.php:1440
+#: includes/Services/DocumentService.php:1447
 msgid "Completed & signed: \"%s\""
 msgstr "הושלם ונחתם: \"%s\""
 
@@ -553,7 +557,7 @@ msgstr "סירוב לחתום"
 msgid "Declined"
 msgstr "סורב"
 
-#: includes/Setup/Installer.php:303
+#: includes/Setup/Installer.php:328
 msgid "Default workspace"
 msgstr "סביבת עבודה ברירת מחדל"
 
@@ -811,6 +815,10 @@ msgstr "הזינו אפשרויות מופרדות בפסיקים:"
 msgid "Enter the document ID and its verification code to confirm it is authentic and see who signed it."
 msgstr "הזינו את מזהה המסמך ואת קוד האימות כדי לוודא שהוא אותנטי ולראות מי חתם עליו."
 
+#: includes/Billing/Plans.php:73
+msgid "Enterprise"
+msgstr "ארגוני"
+
 #: includes/Admin/views/edit.php:191
 #: includes/Services/DocumentService.php:372
 msgid "Event"
@@ -828,7 +836,7 @@ msgstr "לכל חותם יש שדה למילוי"
 msgid "Every signer has a signature field"
 msgstr "לכל חותם יש שדה חתימה"
 
-#: includes/Services/DocumentService.php:1131
+#: includes/Services/DocumentService.php:1138
 msgid "Every signer must have at least one field. Please assign a field to each signer."
 msgstr "לכל חותם חייב להיות לפחות שדה אחד. אנא שייכו שדה לכל חותם."
 
@@ -1297,7 +1305,7 @@ msgstr "אנשים שאתם חותמים איתם נשמרים כאן אוטומ
 msgid "Permanently delete this document and all its data?"
 msgstr "למחוק לצמיתות את המסמך הזה ואת כל הנתונים שלו?"
 
-#: includes/Setup/Installer.php:343
+#: includes/Setup/Installer.php:368
 msgid "Personal workspace"
 msgstr "מרחב עבודה אישי"
 
@@ -1321,7 +1329,7 @@ msgstr "טלפון לוואטסאפ (אופציונלי)"
 msgid "Place at least one field for each signer."
 msgstr "מקמו לפחות שדה אחד לכל חותם."
 
-#: includes/Services/DocumentService.php:1039
+#: includes/Services/DocumentService.php:1046
 msgid "Place at least one signature field before sending."
 msgstr "הניחו לפחות שדה חתימה אחד לפני השליחה."
 
@@ -1352,7 +1360,7 @@ msgstr "אנא בחרו קובץ PDF להעלאה."
 msgid "Please choose one of your templates."
 msgstr "בחרו אחת מהתבניות שלכם."
 
-#: includes/Services/DocumentService.php:1274
+#: includes/Services/DocumentService.php:1281
 msgid "Please complete all required fields before signing."
 msgstr "אנא מלאו את כל שדות החובה לפני החתימה."
 
@@ -1392,7 +1400,7 @@ msgstr "אנא ספקו כתובת אימייל תקינה עבור החותם �
 msgid "Please provide a valid email address."
 msgstr "אנא הזינו כתובת דוא״ל תקינה."
 
-#: includes/Services/AccountService.php:218
+#: includes/Services/AccountService.php:220
 msgid "Please provide a valid email and role."
 msgstr "נא לספק אימייל ותפקיד תקינים."
 
@@ -1693,7 +1701,7 @@ msgid "Sent %d invitation(s)."
 msgstr "נשלחו %d הזמנות."
 
 #: includes/Email/Mailer.php:64
-#: includes/Services/DocumentService.php:1450
+#: includes/Services/DocumentService.php:1457
 msgid "Sent by %s"
 msgstr "נשלח על-ידי %s"
 
@@ -1842,7 +1850,11 @@ msgstr "החתימה סורבה"
 msgid "Skip to content"
 msgstr "דלגו לתוכן"
 
-#: includes/Services/DocumentService.php:1095
+#: includes/Billing/Plans.php:51
+msgid "Solo"
+msgstr "יחיד"
+
+#: includes/Services/DocumentService.php:1102
 msgid "Some invitations could not be sent: %s. Please check your site email settings and re-send."
 msgstr "חלק מההזמנות לא נשלחו: %s. אנא בדקו את הגדרות הדוא\"ל של האתר ושלחו מחדש."
 
@@ -1965,7 +1977,7 @@ msgstr "התעודה חייבת להיות קובץ ‎.p12‎ או ‎.pfx‎."
 msgid "The daily reminder task is scheduled."
 msgstr "משימת התזכורת היומית מתוזמנת."
 
-#: includes/Services/DocumentService.php:1445
+#: includes/Services/DocumentService.php:1452
 msgid "The document \"%s\" has been signed by all parties."
 msgstr "המסמך \"%s\" נחתם על ידי כל הצדדים."
 
@@ -1990,7 +2002,7 @@ msgstr "הקובץ אינו נראה כקובץ PDF תקין."
 msgid "The file is too large (max 25 MB)."
 msgstr "הקובץ גדול מדי (מקסימום 25 מ״ב)."
 
-#: includes/Services/DocumentService.php:1447
+#: includes/Services/DocumentService.php:1454
 msgid "The fully signed copy is attached."
 msgstr "העותק החתום המלא מצורף."
 
@@ -2385,6 +2397,10 @@ msgstr "סירבת לחתום על מסמך זה."
 msgid "You have declined to sign this document. The sender has been notified."
 msgstr "סירבת לחתום על מסמך זה. השולח קיבל הודעה על כך."
 
+#: includes/Services/SubscriptionService.php:181
+msgid "You have reached your plan’s monthly document limit. Upgrade your plan to send more."
+msgstr "הגעתם למכסת המסמכים החודשית של המסלול. שדרגו את המסלול כדי לשלוח עוד."
+
 #: includes/Frontend/SigningController.php:421
 msgid "You must agree to sign electronically before continuing."
 msgstr "עליך להסכים לחתום באופן אלקטרוני לפני המשך."
@@ -2420,6 +2436,10 @@ msgstr "התפקיד שלכם במרחב העבודה אינו מאפשר ניה
 #: includes/Frontend/views/sign.php:45
 msgid "Your signature"
 msgstr "החתימה שלך"
+
+#: includes/Services/SubscriptionService.php:177
+msgid "Your subscription is not active. Please choose a plan to keep sending documents."
+msgstr "המנוי שלכם אינו פעיל. אנא בחרו מסלול כדי להמשיך לשלוח מסמכים."
 
 #: includes/Frontend/SignerAuth.php:135
 msgid "Your verification code is: %1$s\n\nIt expires in %2$d minutes."

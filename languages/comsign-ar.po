@@ -191,6 +191,9 @@ msgstr "يتطلب الإرسال الجماعي قالبًا يحتوي على 
 msgid "Bulk send: %s"
 msgstr "إرسال جماعي: %s"
 
+msgid "Business"
+msgstr "الأعمال"
+
 msgid "CC recipients"
 msgstr "مستلمو نسخة (CC)"
 
@@ -526,6 +529,9 @@ msgstr "أدخل الخيارات مفصولة بفواصل:"
 
 msgid "Enter the document ID and its verification code to confirm it is authentic and see who signed it."
 msgstr "أدخل معرّف المستند ورمز التحقق الخاص به للتأكد من أصالته ومعرفة من وقّعه."
+
+msgid "Enterprise"
+msgstr "المؤسسات"
 
 msgid "Event"
 msgstr "الحدث"
@@ -1229,6 +1235,9 @@ msgstr "تم رفض التوقيع"
 msgid "Skip to content"
 msgstr "انتقل إلى المحتوى"
 
+msgid "Solo"
+msgstr "فردي"
+
 msgid "Some invitations could not be sent: %s. Please check your site email settings and re-send."
 msgstr "تعذّر إرسال بعض الدعوات: %s. يرجى التحقق من إعدادات بريد موقعك وإعادة الإرسال."
 
@@ -1610,6 +1619,9 @@ msgstr "لقد رفضت توقيع هذا المستند."
 msgid "You have declined to sign this document. The sender has been notified."
 msgstr "لقد رفضت توقيع هذا المستند. تم إشعار المُرسِل."
 
+msgid "You have reached your plan’s monthly document limit. Upgrade your plan to send more."
+msgstr "لقد بلغت الحد الشهري للمستندات في باقتك. قم بترقية باقتك لإرسال المزيد."
+
 msgid "You must agree to sign electronically before continuing."
 msgstr "يجب أن توافق على التوقيع إلكترونيًا قبل المتابعة."
 
@@ -1636,6 +1648,9 @@ msgstr "دورك في مساحة العمل لا يسمح بإدارة جهات 
 
 msgid "Your signature"
 msgstr "توقيعك"
+
+msgid "Your subscription is not active. Please choose a plan to keep sending documents."
+msgstr "اشتراكك غير نشط. يرجى اختيار باقة لمواصلة إرسال المستندات."
 
 msgid "Your verification code is: %1$s\\n\\nIt expires in %2$d minutes."
 msgstr "رمز التحقق الخاص بك هو: %1$s\\n\\nتنتهي صلاحيته خلال %2$d دقيقة."

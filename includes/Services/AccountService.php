@@ -135,6 +135,8 @@ final class AccountService {
 	public function create_account( string $name, int $owner_user_id, int $parent_id = 0, string $tier = 'free' ): int {
 		$id = $this->accounts->create( $name, $parent_id, $tier );
 		$this->accounts->add_member( $id, $owner_user_id, AccountRepository::ROLE_OWNER );
+		// Every new workspace starts a free trial on the entry plan.
+		( new SubscriptionService() )->start_trial( $id );
 		return $id;
 	}
 

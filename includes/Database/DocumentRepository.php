@@ -130,6 +130,26 @@ final class DocumentRepository {
 	}
 
 	/**
+	 * Count documents created for a single account since a UTC datetime.
+	 *
+	 * Used for monthly usage quotas. Drafts count too, since creating a document
+	 * already consumes the workspace's allowance.
+	 *
+	 * @param int    $account_id Account id.
+	 * @param string $since_gmt  UTC 'Y-m-d H:i:s' lower bound (inclusive).
+	 */
+	public function count_for_account_since( int $account_id, string $since_gmt ): int {
+		global $wpdb;
+		return (int) $wpdb->get_var( // phpcs:ignore WordPress.DB.DirectDatabaseQuery, WordPress.DB.PreparedSQL.NotPrepared
+			$wpdb->prepare(
+				'SELECT COUNT(*) FROM ' . Installer::documents_table() . ' WHERE account_id = %d AND created_at >= %s',
+				$account_id,
+				$since_gmt
+			)
+		);
+	}
+
+	/**
 	 * Build the shared "account scope + optional filters" WHERE clause.
 	 *
 	 * @param int[]  $account_ids Visible account ids.

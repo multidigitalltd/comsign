@@ -191,6 +191,9 @@ msgstr "Для массовой отправки нужен шаблон ров�
 msgid "Bulk send: %s"
 msgstr "Массовая отправка: %s"
 
+msgid "Business"
+msgstr "Бизнес"
+
 msgid "CC recipients"
 msgstr "Получатели копии (CC)"
 
@@ -526,6 +529,9 @@ msgstr "Введите варианты через запятую:"
 
 msgid "Enter the document ID and its verification code to confirm it is authentic and see who signed it."
 msgstr "Введите ID документа и его код проверки, чтобы подтвердить подлинность и увидеть, кто его подписал."
+
+msgid "Enterprise"
+msgstr "Корпоративный"
 
 msgid "Event"
 msgstr "Событие"
@@ -1229,6 +1235,9 @@ msgstr "Подписание отклонено"
 msgid "Skip to content"
 msgstr "Перейти к содержимому"
 
+msgid "Solo"
+msgstr "Соло"
+
 msgid "Some invitations could not be sent: %s. Please check your site email settings and re-send."
 msgstr "Некоторые приглашения не удалось отправить: %s. Проверьте настройки почты сайта и отправьте повторно."
 
@@ -1610,6 +1619,9 @@ msgstr "Вы отказались подписывать этот докумен
 msgid "You have declined to sign this document. The sender has been notified."
 msgstr "Вы отказались подписывать этот документ. Отправитель уведомлён."
 
+msgid "You have reached your plan’s monthly document limit. Upgrade your plan to send more."
+msgstr "Вы достигли месячного лимита документов вашего тарифа. Перейдите на тариф выше, чтобы отправлять больше."
+
 msgid "You must agree to sign electronically before continuing."
 msgstr "Перед продолжением вы должны согласиться подписать электронно."
 
@@ -1636,6 +1648,9 @@ msgstr "Ваша роль в этом рабочем пространстве н
 
 msgid "Your signature"
 msgstr "Ваша подпись"
+
+msgid "Your subscription is not active. Please choose a plan to keep sending documents."
+msgstr "Ваша подписка неактивна. Выберите тариф, чтобы продолжать отправку документов."
 
 msgid "Your verification code is: %1$s\\n\\nIt expires in %2$d minutes."
 msgstr "Ваш код проверки: %1$s\\n\\nОн истекает через %2$d минут."

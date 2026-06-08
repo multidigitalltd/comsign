@@ -1029,6 +1029,13 @@ final class DocumentService {
 			throw new \RuntimeException( __( 'Document not found.', 'comsign' ) );
 		}
 
+		// Plan gate: an active subscription within its monthly quota (no-op for
+		// unmanaged/legacy workspaces). Re-sending an already-sent document does
+		// not consume new quota, so only gate the first send (a draft).
+		if ( DocumentRepository::STATUS_DRAFT === $document->status ) {
+			( new SubscriptionService() )->assert_can_send( (int) ( $document->account_id ?? 0 ) );
+		}
+
 		$signers = $this->signers->for_document( $document_id );
 		if ( empty( $signers ) ) {
 			throw new \RuntimeException( __( 'Add at least one signer before sending.', 'comsign' ) );
