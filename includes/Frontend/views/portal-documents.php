@@ -49,6 +49,17 @@ require __DIR__ . '/partials/portal-nav.php';
 			<?php if ( '' !== $search || '' !== $status ) : ?>
 				<a class="comsign-btn" href="<?php echo esc_url( \ComSign\Frontend\PortalController::url( array( 'view' => 'documents' ) ) ); ?>"><?php esc_html_e( 'Clear', 'comsign' ); ?></a>
 			<?php endif; ?>
+			<?php
+			$export_args = array( 'action' => 'comsign_portal_export' );
+			if ( '' !== $search ) {
+				$export_args['s'] = $search;
+			}
+			if ( '' !== $status ) {
+				$export_args['status'] = $status;
+			}
+			$export_url = wp_nonce_url( add_query_arg( $export_args, admin_url( 'admin-post.php' ) ), 'comsign_portal_export' );
+			?>
+			<a class="comsign-btn" href="<?php echo esc_url( $export_url ); ?>"><?php esc_html_e( 'Export CSV', 'comsign' ); ?></a>
 		</form>
 
 		<?php require __DIR__ . '/partials/portal-doc-table.php'; ?>

@@ -653,6 +653,9 @@ msgstr "ينتهي في:"
 msgid "Expiry extended"
 msgstr "تم تمديد الصلاحية"
 
+msgid "Export CSV"
+msgstr "تصدير CSV"
+
 msgid "Extend"
 msgstr "تمديد"
 
@@ -913,6 +916,9 @@ msgstr "غير موجود"
 
 msgid "Nothing stuck — every document is moving."
 msgstr "لا شيء متوقف — كل مستند يتقدّم."
+
+msgid "Nothing to export."
+msgstr "لا شيء للتصدير."
 
 msgid "Number"
 msgstr "رقم"
@@ -1625,6 +1631,9 @@ msgstr "تم مسح سلطة الطابع الزمني."
 msgid "Timestamp authority saved. New signatures will include a trusted timestamp."
 msgstr "تم حفظ سلطة الطابع الزمني. ستتضمن التوقيعات الجديدة طابعًا زمنيًا موثوقًا."
 
+msgid "Title"
+msgstr "العنوان"
+
 msgid "Title:"
 msgstr "العنوان:"
 
@@ -1642,6 +1651,9 @@ msgstr "محاولات خاطئة كثيرة جدًا. يرجى الانتظار
 
 msgid "Total documents"
 msgstr "إجمالي المستندات"
+
+msgid "Total signers"
+msgstr "إجمالي الموقّعين"
 
 msgid "Type"
 msgstr "النوع"

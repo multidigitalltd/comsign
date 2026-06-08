@@ -653,6 +653,9 @@ msgstr "Истекает:"
 msgid "Expiry extended"
 msgstr "Срок продлён"
 
+msgid "Export CSV"
+msgstr "Экспорт CSV"
+
 msgid "Extend"
 msgstr "Продлить"
 
@@ -913,6 +916,9 @@ msgstr "Не найдено"
 
 msgid "Nothing stuck — every document is moving."
 msgstr "Ничего не застряло — все документы в движении."
+
+msgid "Nothing to export."
+msgstr "Нечего экспортировать."
 
 msgid "Number"
 msgstr "Число"
@@ -1625,6 +1631,9 @@ msgstr "Служба меток времени очищена."
 msgid "Timestamp authority saved. New signatures will include a trusted timestamp."
 msgstr "Служба меток времени сохранена. Новые подписи будут включать доверенную метку времени."
 
+msgid "Title"
+msgstr "Название"
+
 msgid "Title:"
 msgstr "Название:"
 
@@ -1642,6 +1651,9 @@ msgstr "Слишком много неверных попыток. Подожд�
 
 msgid "Total documents"
 msgstr "Всего документов"
+
+msgid "Total signers"
+msgstr "Всего подписантов"
 
 msgid "Type"
 msgstr "Тип"

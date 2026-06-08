@@ -67,6 +67,7 @@ final class PortalController {
 		add_action( 'admin_post_comsign_portal_create', array( $this, 'handle_create' ) );
 		add_action( 'admin_post_comsign_portal_resend', array( $this, 'handle_resend' ) );
 		add_action( 'admin_post_comsign_portal_download', array( $this, 'handle_download' ) );
+		add_action( 'admin_post_comsign_portal_export', array( $this, 'handle_export' ) );
 		// Build-your-own document: upload a PDF, manage signers, place fields.
 		add_action( 'admin_post_comsign_portal_upload', array( $this, 'handle_upload' ) );
 		add_action( 'admin_post_comsign_portal_add_signer', array( $this, 'handle_add_signer' ) );
@@ -247,6 +248,45 @@ final class PortalController {
 		header( 'Content-Disposition: attachment; filename="' . $filename . '"' );
 		header( 'Content-Length: ' . (string) filesize( $path ) );
 		readfile( $path ); // phpcs:ignore WordPress.WP.AlternativeFunctions.file_system_operations_readfile
+		exit;
+	}
+
+	/**
+	 * Export the (filtered) document list for the user's workspaces as CSV.
+	 */
+	public function handle_export(): void {
+		$user_id = $this->require_login();
+		check_admin_referer( 'comsign_portal_export' );
+
+		$account_ids = $this->accounts->visible_account_ids( $user_id );
+		if ( ! $account_ids ) {
+			wp_die( esc_html__( 'Nothing to export.', 'comsign' ), '', array( 'response' => 403 ) );
+		}
+
+		// phpcs:disable WordPress.Security.NonceVerification.Recommended -- nonce checked above.
+		$search = isset( $_GET['s'] ) ? sanitize_text_field( wp_unslash( $_GET['s'] ) ) : '';
+		$status = isset( $_GET['status'] ) ? sanitize_key( wp_unslash( $_GET['status'] ) ) : '';
+		// phpcs:enable WordPress.Security.NonceVerification.Recommended
+		$statuses = array(
+			DocumentRepository::STATUS_DRAFT,
+			DocumentRepository::STATUS_SENT,
+			DocumentRepository::STATUS_SIGNED,
+			DocumentRepository::STATUS_COMPLETED,
+			DocumentRepository::STATUS_DECLINED,
+		);
+		if ( ! in_array( $status, $statuses, true ) ) {
+			$status = '';
+		}
+
+		// Bounded export (most recent matching documents).
+		$rows = $this->decorate( $this->documents->paginate_for_accounts( $account_ids, 5000, 0, $search, $status ) );
+		$csv  = \ComSign\Services\DocumentExport::to_csv( $rows );
+
+		nocache_headers();
+		header( 'Content-Type: text/csv; charset=utf-8' );
+		header( 'Content-Disposition: attachment; filename="comsign-documents-' . gmdate( 'Ymd' ) . '.csv"' );
+		header( 'Content-Length: ' . (string) strlen( $csv ) );
+		echo $csv; // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped -- CSV bytes.
 		exit;
 	}
 

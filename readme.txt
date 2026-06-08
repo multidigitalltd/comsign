@@ -4,7 +4,7 @@ Tags: signature, digital signature, pdf, esignature, hebrew
 Requires at least: 6.0
 Tested up to: 6.5
 Requires PHP: 7.4
-Stable tag: 0.48.0
+Stable tag: 0.49.0
 License: GPL-2.0-or-later
 License URI: https://www.gnu.org/licenses/gpl-2.0.html
 
@@ -105,6 +105,12 @@ ID and its SHA-256 code (shown on the document screen and the signature
 certificate) to confirm the document is authentic and see who signed it.
 
 == Changelog ==
+
+= 0.49.0 =
+* New: export your documents to CSV from the portal. The "Export CSV" button on
+  the Documents page downloads the current (search/status-filtered) list with
+  title, status, signed/total signers, created date and verification code —
+  UTF-8 with a BOM so Hebrew/Arabic open correctly in Excel.
 
 = 0.48.0 =
 * Mobile: the portal's data tables (documents, signers, contacts, team) now
