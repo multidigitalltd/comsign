@@ -258,6 +258,10 @@ msgstr ""
 msgid "Annual — %s"
 msgstr ""
 
+#: includes/Frontend/views/portal-dashboard.php:49
+msgid "Ask a workspace owner to give you permission to create documents."
+msgstr ""
+
 #: includes/Admin/views/template-use.php:26
 msgid "Assign a recipient to each role. The document is created as a draft so you can review it before sending."
 msgstr ""
@@ -424,6 +428,7 @@ msgid "Choose a different template"
 msgstr ""
 
 #: includes/Frontend/views/portal-billing.php:107
+#: includes/Frontend/views/portal-dashboard.php:38
 msgid "Choose a plan"
 msgstr ""
 
@@ -543,7 +548,7 @@ msgid "Contact saved."
 msgstr ""
 
 #: includes/Frontend/PortalController.php:644
-#: includes/Frontend/PortalController.php:1198
+#: includes/Frontend/PortalController.php:1214
 #: includes/Frontend/views/portal-contacts.php:23
 msgid "Contacts"
 msgstr ""
@@ -612,6 +617,10 @@ msgstr ""
 msgid "Create document"
 msgstr ""
 
+#: includes/Frontend/views/portal-dashboard.php:47
+msgid "Create your first document"
+msgstr ""
+
 #: includes/Admin/DocumentsListTable.php:56
 #: includes/Admin/views/templates.php:31
 #: includes/Audit/AuditLogger.php:44
@@ -627,7 +636,7 @@ msgstr ""
 msgid "Dana Cohen, dana@example.com, +972500000000\nAvi Levi, avi@example.com"
 msgstr ""
 
-#: includes/Frontend/PortalController.php:1180
+#: includes/Frontend/PortalController.php:1196
 msgid "Dashboard"
 msgstr ""
 
@@ -697,7 +706,7 @@ msgstr ""
 
 #: includes/Admin/DocumentsListTable.php:53
 #: includes/Admin/views/analytics.php:85
-#: includes/Frontend/PortalController.php:1131
+#: includes/Frontend/PortalController.php:1147
 #: includes/Frontend/views/partials/portal-doc-table.php:20
 #: includes/Frontend/views/sign.php:25
 #: includes/Services/DocumentService.php:366
@@ -739,7 +748,7 @@ msgid "Document file is uploaded"
 msgstr ""
 
 #: includes/Frontend/PortalController.php:720
-#: includes/Frontend/PortalController.php:1116
+#: includes/Frontend/PortalController.php:1132
 msgid "Document not available"
 msgstr ""
 
@@ -788,8 +797,8 @@ msgstr ""
 
 #: includes/Admin/Admin.php:137
 #: includes/Admin/Admin.php:138
-#: includes/Frontend/PortalController.php:1087
-#: includes/Frontend/PortalController.php:1185
+#: includes/Frontend/PortalController.php:1103
+#: includes/Frontend/PortalController.php:1201
 #: includes/Frontend/views/portal-documents.php:34
 msgid "Documents"
 msgstr ""
@@ -1246,8 +1255,9 @@ msgid "Needs attention (out > 7 days)"
 msgstr ""
 
 #: includes/Frontend/PortalController.php:606
-#: includes/Frontend/PortalController.php:1193
+#: includes/Frontend/PortalController.php:1209
 #: includes/Frontend/views/portal-create.php:27
+#: includes/Frontend/views/portal-dashboard.php:63
 msgid "New document"
 msgstr ""
 
@@ -1265,10 +1275,6 @@ msgstr ""
 
 #: includes/Frontend/views/partials/portal-doc-table.php:13
 msgid "No documents to show. Start by uploading a PDF in the admin."
-msgstr ""
-
-#: includes/Frontend/views/portal-dashboard.php:30
-msgid "No documents yet."
 msgstr ""
 
 #: includes/Admin/DocumentsListTable.php:218
@@ -1339,7 +1345,7 @@ msgstr ""
 msgid "Not available"
 msgstr ""
 
-#: includes/Frontend/PortalController.php:1115
+#: includes/Frontend/PortalController.php:1131
 msgid "Not found"
 msgstr ""
 
@@ -1507,7 +1513,7 @@ msgid "Place signature fields"
 msgstr ""
 
 #: includes/Frontend/PortalController.php:972
-#: includes/Frontend/PortalController.php:1214
+#: includes/Frontend/PortalController.php:1230
 #: includes/Frontend/views/portal-billing.php:51
 msgid "Plan & billing"
 msgstr ""
@@ -1606,7 +1612,7 @@ msgstr ""
 msgid "Please verify your identity before signing."
 msgstr ""
 
-#: includes/Frontend/PortalController.php:1251
+#: includes/Frontend/PortalController.php:1267
 msgid "Portal template missing."
 msgstr ""
 
@@ -1651,7 +1657,7 @@ msgstr ""
 msgid "Reason for declining (optional)"
 msgstr ""
 
-#: includes/Frontend/views/portal-dashboard.php:34
+#: includes/Frontend/views/portal-dashboard.php:66
 msgid "Recent documents"
 msgstr ""
 
@@ -2098,7 +2104,7 @@ msgid "System Status"
 msgstr ""
 
 #: includes/Frontend/PortalController.php:836
-#: includes/Frontend/PortalController.php:1206
+#: includes/Frontend/PortalController.php:1222
 #: includes/Frontend/views/portal-team.php:23
 msgid "Team"
 msgstr ""
@@ -2271,7 +2277,7 @@ msgstr ""
 msgid "This document does not allow assigning to someone else."
 msgstr ""
 
-#: includes/Frontend/PortalController.php:1117
+#: includes/Frontend/PortalController.php:1133
 msgid "This document does not exist in your workspace."
 msgstr ""
 
@@ -2419,6 +2425,10 @@ msgstr ""
 msgid "Upload a PDF (or compose one) for this document."
 msgstr ""
 
+#: includes/Frontend/views/portal-dashboard.php:45
+msgid "Upload a PDF or pick a template, add the people who need to sign, place the fields, and send. We’ll track it for you."
+msgstr ""
+
 #: includes/Frontend/views/portal-create.php:33
 msgid "Upload a PDF, add signers, and place the fields yourself."
 msgstr ""
@@ -2534,12 +2544,16 @@ msgstr ""
 msgid "Webhook secret"
 msgstr ""
 
+#: includes/Frontend/views/portal-dashboard.php:44
+msgid "Welcome! Let’s send your first document."
+msgstr ""
+
 #: includes/Admin/views/edit.php:192
 #: includes/Services/DocumentService.php:373
 msgid "When"
 msgstr ""
 
-#: includes/Frontend/PortalController.php:1046
+#: includes/Frontend/PortalController.php:1057
 #: includes/Frontend/views/partials/portal-nav.php:13
 msgid "Workspace"
 msgstr ""
@@ -2572,6 +2586,10 @@ msgstr ""
 
 #: includes/Admin/Admin.php:1340
 msgid "You are not allowed to access this page."
+msgstr ""
+
+#: includes/Frontend/views/portal-dashboard.php:35
+msgid "You are on a free trial — %d days left."
 msgstr ""
 
 #: includes/Admin/views/members.php:31
@@ -2710,7 +2728,7 @@ msgstr ""
 msgid "Your verification code is: %1$s\n\nIt expires in %2$d minutes."
 msgstr ""
 
-#: includes/Frontend/views/portal-dashboard.php:20
+#: includes/Frontend/views/portal-dashboard.php:28
 msgid "Your workspace"
 msgstr ""
 

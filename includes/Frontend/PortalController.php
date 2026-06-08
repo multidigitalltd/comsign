@@ -1038,16 +1038,32 @@ final class PortalController {
 	 * @param int[] $account_ids Visible accounts.
 	 */
 	private function render_dashboard( int $user_id, array $account_ids ): void {
-		$recent = $this->documents->paginate_for_accounts( $account_ids, 8, 0 );
+		$recent  = $this->documents->paginate_for_accounts( $account_ids, 8, 0 );
+		$account = $this->working_account_id( $user_id );
+		$subs    = new SubscriptionService();
+
+		// Trial banner data (owners only).
+		$trial_days = null;
+		if ( $this->can_manage_billing( $user_id ) ) {
+			$sub = $subs->for_account( $account );
+			if ( $sub && SubscriptionService::STATUS_TRIALING === $subs->status( $account ) && ! empty( $sub->trial_ends_at ) ) {
+				$trial_days = max( 0, (int) ceil( ( strtotime( $sub->trial_ends_at . ' UTC' ) - time() ) / DAY_IN_SECONDS ) );
+			}
+		}
 
 		$this->render(
 			'portal-dashboard',
 			array(
-				'page_title' => __( 'Workspace', 'comsign' ),
-				'nav'        => $this->nav( 'dashboard', $user_id ),
-				'counts'     => $this->documents->status_counts_for_accounts( $account_ids ),
-				'recent'     => $this->decorate( $recent ),
-				'switcher'   => $this->switcher( $user_id ),
+				'page_title'        => __( 'Workspace', 'comsign' ),
+				'nav'               => $this->nav( 'dashboard', $user_id ),
+				'counts'            => $this->documents->status_counts_for_accounts( $account_ids ),
+				'recent'            => $this->decorate( $recent ),
+				'is_empty'          => empty( $recent ),
+				'can_create'        => $this->can_create( $user_id ),
+				'can_manage_billing' => $this->can_manage_billing( $user_id ),
+				'trial_days'        => $trial_days,
+				'subscription_status' => $subs->status( $account ),
+				'switcher'          => $this->switcher( $user_id ),
 			)
 		);
 	}

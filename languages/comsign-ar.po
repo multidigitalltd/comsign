@@ -158,6 +158,9 @@ msgstr "التحليلات"
 msgid "Annual — %s"
 msgstr "سنوي — %s"
 
+msgid "Ask a workspace owner to give you permission to create documents."
+msgstr "اطلب من مالك مساحة العمل منحك صلاحية إنشاء المستندات."
+
 msgid "Assign a recipient to each role. The document is created as a draft so you can review it before sending."
 msgstr "عيّن مستلمًا لكل دور. يُنشأ المستند كمسودة لتتمكن من مراجعته قبل الإرسال."
 
@@ -403,6 +406,9 @@ msgstr "إنشاء مساحة عمل فرعية"
 
 msgid "Create document"
 msgstr "إنشاء مستند"
+
+msgid "Create your first document"
+msgstr "أنشئ مستندك الأول"
 
 msgid "Created"
 msgstr "تم الإنشاء"
@@ -826,9 +832,6 @@ msgstr "لا توجد جهات اتصال بعد."
 
 msgid "No documents to show. Start by uploading a PDF in the admin."
 msgstr "لا توجد مستندات لعرضها. ابدأ برفع ملف PDF من لوحة الإدارة."
-
-msgid "No documents yet."
-msgstr "لا توجد مستندات بعد."
 
 msgid "No documents yet. Upload your first PDF to get started."
 msgstr "لا توجد مستندات بعد. ارفع أول ملف PDF للبدء."
@@ -1616,6 +1619,9 @@ msgstr "رفع ملف PDF"
 msgid "Upload a PDF (or compose one) for this document."
 msgstr "ارفع ملف PDF (أو أنشئ واحدًا) لهذا المستند."
 
+msgid "Upload a PDF or pick a template, add the people who need to sign, place the fields, and send. We’ll track it for you."
+msgstr "ارفع ملف PDF أو اختر قالبًا، أضف الأشخاص الذين يجب أن يوقّعوا، ضع الحقول، ثم أرسل. سنتتبّعه نيابةً عنك."
+
 msgid "Upload a PDF, add signers, and place the fields yourself."
 msgstr "ارفع ملف PDF، وأضف الموقّعين، وضع الحقول بنفسك."
 
@@ -1697,6 +1703,9 @@ msgstr "عنوان webhook"
 msgid "Webhook secret"
 msgstr "سر webhook"
 
+msgid "Welcome! Let’s send your first document."
+msgstr "مرحبًا! لنرسل مستندك الأول."
+
 msgid "When"
 msgstr "متى"
 
@@ -1723,6 +1732,9 @@ msgstr "X-ComSign-Key"
 
 msgid "You are not allowed to access this page."
 msgstr "غير مسموح لك بالوصول إلى هذه الصفحة."
+
+msgid "You are on a free trial — %d days left."
+msgstr "أنت في تجربة مجانية — تبقّى %d يومًا."
 
 msgid "You can view members but only an owner or admin can change them."
 msgstr "يمكنك عرض الأعضاء لكن المالك أو المدير فقط يمكنه تغييرهم."

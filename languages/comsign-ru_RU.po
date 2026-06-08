@@ -158,6 +158,9 @@ msgstr "Аналитика"
 msgid "Annual — %s"
 msgstr "Годовой — %s"
 
+msgid "Ask a workspace owner to give you permission to create documents."
+msgstr "Попросите владельца рабочего пространства разрешить вам создавать документы."
+
 msgid "Assign a recipient to each role. The document is created as a draft so you can review it before sending."
 msgstr "Назначьте получателя на каждую роль. Документ создаётся как черновик, чтобы вы могли проверить его перед отправкой."
 
@@ -403,6 +406,9 @@ msgstr "Создать под-пространство"
 
 msgid "Create document"
 msgstr "Создать документ"
+
+msgid "Create your first document"
+msgstr "Создайте первый документ"
 
 msgid "Created"
 msgstr "Создано"
@@ -826,9 +832,6 @@ msgstr "Пока нет контактов."
 
 msgid "No documents to show. Start by uploading a PDF in the admin."
 msgstr "Нет документов для показа. Начните с загрузки PDF в админке."
-
-msgid "No documents yet."
-msgstr "Пока нет документов."
 
 msgid "No documents yet. Upload your first PDF to get started."
 msgstr "Пока нет документов. Загрузите первый PDF, чтобы начать."
@@ -1616,6 +1619,9 @@ msgstr "Загрузить PDF"
 msgid "Upload a PDF (or compose one) for this document."
 msgstr "Загрузите PDF (или создайте его) для этого документа."
 
+msgid "Upload a PDF or pick a template, add the people who need to sign, place the fields, and send. We’ll track it for you."
+msgstr "Загрузите PDF или выберите шаблон, добавьте подписантов, разместите поля и отправьте. Мы будем отслеживать это за вас."
+
 msgid "Upload a PDF, add signers, and place the fields yourself."
 msgstr "Загрузите PDF, добавьте подписантов и разместите поля сами."
 
@@ -1697,6 +1703,9 @@ msgstr "URL webhook"
 msgid "Webhook secret"
 msgstr "Секрет webhook"
 
+msgid "Welcome! Let’s send your first document."
+msgstr "Добро пожаловать! Давайте отправим ваш первый документ."
+
 msgid "When"
 msgstr "Когда"
 
@@ -1723,6 +1732,9 @@ msgstr "X-ComSign-Key"
 
 msgid "You are not allowed to access this page."
 msgstr "Вам не разрешён доступ к этой странице."
+
+msgid "You are on a free trial — %d days left."
+msgstr "У вас бесплатный пробный период — осталось дней: %d."
 
 msgid "You can view members but only an owner or admin can change them."
 msgstr "Вы можете просматривать участников, но изменять их может только владелец или администратор."
