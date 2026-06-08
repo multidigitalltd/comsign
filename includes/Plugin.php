@@ -83,6 +83,9 @@ final class Plugin {
 
 		// Billing: Cardcom payment webhook.
 		( new \ComSign\Frontend\BillingController() )->register();
+
+		// Public pricing table shortcode.
+		( new \ComSign\Frontend\PricingShortcode() )->register();
 	}
 
 	/**

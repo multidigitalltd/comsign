@@ -836,6 +836,9 @@ msgstr "لم يتم تعيين مفتاح REST API. احفظ الإعدادات 
 msgid "No contacts yet."
 msgstr "لا توجد جهات اتصال بعد."
 
+msgid "No credit card required to start. Cancel anytime."
+msgstr "لا حاجة لبطاقة ائتمان للبدء. يمكنك الإلغاء في أي وقت."
+
 msgid "No documents to show. Start by uploading a PDF in the admin."
 msgstr "لا توجد مستندات لعرضها. ابدأ برفع ملف PDF من لوحة الإدارة."
 
@@ -1379,6 +1382,9 @@ msgstr "تعذّر إرسال بعض الدعوات: %s. يرجى التحقق �
 msgid "Someone else should sign this"
 msgstr "يجب أن يوقّع هذا شخص آخر"
 
+msgid "Start %d-day free trial"
+msgstr "ابدأ تجربة مجانية لمدة %d يومًا"
+
 msgid "Status"
 msgstr "الحالة"
 
@@ -1885,6 +1891,9 @@ msgstr "email@example.com"
 
 msgid "monthly"
 msgstr "شهري"
+
+msgid "or %s / year"
+msgstr "أو %s / سنة"
 
 msgid "wp_mail() reported a failure. Check your mail configuration (e.g. an SMTP plugin)."
 msgstr "أبلغت wp_mail() عن فشل. تحقق من إعدادات البريد لديك (مثل إضافة SMTP)."

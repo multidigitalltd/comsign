@@ -23,6 +23,7 @@ msgid_plural "%d days"
 msgstr[0] ""
 msgstr[1] ""
 
+#: includes/Frontend/PricingShortcode.php:83
 #: includes/Frontend/views/portal-billing.php:130
 msgid "%d documents / month"
 msgstr ""
@@ -69,6 +70,7 @@ msgstr ""
 msgid "* Required"
 msgstr ""
 
+#: includes/Frontend/PricingShortcode.php:74
 #: includes/Frontend/views/portal-billing.php:123
 msgid "/ month"
 msgstr ""
@@ -117,6 +119,7 @@ msgstr ""
 msgid "A webhook URL is configured. Use “Send test webhook” below to confirm it is reachable."
 msgstr ""
 
+#: includes/Frontend/PricingShortcode.php:92
 #: includes/Frontend/views/portal-billing.php:139
 msgid "API & webhooks"
 msgstr ""
@@ -636,6 +639,7 @@ msgstr ""
 msgid "Created"
 msgstr ""
 
+#: includes/Frontend/PricingShortcode.php:89
 #: includes/Frontend/views/portal-billing.php:136
 msgid "Custom branding"
 msgstr ""
@@ -700,6 +704,7 @@ msgstr ""
 msgid "Details"
 msgstr ""
 
+#: includes/Frontend/PricingShortcode.php:86
 #: includes/Frontend/views/portal-billing.php:133
 msgid "Digital (PKI) signatures"
 msgstr ""
@@ -1279,6 +1284,10 @@ msgstr ""
 
 #: includes/Frontend/views/portal-contacts.php:63
 msgid "No contacts yet."
+msgstr ""
+
+#: includes/Frontend/PricingShortcode.php:104
+msgid "No credit card required to start. Cancel anytime."
 msgstr ""
 
 #: includes/Frontend/views/partials/portal-doc-table.php:13
@@ -2078,6 +2087,10 @@ msgstr ""
 msgid "Someone else should sign this"
 msgstr ""
 
+#: includes/Frontend/PricingShortcode.php:98
+msgid "Start %d-day free trial"
+msgstr ""
+
 #: includes/Admin/DocumentsListTable.php:54
 #: includes/Admin/views/analytics.php:86
 #: includes/Admin/views/health.php:37
@@ -2125,6 +2138,7 @@ msgstr ""
 msgid "Team management is not available"
 msgstr ""
 
+#: includes/Frontend/PricingShortcode.php:84
 #: includes/Frontend/views/portal-billing.php:131
 msgid "Team seats: %d"
 msgstr ""
@@ -2412,6 +2426,7 @@ msgstr ""
 msgid "Unexpected gateway response."
 msgstr ""
 
+#: includes/Frontend/PricingShortcode.php:83
 #: includes/Frontend/views/portal-billing.php:130
 msgid "Unlimited documents"
 msgstr ""
@@ -2800,6 +2815,10 @@ msgstr ""
 #: includes/Services/BillingService.php:61
 #: includes/Services/BillingService.php:140
 msgid "monthly"
+msgstr ""
+
+#: includes/Frontend/PricingShortcode.php:79
+msgid "or %s / year"
 msgstr ""
 
 #: includes/Admin/Admin.php:1071

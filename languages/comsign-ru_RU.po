@@ -836,6 +836,9 @@ msgstr "Ключ REST API не задан. Сохраните настройки
 msgid "No contacts yet."
 msgstr "Пока нет контактов."
 
+msgid "No credit card required to start. Cancel anytime."
+msgstr "Для начала не нужна банковская карта. Отмена в любой момент."
+
 msgid "No documents to show. Start by uploading a PDF in the admin."
 msgstr "Нет документов для показа. Начните с загрузки PDF в админке."
 
@@ -1379,6 +1382,9 @@ msgstr "Некоторые приглашения не удалось отпра
 msgid "Someone else should sign this"
 msgstr "Это должен подписать кто-то другой"
 
+msgid "Start %d-day free trial"
+msgstr "Начать бесплатный пробный период на %d дней"
+
 msgid "Status"
 msgstr "Статус"
 
@@ -1885,6 +1891,9 @@ msgstr "email@example.com"
 
 msgid "monthly"
 msgstr "месячный"
+
+msgid "or %s / year"
+msgstr "или %s / год"
 
 msgid "wp_mail() reported a failure. Check your mail configuration (e.g. an SMTP plugin)."
 msgstr "wp_mail() сообщила об ошибке. Проверьте настройки почты (например, плагин SMTP)."

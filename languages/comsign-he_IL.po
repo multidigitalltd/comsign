@@ -22,6 +22,7 @@ msgstr "%1$d נוצלו, %2$d נותרו."
 msgid "%d day"
 msgstr "%d ימים"
 
+#: includes/Frontend/PricingShortcode.php:83
 #: includes/Frontend/views/portal-billing.php:130
 msgid "%d documents / month"
 msgstr "%d מסמכים בחודש"
@@ -64,6 +65,7 @@ msgstr "(ללא כותרת)"
 msgid "* Required"
 msgstr "* חובה"
 
+#: includes/Frontend/PricingShortcode.php:74
 #: includes/Frontend/views/portal-billing.php:123
 msgid "/ month"
 msgstr "/ חודש"
@@ -112,6 +114,7 @@ msgstr "סביבת עבודה משנה משתייכת לזו; מנהלים כא�
 msgid "A webhook URL is configured. Use “Send test webhook” below to confirm it is reachable."
 msgstr "כתובת webhook מוגדרת. השתמשו ב“שליחת webhook לבדיקה” למטה כדי לוודא שהיא נגישה."
 
+#: includes/Frontend/PricingShortcode.php:92
 #: includes/Frontend/views/portal-billing.php:139
 msgid "API & webhooks"
 msgstr "API ו-webhooks"
@@ -631,6 +634,7 @@ msgstr "צרו את המסמך הראשון שלכם"
 msgid "Created"
 msgstr "נוצר"
 
+#: includes/Frontend/PricingShortcode.php:89
 #: includes/Frontend/views/portal-billing.php:136
 msgid "Custom branding"
 msgstr "מיתוג מותאם"
@@ -695,6 +699,7 @@ msgstr "השליחה נכשלה: %s"
 msgid "Details"
 msgstr "פרטים"
 
+#: includes/Frontend/PricingShortcode.php:86
 #: includes/Frontend/views/portal-billing.php:133
 msgid "Digital (PKI) signatures"
 msgstr "חתימות דיגיטליות (PKI)"
@@ -1275,6 +1280,10 @@ msgstr "לא הוגדר מפתח REST API. שמרו את ההגדרות כדי �
 #: includes/Frontend/views/portal-contacts.php:63
 msgid "No contacts yet."
 msgstr "אין עדיין אנשי קשר."
+
+#: includes/Frontend/PricingShortcode.php:104
+msgid "No credit card required to start. Cancel anytime."
+msgstr "לא נדרש כרטיס אשראי כדי להתחיל. ניתן לבטל בכל עת."
 
 #: includes/Frontend/views/partials/portal-doc-table.php:13
 msgid "No documents to show. Start by uploading a PDF in the admin."
@@ -2073,6 +2082,10 @@ msgstr "חלק מההזמנות לא נשלחו: %s. אנא בדקו את הגד
 msgid "Someone else should sign this"
 msgstr "מישהו אחר צריך לחתום על זה"
 
+#: includes/Frontend/PricingShortcode.php:98
+msgid "Start %d-day free trial"
+msgstr "התחילו ניסיון חינם ל-%d ימים"
+
 #: includes/Admin/DocumentsListTable.php:54
 #: includes/Admin/views/analytics.php:86
 #: includes/Admin/views/health.php:37
@@ -2120,6 +2133,7 @@ msgstr "צוות"
 msgid "Team management is not available"
 msgstr "ניהול צוות אינו זמין"
 
+#: includes/Frontend/PricingShortcode.php:84
 #: includes/Frontend/views/portal-billing.php:131
 msgid "Team seats: %d"
 msgstr "מושבי צוות: %d"
@@ -2407,6 +2421,7 @@ msgstr "הקלידו את שמכם המלא"
 msgid "Unexpected gateway response."
 msgstr "תגובה לא צפויה משער התשלום."
 
+#: includes/Frontend/PricingShortcode.php:83
 #: includes/Frontend/views/portal-billing.php:130
 msgid "Unlimited documents"
 msgstr "מסמכים ללא הגבלה"
@@ -2796,6 +2811,10 @@ msgstr "email@example.com"
 #: includes/Services/BillingService.php:140
 msgid "monthly"
 msgstr "חודשי"
+
+#: includes/Frontend/PricingShortcode.php:79
+msgid "or %s / year"
+msgstr "או %s / שנה"
 
 #: includes/Admin/Admin.php:1071
 msgid "wp_mail() reported a failure. Check your mail configuration (e.g. an SMTP plugin)."
