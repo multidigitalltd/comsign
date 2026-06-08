@@ -77,6 +77,7 @@ final class PortalController {
 		add_action( 'admin_post_comsign_portal_contact_delete', array( $this, 'handle_contact_delete' ) );
 		// Billing: start a Cardcom checkout for a plan.
 		add_action( 'admin_post_comsign_portal_checkout', array( $this, 'handle_checkout' ) );
+		add_action( 'admin_post_comsign_portal_cancel_sub', array( $this, 'handle_cancel_subscription' ) );
 		// Team management.
 		add_action( 'admin_post_comsign_portal_invite', array( $this, 'handle_invite' ) );
 		add_action( 'admin_post_comsign_portal_member_role', array( $this, 'handle_member_role' ) );
@@ -1029,6 +1030,22 @@ final class PortalController {
 		// Off-site to the Cardcom hosted payment page.
 		wp_redirect( esc_url_raw( (string) $result['url'] ) ); // phpcs:ignore WordPress.Security.SafeRedirect.wp_redirect_wp_redirect
 		exit;
+	}
+
+	/**
+	 * Cancel the workspace subscription (access continues until the period end).
+	 */
+	public function handle_cancel_subscription(): void {
+		$user_id = $this->require_login();
+		check_admin_referer( 'comsign_portal_checkout' );
+
+		$account = $this->working_account_id( $user_id );
+		if ( $account <= 0 || ! $this->accounts->can_in_account( $user_id, $account, Roles::MANAGE_SETTINGS ) ) {
+			$this->bounce( self::url(), __( 'You cannot manage billing for this workspace.', 'comsign' ) );
+		}
+
+		( new SubscriptionService() )->cancel( $account );
+		$this->bounce( self::url( array( 'view' => 'billing' ) ), __( 'Your subscription has been canceled.', 'comsign' ), 'success' );
 	}
 
 	/**

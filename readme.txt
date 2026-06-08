@@ -4,7 +4,7 @@ Tags: signature, digital signature, pdf, esignature, hebrew
 Requires at least: 6.0
 Tested up to: 6.5
 Requires PHP: 7.4
-Stable tag: 0.43.0
+Stable tag: 0.44.0
 License: GPL-2.0-or-later
 License URI: https://www.gnu.org/licenses/gpl-2.0.html
 
@@ -105,6 +105,13 @@ ID and its SHA-256 code (shown on the document screen and the signature
 certificate) to confirm the document is authentic and see who signed it.
 
 == Changelog ==
+
+= 0.44.0 =
+* New: cancel your subscription from the portal (access continues until the end
+  of the paid period).
+* New: lifecycle emails — a welcome email when a workspace is created, and a
+  reminder to the workspace owner a few days before the free trial ends (sent
+  once per trial via the daily cron).
 
 = 0.43.0 =
 * New: a guided dashboard. New workspaces get a friendly empty state that walks

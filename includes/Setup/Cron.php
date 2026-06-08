@@ -52,6 +52,9 @@ final class Cron {
 			( new \ComSign\Services\BillingService() )->run_renewals();
 		}
 
+		// Nudge owners whose free trial is ending soon.
+		( new \ComSign\Services\BillingNotifications() )->send_trial_reminders( 3 );
+
 		if ( ! Settings::get( 'reminders_enabled' ) ) {
 			return;
 		}

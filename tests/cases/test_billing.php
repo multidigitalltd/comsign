@@ -151,3 +151,25 @@ Test::add( 'billing: a failed renewal marks the account past_due', static functi
 	Test::equals( 1, $result['failed'], 'the renewal is recorded as failed' );
 	Test::equals( SubscriptionService::STATUS_PAST_DUE, $subs->status( $acct ), 'account is now past due' );
 } );
+
+Test::add( 'billing: trial-ending reminders are sent once', static function (): void {
+	reset_tables();
+	$accounts = new \ComSign\Services\AccountService();
+	$repo     = new SubscriptionRepository();
+	$notify   = new \ComSign\Services\BillingNotifications();
+
+	// Owner with an email + a workspace (auto-trial).
+	$uid = wp_insert_user( array(
+		'user_login' => 'trial_owner_' . wp_generate_password( 6, false ),
+		'user_pass'  => 'x',
+		'user_email' => 'trialo_' . wp_generate_password( 6, false ) . '@example.com',
+		'role'       => 'subscriber',
+	) );
+	$account = $accounts->create_account( 'Trial WS', (int) $uid );
+
+	// Trial ends in 2 days (inside the 3-day reminder window).
+	$repo->set_datetime( $account, 'trial_ends_at', gmdate( 'Y-m-d H:i:s', time() + 2 * DAY_IN_SECONDS ) );
+
+	Test::equals( 1, $notify->send_trial_reminders( 3 ), 'one owner reminded' );
+	Test::equals( 0, $notify->send_trial_reminders( 3 ), 'not reminded again (deduped)' );
+} );

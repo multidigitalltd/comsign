@@ -98,6 +98,14 @@ $paid = isset( $_GET['paid'] ) ? sanitize_key( wp_unslash( $_GET['paid'] ) ) : '
 				}
 				?>
 			</p>
+
+			<?php if ( in_array( $status, array( SubscriptionService::STATUS_ACTIVE, SubscriptionService::STATUS_PAST_DUE ), true ) ) : ?>
+				<form method="post" action="<?php echo esc_url( $action ); ?>" onsubmit="return confirm('<?php echo esc_js( __( 'Cancel your subscription? You will keep access until the end of the current period.', 'comsign' ) ); ?>');">
+					<input type="hidden" name="action" value="comsign_portal_cancel_sub">
+					<input type="hidden" name="_wpnonce" value="<?php echo esc_attr( $nonce ); ?>">
+					<button type="submit" class="comsign-btn comsign-btn--small"><?php esc_html_e( 'Cancel subscription', 'comsign' ); ?></button>
+				</form>
+			<?php endif; ?>
 		</section>
 
 		<?php if ( ! $configured ) : ?>

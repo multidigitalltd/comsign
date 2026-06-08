@@ -245,6 +245,12 @@ msgstr "تم حفظ مستلمي النسخة."
 msgid "Cancel"
 msgstr "إلغاء"
 
+msgid "Cancel subscription"
+msgstr "إلغاء الاشتراك"
+
+msgid "Cancel your subscription? You will keep access until the end of the current period."
+msgstr "إلغاء اشتراكك؟ ستحتفظ بالوصول حتى نهاية الفترة الحالية."
+
 msgid "Canceled"
 msgstr "مُلغى"
 
@@ -1247,6 +1253,9 @@ msgstr "إرسال بريد تجريبي إلى %s"
 msgid "Send test webhook"
 msgstr "إرسال webhook تجريبي"
 
+msgid "Send your first document for signing here:"
+msgstr "أرسل مستندك الأول للتوقيع هنا:"
+
 msgid "Sender"
 msgstr "المُرسِل"
 
@@ -1580,6 +1589,9 @@ msgstr "العنوان:"
 msgid "To do:"
 msgstr "للتنفيذ:"
 
+msgid "To keep sending documents, choose a plan here:"
+msgstr "لمواصلة إرسال المستندات، اختر باقة هنا:"
+
 msgid "Too many attempts"
 msgstr "محاولات كثيرة جدًا"
 
@@ -1703,8 +1715,14 @@ msgstr "عنوان webhook"
 msgid "Webhook secret"
 msgstr "سر webhook"
 
+msgid "Welcome to %s"
+msgstr "مرحبًا بك في %s"
+
 msgid "Welcome! Let’s send your first document."
 msgstr "مرحبًا! لنرسل مستندك الأول."
+
+msgid "Welcome! Your workspace is ready with a %d-day free trial."
+msgstr "مرحبًا! مساحة عملك جاهزة مع تجربة مجانية لمدة %d يومًا."
 
 msgid "When"
 msgstr "متى"
@@ -1799,6 +1817,9 @@ msgstr "يجب أن توافق على التوقيع إلكترونيًا قبل
 msgid "You need to sign in to access your workspace."
 msgstr "تحتاج إلى تسجيل الدخول للوصول إلى مساحة عملك."
 
+msgid "Your %s free trial is ending soon"
+msgstr "تجربتك المجانية في %s على وشك الانتهاء"
+
 msgid "Your ComSign verification code"
 msgstr "رمز التحقق الخاص بك من ComSign"
 
@@ -1814,6 +1835,9 @@ msgstr "جهات اتصالك"
 msgid "Your current plan"
 msgstr "باقتك الحالية"
 
+msgid "Your free trial ends in %d days."
+msgstr "تنتهي تجربتك المجانية خلال %d أيام."
+
 msgid "Your role in this workspace does not allow creating documents. Please contact an administrator."
 msgstr "دورك في مساحة العمل هذه لا يسمح بإنشاء المستندات. يرجى التواصل مع المسؤول."
 
@@ -1828,6 +1852,9 @@ msgstr "توقيعك"
 
 msgid "Your subscription"
 msgstr "اشتراكك"
+
+msgid "Your subscription has been canceled."
+msgstr "تم إلغاء اشتراكك."
 
 msgid "Your subscription is not active. Please choose a plan to keep sending documents."
 msgstr "اشتراكك غير نشط. يرجى اختيار باقة لمواصلة إرسال المستندات."

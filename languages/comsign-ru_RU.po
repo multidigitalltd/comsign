@@ -245,6 +245,12 @@ msgstr "Получатели копии сохранены."
 msgid "Cancel"
 msgstr "Отмена"
 
+msgid "Cancel subscription"
+msgstr "Отменить подписку"
+
+msgid "Cancel your subscription? You will keep access until the end of the current period."
+msgstr "Отменить подписку? Доступ сохранится до конца текущего периода."
+
 msgid "Canceled"
 msgstr "Отменена"
 
@@ -1247,6 +1253,9 @@ msgstr "Отправить тестовое письмо на %s"
 msgid "Send test webhook"
 msgstr "Отправить тестовый webhook"
 
+msgid "Send your first document for signing here:"
+msgstr "Отправьте первый документ на подпись здесь:"
+
 msgid "Sender"
 msgstr "Отправитель"
 
@@ -1580,6 +1589,9 @@ msgstr "Название:"
 msgid "To do:"
 msgstr "Сделать:"
 
+msgid "To keep sending documents, choose a plan here:"
+msgstr "Чтобы продолжать отправлять документы, выберите тариф здесь:"
+
 msgid "Too many attempts"
 msgstr "Слишком много попыток"
 
@@ -1703,8 +1715,14 @@ msgstr "URL webhook"
 msgid "Webhook secret"
 msgstr "Секрет webhook"
 
+msgid "Welcome to %s"
+msgstr "Добро пожаловать в %s"
+
 msgid "Welcome! Let’s send your first document."
 msgstr "Добро пожаловать! Давайте отправим ваш первый документ."
+
+msgid "Welcome! Your workspace is ready with a %d-day free trial."
+msgstr "Добро пожаловать! Ваше рабочее пространство готово с %d-дневным пробным периодом."
 
 msgid "When"
 msgstr "Когда"
@@ -1799,6 +1817,9 @@ msgstr "Перед продолжением вы должны согласить
 msgid "You need to sign in to access your workspace."
 msgstr "Чтобы войти в рабочее пространство, необходимо авторизоваться."
 
+msgid "Your %s free trial is ending soon"
+msgstr "Ваш бесплатный пробный период в %s скоро заканчивается"
+
 msgid "Your ComSign verification code"
 msgstr "Ваш код проверки ComSign"
 
@@ -1814,6 +1835,9 @@ msgstr "Ваши контакты"
 msgid "Your current plan"
 msgstr "Ваш текущий тариф"
 
+msgid "Your free trial ends in %d days."
+msgstr "Ваш бесплатный пробный период заканчивается через %d дней."
+
 msgid "Your role in this workspace does not allow creating documents. Please contact an administrator."
 msgstr "Ваша роль в этом рабочем пространстве не позволяет создавать документы. Обратитесь к администратору."
 
@@ -1828,6 +1852,9 @@ msgstr "Ваша подпись"
 
 msgid "Your subscription"
 msgstr "Ваша подписка"
+
+msgid "Your subscription has been canceled."
+msgstr "Ваша подписка отменена."
 
 msgid "Your subscription is not active. Please choose a plan to keep sending documents."
 msgstr "Ваша подписка неактивна. Выберите тариф, чтобы продолжать отправку документов."

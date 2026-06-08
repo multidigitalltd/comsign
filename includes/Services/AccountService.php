@@ -137,6 +137,7 @@ final class AccountService {
 		$this->accounts->add_member( $id, $owner_user_id, AccountRepository::ROLE_OWNER );
 		// Every new workspace starts a free trial on the entry plan.
 		( new SubscriptionService() )->start_trial( $id );
+		( new BillingNotifications() )->send_welcome( $id );
 		return $id;
 	}
 

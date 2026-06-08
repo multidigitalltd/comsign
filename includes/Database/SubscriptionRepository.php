@@ -95,6 +95,25 @@ final class SubscriptionRepository {
 	}
 
 	/**
+	 * Trials that end on or before a UTC datetime (and have not yet ended).
+	 *
+	 * @param string $before_gmt UTC 'Y-m-d H:i:s' upper bound.
+	 *
+	 * @return object[]
+	 */
+	public function trials_ending_before( string $before_gmt ): array {
+		global $wpdb;
+		$now = current_time( 'mysql', true );
+		return $wpdb->get_results( // phpcs:ignore WordPress.DB.DirectDatabaseQuery, WordPress.DB.PreparedSQL.NotPrepared
+			$wpdb->prepare(
+				'SELECT * FROM ' . Installer::subscriptions_table() . " WHERE status = 'trialing' AND trial_ends_at IS NOT NULL AND trial_ends_at > %s AND trial_ends_at <= %s",
+				$now,
+				$before_gmt
+			)
+		);
+	}
+
+	/**
 	 * Set (or clear) the trial / current-period end datetimes.
 	 *
 	 * $wpdb->update() can't write SQL NULL reliably, so this uses a prepared
