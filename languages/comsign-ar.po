@@ -857,8 +857,8 @@ msgstr "لا توجد جهات اتصال بعد."
 msgid "No credit card required to start. Cancel anytime."
 msgstr "لا حاجة لبطاقة ائتمان للبدء. يمكنك الإلغاء في أي وقت."
 
-msgid "No documents to show. Start by uploading a PDF in the admin."
-msgstr "لا توجد مستندات لعرضها. ابدأ برفع ملف PDF من لوحة الإدارة."
+msgid "No documents yet."
+msgstr "لا توجد مستندات بعد."
 
 msgid "No documents yet. Upload your first PDF to get started."
 msgstr "لا توجد مستندات بعد. ارفع أول ملف PDF للبدء."

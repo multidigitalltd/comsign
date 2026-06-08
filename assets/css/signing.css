@@ -590,3 +590,49 @@ body.comsign-public {
 .comsign-onboard { text-align: center; padding: 32px 20px; }
 .comsign-onboard h2 { margin-top: 0; }
 .comsign-onboard .comsign-btn { display: inline-block; }
+
+/* ---- Responsive tables: cards on mobile (0.48.0) ---- */
+@media ( max-width: 600px ) {
+	.comsign-cards-on-mobile thead {
+		position: absolute;
+		width: 1px;
+		height: 1px;
+		overflow: hidden;
+		clip: rect( 0, 0, 0, 0 );
+		white-space: nowrap;
+	}
+	.comsign-cards-on-mobile,
+	.comsign-cards-on-mobile tbody,
+	.comsign-cards-on-mobile tr,
+	.comsign-cards-on-mobile td {
+		display: block;
+		width: 100%;
+	}
+	.comsign-cards-on-mobile tr {
+		border: 1px solid var( --comsign-border, #d6d9de );
+		border-radius: var( --comsign-radius-sm, 8px );
+		margin-bottom: 12px;
+		padding: 6px 12px;
+		background: var( --comsign-surface, #fff );
+	}
+	.comsign-cards-on-mobile td {
+		display: flex;
+		justify-content: space-between;
+		align-items: center;
+		gap: 12px;
+		padding: 8px 0;
+		border: 0;
+		border-bottom: 1px solid #f0f0f2;
+		text-align: end;
+	}
+	.comsign-cards-on-mobile td:last-child { border-bottom: 0; }
+	.comsign-cards-on-mobile td::before {
+		content: attr( data-label );
+		font-weight: 600;
+		color: var( --comsign-muted, #6b7280 );
+		text-align: start;
+		flex: 0 0 auto;
+	}
+	/* Action cells (forms/buttons) align to the end without a label gap. */
+	.comsign-cards-on-mobile td:not([data-label])::before { content: ""; }
+}

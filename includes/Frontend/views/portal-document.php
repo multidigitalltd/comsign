@@ -80,25 +80,25 @@ require __DIR__ . '/partials/portal-nav.php';
 		<?php if ( empty( $signers ) ) : ?>
 			<p class="comsign-empty"><?php esc_html_e( 'No signers added yet.', 'comsign' ); ?></p>
 		<?php else : ?>
-			<table class="comsign-portal-table">
+			<table class="comsign-portal-table comsign-cards-on-mobile">
 				<thead>
 					<tr>
-						<th><?php esc_html_e( 'Name', 'comsign' ); ?></th>
-						<th><?php esc_html_e( 'Email', 'comsign' ); ?></th>
-						<th><?php esc_html_e( 'Status', 'comsign' ); ?></th>
-						<th><?php esc_html_e( 'Signed at', 'comsign' ); ?></th>
+						<th scope="col"><?php esc_html_e( 'Name', 'comsign' ); ?></th>
+						<th scope="col"><?php esc_html_e( 'Email', 'comsign' ); ?></th>
+						<th scope="col"><?php esc_html_e( 'Status', 'comsign' ); ?></th>
+						<th scope="col"><?php esc_html_e( 'Signed at', 'comsign' ); ?></th>
 						<?php if ( ! empty( $can_send ) && empty( $is_draft ) ) : ?>
-							<th><?php esc_html_e( 'Action', 'comsign' ); ?></th>
+							<th scope="col"><?php esc_html_e( 'Action', 'comsign' ); ?></th>
 						<?php endif; ?>
 					</tr>
 				</thead>
 				<tbody>
 					<?php foreach ( $signers as $signer ) : ?>
 						<tr>
-							<td><?php echo esc_html( $signer->name ); ?></td>
-							<td><?php echo esc_html( $signer->email ); ?></td>
-							<td><span class="comsign-pill comsign-pill--<?php echo esc_attr( $signer->status ); ?>"><?php echo esc_html( ucfirst( (string) $signer->status ) ); ?></span></td>
-							<td><?php echo esc_html( ! empty( $signer->signed_at ) ? mysql2date( get_option( 'date_format' ), get_date_from_gmt( (string) $signer->signed_at ) ) : '—' ); ?></td>
+							<td data-label="<?php esc_attr_e( 'Name', 'comsign' ); ?>"><?php echo esc_html( $signer->name ); ?></td>
+							<td data-label="<?php esc_attr_e( 'Email', 'comsign' ); ?>"><?php echo esc_html( $signer->email ); ?></td>
+							<td data-label="<?php esc_attr_e( 'Status', 'comsign' ); ?>"><span class="comsign-pill comsign-pill--<?php echo esc_attr( $signer->status ); ?>"><?php echo esc_html( ucfirst( (string) $signer->status ) ); ?></span></td>
+							<td data-label="<?php esc_attr_e( 'Signed at', 'comsign' ); ?>"><?php echo esc_html( ! empty( $signer->signed_at ) ? mysql2date( get_option( 'date_format' ), get_date_from_gmt( (string) $signer->signed_at ) ) : '—' ); ?></td>
 							<?php if ( ! empty( $can_send ) && empty( $is_draft ) ) : ?>
 								<td>
 									<?php if ( \ComSign\Database\SignerRepository::STATUS_SIGNED !== $signer->status ) : ?>

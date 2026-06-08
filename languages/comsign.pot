@@ -652,6 +652,7 @@ msgstr ""
 #: includes/Admin/views/templates.php:31
 #: includes/Audit/AuditLogger.php:44
 #: includes/Frontend/views/partials/portal-doc-table.php:23
+#: includes/Frontend/views/partials/portal-doc-table.php:36
 msgid "Created"
 msgstr ""
 
@@ -737,6 +738,7 @@ msgstr ""
 #: includes/Admin/views/analytics.php:85
 #: includes/Frontend/PortalController.php:1164
 #: includes/Frontend/views/partials/portal-doc-table.php:20
+#: includes/Frontend/views/partials/portal-doc-table.php:29
 #: includes/Frontend/views/sign.php:25
 #: includes/Services/DocumentService.php:366
 #: includes/Signature/CertificatePage.php:31
@@ -912,13 +914,17 @@ msgstr ""
 #: includes/Admin/views/members.php:114
 #: includes/Frontend/views/portal-contacts.php:37
 #: includes/Frontend/views/portal-contacts.php:69
+#: includes/Frontend/views/portal-contacts.php:78
 #: includes/Frontend/views/portal-create.php:113
 #: includes/Frontend/views/portal-document.php:87
+#: includes/Frontend/views/portal-document.php:99
 #: includes/Frontend/views/portal-edit.php:40
 #: includes/Frontend/views/portal-edit.php:111
 #: includes/Frontend/views/portal-team.php:32
 #: includes/Frontend/views/portal-team.php:53
+#: includes/Frontend/views/portal-team.php:62
 #: includes/Frontend/views/portal-team.php:95
+#: includes/Frontend/views/portal-team.php:103
 #: includes/Frontend/views/sign.php:166
 #: includes/Signature/CertificatePage.php:40
 msgid "Email"
@@ -1275,9 +1281,12 @@ msgstr ""
 
 #: includes/Admin/Admin.php:280
 #: includes/Frontend/views/portal-contacts.php:68
+#: includes/Frontend/views/portal-contacts.php:77
 #: includes/Frontend/views/portal-document.php:86
+#: includes/Frontend/views/portal-document.php:98
 #: includes/Frontend/views/portal-edit.php:39
 #: includes/Frontend/views/portal-team.php:52
+#: includes/Frontend/views/portal-team.php:61
 #: includes/Signature/CertificatePage.php:39
 msgid "Name"
 msgstr ""
@@ -1315,7 +1324,7 @@ msgid "No credit card required to start. Cancel anytime."
 msgstr ""
 
 #: includes/Frontend/views/partials/portal-doc-table.php:13
-msgid "No documents to show. Start by uploading a PDF in the admin."
+msgid "No documents yet."
 msgstr ""
 
 #: includes/Admin/DocumentsListTable.php:218
@@ -1524,6 +1533,7 @@ msgid "Personal workspace"
 msgstr ""
 
 #: includes/Frontend/views/portal-contacts.php:70
+#: includes/Frontend/views/portal-contacts.php:79
 msgid "Phone"
 msgstr ""
 
@@ -1793,8 +1803,10 @@ msgstr ""
 #: includes/Admin/views/members.php:117
 #: includes/Frontend/views/portal-team.php:36
 #: includes/Frontend/views/portal-team.php:54
+#: includes/Frontend/views/portal-team.php:63
 #: includes/Frontend/views/portal-team.php:68
 #: includes/Frontend/views/portal-team.php:96
+#: includes/Frontend/views/portal-team.php:104
 msgid "Role"
 msgstr ""
 
@@ -2046,10 +2058,12 @@ msgstr ""
 
 #: includes/Audit/AuditLogger.php:48
 #: includes/Frontend/views/partials/portal-doc-table.php:22
+#: includes/Frontend/views/partials/portal-doc-table.php:35
 msgid "Signed"
 msgstr ""
 
 #: includes/Frontend/views/portal-document.php:89
+#: includes/Frontend/views/portal-document.php:101
 #: includes/Signature/CertificatePage.php:41
 msgid "Signed at"
 msgstr ""
@@ -2143,7 +2157,9 @@ msgstr ""
 #: includes/Admin/views/analytics.php:86
 #: includes/Admin/views/health.php:37
 #: includes/Frontend/views/partials/portal-doc-table.php:21
+#: includes/Frontend/views/partials/portal-doc-table.php:34
 #: includes/Frontend/views/portal-document.php:88
+#: includes/Frontend/views/portal-document.php:100
 msgid "Status"
 msgstr ""
 

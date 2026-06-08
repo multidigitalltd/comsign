@@ -46,7 +46,7 @@ require __DIR__ . '/partials/portal-nav.php';
 
 			<section class="comsign-editor-main" aria-labelledby="comsign-members-h">
 				<h2 id="comsign-members-h"><?php esc_html_e( 'Workspace members', 'comsign' ); ?></h2>
-				<table class="comsign-portal-table">
+				<table class="comsign-portal-table comsign-cards-on-mobile">
 					<thead>
 						<tr>
 							<th scope="col"><?php esc_html_e( 'Name', 'comsign' ); ?></th>
@@ -58,9 +58,9 @@ require __DIR__ . '/partials/portal-nav.php';
 					<tbody>
 						<?php foreach ( $members as $m ) : ?>
 							<tr>
-								<td><?php echo esc_html( $m['name'] ? $m['name'] : '—' ); ?></td>
-								<td><?php echo esc_html( $m['email'] ); ?></td>
-								<td>
+								<td data-label="<?php esc_attr_e( 'Name', 'comsign' ); ?>"><?php echo esc_html( $m['name'] ? $m['name'] : '—' ); ?></td>
+								<td data-label="<?php esc_attr_e( 'Email', 'comsign' ); ?>"><?php echo esc_html( $m['email'] ); ?></td>
+								<td data-label="<?php esc_attr_e( 'Role', 'comsign' ); ?>">
 									<form method="post" action="<?php echo esc_url( $action ); ?>" class="comsign-inline-form">
 										<input type="hidden" name="action" value="comsign_portal_member_role">
 										<input type="hidden" name="_wpnonce" value="<?php echo esc_attr( $nonce ); ?>">
@@ -89,7 +89,7 @@ require __DIR__ . '/partials/portal-nav.php';
 
 				<?php if ( ! empty( $invites ) ) : ?>
 					<h3><?php esc_html_e( 'Pending invitations', 'comsign' ); ?></h3>
-					<table class="comsign-portal-table">
+					<table class="comsign-portal-table comsign-cards-on-mobile">
 						<thead>
 							<tr>
 								<th scope="col"><?php esc_html_e( 'Email', 'comsign' ); ?></th>
@@ -100,8 +100,8 @@ require __DIR__ . '/partials/portal-nav.php';
 						<tbody>
 							<?php foreach ( $invites as $invite ) : ?>
 								<tr>
-									<td><?php echo esc_html( $invite->email ); ?></td>
-									<td><?php echo esc_html( $roles[ $invite->role ] ?? $invite->role ); ?></td>
+									<td data-label="<?php esc_attr_e( 'Email', 'comsign' ); ?>"><?php echo esc_html( $invite->email ); ?></td>
+									<td data-label="<?php esc_attr_e( 'Role', 'comsign' ); ?>"><?php echo esc_html( $roles[ $invite->role ] ?? $invite->role ); ?></td>
 									<td>
 										<form method="post" action="<?php echo esc_url( $action ); ?>" class="comsign-inline-form">
 											<input type="hidden" name="action" value="comsign_portal_member_remove">

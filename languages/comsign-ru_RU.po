@@ -857,8 +857,8 @@ msgstr "Пока нет контактов."
 msgid "No credit card required to start. Cancel anytime."
 msgstr "Для начала не нужна банковская карта. Отмена в любой момент."
 
-msgid "No documents to show. Start by uploading a PDF in the admin."
-msgstr "Нет документов для показа. Начните с загрузки PDF в админке."
+msgid "No documents yet."
+msgstr "Пока нет документов."
 
 msgid "No documents yet. Upload your first PDF to get started."
 msgstr "Пока нет документов. Загрузите первый PDF, чтобы начать."

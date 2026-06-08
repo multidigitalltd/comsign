@@ -62,7 +62,7 @@ require __DIR__ . '/partials/portal-nav.php';
 				<?php if ( empty( $contacts ) ) : ?>
 					<p class="comsign-empty"><?php esc_html_e( 'No contacts yet.', 'comsign' ); ?></p>
 				<?php else : ?>
-					<table class="comsign-portal-table">
+					<table class="comsign-portal-table comsign-cards-on-mobile">
 						<thead>
 							<tr>
 								<th scope="col"><?php esc_html_e( 'Name', 'comsign' ); ?></th>
@@ -74,9 +74,9 @@ require __DIR__ . '/partials/portal-nav.php';
 						<tbody>
 							<?php foreach ( $contacts as $contact ) : ?>
 								<tr>
-									<td><?php echo esc_html( $contact->name ); ?></td>
-									<td><?php echo esc_html( $contact->email ); ?></td>
-									<td><?php echo esc_html( $contact->phone ); ?></td>
+									<td data-label="<?php esc_attr_e( 'Name', 'comsign' ); ?>"><?php echo esc_html( $contact->name ); ?></td>
+									<td data-label="<?php esc_attr_e( 'Email', 'comsign' ); ?>"><?php echo esc_html( $contact->email ); ?></td>
+									<td data-label="<?php esc_attr_e( 'Phone', 'comsign' ); ?>"><?php echo esc_html( $contact->phone ); ?></td>
 									<td>
 										<form method="post" action="<?php echo esc_url( $action ); ?>" class="comsign-inline-form" onsubmit="return confirm('<?php echo esc_js( __( 'Remove this contact?', 'comsign' ) ); ?>');">
 											<input type="hidden" name="action" value="comsign_portal_contact_delete">
