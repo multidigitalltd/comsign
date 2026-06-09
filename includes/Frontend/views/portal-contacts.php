@@ -8,6 +8,8 @@
  * @var array      $nav
  * @var object[]   $contacts
  * @var string     $search
+ * @var int        $used         Contacts saved.
+ * @var int|null   $remaining    Contacts left on the plan (null = unlimited).
  * @var string     $action       admin-post.php URL.
  * @var string     $add_nonce
  * @var string     $delete_nonce
@@ -48,6 +50,18 @@ require __DIR__ . '/partials/portal-nav.php';
 			<section class="comsign-editor-main" aria-labelledby="comsign-contact-list-h">
 				<h2 id="comsign-contact-list-h"><?php esc_html_e( 'Your contacts', 'comsign' ); ?></h2>
 
+				<p class="comsign-template-meta">
+					<?php
+					if ( null === $remaining ) {
+						/* translators: %d: number of contacts saved. */
+						echo esc_html( sprintf( __( '%d saved (unlimited).', 'comsign' ), (int) $used ) );
+					} else {
+						/* translators: 1: saved, 2: remaining. */
+						echo esc_html( sprintf( __( '%1$d saved, %2$d left on your plan.', 'comsign' ), (int) $used, (int) $remaining ) );
+					}
+					?>
+				</p>
+
 				<form method="get" class="comsign-portal-filter" role="search">
 					<input type="hidden" name="comsign_app" value="1">
 					<input type="hidden" name="view" value="contacts">
@@ -78,6 +92,7 @@ require __DIR__ . '/partials/portal-nav.php';
 									<td data-label="<?php esc_attr_e( 'Email', 'comsign' ); ?>"><?php echo esc_html( $contact->email ); ?></td>
 									<td data-label="<?php esc_attr_e( 'Phone', 'comsign' ); ?>"><?php echo esc_html( $contact->phone ); ?></td>
 									<td>
+										<a class="comsign-btn comsign-btn--small" href="<?php echo esc_url( \ComSign\Frontend\PortalController::url( array( 'view' => 'contact', 'contact' => (int) $contact->id ) ) ); ?>"><?php esc_html_e( 'Documents', 'comsign' ); ?></a>
 										<form method="post" action="<?php echo esc_url( $action ); ?>" class="comsign-inline-form" onsubmit="return confirm('<?php echo esc_js( __( 'Remove this contact?', 'comsign' ) ); ?>');">
 											<input type="hidden" name="action" value="comsign_portal_contact_delete">
 											<input type="hidden" name="_wpnonce" value="<?php echo esc_attr( $delete_nonce ); ?>">

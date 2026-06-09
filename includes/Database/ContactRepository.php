@@ -122,6 +122,19 @@ final class ContactRepository {
 	}
 
 	/**
+	 * Number of contacts in a single workspace (for plan-limit checks).
+	 */
+	public function count_for_account( int $account_id ): int {
+		global $wpdb;
+		if ( $account_id <= 0 ) {
+			return 0;
+		}
+		return (int) $wpdb->get_var( // phpcs:ignore WordPress.DB.DirectDatabaseQuery, WordPress.DB.PreparedSQL.NotPrepared
+			$wpdb->prepare( 'SELECT COUNT(*) FROM ' . Installer::contacts_table() . ' WHERE account_id = %d', $account_id )
+		);
+	}
+
+	/**
 	 * Fetch a contact by id.
 	 */
 	public function find( int $id ): ?object {

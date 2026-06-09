@@ -5,6 +5,9 @@ msgstr ""
 msgid "%1$d of %2$d signed"
 msgstr "Подписано %1$d из %2$d"
 
+msgid "%1$d saved, %2$d left on your plan."
+msgstr "%1$d сохранено, %2$d осталось по вашему тарифу."
+
 msgid "%1$d used, %2$d remaining."
 msgstr "Использовано: %1$d, осталось: %2$d."
 
@@ -13,6 +16,9 @@ msgstr "%d документов / месяц"
 
 msgid "%d documents used (unlimited)."
 msgstr "Использовано документов: %d (без ограничений)."
+
+msgid "%d saved (unlimited)."
+msgstr "%d сохранено (без ограничений)."
 
 msgid "%s (copy)"
 msgstr "%s (копия)"
@@ -211,6 +217,9 @@ msgstr "Автоматические напоминания"
 
 msgid "Avg. time to complete"
 msgstr "Среднее время завершения"
+
+msgid "Back to contacts"
+msgstr "Назад к контактам"
 
 msgid "Back to documents"
 msgstr "Назад к документам"
@@ -595,6 +604,9 @@ msgstr "Документы"
 
 msgid "Documents by status"
 msgstr "Документы по статусу"
+
+msgid "Documents signed"
+msgstr "Подписанные документы"
 
 msgid "Done:"
 msgstr "Готово:"
@@ -1520,6 +1532,9 @@ msgstr "Подписанная копия"
 msgid "Signed document"
 msgstr "Подписанный документ"
 
+msgid "Signed on"
+msgstr "Подписано"
+
 msgid "Signed successfully"
 msgstr "Успешно подписано"
 
@@ -1720,6 +1735,9 @@ msgstr "Эти люди получают полностью подписанны
 
 msgid "These signers have no fields yet: %s. Open \\\"Place signature fields\\\"."
 msgstr "У этих подписантов пока нет полей: %s. Откройте \\\"Разместить поля подписи\\\"."
+
+msgid "This contact hasn’t signed any documents in this workspace yet."
+msgstr "Этот контакт ещё не подписал ни одного документа в этом рабочем пространстве."
 
 msgid "This document does not allow assigning to someone else."
 msgstr "Этот документ не разрешает передачу другому человеку."
@@ -2074,6 +2092,9 @@ msgstr "Вы отказались подписывать этот докумен
 
 msgid "You have declined to sign this document. The sender has been notified."
 msgstr "Вы отказались подписывать этот документ. Отправитель уведомлён."
+
+msgid "You have reached your plan’s contact limit. Upgrade your plan to add more contacts."
+msgstr "Вы достигли лимита контактов вашего тарифа. Перейдите на более высокий тариф, чтобы добавить больше контактов."
 
 msgid "You have reached your plan’s monthly document limit. Upgrade your plan to send more."
 msgstr "Вы достигли месячного лимита документов вашего тарифа. Перейдите на тариф выше, чтобы отправлять больше."

@@ -10,6 +10,7 @@ namespace ComSign\Services;
 defined( 'ABSPATH' ) || exit;
 
 use ComSign\Billing\Plans;
+use ComSign\Database\ContactRepository;
 use ComSign\Database\DocumentRepository;
 use ComSign\Database\SubscriptionRepository;
 
@@ -152,6 +153,39 @@ final class SubscriptionService {
 			return null; // unlimited
 		}
 		return max( 0, $limit - $this->documents_used( $account_id ) );
+	}
+
+	/**
+	 * Contacts saved in the workspace's address book.
+	 */
+	public function contacts_used( int $account_id ): int {
+		return ( new ContactRepository() )->count_for_account( $account_id );
+	}
+
+	/**
+	 * Remaining address-book contacts this plan allows, or null when unlimited.
+	 */
+	public function contacts_remaining( int $account_id ): ?int {
+		if ( ! $this->is_managed( $account_id ) ) {
+			return null; // unmanaged/legacy workspaces have no cap
+		}
+		$limit = Plans::limit( $this->plan_id( $account_id ), Plans::LIMIT_CONTACTS );
+		if ( $limit <= 0 ) {
+			return null; // unlimited
+		}
+		return max( 0, $limit - $this->contacts_used( $account_id ) );
+	}
+
+	/**
+	 * Throw a user-facing error if the account is at its contact limit.
+	 *
+	 * @throws \RuntimeException When the address book is full for the plan.
+	 */
+	public function assert_can_add_contact( int $account_id ): void {
+		$remaining = $this->contacts_remaining( $account_id );
+		if ( null !== $remaining && $remaining <= 0 ) {
+			throw new \RuntimeException( __( 'You have reached your plan’s contact limit. Upgrade your plan to add more contacts.', 'comsign' ) );
+		}
 	}
 
 	/**

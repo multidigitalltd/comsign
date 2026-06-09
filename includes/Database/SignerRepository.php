@@ -90,6 +90,41 @@ final class SignerRepository {
 	}
 
 	/**
+	 * Documents that a given email address has signed, within a set of
+	 * workspaces. Used to show a contact's signing history.
+	 *
+	 * @param string $email       Signer email.
+	 * @param int[]  $account_ids Workspace ids to scope to.
+	 *
+	 * @return object[] Document rows (newest first), each with a signed_at.
+	 */
+	public function documents_signed_by_email( string $email, array $account_ids ): array {
+		global $wpdb;
+		$email = trim( $email );
+		if ( '' === $email || empty( $account_ids ) ) {
+			return array();
+		}
+
+		$documents = Installer::documents_table();
+		$signers   = Installer::signers_table();
+		$ids       = array_map( 'intval', $account_ids );
+		$place     = implode( ',', array_fill( 0, count( $ids ), '%d' ) );
+
+		// phpcs:disable WordPress.DB.PreparedSQL.InterpolatedNotPrepared
+		$sql = $wpdb->prepare(
+			"SELECT d.*, s.signed_at AS signed_at FROM {$documents} d
+			 INNER JOIN {$signers} s ON s.document_id = d.id
+			 WHERE s.email = %s AND s.status = %s AND d.account_id IN ( {$place} )
+			 ORDER BY s.signed_at DESC, d.id DESC
+			 LIMIT 200",
+			array_merge( array( $email, self::STATUS_SIGNED ), $ids )
+		);
+		// phpcs:enable WordPress.DB.PreparedSQL.InterpolatedNotPrepared
+
+		return (array) $wpdb->get_results( $sql ); // phpcs:ignore WordPress.DB.DirectDatabaseQuery, WordPress.DB.PreparedSQL.NotPrepared
+	}
+
+	/**
 	 * Update columns on a signer.
 	 *
 	 * @param int   $id   Signer id.

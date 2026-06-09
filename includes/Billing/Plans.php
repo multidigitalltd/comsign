@@ -31,6 +31,7 @@ final class Plans {
 	public const LIMIT_DOCS_PER_MONTH = 'docs_per_month';
 	public const LIMIT_SEATS          = 'seats';
 	public const LIMIT_STORAGE_MB     = 'storage_mb';
+	public const LIMIT_CONTACTS       = 'contacts';
 
 	/**
 	 * Currency the prices are expressed in (ISO 4217).
@@ -54,6 +55,7 @@ final class Plans {
 					self::LIMIT_DOCS_PER_MONTH => 20,
 					self::LIMIT_SEATS          => 1,
 					self::LIMIT_STORAGE_MB     => 1000,
+					self::LIMIT_CONTACTS       => 100,
 				),
 				'features'   => array(),
 			),
@@ -65,6 +67,7 @@ final class Plans {
 					self::LIMIT_DOCS_PER_MONTH => 200,
 					self::LIMIT_SEATS          => 5,
 					self::LIMIT_STORAGE_MB     => 10000,
+					self::LIMIT_CONTACTS       => 2000,
 				),
 				'features'   => array( self::FEATURE_PKI, self::FEATURE_BRANDING ),
 			),
@@ -76,6 +79,7 @@ final class Plans {
 					self::LIMIT_DOCS_PER_MONTH => 0, // unlimited
 					self::LIMIT_SEATS          => 25,
 					self::LIMIT_STORAGE_MB     => 100000,
+					self::LIMIT_CONTACTS       => 0, // unlimited
 				),
 				'features'   => array( self::FEATURE_PKI, self::FEATURE_BRANDING, self::FEATURE_API, self::FEATURE_WEBHOOKS ),
 			),

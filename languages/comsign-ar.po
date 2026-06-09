@@ -5,6 +5,9 @@ msgstr ""
 msgid "%1$d of %2$d signed"
 msgstr "تم توقيع %1$d من %2$d"
 
+msgid "%1$d saved, %2$d left on your plan."
+msgstr "%1$d محفوظ، %2$d متبقٍ في باقتك."
+
 msgid "%1$d used, %2$d remaining."
 msgstr "%1$d مُستخدمة، %2$d متبقية."
 
@@ -13,6 +16,9 @@ msgstr "%d مستندات / شهر"
 
 msgid "%d documents used (unlimited)."
 msgstr "%d مستندات مُستخدمة (غير محدود)."
+
+msgid "%d saved (unlimited)."
+msgstr "%d محفوظ (غير محدود)."
 
 msgid "%s (copy)"
 msgstr "%s (نسخة)"
@@ -211,6 +217,9 @@ msgstr "التذكيرات التلقائية"
 
 msgid "Avg. time to complete"
 msgstr "متوسط وقت الإكمال"
+
+msgid "Back to contacts"
+msgstr "العودة إلى جهات الاتصال"
 
 msgid "Back to documents"
 msgstr "العودة إلى المستندات"
@@ -595,6 +604,9 @@ msgstr "المستندات"
 
 msgid "Documents by status"
 msgstr "المستندات حسب الحالة"
+
+msgid "Documents signed"
+msgstr "المستندات الموقّعة"
 
 msgid "Done:"
 msgstr "تم:"
@@ -1520,6 +1532,9 @@ msgstr "نسخة موقّعة"
 msgid "Signed document"
 msgstr "مستند موقّع"
 
+msgid "Signed on"
+msgstr "تاريخ التوقيع"
+
 msgid "Signed successfully"
 msgstr "تم التوقيع بنجاح"
 
@@ -1720,6 +1735,9 @@ msgstr "يتلقى هؤلاء الأشخاص ملف PDF الموقّع بالك�
 
 msgid "These signers have no fields yet: %s. Open \\\"Place signature fields\\\"."
 msgstr "هؤلاء الموقّعون ليس لديهم حقول بعد: %s. افتح \\\"وضع حقول التوقيع\\\"."
+
+msgid "This contact hasn’t signed any documents in this workspace yet."
+msgstr "لم توقّع جهة الاتصال هذه أي مستندات في مساحة العمل هذه بعد."
 
 msgid "This document does not allow assigning to someone else."
 msgstr "لا يسمح هذا المستند بالإحالة إلى شخص آخر."
@@ -2074,6 +2092,9 @@ msgstr "لقد رفضت توقيع هذا المستند."
 
 msgid "You have declined to sign this document. The sender has been notified."
 msgstr "لقد رفضت توقيع هذا المستند. تم إشعار المُرسِل."
+
+msgid "You have reached your plan’s contact limit. Upgrade your plan to add more contacts."
+msgstr "لقد وصلت إلى حدّ جهات الاتصال في باقتك. قم بترقية باقتك لإضافة المزيد من جهات الاتصال."
 
 msgid "You have reached your plan’s monthly document limit. Upgrade your plan to send more."
 msgstr "لقد بلغت الحد الشهري للمستندات في باقتك. قم بترقية باقتك لإرسال المزيد."

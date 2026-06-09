@@ -94,3 +94,53 @@ Test::add( 'contacts: delete is account-scoped (IDOR guard)', static function ()
 	$admin_visible = array_map( 'intval', $accounts->visible_account_ids( 1 ) );
 	Test::ok( in_array( (int) $contact->account_id, $admin_visible, true ), 'account member may delete it' );
 } );
+
+Test::add( 'contacts: count + per-plan limit', static function (): void {
+	reset_tables();
+	$repo    = new ContactRepository();
+	$subs    = new \ComSign\Services\SubscriptionService();
+	$account = ( new AccountService() )->default_account_id();
+
+	Test::equals( 0, $repo->count_for_account( $account ), 'empty book counts zero' );
+	$repo->upsert( $account, 'A', 'a@example.com', '' );
+	$repo->upsert( $account, 'B', 'b@example.com', '' );
+	Test::equals( 2, $repo->count_for_account( $account ), 'counts two contacts' );
+
+	// Cap the plan at 2 contacts via the plans filter and start a managed trial.
+	add_filter( 'comsign_plans', $cap = static function ( $plans ) {
+		if ( isset( $plans['solo'] ) ) {
+			$plans['solo']['limits'][ \ComSign\Billing\Plans::LIMIT_CONTACTS ] = 2;
+		}
+		return $plans;
+	} );
+	$subs->start_trial( $account, 'solo' );
+
+	Test::equals( 0, $subs->contacts_remaining( $account ), 'no room left at the cap' );
+	Test::throws( static function () use ( $subs, $account ): void {
+		$subs->assert_can_add_contact( $account );
+	}, 'adding past the cap is refused' );
+
+	remove_filter( 'comsign_plans', $cap );
+} );
+
+Test::add( 'contacts: signing history by email', static function (): void {
+	reset_tables();
+	$svc     = new DocumentService();
+	$signers = new \ComSign\Database\SignerRepository();
+	$account = ( new AccountService() )->default_account_id();
+
+	// A document signed by dana@.
+	$doc_id = $svc->create_from_text( 'Lease', '<p>x</p>', array() );
+	$sid    = $svc->add_signer( $doc_id, 'Dana', 'dana@example.com' );
+	$signers->update( $sid, array( 'status' => \ComSign\Database\SignerRepository::STATUS_SIGNED, 'signed_at' => gmdate( 'Y-m-d H:i:s' ) ) );
+
+	// A second document only sent (not signed) to the same email.
+	$doc2 = $svc->create_from_text( 'Draft', '<p>y</p>', array() );
+	$svc->add_signer( $doc2, 'Dana', 'dana@example.com' );
+
+	$found = $signers->documents_signed_by_email( 'dana@example.com', array( $account ) );
+	Test::equals( 1, count( $found ), 'only the signed document is returned' );
+	Test::equals( $doc_id, (int) $found[0]->id, 'it is the signed lease' );
+
+	Test::equals( 0, count( $signers->documents_signed_by_email( 'nobody@example.com', array( $account ) ) ), 'unknown email has no history' );
+} );

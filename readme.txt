@@ -4,7 +4,7 @@ Tags: signature, digital signature, pdf, esignature, hebrew
 Requires at least: 6.0
 Tested up to: 6.5
 Requires PHP: 7.4
-Stable tag: 0.56.0
+Stable tag: 0.57.0
 License: GPL-2.0-or-later
 License URI: https://www.gnu.org/licenses/gpl-2.0.html
 
@@ -105,6 +105,13 @@ ID and its SHA-256 code (shown on the document screen and the signature
 certificate) to confirm the document is authentic and see who signed it.
 
 == Changelog ==
+
+= 0.57.0 =
+* New: open a contact to see every document in the workspace that contact has
+  signed, with the signing date — straight from the Contacts screen.
+* New: per-plan contact limits. The Contacts screen shows how many you've saved
+  and how many your plan allows; adding past the limit prompts an upgrade
+  (Solo 100, Business 2,000, Enterprise unlimited).
 
 = 0.56.0 =
 * New: "Form / questionnaire" document type. Define questions (short text,

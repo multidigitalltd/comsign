@@ -723,6 +723,8 @@ final class PortalController {
 			$this->render_edit( $user_id, $account_ids );
 		} elseif ( 'contacts' === $view ) {
 			$this->render_contacts( $user_id, $account_ids );
+		} elseif ( 'contact' === $view ) {
+			$this->render_contact( $user_id, $account_ids );
 		} elseif ( 'billing' === $view ) {
 			$this->render_billing( $user_id, $account_ids );
 		} elseif ( 'team' === $view ) {
@@ -867,7 +869,9 @@ final class PortalController {
 			);
 		}
 
-		$search = isset( $_GET['cs'] ) ? sanitize_text_field( wp_unslash( $_GET['cs'] ) ) : ''; // phpcs:ignore WordPress.Security.NonceVerification.Recommended
+		$search  = isset( $_GET['cs'] ) ? sanitize_text_field( wp_unslash( $_GET['cs'] ) ) : ''; // phpcs:ignore WordPress.Security.NonceVerification.Recommended
+		$account = $this->working_account_id( $user_id );
+		$subs    = new SubscriptionService();
 
 		$this->render(
 			'portal-contacts',
@@ -876,10 +880,45 @@ final class PortalController {
 				'nav'           => $this->nav( 'contacts', $user_id ),
 				'contacts'      => $this->contacts->for_accounts( $this->working_scope( $user_id ), $search, 300 ),
 				'search'        => $search,
+				'used'          => $subs->contacts_used( $account ),
+				'remaining'     => $subs->contacts_remaining( $account ),
 				'action'        => admin_url( 'admin-post.php' ),
 				'add_nonce'     => wp_create_nonce( 'comsign_portal_contact_add' ),
 				'delete_nonce'  => wp_create_nonce( 'comsign_portal_contact_delete' ),
 				'switcher'      => $this->switcher( $user_id ),
+			)
+		);
+	}
+
+	/**
+	 * A single contact's signing history: every document in the workspace that
+	 * this contact (matched by email) has signed.
+	 *
+	 * @param int   $user_id     Current user.
+	 * @param int[] $account_ids Visible accounts.
+	 */
+	private function render_contact( int $user_id, array $account_ids ): void {
+		if ( ! $this->can_create( $user_id ) ) {
+			$this->bounce( self::url(), __( 'Your role in this workspace does not allow managing contacts.', 'comsign' ) );
+		}
+
+		$id      = isset( $_GET['contact'] ) ? absint( wp_unslash( $_GET['contact'] ) ) : 0; // phpcs:ignore WordPress.Security.NonceVerification.Recommended
+		$contact = $id ? $this->contacts->find( $id ) : null;
+		$scope   = $this->working_scope( $user_id );
+
+		// The contact must belong to the workspace being managed.
+		if ( ! $contact || empty( $scope ) || (int) $contact->account_id !== (int) $scope[0] ) {
+			$this->bounce( self::url( array( 'view' => 'contacts' ) ), __( 'That contact could not be found in your workspace.', 'comsign' ) );
+		}
+
+		$this->render(
+			'portal-contact',
+			array(
+				'page_title' => $contact->name ? $contact->name : $contact->email,
+				'nav'        => $this->nav( 'contacts', $user_id ),
+				'contact'    => $contact,
+				'documents'  => $this->signers->documents_signed_by_email( (string) $contact->email, $scope ),
+				'switcher'   => $this->switcher( $user_id ),
 			)
 		);
 	}
@@ -901,11 +940,40 @@ final class PortalController {
 		$phone = isset( $_POST['phone'] ) ? sanitize_text_field( wp_unslash( $_POST['phone'] ) ) : '';
 
 		$target = self::url( array( 'view' => 'contacts' ) );
+
+		// New contacts are gated by the plan's address-book limit (updates to an
+		// existing contact are always allowed — they don't grow the book).
+		if ( 0 === $this->contacts->count_for_account( $account_id )
+			|| ! $this->contact_exists( $account_id, $email ) ) {
+			try {
+				( new SubscriptionService() )->assert_can_add_contact( $account_id );
+			} catch ( \Throwable $e ) {
+				$this->bounce( $target, $e->getMessage() );
+			}
+		}
+
 		if ( 0 === $this->contacts->upsert( $account_id, $name, $email, $phone ) ) {
 			$this->bounce( $target, __( 'Please provide a valid email address for the contact.', 'comsign' ) );
 		}
 
 		$this->bounce( $target, __( 'Contact saved.', 'comsign' ), 'success' );
+	}
+
+	/**
+	 * Whether a contact with this email already exists in the workspace (so an
+	 * upsert would update rather than add a new row).
+	 */
+	private function contact_exists( int $account_id, string $email ): bool {
+		$email = sanitize_email( $email );
+		if ( '' === $email ) {
+			return false;
+		}
+		foreach ( $this->contacts->for_accounts( array( $account_id ), $email, 5 ) as $c ) {
+			if ( strtolower( (string) $c->email ) === strtolower( $email ) ) {
+				return true;
+			}
+		}
+		return false;
 	}
 
 	/**
