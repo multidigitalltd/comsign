@@ -1,0 +1,18 @@
+# Node
+node_modules/
+
+# OS / editor
+.DS_Store
+Thumbs.db
+*.swp
+.idea/
+.vscode/
+
+# Build / logs
+*.log
+
+# Local env
+.env
+
+# NOTE: vendor/ is intentionally committed so the plugin runs standalone
+# (no Composer build step required on the target WordPress site).

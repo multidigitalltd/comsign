@@ -1,0 +1,39 @@
+/**
+ * ComSign public pricing table ([comsign_pricing]). Self-contained so it renders
+ * cleanly inside any theme.
+ */
+.comsign-pricing { margin: 24px 0; }
+.comsign-pricing-grid {
+	display: grid;
+	grid-template-columns: repeat( auto-fit, minmax( 240px, 1fr ) );
+	gap: 20px;
+}
+.comsign-pricing-card {
+	border: 1px solid var( --comsign-border, #d6d9de );
+	border-radius: var( --comsign-radius, 10px );
+	padding: 24px;
+	background: var( --comsign-surface, #fff );
+	text-align: center;
+	display: flex;
+	flex-direction: column;
+}
+.comsign-pricing-card h3 { margin: 0 0 8px; font-size: 1.25em; }
+.comsign-pricing-amount { font-size: 2em; font-weight: 700; margin: 8px 0 0; }
+.comsign-pricing-per { font-size: 0.5em; font-weight: 400; color: var( --comsign-muted, #6b7280 ); }
+.comsign-pricing-annual { color: var( --comsign-muted, #6b7280 ); margin: 4px 0 16px; }
+.comsign-pricing-features { list-style: none; padding: 0; margin: 0 0 20px; text-align: start; }
+.comsign-pricing-features li { padding: 6px 0; border-bottom: 1px solid #f0f0f2; }
+.comsign-pricing-cta {
+	display: inline-block;
+	margin-top: auto;
+	padding: 12px 20px;
+	background: var( --comsign-primary, #0b3d91 );
+	color: var( --comsign-on-primary, #fff );
+	border-radius: var( --comsign-radius-sm, 8px );
+	text-decoration: none;
+	font-weight: 700;
+	min-height: 44px;
+}
+.comsign-pricing-cta:hover,
+.comsign-pricing-cta:focus { opacity: 0.92; color: #fff; }
+.comsign-pricing-note { text-align: center; color: var( --comsign-muted, #6b7280 ); margin-top: 16px; }

@@ -1,0 +1,115 @@
+/**
+ * ComSign design tokens + accessibility base.
+ *
+ * Loaded before admin.css and signing.css so every surface (WP-Admin screens
+ * and the standalone public/portal pages) shares one palette, spacing scale,
+ * radius, shadow and focus treatment. Everything is scoped to ComSign
+ * containers (.comsign-wrap, .comsign-portal, .comsign-public) so we never
+ * restyle the rest of WP-Admin.
+ */
+
+:root {
+	/* Brand. --comsign-accent is injected per-site (Branding); these fall back. */
+	--comsign-primary: var( --comsign-accent, #0b3d91 );
+	--comsign-primary-strong: var( --comsign-accent, #2563eb );
+	--comsign-on-primary: #ffffff;
+
+	/* Neutrals (text/muted chosen to clear WCAG AA 4.5:1 on white). */
+	--comsign-surface: #ffffff;
+	--comsign-bg: #f4f6f9;
+	--comsign-border: #d6d9de;
+	--comsign-text: #1d2327;
+	--comsign-muted: #595f6b;
+
+	/* Semantic. Foreground colours are AA-contrast on their *-bg tints. */
+	--comsign-success: #15803d;
+	--comsign-success-bg: #f0fdf4;
+	--comsign-warning: #b45309;
+	--comsign-warning-bg: #fffbeb;
+	--comsign-danger: #b91c1c;
+	--comsign-danger-bg: #fef2f2;
+
+	/* Spacing scale. */
+	--comsign-space-1: 4px;
+	--comsign-space-2: 8px;
+	--comsign-space-3: 12px;
+	--comsign-space-4: 16px;
+	--comsign-space-5: 24px;
+	--comsign-space-6: 32px;
+
+	/* Radius + shadow. */
+	--comsign-radius-sm: 6px;
+	--comsign-radius: 10px;
+	--comsign-radius-pill: 999px;
+	--comsign-shadow: 0 1px 2px rgba( 16, 24, 40, 0.06 ), 0 1px 3px rgba( 16, 24, 40, 0.1 );
+
+	/* Keyboard focus ring. */
+	--comsign-focus: #2563eb;
+}
+
+/* ---- Accessibility base ---- */
+
+/* Visible focus for keyboard users only (mouse clicks stay clean). */
+.comsign-wrap a:focus-visible,
+.comsign-wrap button:focus-visible,
+.comsign-wrap input:focus-visible,
+.comsign-wrap select:focus-visible,
+.comsign-wrap textarea:focus-visible,
+.comsign-wrap [tabindex]:focus-visible,
+.comsign-portal a:focus-visible,
+.comsign-portal button:focus-visible,
+.comsign-portal input:focus-visible,
+.comsign-portal select:focus-visible,
+.comsign-portal textarea:focus-visible,
+.comsign-portal [tabindex]:focus-visible,
+.comsign-public a:focus-visible,
+.comsign-public button:focus-visible,
+.comsign-public input:focus-visible,
+.comsign-public select:focus-visible,
+.comsign-public textarea:focus-visible,
+.comsign-public [tabindex]:focus-visible {
+	outline: 2px solid var( --comsign-focus );
+	outline-offset: 2px;
+	border-radius: var( --comsign-radius-sm );
+}
+
+/* Visually-hidden text that remains available to screen readers. */
+.comsign-sr-only {
+	position: absolute !important;
+	width: 1px;
+	height: 1px;
+	padding: 0;
+	margin: -1px;
+	overflow: hidden;
+	clip: rect( 0, 0, 0, 0 );
+	white-space: nowrap;
+	border: 0;
+}
+
+/* Skip-to-content link: off-screen until focused. */
+.comsign-skip-link {
+	position: absolute;
+	inset-inline-start: -9999px;
+	top: 0;
+	z-index: 100;
+	padding: var( --comsign-space-2 ) var( --comsign-space-4 );
+	background: var( --comsign-primary );
+	color: var( --comsign-on-primary );
+	border-radius: 0 0 var( --comsign-radius-sm ) var( --comsign-radius-sm );
+	text-decoration: none;
+}
+.comsign-skip-link:focus {
+	inset-inline-start: var( --comsign-space-2 );
+}
+
+/* Respect reduced-motion within ComSign surfaces. */
+@media ( prefers-reduced-motion: reduce ) {
+	.comsign-wrap *,
+	.comsign-portal *,
+	.comsign-public * {
+		animation-duration: 0.001ms !important;
+		animation-iteration-count: 1 !important;
+		transition-duration: 0.001ms !important;
+		scroll-behavior: auto !important;
+	}
+}

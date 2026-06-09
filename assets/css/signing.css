@@ -1,0 +1,731 @@
+/* ComSign public signing page. Self-contained, RTL-aware via [dir]. */
+
+:root {
+	/* --comsign-accent is injected per-site (Branding); falls back to default. */
+	--comsign-primary: var(--comsign-accent, #0b3d91);
+	--comsign-border: #d6d9de;
+	--comsign-bg: #f4f6f9;
+	--comsign-text: #1d2327;
+}
+
+.comsign-brand-logo {
+	max-height: 44px;
+	max-width: 240px;
+	width: auto;
+	display: block;
+}
+
+* { box-sizing: border-box; }
+
+body.comsign-public {
+	margin: 0;
+	font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Rubik, Arial, sans-serif;
+	background: var(--comsign-bg);
+	color: var(--comsign-text);
+	line-height: 1.6;
+}
+
+.comsign-shell {
+	max-width: 860px;
+	margin: 0 auto;
+	padding: 24px 16px 48px;
+}
+
+.comsign-public-header {
+	padding: 12px 0 20px;
+	border-bottom: 1px solid var(--comsign-border);
+	margin-bottom: 24px;
+}
+
+.comsign-brand {
+	font-weight: 700;
+	font-size: 18px;
+	color: var(--comsign-primary);
+}
+
+.comsign-card {
+	background: #fff;
+	border: 1px solid var(--comsign-border);
+	border-radius: 10px;
+	padding: 20px;
+	margin-bottom: 20px;
+	box-shadow: 0 1px 3px rgba( 0, 0, 0, 0.04 );
+}
+
+.comsign-sign h1 { margin-top: 0; }
+.comsign-intro { color: #50575e; }
+
+/* Document viewer */
+.comsign-doc-viewer {
+	border: 1px solid var(--comsign-border);
+	border-radius: 10px;
+	overflow: hidden;
+	background: #525659;
+	margin-bottom: 20px;
+}
+
+.comsign-doc-viewer iframe {
+	display: block;
+	width: 100%;
+	height: 60vh;
+	border: 0;
+}
+
+/* Tabs */
+.comsign-tabs {
+	display: flex;
+	gap: 4px;
+	margin-bottom: 12px;
+}
+
+.comsign-tab {
+	border: 1px solid var(--comsign-border);
+	background: #fff;
+	padding: 8px 18px;
+	border-radius: 8px;
+	cursor: pointer;
+	font: inherit;
+}
+
+.comsign-tab.is-active {
+	background: var(--comsign-primary);
+	color: #fff;
+	border-color: var(--comsign-primary);
+}
+
+/* Signature canvases */
+.comsign-canvas {
+	width: 100%;
+	height: 200px;
+	border: 2px dashed var(--comsign-border);
+	border-radius: 8px;
+	background: repeating-linear-gradient( 45deg, #fafbfc, #fafbfc 10px, #fff 10px, #fff 20px );
+	touch-action: none;
+}
+
+.comsign-input {
+	width: 100%;
+	padding: 10px 12px;
+	border: 1px solid var(--comsign-border);
+	border-radius: 8px;
+	font: inherit;
+	margin-bottom: 10px;
+}
+
+.comsign-link {
+	background: none;
+	border: 0;
+	color: var(--comsign-primary);
+	cursor: pointer;
+	padding: 4px 0;
+	font: inherit;
+	text-decoration: underline;
+}
+
+/* Consent + actions */
+.comsign-consent {
+	display: flex;
+	gap: 10px;
+	align-items: flex-start;
+	margin-bottom: 16px;
+}
+
+.comsign-consent input { margin-top: 5px; }
+
+.comsign-actions {
+	display: flex;
+	gap: 10px;
+	flex-wrap: wrap;
+}
+
+.comsign-btn {
+	border: 0;
+	border-radius: 8px;
+	padding: 12px 24px;
+	font: inherit;
+	font-weight: 600;
+	cursor: pointer;
+}
+
+.comsign-btn--primary { background: var(--comsign-primary); color: #fff; }
+.comsign-btn--ghost { background: #fff; border: 1px solid var(--comsign-border); }
+.comsign-btn--danger { background: #a02222; color: #fff; }
+
+.comsign-error { color: #a02222; font-weight: 600; }
+
+/* Messages */
+.comsign-message { text-align: center; padding: 40px 20px; }
+.comsign-message--success h1 { color: #0a6b27; }
+
+.comsign-public-footer {
+	text-align: center;
+	color: #8c8f94;
+	font-size: 13px;
+	padding-top: 16px;
+}
+
+.is-hidden { display: none !important; }
+
+@media ( max-width: 600px ) {
+	.comsign-doc-viewer iframe { height: 50vh; }
+}
+
+/* Identity challenge (access code / email OTP) */
+.comsign-auth__error {
+	background: #fde8e8;
+	color: #8a1f1f;
+	border: 1px solid #f3b1b1;
+	border-radius: 6px;
+	padding: 10px 12px;
+	margin: 12px 0;
+}
+.comsign-auth__form input[type="text"] {
+	font-size: 1.4em;
+	letter-spacing: 0.3em;
+	padding: 10px 12px;
+	width: 100%;
+	max-width: 240px;
+	box-sizing: border-box;
+}
+.comsign-auth__resend {
+	margin-top: 8px;
+}
+.comsign-link-button {
+	background: none;
+	border: none;
+	color: #2271b1;
+	cursor: pointer;
+	padding: 0;
+	text-decoration: underline;
+	font: inherit;
+}
+
+/* Required signer fields */
+.comsign-required .comsign-input,
+.comsign-required .comsign-check {
+	box-shadow: 0 0 0 2px #f0b429;
+	border-radius: 4px;
+}
+
+/* Signer file-upload field */
+.comsign-file-label {
+	display: block;
+	font-weight: 600;
+	margin-bottom: 4px;
+}
+.comsign-file {
+	display: block;
+	margin-top: 6px;
+	font-weight: 400;
+}
+
+/* ---- 0.15.0 signer UX: labels, help, inline errors, mobile ---- */
+.comsign-required-legend {
+	color: #6b7280;
+	font-size: 0.85em;
+	margin: 0 0 12px;
+}
+.comsign-field-row {
+	margin: 0 0 16px;
+}
+.comsign-field-caption {
+	display: block;
+	font-weight: 600;
+	margin-bottom: 4px;
+}
+.comsign-req {
+	color: #b91c1c;
+}
+.comsign-field-help {
+	color: #6b7280;
+	font-size: 0.85em;
+	margin: 4px 0 0;
+}
+.comsign-field-error {
+	color: #b91c1c;
+	font-size: 0.85em;
+	margin: 4px 0 0;
+}
+.comsign-row-invalid .comsign-input,
+.comsign-row-invalid .comsign-file,
+.comsign-row-invalid .comsign-check {
+	box-shadow: 0 0 0 2px #b91c1c;
+	border-radius: 4px;
+}
+
+/* Collapsible legal text under the plain-language consent */
+.comsign-legal {
+	margin: 4px 0 16px;
+	font-size: 0.9em;
+}
+.comsign-legal summary {
+	cursor: pointer;
+	color: #2563eb;
+}
+.comsign-legal p {
+	color: #4b5563;
+	margin: 8px 0 0;
+}
+
+/* Touch-friendly controls (>=44px tap targets) */
+.comsign-btn {
+	min-height: 48px;
+}
+.comsign-input,
+.comsign-file {
+	min-height: 44px;
+}
+.comsign-check input,
+.comsign-consent input {
+	width: 22px;
+	height: 22px;
+}
+
+/* Keep the page from scrolling while drawing a signature on touch screens */
+.comsign-canvas {
+	touch-action: none;
+	max-width: 100%;
+}
+
+/* Prominent primary action; decline clearly secondary */
+.comsign-actions {
+	display: flex;
+	flex-wrap: wrap;
+	gap: 12px;
+	align-items: center;
+}
+.comsign-btn--primary {
+	font-weight: 700;
+}
+.comsign-btn--ghost {
+	opacity: 0.85;
+}
+
+/* Mobile-first: vertical layout, full-width actions on small screens */
+@media ( max-width: 600px ) {
+	.comsign-actions {
+		flex-direction: column-reverse;
+		align-items: stretch;
+	}
+	.comsign-actions .comsign-btn {
+		width: 100%;
+	}
+	.comsign-doc-viewer iframe {
+		min-height: 50vh;
+	}
+}
+
+/* ---- Public verification page ---- */
+.comsign-verify-form input[type="text"],
+.comsign-verify-form input[type="number"] {
+	max-width: 100%;
+	min-height: 44px;
+	padding: 8px;
+}
+.comsign-verify-result {
+	margin-top: 16px;
+	padding: 16px;
+	border-radius: 6px;
+}
+.comsign-verify-ok {
+	background: #ecfdf5;
+	border: 1px solid #10b981;
+}
+.comsign-verify-fail {
+	background: #fef2f2;
+	border: 1px solid #ef4444;
+}
+
+/* ---- Client portal (0.20.0) ---- */
+.comsign-portal { max-width: 920px; margin: 0 auto; }
+.comsign-portal-nav {
+	display: flex;
+	justify-content: space-between;
+	align-items: center;
+	flex-wrap: wrap;
+	gap: 12px;
+	max-width: 920px;
+	margin: 0 auto 16px;
+	padding-bottom: 8px;
+	border-bottom: 1px solid #e5e7eb;
+}
+.comsign-portal-links {
+	display: flex;
+	gap: 16px;
+	list-style: none;
+	margin: 0;
+	padding: 0;
+}
+.comsign-portal-links a {
+	text-decoration: none;
+	padding: 8px 4px;
+	font-weight: 600;
+	color: #4b5563;
+	border-bottom: 2px solid transparent;
+}
+.comsign-portal-links a.is-active {
+	color: var(--comsign-accent, #2563eb);
+	border-bottom-color: var(--comsign-accent, #2563eb);
+}
+.comsign-portal-switcher select { min-height: 40px; }
+.comsign-portal-cards {
+	display: flex;
+	flex-wrap: wrap;
+	gap: 12px;
+	margin: 16px 0 24px;
+}
+.comsign-portal-stat {
+	flex: 1 1 120px;
+	background: #f9fafb;
+	border: 1px solid #e5e7eb;
+	border-radius: 8px;
+	padding: 16px;
+	text-align: center;
+}
+.comsign-portal-stat-num { display: block; font-size: 1.8em; font-weight: 700; }
+.comsign-portal-stat-label { color: #6b7280; font-size: 0.85em; }
+.comsign-portal-table { width: 100%; border-collapse: collapse; }
+.comsign-portal-table th, .comsign-portal-table td {
+	text-align: start;
+	padding: 10px 8px;
+	border-bottom: 1px solid #eef2f7;
+}
+.comsign-pill {
+	display: inline-block;
+	padding: 2px 10px;
+	border-radius: 12px;
+	font-size: 0.8em;
+	background: #e5e7eb;
+	color: #374151;
+}
+.comsign-pill--completed, .comsign-pill--signed { background: #dcfce7; color: #166534; }
+.comsign-pill--declined { background: #fee2e2; color: #991b1b; }
+.comsign-pill--sent, .comsign-pill--viewed { background: #dbeafe; color: #1e40af; }
+.comsign-portal-pagination {
+	display: flex;
+	gap: 12px;
+	align-items: center;
+	margin-top: 16px;
+}
+.comsign-empty { color: #6b7280; }
+@media ( max-width: 600px ) {
+	.comsign-portal-table thead { display: none; }
+	.comsign-portal-table, .comsign-portal-table tbody, .comsign-portal-table tr, .comsign-portal-table td { display: block; width: 100%; }
+	.comsign-portal-table tr { border: 1px solid #e5e7eb; border-radius: 8px; margin-bottom: 10px; padding: 6px; }
+	.comsign-portal-table td { border: 0; padding: 4px 8px; }
+}
+
+/* ---- Portal: create flow, actions, flash (0.24.0) ---- */
+.comsign-portal-flash {
+	max-width: 920px;
+	margin: 12px auto 0;
+	padding: 10px 14px;
+	border-radius: 8px;
+	border: 1px solid;
+}
+.comsign-portal-flash.is-success { background: var( --comsign-success-bg, #f0fdf4 ); border-color: var( --comsign-success, #16a34a ); color: var( --comsign-success, #166534 ); }
+.comsign-portal-flash.is-error { background: var( --comsign-danger-bg, #fef2f2 ); border-color: var( --comsign-danger, #dc2626 ); color: var( --comsign-danger, #991b1b ); }
+.comsign-portal-flash.is-warning { background: var( --comsign-warning-bg, #fffbeb ); border-color: var( --comsign-warning, #d97706 ); color: var( --comsign-warning-text, #92400e ); }
+
+.comsign-portal-actions { display: flex; flex-wrap: wrap; gap: 8px; margin: 8px 0 16px; }
+
+.comsign-btn--small { padding: 4px 10px; font-size: 0.85em; }
+
+.comsign-template-list { list-style: none; margin: 0; padding: 0; }
+.comsign-template-list li {
+	display: flex;
+	align-items: center;
+	justify-content: space-between;
+	gap: 12px;
+	padding: 14px 16px;
+	border: 1px solid var(--comsign-border, #e5e7eb);
+	border-radius: 10px;
+	margin-bottom: 10px;
+	background: #fff;
+}
+.comsign-template-name { display: block; font-weight: 600; }
+.comsign-template-meta { color: #6b7280; font-size: 0.85em; }
+
+.comsign-recipient {
+	border: 1px solid var(--comsign-border, #e5e7eb);
+	border-radius: 10px;
+	padding: 12px 16px;
+	margin: 0 0 14px;
+}
+.comsign-recipient legend { font-weight: 600; padding: 0 6px; }
+.comsign-recipient label { display: block; font-weight: 600; margin-bottom: 2px; }
+.comsign-recipient input { width: 100%; max-width: 420px; }
+.comsign-form-actions { display: flex; gap: 10px; flex-wrap: wrap; }
+
+/* Wizard steps + readiness checklist (shared look with admin) */
+.comsign-steps { display: flex; flex-wrap: wrap; gap: 8px; list-style: none; margin: 12px 0 20px; padding: 0; }
+.comsign-steps li { display: flex; align-items: center; gap: 8px; padding: 8px 14px; border: 1px solid var( --comsign-border, #e5e7eb ); border-radius: var( --comsign-radius-pill, 999px ); color: var( --comsign-muted, #6b7280 ); background: var( --comsign-surface, #fff ); }
+.comsign-steps li.is-current { border-color: var( --comsign-primary-strong, #2563eb ); color: #1e3a8a; font-weight: 600; }
+.comsign-step-n { display: inline-flex; align-items: center; justify-content: center; width: 22px; height: 22px; border-radius: 50%; background: #e5e7eb; font-size: 12px; font-weight: 700; }
+.comsign-steps li.is-current .comsign-step-n { background: var( --comsign-primary-strong, #2563eb ); color: #fff; }
+
+.comsign-readiness { border: 1px solid var( --comsign-border, #e5e7eb ); border-radius: var( --comsign-radius-sm, 8px ); padding: 12px 14px; margin-bottom: 16px; background: #f9fafb; }
+.comsign-readiness.is-ready { border-color: var( --comsign-success, #16a34a ); background: var( --comsign-success-bg, #f0fdf4 ); }
+.comsign-readiness.is-blocked { border-color: var( --comsign-warning, #d97706 ); background: var( --comsign-warning-bg, #fffbeb ); }
+.comsign-readiness-title { font-weight: 700; margin: 0 0 8px; }
+.comsign-readiness ul { margin: 0 0 10px; padding: 0; list-style: none; }
+.comsign-readiness li { padding: 4px 0; }
+.comsign-readiness li.ok { color: var( --comsign-success, #166534 ); }
+.comsign-readiness li.todo { color: var( --comsign-warning, #92400e ); }
+.comsign-readiness-mark { display: inline-block; width: 1.2em; font-weight: 700; }
+.comsign-readiness-hint { display: block; margin-inline-start: 1.2em; font-size: 0.9em; color: var( --comsign-muted, #6b7280 ); }
+
+/* ---- Portal field editor (0.26.0) ---- */
+/* The editor needs more room than the default reading width. */
+.comsign-shell:has( .comsign-editor-grid ) { max-width: 1200px; }
+.comsign-portal:has( .comsign-editor-grid ) { max-width: 1200px; }
+
+.comsign-create-option {
+	border: 1px solid var( --comsign-border, #e5e7eb );
+	border-radius: var( --comsign-radius, 10px );
+	padding: 16px;
+	margin-bottom: 20px;
+	background: var( --comsign-surface, #fff );
+}
+
+/* Step 1: how to create — choice cards. */
+.comsign-choice-grid {
+	display: grid;
+	grid-template-columns: repeat( auto-fit, minmax( 220px, 1fr ) );
+	gap: var( --comsign-space-4, 16px );
+	margin: 16px 0 8px;
+}
+.comsign-choice {
+	display: flex;
+	flex-direction: column;
+	gap: 8px;
+	padding: 22px 18px;
+	border: 1px solid var( --comsign-border, #e5e7eb );
+	border-radius: var( --comsign-radius, 12px );
+	background: var( --comsign-surface, #fff );
+	text-decoration: none;
+	color: inherit;
+	box-shadow: 0 1px 2px rgba( 0, 0, 0, 0.04 );
+	transition: border-color .15s, box-shadow .15s, transform .15s;
+}
+.comsign-choice:hover,
+.comsign-choice:focus-visible {
+	border-color: var( --comsign-primary, #2563eb );
+	box-shadow: 0 6px 18px rgba( 37, 99, 235, 0.12 );
+	transform: translateY( -2px );
+}
+.comsign-choice.is-disabled {
+	opacity: .55;
+	pointer-events: none;
+}
+.comsign-choice-icon { font-size: 30px; line-height: 1; }
+.comsign-choice-title { font-size: 16px; font-weight: 700; }
+.comsign-choice-desc { font-size: 13px; color: var( --comsign-muted, #6b7280 ); }
+
+/* Per-signer field picker in the "write text" flow. */
+.comsign-field-picker {
+	border: 1px dashed var( --comsign-border, #e5e7eb );
+	border-radius: 8px;
+	padding: 8px 12px;
+	margin-top: 8px;
+}
+.comsign-field-picker legend { font-size: 12px; font-weight: 600; color: var( --comsign-muted, #6b7280 ); padding: 0 4px; }
+.comsign-field-picker label { display: inline-flex; align-items: center; gap: 6px; font-weight: 500; margin: 4px 14px 4px 0; }
+.comsign-field-picker input { width: auto; }
+
+/* Form / questionnaire builder. */
+.comsign-question {
+	border: 1px solid var( --comsign-border, #e5e7eb );
+	border-radius: 10px;
+	padding: 10px 14px;
+	margin: 0 0 12px;
+	background: var( --comsign-surface, #fff );
+}
+.comsign-question legend { font-weight: 600; padding: 0 6px; color: var( --comsign-muted, #6b7280 ); }
+.comsign-question-meta {
+	display: flex;
+	flex-wrap: wrap;
+	gap: 14px;
+	align-items: end;
+}
+.comsign-question-meta label { font-weight: 500; font-size: 13px; }
+.comsign-question-meta select,
+.comsign-question-meta input[type="text"] { display: block; margin-top: 4px; }
+.comsign-q-required { align-self: center; }
+.comsign-q-required input { width: auto; }
+.comsign-editor-grid {
+	display: grid;
+	grid-template-columns: 320px 1fr;
+	gap: var( --comsign-space-5, 24px );
+	align-items: start;
+}
+@media ( max-width: 860px ) {
+	.comsign-editor-grid { grid-template-columns: 1fr; }
+}
+.comsign-editor-signers { list-style: none; margin: 0 0 16px; padding: 0; }
+.comsign-editor-signers li {
+	display: flex;
+	align-items: center;
+	justify-content: space-between;
+	gap: 10px;
+	padding: 10px 12px;
+	border: 1px solid var( --comsign-border, #e5e7eb );
+	border-radius: var( --comsign-radius-sm, 8px );
+	margin-bottom: 8px;
+	background: var( --comsign-surface, #fff );
+}
+.comsign-editor-toolbar {
+	display: flex;
+	flex-wrap: wrap;
+	align-items: center;
+	gap: 8px;
+	margin-bottom: 8px;
+}
+.comsign-editor-toolbar select { min-height: 38px; }
+
+/* ---- Portal document filter (0.30.0) ---- */
+.comsign-portal-filter {
+	display: flex;
+	flex-wrap: wrap;
+	gap: 8px;
+	align-items: center;
+	margin: 0 0 16px;
+}
+.comsign-portal-filter input[type="search"] {
+	flex: 1 1 220px;
+	min-height: 40px;
+	padding: 6px 10px;
+	border: 1px solid var( --comsign-border, #d6d9de );
+	border-radius: var( --comsign-radius-sm, 6px );
+}
+.comsign-portal-filter select { min-height: 40px; }
+
+/* ---- Delegation (assign to someone else) (0.35.0) ---- */
+.comsign-delegate > summary {
+	cursor: pointer;
+	font-weight: 600;
+	list-style: revert;
+}
+.comsign-delegate > summary:focus-visible {
+	outline: 2px solid var( --comsign-focus, #2563eb );
+	outline-offset: 2px;
+	border-radius: var( --comsign-radius-sm, 6px );
+}
+
+/* ---- Plan & billing (0.40.0) ---- */
+.comsign-plan-grid {
+	display: grid;
+	grid-template-columns: repeat( auto-fit, minmax( 240px, 1fr ) );
+	gap: 16px;
+	margin: 0 0 24px;
+}
+.comsign-plan-card {
+	border: 1px solid var( --comsign-border, #d6d9de );
+	border-radius: var( --comsign-radius, 10px );
+	padding: 20px;
+	background: var( --comsign-surface, #fff );
+	display: flex;
+	flex-direction: column;
+}
+.comsign-plan-card.is-current {
+	border-color: var( --comsign-primary, #0b3d91 );
+	box-shadow: 0 0 0 2px var( --comsign-primary, #0b3d91 ) inset;
+}
+.comsign-plan-card h3 { margin: 0 0 4px; }
+.comsign-plan-price { margin: 4px 0 12px; }
+.comsign-plan-amount { font-size: 1.8em; font-weight: 700; }
+.comsign-plan-per { color: var( --comsign-muted, #6b7280 ); }
+.comsign-plan-limits { list-style: none; padding: 0; margin: 0 0 16px; }
+.comsign-plan-limits li { padding: 5px 0; border-bottom: 1px solid #f0f0f2; }
+.comsign-plan-actions { display: flex; flex-direction: column; gap: 8px; margin-top: auto; }
+.comsign-plan-actions .comsign-btn { width: 100%; }
+.comsign-plan-current { font-weight: 600; color: var( --comsign-success, #15803d ); margin-top: auto; }
+
+/* ---- Dashboard onboarding + trial banner (0.43.0) ---- */
+.comsign-trial-banner {
+	display: flex;
+	flex-wrap: wrap;
+	align-items: center;
+	justify-content: space-between;
+	gap: 12px;
+	padding: 12px 16px;
+	margin: 0 0 16px;
+	border: 1px solid var( --comsign-warning, #b45309 );
+	background: var( --comsign-warning-bg, #fffbeb );
+	border-radius: var( --comsign-radius-sm, 8px );
+}
+.comsign-onboard { text-align: center; padding: 32px 20px; }
+.comsign-onboard h2 { margin-top: 0; }
+.comsign-onboard .comsign-btn { display: inline-block; }
+
+/* ---- Responsive tables: cards on mobile (0.48.0) ---- */
+@media ( max-width: 600px ) {
+	.comsign-cards-on-mobile thead {
+		position: absolute;
+		width: 1px;
+		height: 1px;
+		overflow: hidden;
+		clip: rect( 0, 0, 0, 0 );
+		white-space: nowrap;
+	}
+	.comsign-cards-on-mobile,
+	.comsign-cards-on-mobile tbody,
+	.comsign-cards-on-mobile tr,
+	.comsign-cards-on-mobile td {
+		display: block;
+		width: 100%;
+	}
+	.comsign-cards-on-mobile tr {
+		border: 1px solid var( --comsign-border, #d6d9de );
+		border-radius: var( --comsign-radius-sm, 8px );
+		margin-bottom: 12px;
+		padding: 6px 12px;
+		background: var( --comsign-surface, #fff );
+	}
+	.comsign-cards-on-mobile td {
+		display: flex;
+		justify-content: space-between;
+		align-items: center;
+		gap: 12px;
+		padding: 8px 0;
+		border: 0;
+		border-bottom: 1px solid #f0f0f2;
+		text-align: end;
+	}
+	.comsign-cards-on-mobile td:last-child { border-bottom: 0; }
+	.comsign-cards-on-mobile td::before {
+		content: attr( data-label );
+		font-weight: 600;
+		color: var( --comsign-muted, #6b7280 );
+		text-align: start;
+		flex: 0 0 auto;
+	}
+	/* Action cells (forms/buttons) align to the end without a label gap. */
+	.comsign-cards-on-mobile td:not([data-label])::before { content: ""; }
+}
+
+/* ---- Portal insights (0.50.0) ---- */
+.comsign-spark {
+	display: flex;
+	align-items: flex-end;
+	gap: 4px;
+	height: 120px;
+	padding-top: 8px;
+}
+.comsign-spark-bar {
+	flex: 1;
+	min-width: 6px;
+	background: var( --comsign-primary, #0b3d91 );
+	border-radius: 3px 3px 0 0;
+	opacity: 0.85;
+}
+.comsign-status-list { list-style: none; margin: 0; padding: 0; }
+.comsign-status-list li {
+	display: flex;
+	align-items: center;
+	justify-content: space-between;
+	gap: 12px;
+	padding: 8px 0;
+	border-bottom: 1px solid #f0f0f2;
+}
+.comsign-status-list li:last-child { border-bottom: 0; }

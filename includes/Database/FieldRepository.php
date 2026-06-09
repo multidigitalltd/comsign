@@ -1,0 +1,285 @@
+<?php
+/**
+ * Signature-field data access.
+ *
+ * @package ComSign
+ */
+
+namespace ComSign\Database;
+
+defined( 'ABSPATH' ) || exit;
+
+use ComSign\Setup\Installer;
+
+/**
+ * Read/write access to the signature fields table.
+ *
+ * Field positions are stored as fractions (0..1) of the page width/height so
+ * they are resolution-independent between the browser preview and the PDF.
+ */
+final class FieldRepository {
+
+	public const TYPE_SIGNATURE = 'signature';
+	public const TYPE_INITIALS  = 'initials';
+	public const TYPE_DATE      = 'date';
+	public const TYPE_TEXT      = 'text';
+	public const TYPE_NUMBER    = 'number';
+	public const TYPE_CHECKBOX  = 'checkbox';
+	public const TYPE_CHOICE    = 'choice';
+	public const TYPE_ATTACHMENT = 'attachment'; // signer uploads a file.
+	public const TYPE_NAME      = 'name';  // auto: signer name.
+	public const TYPE_EMAIL     = 'email'; // auto: signer email.
+
+	/**
+	 * Field types the signer interacts with on the signing page.
+	 */
+	public const INPUT_TYPES = array(
+		self::TYPE_TEXT,
+		self::TYPE_NUMBER,
+		self::TYPE_CHECKBOX,
+		self::TYPE_CHOICE,
+		self::TYPE_ATTACHMENT,
+	);
+
+	/**
+	 * Field types auto-filled from signer/document data (no input needed).
+	 */
+	public const AUTO_TYPES = array(
+		self::TYPE_DATE,
+		self::TYPE_NAME,
+		self::TYPE_EMAIL,
+	);
+
+	/**
+	 * Sanitise a decoded field payload from the placement editor.
+	 *
+	 * Shared by the admin edit screen and the client portal so both apply the
+	 * same type allowlist and text sanitisation before the values reach
+	 * {@see DocumentService::save_fields()} (which clamps coordinates and
+	 * verifies signer ownership).
+	 *
+	 * @param array $fields Raw field rows decoded from JSON.
+	 *
+	 * @return array<int,array<string,mixed>>
+	 */
+	public static function sanitize_payload( array $fields ): array {
+		$allowed_types = array(
+			self::TYPE_SIGNATURE,
+			self::TYPE_INITIALS,
+			self::TYPE_DATE,
+			self::TYPE_TEXT,
+			self::TYPE_NUMBER,
+			self::TYPE_CHECKBOX,
+			self::TYPE_CHOICE,
+			self::TYPE_ATTACHMENT,
+			self::TYPE_NAME,
+			self::TYPE_EMAIL,
+		);
+
+		$clean = array();
+		foreach ( $fields as $field ) {
+			if ( ! is_array( $field ) ) {
+				continue;
+			}
+			$type = isset( $field['type'] ) ? sanitize_key( $field['type'] ) : self::TYPE_SIGNATURE;
+
+			$options = null;
+			if ( self::TYPE_CHOICE === $type && isset( $field['options'] ) && is_array( $field['options'] ) ) {
+				$options = array();
+				foreach ( $field['options'] as $opt ) {
+					$opt = sanitize_text_field( (string) $opt );
+					if ( '' !== $opt ) {
+						$options[] = $opt;
+					}
+				}
+			}
+
+			$clean[] = array(
+				'signer_id' => isset( $field['signer_id'] ) ? absint( $field['signer_id'] ) : 0,
+				'type'      => in_array( $type, $allowed_types, true ) ? $type : self::TYPE_SIGNATURE,
+				'required'  => ! empty( $field['required'] ),
+				'page'      => isset( $field['page'] ) ? max( 1, absint( $field['page'] ) ) : 1,
+				'pos_x'     => isset( $field['pos_x'] ) ? (float) $field['pos_x'] : 0.0,
+				'pos_y'     => isset( $field['pos_y'] ) ? (float) $field['pos_y'] : 0.0,
+				'width'     => isset( $field['width'] ) ? (float) $field['width'] : 0.0,
+				'height'    => isset( $field['height'] ) ? (float) $field['height'] : 0.0,
+				'label'     => isset( $field['label'] ) ? sanitize_text_field( (string) $field['label'] ) : '',
+				'help_text' => isset( $field['help_text'] ) ? sanitize_text_field( (string) $field['help_text'] ) : '',
+				'options'   => $options,
+			);
+		}
+
+		return $clean;
+	}
+
+	/**
+	 * Insert a field.
+	 *
+	 * @param array $data document_id, signer_id, type, page, pos_x, pos_y,
+	 *                    width, height, options (array for choice fields).
+	 */
+	public function create( array $data ): int {
+		global $wpdb;
+
+		$options = $data['options'] ?? null;
+		if ( null !== $options && ! is_string( $options ) ) {
+			$options = wp_json_encode( array_values( (array) $options ) );
+		}
+
+		$wpdb->insert( // phpcs:ignore WordPress.DB.DirectDatabaseQuery
+			Installer::fields_table(),
+			array(
+				'document_id' => (int) $data['document_id'],
+				'signer_id'   => (int) $data['signer_id'],
+				'type'        => (string) ( $data['type'] ?? self::TYPE_SIGNATURE ),
+				'required'    => ! empty( $data['required'] ) ? 1 : 0,
+				'page'        => max( 1, (int) ( $data['page'] ?? 1 ) ),
+				'pos_x'       => (float) ( $data['pos_x'] ?? 0 ),
+				'pos_y'       => (float) ( $data['pos_y'] ?? 0 ),
+				'width'       => (float) ( $data['width'] ?? 0 ),
+				'height'      => (float) ( $data['height'] ?? 0 ),
+				'label'       => mb_substr( (string) ( $data['label'] ?? '' ), 0, 150 ),
+				'help_text'   => mb_substr( (string) ( $data['help_text'] ?? '' ), 0, 255 ),
+				'options'     => $options,
+				'created_at'  => current_time( 'mysql', true ),
+			),
+			array( '%d', '%d', '%s', '%d', '%d', '%f', '%f', '%f', '%f', '%s', '%s', '%s', '%s' )
+		);
+
+		return (int) $wpdb->insert_id;
+	}
+
+	/**
+	 * Human-facing label for a field on the signing page.
+	 *
+	 * Uses the admin-supplied label when present, otherwise a sensible default
+	 * per field type so the signer never sees a bare "Your answer".
+	 *
+	 * @param object $field Field row.
+	 */
+	public static function display_label( object $field ): string {
+		$label = isset( $field->label ) ? trim( (string) $field->label ) : '';
+		if ( '' !== $label ) {
+			return $label;
+		}
+
+		switch ( $field->type ) {
+			case self::TYPE_NUMBER:
+				return __( 'Number', 'comsign' );
+			case self::TYPE_CHECKBOX:
+				return __( 'I confirm', 'comsign' );
+			case self::TYPE_CHOICE:
+				return __( 'Select an option', 'comsign' );
+			case self::TYPE_ATTACHMENT:
+				return __( 'Upload a file', 'comsign' );
+			default:
+				return __( 'Your answer', 'comsign' );
+		}
+	}
+
+	/**
+	 * Decode a field's choice options into a flat array of strings.
+	 *
+	 * @param object $field Field row.
+	 *
+	 * @return string[]
+	 */
+	public static function decode_options( object $field ): array {
+		if ( empty( $field->options ) ) {
+			return array();
+		}
+		$decoded = json_decode( (string) $field->options, true );
+		return is_array( $decoded ) ? array_values( array_map( 'strval', $decoded ) ) : array();
+	}
+
+	/**
+	 * All fields for a document.
+	 */
+	public function for_document( int $document_id ): array {
+		global $wpdb;
+
+		return $wpdb->get_results( // phpcs:ignore WordPress.DB.DirectDatabaseQuery, WordPress.DB.PreparedSQL.NotPrepared
+			$wpdb->prepare(
+				'SELECT * FROM ' . Installer::fields_table() . ' WHERE document_id = %d ORDER BY page ASC, id ASC',
+				$document_id
+			)
+		);
+	}
+
+	/**
+	 * All fields assigned to a specific signer.
+	 */
+	public function for_signer( int $signer_id ): array {
+		global $wpdb;
+
+		return $wpdb->get_results( // phpcs:ignore WordPress.DB.DirectDatabaseQuery, WordPress.DB.PreparedSQL.NotPrepared
+			$wpdb->prepare(
+				'SELECT * FROM ' . Installer::fields_table() . ' WHERE signer_id = %d ORDER BY page ASC, id ASC',
+				$signer_id
+			)
+		);
+	}
+
+	/**
+	 * All fields for a signer, scoped to a specific document.
+	 *
+	 * Safer than {@see for_signer()} during signing: it guarantees the returned
+	 * fields belong to the document being signed, even if a stray field row
+	 * referenced a signer id from elsewhere.
+	 */
+	public function for_signer_in_document( int $document_id, int $signer_id ): array {
+		global $wpdb;
+
+		return $wpdb->get_results( // phpcs:ignore WordPress.DB.DirectDatabaseQuery, WordPress.DB.PreparedSQL.NotPrepared
+			$wpdb->prepare(
+				'SELECT * FROM ' . Installer::fields_table() . ' WHERE document_id = %d AND signer_id = %d ORDER BY page ASC, id ASC',
+				$document_id,
+				$signer_id
+			)
+		);
+	}
+
+	/**
+	 * Store the captured value (e.g. signature image reference) for a field.
+	 *
+	 * @param int    $id    Field id.
+	 * @param string $value Value to store.
+	 */
+	public function set_value( int $id, string $value ): void {
+		global $wpdb;
+
+		$wpdb->update( // phpcs:ignore WordPress.DB.DirectDatabaseQuery
+			Installer::fields_table(),
+			array( 'value' => $value ),
+			array( 'id' => $id ),
+			array( '%s' ),
+			array( '%d' )
+		);
+	}
+
+	/**
+	 * Delete all fields assigned to a signer.
+	 */
+	public function delete_for_signer( int $signer_id ): void {
+		global $wpdb;
+
+		$wpdb->delete( // phpcs:ignore WordPress.DB.DirectDatabaseQuery
+			Installer::fields_table(),
+			array( 'signer_id' => $signer_id ),
+			array( '%d' )
+		);
+	}
+
+	/**
+	 * Delete all fields for a document.
+	 */
+	public function delete_for_document( int $document_id ): void {
+		global $wpdb;
+
+		$wpdb->delete( // phpcs:ignore WordPress.DB.DirectDatabaseQuery
+			Installer::fields_table(),
+			array( 'document_id' => $document_id ),
+			array( '%d' )
+		);
+	}
+}

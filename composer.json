@@ -1,0 +1,27 @@
+{
+    "name": "multidigitalltd/comsign",
+    "description": "ComSign — secure digital document signing for WordPress, with full Hebrew/RTL support.",
+    "type": "wordpress-plugin",
+    "license": "GPL-2.0-or-later",
+    "require": {
+        "php": ">=7.4",
+        "setasign/fpdi": "^2.6",
+        "tecnickcom/tcpdf": "^6.7"
+    },
+    "autoload": {
+        "psr-4": {
+            "ComSign\\": "includes/"
+        }
+    },
+    "config": {
+        "optimize-autoloader": true,
+        "sort-packages": true
+    },
+    "scripts": {
+        "lint": "find . -path ./vendor -prune -o -name '*.php' -print0 | xargs -0 -n1 php -l > /dev/null && echo OK",
+        "test": "php tests/run.php",
+        "phpcs": "phpcs",
+        "phpcbf": "phpcbf",
+        "phpcompat": "phpcs --standard=PHPCompatibilityWP --runtime-set testVersion 7.4- comsign.php uninstall.php includes tests"
+    }
+}

@@ -1,0 +1,89 @@
+<?php
+/**
+ * Add-new-document view (upload a PDF, or compose one from text).
+ *
+ * @package ComSign
+ *
+ * @var string     $action_url
+ * @var string     $nonce
+ * @var string     $compose_nonce
+ * @var array|null $notice
+ */
+
+defined( 'ABSPATH' ) || exit;
+?>
+<div class="wrap comsign-wrap">
+	<h1><?php esc_html_e( 'Add Document', 'comsign' ); ?></h1>
+
+	<?php require __DIR__ . '/partials/notice.php'; ?>
+
+	<ol class="comsign-steps" aria-label="<?php esc_attr_e( 'How signing works', 'comsign' ); ?>">
+		<li class="is-current"><span class="comsign-step-n">1</span><?php esc_html_e( 'Add the document', 'comsign' ); ?></li>
+		<li><span class="comsign-step-n">2</span><?php esc_html_e( 'Add signers', 'comsign' ); ?></li>
+		<li><span class="comsign-step-n">3</span><?php esc_html_e( 'Place fields', 'comsign' ); ?></li>
+		<li><span class="comsign-step-n">4</span><?php esc_html_e( 'Review &amp; send', 'comsign' ); ?></li>
+	</ol>
+
+	<div class="comsign-tabs comsign-admin-tabs" role="tablist" aria-label="<?php esc_attr_e( 'How to add a document', 'comsign' ); ?>">
+		<button type="button" id="comsign-tab-upload" class="comsign-tab is-active" data-tab="upload" role="tab" aria-selected="true" aria-controls="comsign-panel-upload"><?php esc_html_e( 'Upload a PDF', 'comsign' ); ?></button>
+		<button type="button" id="comsign-tab-compose" class="comsign-tab" data-tab="compose" role="tab" aria-selected="false" aria-controls="comsign-panel-compose" tabindex="-1"><?php esc_html_e( 'Compose from text', 'comsign' ); ?></button>
+	</div>
+
+	<div class="comsign-tab-panel" data-panel="upload" id="comsign-panel-upload" role="tabpanel" aria-labelledby="comsign-tab-upload" tabindex="0">
+		<form method="post" action="<?php echo esc_url( $action_url ); ?>" enctype="multipart/form-data" class="comsign-card">
+			<input type="hidden" name="action" value="comsign_create_document">
+			<input type="hidden" name="_wpnonce" value="<?php echo esc_attr( $nonce ); ?>">
+
+			<p>
+				<label for="comsign-title"><strong><?php esc_html_e( 'Document title', 'comsign' ); ?></strong></label><br>
+				<input type="text" id="comsign-title" name="title" class="regular-text" placeholder="<?php esc_attr_e( 'e.g. Service agreement', 'comsign' ); ?>">
+			</p>
+			<p>
+				<label for="comsign-file"><strong><?php esc_html_e( 'PDF file', 'comsign' ); ?></strong></label><br>
+				<input type="file" id="comsign-file" name="document" accept="application/pdf" required>
+				<span class="description"><?php esc_html_e( 'PDF only, up to 25 MB.', 'comsign' ); ?></span>
+			</p>
+			<p><button type="submit" class="button button-primary"><?php esc_html_e( 'Upload & continue', 'comsign' ); ?></button></p>
+		</form>
+	</div>
+
+	<div class="comsign-tab-panel is-hidden" data-panel="compose" id="comsign-panel-compose" role="tabpanel" aria-labelledby="comsign-tab-compose" tabindex="0">
+		<form method="post" action="<?php echo esc_url( $action_url ); ?>" class="comsign-card">
+			<input type="hidden" name="action" value="comsign_create_text">
+			<input type="hidden" name="_wpnonce" value="<?php echo esc_attr( $compose_nonce ); ?>">
+
+			<p>
+				<label for="comsign-compose-title"><strong><?php esc_html_e( 'Document title', 'comsign' ); ?></strong></label><br>
+				<input type="text" id="comsign-compose-title" name="title" class="regular-text" placeholder="<?php esc_attr_e( 'e.g. Service agreement', 'comsign' ); ?>">
+			</p>
+
+			<p><strong><?php esc_html_e( 'Document content', 'comsign' ); ?></strong></p>
+			<p class="description">
+				<?php esc_html_e( 'Write the fixed text of the document. After creating it you can place fillable and signature fields on the generated PDF.', 'comsign' ); ?>
+				<?php esc_html_e( 'Use placeholders like {{name}} or {{date}} to insert variables.', 'comsign' ); ?>
+			</p>
+			<?php
+			wp_editor(
+				'',
+				'comsign_content',
+				array(
+					'textarea_name' => 'content',
+					'textarea_rows' => 14,
+					'media_buttons' => false,
+					'teeny'         => true,
+				)
+			);
+			?>
+
+			<p style="margin-top:16px;">
+				<label for="comsign-variables"><strong><?php esc_html_e( 'Variables', 'comsign' ); ?></strong></label><br>
+				<span class="description"><?php esc_html_e( 'One per line, in the form name = value. Each {{name}} in the content is replaced with its value. {{date}} and {{site}} are available automatically.', 'comsign' ); ?></span>
+			</p>
+			<p>
+				<textarea id="comsign-variables" name="variables" rows="4" class="large-text code" placeholder="<?php esc_attr_e( "customer_name = Dana Cohen\ncontract_no = 2026-0042", 'comsign' ); ?>"></textarea>
+			</p>
+
+			<p><button type="submit" class="button button-primary"><?php esc_html_e( 'Create document', 'comsign' ); ?></button></p>
+		</form>
+	</div>
+</div>

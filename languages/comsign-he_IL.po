@@ -1,0 +1,3405 @@
+# Hebrew translation for ComSign.
+# Copyright (C) 2026 Multi Digital LTD
+msgid ""
+msgstr ""
+"Project-Id-Version: ComSign 0.1.0\n"
+"Language: he_IL\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+"X-Domain: comsign\n"
+
+#: includes/Admin/DocumentsListTable.php:200
+msgid "%1$d of %2$d signed"
+msgstr "%1$d מתוך %2$d חתמו"
+
+#: includes/Frontend/views/portal-contacts.php:60
+msgid "%1$d saved, %2$d left on your plan."
+msgstr "%1$d נשמרו, %2$d נותרו במסלול שלכם."
+
+#: includes/Frontend/views/portal-billing.php:112
+msgid "%1$d used, %2$d remaining."
+msgstr "%1$d נוצלו, %2$d נותרו."
+
+#: includes/Services/Analytics.php:252
+msgid "%d day"
+msgstr "%d ימים"
+
+#: includes/Frontend/PricingShortcode.php:83
+#: includes/Frontend/views/portal-billing.php:151
+msgid "%d documents / month"
+msgstr "%d מסמכים בחודש"
+
+#: includes/Frontend/views/portal-billing.php:109
+msgid "%d documents used (unlimited)."
+msgstr "%d מסמכים נוצלו (ללא הגבלה)."
+
+#: includes/Services/Analytics.php:248
+msgid "%d hour"
+msgstr "%d שעות"
+
+#: includes/Services/Analytics.php:243
+msgid "%d minute"
+msgstr "%d דקות"
+
+#: includes/Frontend/views/portal-contacts.php:57
+msgid "%d saved (unlimited)."
+msgstr "%d נשמרו (ללא הגבלה)."
+
+#: includes/Services/DocumentService.php:897
+msgid "%s (copy)"
+msgstr "%s (עותק)"
+
+#: includes/Services/AccountService.php:276
+msgid "%s's workspace"
+msgstr "סביבת העבודה של %s"
+
+#: includes/Setup/Installer.php:396
+msgid "%s’s workspace"
+msgstr "מרחב העבודה של %s"
+
+#: includes/Admin/DocumentsListTable.php:142
+#: includes/Admin/views/analytics.php:93
+#: includes/Admin/views/edit.php:52
+#: includes/Admin/views/templates.php:47
+#: includes/Frontend/views/partials/portal-doc-table.php:31
+#: includes/Frontend/views/portal-contact.php:48
+#: includes/Frontend/views/portal-document.php:30
+#: includes/Frontend/views/portal-edit.php:65
+#: includes/Frontend/views/portal-insights.php:101
+msgid "(untitled)"
+msgstr "(ללא כותרת)"
+
+#: includes/Frontend/views/sign.php:83
+msgid "* Required"
+msgstr "* חובה"
+
+#: includes/Frontend/PricingShortcode.php:74
+#: includes/Frontend/views/portal-billing.php:144
+msgid "/ month"
+msgstr "/ חודש"
+
+#: includes/Admin/views/edit.php:174
+msgid "14 days"
+msgstr "14 ימים"
+
+#: includes/Admin/views/edit.php:175
+msgid "30 days"
+msgstr "30 ימים"
+
+#: includes/Admin/views/edit.php:173
+msgid "7 days"
+msgstr "7 ימים"
+
+#: includes/Support/HealthCheck.php:128
+msgid "A REST API key is configured."
+msgstr "מפתח REST API מוגדר."
+
+#: includes/Email/Mailer.php:34
+msgid "A document is awaiting your signature — %s"
+msgstr "מסמך ממתין לחתימתך — %s"
+
+#: includes/Services/DocumentService.php:1387
+msgid "A field is assigned to a signer that is not on this document. Please re-save the fields."
+msgstr "שדה משויך לחותם שאינו במסמך זה. אנא שמרו מחדש את השדות."
+
+#: includes/Frontend/SigningController.php:371
+msgid "A new code has been sent."
+msgstr "קוד חדש נשלח."
+
+#: includes/Services/DocumentService.php:1516
+msgid "A signature is required."
+msgstr "נדרשת חתימה."
+
+#: includes/Admin/Admin.php:788
+msgid "A signing link was generated. Copy it or share via WhatsApp below."
+msgstr "נוצר קישור לחתימה. העתיקו אותו או שתפו בוואטסאפ למטה."
+
+#: includes/Admin/views/members.php:128
+msgid "A sub-workspace belongs under this one; managers here can see its documents too."
+msgstr "סביבת עבודה משנה משתייכת לזו; מנהלים כאן רואים גם את המסמכים שלה."
+
+#: includes/Support/HealthCheck.php:142
+msgid "A webhook URL is configured. Use “Send test webhook” below to confirm it is reachable."
+msgstr "כתובת webhook מוגדרת. השתמשו ב“שליחת webhook לבדיקה” למטה כדי לוודא שהיא נגישה."
+
+#: includes/Frontend/PricingShortcode.php:92
+#: includes/Frontend/views/portal-billing.php:160
+msgid "API & webhooks"
+msgstr "API ו-webhooks"
+
+#: includes/Admin/views/settings.php:164
+msgid "API name"
+msgstr "שם API"
+
+#: includes/Admin/views/settings.php:168
+msgid "API password"
+msgstr "סיסמת API"
+
+#: includes/Admin/views/settings.php:60
+msgid "Accent colour"
+msgstr "צבע מותג"
+
+#: includes/Admin/views/edit.php:276
+msgid "Access code"
+msgstr "קוד גישה"
+
+#: includes/Admin/views/edit.php:319
+msgid "Access code (for the access-code method)"
+msgstr "קוד גישה (לשיטת קוד הגישה)"
+
+#: includes/Frontend/SignerAuth.php:42
+msgid "Access code (shared by you)"
+msgstr "קוד גישה (שאתם משתפים)"
+
+#: includes/Admin/views/workspaces.php:139
+#: includes/Frontend/views/portal-contacts.php:85
+#: includes/Frontend/views/portal-document.php:91
+#: includes/Frontend/views/portal-team.php:55
+#: includes/Frontend/views/portal-team.php:97
+msgid "Action"
+msgstr "פעולה"
+
+#: includes/Services/BillingNotifications.php:82
+msgid "Action needed: %s payment failed"
+msgstr "נדרשת פעולה: התשלום ב-%s נכשל"
+
+#: includes/Admin/views/edit.php:337
+#: includes/Admin/views/templates.php:32
+msgid "Actions"
+msgstr "פעולות"
+
+#: includes/Admin/views/workspaces.php:23
+#: includes/Frontend/views/portal-billing.php:31
+msgid "Active"
+msgstr "פעיל"
+
+#: includes/Admin/views/settings.php:119
+msgid "Active certificate:"
+msgstr "תעודה פעילה:"
+
+#: includes/Admin/Admin.php:147
+#: includes/Admin/Admin.php:148
+#: includes/Admin/views/list.php:20
+#: includes/Admin/views/new.php:16
+msgid "Add Document"
+msgstr "הוספת מסמך"
+
+#: includes/Frontend/views/portal-contacts.php:30
+msgid "Add a contact"
+msgstr "הוספת איש קשר"
+
+#: includes/Services/DocumentService.php:361
+msgid "Add a recipient name and a valid email."
+msgstr "הוסיפו שם נמען וכתובת דוא\"ל תקינה."
+
+#: includes/Services/SendReadiness.php:108
+msgid "Add a signature (or initials) field for: %s."
+msgstr "הוסיפו שדה חתימה (או ראשי תיבות) עבור: %s."
+
+#: includes/Frontend/views/portal-edit.php:153
+msgid "Add a signer first, then drag fields onto the document."
+msgstr "הוסיפו תחילה חותם, ואז גררו שדות אל המסמך."
+
+#: includes/Services/DocumentService.php:355
+msgid "Add at least one question to the form."
+msgstr "הוסיפו לפחות שאלה אחת לטופס."
+
+#: includes/Services/DocumentService.php:166
+#: includes/Services/DocumentService.php:208
+#: includes/Services/DocumentService.php:1296
+msgid "Add at least one signer before sending."
+msgstr "יש להוסיף לפחות חותם אחד לפני השליחה."
+
+#: includes/Admin/views/edit.php:84
+msgid "Add at least one signer first, then drop signature fields onto the document."
+msgstr "הוסיפו תחילה לפחות חותם אחד, ולאחר מכן הניחו שדות חתימה על המסמך."
+
+#: includes/Frontend/views/portal-edit.php:80
+msgid "Add at least one signer to start placing fields."
+msgstr "הוסיפו לפחות חותם אחד כדי להתחיל למקם שדות."
+
+#: includes/Admin/views/edit.php:108
+#: includes/Frontend/views/portal-edit.php:177
+msgid "Add field"
+msgstr "הוספת שדה"
+
+#: includes/Frontend/views/portal-create.php:151
+msgid "Add questions; your recipient fills them in online and signs. Leave a question blank to skip it."
+msgstr "הוסיפו שאלות; הנמען ממלא אותן באינטרנט וחותם. השאירו שאלה ריקה כדי לדלג עליה."
+
+#: includes/Frontend/views/portal-create.php:214
+#: includes/Frontend/views/portal-create.php:246
+msgid "Add recipients"
+msgstr "הוספת נמענים"
+
+#: includes/Admin/views/edit.php:321
+#: includes/Frontend/views/portal-edit.php:118
+msgid "Add signer"
+msgstr "הוספת חותם"
+
+#: includes/Admin/views/new.php:22
+#: includes/Frontend/views/portal-edit.php:69
+msgid "Add signers"
+msgstr "הוספת חותמים"
+
+#: includes/Admin/views/new.php:21
+#: includes/Frontend/views/portal-edit.php:68
+msgid "Add the document"
+msgstr "הוספת המסמך"
+
+#: includes/Services/SendReadiness.php:66
+msgid "Add the people who need to sign."
+msgstr "הוסיפו את האנשים שצריכים לחתום."
+
+#: includes/Admin/views/settings.php:244
+msgid "Address"
+msgstr "כתובת"
+
+#: includes/Support/Roles.php:90
+msgid "Admin"
+msgstr "מנהל"
+
+#: includes/Admin/views/edit.php:67
+msgid "All parties have signed. The signed PDF and verification details are available below."
+msgstr "כל הצדדים חתמו. קובץ ה-PDF החתום ופרטי האימות זמינים למטה."
+
+#: includes/Admin/DocumentsListTable.php:117
+#: includes/Admin/views/workspaces.php:40
+#: includes/Frontend/views/portal-documents.php:43
+msgid "All statuses"
+msgstr "כל הסטטוסים"
+
+#: includes/Admin/views/edit.php:373
+msgid "Allow signers to assign someone else"
+msgstr "אפשרו לחותמים להעביר לאדם אחר"
+
+#: includes/Frontend/SigningController.php:105
+#: includes/Frontend/SigningController.php:412
+#: includes/Frontend/SigningController.php:520
+msgid "Already signed"
+msgstr "כבר נחתם"
+
+#: includes/Admin/views/workspaces.php:125
+msgid "An audit trail of manual plan changes, suspensions and reactivations."
+msgstr "מסלול ביקורת של שינויי מסלול ידניים, השעיות והפעלות מחדש."
+
+#: includes/Admin/Admin.php:156
+#: includes/Admin/Admin.php:157
+#: includes/Admin/views/analytics.php:33
+msgid "Analytics"
+msgstr "אנליטיקס"
+
+#: includes/Frontend/views/portal-billing.php:188
+msgid "Annual — %s"
+msgstr "שנתי — %s"
+
+#: includes/Frontend/views/portal-create.php:171
+msgid "Answer type"
+msgstr "סוג תשובה"
+
+#: includes/Frontend/views/portal-dashboard.php:49
+msgid "Ask a workspace owner to give you permission to create documents."
+msgstr "בקשו מבעלים של מרחב העבודה להרשות לכם ליצור מסמכים."
+
+#: includes/Admin/views/template-use.php:26
+msgid "Assign a recipient to each role. The document is created as a draft so you can review it before sending."
+msgstr "שייכו נמען לכל תפקיד. המסמך נוצר כטיוטה כדי שתוכלו לבדוק לפני השליחה."
+
+#: includes/Frontend/views/sign.php:173
+msgid "Assign to this person"
+msgstr "העברה לאדם זה"
+
+#: includes/Frontend/SigningController.php:539
+msgid "Assigned to someone else"
+msgstr "הועבר לאדם אחר"
+
+#: includes/Services/SendReadiness.php:64
+msgid "At least one signer added"
+msgstr "נוסף לפחות חותם אחד"
+
+#: includes/Signature/CertificatePage.php:55
+msgid "Attachment %d"
+msgstr "קובץ מצורף %d"
+
+#: includes/Admin/views/edit.php:393
+msgid "Audit report (PDF)"
+msgstr "דוח ביקורת (PDF)"
+
+#: includes/Services/DocumentService.php:650
+msgid "Audit report — %s"
+msgstr "דוח ביקורת — %s"
+
+#: includes/Admin/views/edit.php:184
+#: includes/Services/DocumentService.php:620
+msgid "Audit trail"
+msgstr "מסלול ביקורת (Audit Trail)"
+
+#: includes/Admin/views/settings.php:24
+msgid "Automatic reminders"
+msgstr "תזכורות אוטומטיות"
+
+#: includes/Admin/views/analytics.php:46
+#: includes/Frontend/views/portal-insights.php:46
+msgid "Avg. time to complete"
+msgstr "זמן ממוצע להשלמה"
+
+#: includes/Frontend/views/portal-contact.php:22
+msgid "Back to contacts"
+msgstr "חזרה לאנשי קשר"
+
+#: includes/Frontend/views/portal-document.php:28
+#: includes/Frontend/views/portal-edit.php:63
+msgid "Back to documents"
+msgstr "חזרה למסמכים"
+
+#: includes/Admin/views/edit.php:56
+msgid "Back to list"
+msgstr "חזרה לרשימה"
+
+#: includes/Frontend/views/portal-create.php:111
+msgid "Basic formatting is allowed. A “Signatures” page is added automatically."
+msgstr "מותר עיצוב בסיסי. עמוד \"חתימות\" מתווסף אוטומטית."
+
+#: includes/Admin/views/edit.php:342
+#: includes/Frontend/views/portal-document.php:53
+#: includes/Frontend/views/portal-edit.php:123
+msgid "Before you can send:"
+msgstr "לפני שניתן לשלוח:"
+
+#: includes/Admin/views/settings.php:153
+msgid "Billing (Cardcom)"
+msgstr "חיוב (קארדקום)"
+
+#: includes/Frontend/PortalController.php:1262
+msgid "Billing is not available"
+msgstr "החיוב אינו זמין"
+
+#: includes/Frontend/PortalController.php:1371
+msgid "Billing is not set up yet. Please contact support."
+msgstr "החיוב עדיין לא הוגדר. אנא פנו לתמיכה."
+
+#: includes/Admin/Admin.php:1024
+msgid "Billing settings saved."
+msgstr "הגדרות החיוב נשמרו."
+
+#: includes/Admin/views/settings.php:46
+msgid "Brand name"
+msgstr "שם המותג"
+
+#: includes/Admin/views/settings.php:42
+msgid "Branding"
+msgstr "מיתוג"
+
+#: includes/Admin/views/edit.php:194
+#: includes/Services/DocumentService.php:630
+#: includes/Signature/CertificatePage.php:46
+msgid "Browser"
+msgstr "דפדפן"
+
+#: includes/Frontend/views/portal-create.php:150
+msgid "Build a form"
+msgstr "בניית טופס"
+
+#: includes/Admin/views/templates.php:53
+msgid "Bulk send"
+msgstr "שליחה בכמות"
+
+#: includes/Admin/Admin.php:1361
+msgid "Bulk send complete: %d document(s) created and sent."
+msgstr "השליחה בכמות הושלמה: %d מסמכים נוצרו ונשלחו."
+
+#: includes/Services/DocumentService.php:1167
+msgid "Bulk send requires a template with exactly one role."
+msgstr "שליחה בכמות דורשת תבנית עם תפקיד אחד בדיוק."
+
+#: includes/Admin/views/template-bulk.php:17
+msgid "Bulk send: %s"
+msgstr "שליחה בכמות: %s"
+
+#: includes/Billing/Plans.php:64
+msgid "Business"
+msgstr "עסקי"
+
+#: includes/Admin/views/edit.php:325
+msgid "CC recipients"
+msgstr "נמעני העתק (CC)"
+
+#: includes/Admin/Admin.php:494
+msgid "CC recipients saved."
+msgstr "נמעני ההעתק נשמרו."
+
+#: includes/Admin/views/members.php:98
+#: includes/Frontend/views/portal-team.php:110
+msgid "Cancel"
+msgstr "ביטול"
+
+#: includes/Frontend/views/portal-billing.php:127
+msgid "Cancel subscription"
+msgstr "ביטול מנוי"
+
+#: includes/Frontend/views/portal-billing.php:124
+msgid "Cancel your subscription? You will keep access until the end of the current period."
+msgstr "לבטל את המנוי? תשמרו על הגישה עד סוף התקופה הנוכחית."
+
+#: includes/Admin/views/workspaces.php:25
+#: includes/Frontend/views/portal-billing.php:33
+msgid "Canceled"
+msgstr "בוטל"
+
+#: includes/Billing/CardcomGateway.php:28
+#: includes/Billing/CardcomGateway.php:53
+msgid "Cardcom is not configured."
+msgstr "קארדקום אינו מוגדר."
+
+#: includes/Admin/views/settings.php:257
+msgid "Cardcom webhook (optional)"
+msgstr "וובהוק קארדקום (אופציונלי)"
+
+#: includes/Admin/views/settings.php:146
+msgid "Certificate password"
+msgstr "סיסמת התעודה"
+
+#: includes/Admin/Admin.php:989
+msgid "Certificate removed. Documents will use electronic signatures."
+msgstr "התעודה הוסרה. מסמכים ייחתמו בחתימה אלקטרונית."
+
+#: includes/Admin/Admin.php:977
+msgid "Certificate stored. New documents will be signed with PKI/PAdES."
+msgstr "התעודה נשמרה. מסמכים חדשים ייחתמו ב-PKI/PAdES."
+
+#: includes/Admin/views/workspaces.php:140
+msgid "Change"
+msgstr "שינוי"
+
+#: includes/Admin/views/health.php:38
+msgid "Check"
+msgstr "בדיקה"
+
+#: includes/Admin/Admin.php:299
+#: includes/Admin/views/edit.php:103
+#: includes/Frontend/views/portal-edit.php:43
+#: includes/Frontend/views/portal-edit.php:172
+msgid "Checkbox"
+msgstr "תיבת סימון"
+
+#: includes/Frontend/views/portal-create.php:175
+msgid "Checkbox (tick to confirm)"
+msgstr "תיבת סימון (סמנו לאישור)"
+
+#: includes/Admin/Admin.php:300
+#: includes/Frontend/views/portal-edit.php:44
+msgid "Choice"
+msgstr "בחירה"
+
+#: includes/Admin/views/edit.php:104
+#: includes/Frontend/views/portal-edit.php:173
+msgid "Choice (dropdown)"
+msgstr "בחירה (רשימה נפתחת)"
+
+#: includes/Frontend/views/portal-create.php:179
+msgid "Choices (comma-separated)"
+msgstr "אפשרויות (מופרדות בפסיקים)"
+
+#: includes/Frontend/views/portal-create.php:41
+msgid "Choose a different way to start"
+msgstr "בחרו דרך אחרת להתחיל"
+
+#: includes/Frontend/views/portal-billing.php:136
+#: includes/Frontend/views/portal-dashboard.php:38
+msgid "Choose a plan"
+msgstr "בחירת מסלול"
+
+#: includes/Frontend/views/portal-create.php:213
+#: includes/Frontend/views/portal-create.php:245
+msgid "Choose a template"
+msgstr "בחירת תבנית"
+
+#: includes/Frontend/views/sign.php:105
+msgid "Choose…"
+msgstr "בחרו…"
+
+#: includes/Admin/views/workspaces.php:47
+#: includes/Frontend/views/portal-contacts.php:72
+#: includes/Frontend/views/portal-documents.php:50
+#: includes/Frontend/views/sign.php:54
+msgid "Clear"
+msgstr "ניקוי"
+
+#: includes/Admin/Admin.php:306
+#: includes/Frontend/views/portal-edit.php:50
+msgid "Click to toggle required"
+msgstr "לחצו כדי לסמן כשדה חובה"
+
+#: includes/Admin/views/settings.php:211
+msgid "Client portal"
+msgstr "פורטל לקוחות"
+
+#: includes/Frontend/views/auth.php:50
+msgid "Code"
+msgstr "קוד"
+
+#: includes/Admin/Admin.php:127
+#: includes/Admin/Admin.php:128
+msgid "ComSign"
+msgstr "ComSign"
+
+#: includes/Services/BillingService.php:59
+msgid "ComSign %1$s (%2$s)"
+msgstr "ComSign %1$s (%2$s)"
+
+#: includes/Services/BillingService.php:153
+msgid "ComSign %1$s (%2$s) renewal"
+msgstr "חידוש ComSign %1$s (%2$s)"
+
+#: includes/Admin/views/list.php:19
+msgid "ComSign Documents"
+msgstr "מסמכי ComSign"
+
+#: includes/Admin/views/settings.php:16
+msgid "ComSign Settings"
+msgstr "הגדרות ComSign"
+
+#: includes/Admin/Admin.php:1216
+msgid "ComSign test email"
+msgstr "דוא“ל בדיקה מ-ComSign"
+
+#: comsign.php:49
+msgid "ComSign: dependencies are missing. Please run \"composer install\" inside the plugin directory."
+msgstr "ComSign: חסרות תלויות. יש להריץ \"composer install\" בתיקיית התוסף."
+
+#: includes/Admin/DocumentsListTable.php:232
+#: includes/Admin/views/analytics.php:26
+#: includes/Audit/AuditLogger.php:49
+#: includes/Frontend/views/portal-insights.php:66
+msgid "Completed"
+msgstr "הושלם"
+
+#: includes/Services/DocumentService.php:1702
+msgid "Completed & signed: \"%s\""
+msgstr "הושלם ונחתם: \"%s\""
+
+#: includes/Admin/views/settings.php:122
+msgid "Completed documents are signed with a cryptographic PKCS#7/PAdES signature."
+msgstr "מסמכים שהושלמו נחתמים בחתימה קריפטוגרפית PKCS#7/PAdES."
+
+#: includes/Frontend/SigningController.php:291
+msgid "Completed:"
+msgstr "הושלם:"
+
+#: includes/Admin/views/analytics.php:42
+#: includes/Frontend/views/portal-insights.php:42
+msgid "Completion rate"
+msgstr "שיעור השלמה"
+
+#: includes/Admin/views/analytics.php:69
+#: includes/Frontend/views/portal-insights.php:55
+msgid "Completions (last 14 days)"
+msgstr "השלמות (14 ימים אחרונים)"
+
+#: includes/Admin/views/analytics.php:70
+msgid "Completions per day"
+msgstr "השלמות ליום"
+
+#: includes/Frontend/views/portal-insights.php:62
+msgid "Completions per day (last 14 days)"
+msgstr "השלמות ליום (14 הימים האחרונים)"
+
+#: includes/Admin/views/new.php:29
+msgid "Compose from text"
+msgstr "יצירה מטקסט"
+
+#: includes/Frontend/views/sign.php:150
+msgid "Confirm decline"
+msgstr "אישור סירוב"
+
+#: includes/Admin/views/settings.php:154
+msgid "Connect your Cardcom terminal to charge subscriptions. The API password is stored encrypted."
+msgstr "חברו את מסוף הקארדקום שלכם לחיוב מנויים. סיסמת ה-API נשמרת מוצפנת."
+
+#: includes/Admin/views/health.php:58
+msgid "Connectivity tests"
+msgstr "בדיקות תקשורת"
+
+#: includes/Frontend/SigningController.php:421
+msgid "Consent required"
+msgstr "נדרשת הסכמה"
+
+#: includes/Audit/AuditLogger.php:47
+msgid "Consented"
+msgstr "ניתנה הסכמה"
+
+#: includes/Frontend/PortalController.php:1001
+msgid "Contact removed."
+msgstr "איש הקשר הוסר."
+
+#: includes/Frontend/PortalController.php:963
+msgid "Contact saved."
+msgstr "איש הקשר נשמר."
+
+#: includes/Frontend/PortalController.php:883
+#: includes/Frontend/PortalController.php:1721
+#: includes/Frontend/views/portal-contacts.php:25
+msgid "Contacts"
+msgstr "אנשי קשר"
+
+#: includes/Frontend/PortalController.php:869
+msgid "Contacts are not available"
+msgstr "אנשי קשר אינם זמינים"
+
+#: includes/Frontend/views/auth.php:53
+msgid "Continue"
+msgstr "המשך"
+
+#: includes/Admin/Admin.php:249
+msgid "Copied!"
+msgstr "הועתק!"
+
+#: includes/Admin/Admin.php:250
+#: includes/Admin/views/edit.php:294
+msgid "Copy link"
+msgstr "העתקת קישור"
+
+#: includes/Frontend/SigningController.php:454
+msgid "Could not complete signing"
+msgstr "לא ניתן להשלים את החתימה"
+
+#: includes/Pdf/FormComposer.php:131
+#: includes/Pdf/PdfComposer.php:82
+msgid "Could not generate the document PDF."
+msgstr "לא ניתן היה להפיק את קובץ ה-PDF של המסמך."
+
+#: includes/Admin/Admin.php:308
+#: includes/Frontend/views/portal-edit.php:52
+msgid "Could not load the document preview."
+msgstr "לא ניתן לטעון את תצוגת המסמך."
+
+#: includes/Frontend/SigningController.php:535
+msgid "Could not reassign"
+msgstr "לא ניתן היה להעביר"
+
+#: includes/Billing/CardcomGateway.php:140
+#: includes/Frontend/PortalController.php:1387
+msgid "Could not start checkout."
+msgstr "לא ניתן היה להתחיל את התשלום."
+
+#: includes/Services/DocumentService.php:93
+msgid "Could not store the uploaded file."
+msgstr "לא ניתן לשמור את הקובץ שהועלה."
+
+#: includes/Admin/views/members.php:136
+msgid "Create"
+msgstr "יצירה"
+
+#: includes/Admin/views/template-bulk.php:41
+msgid "Create & send all"
+msgstr "יצירה ושליחה לכולם"
+
+#: includes/Frontend/views/portal-create.php:141
+#: includes/Frontend/views/portal-create.php:204
+#: includes/Frontend/views/portal-create.php:278
+msgid "Create &amp; send"
+msgstr "יצירה ושליחה"
+
+#: includes/Admin/views/members.php:127
+msgid "Create a sub-workspace"
+msgstr "יצירת סביבת עבודה משנה"
+
+#: includes/Admin/views/new.php:86
+#: includes/Admin/views/template-use.php:37
+msgid "Create document"
+msgstr "יצירת מסמך"
+
+#: includes/Frontend/views/portal-dashboard.php:47
+msgid "Create your first document"
+msgstr "צרו את המסמך הראשון שלכם"
+
+#: includes/Admin/DocumentsListTable.php:56
+#: includes/Admin/views/templates.php:31
+#: includes/Admin/views/workspaces.php:63
+#: includes/Audit/AuditLogger.php:44
+#: includes/Frontend/views/partials/portal-doc-table.php:23
+#: includes/Frontend/views/partials/portal-doc-table.php:36
+#: includes/Services/DocumentExport.php:29
+msgid "Created"
+msgstr "נוצר"
+
+#: includes/Frontend/PricingShortcode.php:89
+#: includes/Frontend/views/portal-billing.php:157
+msgid "Custom branding"
+msgstr "מיתוג מותאם"
+
+#: includes/Frontend/views/portal-insights.php:56
+msgid "Daily completions for the last 14 days. A text table follows below."
+msgstr "השלמות יומיות ב-14 הימים האחרונים. טבלת טקסט מופיעה למטה."
+
+#: includes/Admin/views/template-bulk.php:28
+msgid "Dana Cohen, dana@example.com, +972500000000\nAvi Levi, avi@example.com"
+msgstr "דנה כהן, dana@example.com, +972500000000\nאבי לוי, avi@example.com"
+
+#: includes/Frontend/PortalController.php:1698
+msgid "Dashboard"
+msgstr "לוח בקרה"
+
+#: includes/Admin/Admin.php:294
+#: includes/Frontend/views/portal-edit.php:38
+#: includes/Frontend/views/portal-insights.php:65
+#: includes/Services/DocumentService.php:312
+msgid "Date"
+msgstr "תאריך"
+
+#: includes/Admin/views/edit.php:98
+#: includes/Frontend/views/portal-edit.php:167
+msgid "Date (auto)"
+msgstr "תאריך (אוטומטי)"
+
+#: includes/Frontend/views/portal-create.php:133
+msgid "Date signed"
+msgstr "תאריך החתימה"
+
+#: includes/Frontend/views/portal-billing.php:82
+msgid "Days left in your free trial: %d"
+msgstr "ימים שנותרו בניסיון החינם: %d"
+
+#: includes/Frontend/views/sign.php:140
+msgid "Decline to sign"
+msgstr "סירוב לחתום"
+
+#: includes/Admin/DocumentsListTable.php:233
+#: includes/Admin/views/analytics.php:27
+#: includes/Audit/AuditLogger.php:50
+msgid "Declined"
+msgstr "סורב"
+
+#: includes/Setup/Installer.php:357
+msgid "Default workspace"
+msgstr "סביבת עבודה ברירת מחדל"
+
+#: includes/Frontend/views/portal-create.php:56
+msgid "Define questions; your recipient answers them online and signs, and you get one signed PDF with their answers."
+msgstr "הגדירו שאלות; הנמען עונה עליהן באינטרנט וחותם, ואתם מקבלים PDF חתום אחד עם התשובות שלו."
+
+#: includes/Audit/AuditLogger.php:56
+msgid "Delegated"
+msgstr "הועבר"
+
+#: includes/Admin/views/templates.php:55
+msgid "Delete"
+msgstr "מחיקה"
+
+#: includes/Admin/views/edit.php:408
+msgid "Delete document"
+msgstr "מחיקת מסמך"
+
+#: includes/Admin/views/templates.php:55
+msgid "Delete this template?"
+msgstr "למחוק את התבנית הזו?"
+
+#: includes/Integrations/Webhooks.php:144
+msgid "Delivery failed: %s"
+msgstr "השליחה נכשלה: %s"
+
+#: includes/Admin/views/health.php:39
+msgid "Details"
+msgstr "פרטים"
+
+#: includes/Frontend/PricingShortcode.php:86
+#: includes/Frontend/views/portal-billing.php:154
+msgid "Digital (PKI) signatures"
+msgstr "חתימות דיגיטליות (PKI)"
+
+#: includes/Admin/views/settings.php:113
+msgid "Digital signature (PKI / PAdES)"
+msgstr "חתימה דיגיטלית (PKI / PAdES)"
+
+#: includes/Signature/PadesSignatureProvider.php:34
+msgid "Digital signature (PKI/PAdES)"
+msgstr "חתימה דיגיטלית (PKI/PAdES)"
+
+#: includes/Admin/DocumentsListTable.php:53
+#: includes/Admin/views/analytics.php:85
+#: includes/Frontend/PortalController.php:1649
+#: includes/Frontend/views/partials/portal-doc-table.php:20
+#: includes/Frontend/views/partials/portal-doc-table.php:29
+#: includes/Frontend/views/portal-contact.php:38
+#: includes/Frontend/views/portal-contact.php:46
+#: includes/Frontend/views/sign.php:25
+#: includes/Services/DocumentService.php:621
+#: includes/Signature/CertificatePage.php:31
+msgid "Document"
+msgstr "מסמך"
+
+#: includes/Frontend/SigningController.php:277
+#: includes/Signature/CertificatePage.php:32
+msgid "Document ID"
+msgstr "מזהה מסמך"
+
+#: includes/Admin/views/new.php:60
+#: includes/Frontend/views/portal-create.php:109
+msgid "Document content"
+msgstr "תוכן המסמך"
+
+#: includes/Frontend/PortalController.php:182
+msgid "Document created and sent for signing."
+msgstr "המסמך נוצר ונשלח לחתימה."
+
+#: includes/Admin/Admin.php:1334
+msgid "Document created from template. Review and send."
+msgstr "מסמך נוצר מתבנית. בדקו ושלחו."
+
+#: includes/Frontend/PortalController.php:376
+#: includes/Frontend/PortalController.php:430
+msgid "Document created."
+msgstr "המסמך נוצר."
+
+#: includes/Admin/Admin.php:459
+msgid "Document created. Now add signers and place fields."
+msgstr "המסמך נוצר. כעת הוסיפו חותמים והניחו שדות."
+
+#: includes/Admin/Admin.php:885
+msgid "Document deleted."
+msgstr "המסמך נמחק."
+
+#: includes/Admin/Admin.php:874
+msgid "Document duplicated."
+msgstr "המסמך שוכפל."
+
+#: includes/Services/SendReadiness.php:56
+msgid "Document file is uploaded"
+msgstr "קובץ המסמך הועלה"
+
+#: includes/Frontend/PortalController.php:1023
+#: includes/Frontend/PortalController.php:1634
+msgid "Document not available"
+msgstr "המסמך אינו זמין"
+
+#: includes/Frontend/SignedDownloadController.php:65
+#: includes/Services/DocumentService.php:590
+#: includes/Services/DocumentService.php:615
+#: includes/Services/DocumentService.php:893
+#: includes/Services/DocumentService.php:969
+#: includes/Services/DocumentService.php:1284
+msgid "Document not found."
+msgstr "המסמך לא נמצא."
+
+#: includes/Frontend/views/sign.php:38
+msgid "Document preview"
+msgstr "תצוגת מסמך"
+
+#: includes/Frontend/PortalController.php:144
+#: includes/Frontend/PortalController.php:373
+msgid "Document sent for signing."
+msgstr "המסמך נשלח לחתימה."
+
+#: includes/Signature/PadesSignatureProvider.php:58
+msgid "Document signed via ComSign"
+msgstr "המסמך נחתם באמצעות ComSign"
+
+#: includes/Admin/views/new.php:38
+#: includes/Admin/views/new.php:56
+#: includes/Frontend/views/portal-create.php:105
+msgid "Document title"
+msgstr "כותרת המסמך"
+
+#: includes/Frontend/views/portal-create.php:85
+msgid "Document title (optional)"
+msgstr "כותרת המסמך (לא חובה)"
+
+#: includes/Frontend/SigningController.php:97
+#: includes/Frontend/SigningController.php:438
+#: includes/Frontend/SigningController.php:525
+msgid "Document unavailable"
+msgstr "המסמך אינו זמין"
+
+#: includes/Frontend/SigningController.php:564
+msgid "Document unavailable."
+msgstr "המסמך אינו זמין."
+
+#: includes/Admin/Admin.php:431
+msgid "Document uploaded. Now add signers and place signature fields."
+msgstr "המסמך הועלה. כעת הוסיפו חותמים והניחו שדות חתימה."
+
+#: includes/Admin/views/settings.php:202
+msgid "Document verification form — lets anyone confirm a signed document is authentic using its ID and verification code (SHA-256), and see who signed it."
+msgstr "טופס אימות מסמך — מאפשר לכל אחד לוודא שמסמך חתום אותנטי באמצעות המזהה וקוד האימות (SHA-256), ולראות מי חתם עליו."
+
+#: includes/Admin/Admin.php:138
+#: includes/Admin/Admin.php:139
+#: includes/Admin/views/workspaces.php:62
+#: includes/Frontend/PortalController.php:1605
+#: includes/Frontend/PortalController.php:1703
+#: includes/Frontend/views/portal-contacts.php:95
+#: includes/Frontend/views/portal-documents.php:34
+msgid "Documents"
+msgstr "מסמכים"
+
+#: includes/Admin/views/analytics.php:55
+#: includes/Frontend/views/portal-insights.php:81
+msgid "Documents by status"
+msgstr "מסמכים לפי סטטוס"
+
+#: includes/Frontend/views/portal-contact.php:30
+msgid "Documents signed"
+msgstr "מסמכים שנחתמו"
+
+#: includes/Admin/views/edit.php:348
+#: includes/Frontend/views/portal-document.php:59
+#: includes/Frontend/views/portal-edit.php:129
+msgid "Done:"
+msgstr "בוצע:"
+
+#: includes/Admin/views/edit.php:179
+msgid "Download audit trail (PDF)"
+msgstr "הורדת יומן ביקורת (PDF)"
+
+#: includes/Frontend/views/portal-document.php:44
+msgid "Download original"
+msgstr "הורדת המקור"
+
+#: includes/Admin/views/edit.php:69
+#: includes/Frontend/views/portal-document.php:46
+msgid "Download signed PDF"
+msgstr "הורדת PDF חתום"
+
+#: includes/Audit/AuditLogger.php:51
+msgid "Downloaded"
+msgstr "הורד"
+
+#: includes/Admin/DocumentsListTable.php:228
+#: includes/Admin/views/analytics.php:22
+msgid "Draft"
+msgstr "טיוטה"
+
+#: includes/Frontend/PortalController.php:185
+msgid "Draft created."
+msgstr "הטיוטה נוצרה."
+
+#: includes/Admin/views/edit.php:109
+#: includes/Frontend/views/portal-edit.php:179
+msgid "Drag to reposition; double-click to remove; click a field label to toggle “required”."
+msgstr "גררו למיקום; לחיצה כפולה למחיקה; לחיצה על תווית השדה מסמנת כחובה."
+
+#: includes/Frontend/views/sign.php:48
+msgid "Draw"
+msgstr "ציור"
+
+#: includes/Frontend/views/sign.php:53
+msgid "Drawing area for your signature"
+msgstr "אזור ציור לחתימה שלך"
+
+#: includes/Admin/DocumentsListTable.php:152
+msgid "Duplicate"
+msgstr "שכפול"
+
+#: includes/Admin/views/template-bulk.php:26
+msgid "Each line creates and sends a separate document. Format: name, email, phone (phone optional)."
+msgstr "כל שורה יוצרת ושולחת מסמך נפרד. פורמט: שם, אימייל, טלפון (טלפון אופציונלי)."
+
+#: includes/Frontend/views/portal-integrations.php:41
+msgid "Each request is signed with HMAC-SHA256 of the body in the X-ComSign-Signature header. Verify it with this secret."
+msgstr "כל בקשה נחתמת ב-HMAC-SHA256 של גוף ההודעה בכותרת X-ComSign-Signature. אמתו אותה עם הסוד הזה."
+
+#: includes/Services/SendReadiness.php:109
+msgid "Each signer should have somewhere to sign."
+msgstr "לכל חותם צריך להיות מקום לחתום."
+
+#: includes/Frontend/PortalController.php:1069
+#: includes/Frontend/views/portal-document.php:42
+msgid "Edit document"
+msgstr "עריכת מסמך"
+
+#: includes/Signature/ElectronicSignatureProvider.php:34
+msgid "Electronic signature"
+msgstr "חתימה אלקטרונית"
+
+#: includes/Admin/Admin.php:296
+#: includes/Admin/views/members.php:38
+#: includes/Admin/views/members.php:85
+#: includes/Admin/views/members.php:114
+#: includes/Frontend/views/portal-contacts.php:39
+#: includes/Frontend/views/portal-contacts.php:83
+#: includes/Frontend/views/portal-contacts.php:92
+#: includes/Frontend/views/portal-create.php:126
+#: includes/Frontend/views/portal-create.php:198
+#: includes/Frontend/views/portal-create.php:267
+#: includes/Frontend/views/portal-document.php:87
+#: includes/Frontend/views/portal-document.php:99
+#: includes/Frontend/views/portal-edit.php:40
+#: includes/Frontend/views/portal-edit.php:111
+#: includes/Frontend/views/portal-team.php:32
+#: includes/Frontend/views/portal-team.php:53
+#: includes/Frontend/views/portal-team.php:62
+#: includes/Frontend/views/portal-team.php:95
+#: includes/Frontend/views/portal-team.php:103
+#: includes/Frontend/views/sign.php:166
+#: includes/Signature/CertificatePage.php:40
+msgid "Email"
+msgstr "דוא״ל"
+
+#: includes/Admin/views/edit.php:100
+#: includes/Frontend/views/portal-edit.php:169
+msgid "Email (auto)"
+msgstr "אימייל (אוטומטי)"
+
+#: includes/Admin/views/settings.php:29
+msgid "Email a reminder to signers who have not signed yet."
+msgstr "שליחת תזכורת במייל לחותמים שטרם חתמו."
+
+#: includes/Support/HealthCheck.php:116
+msgid "Email delivery"
+msgstr "שליחת דוא“ל"
+
+#: includes/Admin/views/edit.php:320
+msgid "Email is optional — leave it empty to share a signing link by WhatsApp or any other channel."
+msgstr "האימייל אופציונלי — השאירו ריק כדי לשתף קישור לחתימה בוואטסאפ או בכל ערוץ אחר."
+
+#: includes/Admin/views/edit.php:253
+msgid "Email link"
+msgstr "שליחת קישור במייל"
+
+#: includes/Frontend/SignerAuth.php:43
+msgid "Email one-time code"
+msgstr "קוד חד-פעמי באימייל"
+
+#: includes/Integrations/Webhooks.php:152
+msgid "Endpoint responded with HTTP %d."
+msgstr "היעד הגיב עם HTTP %d."
+
+#: includes/Admin/Admin.php:303
+#: includes/Frontend/views/portal-edit.php:47
+msgid "Enter options separated by commas:"
+msgstr "הזינו אפשרויות מופרדות בפסיקים:"
+
+#: includes/Frontend/views/verify.php:17
+msgid "Enter the document ID and its verification code to confirm it is authentic and see who signed it."
+msgstr "הזינו את מזהה המסמך ואת קוד האימות כדי לוודא שהוא אותנטי ולראות מי חתם עליו."
+
+#: includes/Billing/Plans.php:76
+msgid "Enterprise"
+msgstr "ארגוני"
+
+#: includes/Admin/views/edit.php:191
+#: includes/Services/DocumentService.php:627
+msgid "Event"
+msgstr "אירוע"
+
+#: includes/Admin/views/workspaces.php:32
+msgid "Every customer workspace on this site, with its plan, members and document count. Only you (the site operator) can see this cross-tenant view."
+msgstr "כל סביבת עבודה של לקוח באתר זה, עם המסלול, החברים ומספר המסמכים שלה. רק אתם (מפעיל האתר) רואים תצוגה חוצת-דיירים זו."
+
+#: includes/Admin/views/settings.php:86
+msgid "Every event is POSTed here as JSON, signed with X-ComSign-Signature (HMAC-SHA256 of the body using the secret below)."
+msgstr "כל אירוע נשלח לכאן כ-JSON, חתום ב-X-ComSign-Signature (HMAC-SHA256 של גוף הבקשה עם הסוד שלמטה)."
+
+#: includes/Services/SendReadiness.php:94
+msgid "Every signer has a field to fill"
+msgstr "לכל חותם יש שדה למילוי"
+
+#: includes/Services/SendReadiness.php:104
+msgid "Every signer has a signature field"
+msgstr "לכל חותם יש שדה חתימה"
+
+#: includes/Services/DocumentService.php:1393
+msgid "Every signer must have at least one field. Please assign a field to each signer."
+msgstr "לכל חותם חייב להיות לפחות שדה אחד. אנא שייכו שדה לכל חותם."
+
+#: includes/Frontend/views/portal-integrations.php:49
+msgid "Example payload"
+msgstr "דוגמת מטען (Payload)"
+
+#: includes/Admin/views/workspaces.php:26
+#: includes/Audit/AuditLogger.php:54
+#: includes/Frontend/views/portal-billing.php:34
+msgid "Expired"
+msgstr "פג תוקף"
+
+#: includes/Admin/views/edit.php:145
+#: includes/Frontend/views/portal-document.php:35
+msgid "Expires:"
+msgstr "פג תוקף:"
+
+#: includes/Audit/AuditLogger.php:55
+msgid "Expiry extended"
+msgstr "התוקף הוארך"
+
+#: includes/Frontend/views/portal-documents.php:62
+msgid "Export CSV"
+msgstr "ייצוא CSV"
+
+#: includes/Admin/views/edit.php:177
+msgid "Extend"
+msgstr "הארכה"
+
+#: includes/Admin/views/edit.php:171
+msgid "Extend deadline by"
+msgstr "הארכת מועד אחרון ב-"
+
+#: includes/Admin/views/edit.php:87
+msgid "Field for:"
+msgstr "שדה עבור:"
+
+#: includes/Admin/Admin.php:304
+#: includes/Frontend/views/portal-edit.php:48
+msgid "Field label shown to the signer (optional):"
+msgstr "תווית השדה שתוצג לחותם (לא חובה):"
+
+#: includes/Frontend/views/portal-edit.php:163
+msgid "Field:"
+msgstr "שדה:"
+
+#: includes/Frontend/PortalController.php:513
+msgid "Fields saved."
+msgstr "השדות נשמרו."
+
+#: includes/Frontend/views/portal-create.php:130
+msgid "Fields to add for this signer"
+msgstr "שדות להוספה עבור חותם זה"
+
+#: includes/Admin/Admin.php:301
+#: includes/Frontend/views/portal-edit.php:45
+msgid "File"
+msgstr "קובץ"
+
+#: includes/Admin/Admin.php:1438
+#: includes/Frontend/PortalController.php:244
+#: includes/Frontend/PortalController.php:249
+#: includes/Frontend/SignedDownloadController.php:77
+msgid "File not available."
+msgstr "הקובץ אינו זמין."
+
+#: includes/Admin/views/edit.php:105
+#: includes/Frontend/views/portal-edit.php:174
+msgid "File upload"
+msgstr "העלאת קובץ"
+
+#: includes/Frontend/views/sign.php:82
+msgid "Fill in the details below"
+msgstr "מלאו את הפרטים הבאים"
+
+#: includes/Admin/DocumentsListTable.php:127
+#: includes/Admin/views/workspaces.php:45
+#: includes/Frontend/views/portal-documents.php:48
+msgid "Filter"
+msgstr "סינון"
+
+#: includes/Admin/DocumentsListTable.php:115
+#: includes/Frontend/views/portal-documents.php:41
+msgid "Filter by status"
+msgstr "סינון לפי סטטוס"
+
+#: includes/Frontend/views/portal-edit.php:156
+msgid "For signer:"
+msgstr "עבור חותם:"
+
+#: includes/Services/DocumentService.php:364
+msgid "Form"
+msgstr "טופס"
+
+#: includes/Frontend/views/portal-create.php:55
+msgid "Form / questionnaire"
+msgstr "טופס / שאלון"
+
+#: includes/Frontend/PortalController.php:427
+msgid "Form sent for completion."
+msgstr "הטופס נשלח למילוי."
+
+#: includes/Frontend/views/portal-create.php:157
+msgid "Form title"
+msgstr "כותרת הטופס"
+
+#: includes/Admin/views/workspaces.php:22
+#: includes/Frontend/views/portal-billing.php:30
+msgid "Free trial"
+msgstr "ניסיון חינם"
+
+#: includes/Admin/views/edit.php:309
+#: includes/Admin/views/template-use.php:31
+#: includes/Frontend/views/portal-contacts.php:35
+#: includes/Frontend/views/portal-create.php:122
+#: includes/Frontend/views/portal-create.php:132
+#: includes/Frontend/views/portal-create.php:194
+#: includes/Frontend/views/portal-create.php:263
+#: includes/Frontend/views/portal-edit.php:107
+#: includes/Frontend/views/sign.php:162
+#: includes/Services/DocumentService.php:310
+msgid "Full name"
+msgstr "שם מלא"
+
+#: includes/Support/HealthCheck.php:70
+msgid "GD is available for stamping signature images."
+msgstr "GD זמין להטבעת תמונות חתימה."
+
+#: includes/Support/HealthCheck.php:71
+msgid "GD is missing; drawn/typed signature images cannot be processed."
+msgstr "GD חסר; לא ניתן לעבד תמונות חתימה מצוירות/מוקלדות."
+
+#: includes/Admin/views/edit.php:236
+msgid "Get signing link"
+msgstr "קבלת קישור לחתימה"
+
+#: includes/Services/BillingNotifications.php:123
+msgid "Good news — your workspace has been reactivated and you can send documents again."
+msgstr "חדשות טובות — סביבת העבודה שלכם הופעלה מחדש ותוכלו לשלוח מסמכים שוב."
+
+#: includes/Email/Mailer.php:38
+msgid "Hello %s,"
+msgstr "שלום %s,"
+
+#: includes/Frontend/views/sign.php:31
+msgid "Hello %s, please review the document below and add your signature."
+msgstr "שלום %s, אנא עיינו במסמך שלמטה והוסיפו את חתימתכם."
+
+#: includes/Email/Mailer.php:39
+msgid "Hello,"
+msgstr "שלום,"
+
+#: includes/Frontend/views/portal-create.php:212
+#: includes/Frontend/views/portal-create.php:244
+#: includes/Frontend/views/portal-edit.php:67
+msgid "How it works"
+msgstr "איך זה עובד"
+
+#: includes/Admin/views/new.php:20
+msgid "How signing works"
+msgstr "איך החתימה עובדת"
+
+#: includes/Admin/views/new.php:27
+msgid "How to add a document"
+msgstr "איך מוסיפים מסמך"
+
+#: includes/Frontend/views/portal-create.php:46
+msgid "How would you like to create this document?"
+msgstr "איך תרצו ליצור את המסמך?"
+
+#: includes/Database/FieldRepository.php:170
+msgid "I confirm"
+msgstr "אני מאשר/ת"
+
+#: includes/Frontend/views/sign.php:129
+msgid "I have read the document and I agree to sign it electronically."
+msgstr "קראתי את המסמך ואני מסכים/ה לחתום עליו באופן מקוון."
+
+#: includes/Admin/views/edit.php:193
+#: includes/Admin/views/workspaces.php:142
+#: includes/Services/DocumentService.php:629
+msgid "IP"
+msgstr "IP"
+
+#: includes/Signature/CertificatePage.php:45
+msgid "IP address"
+msgstr "כתובת IP"
+
+#: includes/Support/HealthCheck.php:67
+msgid "Image support (GD)"
+msgstr "תמיכה בתמונות (GD)"
+
+#: includes/Admin/Admin.php:293
+#: includes/Admin/views/edit.php:97
+#: includes/Frontend/views/portal-create.php:134
+#: includes/Frontend/views/portal-edit.php:37
+#: includes/Frontend/views/portal-edit.php:166
+#: includes/Services/DocumentService.php:308
+msgid "Initials"
+msgstr "ראשי תיבות"
+
+#: includes/Frontend/PortalController.php:1522
+#: includes/Frontend/PortalController.php:1708
+#: includes/Frontend/views/portal-insights.php:29
+msgid "Insights"
+msgstr "תובנות"
+
+#: includes/Admin/views/settings.php:81
+#: includes/Frontend/PortalController.php:1454
+#: includes/Frontend/PortalController.php:1467
+#: includes/Frontend/PortalController.php:1746
+#: includes/Frontend/views/portal-integrations.php:22
+msgid "Integrations"
+msgstr "אינטגרציות"
+
+#: includes/Frontend/SigningController.php:354
+#: includes/Frontend/SigningController.php:406
+#: includes/Frontend/SigningController.php:482
+#: includes/Frontend/SigningController.php:508
+msgid "Invalid link"
+msgstr "קישור לא תקין"
+
+#: includes/Frontend/SigningController.php:553
+msgid "Invalid link."
+msgstr "קישור לא תקין."
+
+#: includes/Frontend/SigningController.php:89
+msgid "Invalid or expired link"
+msgstr "קישור לא תקין או שפג תוקפו"
+
+#: includes/Frontend/SignedDownloadController.php:71
+msgid "Invalid or expired link."
+msgstr "קישור לא תקין או שפג תוקפו."
+
+#: includes/Services/BillingService.php:47
+msgid "Invalid plan."
+msgstr "מסלול לא תקין."
+
+#: includes/Services/DocumentService.php:691
+msgid "Invalid upload."
+msgstr "העלאה לא תקינה."
+
+#: includes/Admin/Admin.php:684
+#: includes/Frontend/PortalController.php:1227
+msgid "Invitation cancelled."
+msgstr "ההזמנה בוטלה."
+
+#: includes/Admin/Admin.php:535
+#: includes/Frontend/PortalController.php:229
+msgid "Invitation re-sent."
+msgstr "ההזמנה נשלחה מחדש."
+
+#: includes/Admin/Admin.php:625
+#: includes/Frontend/PortalController.php:1182
+msgid "Invitation saved. The user will join when they sign in with this email."
+msgstr "ההזמנה נשמרה. המשתמש יצטרף כשיתחבר עם אימייל זה."
+
+#: includes/Support/HealthCheck.php:118
+msgid "Invitations are sent with wp_mail(). Use “Send test email” below to confirm delivery on this server."
+msgstr "ההזמנות נשלחות עם wp_mail(). השתמשו ב“שליחת דוא“ל בדיקה” למטה כדי לאמת שליחה בשרת זה."
+
+#: includes/Admin/views/members.php:109
+#: includes/Frontend/views/portal-team.php:27
+msgid "Invite a member"
+msgstr "הזמנת חבר"
+
+#: includes/Frontend/SigningController.php:446
+msgid "It is not your turn to sign yet."
+msgstr "עדיין לא הגיע תורך לחתום."
+
+#: includes/Frontend/views/portal-billing.php:121
+msgid "Keep my subscription"
+msgstr "השאר את המנוי שלי"
+
+#: includes/Admin/views/analytics.php:87
+msgid "Last activity"
+msgstr "פעילות אחרונה"
+
+#: includes/Admin/views/settings.php:171
+msgid "Leave blank to keep the current password."
+msgstr "השאירו ריק כדי לשמור את הסיסמה הנוכחית."
+
+#: includes/Admin/views/settings.php:243
+msgid "Link"
+msgstr "קישור"
+
+#: includes/Frontend/SigningController.php:119
+#: includes/Frontend/SigningController.php:442
+msgid "Link expired"
+msgstr "הקישור פג תוקף"
+
+#: includes/Admin/views/edit.php:377
+#: includes/Admin/views/template-bulk.php:36
+msgid "Link expires after"
+msgstr "הקישור פג תוקף לאחר"
+
+#: includes/Admin/Admin.php:307
+#: includes/Frontend/views/portal-edit.php:51
+msgid "Loading document…"
+msgstr "טוען מסמך…"
+
+#: includes/Admin/views/settings.php:51
+msgid "Logo URL"
+msgstr "כתובת לוגו"
+
+#: includes/Admin/DocumentsListTable.php:151
+#: includes/Admin/views/workspaces.php:64
+msgid "Manage"
+msgstr "ניהול"
+
+#: includes/Admin/views/members.php:37
+msgid "Member"
+msgstr "חבר"
+
+#: includes/Admin/Admin.php:624
+#: includes/Frontend/PortalController.php:1182
+msgid "Member added."
+msgstr "החבר נוסף."
+
+#: includes/Admin/Admin.php:668
+#: includes/Frontend/PortalController.php:1236
+msgid "Member removed."
+msgstr "החבר הוסר."
+
+#: includes/Admin/Admin.php:174
+#: includes/Admin/Admin.php:175
+#: includes/Admin/views/workspaces.php:61
+msgid "Members"
+msgstr "חברים"
+
+#: includes/Admin/views/edit.php:382
+#: includes/Admin/views/template-bulk.php:32
+msgid "Message to signers (optional)"
+msgstr "הודעה לחותמים (אופציונלי)"
+
+#: includes/Billing/CardcomGateway.php:57
+msgid "Missing billing token."
+msgstr "חסר טוקן חיוב."
+
+#: includes/Billing/CardcomGateway.php:37
+msgid "Missing transaction reference."
+msgstr "חסר מזהה עסקה."
+
+#: includes/Frontend/views/portal-billing.php:176
+msgid "Monthly — %s"
+msgstr "חודשי — %s"
+
+#: includes/Frontend/views/sign.php:132
+msgid "More information"
+msgstr "מידע נוסף"
+
+#: includes/Frontend/views/portal-create.php:174
+msgid "Multiple choice"
+msgstr "בחירה מרובה"
+
+#: includes/Frontend/views/portal-integrations.php:34
+msgid "Must be a public https URL. Leave blank to disable."
+msgstr "חייבת להיות כתובת https ציבורית. השאירו ריק כדי לבטל."
+
+#: includes/Frontend/views/sign.php:133
+msgid "My electronic signature is legally binding and has the same effect as a handwritten signature. The time, my IP address and browser are recorded as proof of signing."
+msgstr "החתימה המקוונת שלי מחייבת מבחינה משפטית ובעלת תוקף זהה לחתימה ידנית. מועד החתימה, כתובת ה-IP והדפדפן שלי נרשמים כהוכחה לחתימה."
+
+#: includes/Admin/Admin.php:295
+#: includes/Frontend/views/portal-contacts.php:82
+#: includes/Frontend/views/portal-contacts.php:91
+#: includes/Frontend/views/portal-document.php:86
+#: includes/Frontend/views/portal-document.php:98
+#: includes/Frontend/views/portal-edit.php:39
+#: includes/Frontend/views/portal-team.php:52
+#: includes/Frontend/views/portal-team.php:61
+#: includes/Signature/CertificatePage.php:39
+msgid "Name"
+msgstr "שם"
+
+#: includes/Admin/views/edit.php:99
+#: includes/Frontend/views/portal-edit.php:168
+msgid "Name (auto)"
+msgstr "שם (אוטומטי)"
+
+#: includes/Admin/views/analytics.php:78
+#: includes/Frontend/views/portal-insights.php:93
+msgid "Needs attention (out > 7 days)"
+msgstr "דורש תשומת לב (נשלח לפני יותר מ-7 ימים)"
+
+#: includes/Frontend/PortalController.php:840
+#: includes/Frontend/PortalController.php:1716
+#: includes/Frontend/views/portal-create.php:38
+#: includes/Frontend/views/portal-dashboard.php:63
+msgid "New document"
+msgstr "מסמך חדש"
+
+#: includes/Frontend/views/portal-documents.php:79
+msgid "Next"
+msgstr "הבא"
+
+#: includes/Support/HealthCheck.php:129
+msgid "No REST API key is set. Save Settings to generate one if you use the API."
+msgstr "לא הוגדר מפתח REST API. שמרו את ההגדרות כדי לייצר מפתח אם אתם משתמשים ב-API."
+
+#: includes/Frontend/views/portal-contacts.php:77
+msgid "No contacts yet."
+msgstr "אין עדיין אנשי קשר."
+
+#: includes/Frontend/PricingShortcode.php:104
+msgid "No credit card required to start. Cancel anytime."
+msgstr "לא נדרש כרטיס אשראי כדי להתחיל. ניתן לבטל בכל עת."
+
+#: includes/Frontend/views/portal-insights.php:32
+msgid "No data yet — send a document to start seeing insights."
+msgstr "אין עדיין נתונים — שלחו מסמך כדי להתחיל לראות תובנות."
+
+#: includes/Frontend/views/partials/portal-doc-table.php:13
+msgid "No documents yet."
+msgstr "אין עדיין מסמכים."
+
+#: includes/Admin/DocumentsListTable.php:218
+msgid "No documents yet. Upload your first PDF to get started."
+msgstr "אין עדיין מסמכים. העלו את קובץ ה-PDF הראשון כדי להתחיל."
+
+#: includes/Admin/Admin.php:843
+msgid "No emails were sent because the signer(s) have no email. Use \"Get signing link\" to share their link."
+msgstr "לא נשלחו מיילים כי לחותם/ים אין כתובת אימייל. השתמשו ב\"קבלת קישור לחתימה\" לשיתוף הקישור."
+
+#: includes/Admin/views/edit.php:150
+#: includes/Admin/views/edit.php:186
+msgid "No events recorded yet."
+msgstr "טרם נרשמו אירועים."
+
+#: includes/Frontend/SignerAuth.php:41
+msgid "No extra verification"
+msgstr "ללא אימות נוסף"
+
+#: includes/Services/DocumentService.php:687
+msgid "No file was uploaded, or the upload failed."
+msgstr "לא הועלה קובץ, או שההעלאה נכשלה."
+
+#: includes/Frontend/SigningController.php:308
+msgid "No matching signed document was found for that ID and code."
+msgstr "לא נמצא מסמך חתום תואם למזהה ולקוד שהוזנו."
+
+#: includes/Frontend/views/portal-document.php:81
+msgid "No signers added yet."
+msgstr "לא נוספו עדיין חותמים."
+
+#: includes/Admin/views/edit.php:216
+msgid "No signers yet."
+msgstr "אין עדיין חותמים."
+
+#: includes/Admin/views/workspaces.php:27
+#: includes/Frontend/views/portal-billing.php:35
+msgid "No subscription"
+msgstr "אין מנוי"
+
+#: includes/Frontend/views/portal-create.php:69
+msgid "No templates in this workspace yet."
+msgstr "אין עדיין תבניות בסביבת עבודה זו."
+
+#: includes/Admin/views/templates.php:24
+msgid "No templates yet."
+msgstr "אין עדיין תבניות."
+
+#: includes/Support/HealthCheck.php:136
+msgid "No webhook URL configured (optional)."
+msgstr "לא הוגדרה כתובת webhook (אופציונלי)."
+
+#: includes/Integrations/Webhooks.php:104
+msgid "No webhook URL is configured."
+msgstr "לא הוגדרה כתובת webhook."
+
+#: includes/Frontend/PortalController.php:706
+msgid "No workspace"
+msgstr "אין סביבת עבודה"
+
+#: includes/Frontend/PortalController.php:707
+msgid "No workspace yet"
+msgstr "אין עדיין סביבת עבודה"
+
+#: includes/Admin/views/workspaces.php:52
+msgid "No workspaces yet."
+msgstr "אין עדיין סביבות עבודה."
+
+#: includes/Frontend/PortalController.php:802
+#: includes/Frontend/PortalController.php:868
+#: includes/Frontend/PortalController.php:1110
+#: includes/Frontend/PortalController.php:1261
+msgid "Not allowed"
+msgstr "אין הרשאה"
+
+#: includes/Frontend/PortalController.php:1022
+msgid "Not available"
+msgstr "לא זמין"
+
+#: includes/Frontend/PortalController.php:1633
+msgid "Not found"
+msgstr "לא נמצא"
+
+#: includes/Admin/views/analytics.php:80
+#: includes/Frontend/views/portal-insights.php:95
+msgid "Nothing stuck — every document is moving."
+msgstr "שום דבר לא תקוע — כל המסמכים מתקדמים."
+
+#: includes/Frontend/PortalController.php:272
+msgid "Nothing to export."
+msgstr "אין מה לייצא."
+
+#: includes/Admin/Admin.php:298
+#: includes/Admin/views/edit.php:102
+#: includes/Database/FieldRepository.php:168
+#: includes/Frontend/views/portal-edit.php:42
+#: includes/Frontend/views/portal-edit.php:171
+msgid "Number"
+msgstr "מספר"
+
+#: includes/Admin/views/health.php:17
+msgid "OK"
+msgstr "תקין"
+
+#: includes/Admin/views/new.php:80
+msgid "One per line, in the form name = value. Each {{name}} in the content is replaced with its value. {{date}} and {{site}} are available automatically."
+msgstr "שורה אחת לכל משתנה, בפורמט name = value. כל {{name}} בתוכן יוחלף בערכו. {{date}} ו-{{site}} זמינים אוטומטית."
+
+#: includes/Frontend/views/portal-billing.php:133
+msgid "Online payment is not set up on this site yet. Please contact support to choose a paid plan."
+msgstr "תשלום מקוון עדיין לא הוגדר באתר. אנא פנו לתמיכה כדי לבחור מסלול בתשלום."
+
+#: includes/Services/DocumentService.php:701
+msgid "Only PDF files are allowed."
+msgstr "ניתן להעלות קבצי PDF בלבד."
+
+#: includes/Frontend/PortalController.php:1448
+msgid "Only a workspace owner can manage integrations."
+msgstr "רק בעלים של סביבת עבודה יכול לנהל אינטגרציות."
+
+#: includes/Frontend/PortalController.php:1263
+msgid "Only a workspace owner can manage the plan and billing."
+msgstr "רק בעלים של מרחב העבודה יכול לנהל את המסלול והחיוב."
+
+#: includes/Frontend/PortalController.php:669
+msgid "Open your area"
+msgstr "פתחו את האזור האישי"
+
+#: includes/Support/HealthCheck.php:78
+msgid "OpenSSL (PKI signing)"
+msgstr "OpenSSL (חתימת PKI)"
+
+#: includes/Support/HealthCheck.php:81
+msgid "OpenSSL is available for cryptographic (PAdES) signing."
+msgstr "OpenSSL זמין לחתימה קריפטוגרפית (PAdES)."
+
+#: includes/Signature/Certificate.php:67
+msgid "OpenSSL is not available on this server, so PKI signing cannot be enabled."
+msgstr "OpenSSL אינו זמין בשרת זה, ולכן לא ניתן להפעיל חתימת PKI."
+
+#: includes/Admin/views/settings.php:116
+msgid "OpenSSL is not available on this server, so cryptographic signing cannot be enabled."
+msgstr "OpenSSL אינו זמין בשרת זה, ולכן לא ניתן להפעיל חתימה קריפטוגרפית."
+
+#: includes/Support/HealthCheck.php:82
+msgid "OpenSSL is unavailable; documents use electronic signatures only."
+msgstr "OpenSSL אינו זמין; המסמכים משתמשים בחתימה אלקטרונית בלבד."
+
+#: includes/Admin/views/workspaces.php:137
+msgid "Operator"
+msgstr "מפעיל"
+
+#: includes/Admin/views/settings.php:259
+msgid "Optional safety net. Payments activate automatically when the customer returns from Cardcom; this URL is sent per-transaction, so there is nothing to set in your terminal."
+msgstr "רשת ביטחון אופציונלית. התשלומים מופעלים אוטומטית כשהלקוח חוזר מקארדקום; כתובת זו נשלחת לכל עסקה בנפרד, כך שאין צורך להגדיר דבר במסוף שלכם."
+
+#: includes/Admin/views/settings.php:131
+msgid "Optional. An RFC-3161 timestamp proves when each document was signed (PAdES-T), giving the signature long-term validity. Leave empty to disable."
+msgstr "לא חובה. חותמת זמן לפי RFC-3161 מוכיחה מתי כל מסמך נחתם (PAdES-T), ומעניקה לחתימה תוקף לטווח ארוך. השאירו ריק כדי להשבית."
+
+#: includes/Admin/views/settings.php:182
+msgid "Optional. Payments are confirmed automatically when the customer returns from Cardcom, so you do not need to configure anything in your terminal. ComSign also sends this URL with each transaction as a safety net — it is per-transaction and will not affect other systems that share the same Cardcom terminal."
+msgstr "אופציונלי. התשלומים מאומתים אוטומטית כשהלקוח חוזר מקארדקום, כך שאין צורך להגדיר דבר במסוף שלכם. ComSign גם שולחת כתובת זו עם כל עסקה כרשת ביטחון — היא נשלחת לכל עסקה בנפרד ולא תשפיע על מערכות אחרות שמשתמשות באותו מסוף קארדקום."
+
+#: includes/Admin/views/edit.php:70
+msgid "Original PDF"
+msgstr "PDF מקורי"
+
+#: includes/Frontend/views/portal-integrations.php:26
+#: includes/Support/HealthCheck.php:136
+#: includes/Support/HealthCheck.php:140
+#: includes/Support/HealthCheck.php:142
+msgid "Outgoing webhook"
+msgstr "Webhook יוצא"
+
+#: includes/Support/Roles.php:89
+msgid "Owner"
+msgstr "בעלים"
+
+#: includes/Admin/views/workspaces.php:58
+msgid "Owner(s)"
+msgstr "בעלים"
+
+#: includes/Admin/views/new.php:42
+#: includes/Frontend/views/portal-create.php:89
+msgid "PDF file"
+msgstr "קובץ PDF"
+
+#: includes/Admin/views/new.php:44
+msgid "PDF only, up to 25 MB."
+msgstr "PDF בלבד, עד 25 מ״ב."
+
+#: includes/Frontend/PortalController.php:330
+msgid "PDF uploaded. Now add signers and place fields."
+msgstr "ה-PDF הועלה. כעת הוסיפו חותמים ומקמו שדות."
+
+#: includes/Support/HealthCheck.php:57
+msgid "PHP version"
+msgstr "גרסת PHP"
+
+#: includes/Frontend/views/portal-documents.php:75
+msgid "Page %1$d of %2$d"
+msgstr "עמוד %1$d מתוך %2$d"
+
+#: includes/Admin/DocumentsListTable.php:231
+#: includes/Admin/views/analytics.php:25
+msgid "Partially signed"
+msgstr "נחתם חלקית"
+
+#: includes/Admin/views/settings.php:192
+msgid "Paste these shortcodes into any page or post. The links are the public entry points for your customers."
+msgstr "הדביקו את הקודים הקצרים בכל עמוד או פוסט. הקישורים הם נקודות הכניסה הציבוריות ללקוחות שלכם."
+
+#: includes/Admin/views/workspaces.php:24
+#: includes/Frontend/views/portal-billing.php:32
+msgid "Payment due"
+msgstr "תשלום נדרש"
+
+#: includes/Frontend/views/portal-billing.php:57
+msgid "Payment received — your plan is now active."
+msgstr "התשלום התקבל — המסלול שלכם פעיל כעת."
+
+#: includes/Frontend/views/portal-billing.php:61
+msgid "Payment was not completed. You can try again below."
+msgstr "התשלום לא הושלם. אפשר לנסות שוב למטה."
+
+#: includes/Admin/views/members.php:83
+#: includes/Frontend/views/portal-team.php:91
+msgid "Pending invitations"
+msgstr "הזמנות ממתינות"
+
+#: includes/Frontend/views/portal-contacts.php:26
+msgid "People you sign with are saved here automatically and offered as suggestions when you add signers."
+msgstr "אנשים שאתם חותמים איתם נשמרים כאן אוטומטית ומוצעים כהשלמה כשאתם מוסיפים חותמים."
+
+#: includes/Admin/views/edit.php:404
+msgid "Permanently delete this document and all its data?"
+msgstr "למחוק לצמיתות את המסמך הזה ואת כל הנתונים שלו?"
+
+#: includes/Setup/Installer.php:397
+msgid "Personal workspace"
+msgstr "מרחב עבודה אישי"
+
+#: includes/Frontend/views/portal-contacts.php:84
+#: includes/Frontend/views/portal-contacts.php:93
+msgid "Phone"
+msgstr "טלפון"
+
+#: includes/Frontend/views/portal-contacts.php:43
+#: includes/Frontend/views/portal-create.php:271
+#: includes/Frontend/views/portal-edit.php:115
+#: includes/Frontend/views/sign.php:170
+msgid "Phone (optional)"
+msgstr "טלפון (לא חובה)"
+
+#: includes/Admin/views/edit.php:311
+#: includes/Admin/views/template-use.php:33
+msgid "Phone for WhatsApp (optional)"
+msgstr "טלפון לוואטסאפ (אופציונלי)"
+
+#: includes/Services/SendReadiness.php:99
+msgid "Place at least one field for each signer."
+msgstr "מקמו לפחות שדה אחד לכל חותם."
+
+#: includes/Services/DocumentService.php:1301
+msgid "Place at least one signature field before sending."
+msgstr "הניחו לפחות שדה חתימה אחד לפני השליחה."
+
+#: includes/Admin/views/new.php:23
+#: includes/Frontend/views/portal-edit.php:70
+#: includes/Frontend/views/portal-edit.php:150
+msgid "Place fields"
+msgstr "מיקום שדות"
+
+#: includes/Admin/views/edit.php:82
+msgid "Place signature fields"
+msgstr "הנחת שדות חתימה"
+
+#: includes/Admin/views/workspaces.php:59
+#: includes/Admin/views/workspaces.php:83
+msgid "Plan"
+msgstr "מסלול"
+
+#: includes/Frontend/PortalController.php:1281
+#: includes/Frontend/PortalController.php:1737
+#: includes/Frontend/views/portal-billing.php:54
+msgid "Plan & billing"
+msgstr "מסלול וחיוב"
+
+#: includes/Admin/Admin.php:1173
+msgid "Plan updated."
+msgstr "המסלול עודכן."
+
+#: includes/Frontend/views/portal-billing.php:73
+msgid "Plan:"
+msgstr "מסלול:"
+
+#: includes/Services/DocumentService.php:117
+#: includes/Services/DocumentService.php:169
+msgid "Please add a title or some content for the document."
+msgstr "אנא הוסיפו כותרת או תוכן כלשהו למסמך."
+
+#: includes/Admin/Admin.php:958
+msgid "Please choose a .p12/.pfx certificate file."
+msgstr "אנא בחרו קובץ תעודה .p12/.pfx."
+
+#: includes/Admin/Admin.php:419
+#: includes/Frontend/PortalController.php:315
+msgid "Please choose a PDF to upload."
+msgstr "אנא בחרו קובץ PDF להעלאה."
+
+#: includes/Admin/Admin.php:1161
+#: includes/Frontend/PortalController.php:1368
+msgid "Please choose a valid plan."
+msgstr "אנא בחרו מסלול תקין."
+
+#: includes/Frontend/PortalController.php:160
+msgid "Please choose one of your templates."
+msgstr "בחרו אחת מהתבניות שלכם."
+
+#: includes/Services/DocumentService.php:1536
+msgid "Please complete all required fields before signing."
+msgstr "אנא מלאו את כל שדות החובה לפני החתימה."
+
+#: includes/Frontend/views/sign.php:136
+msgid "Please complete the highlighted items: add your signature, fill the required fields and accept the agreement."
+msgstr "נא להשלים את הפריטים המסומנים: הוסיפו חתימה, מלאו את שדות החובה ואשרו את ההסכמה."
+
+#: includes/Frontend/views/auth.php:37
+msgid "Please enter the access code provided by the sender to continue."
+msgstr "הזינו את קוד הגישה שקיבלתם מהשולח כדי להמשיך."
+
+#: includes/Email/Mailer.php:58
+msgid "Please open the secure link below to view and sign it:"
+msgstr "אנא פתחו את הקישור המאובטח שלהלן כדי לצפות ולחתום:"
+
+#: includes/Services/DocumentService.php:740
+msgid "Please provide a name or an email for the signer."
+msgstr "אנא הזינו שם או אימייל לחותם."
+
+#: includes/Services/DocumentService.php:1084
+msgid "Please provide a recipient for every role that has fields."
+msgstr "אנא ספקו נמען לכל תפקיד שיש לו שדות."
+
+#: includes/Admin/Admin.php:699
+msgid "Please provide a sub-workspace name."
+msgstr "נא לספק שם לסביבת העבודה המשנה."
+
+#: includes/Frontend/PortalController.php:960
+msgid "Please provide a valid email address for the contact."
+msgstr "אנא ספקו כתובת אימייל תקינה עבור איש הקשר."
+
+#: includes/Services/DocumentService.php:506
+msgid "Please provide a valid email address for the new signer."
+msgstr "אנא ספקו כתובת אימייל תקינה עבור החותם החדש."
+
+#: includes/Services/DocumentService.php:735
+msgid "Please provide a valid email address."
+msgstr "אנא הזינו כתובת דוא״ל תקינה."
+
+#: includes/Frontend/PortalController.php:1201
+#: includes/Services/AccountService.php:221
+msgid "Please provide a valid email and role."
+msgstr "נא לספק אימייל ותפקיד תקינים."
+
+#: includes/Services/DocumentService.php:1073
+msgid "Please provide at least one recipient."
+msgstr "אנא ספקו לפחות נמען אחד."
+
+#: includes/Services/DocumentService.php:509
+msgid "Please provide the new signer’s name."
+msgstr "אנא ספקו את שם החותם החדש."
+
+#: includes/Frontend/PortalController.php:685
+msgid "Please sign in"
+msgstr "נא להתחבר"
+
+#: includes/Admin/views/edit.php:285
+msgid "Please sign the document at the following secure link: %s"
+msgstr "אנא חתמו על המסמך בקישור המאובטח הבא: %s"
+
+#: includes/Frontend/SigningController.php:516
+msgid "Please verify your identity before assigning to someone else."
+msgstr "אנא אמתו את זהותכם לפני העברה לאדם אחר."
+
+#: includes/Frontend/SigningController.php:416
+msgid "Please verify your identity before signing."
+msgstr "אנא אמתו את זהותכם לפני החתימה."
+
+#: includes/Frontend/PortalController.php:1784
+msgid "Portal template missing."
+msgstr "תבנית הפורטל חסרה."
+
+#: includes/Frontend/views/sign.php:60
+msgid "Preview of your typed signature"
+msgstr "תצוגה מקדימה של החתימה המוקלדת"
+
+#: includes/Frontend/views/portal-documents.php:70
+msgid "Previous"
+msgstr "הקודם"
+
+#: includes/Admin/views/health.php:19
+msgid "Problem"
+msgstr "בעיה"
+
+#: includes/Support/HealthCheck.php:103
+#: includes/Support/HealthCheck.php:108
+#: includes/Support/HealthCheck.php:111
+msgid "Protected file storage"
+msgstr "אחסון קבצים מוגן"
+
+#: includes/Admin/views/settings.php:198
+msgid "Public pricing table — shows your plans (price, limits, features) with a “start free trial” button that signs the visitor up and gives them a workspace + trial. Put it on your pricing/landing page."
+msgstr "טבלת תמחור ציבורית — מציגה את המסלולים (מחיר, מגבלות, פיצ'רים) עם כפתור \"התחל ניסיון חינם\" שמרשם את המבקר ונותן לו מרחב עבודה + ניסיון. הציבו בעמוד התמחור/נחיתה."
+
+#: includes/Frontend/views/portal-create.php:166
+msgid "Question"
+msgstr "שאלה"
+
+#: includes/Frontend/views/portal-create.php:164
+msgid "Question %d"
+msgstr "שאלה %d"
+
+#: includes/Frontend/views/portal-create.php:161
+msgid "Questions"
+msgstr "שאלות"
+
+#: includes/Admin/views/settings.php:91
+#: includes/Support/HealthCheck.php:125
+msgid "REST API key"
+msgstr "מפתח REST API"
+
+#: includes/Admin/views/settings.php:107
+msgid "REST base: /wp-json/comsign/v1/documents"
+msgstr "בסיס REST: /wp-json/comsign/v1/documents"
+
+#: includes/Admin/views/edit.php:387
+msgid "Re-send invitations"
+msgstr "שליחת הזמנות מחדש"
+
+#: includes/Admin/views/workspaces.php:103
+#: includes/Admin/views/workspaces.php:130
+msgid "Reactivate"
+msgstr "הפעלה מחדש"
+
+#: includes/Admin/views/edit.php:342
+#: includes/Frontend/views/portal-document.php:53
+#: includes/Frontend/views/portal-edit.php:123
+msgid "Ready to send"
+msgstr "מוכן לשליחה"
+
+#: includes/Admin/views/workspaces.php:141
+msgid "Reason"
+msgstr "סיבה"
+
+#: includes/Admin/views/workspaces.php:101
+#: includes/Admin/views/workspaces.php:102
+#: includes/Admin/views/workspaces.php:111
+#: includes/Admin/views/workspaces.php:112
+msgid "Reason (optional)"
+msgstr "סיבה (אופציונלי)"
+
+#: includes/Frontend/views/sign.php:148
+msgid "Reason for declining (optional)"
+msgstr "סיבת הסירוב (אופציונלי)"
+
+#: includes/Frontend/views/portal-dashboard.php:66
+msgid "Recent documents"
+msgstr "מסמכים אחרונים"
+
+#: includes/Admin/views/workspaces.php:124
+msgid "Recent operator actions"
+msgstr "פעולות מפעיל אחרונות"
+
+#: includes/Frontend/views/portal-create.php:192
+msgid "Recipient"
+msgstr "נמען"
+
+#: includes/Admin/views/settings.php:104
+msgid "Regenerate API key & webhook secret on save"
+msgstr "יצירה מחדש של מפתח ה-API וסוד ה-webhook בשמירה"
+
+#: includes/Admin/views/settings.php:34
+msgid "Remind every"
+msgstr "תזכורת כל"
+
+#: includes/Audit/AuditLogger.php:53
+msgid "Reminder sent"
+msgstr "נשלחה תזכורת"
+
+#: includes/Email/Mailer.php:32
+msgid "Reminder: a document is awaiting your signature — %s"
+msgstr "תזכורת: מסמך ממתין לחתימתך — %s"
+
+#: includes/Admin/views/settings.php:39
+msgid "Reminders run once a day via WP-Cron. Each reminder issues a fresh signing link."
+msgstr "התזכורות רצות פעם ביום דרך WP-Cron. כל תזכורת מנפיקה קישור חתימה חדש."
+
+#: includes/Admin/Admin.php:302
+#: includes/Admin/views/edit.php:261
+#: includes/Admin/views/members.php:73
+#: includes/Frontend/views/portal-contacts.php:100
+#: includes/Frontend/views/portal-edit.php:46
+#: includes/Frontend/views/portal-edit.php:94
+#: includes/Frontend/views/portal-team.php:82
+msgid "Remove"
+msgstr "הסרה"
+
+#: includes/Admin/views/settings.php:138
+msgid "Remove certificate"
+msgstr "הסרת תעודה"
+
+#: includes/Admin/views/settings.php:135
+msgid "Remove the certificate and revert to electronic signatures?"
+msgstr "להסיר את התעודה ולחזור לחתימה אלקטרונית?"
+
+#: includes/Frontend/views/portal-contacts.php:96
+msgid "Remove this contact?"
+msgstr "להסיר את איש הקשר הזה?"
+
+#: includes/Admin/views/members.php:68
+#: includes/Frontend/views/portal-team.php:78
+msgid "Remove this member?"
+msgstr "להסיר חבר זה?"
+
+#: includes/Admin/views/edit.php:256
+#: includes/Frontend/views/portal-edit.php:89
+msgid "Remove this signer?"
+msgstr "להסיר את החותם הזה?"
+
+#: includes/Frontend/views/portal-billing.php:98
+msgid "Renews on %s."
+msgstr "מתחדש בתאריך %s."
+
+#: includes/Admin/views/edit.php:367
+msgid "Require signing in order"
+msgstr "דרישת חתימה לפי סדר"
+
+#: includes/Admin/views/edit.php:107
+#: includes/Frontend/views/portal-create.php:183
+#: includes/Frontend/views/portal-edit.php:176
+msgid "Required"
+msgstr "חובה"
+
+#: includes/Frontend/views/portal-document.php:110
+msgid "Resend"
+msgstr "שליחה מחדש"
+
+#: includes/Frontend/views/auth.php:62
+msgid "Resend code"
+msgstr "שליחת קוד מחדש"
+
+#: includes/Admin/views/new.php:24
+#: includes/Frontend/views/portal-edit.php:71
+msgid "Review &amp; send"
+msgstr "סקירה ושליחה"
+
+#: includes/Admin/views/members.php:39
+#: includes/Admin/views/members.php:85
+#: includes/Admin/views/members.php:117
+#: includes/Frontend/views/portal-team.php:36
+#: includes/Frontend/views/portal-team.php:54
+#: includes/Frontend/views/portal-team.php:63
+#: includes/Frontend/views/portal-team.php:68
+#: includes/Frontend/views/portal-team.php:96
+#: includes/Frontend/views/portal-team.php:104
+msgid "Role"
+msgstr "תפקיד"
+
+#: includes/Services/DocumentService.php:979
+msgid "Role %d"
+msgstr "תפקיד %d"
+
+#: includes/Admin/Admin.php:645
+#: includes/Frontend/PortalController.php:1210
+msgid "Role updated."
+msgstr "התפקיד עודכן."
+
+#: includes/Admin/views/templates.php:30
+msgid "Roles"
+msgstr "תפקידים"
+
+#: includes/Support/HealthCheck.php:60
+msgid "Running PHP %s (7.4+ required)."
+msgstr "רץ על PHP %s (נדרש 7.4 ומעלה)."
+
+#: includes/Admin/views/edit.php:74
+msgid "SHA-256:"
+msgstr "SHA-256:"
+
+#: includes/Admin/views/edit.php:277
+#: includes/Admin/views/members.php:60
+msgid "Save"
+msgstr "שמירה"
+
+#: includes/Admin/views/edit.php:332
+msgid "Save CC recipients"
+msgstr "שמירת נמעני העתק"
+
+#: includes/Admin/views/templates.php:19
+msgid "Save a document as a template from its management screen, then reuse it here for new documents or bulk sending."
+msgstr "שמרו מסמך כתבנית ממסך הניהול שלו, ואז השתמשו בה כאן ליצירת מסמכים חדשים או לשליחה בכמות."
+
+#: includes/Frontend/views/portal-create.php:142
+#: includes/Frontend/views/portal-create.php:205
+#: includes/Frontend/views/portal-create.php:279
+msgid "Save as draft"
+msgstr "שמירה כטיוטה"
+
+#: includes/Admin/views/edit.php:401
+msgid "Save as template"
+msgstr "שמירה כתבנית"
+
+#: includes/Admin/views/settings.php:186
+msgid "Save billing settings"
+msgstr "שמירת הגדרות חיוב"
+
+#: includes/Frontend/views/portal-contacts.php:46
+msgid "Save contact"
+msgstr "שמירת איש קשר"
+
+#: includes/Admin/views/edit.php:119
+#: includes/Frontend/views/portal-edit.php:188
+msgid "Save fields"
+msgstr "שמירת שדות"
+
+#: includes/Admin/views/settings.php:109
+msgid "Save settings"
+msgstr "שמירת הגדרות"
+
+#: includes/Admin/views/settings.php:132
+msgid "Save timestamp settings"
+msgstr "שמירת הגדרות חותמת זמן"
+
+#: includes/Frontend/views/portal-integrations.php:45
+msgid "Save webhook"
+msgstr "שמירת וובהוק"
+
+#: includes/Pdf/PdfSigner.php:163
+msgid "Scan to verify this document online."
+msgstr "סרקו כדי לאמת את המסמך באופן מקוון."
+
+#: includes/Support/HealthCheck.php:91
+#: includes/Support/HealthCheck.php:94
+#: includes/Support/HealthCheck.php:96
+msgid "Scheduled tasks (WP-Cron)"
+msgstr "משימות מתוזמנות (WP-Cron)"
+
+#: includes/Frontend/views/portal-contacts.php:70
+msgid "Search"
+msgstr "חיפוש"
+
+#: includes/Frontend/views/portal-contacts.php:69
+msgid "Search by name or email…"
+msgstr "חיפוש לפי שם או אימייל…"
+
+#: includes/Admin/views/workspaces.php:38
+msgid "Search by name…"
+msgstr "חיפוש לפי שם…"
+
+#: includes/Frontend/views/portal-documents.php:40
+msgid "Search by title…"
+msgstr "חיפוש לפי כותרת…"
+
+#: includes/Frontend/views/portal-contacts.php:68
+msgid "Search contacts"
+msgstr "חיפוש אנשי קשר"
+
+#: includes/Admin/views/list.php:56
+#: includes/Frontend/views/portal-documents.php:39
+msgid "Search documents"
+msgstr "חיפוש מסמכים"
+
+#: includes/Frontend/views/partials/footer.php:14
+msgid "Securely processed by %s"
+msgstr "מעובד באופן מאובטח על-ידי %s"
+
+#: includes/Database/FieldRepository.php:172
+msgid "Select an option"
+msgstr "בחרו אפשרות"
+
+#: includes/Admin/views/settings.php:53
+msgid "Select image"
+msgstr "בחירת תמונה"
+
+#: includes/Frontend/views/portal-create.php:215
+#: includes/Frontend/views/portal-create.php:247
+msgid "Send"
+msgstr "שליחה"
+
+#: includes/Audit/AuditLogger.php:52
+msgid "Send failed"
+msgstr "השליחה נכשלה"
+
+#: includes/Admin/views/edit.php:387
+#: includes/Frontend/views/portal-document.php:73
+#: includes/Frontend/views/portal-edit.php:143
+msgid "Send for signing"
+msgstr "שליחה לחתימה"
+
+#: includes/Admin/views/members.php:124
+#: includes/Frontend/views/portal-team.php:43
+msgid "Send invite"
+msgstr "שליחת הזמנה"
+
+#: includes/Frontend/views/portal-integrations.php:23
+msgid "Send signing events to your own systems. ComSign POSTs a JSON payload to your URL each time a document is signed, completed or declined — and on completion it includes a direct link to download the signed PDF."
+msgstr "שלחו אירועי חתימה למערכות שלכם. ComSign שולחת מטען JSON לכתובת שלכם בכל פעם שמסמך נחתם, הושלם או סורב — ובהשלמה היא כוללת קישור ישיר להורדת ה-PDF החתום."
+
+#: includes/Admin/views/health.php:66
+msgid "Send test email to %s"
+msgstr "שליחת דוא“ל בדיקה אל %s"
+
+#: includes/Admin/views/health.php:73
+msgid "Send test webhook"
+msgstr "שליחת webhook לבדיקה"
+
+#: includes/Services/BillingNotifications.php:105
+msgid "Send your first document for signing here:"
+msgstr "שלחו את המסמך הראשון שלכם לחתימה כאן:"
+
+#: includes/Support/Roles.php:91
+msgid "Sender"
+msgstr "שולח"
+
+#: includes/Admin/DocumentsListTable.php:229
+#: includes/Admin/views/analytics.php:23
+msgid "Sent"
+msgstr "נשלח"
+
+#: includes/Admin/Admin.php:847
+msgid "Sent %1$d invitation(s). %2$d signer(s) have no email — share their link manually."
+msgstr "נשלחו %1$d הזמנות. ל-%2$d חותם/ים אין אימייל — שתפו את הקישור ידנית."
+
+#: includes/Admin/Admin.php:854
+msgid "Sent %d invitation(s)."
+msgstr "נשלחו %d הזמנות."
+
+#: includes/Email/Mailer.php:64
+#: includes/Services/DocumentService.php:1712
+msgid "Sent by %s"
+msgstr "נשלח על-ידי %s"
+
+#: includes/Audit/AuditLogger.php:45
+msgid "Sent for signing"
+msgstr "נשלח לחתימה"
+
+#: includes/Admin/views/workspaces.php:93
+#: includes/Admin/views/workspaces.php:128
+msgid "Set plan"
+msgstr "הגדרת מסלול"
+
+#: includes/Admin/Admin.php:183
+#: includes/Admin/Admin.php:184
+msgid "Settings"
+msgstr "הגדרות"
+
+#: includes/Admin/Admin.php:1046
+msgid "Settings saved."
+msgstr "ההגדרות נשמרו."
+
+#: includes/Admin/views/edit.php:295
+msgid "Share via WhatsApp"
+msgstr "שיתוף בוואטסאפ"
+
+#: includes/Admin/Admin.php:305
+#: includes/Frontend/views/portal-edit.php:49
+msgid "Short help text under the field (optional):"
+msgstr "טקסט עזר קצר מתחת לשדה (לא חובה):"
+
+#: includes/Frontend/views/portal-create.php:173
+msgid "Short text"
+msgstr "טקסט קצר"
+
+#: includes/Admin/views/settings.php:226
+msgid "Shortcode"
+msgstr "קוד קצר"
+
+#: includes/Admin/views/settings.php:191
+msgid "Shortcodes &amp; links"
+msgstr "קודים קצרים וקישורים"
+
+#: includes/Admin/views/settings.php:43
+msgid "Shown to signers on the signing page and in emails."
+msgstr "מוצג לחותמים בעמוד החתימה ובמיילים."
+
+#: includes/Frontend/views/sign.php:139
+msgid "Sign & finish"
+msgstr "חתימה וסיום"
+
+#: includes/Frontend/views/partials/header.php:25
+msgid "Sign document"
+msgstr "חתימה על המסמך"
+
+#: includes/Frontend/PortalController.php:684
+#: includes/Frontend/views/portal-message.php:21
+msgid "Sign in"
+msgstr "התחברות"
+
+#: includes/Admin/views/edit.php:244
+msgid "Sign in person"
+msgstr "חתימה במקום"
+
+#: includes/Frontend/PortalController.php:667
+msgid "Sign in to your area"
+msgstr "התחברו לאזור האישי"
+
+#: includes/Frontend/views/sign.php:19
+msgid "Sign: %s"
+msgstr "חתימה: %s"
+
+#: includes/Admin/Admin.php:292
+#: includes/Admin/views/edit.php:96
+#: includes/Frontend/views/portal-create.php:131
+#: includes/Frontend/views/portal-edit.php:36
+#: includes/Frontend/views/portal-edit.php:165
+#: includes/Services/DocumentService.php:306
+msgid "Signature"
+msgstr "חתימה"
+
+#: includes/Signature/CertificatePage.php:59
+msgid "Signature Certificate"
+msgstr "תעודת חתימה"
+
+#: includes/Admin/Admin.php:803
+msgid "Signature fields saved."
+msgstr "שדות החתימה נשמרו."
+
+#: includes/Frontend/views/sign.php:47
+msgid "Signature method"
+msgstr "שיטת חתימה"
+
+#: includes/Services/DocumentService.php:306
+msgid "Signature — %s"
+msgstr "חתימה — %s"
+
+#: includes/Pdf/FormComposer.php:122
+#: includes/Pdf/PdfComposer.php:69
+msgid "Signatures"
+msgstr "חתימות"
+
+#: includes/Admin/views/analytics.php:50
+#: includes/Frontend/views/portal-insights.php:50
+msgid "Signatures pending"
+msgstr "חתימות ממתינות"
+
+#: includes/Audit/AuditLogger.php:48
+#: includes/Frontend/views/partials/portal-doc-table.php:22
+#: includes/Frontend/views/partials/portal-doc-table.php:35
+#: includes/Services/DocumentExport.php:27
+msgid "Signed"
+msgstr "נחתם"
+
+#: includes/Frontend/views/portal-document.php:89
+#: includes/Frontend/views/portal-document.php:101
+#: includes/Signature/CertificatePage.php:41
+msgid "Signed at"
+msgstr "נחתם בתאריך"
+
+#: includes/Frontend/SigningController.php:295
+msgid "Signed by:"
+msgstr "נחתם על-ידי:"
+
+#: includes/Admin/DocumentsListTable.php:159
+msgid "Signed copy"
+msgstr "עותק חתום"
+
+#: includes/Admin/views/edit.php:66
+msgid "Signed document"
+msgstr "מסמך חתום"
+
+#: includes/Frontend/views/portal-contact.php:40
+#: includes/Frontend/views/portal-contact.php:54
+msgid "Signed on"
+msgstr "נחתם בתאריך"
+
+#: includes/Frontend/SigningController.php:461
+#: includes/Frontend/SigningController.php:468
+msgid "Signed successfully"
+msgstr "נחתם בהצלחה"
+
+#: includes/Frontend/views/portal-create.php:120
+#: includes/Frontend/views/portal-create.php:261
+#: includes/Signature/CertificatePage.php:37
+msgid "Signer %d"
+msgstr "חותם %d"
+
+#: includes/Admin/Admin.php:480
+#: includes/Frontend/PortalController.php:472
+msgid "Signer added."
+msgstr "החותם נוסף."
+
+#: includes/Services/DocumentService.php:455
+#: includes/Services/DocumentService.php:855
+msgid "Signer not found."
+msgstr "החותם לא נמצא."
+
+#: includes/Admin/Admin.php:519
+#: includes/Frontend/PortalController.php:493
+msgid "Signer removed."
+msgstr "החותם הוסר."
+
+#: includes/Admin/Admin.php:508
+msgid "Signer verification updated."
+msgstr "אימות החותם עודכן."
+
+#: includes/Admin/DocumentsListTable.php:55
+#: includes/Admin/views/edit.php:214
+#: includes/Frontend/views/portal-document.php:79
+#: includes/Frontend/views/portal-edit.php:77
+msgid "Signers"
+msgstr "חותמים"
+
+#: includes/Frontend/views/portal-create.php:230
+msgid "Signers: %d"
+msgstr "חותמים: %d"
+
+#: includes/Admin/Admin.php:724
+msgid "Signing deadline extended."
+msgstr "מועד החתימה האחרון הוארך."
+
+#: includes/Frontend/SigningController.php:111
+#: includes/Frontend/SigningController.php:495
+msgid "Signing declined"
+msgstr "החתימה סורבה"
+
+#: includes/Frontend/views/portal-integrations.php:39
+msgid "Signing secret"
+msgstr "סוד חתימה"
+
+#: includes/Frontend/views/partials/header.php:33
+msgid "Skip to content"
+msgstr "דלגו לתוכן"
+
+#: includes/Billing/Plans.php:52
+msgid "Solo"
+msgstr "יחיד"
+
+#: includes/Services/DocumentService.php:1357
+msgid "Some invitations could not be sent: %s. Please check your site email settings and re-send."
+msgstr "חלק מההזמנות לא נשלחו: %s. אנא בדקו את הגדרות הדוא\"ל של האתר ושלחו מחדש."
+
+#: includes/Frontend/views/sign.php:155
+msgid "Someone else should sign this"
+msgstr "מישהו אחר צריך לחתום על זה"
+
+#: includes/Admin/views/settings.php:218
+msgid "Standalone public page to verify a document (same as the [comsign_verify] shortcode)."
+msgstr "עמוד ציבורי עצמאי לאימות מסמך (זהה לקוד הקצר [comsign_verify])."
+
+#: includes/Frontend/PricingShortcode.php:98
+msgid "Start %d-day free trial"
+msgstr "התחילו ניסיון חינם ל-%d ימים"
+
+#: includes/Frontend/views/portal-create.php:70
+msgid "Start from a saved template and just add recipients."
+msgstr "התחילו מתבנית שמורה ורק הוסיפו נמענים."
+
+#: includes/Admin/DocumentsListTable.php:54
+#: includes/Admin/views/analytics.php:86
+#: includes/Admin/views/health.php:37
+#: includes/Admin/views/workspaces.php:60
+#: includes/Frontend/views/partials/portal-doc-table.php:21
+#: includes/Frontend/views/partials/portal-doc-table.php:34
+#: includes/Frontend/views/portal-contact.php:39
+#: includes/Frontend/views/portal-contact.php:51
+#: includes/Frontend/views/portal-document.php:88
+#: includes/Frontend/views/portal-document.php:100
+#: includes/Services/DocumentExport.php:26
+msgid "Status"
+msgstr "סטטוס"
+
+#: includes/Admin/views/edit.php:142
+#: includes/Frontend/views/portal-billing.php:67
+#: includes/Frontend/views/portal-document.php:32
+msgid "Status:"
+msgstr "סטטוס:"
+
+#: includes/Support/HealthCheck.php:108
+msgid "Storage is writable but the .htaccess guard is missing. On nginx, add a deny rule for the comsign uploads directory."
+msgstr "האחסון ניתן לכתיבה אך חסר קובץ .htaccess להגנה. ב-nginx, הוסיפו כלל deny לתיקיית ההעלאות של comsign."
+
+#: includes/Admin/Admin.php:705
+msgid "Sub-workspace created."
+msgstr "סביבת עבודה משנה נוצרה."
+
+#: includes/Admin/views/members.php:133
+msgid "Sub-workspace name"
+msgstr "שם סביבת עבודה משנה"
+
+#: includes/Admin/views/workspaces.php:113
+#: includes/Admin/views/workspaces.php:129
+msgid "Suspend"
+msgstr "השעיה"
+
+#: includes/Admin/views/workspaces.php:106
+msgid "Suspend this workspace?"
+msgstr "להשעות את סביבת העבודה הזו?"
+
+#: includes/Admin/views/list.php:37
+#: includes/Frontend/views/partials/portal-nav.php:36
+msgid "Switch"
+msgstr "החלפה"
+
+#: includes/Admin/Admin.php:192
+#: includes/Admin/Admin.php:193
+#: includes/Admin/views/health.php:28
+msgid "System Status"
+msgstr "סטטוס מערכת"
+
+#: includes/Frontend/PortalController.php:1139
+#: includes/Frontend/PortalController.php:1729
+#: includes/Frontend/views/portal-team.php:23
+msgid "Team"
+msgstr "צוות"
+
+#: includes/Frontend/PortalController.php:1111
+msgid "Team management is not available"
+msgstr "ניהול צוות אינו זמין"
+
+#: includes/Frontend/PricingShortcode.php:84
+#: includes/Frontend/views/portal-billing.php:152
+msgid "Team seats: %d"
+msgstr "מושבי צוות: %d"
+
+#: includes/Admin/views/templates.php:29
+msgid "Template"
+msgstr "תבנית"
+
+#: includes/Admin/Admin.php:1374
+msgid "Template deleted."
+msgstr "התבנית נמחקה."
+
+#: includes/Frontend/SigningController.php:702
+msgid "Template missing."
+msgstr "תבנית חסרה."
+
+#: includes/Admin/views/edit.php:400
+msgid "Template name"
+msgstr "שם התבנית"
+
+#: includes/Admin/Admin.php:1279
+#: includes/Services/DocumentService.php:1045
+#: includes/Services/DocumentService.php:1163
+msgid "Template not found."
+msgstr "התבנית לא נמצאה."
+
+#: includes/Admin/Admin.php:1318
+msgid "Template saved."
+msgstr "התבנית נשמרה."
+
+#: includes/Admin/Admin.php:165
+#: includes/Admin/Admin.php:166
+#: includes/Admin/views/templates.php:18
+msgid "Templates"
+msgstr "תבניות"
+
+#: includes/Admin/views/settings.php:160
+msgid "Terminal number"
+msgstr "מספר מסוף"
+
+#: includes/Admin/Admin.php:1223
+msgid "Test email sent to %s."
+msgstr "דוא“ל בדיקה נשלח אל %s."
+
+#: includes/Admin/views/settings.php:175
+msgid "Test mode"
+msgstr "מצב בדיקה"
+
+#: includes/Admin/Admin.php:297
+#: includes/Admin/views/edit.php:101
+#: includes/Frontend/views/portal-edit.php:41
+#: includes/Frontend/views/portal-edit.php:170
+msgid "Text"
+msgstr "טקסט"
+
+#: includes/Frontend/SigningController.php:469
+msgid "Thank you — your signature has been recorded. The document will be completed once the remaining participants have signed."
+msgstr "תודה — חתימתך נקלטה. המסמך יושלם לאחר ששאר המשתתפים יחתמו."
+
+#: includes/Frontend/SigningController.php:540
+msgid "Thank you. We have emailed the document to the person you chose, and your access to this link has ended."
+msgstr "תודה. שלחנו את המסמך באימייל לאדם שבחרתם, והגישה שלכם לקישור הזה הסתיימה."
+
+#: includes/Frontend/SigningController.php:383
+msgid "That code was not correct. Please try again."
+msgstr "הקוד שגוי. נסו שוב."
+
+#: includes/Frontend/PortalController.php:915
+#: includes/Frontend/PortalController.php:997
+msgid "That contact could not be found in your workspace."
+msgstr "איש קשר זה לא נמצא במרחב העבודה שלכם."
+
+#: includes/Frontend/PortalController.php:1502
+msgid "That webhook URL is invalid or points to a blocked (private/loopback) address."
+msgstr "כתובת הוובהוק אינה תקינה או מצביעה על כתובת חסומה (פרטית/לולאה מקומית)."
+
+#: includes/Signature/Certificate.php:78
+msgid "The certificate could not be read. Check the file and password."
+msgstr "לא ניתן היה לקרוא את התעודה. בדקו את הקובץ והסיסמה."
+
+#: includes/Signature/Certificate.php:72
+msgid "The certificate file is missing or too large (max 512 KB)."
+msgstr "קובץ התעודה חסר או גדול מדי (מקסימום 512 ק\"ב)."
+
+#: includes/Admin/Admin.php:968
+msgid "The certificate file is too large (max 512 KB)."
+msgstr "קובץ התעודה גדול מדי (מקסימום 512 ק\"ב)."
+
+#: includes/Admin/Admin.php:964
+msgid "The certificate must be a .p12 or .pfx file."
+msgstr "התעודה חייבת להיות קובץ ‎.p12‎ או ‎.pfx‎."
+
+#: includes/Admin/views/settings.php:206
+msgid "The customer personal area — put this on a page (e.g. “My account”) and signed-in customers manage, create, send and track their documents and billing there, on your own URL. (The built-in /comsign/app page works too.)"
+msgstr "האזור האישי של הלקוח — הציבו זאת בעמוד (למשל “החשבון שלי”) ולקוחות מחוברים ינהלו, ייצרו, ישלחו ויעקבו אחר המסמכים והחיוב שלהם שם, בכתובת שלכם. (גם העמוד המובנה /comsign/app עובד.)"
+
+#: includes/Support/HealthCheck.php:96
+msgid "The daily reminder task is scheduled."
+msgstr "משימת התזכורת היומית מתוזמנת."
+
+#: includes/Services/DocumentService.php:1707
+msgid "The document \"%s\" has been signed by all parties."
+msgstr "המסמך \"%s\" נחתם על ידי כל הצדדים."
+
+#: includes/Frontend/SigningController.php:438
+#: includes/Frontend/SigningController.php:525
+msgid "The document could not be found."
+msgstr "לא ניתן היה למצוא את המסמך."
+
+#: includes/Frontend/SigningController.php:462
+msgid "The document is now fully signed by all parties. A signed copy will be sent to the relevant recipients."
+msgstr "המסמך נחתם כעת על ידי כל הצדדים. עותק חתום יישלח לנמענים הרלוונטיים."
+
+#: includes/Services/DocumentService.php:473
+msgid "The email could not be sent. Please check your site email settings."
+msgstr "לא ניתן היה לשלוח את האימייל. אנא בדקו את הגדרות הדוא\"ל של האתר."
+
+#: includes/Services/DocumentService.php:711
+msgid "The file does not look like a valid PDF."
+msgstr "הקובץ אינו נראה כקובץ PDF תקין."
+
+#: includes/Services/DocumentService.php:696
+msgid "The file is too large (max 25 MB)."
+msgstr "הקובץ גדול מדי (מקסימום 25 מ״ב)."
+
+#: includes/Services/DocumentService.php:1709
+msgid "The fully signed copy is attached."
+msgstr "העותק החתום המלא מצורף."
+
+#: includes/Support/HealthCheck.php:103
+msgid "The protected uploads directory is missing or not writable."
+msgstr "תיקיית ההעלאות המוגנת חסרה או אינה ניתנת לכתיבה."
+
+#: includes/Support/HealthCheck.php:91
+msgid "The reminder task is not scheduled. Reactivate the plugin."
+msgstr "משימת התזכורת אינה מתוזמנת. הפעילו מחדש את התוסף."
+
+#: includes/Frontend/SigningController.php:98
+msgid "The requested document could not be found."
+msgstr "לא ניתן היה למצוא את המסמך המבוקש."
+
+#: includes/Support/HealthCheck.php:111
+msgid "The storage directory exists, is writable and carries deny rules (verify nginx separately)."
+msgstr "תיקיית האחסון קיימת, ניתנת לכתיבה ומכילה כללי deny (בדקו nginx בנפרד)."
+
+#: includes/Integrations/Webhooks.php:111
+msgid "The webhook URL is invalid or points to a blocked (private/loopback) target."
+msgstr "כתובת ה-webhook אינה תקינה או מצביעה ליעד חסום (פרטי/loopback)."
+
+#: includes/Support/HealthCheck.php:140
+msgid "The webhook URL is set but looks invalid or points to a blocked (private/loopback) target."
+msgstr "כתובת ה-webhook מוגדרת אך נראית לא תקינה או מצביעה ליעד חסום (פרטי/loopback)."
+
+#: includes/Frontend/views/portal-create.php:219
+msgid "There are no templates in this workspace yet. An administrator can create one from any document."
+msgstr "אין עדיין תבניות במרחב העבודה הזה. מנהל יכול ליצור תבנית מכל מסמך."
+
+#: includes/Admin/views/health.php:32
+msgid "These checks help you confirm ComSign is correctly configured on this server."
+msgstr "בדיקות אלו עוזרות לוודא ש-ComSign מוגדר נכון בשרת זה."
+
+#: includes/Admin/views/edit.php:331
+msgid "These people receive the fully signed PDF by email when signing completes. They do not sign."
+msgstr "אנשים אלה יקבלו את ה-PDF החתום במייל עם השלמת החתימות. הם אינם חותמים."
+
+#: includes/Services/SendReadiness.php:98
+msgid "These signers have no fields yet: %s. Open \"Place signature fields\"."
+msgstr "לחותמים אלו אין עדיין שדות: %s. פתחו את \"מיקום שדות חתימה\"."
+
+#: includes/Frontend/views/portal-contact.php:33
+msgid "This contact hasn’t signed any documents in this workspace yet."
+msgstr "איש קשר זה עדיין לא חתם על מסמכים בסביבת עבודה זו."
+
+#: includes/Services/DocumentService.php:497
+msgid "This document does not allow assigning to someone else."
+msgstr "מסמך זה אינו מאפשר העברה לאדם אחר."
+
+#: includes/Frontend/PortalController.php:1635
+msgid "This document does not exist in your workspace."
+msgstr "מסמך זה אינו קיים בסביבת העבודה שלך."
+
+#: includes/Frontend/PortalController.php:446
+#: includes/Frontend/PortalController.php:1034
+msgid "This document has already been sent and can no longer be edited."
+msgstr "המסמך כבר נשלח ולא ניתן לערוך אותו יותר."
+
+#: includes/Frontend/SigningController.php:289
+msgid "This document is authentic."
+msgstr "מסמך זה אותנטי."
+
+#: includes/Frontend/PortalController.php:1024
+msgid "This document is not available for editing in your workspace."
+msgstr "מסמך זה אינו זמין לעריכה במרחב העבודה שלכם."
+
+#: includes/Frontend/SigningController.php:128
+msgid "This document is signed in order. You will be notified when it is your turn."
+msgstr "מסמך זה נחתם לפי סדר. תקבלו הודעה כשיגיע תורכם."
+
+#: includes/Frontend/views/sign.php:121
+msgid "This field is required."
+msgstr "שדה זה הוא חובה."
+
+#: includes/Admin/Admin.php:1217
+msgid "This is a test email from ComSign. If you received it, outgoing mail works on this server."
+msgstr "זהו דוא“ל בדיקה מ-ComSign. אם קיבלתם אותו, שליחת הדואר היוצא עובדת בשרת זה."
+
+#: includes/Admin/views/edit.php:297
+msgid "This link is personal and replaces any link previously issued to this signer."
+msgstr "הקישור אישי ומחליף כל קישור קודם שהונפק לחותם זה."
+
+#: includes/Email/Mailer.php:61
+msgid "This link is personal — please do not forward it."
+msgstr "קישור זה אישי — אנא אל תעבירו אותו לאחרים."
+
+#: includes/Frontend/views/portal-billing.php:105
+msgid "This month:"
+msgstr "החודש:"
+
+#: includes/Services/DocumentService.php:500
+msgid "This signer can no longer be reassigned."
+msgstr "לא ניתן עוד להעביר חותם זה."
+
+#: includes/Services/DocumentService.php:458
+msgid "This signer has no email. Share the signing link instead."
+msgstr "לחותם זה אין אימייל. שתפו את קישור החתימה במקום."
+
+#: includes/Frontend/SigningController.php:442
+msgid "This signing link has expired."
+msgstr "קישור החתימה פג תוקף."
+
+#: includes/Frontend/SigningController.php:120
+msgid "This signing link has expired. Please ask the sender for a new one."
+msgstr "קישור החתימה פג תוקף. אנא בקשו מהשולח קישור חדש."
+
+#: includes/Frontend/SigningController.php:354
+#: includes/Frontend/SigningController.php:406
+#: includes/Frontend/SigningController.php:482
+#: includes/Frontend/SigningController.php:508
+msgid "This signing link is no longer valid."
+msgstr "קישור החתימה אינו בתוקף עוד."
+
+#: includes/Frontend/SigningController.php:90
+msgid "This signing link is no longer valid. Please ask the sender for a new one."
+msgstr "קישור החתימה אינו בתוקף עוד. אנא בקשו מהשולח קישור חדש."
+
+#: includes/Admin/views/edit.php:139
+msgid "Timeline"
+msgstr "ציר זמן"
+
+#: includes/Admin/views/settings.php:128
+msgid "Timestamp authority (TSA) URL"
+msgstr "כתובת רשות חותמות הזמן (TSA)"
+
+#: includes/Admin/Admin.php:1004
+msgid "Timestamp authority cleared."
+msgstr "רשות חותמות הזמן נוקתה."
+
+#: includes/Admin/Admin.php:1003
+msgid "Timestamp authority saved. New signatures will include a trusted timestamp."
+msgstr "רשות חותמות הזמן נשמרה. חתימות חדשות יכללו חותמת זמן מהימנה."
+
+#: includes/Services/DocumentExport.php:25
+msgid "Title"
+msgstr "כותרת"
+
+#: includes/Frontend/SigningController.php:290
+msgid "Title:"
+msgstr "כותרת:"
+
+#: includes/Admin/views/edit.php:348
+#: includes/Frontend/views/portal-document.php:59
+#: includes/Frontend/views/portal-edit.php:129
+msgid "To do:"
+msgstr "לביצוע:"
+
+#: includes/Services/BillingNotifications.php:58
+msgid "To keep sending documents, choose a plan here:"
+msgstr "כדי להמשיך לשלוח מסמכים, בחרו מסלול כאן:"
+
+#: includes/Frontend/SigningController.php:363
+msgid "Too many attempts"
+msgstr "יותר מדי ניסיונות"
+
+#: includes/Frontend/SigningController.php:364
+msgid "Too many incorrect attempts. Please wait a few minutes and try again."
+msgstr "יותר מדי ניסיונות שגויים. אנא המתינו מספר דקות ונסו שוב."
+
+#: includes/Admin/views/analytics.php:38
+#: includes/Frontend/views/portal-insights.php:38
+msgid "Total documents"
+msgstr "סה\"כ מסמכים"
+
+#: includes/Services/DocumentExport.php:28
+msgid "Total signers"
+msgstr "סך החותמים"
+
+#: includes/Frontend/views/sign.php:49
+msgid "Type"
+msgstr "הקלדה"
+
+#: includes/Frontend/views/portal-create.php:51
+msgid "Type the document and pick which fields each signer fills. We place the signature block for you — no dragging."
+msgstr "הקלידו את המסמך ובחרו אילו שדות כל חותם ממלא. אנחנו ממקמים את בלוק החתימה עבורכם — בלי גרירה."
+
+#: includes/Frontend/views/sign.php:58
+#: includes/Frontend/views/sign.php:59
+msgid "Type your full name"
+msgstr "הקלידו את שמכם המלא"
+
+#: includes/Billing/CardcomGateway.php:233
+msgid "Unexpected gateway response."
+msgstr "תגובה לא צפויה משער התשלום."
+
+#: includes/Admin/Admin.php:1203
+msgid "Unknown action."
+msgstr "פעולה לא ידועה."
+
+#: includes/Frontend/PricingShortcode.php:83
+#: includes/Frontend/views/portal-billing.php:151
+msgid "Unlimited documents"
+msgstr "מסמכים ללא הגבלה"
+
+#: includes/Services/DocumentService.php:124
+#: includes/Services/DocumentService.php:175
+msgid "Untitled document"
+msgstr "מסמך ללא כותרת"
+
+#: includes/Frontend/views/portal-team.php:74
+msgid "Update"
+msgstr "עדכון"
+
+#: includes/Services/BillingNotifications.php:86
+msgid "Update your billing here:"
+msgstr "עדכנו את פרטי החיוב כאן:"
+
+#: includes/Frontend/PortalController.php:1456
+msgid "Upgrade to a plan that includes webhooks to send signing events to your own systems."
+msgstr "שדרגו למסלול הכולל וובהוקים כדי לשלוח אירועי חתימה למערכות שלכם."
+
+#: includes/Admin/views/new.php:46
+msgid "Upload & continue"
+msgstr "העלאה והמשך"
+
+#: includes/Frontend/views/portal-create.php:92
+msgid "Upload &amp; continue"
+msgstr "העלאה והמשך"
+
+#: includes/Admin/views/new.php:28
+#: includes/Frontend/views/portal-create.php:60
+#: includes/Frontend/views/portal-create.php:79
+msgid "Upload a PDF"
+msgstr "העלאת PDF"
+
+#: includes/Services/SendReadiness.php:58
+msgid "Upload a PDF (or compose one) for this document."
+msgstr "העלו PDF (או חברו אחד) למסמך זה."
+
+#: includes/Frontend/views/portal-dashboard.php:45
+msgid "Upload a PDF or pick a template, add the people who need to sign, place the fields, and send. We’ll track it for you."
+msgstr "העלו PDF או בחרו תבנית, הוסיפו את האנשים שצריכים לחתום, מקמו את השדות, ושִלחו. אנחנו נעקוב עבורכם."
+
+#: includes/Frontend/views/portal-create.php:80
+msgid "Upload a PDF, add signers, and place the fields yourself."
+msgstr "העלו PDF, הוסיפו חותמים, ומקמו את השדות בעצמכם."
+
+#: includes/Admin/views/settings.php:141
+msgid "Upload a PKCS#12 certificate (.p12/.pfx) to sign completed documents cryptographically (eIDAS / ComSign compatible). Without it, documents use electronic signatures."
+msgstr "העלו תעודת PKCS#12 ‏(.p12/.pfx) כדי לחתום מסמכים שהושלמו בחתימה קריפטוגרפית (תואם eIDAS / ComSign). ללא תעודה, המסמכים נחתמים בחתימה אלקטרונית."
+
+#: includes/Database/FieldRepository.php:174
+msgid "Upload a file"
+msgstr "העלאת קובץ"
+
+#: includes/Frontend/views/portal-create.php:61
+msgid "Upload a scanned or existing PDF and place the fields exactly where you want them."
+msgstr "העלו PDF סרוק או קיים ומקמו את השדות בדיוק היכן שתרצו."
+
+#: includes/Admin/views/settings.php:147
+msgid "Upload certificate"
+msgstr "העלאת תעודה"
+
+#: includes/Admin/views/templates.php:51
+msgid "Use"
+msgstr "שימוש"
+
+#: includes/Frontend/views/portal-create.php:65
+msgid "Use a template"
+msgstr "שימוש בתבנית"
+
+#: includes/Admin/views/settings.php:176
+msgid "Use a test terminal"
+msgstr "השתמשו במסוף בדיקה"
+
+#: includes/Admin/views/new.php:63
+msgid "Use placeholders like {{name}} or {{date}} to insert variables."
+msgstr "השתמשו ב-placeholders כמו {{name}} או {{date}} כדי להוסיף משתנים."
+
+#: includes/Admin/views/template-use.php:17
+msgid "Use template: %s"
+msgstr "שימוש בתבנית: %s"
+
+#: includes/Frontend/views/portal-create.php:235
+msgid "Use this template"
+msgstr "שימוש בתבנית זו"
+
+#: includes/Admin/views/new.php:79
+msgid "Variables"
+msgstr "משתנים"
+
+#: includes/Frontend/SigningController.php:279
+#: includes/Services/DocumentExport.php:30
+msgid "Verification code (SHA-256)"
+msgstr "קוד אימות (SHA-256)"
+
+#: includes/Admin/views/settings.php:216
+msgid "Verification page"
+msgstr "עמוד אימות"
+
+#: includes/Frontend/SigningController.php:416
+#: includes/Frontend/SigningController.php:516
+msgid "Verification required"
+msgstr "נדרש אימות"
+
+#: includes/Frontend/SigningController.php:559
+msgid "Verification required."
+msgstr "נדרש אימות."
+
+#: includes/Frontend/views/verify.php:12
+#: includes/Frontend/views/verify.php:16
+msgid "Verify a document"
+msgstr "אימות מסמך"
+
+#: includes/Frontend/SigningController.php:281
+msgid "Verify document"
+msgstr "אימות מסמך"
+
+#: includes/Admin/views/edit.php:270
+msgid "Verify identity:"
+msgstr "אימות זהות:"
+
+#: includes/Frontend/views/auth.php:20
+#: includes/Frontend/views/auth.php:24
+msgid "Verify your identity"
+msgstr "אימות הזהות שלכם"
+
+#: includes/Admin/views/edit.php:392
+msgid "View original"
+msgstr "צפייה במקור"
+
+#: includes/Admin/DocumentsListTable.php:230
+#: includes/Admin/views/analytics.php:24
+#: includes/Audit/AuditLogger.php:46
+msgid "Viewed"
+msgstr "נצפה"
+
+#: includes/Support/Roles.php:92
+msgid "Viewer"
+msgstr "צופה"
+
+#: includes/Support/HealthCheck.php:94
+msgid "WP-Cron is disabled; make sure a real system cron triggers wp-cron.php, or reminders will not be sent."
+msgstr "WP-Cron מושבת; ודאו ש-cron מערכתי אמיתי מפעיל את wp-cron.php, אחרת לא יישלחו תזכורות."
+
+#: includes/Frontend/SigningController.php:127
+#: includes/Frontend/SigningController.php:446
+msgid "Waiting for an earlier signer"
+msgstr "ממתינים לחותם קודם"
+
+#: includes/Admin/views/health.php:18
+msgid "Warning"
+msgstr "אזהרה"
+
+#: includes/Services/BillingNotifications.php:85
+msgid "We could not charge your subscription. Your workspace will keep working for now, but please update your payment to avoid interruption."
+msgstr "לא הצלחנו לחייב את המנוי שלכם. מרחב העבודה ימשיך לעבוד בינתיים, אך אנא עדכנו את אמצעי התשלום כדי למנוע הפרעה."
+
+#: includes/Frontend/views/portal-billing.php:59
+msgid "We could not confirm your payment. If you were charged, it will activate shortly — otherwise you can try again below."
+msgstr "לא הצלחנו לאמת את התשלום. אם חויבתם, הוא יופעל בקרוב — אחרת תוכלו לנסות שוב למטה."
+
+#: includes/Frontend/views/auth.php:31
+msgid "We sent a one-time code to %s. Enter it below to continue."
+msgstr "שלחנו קוד חד-פעמי אל %s. הזינו אותו כאן כדי להמשיך."
+
+#: includes/Frontend/views/sign.php:160
+msgid "We will email the document to the person you choose, and your access to this link will end."
+msgstr "נשלח את המסמך באימייל לאדם שתבחרו, והגישה שלכם לקישור הזה תסתיים."
+
+#: includes/Admin/views/settings.php:84
+#: includes/Frontend/views/portal-integrations.php:32
+msgid "Webhook URL"
+msgstr "כתובת Webhook"
+
+#: includes/Admin/views/settings.php:179
+msgid "Webhook URL (optional)"
+msgstr "כתובת וובהוק (אופציונלי)"
+
+#: includes/Frontend/PortalController.php:1507
+msgid "Webhook disabled."
+msgstr "הוובהוק בוטל."
+
+#: includes/Frontend/PortalController.php:1507
+msgid "Webhook saved."
+msgstr "הוובהוק נשמר."
+
+#: includes/Admin/views/settings.php:96
+msgid "Webhook secret"
+msgstr "סוד Webhook"
+
+#: includes/Frontend/PortalController.php:1494
+msgid "Webhooks are not available on your plan."
+msgstr "וובהוקים אינם זמינים במסלול שלכם."
+
+#: includes/Frontend/PortalController.php:1455
+msgid "Webhooks are not on your plan"
+msgstr "וובהוקים אינם כלולים במסלול שלכם"
+
+#: includes/Services/BillingNotifications.php:101
+msgid "Welcome to %s"
+msgstr "ברוכים הבאים ל-%s"
+
+#: includes/Frontend/views/portal-dashboard.php:44
+msgid "Welcome! Let’s send your first document."
+msgstr "ברוכים הבאים! בואו נשלח את המסמך הראשון שלכם."
+
+#: includes/Services/BillingNotifications.php:104
+msgid "Welcome! Your workspace is ready with a %d-day free trial."
+msgstr "ברוכים הבאים! מרחב העבודה שלכם מוכן עם %d ימי ניסיון חינם."
+
+#: includes/Admin/views/settings.php:227
+#: includes/Admin/views/settings.php:245
+msgid "What it does"
+msgstr "מה זה עושה"
+
+#: includes/Admin/views/edit.php:192
+#: includes/Admin/views/workspaces.php:136
+#: includes/Services/DocumentService.php:628
+msgid "When"
+msgstr "מתי"
+
+#: includes/Admin/views/settings.php:213
+msgid "Where signed-in customers manage, create, send and track their documents (no WP-Admin needed)."
+msgstr "היכן שלקוחות מחוברים מנהלים, יוצרים, שולחים ועוקבים אחר המסמכים שלהם (ללא צורך ב-WP-Admin)."
+
+#: includes/Frontend/views/portal-create.php:189
+msgid "Who fills this in?"
+msgstr "מי ממלא את זה?"
+
+#: includes/Frontend/views/portal-create.php:114
+msgid "Who needs to sign?"
+msgstr "מי צריך לחתום?"
+
+#: includes/Admin/views/workspaces.php:57
+#: includes/Admin/views/workspaces.php:138
+#: includes/Frontend/PortalController.php:1559
+#: includes/Frontend/views/partials/portal-nav.php:13
+msgid "Workspace"
+msgstr "סביבת עבודה"
+
+#: includes/Admin/views/members.php:23
+#: includes/Frontend/views/portal-team.php:48
+msgid "Workspace members"
+msgstr "חברי סביבת העבודה"
+
+#: includes/Admin/Admin.php:1151
+msgid "Workspace not found."
+msgstr "סביבת העבודה לא נמצאה."
+
+#: includes/Admin/Admin.php:1200
+msgid "Workspace reactivated."
+msgstr "סביבת העבודה הופעלה מחדש."
+
+#: includes/Admin/Admin.php:1186
+msgid "Workspace suspended."
+msgstr "סביבת העבודה הושעתה."
+
+#: includes/Admin/Admin.php:548
+msgid "Workspace switched."
+msgstr "סביבת העבודה הוחלפה."
+
+#: includes/Admin/views/list.php:29
+#: includes/Frontend/views/partials/portal-nav.php:28
+msgid "Workspace:"
+msgstr "סביבת עבודה:"
+
+#: includes/Admin/views/members.php:25
+msgid "Workspace: %s"
+msgstr "סביבת עבודה: %s"
+
+#: includes/Admin/Admin.php:205
+#: includes/Admin/Admin.php:206
+#: includes/Admin/views/workspaces.php:31
+msgid "Workspaces"
+msgstr "סביבות עבודה"
+
+#: includes/Frontend/views/portal-create.php:50
+msgid "Write text"
+msgstr "כתיבת טקסט"
+
+#: includes/Frontend/views/portal-create.php:99
+msgid "Write the document"
+msgstr "כתיבת המסמך"
+
+#: includes/Admin/views/new.php:62
+msgid "Write the fixed text of the document. After creating it you can place fillable and signature fields on the generated PDF."
+msgstr "כתבו את הטקסט הקבוע של המסמך. לאחר היצירה תוכלו להניח שדות למילוי וחתימה על ה-PDF שייווצר."
+
+#: includes/Admin/views/settings.php:92
+msgid "X-ComSign-Key"
+msgstr "X-ComSign-Key"
+
+#: includes/Frontend/views/portal-create.php:180
+msgid "Yes, No, Maybe"
+msgstr "כן, לא, אולי"
+
+#: includes/Admin/Admin.php:1072
+#: includes/Admin/Admin.php:1140
+#: includes/Admin/Admin.php:1494
+msgid "You are not allowed to access this page."
+msgstr "אינך מורשה לגשת לעמוד זה."
+
+#: includes/Frontend/views/portal-dashboard.php:35
+msgid "You are on a free trial — %d days left."
+msgstr "אתם בתקופת ניסיון חינם — נותרו %d ימים."
+
+#: includes/Admin/views/members.php:31
+msgid "You can view members but only an owner or admin can change them."
+msgstr "ניתן לצפות בחברים אך רק בעלים או מנהל יכולים לשנות אותם."
+
+#: includes/Frontend/PortalController.php:803
+msgid "You cannot create documents"
+msgstr "אינכם יכולים ליצור מסמכים"
+
+#: includes/Frontend/PortalController.php:150
+#: includes/Frontend/PortalController.php:311
+#: includes/Frontend/PortalController.php:345
+#: includes/Frontend/PortalController.php:389
+msgid "You cannot create documents in this workspace."
+msgstr "אינכם יכולים ליצור מסמכים במרחב העבודה הזה."
+
+#: includes/Frontend/PortalController.php:441
+msgid "You cannot edit this document."
+msgstr "אינכם יכולים לערוך מסמך זה."
+
+#: includes/Frontend/PortalController.php:1360
+#: includes/Frontend/PortalController.php:1412
+#: includes/Frontend/PortalController.php:1428
+msgid "You cannot manage billing for this workspace."
+msgstr "אינכם יכולים לנהל חיוב עבור מרחב העבודה הזה."
+
+#: includes/Frontend/PortalController.php:939
+msgid "You cannot manage contacts in this workspace."
+msgstr "אינכם יכולים לנהל אנשי קשר במרחב העבודה הזה."
+
+#: includes/Frontend/PortalController.php:1491
+msgid "You cannot manage integrations for this workspace."
+msgstr "אינכם יכולים לנהל אינטגרציות בסביבת עבודה זו."
+
+#: includes/Admin/Admin.php:561
+msgid "You cannot manage members of this workspace."
+msgstr "אינך יכול לנהל את חברי סביבת עבודה זו."
+
+#: includes/Frontend/PortalController.php:1157
+msgid "You cannot manage the team for this workspace."
+msgstr "אינכם יכולים לנהל את הצוות של מרחב העבודה הזה."
+
+#: includes/Admin/Admin.php:664
+#: includes/Frontend/PortalController.php:1206
+#: includes/Frontend/PortalController.php:1232
+msgid "You cannot remove the last owner of a workspace."
+msgstr "לא ניתן להסיר את הבעלים האחרון של סביבת עבודה."
+
+#: includes/Frontend/PortalController.php:220
+msgid "You cannot resend invitations for this document."
+msgstr "אינכם יכולים לשלוח מחדש הזמנות למסמך זה."
+
+#: includes/Frontend/PortalController.php:141
+msgid "You cannot send this document."
+msgstr "אינכם יכולים לשלוח מסמך זה."
+
+#: includes/Admin/Admin.php:63
+msgid "You do not have access to this document."
+msgstr "אין לך גישה למסמך זה."
+
+#: includes/Admin/Admin.php:74
+msgid "You do not have permission to do that."
+msgstr "אין לך הרשאה לבצע פעולה זו."
+
+#: includes/Frontend/SigningController.php:412
+#: includes/Frontend/SigningController.php:520
+msgid "You have already signed this document."
+msgstr "כבר חתמת על מסמך זה."
+
+#: includes/Frontend/SigningController.php:106
+msgid "You have already signed this document. Thank you."
+msgstr "כבר חתמת על מסמך זה. תודה."
+
+#: includes/Email/Mailer.php:45
+msgid "You have been asked to review and sign the document: \"%s\"."
+msgstr "התבקשת לעיין ולחתום על המסמך: \"%s\"."
+
+#: includes/Frontend/SigningController.php:112
+msgid "You have declined to sign this document."
+msgstr "סירבת לחתום על מסמך זה."
+
+#: includes/Frontend/SigningController.php:496
+msgid "You have declined to sign this document. The sender has been notified."
+msgstr "סירבת לחתום על מסמך זה. השולח קיבל הודעה על כך."
+
+#: includes/Services/SubscriptionService.php:187
+msgid "You have reached your plan’s contact limit. Upgrade your plan to add more contacts."
+msgstr "הגעתם למגבלת אנשי הקשר של המסלול שלכם. שדרגו את המסלול כדי להוסיף עוד אנשי קשר."
+
+#: includes/Services/SubscriptionService.php:217
+msgid "You have reached your plan’s monthly document limit. Upgrade your plan to send more."
+msgstr "הגעתם למכסת המסמכים החודשית של המסלול. שדרגו את המסלול כדי לשלוח עוד."
+
+#: includes/Frontend/SigningController.php:421
+msgid "You must agree to sign electronically before continuing."
+msgstr "עליך להסכים לחתום באופן אלקטרוני לפני המשך."
+
+#: includes/Frontend/PortalController.php:686
+msgid "You need to sign in to access your workspace."
+msgstr "עליך להתחבר כדי לגשת לסביבת העבודה שלך."
+
+#: includes/Services/BillingNotifications.php:54
+msgid "Your %s free trial is ending soon"
+msgstr "תקופת הניסיון החינמית שלכם ב-%s עומדת להסתיים"
+
+#: includes/Services/BillingNotifications.php:122
+msgid "Your %s workspace has been reactivated"
+msgstr "סביבת העבודה שלכם ב-%s הופעלה מחדש"
+
+#: includes/Services/BillingNotifications.php:125
+msgid "Your %s workspace has been suspended"
+msgstr "סביבת העבודה שלכם ב-%s הושעתה"
+
+#: includes/Frontend/SignerAuth.php:132
+msgid "Your ComSign verification code"
+msgstr "קוד האימות שלכם ב-ComSign"
+
+#: includes/Frontend/PortalController.php:708
+msgid "Your account is not part of any workspace. Please contact your administrator."
+msgstr "החשבון שלך אינו משויך לאף סביבת עבודה. פנה למנהל המערכת."
+
+#: includes/Database/FieldRepository.php:176
+msgid "Your answer"
+msgstr "התשובה שלך"
+
+#: includes/Frontend/views/portal-contacts.php:51
+msgid "Your contacts"
+msgstr "אנשי הקשר שלכם"
+
+#: includes/Frontend/views/portal-billing.php:165
+msgid "Your current plan"
+msgstr "המסלול הנוכחי שלכם"
+
+#: includes/Services/BillingNotifications.php:57
+msgid "Your free trial ends in %d days."
+msgstr "תקופת הניסיון החינמית שלכם מסתיימת בעוד %d ימים."
+
+#: includes/Frontend/PortalController.php:804
+msgid "Your role in this workspace does not allow creating documents. Please contact an administrator."
+msgstr "התפקיד שלכם במרחב העבודה אינו מאפשר יצירת מסמכים. אנא פנו למנהל."
+
+#: includes/Frontend/PortalController.php:870
+#: includes/Frontend/PortalController.php:906
+msgid "Your role in this workspace does not allow managing contacts."
+msgstr "התפקיד שלכם במרחב העבודה אינו מאפשר ניהול אנשי קשר."
+
+#: includes/Frontend/PortalController.php:1112
+msgid "Your role in this workspace does not allow managing the team."
+msgstr "התפקיד שלכם במרחב העבודה אינו מאפשר ניהול צוות."
+
+#: includes/Frontend/views/sign.php:45
+msgid "Your signature"
+msgstr "החתימה שלך"
+
+#: includes/Frontend/views/portal-billing.php:65
+msgid "Your subscription"
+msgstr "המנוי שלכם"
+
+#: includes/Services/SubscriptionService.php:213
+msgid "Your subscription is not active. Please choose a plan to keep sending documents."
+msgstr "המנוי שלכם אינו פעיל. אנא בחרו מסלול כדי להמשיך לשלוח מסמכים."
+
+#: includes/Frontend/views/portal-billing.php:91
+msgid "Your subscription is set to cancel. You keep full access until %s, after which it will not renew."
+msgstr "המנוי שלכם מתוזמן לביטול. תשמרו על גישה מלאה עד %s, ולאחר מכן הוא לא יתחדש."
+
+#: includes/Frontend/PortalController.php:1432
+msgid "Your subscription will continue to renew."
+msgstr "המנוי שלכם ימשיך להתחדש."
+
+#: includes/Frontend/PortalController.php:1416
+msgid "Your subscription will not renew. You keep access until the end of the current period."
+msgstr "המנוי שלכם לא יתחדש. תשמרו על גישה עד סוף התקופה הנוכחית."
+
+#: includes/Frontend/SignerAuth.php:135
+msgid "Your verification code is: %1$s\n\nIt expires in %2$d minutes."
+msgstr "קוד האימות שלכם הוא: %1$s\n\nהוא יפוג בעוד %2$d דקות."
+
+#: includes/Frontend/views/portal-dashboard.php:28
+msgid "Your workspace"
+msgstr "סביבת העבודה שלך"
+
+#: includes/Services/BillingNotifications.php:126
+msgid "Your workspace has been suspended. Please contact support if you believe this is a mistake."
+msgstr "סביבת העבודה שלכם הושעתה. אנא פנו לתמיכה אם לדעתכם מדובר בטעות."
+
+#: includes/Admin/views/workspaces.php:91
+#: includes/Services/BillingService.php:61
+#: includes/Services/BillingService.php:155
+msgid "annual"
+msgstr "שנתי"
+
+#: includes/Admin/views/new.php:83
+msgid "customer_name = Dana Cohen\ncontract_no = 2026-0042"
+msgstr "customer_name = דנה כהן\ncontract_no = 2026-0042"
+
+#: includes/Admin/views/settings.php:36
+msgid "days"
+msgstr "ימים"
+
+#: includes/Admin/views/edit.php:379
+#: includes/Admin/views/template-bulk.php:38
+msgid "days (0 = never)"
+msgstr "ימים (0 = ללא הגבלה)"
+
+#: includes/Frontend/views/portal-create.php:158
+msgid "e.g. Client intake form"
+msgstr "לדוגמה: טופס קליטת לקוח"
+
+#: includes/Admin/views/new.php:39
+#: includes/Admin/views/new.php:57
+#: includes/Frontend/views/portal-create.php:106
+msgid "e.g. Service agreement"
+msgstr "לדוגמה: הסכם שירות"
+
+#: includes/Frontend/views/portal-create.php:167
+msgid "e.g. What is your full address?"
+msgstr "לדוגמה: מה הכתובת המלאה שלך?"
+
+#: includes/Admin/views/edit.php:310
+#: includes/Admin/views/template-use.php:32
+msgid "email@example.com"
+msgstr "email@example.com"
+
+#: includes/Admin/views/workspaces.php:90
+#: includes/Services/BillingService.php:61
+#: includes/Services/BillingService.php:155
+msgid "monthly"
+msgstr "חודשי"
+
+#: includes/Frontend/PricingShortcode.php:79
+msgid "or %s / year"
+msgstr "או %s / שנה"
+
+#: includes/Admin/Admin.php:1225
+msgid "wp_mail() reported a failure. Check your mail configuration (e.g. an SMTP plugin)."
+msgstr "הפונקציה wp_mail() דיווחה על כשל. בדקו את הגדרות הדואר (למשל תוסף SMTP)."
+
+#: includes/Admin/views/settings.php:170
+msgid "•••••••• (unchanged)"
+msgstr "•••••••• (ללא שינוי)"
+

@@ -1,0 +1,324 @@
+/* ComSign admin styles. RTL-friendly: relies on logical spacing where possible. */
+
+.comsign-grid {
+	display: flex;
+	flex-wrap: wrap;
+	gap: 20px;
+	margin-top: 16px;
+	align-items: flex-start;
+}
+
+.comsign-col-main {
+	flex: 1 1 560px;
+	min-width: 0;
+}
+
+.comsign-col-side {
+	flex: 0 0 300px;
+}
+
+.comsign-card {
+	background: #fff;
+	border: 1px solid #c3c4c7;
+	border-radius: 6px;
+	padding: 16px 20px;
+	margin-bottom: 20px;
+}
+
+.comsign-card h2 {
+	margin-top: 0;
+}
+
+.comsign-inline-form p {
+	margin: 8px 0;
+}
+
+/* Status badges */
+.comsign-badge {
+	display: inline-block;
+	padding: 2px 10px;
+	border-radius: 12px;
+	font-size: 12px;
+	line-height: 1.8;
+	background: #f0f0f1;
+	color: #50575e;
+	vertical-align: middle;
+}
+
+.comsign-badge--draft { background: #f0f0f1; color: #50575e; }
+.comsign-badge--sent,
+.comsign-badge--pending { background: #fcf3d7; color: #8a6d3b; }
+.comsign-badge--viewed { background: #e5f0fb; color: #1d6fb8; }
+.comsign-badge--signed,
+.comsign-badge--partially { background: #e6f4ea; color: #1e7e34; }
+.comsign-badge--completed { background: #d6f0dd; color: #0a6b27; }
+.comsign-badge--declined { background: #fbe5e5; color: #a02222; }
+
+/* Signers list */
+.comsign-signers {
+	margin: 0 0 16px;
+	padding: 0;
+	list-style: none;
+}
+
+.comsign-signers li {
+	padding: 8px 0;
+	border-bottom: 1px solid #f0f0f1;
+}
+
+.comsign-signer-name { display: block; font-weight: 600; }
+.comsign-signer-email { display: block; color: #646970; font-size: 12px; }
+
+/* Editor */
+.comsign-editor-toolbar {
+	display: flex;
+	flex-wrap: wrap;
+	gap: 8px;
+	align-items: center;
+	margin-bottom: 12px;
+	padding: 10px;
+	background: #f6f7f7;
+	border-radius: 4px;
+}
+
+/* The pdf.js field-placement editor styles live in editor.css (shared with the
+   client portal) and are enqueued only on the document edit screen. */
+
+/* Audit */
+.comsign-audit .comsign-ua {
+	max-width: 280px;
+	font-size: 11px;
+	color: #646970;
+	word-break: break-word;
+}
+
+.comsign-hash code {
+	word-break: break-all;
+	font-size: 11px;
+}
+
+/* Admin tabs (Add Document) */
+.comsign-admin-tabs {
+	display: flex;
+	gap: 4px;
+	margin: 16px 0;
+}
+
+.comsign-tab {
+	border: 1px solid #c3c4c7;
+	background: #fff;
+	padding: 8px 18px;
+	border-radius: 6px;
+	cursor: pointer;
+	font: inherit;
+}
+
+.comsign-tab.is-active {
+	background: #2271b1;
+	color: #fff;
+	border-color: #2271b1;
+}
+
+.is-hidden { display: none !important; }
+
+/* Signer rows */
+.comsign-signer-head {
+	display: flex;
+	justify-content: space-between;
+	align-items: center;
+	gap: 8px;
+}
+
+.comsign-signer-actions {
+	display: flex;
+	gap: 14px;
+	margin-top: 6px;
+}
+
+.comsign-mini-form { display: inline; margin: 0; }
+.comsign-link-delete, .button-link.comsign-link-delete { color: #a02222; }
+
+/* Shareable link box */
+.comsign-link-box {
+	margin-top: 10px;
+	padding: 10px;
+	background: #f6f7f7;
+	border: 1px solid #dcdcde;
+	border-radius: 6px;
+}
+
+.comsign-link-input { font-size: 12px; margin-bottom: 8px; }
+
+.comsign-link-buttons {
+	display: flex;
+	gap: 8px;
+	flex-wrap: wrap;
+}
+
+.comsign-wa, .button.comsign-wa {
+	background: #25d366;
+	border-color: #1da851;
+	color: #fff;
+}
+
+.comsign-wa:hover { background: #1da851; color: #fff; }
+
+/* Dashboard summary */
+.comsign-summary {
+	display: flex;
+	flex-wrap: wrap;
+	gap: 16px;
+	margin: 14px 0;
+	padding: 12px 16px;
+	background: #fff;
+	border: 1px solid #c3c4c7;
+	border-radius: 6px;
+}
+
+.comsign-summary-item {
+	display: inline-flex;
+	align-items: center;
+	gap: 8px;
+}
+
+.comsign-summary-item strong { font-size: 16px; }
+
+/* Per-signer identity verification control */
+.comsign-signer-auth {
+	display: flex;
+	flex-wrap: wrap;
+	gap: 6px;
+	align-items: center;
+	margin-top: 8px;
+}
+.comsign-signer-auth .comsign-auth-label {
+	font-size: 12px;
+	color: #646970;
+}
+
+/* Analytics dashboard */
+.comsign-stat-grid {
+	display: grid;
+	grid-template-columns: repeat(auto-fit, minmax(160px, 1fr));
+	gap: 12px;
+	margin: 16px 0;
+}
+.comsign-stat-card {
+	background: #fff;
+	border: 1px solid #dcdcde;
+	border-radius: 8px;
+	padding: 16px;
+	display: flex;
+	flex-direction: column;
+	gap: 4px;
+}
+.comsign-stat-num { font-size: 28px; font-weight: 700; line-height: 1.1; color: #1d2327; }
+.comsign-stat-label { font-size: 12px; color: #646970; }
+.comsign-spark {
+	display: flex;
+	align-items: flex-end;
+	gap: 4px;
+	height: 100px;
+	padding-top: 4px;
+}
+.comsign-spark-bar {
+	flex: 1 1 0;
+	background: #2271b1;
+	border-radius: 2px 2px 0 0;
+	min-height: 2px;
+}
+
+/* ---- Document timeline (0.18.0) ---- */
+.comsign-timeline {
+	list-style: none;
+	margin: 0 0 16px;
+	padding: 0;
+	border-inline-start: 2px solid #d1d5db;
+}
+.comsign-timeline-item {
+	position: relative;
+	padding: 6px 0 6px 16px;
+	margin-inline-start: 8px;
+}
+.comsign-timeline-item::before {
+	content: "";
+	position: absolute;
+	inset-inline-start: -7px;
+	top: 12px;
+	width: 10px;
+	height: 10px;
+	border-radius: 50%;
+	background: #6b7280;
+}
+.comsign-tl--completed::before,
+.comsign-tl--signed::before { background: #15803d; }
+.comsign-tl--declined::before,
+.comsign-tl--send_failed::before,
+.comsign-tl--expired::before { background: #b91c1c; }
+.comsign-tl--sent::before,
+.comsign-tl--reminded::before { background: #2563eb; }
+.comsign-tl-event { font-weight: 600; }
+.comsign-tl-who { margin-inline-start: 8px; color: #374151; }
+.comsign-tl-when { display: block; color: #6b7280; font-size: 0.85em; }
+.comsign-timeline-actions {
+	display: flex;
+	gap: 12px;
+	flex-wrap: wrap;
+	align-items: center;
+}
+.comsign-extend-form {
+	display: flex;
+	gap: 6px;
+	align-items: center;
+}
+
+/* ---- Ready-to-send checklist (0.23.0) ---- */
+.comsign-readiness {
+	border: 1px solid var( --comsign-border, #e5e7eb );
+	border-radius: var( --comsign-radius-sm, 8px );
+	padding: var( --comsign-space-3, 12px ) var( --comsign-space-4, 14px );
+	margin-bottom: var( --comsign-space-4, 16px );
+	background: #f9fafb;
+}
+.comsign-readiness.is-ready { border-color: var( --comsign-success, #16a34a ); background: var( --comsign-success-bg, #f0fdf4 ); }
+.comsign-readiness.is-blocked { border-color: var( --comsign-warning, #d97706 ); background: var( --comsign-warning-bg, #fffbeb ); }
+.comsign-readiness-title { font-weight: 700; margin: 0 0 8px; }
+.comsign-readiness ul { margin: 0; padding: 0; list-style: none; }
+.comsign-readiness li { padding: 4px 0; }
+.comsign-readiness li.ok { color: var( --comsign-success, #166534 ); }
+.comsign-readiness li.todo { color: var( --comsign-warning, #92400e ); }
+.comsign-readiness-mark { display: inline-block; width: 1.2em; font-weight: 700; }
+.comsign-readiness-hint { display: block; margin-inline-start: 1.2em; font-size: 0.9em; color: var( --comsign-muted, #6b7280 ); }
+
+/* ---- Wizard steps (0.23.0) ---- */
+.comsign-steps {
+	display: flex;
+	flex-wrap: wrap;
+	gap: var( --comsign-space-2, 8px );
+	list-style: none;
+	margin: 12px 0 20px;
+	padding: 0;
+	counter-reset: step;
+}
+.comsign-steps li {
+	display: flex;
+	align-items: center;
+	gap: var( --comsign-space-2, 8px );
+	padding: var( --comsign-space-2, 8px ) var( --comsign-space-4, 14px );
+	border: 1px solid var( --comsign-border, #e5e7eb );
+	border-radius: var( --comsign-radius-pill, 999px );
+	color: var( --comsign-muted, #6b7280 );
+	background: var( --comsign-surface, #fff );
+}
+.comsign-steps li.is-current { border-color: var( --comsign-primary-strong, #2563eb ); color: #1e3a8a; font-weight: 600; }
+.comsign-step-n {
+	display: inline-flex;
+	align-items: center;
+	justify-content: center;
+	width: 22px; height: 22px;
+	border-radius: 50%;
+	background: var( --comsign-border, #e5e7eb );
+	font-size: 12px;
+	font-weight: 700;
+}
+.comsign-steps li.is-current .comsign-step-n { background: var( --comsign-primary-strong, #2563eb ); color: #fff; }

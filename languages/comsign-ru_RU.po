@@ -1,0 +1,2251 @@
+msgid ""
+msgstr ""
+"Project-Id-Version: ComSign\nLanguage: ru_RU\nMIME-Version: 1.0\nContent-Type: text/plain; charset=UTF-8\nContent-Transfer-Encoding: 8bit\nPlural-Forms: nplurals=3; plural=(n%10==1 && n%100!=11 ? 0 : n%10>=2 && n%10<=4 && (n%100<12 || n%100>14) ? 1 : 2);\n"
+
+msgid "%1$d of %2$d signed"
+msgstr "Подписано %1$d из %2$d"
+
+msgid "%1$d saved, %2$d left on your plan."
+msgstr "%1$d сохранено, %2$d осталось по вашему тарифу."
+
+msgid "%1$d used, %2$d remaining."
+msgstr "Использовано: %1$d, осталось: %2$d."
+
+msgid "%d documents / month"
+msgstr "%d документов / месяц"
+
+msgid "%d documents used (unlimited)."
+msgstr "Использовано документов: %d (без ограничений)."
+
+msgid "%d saved (unlimited)."
+msgstr "%d сохранено (без ограничений)."
+
+msgid "%s (copy)"
+msgstr "%s (копия)"
+
+msgid "%s's workspace"
+msgstr "Рабочее пространство %s"
+
+msgid "%s’s workspace"
+msgstr "Рабочее пространство %s"
+
+msgid "(untitled)"
+msgstr "(без названия)"
+
+msgid "* Required"
+msgstr "* Обязательно"
+
+msgid "/ month"
+msgstr "/ месяц"
+
+msgid "14 days"
+msgstr "14 дней"
+
+msgid "30 days"
+msgstr "30 дней"
+
+msgid "7 days"
+msgstr "7 дней"
+
+msgid "A REST API key is configured."
+msgstr "Ключ REST API настроен."
+
+msgid "A document is awaiting your signature — %s"
+msgstr "Документ ожидает вашей подписи — %s"
+
+msgid "A field is assigned to a signer that is not on this document. Please re-save the fields."
+msgstr "Поле назначено подписанту, которого нет в этом документе. Пожалуйста, сохраните поля заново."
+
+msgid "A new code has been sent."
+msgstr "Новый код отправлен."
+
+msgid "A signature is required."
+msgstr "Требуется подпись."
+
+msgid "A signing link was generated. Copy it or share via WhatsApp below."
+msgstr "Ссылка для подписания создана. Скопируйте её или поделитесь через WhatsApp ниже."
+
+msgid "A sub-workspace belongs under this one; managers here can see its documents too."
+msgstr "Под-пространство относится к этому; менеджеры здесь также видят его документы."
+
+msgid "A webhook URL is configured. Use “Send test webhook” below to confirm it is reachable."
+msgstr "URL webhook настроен. Нажмите «Отправить тестовый webhook» ниже, чтобы проверить доступность."
+
+msgid "API & webhooks"
+msgstr "API и webhooks"
+
+msgid "API name"
+msgstr "Имя API"
+
+msgid "API password"
+msgstr "Пароль API"
+
+msgid "Accent colour"
+msgstr "Акцентный цвет"
+
+msgid "Access code"
+msgstr "Код доступа"
+
+msgid "Access code (for the access-code method)"
+msgstr "Код доступа (для метода с кодом доступа)"
+
+msgid "Access code (shared by you)"
+msgstr "Код доступа (передаёте вы)"
+
+msgid "Action"
+msgstr "Действие"
+
+msgid "Action needed: %s payment failed"
+msgstr "Требуется действие: платёж в %s не прошёл"
+
+msgid "Actions"
+msgstr "Действия"
+
+msgid "Active"
+msgstr "Активна"
+
+msgid "Active certificate:"
+msgstr "Активный сертификат:"
+
+msgid "Add Document"
+msgstr "Добавить документ"
+
+msgid "Add a contact"
+msgstr "Добавить контакт"
+
+msgid "Add a recipient name and a valid email."
+msgstr "Укажите имя получателя и корректный e-mail."
+
+msgid "Add a signature (or initials) field for: %s."
+msgstr "Добавьте поле подписи (или инициалов) для: %s."
+
+msgid "Add a signer first, then drag fields onto the document."
+msgstr "Сначала добавьте подписанта, затем перетащите поля на документ."
+
+msgid "Add at least one question to the form."
+msgstr "Добавьте хотя бы один вопрос в форму."
+
+msgid "Add at least one signer before sending."
+msgstr "Добавьте хотя бы одного подписанта перед отправкой."
+
+msgid "Add at least one signer first, then drop signature fields onto the document."
+msgstr "Сначала добавьте хотя бы одного подписанта, затем разместите поля подписи на документе."
+
+msgid "Add at least one signer to start placing fields."
+msgstr "Добавьте хотя бы одного подписанта, чтобы начать размещать поля."
+
+msgid "Add field"
+msgstr "Добавить поле"
+
+msgid "Add questions; your recipient fills them in online and signs. Leave a question blank to skip it."
+msgstr "Добавьте вопросы; получатель заполнит их онлайн и подпишет. Оставьте вопрос пустым, чтобы пропустить."
+
+msgid "Add recipients"
+msgstr "Добавить получателей"
+
+msgid "Add signer"
+msgstr "Добавить подписанта"
+
+msgid "Add signers"
+msgstr "Добавить подписантов"
+
+msgid "Add the document"
+msgstr "Добавить документ"
+
+msgid "Add the people who need to sign."
+msgstr "Добавьте людей, которые должны подписать."
+
+msgid "Address"
+msgstr "Адрес"
+
+msgid "Admin"
+msgstr "Администратор"
+
+msgid "All parties have signed. The signed PDF and verification details are available below."
+msgstr "Все стороны подписали. Подписанный PDF и сведения для проверки доступны ниже."
+
+msgid "All statuses"
+msgstr "Все статусы"
+
+msgid "Allow signers to assign someone else"
+msgstr "Разрешить подписантам передавать подписание другому"
+
+msgid "Already signed"
+msgstr "Уже подписано"
+
+msgid "An audit trail of manual plan changes, suspensions and reactivations."
+msgstr "Журнал аудита ручных изменений тарифа, приостановок и возобновлений."
+
+msgid "Analytics"
+msgstr "Аналитика"
+
+msgid "Annual — %s"
+msgstr "Годовой — %s"
+
+msgid "Answer type"
+msgstr "Тип ответа"
+
+msgid "Ask a workspace owner to give you permission to create documents."
+msgstr "Попросите владельца рабочего пространства разрешить вам создавать документы."
+
+msgid "Assign a recipient to each role. The document is created as a draft so you can review it before sending."
+msgstr "Назначьте получателя на каждую роль. Документ создаётся как черновик, чтобы вы могли проверить его перед отправкой."
+
+msgid "Assign to this person"
+msgstr "Передать этому человеку"
+
+msgid "Assigned to someone else"
+msgstr "Передано другому человеку"
+
+msgid "At least one signer added"
+msgstr "Добавлен хотя бы один подписант"
+
+msgid "Attachment %d"
+msgstr "Вложение %d"
+
+msgid "Audit report (PDF)"
+msgstr "Отчёт аудита (PDF)"
+
+msgid "Audit report — %s"
+msgstr "Отчёт аудита — %s"
+
+msgid "Audit trail"
+msgstr "Журнал аудита"
+
+msgid "Automatic reminders"
+msgstr "Автоматические напоминания"
+
+msgid "Avg. time to complete"
+msgstr "Среднее время завершения"
+
+msgid "Back to contacts"
+msgstr "Назад к контактам"
+
+msgid "Back to documents"
+msgstr "Назад к документам"
+
+msgid "Back to list"
+msgstr "Назад к списку"
+
+msgid "Basic formatting is allowed. A “Signatures” page is added automatically."
+msgstr "Допускается базовое форматирование. Страница «Подписи» добавляется автоматически."
+
+msgid "Before you can send:"
+msgstr "Прежде чем отправить:"
+
+msgid "Billing (Cardcom)"
+msgstr "Оплата (Cardcom)"
+
+msgid "Billing is not available"
+msgstr "Оплата недоступна"
+
+msgid "Billing is not set up yet. Please contact support."
+msgstr "Оплата ещё не настроена. Обратитесь в поддержку."
+
+msgid "Billing settings saved."
+msgstr "Настройки оплаты сохранены."
+
+msgid "Brand name"
+msgstr "Название бренда"
+
+msgid "Branding"
+msgstr "Брендирование"
+
+msgid "Browser"
+msgstr "Браузер"
+
+msgid "Build a form"
+msgstr "Создать форму"
+
+msgid "Bulk send"
+msgstr "Массовая отправка"
+
+msgid "Bulk send complete: %d document(s) created and sent."
+msgstr "Массовая отправка завершена: создано и отправлено документов — %d."
+
+msgid "Bulk send requires a template with exactly one role."
+msgstr "Для массовой отправки нужен шаблон ровно с одной ролью."
+
+msgid "Bulk send: %s"
+msgstr "Массовая отправка: %s"
+
+msgid "Business"
+msgstr "Бизнес"
+
+msgid "CC recipients"
+msgstr "Получатели копии (CC)"
+
+msgid "CC recipients saved."
+msgstr "Получатели копии сохранены."
+
+msgid "Cancel"
+msgstr "Отмена"
+
+msgid "Cancel subscription"
+msgstr "Отменить подписку"
+
+msgid "Cancel your subscription? You will keep access until the end of the current period."
+msgstr "Отменить подписку? Доступ сохранится до конца текущего периода."
+
+msgid "Canceled"
+msgstr "Отменена"
+
+msgid "Cardcom is not configured."
+msgstr "Cardcom не настроен."
+
+msgid "Cardcom webhook (optional)"
+msgstr "Вебхук Cardcom (необязательно)"
+
+msgid "Certificate password"
+msgstr "Пароль сертификата"
+
+msgid "Certificate removed. Documents will use electronic signatures."
+msgstr "Сертификат удалён. Документы будут использовать электронные подписи."
+
+msgid "Certificate stored. New documents will be signed with PKI/PAdES."
+msgstr "Сертификат сохранён. Новые документы будут подписываться с PKI/PAdES."
+
+msgid "Change"
+msgstr "Изменение"
+
+msgid "Check"
+msgstr "Проверить"
+
+msgid "Checkbox"
+msgstr "Флажок"
+
+msgid "Checkbox (tick to confirm)"
+msgstr "Флажок (отметьте для подтверждения)"
+
+msgid "Choice"
+msgstr "Выбор"
+
+msgid "Choice (dropdown)"
+msgstr "Выбор (выпадающий список)"
+
+msgid "Choices (comma-separated)"
+msgstr "Варианты (через запятую)"
+
+msgid "Choose a different way to start"
+msgstr "Выбрать другой способ начать"
+
+msgid "Choose a plan"
+msgstr "Выберите тариф"
+
+msgid "Choose a template"
+msgstr "Выберите шаблон"
+
+msgid "Choose…"
+msgstr "Выбрать…"
+
+msgid "Clear"
+msgstr "Очистить"
+
+msgid "Click to toggle required"
+msgstr "Нажмите, чтобы переключить «обязательно»"
+
+msgid "Client portal"
+msgstr "Портал клиентов"
+
+msgid "Code"
+msgstr "Код"
+
+msgid "ComSign"
+msgstr "ComSign"
+
+msgid "ComSign %1$s (%2$s)"
+msgstr "ComSign %1$s (%2$s)"
+
+msgid "ComSign %1$s (%2$s) renewal"
+msgstr "Продление ComSign %1$s (%2$s)"
+
+msgid "ComSign Documents"
+msgstr "Документы ComSign"
+
+msgid "ComSign Settings"
+msgstr "Настройки ComSign"
+
+msgid "ComSign test email"
+msgstr "Тестовое письмо ComSign"
+
+msgid "ComSign: dependencies are missing. Please run \\\"composer install\\\" inside the plugin directory."
+msgstr "ComSign: отсутствуют зависимости. Выполните \\\"composer install\\\" в каталоге плагина."
+
+msgid "Completed"
+msgstr "Завершено"
+
+msgid "Completed & signed: \\\"%s\\\""
+msgstr "Завершено и подписано: \\\"%s\\\""
+
+msgid "Completed documents are signed with a cryptographic PKCS#7/PAdES signature."
+msgstr "Завершённые документы подписываются криптографической подписью PKCS#7/PAdES."
+
+msgid "Completed:"
+msgstr "Завершено:"
+
+msgid "Completion rate"
+msgstr "Доля завершения"
+
+msgid "Completions (last 14 days)"
+msgstr "Завершения (последние 14 дней)"
+
+msgid "Completions per day"
+msgstr "Завершений в день"
+
+msgid "Completions per day (last 14 days)"
+msgstr "Завершения по дням (последние 14 дней)"
+
+msgid "Compose from text"
+msgstr "Создать из текста"
+
+msgid "Confirm decline"
+msgstr "Подтвердить отказ"
+
+msgid "Connect your Cardcom terminal to charge subscriptions. The API password is stored encrypted."
+msgstr "Подключите терминал Cardcom для оплаты подписок. Пароль API хранится в зашифрованном виде."
+
+msgid "Connectivity tests"
+msgstr "Тесты подключения"
+
+msgid "Consent required"
+msgstr "Требуется согласие"
+
+msgid "Consented"
+msgstr "Согласие получено"
+
+msgid "Contact removed."
+msgstr "Контакт удалён."
+
+msgid "Contact saved."
+msgstr "Контакт сохранён."
+
+msgid "Contacts"
+msgstr "Контакты"
+
+msgid "Contacts are not available"
+msgstr "Контакты недоступны"
+
+msgid "Continue"
+msgstr "Продолжить"
+
+msgid "Copied!"
+msgstr "Скопировано!"
+
+msgid "Copy link"
+msgstr "Копировать ссылку"
+
+msgid "Could not complete signing"
+msgstr "Не удалось завершить подписание"
+
+msgid "Could not generate the document PDF."
+msgstr "Не удалось создать PDF документа."
+
+msgid "Could not load the document preview."
+msgstr "Не удалось загрузить предпросмотр документа."
+
+msgid "Could not reassign"
+msgstr "Не удалось передать"
+
+msgid "Could not start checkout."
+msgstr "Не удалось начать оплату."
+
+msgid "Could not store the uploaded file."
+msgstr "Не удалось сохранить загруженный файл."
+
+msgid "Create"
+msgstr "Создать"
+
+msgid "Create & send all"
+msgstr "Создать и отправить все"
+
+msgid "Create &amp; send"
+msgstr "Создать и отправить"
+
+msgid "Create a sub-workspace"
+msgstr "Создать под-пространство"
+
+msgid "Create document"
+msgstr "Создать документ"
+
+msgid "Create your first document"
+msgstr "Создайте первый документ"
+
+msgid "Created"
+msgstr "Создано"
+
+msgid "Custom branding"
+msgstr "Свой брендинг"
+
+msgid "Daily completions for the last 14 days. A text table follows below."
+msgstr "Ежедневные завершения за последние 14 дней. Ниже следует текстовая таблица."
+
+msgid "Dana Cohen, dana@example.com, +972500000000\\nAvi Levi, avi@example.com"
+msgstr ""
+
+msgid "Dashboard"
+msgstr "Панель"
+
+msgid "Date"
+msgstr "Дата"
+
+msgid "Date (auto)"
+msgstr "Дата (авто)"
+
+msgid "Date signed"
+msgstr "Дата подписания"
+
+msgid "Days left in your free trial: %d"
+msgstr "Дней до конца пробного периода: %d"
+
+msgid "Decline to sign"
+msgstr "Отказаться подписывать"
+
+msgid "Declined"
+msgstr "Отклонено"
+
+msgid "Default workspace"
+msgstr "Рабочее пространство по умолчанию"
+
+msgid "Define questions; your recipient answers them online and signs, and you get one signed PDF with their answers."
+msgstr "Задайте вопросы; получатель ответит на них онлайн и подпишет, а вы получите один подписанный PDF с ответами."
+
+msgid "Delegated"
+msgstr "Передано"
+
+msgid "Delete"
+msgstr "Удалить"
+
+msgid "Delete document"
+msgstr "Удалить документ"
+
+msgid "Delete this template?"
+msgstr "Удалить этот шаблон?"
+
+msgid "Delivery failed: %s"
+msgstr "Доставка не удалась: %s"
+
+msgid "Details"
+msgstr "Подробности"
+
+msgid "Digital (PKI) signatures"
+msgstr "Цифровые подписи (PKI)"
+
+msgid "Digital signature (PKI / PAdES)"
+msgstr "Цифровая подпись (PKI / PAdES)"
+
+msgid "Digital signature (PKI/PAdES)"
+msgstr "Цифровая подпись (PKI/PAdES)"
+
+msgid "Document"
+msgstr "Документ"
+
+msgid "Document ID"
+msgstr "ID документа"
+
+msgid "Document content"
+msgstr "Содержимое документа"
+
+msgid "Document created and sent for signing."
+msgstr "Документ создан и отправлен на подписание."
+
+msgid "Document created from template. Review and send."
+msgstr "Документ создан из шаблона. Проверьте и отправьте."
+
+msgid "Document created."
+msgstr "Документ создан."
+
+msgid "Document created. Now add signers and place fields."
+msgstr "Документ создан. Теперь добавьте подписантов и разместите поля."
+
+msgid "Document deleted."
+msgstr "Документ удалён."
+
+msgid "Document duplicated."
+msgstr "Документ продублирован."
+
+msgid "Document file is uploaded"
+msgstr "Файл документа загружен"
+
+msgid "Document not available"
+msgstr "Документ недоступен"
+
+msgid "Document not found."
+msgstr "Документ не найден."
+
+msgid "Document preview"
+msgstr "Предпросмотр документа"
+
+msgid "Document sent for signing."
+msgstr "Документ отправлен на подписание."
+
+msgid "Document signed via ComSign"
+msgstr "Документ подписан через ComSign"
+
+msgid "Document title"
+msgstr "Название документа"
+
+msgid "Document title (optional)"
+msgstr "Название документа (необязательно)"
+
+msgid "Document unavailable"
+msgstr "Документ недоступен"
+
+msgid "Document unavailable."
+msgstr "Документ недоступен."
+
+msgid "Document uploaded. Now add signers and place signature fields."
+msgstr "Документ загружен. Теперь добавьте подписантов и разместите поля подписи."
+
+msgid "Document verification form — lets anyone confirm a signed document is authentic using its ID and verification code (SHA-256), and see who signed it."
+msgstr "Форма проверки документа — позволяет любому подтвердить подлинность подписанного документа по его ID и коду проверки (SHA-256) и увидеть, кто его подписал."
+
+msgid "Documents"
+msgstr "Документы"
+
+msgid "Documents by status"
+msgstr "Документы по статусу"
+
+msgid "Documents signed"
+msgstr "Подписанные документы"
+
+msgid "Done:"
+msgstr "Готово:"
+
+msgid "Download audit trail (PDF)"
+msgstr "Скачать журнал аудита (PDF)"
+
+msgid "Download original"
+msgstr "Скачать оригинал"
+
+msgid "Download signed PDF"
+msgstr "Скачать подписанный PDF"
+
+msgid "Downloaded"
+msgstr "Скачано"
+
+msgid "Draft"
+msgstr "Черновик"
+
+msgid "Draft created."
+msgstr "Черновик создан."
+
+msgid "Drag to reposition; double-click to remove; click a field label to toggle “required”."
+msgstr "Перетащите, чтобы переместить; двойной щелчок — удалить; щёлкните по подписи поля, чтобы переключить «обязательно»."
+
+msgid "Draw"
+msgstr "Нарисовать"
+
+msgid "Drawing area for your signature"
+msgstr "Область для рисования вашей подписи"
+
+msgid "Duplicate"
+msgstr "Дублировать"
+
+msgid "Each line creates and sends a separate document. Format: name, email, phone (phone optional)."
+msgstr "Каждая строка создаёт и отправляет отдельный документ. Формат: имя, email, телефон (телефон необязателен)."
+
+msgid "Each request is signed with HMAC-SHA256 of the body in the X-ComSign-Signature header. Verify it with this secret."
+msgstr "Каждый запрос подписывается HMAC-SHA256 тела в заголовке X-ComSign-Signature. Проверяйте его этим секретом."
+
+msgid "Each signer should have somewhere to sign."
+msgstr "У каждого подписанта должно быть место для подписи."
+
+msgid "Edit document"
+msgstr "Редактировать документ"
+
+msgid "Electronic signature"
+msgstr "Электронная подпись"
+
+msgid "Email"
+msgstr "Email"
+
+msgid "Email (auto)"
+msgstr "Email (авто)"
+
+msgid "Email a reminder to signers who have not signed yet."
+msgstr "Отправить напоминание по email подписантам, которые ещё не подписали."
+
+msgid "Email delivery"
+msgstr "Доставка email"
+
+msgid "Email is optional — leave it empty to share a signing link by WhatsApp or any other channel."
+msgstr "Email необязателен — оставьте поле пустым, чтобы поделиться ссылкой для подписания через WhatsApp или иной канал."
+
+msgid "Email link"
+msgstr "Ссылка по email"
+
+msgid "Email one-time code"
+msgstr "Одноразовый код по email"
+
+msgid "Endpoint responded with HTTP %d."
+msgstr "Конечная точка ответила HTTP %d."
+
+msgid "Enter options separated by commas:"
+msgstr "Введите варианты через запятую:"
+
+msgid "Enter the document ID and its verification code to confirm it is authentic and see who signed it."
+msgstr "Введите ID документа и его код проверки, чтобы подтвердить подлинность и увидеть, кто его подписал."
+
+msgid "Enterprise"
+msgstr "Корпоративный"
+
+msgid "Event"
+msgstr "Событие"
+
+msgid "Every customer workspace on this site, with its plan, members and document count. Only you (the site operator) can see this cross-tenant view."
+msgstr "Каждое рабочее пространство клиента на этом сайте с его тарифом, участниками и числом документов. Только вы (оператор сайта) видите это межарендаторное представление."
+
+msgid "Every event is POSTed here as JSON, signed with X-ComSign-Signature (HMAC-SHA256 of the body using the secret below)."
+msgstr "Каждое событие отправляется сюда методом POST в формате JSON, подписанное X-ComSign-Signature (HMAC-SHA256 тела с секретом ниже)."
+
+msgid "Every signer has a field to fill"
+msgstr "У каждого подписанта есть поле для заполнения"
+
+msgid "Every signer has a signature field"
+msgstr "У каждого подписанта есть поле подписи"
+
+msgid "Every signer must have at least one field. Please assign a field to each signer."
+msgstr "У каждого подписанта должно быть хотя бы одно поле. Назначьте поле каждому подписанту."
+
+msgid "Example payload"
+msgstr "Пример полезной нагрузки"
+
+msgid "Expired"
+msgstr "Истёк срок"
+
+msgid "Expires:"
+msgstr "Истекает:"
+
+msgid "Expiry extended"
+msgstr "Срок продлён"
+
+msgid "Export CSV"
+msgstr "Экспорт CSV"
+
+msgid "Extend"
+msgstr "Продлить"
+
+msgid "Extend deadline by"
+msgstr "Продлить срок на"
+
+msgid "Field for:"
+msgstr "Поле для:"
+
+msgid "Field label shown to the signer (optional):"
+msgstr "Подпись поля, видимая подписанту (необязательно):"
+
+msgid "Field:"
+msgstr "Поле:"
+
+msgid "Fields saved."
+msgstr "Поля сохранены."
+
+msgid "Fields to add for this signer"
+msgstr "Поля для этого подписанта"
+
+msgid "File"
+msgstr "Файл"
+
+msgid "File not available."
+msgstr "Файл недоступен."
+
+msgid "File upload"
+msgstr "Загрузка файла"
+
+msgid "Fill in the details below"
+msgstr "Заполните данные ниже"
+
+msgid "Filter"
+msgstr "Фильтр"
+
+msgid "Filter by status"
+msgstr "Фильтр по статусу"
+
+msgid "For signer:"
+msgstr "Для подписанта:"
+
+msgid "Form"
+msgstr "Форма"
+
+msgid "Form / questionnaire"
+msgstr "Форма / анкета"
+
+msgid "Form sent for completion."
+msgstr "Форма отправлена для заполнения."
+
+msgid "Form title"
+msgstr "Название формы"
+
+msgid "Free trial"
+msgstr "Пробный период"
+
+msgid "Full name"
+msgstr "Полное имя"
+
+msgid "GD is available for stamping signature images."
+msgstr "Библиотека GD доступна для нанесения изображений подписи."
+
+msgid "GD is missing; drawn/typed signature images cannot be processed."
+msgstr "Библиотека GD отсутствует; изображения нарисованной/набранной подписи не могут быть обработаны."
+
+msgid "Get signing link"
+msgstr "Получить ссылку для подписания"
+
+msgid "Good news — your workspace has been reactivated and you can send documents again."
+msgstr "Хорошие новости — ваше рабочее пространство возобновлено, можно снова отправлять документы."
+
+msgid "Hello %s,"
+msgstr "Здравствуйте, %s,"
+
+msgid "Hello %s, please review the document below and add your signature."
+msgstr "Здравствуйте, %s! Пожалуйста, ознакомьтесь с документом ниже и поставьте подпись."
+
+msgid "Hello,"
+msgstr "Здравствуйте,"
+
+msgid "How it works"
+msgstr "Как это работает"
+
+msgid "How signing works"
+msgstr "Как работает подписание"
+
+msgid "How to add a document"
+msgstr "Как добавить документ"
+
+msgid "How would you like to create this document?"
+msgstr "Как вы хотите создать этот документ?"
+
+msgid "I confirm"
+msgstr "Подтверждаю"
+
+msgid "I have read the document and I agree to sign it electronically."
+msgstr "Я ознакомился с документом и согласен подписать его электронно."
+
+msgid "IP"
+msgstr "IP"
+
+msgid "IP address"
+msgstr "IP-адрес"
+
+msgid "Image support (GD)"
+msgstr "Поддержка изображений (GD)"
+
+msgid "Initials"
+msgstr "Инициалы"
+
+msgid "Insights"
+msgstr "Аналитика"
+
+msgid "Integrations"
+msgstr "Интеграции"
+
+msgid "Invalid link"
+msgstr "Недействительная ссылка"
+
+msgid "Invalid link."
+msgstr "Недействительная ссылка."
+
+msgid "Invalid or expired link"
+msgstr "Недействительная или истёкшая ссылка"
+
+msgid "Invalid or expired link."
+msgstr "Недействительная или просроченная ссылка."
+
+msgid "Invalid plan."
+msgstr "Недопустимый тариф."
+
+msgid "Invalid upload."
+msgstr "Недопустимая загрузка."
+
+msgid "Invitation cancelled."
+msgstr "Приглашение отменено."
+
+msgid "Invitation re-sent."
+msgstr "Приглашение отправлено повторно."
+
+msgid "Invitation saved. The user will join when they sign in with this email."
+msgstr "Приглашение сохранено. Пользователь присоединится, когда войдёт с этим email."
+
+msgid "Invitations are sent with wp_mail(). Use “Send test email” below to confirm delivery on this server."
+msgstr "Приглашения отправляются через wp_mail(). Нажмите «Отправить тестовое письмо» ниже, чтобы проверить доставку на этом сервере."
+
+msgid "Invite a member"
+msgstr "Пригласить участника"
+
+msgid "It is not your turn to sign yet."
+msgstr "Сейчас не ваша очередь подписывать."
+
+msgid "Keep my subscription"
+msgstr "Оставить подписку"
+
+msgid "Last activity"
+msgstr "Последняя активность"
+
+msgid "Leave blank to keep the current password."
+msgstr "Оставьте пустым, чтобы сохранить текущий пароль."
+
+msgid "Link"
+msgstr "Ссылка"
+
+msgid "Link expired"
+msgstr "Ссылка истекла"
+
+msgid "Link expires after"
+msgstr "Ссылка истекает через"
+
+msgid "Loading document…"
+msgstr "Загрузка документа…"
+
+msgid "Logo URL"
+msgstr "URL логотипа"
+
+msgid "Manage"
+msgstr "Управление"
+
+msgid "Member"
+msgstr "Участник"
+
+msgid "Member added."
+msgstr "Участник добавлен."
+
+msgid "Member removed."
+msgstr "Участник удалён."
+
+msgid "Members"
+msgstr "Участники"
+
+msgid "Message to signers (optional)"
+msgstr "Сообщение подписантам (необязательно)"
+
+msgid "Missing billing token."
+msgstr "Отсутствует токен оплаты."
+
+msgid "Missing transaction reference."
+msgstr "Отсутствует идентификатор транзакции."
+
+msgid "Monthly — %s"
+msgstr "Месячный — %s"
+
+msgid "More information"
+msgstr "Подробнее"
+
+msgid "Multiple choice"
+msgstr "Множественный выбор"
+
+msgid "Must be a public https URL. Leave blank to disable."
+msgstr "Должен быть публичный https-URL. Оставьте пустым, чтобы отключить."
+
+msgid "My electronic signature is legally binding and has the same effect as a handwritten signature. The time, my IP address and browser are recorded as proof of signing."
+msgstr "Моя электронная подпись юридически обязательна и имеет ту же силу, что и собственноручная. Время, мой IP-адрес и браузер фиксируются как доказательство подписания."
+
+msgid "Name"
+msgstr "Имя"
+
+msgid "Name (auto)"
+msgstr "Имя (авто)"
+
+msgid "Needs attention (out > 7 days)"
+msgstr "Требует внимания (отправлено > 7 дней)"
+
+msgid "New document"
+msgstr "Новый документ"
+
+msgid "Next"
+msgstr "Далее"
+
+msgid "No REST API key is set. Save Settings to generate one if you use the API."
+msgstr "Ключ REST API не задан. Сохраните настройки, чтобы создать его, если используете API."
+
+msgid "No contacts yet."
+msgstr "Пока нет контактов."
+
+msgid "No credit card required to start. Cancel anytime."
+msgstr "Для начала не нужна банковская карта. Отмена в любой момент."
+
+msgid "No data yet — send a document to start seeing insights."
+msgstr "Пока нет данных — отправьте документ, чтобы увидеть аналитику."
+
+msgid "No documents yet."
+msgstr "Пока нет документов."
+
+msgid "No documents yet. Upload your first PDF to get started."
+msgstr "Пока нет документов. Загрузите первый PDF, чтобы начать."
+
+msgid "No emails were sent because the signer(s) have no email. Use \\\"Get signing link\\\" to share their link."
+msgstr "Письма не отправлены, так как у подписанта(ов) нет email. Используйте \\\"Получить ссылку для подписания\\\", чтобы поделиться ссылкой."
+
+msgid "No events recorded yet."
+msgstr "Событий пока нет."
+
+msgid "No extra verification"
+msgstr "Без дополнительной проверки"
+
+msgid "No file was uploaded, or the upload failed."
+msgstr "Файл не был загружен, или загрузка не удалась."
+
+msgid "No matching signed document was found for that ID and code."
+msgstr "Подписанный документ с таким ID и кодом не найден."
+
+msgid "No signers added yet."
+msgstr "Подписанты ещё не добавлены."
+
+msgid "No signers yet."
+msgstr "Пока нет подписантов."
+
+msgid "No subscription"
+msgstr "Нет подписки"
+
+msgid "No templates in this workspace yet."
+msgstr "В этом рабочем пространстве пока нет шаблонов."
+
+msgid "No templates yet."
+msgstr "Пока нет шаблонов."
+
+msgid "No webhook URL configured (optional)."
+msgstr "URL webhook не настроен (необязательно)."
+
+msgid "No webhook URL is configured."
+msgstr "URL webhook не настроен."
+
+msgid "No workspace"
+msgstr "Нет рабочего пространства"
+
+msgid "No workspace yet"
+msgstr "Пока нет рабочего пространства"
+
+msgid "No workspaces yet."
+msgstr "Пока нет рабочих пространств."
+
+msgid "Not allowed"
+msgstr "Не разрешено"
+
+msgid "Not available"
+msgstr "Недоступно"
+
+msgid "Not found"
+msgstr "Не найдено"
+
+msgid "Nothing stuck — every document is moving."
+msgstr "Ничего не застряло — все документы в движении."
+
+msgid "Nothing to export."
+msgstr "Нечего экспортировать."
+
+msgid "Number"
+msgstr "Число"
+
+msgid "OK"
+msgstr "ОК"
+
+msgid "One per line, in the form name = value. Each {{name}} in the content is replaced with its value. {{date}} and {{site}} are available automatically."
+msgstr "По одному в строке, в виде имя = значение. Каждое {{name}} в содержимом заменяется его значением. {{date}} и {{site}} доступны автоматически."
+
+msgid "Online payment is not set up on this site yet. Please contact support to choose a paid plan."
+msgstr "Онлайн-оплата на сайте ещё не настроена. Обратитесь в поддержку, чтобы выбрать платный тариф."
+
+msgid "Only PDF files are allowed."
+msgstr "Допускаются только файлы PDF."
+
+msgid "Only a workspace owner can manage integrations."
+msgstr "Управлять интеграциями может только владелец рабочего пространства."
+
+msgid "Only a workspace owner can manage the plan and billing."
+msgstr "Управлять тарифом и оплатой может только владелец рабочего пространства."
+
+msgid "Open your area"
+msgstr "Открыть личный кабинет"
+
+msgid "OpenSSL (PKI signing)"
+msgstr "OpenSSL (подпись PKI)"
+
+msgid "OpenSSL is available for cryptographic (PAdES) signing."
+msgstr "OpenSSL доступен для криптографического подписания (PAdES)."
+
+msgid "OpenSSL is not available on this server, so PKI signing cannot be enabled."
+msgstr "OpenSSL недоступен на этом сервере, поэтому подпись PKI включить нельзя."
+
+msgid "OpenSSL is not available on this server, so cryptographic signing cannot be enabled."
+msgstr "OpenSSL недоступен на этом сервере, поэтому криптографическое подписание включить нельзя."
+
+msgid "OpenSSL is unavailable; documents use electronic signatures only."
+msgstr "OpenSSL недоступен; документы используют только электронные подписи."
+
+msgid "Operator"
+msgstr "Оператор"
+
+msgid "Optional safety net. Payments activate automatically when the customer returns from Cardcom; this URL is sent per-transaction, so there is nothing to set in your terminal."
+msgstr "Необязательная подстраховка. Платежи активируются автоматически при возврате клиента из Cardcom; этот URL отправляется для каждой транзакции отдельно, поэтому ничего настраивать в терминале не нужно."
+
+msgid "Optional. An RFC-3161 timestamp proves when each document was signed (PAdES-T), giving the signature long-term validity. Leave empty to disable."
+msgstr "Необязательно. Метка времени по RFC-3161 подтверждает, когда был подписан каждый документ (PAdES-T), давая подписи долгосрочную действительность. Оставьте пустым, чтобы отключить."
+
+msgid "Optional. Payments are confirmed automatically when the customer returns from Cardcom, so you do not need to configure anything in your terminal. ComSign also sends this URL with each transaction as a safety net — it is per-transaction and will not affect other systems that share the same Cardcom terminal."
+msgstr "Необязательно. Платежи подтверждаются автоматически при возврате клиента из Cardcom, поэтому в терминале ничего настраивать не нужно. ComSign также отправляет этот URL с каждой транзакцией как подстраховку — он привязан к транзакции и не влияет на другие системы, использующие тот же терминал Cardcom."
+
+msgid "Original PDF"
+msgstr "Оригинальный PDF"
+
+msgid "Outgoing webhook"
+msgstr "Исходящий webhook"
+
+msgid "Owner"
+msgstr "Владелец"
+
+msgid "Owner(s)"
+msgstr "Владелец(ы)"
+
+msgid "PDF file"
+msgstr "Файл PDF"
+
+msgid "PDF only, up to 25 MB."
+msgstr "Только PDF, до 25 МБ."
+
+msgid "PDF uploaded. Now add signers and place fields."
+msgstr "PDF загружен. Теперь добавьте подписантов и разместите поля."
+
+msgid "PHP version"
+msgstr "Версия PHP"
+
+msgid "Page %1$d of %2$d"
+msgstr "Страница %1$d из %2$d"
+
+msgid "Partially signed"
+msgstr "Подписано частично"
+
+msgid "Paste these shortcodes into any page or post. The links are the public entry points for your customers."
+msgstr "Вставьте эти шорткоды на любую страницу или запись. Ссылки — это публичные точки входа для ваших клиентов."
+
+msgid "Payment due"
+msgstr "Требуется оплата"
+
+msgid "Payment received — your plan is now active."
+msgstr "Платёж получен — ваш тариф теперь активен."
+
+msgid "Payment was not completed. You can try again below."
+msgstr "Платёж не завершён. Можно попробовать снова ниже."
+
+msgid "Pending invitations"
+msgstr "Ожидающие приглашения"
+
+msgid "People you sign with are saved here automatically and offered as suggestions when you add signers."
+msgstr "Люди, с которыми вы подписываете, сохраняются здесь автоматически и предлагаются при добавлении подписантов."
+
+msgid "Permanently delete this document and all its data?"
+msgstr "Удалить этот документ и все его данные безвозвратно?"
+
+msgid "Personal workspace"
+msgstr "Личное рабочее пространство"
+
+msgid "Phone"
+msgstr "Телефон"
+
+msgid "Phone (optional)"
+msgstr "Телефон (необязательно)"
+
+msgid "Phone for WhatsApp (optional)"
+msgstr "Телефон для WhatsApp (необязательно)"
+
+msgid "Place at least one field for each signer."
+msgstr "Разместите хотя бы одно поле для каждого подписанта."
+
+msgid "Place at least one signature field before sending."
+msgstr "Разместите хотя бы одно поле подписи перед отправкой."
+
+msgid "Place fields"
+msgstr "Размещение полей"
+
+msgid "Place signature fields"
+msgstr "Разместить поля подписи"
+
+msgid "Plan"
+msgstr "Тариф"
+
+msgid "Plan & billing"
+msgstr "Тариф и оплата"
+
+msgid "Plan updated."
+msgstr "Тариф обновлён."
+
+msgid "Plan:"
+msgstr "Тариф:"
+
+msgid "Please add a title or some content for the document."
+msgstr "Пожалуйста, добавьте название или содержимое документа."
+
+msgid "Please choose a .p12/.pfx certificate file."
+msgstr "Пожалуйста, выберите файл сертификата .p12/.pfx."
+
+msgid "Please choose a PDF to upload."
+msgstr "Пожалуйста, выберите PDF для загрузки."
+
+msgid "Please choose a valid plan."
+msgstr "Выберите корректный тариф."
+
+msgid "Please choose one of your templates."
+msgstr "Пожалуйста, выберите один из ваших шаблонов."
+
+msgid "Please complete all required fields before signing."
+msgstr "Пожалуйста, заполните все обязательные поля перед подписанием."
+
+msgid "Please complete the highlighted items: add your signature, fill the required fields and accept the agreement."
+msgstr "Пожалуйста, выполните выделенные пункты: поставьте подпись, заполните обязательные поля и примите соглашение."
+
+msgid "Please enter the access code provided by the sender to continue."
+msgstr "Пожалуйста, введите код доступа от отправителя, чтобы продолжить."
+
+msgid "Please open the secure link below to view and sign it:"
+msgstr "Пожалуйста, откройте защищённую ссылку ниже, чтобы просмотреть и подписать:"
+
+msgid "Please provide a name or an email for the signer."
+msgstr "Пожалуйста, укажите имя или email подписанта."
+
+msgid "Please provide a recipient for every role that has fields."
+msgstr "Пожалуйста, укажите получателя для каждой роли, у которой есть поля."
+
+msgid "Please provide a sub-workspace name."
+msgstr "Пожалуйста, укажите название под-пространства."
+
+msgid "Please provide a valid email address for the contact."
+msgstr "Укажите корректный email контакта."
+
+msgid "Please provide a valid email address for the new signer."
+msgstr "Укажите корректный email нового подписанта."
+
+msgid "Please provide a valid email address."
+msgstr "Пожалуйста, укажите корректный email."
+
+msgid "Please provide a valid email and role."
+msgstr "Пожалуйста, укажите корректные email и роль."
+
+msgid "Please provide at least one recipient."
+msgstr "Пожалуйста, укажите хотя бы одного получателя."
+
+msgid "Please provide the new signer’s name."
+msgstr "Укажите имя нового подписанта."
+
+msgid "Please sign in"
+msgstr "Пожалуйста, войдите"
+
+msgid "Please sign the document at the following secure link: %s"
+msgstr "Пожалуйста, подпишите документ по защищённой ссылке: %s"
+
+msgid "Please verify your identity before assigning to someone else."
+msgstr "Пожалуйста, подтвердите личность перед передачей другому человеку."
+
+msgid "Please verify your identity before signing."
+msgstr "Пожалуйста, подтвердите личность перед подписанием."
+
+msgid "Portal template missing."
+msgstr "Шаблон портала отсутствует."
+
+msgid "Preview of your typed signature"
+msgstr "Предпросмотр набранной подписи"
+
+msgid "Previous"
+msgstr "Назад"
+
+msgid "Problem"
+msgstr "Проблема"
+
+msgid "Protected file storage"
+msgstr "Защищённое хранилище файлов"
+
+msgid "Public pricing table — shows your plans (price, limits, features) with a “start free trial” button that signs the visitor up and gives them a workspace + trial. Put it on your pricing/landing page."
+msgstr "Публичная таблица тарифов — показывает ваши тарифы (цена, лимиты, функции) с кнопкой «начать бесплатный период», которая регистрирует посетителя и даёт ему рабочее пространство + пробный период. Разместите на странице тарифов/лендинге."
+
+msgid "Question"
+msgstr "Вопрос"
+
+msgid "Question %d"
+msgstr "Вопрос %d"
+
+msgid "Questions"
+msgstr "Вопросы"
+
+msgid "REST API key"
+msgstr "Ключ REST API"
+
+msgid "REST base: /wp-json/comsign/v1/documents"
+msgstr "База REST: /wp-json/comsign/v1/documents"
+
+msgid "Re-send invitations"
+msgstr "Отправить приглашения повторно"
+
+msgid "Reactivate"
+msgstr "Возобновить"
+
+msgid "Ready to send"
+msgstr "Готово к отправке"
+
+msgid "Reason"
+msgstr "Причина"
+
+msgid "Reason (optional)"
+msgstr "Причина (необязательно)"
+
+msgid "Reason for declining (optional)"
+msgstr "Причина отказа (необязательно)"
+
+msgid "Recent documents"
+msgstr "Недавние документы"
+
+msgid "Recent operator actions"
+msgstr "Недавние действия оператора"
+
+msgid "Recipient"
+msgstr "Получатель"
+
+msgid "Regenerate API key & webhook secret on save"
+msgstr "Перегенерировать ключ API и секрет webhook при сохранении"
+
+msgid "Remind every"
+msgstr "Напоминать каждые"
+
+msgid "Reminder sent"
+msgstr "Напоминание отправлено"
+
+msgid "Reminder: a document is awaiting your signature — %s"
+msgstr "Напоминание: документ ожидает вашей подписи — %s"
+
+msgid "Reminders run once a day via WP-Cron. Each reminder issues a fresh signing link."
+msgstr "Напоминания выполняются раз в день через WP-Cron. Каждое напоминание выдаёт новую ссылку для подписания."
+
+msgid "Remove"
+msgstr "Удалить"
+
+msgid "Remove certificate"
+msgstr "Удалить сертификат"
+
+msgid "Remove the certificate and revert to electronic signatures?"
+msgstr "Удалить сертификат и вернуться к электронным подписям?"
+
+msgid "Remove this contact?"
+msgstr "Удалить этот контакт?"
+
+msgid "Remove this member?"
+msgstr "Удалить этого участника?"
+
+msgid "Remove this signer?"
+msgstr "Удалить этого подписанта?"
+
+msgid "Renews on %s."
+msgstr "Продлевается %s."
+
+msgid "Require signing in order"
+msgstr "Требовать подписание по порядку"
+
+msgid "Required"
+msgstr "Обязательно"
+
+msgid "Resend"
+msgstr "Отправить снова"
+
+msgid "Resend code"
+msgstr "Отправить код снова"
+
+msgid "Review &amp; send"
+msgstr "Проверить и отправить"
+
+msgid "Role"
+msgstr "Роль"
+
+msgid "Role %d"
+msgstr "Роль %d"
+
+msgid "Role updated."
+msgstr "Роль обновлена."
+
+msgid "Roles"
+msgstr "Роли"
+
+msgid "Running PHP %s (7.4+ required)."
+msgstr "Используется PHP %s (требуется 7.4+)."
+
+msgid "SHA-256:"
+msgstr "SHA-256:"
+
+msgid "Save"
+msgstr "Сохранить"
+
+msgid "Save CC recipients"
+msgstr "Сохранить получателей копии"
+
+msgid "Save a document as a template from its management screen, then reuse it here for new documents or bulk sending."
+msgstr "Сохраните документ как шаблон на экране управления им, затем используйте его здесь для новых документов или массовой отправки."
+
+msgid "Save as draft"
+msgstr "Сохранить как черновик"
+
+msgid "Save as template"
+msgstr "Сохранить как шаблон"
+
+msgid "Save billing settings"
+msgstr "Сохранить настройки оплаты"
+
+msgid "Save contact"
+msgstr "Сохранить контакт"
+
+msgid "Save fields"
+msgstr "Сохранить поля"
+
+msgid "Save settings"
+msgstr "Сохранить настройки"
+
+msgid "Save timestamp settings"
+msgstr "Сохранить настройки метки времени"
+
+msgid "Save webhook"
+msgstr "Сохранить вебхук"
+
+msgid "Scan to verify this document online."
+msgstr "Отсканируйте, чтобы проверить этот документ онлайн."
+
+msgid "Scheduled tasks (WP-Cron)"
+msgstr "Запланированные задачи (WP-Cron)"
+
+msgid "Search"
+msgstr "Поиск"
+
+msgid "Search by name or email…"
+msgstr "Поиск по имени или email…"
+
+msgid "Search by name…"
+msgstr "Поиск по имени…"
+
+msgid "Search by title…"
+msgstr "Поиск по названию…"
+
+msgid "Search contacts"
+msgstr "Поиск контактов"
+
+msgid "Search documents"
+msgstr "Поиск документов"
+
+msgid "Securely processed by %s"
+msgstr "Безопасно обработано через %s"
+
+msgid "Select an option"
+msgstr "Выберите вариант"
+
+msgid "Select image"
+msgstr "Выбрать изображение"
+
+msgid "Send"
+msgstr "Отправить"
+
+msgid "Send failed"
+msgstr "Отправка не удалась"
+
+msgid "Send for signing"
+msgstr "Отправить на подписание"
+
+msgid "Send invite"
+msgstr "Отправить приглашение"
+
+msgid "Send signing events to your own systems. ComSign POSTs a JSON payload to your URL each time a document is signed, completed or declined — and on completion it includes a direct link to download the signed PDF."
+msgstr "Отправляйте события подписания в свои системы. ComSign отправляет JSON на ваш URL каждый раз, когда документ подписан, завершён или отклонён — а при завершении включает прямую ссылку для скачивания подписанного PDF."
+
+msgid "Send test email to %s"
+msgstr "Отправить тестовое письмо на %s"
+
+msgid "Send test webhook"
+msgstr "Отправить тестовый webhook"
+
+msgid "Send your first document for signing here:"
+msgstr "Отправьте первый документ на подпись здесь:"
+
+msgid "Sender"
+msgstr "Отправитель"
+
+msgid "Sent"
+msgstr "Отправлено"
+
+msgid "Sent %1$d invitation(s). %2$d signer(s) have no email — share their link manually."
+msgstr "Отправлено приглашений: %1$d. У %2$d подписанта(ов) нет email — поделитесь их ссылкой вручную."
+
+msgid "Sent %d invitation(s)."
+msgstr "Отправлено приглашений: %d."
+
+msgid "Sent by %s"
+msgstr "Отправлено через %s"
+
+msgid "Sent for signing"
+msgstr "Отправлено на подписание"
+
+msgid "Set plan"
+msgstr "Задать тариф"
+
+msgid "Settings"
+msgstr "Настройки"
+
+msgid "Settings saved."
+msgstr "Настройки сохранены."
+
+msgid "Share via WhatsApp"
+msgstr "Поделиться через WhatsApp"
+
+msgid "Short help text under the field (optional):"
+msgstr "Короткая подсказка под полем (необязательно):"
+
+msgid "Short text"
+msgstr "Короткий текст"
+
+msgid "Shortcode"
+msgstr "Шорткод"
+
+msgid "Shortcodes &amp; links"
+msgstr "Шорткоды и ссылки"
+
+msgid "Shown to signers on the signing page and in emails."
+msgstr "Показывается подписантам на странице подписания и в письмах."
+
+msgid "Sign & finish"
+msgstr "Подписать и завершить"
+
+msgid "Sign document"
+msgstr "Подписать документ"
+
+msgid "Sign in"
+msgstr "Войти"
+
+msgid "Sign in person"
+msgstr "Подписать лично"
+
+msgid "Sign in to your area"
+msgstr "Войдите в личный кабинет"
+
+msgid "Sign: %s"
+msgstr "Подписать: %s"
+
+msgid "Signature"
+msgstr "Подпись"
+
+msgid "Signature Certificate"
+msgstr "Сертификат подписи"
+
+msgid "Signature fields saved."
+msgstr "Поля подписи сохранены."
+
+msgid "Signature method"
+msgstr "Способ подписи"
+
+msgid "Signature — %s"
+msgstr "Подпись — %s"
+
+msgid "Signatures"
+msgstr "Подписи"
+
+msgid "Signatures pending"
+msgstr "Ожидают подписи"
+
+msgid "Signed"
+msgstr "Подписано"
+
+msgid "Signed at"
+msgstr "Время подписания"
+
+msgid "Signed by:"
+msgstr "Подписал(и):"
+
+msgid "Signed copy"
+msgstr "Подписанная копия"
+
+msgid "Signed document"
+msgstr "Подписанный документ"
+
+msgid "Signed on"
+msgstr "Подписано"
+
+msgid "Signed successfully"
+msgstr "Успешно подписано"
+
+msgid "Signer %d"
+msgstr "Подписант %d"
+
+msgid "Signer added."
+msgstr "Подписант добавлен."
+
+msgid "Signer not found."
+msgstr "Подписант не найден."
+
+msgid "Signer removed."
+msgstr "Подписант удалён."
+
+msgid "Signer verification updated."
+msgstr "Проверка подписанта обновлена."
+
+msgid "Signers"
+msgstr "Подписанты"
+
+msgid "Signers: %d"
+msgstr "Подписанты: %d"
+
+msgid "Signing deadline extended."
+msgstr "Срок подписания продлён."
+
+msgid "Signing declined"
+msgstr "Подписание отклонено"
+
+msgid "Signing secret"
+msgstr "Секрет подписи"
+
+msgid "Skip to content"
+msgstr "Перейти к содержимому"
+
+msgid "Solo"
+msgstr "Соло"
+
+msgid "Some invitations could not be sent: %s. Please check your site email settings and re-send."
+msgstr "Некоторые приглашения не удалось отправить: %s. Проверьте настройки почты сайта и отправьте повторно."
+
+msgid "Someone else should sign this"
+msgstr "Это должен подписать кто-то другой"
+
+msgid "Standalone public page to verify a document (same as the [comsign_verify] shortcode)."
+msgstr "Отдельная публичная страница проверки документа (как шорткод [comsign_verify])."
+
+msgid "Start %d-day free trial"
+msgstr "Начать бесплатный пробный период на %d дней"
+
+msgid "Start from a saved template and just add recipients."
+msgstr "Начните с сохранённого шаблона и просто добавьте получателей."
+
+msgid "Status"
+msgstr "Статус"
+
+msgid "Status:"
+msgstr "Статус:"
+
+msgid "Storage is writable but the .htaccess guard is missing. On nginx, add a deny rule for the comsign uploads directory."
+msgstr "Хранилище доступно для записи, но защита .htaccess отсутствует. На nginx добавьте правило запрета для каталога загрузок comsign."
+
+msgid "Sub-workspace created."
+msgstr "Под-пространство создано."
+
+msgid "Sub-workspace name"
+msgstr "Название под-пространства"
+
+msgid "Suspend"
+msgstr "Приостановить"
+
+msgid "Suspend this workspace?"
+msgstr "Приостановить это рабочее пространство?"
+
+msgid "Switch"
+msgstr "Переключить"
+
+msgid "System Status"
+msgstr "Состояние системы"
+
+msgid "Team"
+msgstr "Команда"
+
+msgid "Team management is not available"
+msgstr "Управление командой недоступно"
+
+msgid "Team seats: %d"
+msgstr "Места в команде: %d"
+
+msgid "Template"
+msgstr "Шаблон"
+
+msgid "Template deleted."
+msgstr "Шаблон удалён."
+
+msgid "Template missing."
+msgstr "Шаблон отсутствует."
+
+msgid "Template name"
+msgstr "Название шаблона"
+
+msgid "Template not found."
+msgstr "Шаблон не найден."
+
+msgid "Template saved."
+msgstr "Шаблон сохранён."
+
+msgid "Templates"
+msgstr "Шаблоны"
+
+msgid "Terminal number"
+msgstr "Номер терминала"
+
+msgid "Test email sent to %s."
+msgstr "Тестовое письмо отправлено на %s."
+
+msgid "Test mode"
+msgstr "Тестовый режим"
+
+msgid "Text"
+msgstr "Текст"
+
+msgid "Thank you — your signature has been recorded. The document will be completed once the remaining participants have signed."
+msgstr "Спасибо — ваша подпись зафиксирована. Документ будет завершён, как только подпишут остальные участники."
+
+msgid "Thank you. We have emailed the document to the person you chose, and your access to this link has ended."
+msgstr "Спасибо. Мы отправили документ выбранному вами человеку по email, и ваш доступ к этой ссылке завершён."
+
+msgid "That code was not correct. Please try again."
+msgstr "Код неверен. Пожалуйста, попробуйте снова."
+
+msgid "That contact could not be found in your workspace."
+msgstr "Этот контакт не найден в вашем рабочем пространстве."
+
+msgid "That webhook URL is invalid or points to a blocked (private/loopback) address."
+msgstr "URL вебхука недействителен или указывает на заблокированный (частный/локальный) адрес."
+
+msgid "The certificate could not be read. Check the file and password."
+msgstr "Не удалось прочитать сертификат. Проверьте файл и пароль."
+
+msgid "The certificate file is missing or too large (max 512 KB)."
+msgstr "Файл сертификата отсутствует или слишком большой (макс. 512 КБ)."
+
+msgid "The certificate file is too large (max 512 KB)."
+msgstr "Файл сертификата слишком большой (макс. 512 КБ)."
+
+msgid "The certificate must be a .p12 or .pfx file."
+msgstr "Сертификат должен быть файлом .p12 или .pfx."
+
+msgid "The customer personal area — put this on a page (e.g. “My account”) and signed-in customers manage, create, send and track their documents and billing there, on your own URL. (The built-in /comsign/app page works too.)"
+msgstr "Личный кабинет клиента — разместите это на странице (например, «Мой аккаунт»), и вошедшие клиенты будут управлять, создавать, отправлять и отслеживать свои документы и оплату прямо там, на вашем адресе. (Встроенная страница /comsign/app тоже работает.)"
+
+msgid "The daily reminder task is scheduled."
+msgstr "Ежедневная задача напоминаний запланирована."
+
+msgid "The document \\\"%s\\\" has been signed by all parties."
+msgstr "Документ \\\"%s\\\" подписан всеми сторонами."
+
+msgid "The document could not be found."
+msgstr "Документ не найден."
+
+msgid "The document is now fully signed by all parties. A signed copy will be sent to the relevant recipients."
+msgstr "Документ теперь полностью подписан всеми сторонами. Подписанная копия будет отправлена соответствующим получателям."
+
+msgid "The email could not be sent. Please check your site email settings."
+msgstr "Не удалось отправить письмо. Проверьте настройки почты сайта."
+
+msgid "The file does not look like a valid PDF."
+msgstr "Файл не похож на корректный PDF."
+
+msgid "The file is too large (max 25 MB)."
+msgstr "Файл слишком большой (макс. 25 МБ)."
+
+msgid "The fully signed copy is attached."
+msgstr "Полностью подписанная копия прилагается."
+
+msgid "The protected uploads directory is missing or not writable."
+msgstr "Защищённый каталог загрузок отсутствует или недоступен для записи."
+
+msgid "The reminder task is not scheduled. Reactivate the plugin."
+msgstr "Задача напоминаний не запланирована. Переактивируйте плагин."
+
+msgid "The requested document could not be found."
+msgstr "Запрошенный документ не найден."
+
+msgid "The storage directory exists, is writable and carries deny rules (verify nginx separately)."
+msgstr "Каталог хранилища существует, доступен для записи и содержит правила запрета (проверьте nginx отдельно)."
+
+msgid "The webhook URL is invalid or points to a blocked (private/loopback) target."
+msgstr "URL webhook некорректен или указывает на заблокированный (частный/локальный) адрес."
+
+msgid "The webhook URL is set but looks invalid or points to a blocked (private/loopback) target."
+msgstr "URL webhook задан, но выглядит некорректным или указывает на заблокированный (частный/локальный) адрес."
+
+msgid "There are no templates in this workspace yet. An administrator can create one from any document."
+msgstr "В этом рабочем пространстве пока нет шаблонов. Администратор может создать его из любого документа."
+
+msgid "These checks help you confirm ComSign is correctly configured on this server."
+msgstr "Эти проверки помогают убедиться, что ComSign правильно настроен на этом сервере."
+
+msgid "These people receive the fully signed PDF by email when signing completes. They do not sign."
+msgstr "Эти люди получают полностью подписанный PDF по email после завершения подписания. Они не подписывают."
+
+msgid "These signers have no fields yet: %s. Open \\\"Place signature fields\\\"."
+msgstr "У этих подписантов пока нет полей: %s. Откройте \\\"Разместить поля подписи\\\"."
+
+msgid "This contact hasn’t signed any documents in this workspace yet."
+msgstr "Этот контакт ещё не подписал ни одного документа в этом рабочем пространстве."
+
+msgid "This document does not allow assigning to someone else."
+msgstr "Этот документ не разрешает передачу другому человеку."
+
+msgid "This document does not exist in your workspace."
+msgstr "Этого документа нет в вашем рабочем пространстве."
+
+msgid "This document has already been sent and can no longer be edited."
+msgstr "Этот документ уже отправлен и больше не может быть отредактирован."
+
+msgid "This document is authentic."
+msgstr "Этот документ подлинный."
+
+msgid "This document is not available for editing in your workspace."
+msgstr "Этот документ недоступен для редактирования в вашем рабочем пространстве."
+
+msgid "This document is signed in order. You will be notified when it is your turn."
+msgstr "Этот документ подписывается по порядку. Вы получите уведомление, когда настанет ваша очередь."
+
+msgid "This field is required."
+msgstr "Это поле обязательно."
+
+msgid "This is a test email from ComSign. If you received it, outgoing mail works on this server."
+msgstr "Это тестовое письмо от ComSign. Если вы его получили, исходящая почта на этом сервере работает."
+
+msgid "This link is personal and replaces any link previously issued to this signer."
+msgstr "Эта ссылка персональная и заменяет любую ранее выданную этому подписанту ссылку."
+
+msgid "This link is personal — please do not forward it."
+msgstr "Эта ссылка персональная — пожалуйста, не пересылайте её."
+
+msgid "This month:"
+msgstr "В этом месяце:"
+
+msgid "This signer can no longer be reassigned."
+msgstr "Этого подписанта больше нельзя переназначить."
+
+msgid "This signer has no email. Share the signing link instead."
+msgstr "У этого подписанта нет email. Вместо этого поделитесь ссылкой для подписания."
+
+msgid "This signing link has expired."
+msgstr "Срок действия этой ссылки для подписания истёк."
+
+msgid "This signing link has expired. Please ask the sender for a new one."
+msgstr "Срок действия этой ссылки для подписания истёк. Попросите у отправителя новую."
+
+msgid "This signing link is no longer valid."
+msgstr "Эта ссылка для подписания больше недействительна."
+
+msgid "This signing link is no longer valid. Please ask the sender for a new one."
+msgstr "Эта ссылка для подписания больше недействительна. Попросите у отправителя новую."
+
+msgid "Timeline"
+msgstr "Хронология"
+
+msgid "Timestamp authority (TSA) URL"
+msgstr "URL службы меток времени (TSA)"
+
+msgid "Timestamp authority cleared."
+msgstr "Служба меток времени очищена."
+
+msgid "Timestamp authority saved. New signatures will include a trusted timestamp."
+msgstr "Служба меток времени сохранена. Новые подписи будут включать доверенную метку времени."
+
+msgid "Title"
+msgstr "Название"
+
+msgid "Title:"
+msgstr "Название:"
+
+msgid "To do:"
+msgstr "Сделать:"
+
+msgid "To keep sending documents, choose a plan here:"
+msgstr "Чтобы продолжать отправлять документы, выберите тариф здесь:"
+
+msgid "Too many attempts"
+msgstr "Слишком много попыток"
+
+msgid "Too many incorrect attempts. Please wait a few minutes and try again."
+msgstr "Слишком много неверных попыток. Подождите несколько минут и попробуйте снова."
+
+msgid "Total documents"
+msgstr "Всего документов"
+
+msgid "Total signers"
+msgstr "Всего подписантов"
+
+msgid "Type"
+msgstr "Тип"
+
+msgid "Type the document and pick which fields each signer fills. We place the signature block for you — no dragging."
+msgstr "Введите текст документа и выберите, какие поля заполняет каждый подписант. Блок подписи мы разместим за вас — без перетаскивания."
+
+msgid "Type your full name"
+msgstr "Введите ваше полное имя"
+
+msgid "Unexpected gateway response."
+msgstr "Неожиданный ответ платёжного шлюза."
+
+msgid "Unknown action."
+msgstr "Неизвестное действие."
+
+msgid "Unlimited documents"
+msgstr "Безлимит документов"
+
+msgid "Untitled document"
+msgstr "Документ без названия"
+
+msgid "Update"
+msgstr "Обновить"
+
+msgid "Update your billing here:"
+msgstr "Обновите платёжные данные здесь:"
+
+msgid "Upgrade to a plan that includes webhooks to send signing events to your own systems."
+msgstr "Перейдите на тариф с вебхуками, чтобы отправлять события подписания в свои системы."
+
+msgid "Upload & continue"
+msgstr "Загрузить и продолжить"
+
+msgid "Upload &amp; continue"
+msgstr "Загрузить и продолжить"
+
+msgid "Upload a PDF"
+msgstr "Загрузить PDF"
+
+msgid "Upload a PDF (or compose one) for this document."
+msgstr "Загрузите PDF (или создайте его) для этого документа."
+
+msgid "Upload a PDF or pick a template, add the people who need to sign, place the fields, and send. We’ll track it for you."
+msgstr "Загрузите PDF или выберите шаблон, добавьте подписантов, разместите поля и отправьте. Мы будем отслеживать это за вас."
+
+msgid "Upload a PDF, add signers, and place the fields yourself."
+msgstr "Загрузите PDF, добавьте подписантов и разместите поля сами."
+
+msgid "Upload a PKCS#12 certificate (.p12/.pfx) to sign completed documents cryptographically (eIDAS / ComSign compatible). Without it, documents use electronic signatures."
+msgstr "Загрузите сертификат PKCS#12 (.p12/.pfx) для криптографического подписания завершённых документов (совместимо с eIDAS / ComSign). Без него документы используют электронные подписи."
+
+msgid "Upload a file"
+msgstr "Загрузить файл"
+
+msgid "Upload a scanned or existing PDF and place the fields exactly where you want them."
+msgstr "Загрузите отсканированный или готовый PDF и разместите поля именно там, где нужно."
+
+msgid "Upload certificate"
+msgstr "Загрузить сертификат"
+
+msgid "Use"
+msgstr "Использовать"
+
+msgid "Use a template"
+msgstr "Использовать шаблон"
+
+msgid "Use a test terminal"
+msgstr "Использовать тестовый терминал"
+
+msgid "Use placeholders like {{name}} or {{date}} to insert variables."
+msgstr "Используйте подстановки вроде {{name}} или {{date}} для вставки переменных."
+
+msgid "Use template: %s"
+msgstr "Использовать шаблон: %s"
+
+msgid "Use this template"
+msgstr "Использовать этот шаблон"
+
+msgid "Variables"
+msgstr "Переменные"
+
+msgid "Verification code (SHA-256)"
+msgstr "Код проверки (SHA-256)"
+
+msgid "Verification page"
+msgstr "Страница проверки"
+
+msgid "Verification required"
+msgstr "Требуется проверка"
+
+msgid "Verification required."
+msgstr "Требуется проверка."
+
+msgid "Verify a document"
+msgstr "Проверить документ"
+
+msgid "Verify document"
+msgstr "Проверить документ"
+
+msgid "Verify identity:"
+msgstr "Подтвердить личность:"
+
+msgid "Verify your identity"
+msgstr "Подтвердите вашу личность"
+
+msgid "View original"
+msgstr "Просмотреть оригинал"
+
+msgid "Viewed"
+msgstr "Просмотрено"
+
+msgid "Viewer"
+msgstr "Наблюдатель"
+
+msgid "WP-Cron is disabled; make sure a real system cron triggers wp-cron.php, or reminders will not be sent."
+msgstr "WP-Cron отключён; убедитесь, что реальный системный cron запускает wp-cron.php, иначе напоминания не будут отправляться."
+
+msgid "Waiting for an earlier signer"
+msgstr "Ожидание предыдущего подписанта"
+
+msgid "Warning"
+msgstr "Предупреждение"
+
+msgid "We could not charge your subscription. Your workspace will keep working for now, but please update your payment to avoid interruption."
+msgstr "Нам не удалось списать оплату подписки. Пока рабочее пространство продолжит работать, но обновите способ оплаты, чтобы избежать перерыва."
+
+msgid "We could not confirm your payment. If you were charged, it will activate shortly — otherwise you can try again below."
+msgstr "Не удалось подтвердить ваш платёж. Если средства были списаны, тариф активируется в ближайшее время — иначе попробуйте снова ниже."
+
+msgid "We sent a one-time code to %s. Enter it below to continue."
+msgstr "Мы отправили одноразовый код на %s. Введите его ниже, чтобы продолжить."
+
+msgid "We will email the document to the person you choose, and your access to this link will end."
+msgstr "Мы отправим документ выбранному вами человеку по email, и ваш доступ к этой ссылке завершится."
+
+msgid "Webhook URL"
+msgstr "URL webhook"
+
+msgid "Webhook URL (optional)"
+msgstr "URL вебхука (необязательно)"
+
+msgid "Webhook disabled."
+msgstr "Вебхук отключён."
+
+msgid "Webhook saved."
+msgstr "Вебхук сохранён."
+
+msgid "Webhook secret"
+msgstr "Секрет webhook"
+
+msgid "Webhooks are not available on your plan."
+msgstr "Вебхуки недоступны на вашем тарифе."
+
+msgid "Webhooks are not on your plan"
+msgstr "Вебхуки не входят в ваш тариф"
+
+msgid "Welcome to %s"
+msgstr "Добро пожаловать в %s"
+
+msgid "Welcome! Let’s send your first document."
+msgstr "Добро пожаловать! Давайте отправим ваш первый документ."
+
+msgid "Welcome! Your workspace is ready with a %d-day free trial."
+msgstr "Добро пожаловать! Ваше рабочее пространство готово с %d-дневным пробным периодом."
+
+msgid "What it does"
+msgstr "Что делает"
+
+msgid "When"
+msgstr "Когда"
+
+msgid "Where signed-in customers manage, create, send and track their documents (no WP-Admin needed)."
+msgstr "Где вошедшие клиенты управляют документами, создают, отправляют и отслеживают их (без WP-Admin)."
+
+msgid "Who fills this in?"
+msgstr "Кто это заполняет?"
+
+msgid "Who needs to sign?"
+msgstr "Кто должен подписать?"
+
+msgid "Workspace"
+msgstr "Рабочее пространство"
+
+msgid "Workspace members"
+msgstr "Участники рабочего пространства"
+
+msgid "Workspace not found."
+msgstr "Рабочее пространство не найдено."
+
+msgid "Workspace reactivated."
+msgstr "Рабочее пространство возобновлено."
+
+msgid "Workspace suspended."
+msgstr "Рабочее пространство приостановлено."
+
+msgid "Workspace switched."
+msgstr "Рабочее пространство переключено."
+
+msgid "Workspace:"
+msgstr "Рабочее пространство:"
+
+msgid "Workspace: %s"
+msgstr "Рабочее пространство: %s"
+
+msgid "Workspaces"
+msgstr "Рабочие пространства"
+
+msgid "Write text"
+msgstr "Написать текст"
+
+msgid "Write the document"
+msgstr "Написание документа"
+
+msgid "Write the fixed text of the document. After creating it you can place fillable and signature fields on the generated PDF."
+msgstr "Напишите фиксированный текст документа. После создания вы сможете разместить заполняемые поля и поля подписи на созданном PDF."
+
+msgid "X-ComSign-Key"
+msgstr "X-ComSign-Key"
+
+msgid "Yes, No, Maybe"
+msgstr "Да, Нет, Возможно"
+
+msgid "You are not allowed to access this page."
+msgstr "Вам не разрешён доступ к этой странице."
+
+msgid "You are on a free trial — %d days left."
+msgstr "У вас бесплатный пробный период — осталось дней: %d."
+
+msgid "You can view members but only an owner or admin can change them."
+msgstr "Вы можете просматривать участников, но изменять их может только владелец или администратор."
+
+msgid "You cannot create documents"
+msgstr "Вы не можете создавать документы"
+
+msgid "You cannot create documents in this workspace."
+msgstr "Вы не можете создавать документы в этом рабочем пространстве."
+
+msgid "You cannot edit this document."
+msgstr "Вы не можете редактировать этот документ."
+
+msgid "You cannot manage billing for this workspace."
+msgstr "Вы не можете управлять оплатой этого рабочего пространства."
+
+msgid "You cannot manage contacts in this workspace."
+msgstr "Вы не можете управлять контактами в этом рабочем пространстве."
+
+msgid "You cannot manage integrations for this workspace."
+msgstr "Вы не можете управлять интеграциями этого рабочего пространства."
+
+msgid "You cannot manage members of this workspace."
+msgstr "Вы не можете управлять участниками этого рабочего пространства."
+
+msgid "You cannot manage the team for this workspace."
+msgstr "Вы не можете управлять командой этого рабочего пространства."
+
+msgid "You cannot remove the last owner of a workspace."
+msgstr "Вы не можете удалить последнего владельца рабочего пространства."
+
+msgid "You cannot resend invitations for this document."
+msgstr "Вы не можете повторно отправлять приглашения для этого документа."
+
+msgid "You cannot send this document."
+msgstr "Вы не можете отправить этот документ."
+
+msgid "You do not have access to this document."
+msgstr "У вас нет доступа к этому документу."
+
+msgid "You do not have permission to do that."
+msgstr "У вас нет разрешения на это действие."
+
+msgid "You have already signed this document."
+msgstr "Вы уже подписали этот документ."
+
+msgid "You have already signed this document. Thank you."
+msgstr "Вы уже подписали этот документ. Спасибо."
+
+msgid "You have been asked to review and sign the document: \\\"%s\\\"."
+msgstr "Вас попросили ознакомиться и подписать документ: \\\"%s\\\"."
+
+msgid "You have declined to sign this document."
+msgstr "Вы отказались подписывать этот документ."
+
+msgid "You have declined to sign this document. The sender has been notified."
+msgstr "Вы отказались подписывать этот документ. Отправитель уведомлён."
+
+msgid "You have reached your plan’s contact limit. Upgrade your plan to add more contacts."
+msgstr "Вы достигли лимита контактов вашего тарифа. Перейдите на более высокий тариф, чтобы добавить больше контактов."
+
+msgid "You have reached your plan’s monthly document limit. Upgrade your plan to send more."
+msgstr "Вы достигли месячного лимита документов вашего тарифа. Перейдите на тариф выше, чтобы отправлять больше."
+
+msgid "You must agree to sign electronically before continuing."
+msgstr "Перед продолжением вы должны согласиться подписать электронно."
+
+msgid "You need to sign in to access your workspace."
+msgstr "Чтобы войти в рабочее пространство, необходимо авторизоваться."
+
+msgid "Your %s free trial is ending soon"
+msgstr "Ваш бесплатный пробный период в %s скоро заканчивается"
+
+msgid "Your %s workspace has been reactivated"
+msgstr "Ваше рабочее пространство в %s возобновлено"
+
+msgid "Your %s workspace has been suspended"
+msgstr "Ваше рабочее пространство в %s приостановлено"
+
+msgid "Your ComSign verification code"
+msgstr "Ваш код проверки ComSign"
+
+msgid "Your account is not part of any workspace. Please contact your administrator."
+msgstr "Ваша учётная запись не входит ни в одно рабочее пространство. Обратитесь к администратору."
+
+msgid "Your answer"
+msgstr "Ваш ответ"
+
+msgid "Your contacts"
+msgstr "Ваши контакты"
+
+msgid "Your current plan"
+msgstr "Ваш текущий тариф"
+
+msgid "Your free trial ends in %d days."
+msgstr "Ваш бесплатный пробный период заканчивается через %d дней."
+
+msgid "Your role in this workspace does not allow creating documents. Please contact an administrator."
+msgstr "Ваша роль в этом рабочем пространстве не позволяет создавать документы. Обратитесь к администратору."
+
+msgid "Your role in this workspace does not allow managing contacts."
+msgstr "Ваша роль в этом рабочем пространстве не позволяет управлять контактами."
+
+msgid "Your role in this workspace does not allow managing the team."
+msgstr "Ваша роль в этом рабочем пространстве не позволяет управлять командой."
+
+msgid "Your signature"
+msgstr "Ваша подпись"
+
+msgid "Your subscription"
+msgstr "Ваша подписка"
+
+msgid "Your subscription is not active. Please choose a plan to keep sending documents."
+msgstr "Ваша подписка неактивна. Выберите тариф, чтобы продолжать отправку документов."
+
+msgid "Your subscription is set to cancel. You keep full access until %s, after which it will not renew."
+msgstr "Ваша подписка запланирована к отмене. Полный доступ сохраняется до %s, после чего она не продлится."
+
+msgid "Your subscription will continue to renew."
+msgstr "Ваша подписка продолжит продлеваться."
+
+msgid "Your subscription will not renew. You keep access until the end of the current period."
+msgstr "Ваша подписка не будет продлена. Доступ сохраняется до конца текущего периода."
+
+msgid "Your verification code is: %1$s\\n\\nIt expires in %2$d minutes."
+msgstr ""
+
+msgid "Your workspace"
+msgstr "Ваше рабочее пространство"
+
+msgid "Your workspace has been suspended. Please contact support if you believe this is a mistake."
+msgstr "Ваше рабочее пространство приостановлено. Свяжитесь с поддержкой, если считаете это ошибкой."
+
+msgid "annual"
+msgstr "годовой"
+
+msgid "customer_name = Dana Cohen\\ncontract_no = 2026-0042"
+msgstr ""
+
+msgid "days"
+msgstr "дней"
+
+msgid "days (0 = never)"
+msgstr "дней (0 = никогда)"
+
+msgid "e.g. Client intake form"
+msgstr "напр. Анкета клиента"
+
+msgid "e.g. Service agreement"
+msgstr "напр. Договор оказания услуг"
+
+msgid "e.g. What is your full address?"
+msgstr "напр. Какой ваш полный адрес?"
+
+msgid "email@example.com"
+msgstr "email@example.com"
+
+msgid "monthly"
+msgstr "месячный"
+
+msgid "or %s / year"
+msgstr "или %s / год"
+
+msgid "wp_mail() reported a failure. Check your mail configuration (e.g. an SMTP plugin)."
+msgstr "wp_mail() сообщила об ошибке. Проверьте настройки почты (например, плагин SMTP)."
+
+msgid "•••••••• (unchanged)"
+msgstr "•••••••• (без изменений)"
+
