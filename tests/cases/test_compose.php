@@ -97,3 +97,58 @@ Test::add( 'compose: signers with no id are skipped safely', static function ():
 	$signer_ids = array_unique( array_map( static fn( $f ) => $f['signer_id'], $fields ) );
 	Test::equals( array( 9 ), array_values( $signer_ids ), 'only the real signer is placed' );
 } );
+
+Test::add( 'form: questionnaire builds a signed-ready document with answer fields', static function (): void {
+	reset_tables();
+	$svc     = new DocumentService();
+	$signers = new SignerRepository();
+	$fields  = new FieldRepository();
+
+	$doc_id = $svc->create_form(
+		'Client intake',
+		array(
+			array( 'label' => 'Full address', 'type' => 'text', 'required' => true, 'options' => array() ),
+			array( 'label' => 'Preferred contact', 'type' => 'choice', 'required' => true, 'options' => array( 'Email', 'Phone' ) ),
+			array( 'label' => 'I accept the terms', 'type' => 'checkbox', 'required' => true, 'options' => array() ),
+			array( 'label' => '', 'type' => 'text', 'required' => false, 'options' => array() ), // blank → skipped
+		),
+		array( 'name' => 'Maya Bar', 'email' => 'maya@example.com' )
+	);
+
+	Test::ok( $doc_id > 0, 'a form document was created' );
+	Test::equals( 1, count( $signers->for_document( $doc_id ) ), 'single recipient' );
+
+	$rows = $fields->for_document( $doc_id );
+	$types = array();
+	foreach ( $rows as $r ) {
+		$types[ $r->type ][] = $r;
+	}
+	// 3 questions (text, choice, checkbox) + signature block (signature, name, date).
+	Test::equals( 1, count( $types['text'] ?? array() ), 'one text answer field' );
+	Test::equals( 1, count( $types['choice'] ?? array() ), 'one choice answer field' );
+	Test::equals( 1, count( $types['checkbox'] ?? array() ), 'one checkbox answer field' );
+	Test::equals( 1, count( $types['signature'] ?? array() ), 'a signature field' );
+
+	// The choice field keeps its options.
+	$choice = $types['choice'][0];
+	$opts   = json_decode( (string) $choice->options, true );
+	Test::ok( is_array( $opts ) && in_array( 'Email', $opts, true ) && in_array( 'Phone', $opts, true ), 'choice options stored' );
+
+	// All fields are valid fractional coordinates within the page.
+	foreach ( $rows as $r ) {
+		Test::ok( (float) $r->pos_x >= 0 && (float) $r->pos_x <= 1, 'pos_x is a fraction' );
+		Test::ok( (float) $r->pos_y >= 0 && (float) $r->pos_y <= 1, 'pos_y is a fraction' );
+	}
+} );
+
+Test::add( 'form: a form with no questions is rejected', static function (): void {
+	reset_tables();
+	$svc = new DocumentService();
+	Test::throws( static function () use ( $svc ): void {
+		$svc->create_form( 'Empty', array( array( 'label' => '', 'type' => 'text' ) ), array( 'name' => 'X', 'email' => 'x@example.com' ) );
+	}, 'an empty form is refused' );
+
+	Test::throws( static function () use ( $svc ): void {
+		$svc->create_form( 'Bad recipient', array( array( 'label' => 'Q1', 'type' => 'text' ) ), array( 'name' => '', 'email' => 'not-an-email' ) );
+	}, 'a missing/invalid recipient is refused' );
+} );

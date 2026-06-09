@@ -107,11 +107,17 @@ msgstr "Добавить документ"
 msgid "Add a contact"
 msgstr "Добавить контакт"
 
+msgid "Add a recipient name and a valid email."
+msgstr "Укажите имя получателя и корректный e-mail."
+
 msgid "Add a signature (or initials) field for: %s."
 msgstr "Добавьте поле подписи (или инициалов) для: %s."
 
 msgid "Add a signer first, then drag fields onto the document."
 msgstr "Сначала добавьте подписанта, затем перетащите поля на документ."
+
+msgid "Add at least one question to the form."
+msgstr "Добавьте хотя бы один вопрос в форму."
 
 msgid "Add at least one signer before sending."
 msgstr "Добавьте хотя бы одного подписанта перед отправкой."
@@ -124,6 +130,9 @@ msgstr "Добавьте хотя бы одного подписанта, что
 
 msgid "Add field"
 msgstr "Добавить поле"
+
+msgid "Add questions; your recipient fills them in online and signs. Leave a question blank to skip it."
+msgstr "Добавьте вопросы; получатель заполнит их онлайн и подпишет. Оставьте вопрос пустым, чтобы пропустить."
 
 msgid "Add recipients"
 msgstr "Добавить получателей"
@@ -166,6 +175,9 @@ msgstr "Аналитика"
 
 msgid "Annual — %s"
 msgstr "Годовой — %s"
+
+msgid "Answer type"
+msgstr "Тип ответа"
 
 msgid "Ask a workspace owner to give you permission to create documents."
 msgstr "Попросите владельца рабочего пространства разрешить вам создавать документы."
@@ -233,6 +245,9 @@ msgstr "Брендирование"
 msgid "Browser"
 msgstr "Браузер"
 
+msgid "Build a form"
+msgstr "Создать форму"
+
 msgid "Bulk send"
 msgstr "Массовая отправка"
 
@@ -290,11 +305,17 @@ msgstr "Проверить"
 msgid "Checkbox"
 msgstr "Флажок"
 
+msgid "Checkbox (tick to confirm)"
+msgstr "Флажок (отметьте для подтверждения)"
+
 msgid "Choice"
 msgstr "Выбор"
 
 msgid "Choice (dropdown)"
 msgstr "Выбор (выпадающий список)"
+
+msgid "Choices (comma-separated)"
+msgstr "Варианты (через запятую)"
 
 msgid "Choose a different way to start"
 msgstr "Выбрать другой способ начать"
@@ -450,7 +471,7 @@ msgid "Daily completions for the last 14 days. A text table follows below."
 msgstr "Ежедневные завершения за последние 14 дней. Ниже следует текстовая таблица."
 
 msgid "Dana Cohen, dana@example.com, +972500000000\\nAvi Levi, avi@example.com"
-msgstr "Дана Коэн, dana@example.com, +972500000000\\nАви Леви, avi@example.com"
+msgstr ""
 
 msgid "Dashboard"
 msgstr "Панель"
@@ -475,6 +496,9 @@ msgstr "Отклонено"
 
 msgid "Default workspace"
 msgstr "Рабочее пространство по умолчанию"
+
+msgid "Define questions; your recipient answers them online and signs, and you get one signed PDF with their answers."
+msgstr "Задайте вопросы; получатель ответит на них онлайн и подпишет, а вы получите один подписанный PDF с ответами."
 
 msgid "Delegated"
 msgstr "Передано"
@@ -722,6 +746,18 @@ msgstr "Фильтр по статусу"
 msgid "For signer:"
 msgstr "Для подписанта:"
 
+msgid "Form"
+msgstr "Форма"
+
+msgid "Form / questionnaire"
+msgstr "Форма / анкета"
+
+msgid "Form sent for completion."
+msgstr "Форма отправлена для заполнения."
+
+msgid "Form title"
+msgstr "Название формы"
+
 msgid "Free trial"
 msgstr "Пробный период"
 
@@ -871,6 +907,9 @@ msgstr "Месячный — %s"
 
 msgid "More information"
 msgstr "Подробнее"
+
+msgid "Multiple choice"
+msgstr "Множественный выбор"
 
 msgid "My electronic signature is legally binding and has the same effect as a handwritten signature. The time, my IP address and browser are recorded as proof of signing."
 msgstr "Моя электронная подпись юридически обязательна и имеет ту же силу, что и собственноручная. Время, мой IP-адрес и браузер фиксируются как доказательство подписания."
@@ -1187,6 +1226,15 @@ msgstr "Защищённое хранилище файлов"
 msgid "Public pricing table — shows your plans (price, limits, features) with a “start free trial” button that signs the visitor up and gives them a workspace + trial. Put it on your pricing/landing page."
 msgstr "Публичная таблица тарифов — показывает ваши тарифы (цена, лимиты, функции) с кнопкой «начать бесплатный период», которая регистрирует посетителя и даёт ему рабочее пространство + пробный период. Разместите на странице тарифов/лендинге."
 
+msgid "Question"
+msgstr "Вопрос"
+
+msgid "Question %d"
+msgstr "Вопрос %d"
+
+msgid "Questions"
+msgstr "Вопросы"
+
 msgid "REST API key"
 msgstr "Ключ REST API"
 
@@ -1216,6 +1264,9 @@ msgstr "Недавние документы"
 
 msgid "Recent operator actions"
 msgstr "Недавние действия оператора"
+
+msgid "Recipient"
+msgstr "Получатель"
 
 msgid "Regenerate API key & webhook secret on save"
 msgstr "Перегенерировать ключ API и секрет webhook при сохранении"
@@ -1402,6 +1453,9 @@ msgstr "Поделиться через WhatsApp"
 
 msgid "Short help text under the field (optional):"
 msgstr "Короткая подсказка под полем (необязательно):"
+
+msgid "Short text"
+msgstr "Короткий текст"
 
 msgid "Shortcode"
 msgstr "Шорткод"
@@ -1913,6 +1967,9 @@ msgstr "Когда"
 msgid "Where signed-in customers manage, create, send and track their documents (no WP-Admin needed)."
 msgstr "Где вошедшие клиенты управляют документами, создают, отправляют и отслеживают их (без WP-Admin)."
 
+msgid "Who fills this in?"
+msgstr "Кто это заполняет?"
+
 msgid "Who needs to sign?"
 msgstr "Кто должен подписать?"
 
@@ -1954,6 +2011,9 @@ msgstr "Напишите фиксированный текст документ�
 
 msgid "X-ComSign-Key"
 msgstr "X-ComSign-Key"
+
+msgid "Yes, No, Maybe"
+msgstr "Да, Нет, Возможно"
 
 msgid "You are not allowed to access this page."
 msgstr "Вам не разрешён доступ к этой странице."
@@ -2079,7 +2139,7 @@ msgid "Your subscription will not renew. You keep access until the end of the cu
 msgstr "Ваша подписка не будет продлена. Доступ сохраняется до конца текущего периода."
 
 msgid "Your verification code is: %1$s\\n\\nIt expires in %2$d minutes."
-msgstr "Ваш код проверки: %1$s\\n\\nОн истекает через %2$d минут."
+msgstr ""
 
 msgid "Your workspace"
 msgstr "Ваше рабочее пространство"
@@ -2091,7 +2151,7 @@ msgid "annual"
 msgstr "годовой"
 
 msgid "customer_name = Dana Cohen\\ncontract_no = 2026-0042"
-msgstr "customer_name = Dana Cohen\\ncontract_no = 2026-0042"
+msgstr ""
 
 msgid "days"
 msgstr "дней"
@@ -2099,8 +2159,14 @@ msgstr "дней"
 msgid "days (0 = never)"
 msgstr "дней (0 = никогда)"
 
+msgid "e.g. Client intake form"
+msgstr "напр. Анкета клиента"
+
 msgid "e.g. Service agreement"
 msgstr "напр. Договор оказания услуг"
+
+msgid "e.g. What is your full address?"
+msgstr "напр. Какой ваш полный адрес?"
 
 msgid "email@example.com"
 msgstr "email@example.com"

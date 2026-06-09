@@ -316,6 +316,92 @@ final class DocumentService {
 	}
 
 	/**
+	 * Create a fillable "form / questionnaire" document: the recipient answers
+	 * the questions online and signs, and the answers + signature render into one
+	 * signed PDF. Fields are auto-placed over the generated form — no dragging.
+	 *
+	 * @param string $title     Form title.
+	 * @param array  $questions List of ['label','type','required','options'];
+	 *                          type is text|choice|checkbox.
+	 * @param array  $signer    The single recipient: ['name','email','phone'].
+	 *
+	 * @return int New document id.
+	 *
+	 * @throws \RuntimeException On bad input or PDF failure.
+	 */
+	public function create_form( string $title, array $questions, array $signer ): int {
+		$clean = array();
+		foreach ( $questions as $q ) {
+			$label = isset( $q['label'] ) ? sanitize_text_field( (string) $q['label'] ) : '';
+			if ( '' === $label ) {
+				continue; // blank rows are skipped
+			}
+			$type    = in_array( ( $q['type'] ?? '' ), array( 'text', 'choice', 'checkbox' ), true ) ? (string) $q['type'] : 'text';
+			$options = array();
+			if ( 'choice' === $type ) {
+				foreach ( (array) ( $q['options'] ?? array() ) as $opt ) {
+					$opt = sanitize_text_field( (string) $opt );
+					if ( '' !== $opt ) {
+						$options[] = $opt;
+					}
+				}
+				if ( count( $options ) < 2 ) {
+					$type = 'text'; // not a usable choice — fall back to free text
+				}
+			}
+			$clean[] = array( 'label' => $label, 'type' => $type, 'required' => ! empty( $q['required'] ), 'options' => $options );
+		}
+		if ( empty( $clean ) ) {
+			throw new \RuntimeException( __( 'Add at least one question to the form.', 'comsign' ) );
+		}
+
+		$name  = isset( $signer['name'] ) ? sanitize_text_field( (string) $signer['name'] ) : '';
+		$email = isset( $signer['email'] ) ? sanitize_email( (string) $signer['email'] ) : '';
+		if ( '' === $name || ! is_email( $email ) ) {
+			throw new \RuntimeException( __( 'Add a recipient name and a valid email.', 'comsign' ) );
+		}
+
+		$title       = '' !== trim( $title ) ? $title : __( 'Form', 'comsign' );
+		$document_id = $this->documents->create(
+			array(
+				'title'      => $title,
+				'account_id' => $this->creation_account_id(),
+				'created_by' => get_current_user_id(),
+			)
+		);
+
+		$destination = Storage::document_path( $document_id, 'source' );
+		try {
+			$layout = ( new \ComSign\Pdf\FormComposer() )->render( $title, $clean, $destination );
+		} catch ( \Throwable $e ) {
+			$this->documents->delete( $document_id );
+			throw new \RuntimeException( $e->getMessage() );
+		}
+		$this->documents->update( $document_id, array( 'source_path' => $destination ) );
+
+		$signer_id = $this->add_signer( $document_id, $name, $email, isset( $signer['phone'] ) ? sanitize_text_field( (string) $signer['phone'] ) : '' );
+
+		// Question fields → this recipient; then the signature block on the last page.
+		$fields = array();
+		foreach ( $layout['fields'] as $f ) {
+			$f['signer_id'] = $signer_id;
+			$fields[]       = $f;
+		}
+		$fields = array_merge(
+			$fields,
+			self::signature_block_fields(
+				array( array( 'signer_id' => $signer_id, 'name' => $name, 'fields' => array( 'signature', 'name', 'date' ) ) ),
+				(int) $layout['signature_page']
+			)
+		);
+		$this->save_fields( $document_id, $fields );
+
+		$this->audit->record( AuditLogger::EVENT_CREATED, $document_id, 0, array( 'title' => $title, 'source' => 'form' ) );
+
+		return $document_id;
+	}
+
+	/**
 	 * Merge user-supplied variables with built-in automatic ones.
 	 *
 	 * @param array $variables User variables (name => value).

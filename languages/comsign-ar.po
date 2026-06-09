@@ -107,11 +107,17 @@ msgstr "إضافة مستند"
 msgid "Add a contact"
 msgstr "إضافة جهة اتصال"
 
+msgid "Add a recipient name and a valid email."
+msgstr "أضف اسم المستلم وبريدًا إلكترونيًا صالحًا."
+
 msgid "Add a signature (or initials) field for: %s."
 msgstr "أضف حقل توقيع (أو أحرف أولى) لـ: %s."
 
 msgid "Add a signer first, then drag fields onto the document."
 msgstr "أضف موقّعًا أولًا، ثم اسحب الحقول إلى المستند."
+
+msgid "Add at least one question to the form."
+msgstr "أضف سؤالًا واحدًا على الأقل إلى النموذج."
 
 msgid "Add at least one signer before sending."
 msgstr "أضف موقّعًا واحدًا على الأقل قبل الإرسال."
@@ -124,6 +130,9 @@ msgstr "أضف موقّعًا واحدًا على الأقل لبدء وضع ا�
 
 msgid "Add field"
 msgstr "إضافة حقل"
+
+msgid "Add questions; your recipient fills them in online and signs. Leave a question blank to skip it."
+msgstr "أضف الأسئلة؛ يملؤها المستلم عبر الإنترنت ويوقّع. اترك السؤال فارغًا لتخطّيه."
 
 msgid "Add recipients"
 msgstr "إضافة مستلمين"
@@ -166,6 +175,9 @@ msgstr "التحليلات"
 
 msgid "Annual — %s"
 msgstr "سنوي — %s"
+
+msgid "Answer type"
+msgstr "نوع الإجابة"
 
 msgid "Ask a workspace owner to give you permission to create documents."
 msgstr "اطلب من مالك مساحة العمل منحك صلاحية إنشاء المستندات."
@@ -233,6 +245,9 @@ msgstr "الهوية البصرية"
 msgid "Browser"
 msgstr "المتصفح"
 
+msgid "Build a form"
+msgstr "إنشاء نموذج"
+
 msgid "Bulk send"
 msgstr "إرسال جماعي"
 
@@ -290,11 +305,17 @@ msgstr "تحقق"
 msgid "Checkbox"
 msgstr "مربع اختيار"
 
+msgid "Checkbox (tick to confirm)"
+msgstr "مربع اختيار (حدّد للتأكيد)"
+
 msgid "Choice"
 msgstr "اختيار"
 
 msgid "Choice (dropdown)"
 msgstr "اختيار (قائمة منسدلة)"
+
+msgid "Choices (comma-separated)"
+msgstr "الخيارات (مفصولة بفواصل)"
 
 msgid "Choose a different way to start"
 msgstr "اختر طريقة أخرى للبدء"
@@ -450,7 +471,7 @@ msgid "Daily completions for the last 14 days. A text table follows below."
 msgstr "الإنجازات اليومية لآخر 14 يومًا. يلي ذلك جدول نصي بالأسفل."
 
 msgid "Dana Cohen, dana@example.com, +972500000000\\nAvi Levi, avi@example.com"
-msgstr "دانا كوهين, dana@example.com, ‎+972500000000\\nأبي ليفي, avi@example.com"
+msgstr ""
 
 msgid "Dashboard"
 msgstr "لوحة التحكم"
@@ -475,6 +496,9 @@ msgstr "مرفوض"
 
 msgid "Default workspace"
 msgstr "مساحة العمل الافتراضية"
+
+msgid "Define questions; your recipient answers them online and signs, and you get one signed PDF with their answers."
+msgstr "حدّد الأسئلة؛ يجيب عنها المستلم عبر الإنترنت ويوقّع، وتحصل على ملف PDF موقّع واحد بإجاباته."
 
 msgid "Delegated"
 msgstr "تمت الإحالة"
@@ -722,6 +746,18 @@ msgstr "التصفية حسب الحالة"
 msgid "For signer:"
 msgstr "للموقّع:"
 
+msgid "Form"
+msgstr "نموذج"
+
+msgid "Form / questionnaire"
+msgstr "نموذج / استبيان"
+
+msgid "Form sent for completion."
+msgstr "تم إرسال النموذج لتعبئته."
+
+msgid "Form title"
+msgstr "عنوان النموذج"
+
 msgid "Free trial"
 msgstr "تجربة مجانية"
 
@@ -871,6 +907,9 @@ msgstr "شهري — %s"
 
 msgid "More information"
 msgstr "مزيد من المعلومات"
+
+msgid "Multiple choice"
+msgstr "اختيار من متعدد"
 
 msgid "My electronic signature is legally binding and has the same effect as a handwritten signature. The time, my IP address and browser are recorded as proof of signing."
 msgstr "توقيعي الإلكتروني مُلزم قانونيًا وله نفس أثر التوقيع بخط اليد. يُسجَّل الوقت وعنوان IP والمتصفح كدليل على التوقيع."
@@ -1187,6 +1226,15 @@ msgstr "تخزين ملفات محمي"
 msgid "Public pricing table — shows your plans (price, limits, features) with a “start free trial” button that signs the visitor up and gives them a workspace + trial. Put it on your pricing/landing page."
 msgstr "جدول أسعار عام — يعرض باقاتك (السعر، الحدود، الميزات) مع زر \"ابدأ تجربة مجانية\" يسجّل الزائر ويمنحه مساحة عمل + تجربة. ضعه في صفحة الأسعار/الهبوط."
 
+msgid "Question"
+msgstr "سؤال"
+
+msgid "Question %d"
+msgstr "السؤال %d"
+
+msgid "Questions"
+msgstr "الأسئلة"
+
 msgid "REST API key"
 msgstr "مفتاح REST API"
 
@@ -1216,6 +1264,9 @@ msgstr "المستندات الأخيرة"
 
 msgid "Recent operator actions"
 msgstr "إجراءات المشغّل الأخيرة"
+
+msgid "Recipient"
+msgstr "المستلم"
 
 msgid "Regenerate API key & webhook secret on save"
 msgstr "إعادة إنشاء مفتاح API وسر webhook عند الحفظ"
@@ -1402,6 +1453,9 @@ msgstr "المشاركة عبر واتساب"
 
 msgid "Short help text under the field (optional):"
 msgstr "نص مساعدة قصير أسفل الحقل (اختياري):"
+
+msgid "Short text"
+msgstr "نص قصير"
 
 msgid "Shortcode"
 msgstr "كود قصير"
@@ -1913,6 +1967,9 @@ msgstr "متى"
 msgid "Where signed-in customers manage, create, send and track their documents (no WP-Admin needed)."
 msgstr "حيث يدير العملاء المسجّلون مستنداتهم وينشئونها ويرسلونها ويتابعونها (دون الحاجة إلى WP-Admin)."
 
+msgid "Who fills this in?"
+msgstr "من يملأ هذا؟"
+
 msgid "Who needs to sign?"
 msgstr "من يحتاج إلى التوقيع؟"
 
@@ -1954,6 +2011,9 @@ msgstr "اكتب النص الثابت للمستند. بعد إنشائه يم�
 
 msgid "X-ComSign-Key"
 msgstr "X-ComSign-Key"
+
+msgid "Yes, No, Maybe"
+msgstr "نعم، لا، ربما"
 
 msgid "You are not allowed to access this page."
 msgstr "غير مسموح لك بالوصول إلى هذه الصفحة."
@@ -2079,7 +2139,7 @@ msgid "Your subscription will not renew. You keep access until the end of the cu
 msgstr "لن يتجدد اشتراكك. تحتفظ بالوصول حتى نهاية الفترة الحالية."
 
 msgid "Your verification code is: %1$s\\n\\nIt expires in %2$d minutes."
-msgstr "رمز التحقق الخاص بك هو: %1$s\\n\\nتنتهي صلاحيته خلال %2$d دقيقة."
+msgstr ""
 
 msgid "Your workspace"
 msgstr "مساحة عملك"
@@ -2091,7 +2151,7 @@ msgid "annual"
 msgstr "سنوي"
 
 msgid "customer_name = Dana Cohen\\ncontract_no = 2026-0042"
-msgstr "customer_name = Dana Cohen\\ncontract_no = 2026-0042"
+msgstr ""
 
 msgid "days"
 msgstr "أيام"
@@ -2099,8 +2159,14 @@ msgstr "أيام"
 msgid "days (0 = never)"
 msgstr "أيام (0 = أبدًا)"
 
+msgid "e.g. Client intake form"
+msgstr "مثال: نموذج استقبال عميل"
+
 msgid "e.g. Service agreement"
 msgstr "مثال: اتفاقية خدمة"
+
+msgid "e.g. What is your full address?"
+msgstr "مثال: ما هو عنوانك الكامل؟"
 
 msgid "email@example.com"
 msgstr "email@example.com"

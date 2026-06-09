@@ -532,6 +532,27 @@ body.comsign-public {
 .comsign-field-picker legend { font-size: 12px; font-weight: 600; color: var( --comsign-muted, #6b7280 ); padding: 0 4px; }
 .comsign-field-picker label { display: inline-flex; align-items: center; gap: 6px; font-weight: 500; margin: 4px 14px 4px 0; }
 .comsign-field-picker input { width: auto; }
+
+/* Form / questionnaire builder. */
+.comsign-question {
+	border: 1px solid var( --comsign-border, #e5e7eb );
+	border-radius: 10px;
+	padding: 10px 14px;
+	margin: 0 0 12px;
+	background: var( --comsign-surface, #fff );
+}
+.comsign-question legend { font-weight: 600; padding: 0 6px; color: var( --comsign-muted, #6b7280 ); }
+.comsign-question-meta {
+	display: flex;
+	flex-wrap: wrap;
+	gap: 14px;
+	align-items: end;
+}
+.comsign-question-meta label { font-weight: 500; font-size: 13px; }
+.comsign-question-meta select,
+.comsign-question-meta input[type="text"] { display: block; margin-top: 4px; }
+.comsign-q-required { align-self: center; }
+.comsign-q-required input { width: auto; }
 .comsign-editor-grid {
 	display: grid;
 	grid-template-columns: 320px 1fr;

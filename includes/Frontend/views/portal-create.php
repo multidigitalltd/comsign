@@ -13,7 +13,7 @@
  *
  * @var string      $page_title
  * @var array       $nav
- * @var string      $type          '', 'upload', 'text' or 'template'.
+ * @var string      $type          '', 'upload', 'text', 'form' or 'template'.
  * @var object[]    $templates     Templates available to this user.
  * @var object|null $selected      Chosen template, or null.
  * @var string[]    $roles         Role labels of the chosen template.
@@ -21,6 +21,7 @@
  * @var string      $nonce         create (template) nonce.
  * @var string      $upload_nonce  upload nonce.
  * @var string      $compose_nonce compose-from-text nonce.
+ * @var string      $form_nonce    create-form nonce.
  * @var array|null  $switcher
  */
 
@@ -48,6 +49,11 @@ $cs_url = static fn( array $args = array() ) => PortalController::url( array_mer
 					<span class="comsign-choice-icon" aria-hidden="true">✍️</span>
 					<span class="comsign-choice-title"><?php esc_html_e( 'Write text', 'comsign' ); ?></span>
 					<span class="comsign-choice-desc"><?php esc_html_e( 'Type the document and pick which fields each signer fills. We place the signature block for you — no dragging.', 'comsign' ); ?></span>
+				</a>
+				<a class="comsign-choice" href="<?php echo esc_url( $cs_url( array( 'type' => 'form' ) ) ); ?>">
+					<span class="comsign-choice-icon" aria-hidden="true">📝</span>
+					<span class="comsign-choice-title"><?php esc_html_e( 'Form / questionnaire', 'comsign' ); ?></span>
+					<span class="comsign-choice-desc"><?php esc_html_e( 'Define questions; your recipient answers them online and signs, and you get one signed PDF with their answers.', 'comsign' ); ?></span>
 				</a>
 				<a class="comsign-choice" href="<?php echo esc_url( $cs_url( array( 'type' => 'upload' ) ) ); ?>">
 					<span class="comsign-choice-icon" aria-hidden="true">📄</span>
@@ -130,6 +136,69 @@ $cs_url = static fn( array $args = array() ) => PortalController::url( array_mer
 							</fieldset>
 						<?php endfor; ?>
 					</div>
+
+					<p class="comsign-form-actions">
+						<button type="submit" name="send" value="1" class="comsign-btn comsign-btn--primary"><?php esc_html_e( 'Create &amp; send', 'comsign' ); ?></button>
+						<button type="submit" name="send" value="0" class="comsign-btn"><?php esc_html_e( 'Save as draft', 'comsign' ); ?></button>
+					</p>
+				</form>
+			</section>
+
+		<?php elseif ( 'form' === $type ) : ?>
+
+			<section class="comsign-create-option" aria-labelledby="comsign-form-h">
+				<h2 id="comsign-form-h"><?php esc_html_e( 'Build a form', 'comsign' ); ?></h2>
+				<p class="comsign-template-meta"><?php esc_html_e( 'Add questions; your recipient fills them in online and signs. Leave a question blank to skip it.', 'comsign' ); ?></p>
+				<form method="post" action="<?php echo esc_url( $action ); ?>" class="comsign-portal-form">
+					<input type="hidden" name="action" value="comsign_portal_create_form">
+					<input type="hidden" name="_wpnonce" value="<?php echo esc_attr( $form_nonce ); ?>">
+
+					<p>
+						<label for="comsign-form-title"><?php esc_html_e( 'Form title', 'comsign' ); ?></label>
+						<input type="text" id="comsign-form-title" name="title" placeholder="<?php esc_attr_e( 'e.g. Client intake form', 'comsign' ); ?>" required>
+					</p>
+
+					<h3><?php esc_html_e( 'Questions', 'comsign' ); ?></h3>
+					<?php for ( $q = 0; $q < 8; $q++ ) : ?>
+						<fieldset class="comsign-question">
+							<legend><?php echo esc_html( sprintf( /* translators: %d: question number. */ __( 'Question %d', 'comsign' ), $q + 1 ) ); ?></legend>
+							<p>
+								<label for="q-label-<?php echo (int) $q; ?>"><?php esc_html_e( 'Question', 'comsign' ); ?></label>
+								<input type="text" id="q-label-<?php echo (int) $q; ?>" name="question[<?php echo (int) $q; ?>][label]" placeholder="<?php esc_attr_e( 'e.g. What is your full address?', 'comsign' ); ?>">
+							</p>
+							<p class="comsign-question-meta">
+								<label>
+									<?php esc_html_e( 'Answer type', 'comsign' ); ?>
+									<select name="question[<?php echo (int) $q; ?>][type]">
+										<option value="text"><?php esc_html_e( 'Short text', 'comsign' ); ?></option>
+										<option value="choice"><?php esc_html_e( 'Multiple choice', 'comsign' ); ?></option>
+										<option value="checkbox"><?php esc_html_e( 'Checkbox (tick to confirm)', 'comsign' ); ?></option>
+									</select>
+								</label>
+								<label class="comsign-q-options">
+									<?php esc_html_e( 'Choices (comma-separated)', 'comsign' ); ?>
+									<input type="text" name="question[<?php echo (int) $q; ?>][options]" placeholder="<?php esc_attr_e( 'Yes, No, Maybe', 'comsign' ); ?>">
+								</label>
+								<label class="comsign-q-required">
+									<input type="checkbox" name="question[<?php echo (int) $q; ?>][required]" value="1"> <?php esc_html_e( 'Required', 'comsign' ); ?>
+								</label>
+							</p>
+						</fieldset>
+					<?php endfor; ?>
+
+					<h3><?php esc_html_e( 'Who fills this in?', 'comsign' ); ?></h3>
+					<?php require __DIR__ . '/partials/contacts-datalist.php'; ?>
+					<fieldset class="comsign-recipient">
+						<legend><?php esc_html_e( 'Recipient', 'comsign' ); ?></legend>
+						<p>
+							<label for="form-rcpt-name"><?php esc_html_e( 'Full name', 'comsign' ); ?></label>
+							<input type="text" id="form-rcpt-name" name="recipient[name]" list="comsign-contact-names" autocomplete="off" required>
+						</p>
+						<p>
+							<label for="form-rcpt-email"><?php esc_html_e( 'Email', 'comsign' ); ?></label>
+							<input type="email" id="form-rcpt-email" name="recipient[email]" list="comsign-contact-emails" autocomplete="off" required>
+						</p>
+					</fieldset>
 
 					<p class="comsign-form-actions">
 						<button type="submit" name="send" value="1" class="comsign-btn comsign-btn--primary"><?php esc_html_e( 'Create &amp; send', 'comsign' ); ?></button>
