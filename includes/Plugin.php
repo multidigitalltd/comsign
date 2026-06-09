@@ -77,9 +77,13 @@ final class Plugin {
 			$claim( $user->ID );
 		}, 10, 2 );
 
-		// Integrations: outgoing webhooks + REST API.
+		// Integrations: outgoing webhooks (site-wide + per-workspace) + REST API.
 		( new \ComSign\Integrations\Webhooks() )->register();
+		( new \ComSign\Integrations\AccountWebhooks() )->register();
 		( new \ComSign\Integrations\RestApi() )->register();
+
+		// Public download of a signed PDF over a tokenised link.
+		( new \ComSign\Frontend\SignedDownloadController() )->register();
 
 		// Billing: Cardcom payment webhook.
 		( new \ComSign\Frontend\BillingController() )->register();

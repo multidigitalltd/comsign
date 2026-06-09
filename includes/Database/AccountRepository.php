@@ -63,6 +63,25 @@ final class AccountRepository {
 	}
 
 	/**
+	 * Set (or clear) a workspace's outgoing-webhook URL and secret.
+	 *
+	 * @param int    $account_id Account id.
+	 * @param string $url        Webhook URL ('' to disable).
+	 * @param string $secret     HMAC secret for signing deliveries.
+	 */
+	public function update_webhook( int $account_id, string $url, string $secret ): void {
+		global $wpdb;
+		$wpdb->update( // phpcs:ignore WordPress.DB.DirectDatabaseQuery
+			Installer::accounts_table(),
+			array(
+				'webhook_url'    => substr( $url, 0, 255 ),
+				'webhook_secret' => substr( $secret, 0, 64 ),
+			),
+			array( 'id' => $account_id )
+		);
+	}
+
+	/**
 	 * All accounts (for the admin switcher).
 	 */
 	public function all(): array {

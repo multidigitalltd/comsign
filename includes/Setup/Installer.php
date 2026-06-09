@@ -235,6 +235,8 @@ final class Installer {
 			name VARCHAR(190) NOT NULL DEFAULT '',
 			parent_id BIGINT UNSIGNED NOT NULL DEFAULT 0,
 			tier VARCHAR(40) NOT NULL DEFAULT 'free',
+			webhook_url VARCHAR(255) NOT NULL DEFAULT '',
+			webhook_secret VARCHAR(64) NOT NULL DEFAULT '',
 			created_at DATETIME NOT NULL DEFAULT '0000-00-00 00:00:00',
 			PRIMARY KEY  (id),
 			KEY parent_id (parent_id)

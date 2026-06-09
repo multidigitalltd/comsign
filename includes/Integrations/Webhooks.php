@@ -25,6 +25,28 @@ final class Webhooks {
 	}
 
 	/**
+	 * SSRF guard shared by every outgoing webhook: http(s) only, and never a
+	 * private / loopback / link-local / reserved target (we resolve the host and
+	 * check the IP ourselves because wp_http_validate_url() exempts the site's
+	 * own host, which could be on a private network).
+	 *
+	 * @param string $url Candidate URL.
+	 */
+	public static function is_safe_url( string $url ): bool {
+		$scheme = strtolower( (string) wp_parse_url( $url, PHP_URL_SCHEME ) );
+		if ( ! in_array( $scheme, array( 'http', 'https' ), true ) ) {
+			return false;
+		}
+		$host = (string) wp_parse_url( $url, PHP_URL_HOST );
+		$ip   = filter_var( $host, FILTER_VALIDATE_IP ) ? $host : gethostbyname( $host );
+		if ( filter_var( $ip, FILTER_VALIDATE_IP )
+			&& ! filter_var( $ip, FILTER_VALIDATE_IP, FILTER_FLAG_NO_PRIV_RANGE | FILTER_FLAG_NO_RES_RANGE ) ) {
+			return false;
+		}
+		return (bool) wp_http_validate_url( $url );
+	}
+
+	/**
 	 * Deliver one event to the configured webhook URL.
 	 *
 	 * @param string $event       Event slug.
@@ -34,28 +56,7 @@ final class Webhooks {
 	 */
 	public function deliver( string $event, int $document_id, int $signer_id, array $meta ): void {
 		$url = (string) Settings::get( 'webhook_url' );
-		if ( '' === $url ) {
-			return;
-		}
-
-		// SSRF guard: only http(s).
-		$scheme = strtolower( (string) wp_parse_url( $url, PHP_URL_SCHEME ) );
-		if ( ! in_array( $scheme, array( 'http', 'https' ), true ) ) {
-			return;
-		}
-
-		// Reject private / loopback / link-local / reserved targets explicitly.
-		// (wp_http_validate_url() exempts the site's own host, which would let a
-		// site hosted on a private IP reach internal services — so we check the
-		// resolved IP ourselves as well.)
-		$host = (string) wp_parse_url( $url, PHP_URL_HOST );
-		$ip   = filter_var( $host, FILTER_VALIDATE_IP ) ? $host : gethostbyname( $host );
-		if ( filter_var( $ip, FILTER_VALIDATE_IP )
-			&& ! filter_var( $ip, FILTER_VALIDATE_IP, FILTER_FLAG_NO_PRIV_RANGE | FILTER_FLAG_NO_RES_RANGE ) ) {
-			return;
-		}
-
-		if ( ! wp_http_validate_url( $url ) ) {
+		if ( '' === $url || ! self::is_safe_url( $url ) ) {
 			return;
 		}
 
@@ -104,13 +105,7 @@ final class Webhooks {
 			);
 		}
 
-		$scheme = strtolower( (string) wp_parse_url( $url, PHP_URL_SCHEME ) );
-		$host   = (string) wp_parse_url( $url, PHP_URL_HOST );
-		$ip     = filter_var( $host, FILTER_VALIDATE_IP ) ? $host : gethostbyname( $host );
-		$blocked = filter_var( $ip, FILTER_VALIDATE_IP )
-			&& ! filter_var( $ip, FILTER_VALIDATE_IP, FILTER_FLAG_NO_PRIV_RANGE | FILTER_FLAG_NO_RES_RANGE );
-
-		if ( ! in_array( $scheme, array( 'http', 'https' ), true ) || $blocked || ! wp_http_validate_url( $url ) ) {
+		if ( ! self::is_safe_url( $url ) ) {
 			return array(
 				'ok'      => false,
 				'message' => __( 'The webhook URL is invalid or points to a blocked (private/loopback) target.', 'comsign' ),

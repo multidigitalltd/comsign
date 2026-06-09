@@ -86,6 +86,8 @@ final class PortalController {
 		add_action( 'admin_post_comsign_portal_checkout', array( $this, 'handle_checkout' ) );
 		add_action( 'admin_post_comsign_portal_cancel_sub', array( $this, 'handle_cancel_subscription' ) );
 		add_action( 'admin_post_comsign_portal_resume_sub', array( $this, 'handle_resume_subscription' ) );
+		// Per-workspace outgoing webhook configuration.
+		add_action( 'admin_post_comsign_portal_webhook_save', array( $this, 'handle_webhook_save' ) );
 		// Team management.
 		add_action( 'admin_post_comsign_portal_invite', array( $this, 'handle_invite' ) );
 		add_action( 'admin_post_comsign_portal_member_role', array( $this, 'handle_member_role' ) );
@@ -727,6 +729,8 @@ final class PortalController {
 			$this->render_contact( $user_id, $account_ids );
 		} elseif ( 'billing' === $view ) {
 			$this->render_billing( $user_id, $account_ids );
+		} elseif ( 'integrations' === $view ) {
+			$this->render_integrations( $user_id, $account_ids );
 		} elseif ( 'team' === $view ) {
 			$this->render_team( $user_id, $account_ids );
 		} else {
@@ -1429,6 +1433,81 @@ final class PortalController {
 	}
 
 	/**
+	 * Integrations: this workspace's outgoing webhook (fires on each signature /
+	 * completion, with a direct link to the signed PDF). Owner-only and gated on
+	 * the plan's webhooks feature.
+	 *
+	 * @param int   $user_id     Current user.
+	 * @param int[] $account_ids Visible accounts.
+	 */
+	private function render_integrations( int $user_id, array $account_ids ): void {
+		$account = $this->working_account_id( $user_id );
+		$subs    = new SubscriptionService();
+
+		if ( ! $this->can_manage_billing( $user_id ) ) {
+			$this->bounce( self::url(), __( 'Only a workspace owner can manage integrations.', 'comsign' ) );
+		}
+		if ( $account <= 0 || ! $subs->has_feature( $account, Plans::FEATURE_WEBHOOKS ) ) {
+			$this->render(
+				'portal-message',
+				array(
+					'page_title' => __( 'Integrations', 'comsign' ),
+					'heading'    => __( 'Webhooks are not on your plan', 'comsign' ),
+					'message'    => __( 'Upgrade to a plan that includes webhooks to send signing events to your own systems.', 'comsign' ),
+					'login_url'  => '',
+				)
+			);
+		}
+
+		$acct = ( new AccountRepository() )->find( $account );
+
+		$this->render(
+			'portal-integrations',
+			array(
+				'page_title'  => __( 'Integrations', 'comsign' ),
+				'nav'         => $this->nav( 'integrations', $user_id ),
+				'webhook_url' => $acct ? (string) $acct->webhook_url : '',
+				'secret'      => $acct ? (string) $acct->webhook_secret : '',
+				'action'      => admin_url( 'admin-post.php' ),
+				'nonce'       => wp_create_nonce( 'comsign_portal_webhook' ),
+				'switcher'    => $this->switcher( $user_id ),
+			)
+		);
+	}
+
+	/**
+	 * Save this workspace's webhook URL (generating a signing secret on first
+	 * save). The URL is SSRF-validated before it is stored.
+	 */
+	public function handle_webhook_save(): void {
+		$user_id = $this->require_login();
+		check_admin_referer( 'comsign_portal_webhook' );
+
+		$account = $this->working_account_id( $user_id );
+		$subs    = new SubscriptionService();
+		$target  = self::url( array( 'view' => 'integrations' ) );
+
+		if ( $account <= 0 || ! $this->accounts->can_in_account( $user_id, $account, Roles::MANAGE_SETTINGS ) ) {
+			$this->bounce( self::url(), __( 'You cannot manage integrations for this workspace.', 'comsign' ) );
+		}
+		if ( ! $subs->has_feature( $account, Plans::FEATURE_WEBHOOKS ) ) {
+			$this->bounce( $target, __( 'Webhooks are not available on your plan.', 'comsign' ) );
+		}
+
+		$url  = isset( $_POST['webhook_url'] ) ? esc_url_raw( trim( (string) wp_unslash( $_POST['webhook_url'] ) ) ) : '';
+		$acct = ( new AccountRepository() )->find( $account );
+		$secret = $acct && '' !== (string) $acct->webhook_secret ? (string) $acct->webhook_secret : wp_generate_password( 40, false );
+
+		if ( '' !== $url && ! \ComSign\Integrations\Webhooks::is_safe_url( $url ) ) {
+			$this->bounce( $target, __( 'That webhook URL is invalid or points to a blocked (private/loopback) address.', 'comsign' ) );
+		}
+
+		// Clearing the URL also retires the secret.
+		( new AccountRepository() )->update_webhook( $account, $url, '' === $url ? '' : $secret );
+		$this->bounce( $target, '' === $url ? __( 'Webhook disabled.', 'comsign' ) : __( 'Webhook saved.', 'comsign' ), 'success' );
+	}
+
+	/**
 	 * Insights: read-only analytics over the user's visible workspaces.
 	 *
 	 * @param int   $user_id     Current user.
@@ -1659,6 +1738,16 @@ final class PortalController {
 				'url'    => self::url( array( 'view' => 'billing' ) ),
 				'active' => 'billing' === $active,
 			);
+
+			// Integrations are only useful on plans that grant the webhooks feature.
+			$account = $this->working_account_id( $user_id );
+			if ( $account > 0 && ( new SubscriptionService() )->has_feature( $account, Plans::FEATURE_WEBHOOKS ) ) {
+				$items[] = array(
+					'label'  => __( 'Integrations', 'comsign' ),
+					'url'    => self::url( array( 'view' => 'integrations' ) ),
+					'active' => 'integrations' === $active,
+				);
+			}
 		}
 
 		return $items;

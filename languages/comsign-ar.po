@@ -644,6 +644,9 @@ msgstr "تكرار"
 msgid "Each line creates and sends a separate document. Format: name, email, phone (phone optional)."
 msgstr "كل سطر يُنشئ ويُرسل مستندًا منفصلًا. التنسيق: الاسم، البريد الإلكتروني، الهاتف (الهاتف اختياري)."
 
+msgid "Each request is signed with HMAC-SHA256 of the body in the X-ComSign-Signature header. Verify it with this secret."
+msgstr "يتم توقيع كل طلب بـ HMAC-SHA256 لجسم الرسالة في ترويسة X-ComSign-Signature. تحقّق منه بهذا السر."
+
 msgid "Each signer should have somewhere to sign."
 msgstr "يجب أن يكون لكل موقّع مكان للتوقيع."
 
@@ -703,6 +706,9 @@ msgstr "لكل موقّع حقل توقيع"
 
 msgid "Every signer must have at least one field. Please assign a field to each signer."
 msgstr "يجب أن يكون لكل موقّع حقل واحد على الأقل. يرجى تعيين حقل لكل موقّع."
+
+msgid "Example payload"
+msgstr "مثال على الحمولة"
 
 msgid "Expired"
 msgstr "منتهٍ"
@@ -842,6 +848,9 @@ msgstr "رابط غير صالح."
 msgid "Invalid or expired link"
 msgstr "رابط غير صالح أو منتهٍ"
 
+msgid "Invalid or expired link."
+msgstr "رابط غير صالح أو منتهي الصلاحية."
+
 msgid "Invalid plan."
 msgstr "باقة غير صالحة."
 
@@ -922,6 +931,9 @@ msgstr "مزيد من المعلومات"
 
 msgid "Multiple choice"
 msgstr "اختيار من متعدد"
+
+msgid "Must be a public https URL. Leave blank to disable."
+msgstr "يجب أن يكون عنوان https عامًا. اتركه فارغًا للتعطيل."
 
 msgid "My electronic signature is legally binding and has the same effect as a handwritten signature. The time, my IP address and browser are recorded as proof of signing."
 msgstr "توقيعي الإلكتروني مُلزم قانونيًا وله نفس أثر التوقيع بخط اليد. يُسجَّل الوقت وعنوان IP والمتصفح كدليل على التوقيع."
@@ -1033,6 +1045,9 @@ msgstr "الدفع عبر الإنترنت غير مُعدّ بعد على هذ�
 
 msgid "Only PDF files are allowed."
 msgstr "يُسمح بملفات PDF فقط."
+
+msgid "Only a workspace owner can manage integrations."
+msgstr "يمكن لمالك مساحة العمل فقط إدارة عمليات التكامل."
 
 msgid "Only a workspace owner can manage the plan and billing."
 msgstr "يمكن لمالك مساحة العمل فقط إدارة الباقة والفوترة."
@@ -1379,6 +1394,9 @@ msgstr "حفظ الإعدادات"
 msgid "Save timestamp settings"
 msgstr "حفظ إعدادات الطابع الزمني"
 
+msgid "Save webhook"
+msgstr "حفظ الويب هوك"
+
 msgid "Scan to verify this document online."
 msgstr "امسح ضوئيًا للتحقق من هذا المستند عبر الإنترنت."
 
@@ -1423,6 +1441,9 @@ msgstr "إرسال للتوقيع"
 
 msgid "Send invite"
 msgstr "إرسال دعوة"
+
+msgid "Send signing events to your own systems. ComSign POSTs a JSON payload to your URL each time a document is signed, completed or declined — and on completion it includes a direct link to download the signed PDF."
+msgstr "أرسل أحداث التوقيع إلى أنظمتك الخاصة. يرسل ComSign حمولة JSON إلى عنوانك في كل مرة يتم فيها توقيع مستند أو إكماله أو رفضه — وعند الإكمال يتضمن رابطًا مباشرًا لتنزيل ملف PDF الموقّع."
 
 msgid "Send test email to %s"
 msgstr "إرسال بريد تجريبي إلى %s"
@@ -1565,6 +1586,9 @@ msgstr "تم تمديد الموعد النهائي للتوقيع."
 msgid "Signing declined"
 msgstr "تم رفض التوقيع"
 
+msgid "Signing secret"
+msgstr "سر التوقيع"
+
 msgid "Skip to content"
 msgstr "انتقل إلى المحتوى"
 
@@ -1666,6 +1690,9 @@ msgstr "الرمز غير صحيح. يرجى المحاولة مرة أخرى."
 
 msgid "That contact could not be found in your workspace."
 msgstr "تعذّر العثور على جهة الاتصال في مساحة عملك."
+
+msgid "That webhook URL is invalid or points to a blocked (private/loopback) address."
+msgstr "عنوان الويب هوك غير صالح أو يشير إلى عنوان محظور (خاص/حلقي)."
 
 msgid "The certificate could not be read. Check the file and password."
 msgstr "تعذّر قراءة الشهادة. تحقق من الملف وكلمة المرور."
@@ -1853,6 +1880,9 @@ msgstr "تحديث"
 msgid "Update your billing here:"
 msgstr "حدّث بيانات الفوترة هنا:"
 
+msgid "Upgrade to a plan that includes webhooks to send signing events to your own systems."
+msgstr "قم بالترقية إلى باقة تتضمن الويب هوك لإرسال أحداث التوقيع إلى أنظمتك."
+
 msgid "Upload & continue"
 msgstr "رفع ومتابعة"
 
@@ -1964,8 +1994,20 @@ msgstr "عنوان webhook"
 msgid "Webhook URL (optional)"
 msgstr "عنوان الويب هوك (اختياري)"
 
+msgid "Webhook disabled."
+msgstr "تم تعطيل الويب هوك."
+
+msgid "Webhook saved."
+msgstr "تم حفظ الويب هوك."
+
 msgid "Webhook secret"
 msgstr "سر webhook"
+
+msgid "Webhooks are not available on your plan."
+msgstr "الويب هوك غير متاح في باقتك."
+
+msgid "Webhooks are not on your plan"
+msgstr "الويب هوك غير مُضمَّن في باقتك"
 
 msgid "Welcome to %s"
 msgstr "مرحبًا بك في %s"
@@ -2056,6 +2098,9 @@ msgstr "لا يمكنك إدارة الفوترة لمساحة العمل هذه
 
 msgid "You cannot manage contacts in this workspace."
 msgstr "لا يمكنك إدارة جهات الاتصال في مساحة العمل هذه."
+
+msgid "You cannot manage integrations for this workspace."
+msgstr "لا يمكنك إدارة عمليات التكامل لمساحة العمل هذه."
 
 msgid "You cannot manage members of this workspace."
 msgstr "لا يمكنك إدارة أعضاء مساحة العمل هذه."

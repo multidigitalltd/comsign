@@ -644,6 +644,9 @@ msgstr "Дублировать"
 msgid "Each line creates and sends a separate document. Format: name, email, phone (phone optional)."
 msgstr "Каждая строка создаёт и отправляет отдельный документ. Формат: имя, email, телефон (телефон необязателен)."
 
+msgid "Each request is signed with HMAC-SHA256 of the body in the X-ComSign-Signature header. Verify it with this secret."
+msgstr "Каждый запрос подписывается HMAC-SHA256 тела в заголовке X-ComSign-Signature. Проверяйте его этим секретом."
+
 msgid "Each signer should have somewhere to sign."
 msgstr "У каждого подписанта должно быть место для подписи."
 
@@ -703,6 +706,9 @@ msgstr "У каждого подписанта есть поле подписи"
 
 msgid "Every signer must have at least one field. Please assign a field to each signer."
 msgstr "У каждого подписанта должно быть хотя бы одно поле. Назначьте поле каждому подписанту."
+
+msgid "Example payload"
+msgstr "Пример полезной нагрузки"
 
 msgid "Expired"
 msgstr "Истёк срок"
@@ -842,6 +848,9 @@ msgstr "Недействительная ссылка."
 msgid "Invalid or expired link"
 msgstr "Недействительная или истёкшая ссылка"
 
+msgid "Invalid or expired link."
+msgstr "Недействительная или просроченная ссылка."
+
 msgid "Invalid plan."
 msgstr "Недопустимый тариф."
 
@@ -922,6 +931,9 @@ msgstr "Подробнее"
 
 msgid "Multiple choice"
 msgstr "Множественный выбор"
+
+msgid "Must be a public https URL. Leave blank to disable."
+msgstr "Должен быть публичный https-URL. Оставьте пустым, чтобы отключить."
 
 msgid "My electronic signature is legally binding and has the same effect as a handwritten signature. The time, my IP address and browser are recorded as proof of signing."
 msgstr "Моя электронная подпись юридически обязательна и имеет ту же силу, что и собственноручная. Время, мой IP-адрес и браузер фиксируются как доказательство подписания."
@@ -1033,6 +1045,9 @@ msgstr "Онлайн-оплата на сайте ещё не настроена
 
 msgid "Only PDF files are allowed."
 msgstr "Допускаются только файлы PDF."
+
+msgid "Only a workspace owner can manage integrations."
+msgstr "Управлять интеграциями может только владелец рабочего пространства."
 
 msgid "Only a workspace owner can manage the plan and billing."
 msgstr "Управлять тарифом и оплатой может только владелец рабочего пространства."
@@ -1379,6 +1394,9 @@ msgstr "Сохранить настройки"
 msgid "Save timestamp settings"
 msgstr "Сохранить настройки метки времени"
 
+msgid "Save webhook"
+msgstr "Сохранить вебхук"
+
 msgid "Scan to verify this document online."
 msgstr "Отсканируйте, чтобы проверить этот документ онлайн."
 
@@ -1423,6 +1441,9 @@ msgstr "Отправить на подписание"
 
 msgid "Send invite"
 msgstr "Отправить приглашение"
+
+msgid "Send signing events to your own systems. ComSign POSTs a JSON payload to your URL each time a document is signed, completed or declined — and on completion it includes a direct link to download the signed PDF."
+msgstr "Отправляйте события подписания в свои системы. ComSign отправляет JSON на ваш URL каждый раз, когда документ подписан, завершён или отклонён — а при завершении включает прямую ссылку для скачивания подписанного PDF."
 
 msgid "Send test email to %s"
 msgstr "Отправить тестовое письмо на %s"
@@ -1565,6 +1586,9 @@ msgstr "Срок подписания продлён."
 msgid "Signing declined"
 msgstr "Подписание отклонено"
 
+msgid "Signing secret"
+msgstr "Секрет подписи"
+
 msgid "Skip to content"
 msgstr "Перейти к содержимому"
 
@@ -1666,6 +1690,9 @@ msgstr "Код неверен. Пожалуйста, попробуйте сно
 
 msgid "That contact could not be found in your workspace."
 msgstr "Этот контакт не найден в вашем рабочем пространстве."
+
+msgid "That webhook URL is invalid or points to a blocked (private/loopback) address."
+msgstr "URL вебхука недействителен или указывает на заблокированный (частный/локальный) адрес."
 
 msgid "The certificate could not be read. Check the file and password."
 msgstr "Не удалось прочитать сертификат. Проверьте файл и пароль."
@@ -1853,6 +1880,9 @@ msgstr "Обновить"
 msgid "Update your billing here:"
 msgstr "Обновите платёжные данные здесь:"
 
+msgid "Upgrade to a plan that includes webhooks to send signing events to your own systems."
+msgstr "Перейдите на тариф с вебхуками, чтобы отправлять события подписания в свои системы."
+
 msgid "Upload & continue"
 msgstr "Загрузить и продолжить"
 
@@ -1964,8 +1994,20 @@ msgstr "URL webhook"
 msgid "Webhook URL (optional)"
 msgstr "URL вебхука (необязательно)"
 
+msgid "Webhook disabled."
+msgstr "Вебхук отключён."
+
+msgid "Webhook saved."
+msgstr "Вебхук сохранён."
+
 msgid "Webhook secret"
 msgstr "Секрет webhook"
+
+msgid "Webhooks are not available on your plan."
+msgstr "Вебхуки недоступны на вашем тарифе."
+
+msgid "Webhooks are not on your plan"
+msgstr "Вебхуки не входят в ваш тариф"
 
 msgid "Welcome to %s"
 msgstr "Добро пожаловать в %s"
@@ -2056,6 +2098,9 @@ msgstr "Вы не можете управлять оплатой этого ра
 
 msgid "You cannot manage contacts in this workspace."
 msgstr "Вы не можете управлять контактами в этом рабочем пространстве."
+
+msgid "You cannot manage integrations for this workspace."
+msgstr "Вы не можете управлять интеграциями этого рабочего пространства."
 
 msgid "You cannot manage members of this workspace."
 msgstr "Вы не можете управлять участниками этого рабочего пространства."

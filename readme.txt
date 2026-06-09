@@ -4,7 +4,7 @@ Tags: signature, digital signature, pdf, esignature, hebrew
 Requires at least: 6.0
 Tested up to: 6.5
 Requires PHP: 7.4
-Stable tag: 0.57.0
+Stable tag: 0.58.0
 License: GPL-2.0-or-later
 License URI: https://www.gnu.org/licenses/gpl-2.0.html
 
@@ -105,6 +105,14 @@ ID and its SHA-256 code (shown on the document screen and the signature
 certificate) to confirm the document is authentic and see who signed it.
 
 == Changelog ==
+
+= 0.58.0 =
+* New: per-workspace outgoing webhooks (Integrations screen, on plans that
+  include webhooks). ComSign POSTs a JSON payload to your URL whenever a document
+  is signed, completed or declined — each request signed with HMAC-SHA256 using
+  a per-workspace secret. On completion the payload includes a direct, tokenised
+  link to download the signed PDF (no login), so automations can fetch it. The
+  webhook URL is SSRF-validated before it is stored or called.
 
 = 0.57.0 =
 * New: open a contact to see every document in the workspace that contact has
